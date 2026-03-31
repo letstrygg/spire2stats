@@ -28,6 +28,62 @@ const CATEGORIES = [
     { table: 'stories', folder: 'stories', titleField: 'name' }
 ];
 
+// --- SHARED HELPERS ---
+
+/** Promise-based DB query helper */
+async function query(sql, params = []) {
+    return new Promise((resolve, reject) => {
+        db.all(sql, params, (err, rows) => {
+            if (err) reject(err);
+            else resolve(rows);
+        });
+    });
+}
+
+/** Generates the consistent top summary panel for index pages */
+function generateSummaryPanel(runStats, label, total, seen) {
+    const completionHtml = seen === total ? total : `${seen} <span class="stat-sub">/ ${total} ${label.toLowerCase()}</span>`;
+    return `
+    <div class="stats-summary">
+        <div class="stats-grid">
+            <div class="stat-item"><div class="stat-label">Total Runs</div><div class="stat-value">${runStats.totalRuns}</div></div>
+            <div class="stat-item"><div class="stat-label">Wins / Losses</div><div class="stat-value"><span style="color: #00ff89">${runStats.totalWins}</span> <span style="color: #444">/</span> <span style="color: #ff4b4b">${runStats.totalLosses}</span></div></div>
+            <div class="stat-item"><div class="stat-label">Overall Winrate</div><div class="stat-value">${runStats.globalWinRate.toFixed(1)}%</div></div>
+            <div class="stat-item"><div class="stat-label">Contributors</div><div class="stat-value">${runStats.uniqueUsers}</div></div>
+            <div class="stat-item">
+                <div class="stat-label">${label} Seen</div>
+                <div class="stat-value">${completionHtml}</div>
+            </div>
+        </div>
+    </div>`;
+}
+
+/** Generates associated video grid panels */
+function generateVideoPanel(videos, title = "Associated Runs") {
+    if (!videos || videos.length === 0) return '';
+    const videoLinks = videos.map(v => {
+        let buttons = '';
+        if (v.ltg) buttons += `<a href="https://letstrygg.com${v.ltg}" class="vid-btn ltg-btn" target="_blank">Run Summary</a>`;
+        if (v.yt) buttons += `<a href="https://www.youtube.com/watch?v=${v.yt}" class="vid-btn yt-btn" target="_blank"><span class="material-symbols-outlined">smart_display</span> YouTube</a>`;
+        return `<div class="video-panel">${buttons}</div>`;
+    }).join('');
+    return `<div class="featured-videos"><h3>${title}</h3><div class="video-grid">${videoLinks}</div></div>`;
+}
+
+/** Helper for win bar background styles */
+function getWinBarStyle(seen, winRateNum) {
+    if (seen === 0) return 'background: #444;';
+    return `background: linear-gradient(to right, #00ff89 ${winRateNum}%, #ff4b4b ${winRateNum}%);`;
+}
+
+/** Helper for win rate text color logic */
+function getWinRateColor(seen, winRateNum, globalWinRate) {
+    if (seen === 0) return '#888';
+    if (winRateNum > globalWinRate) return '#00ff89';
+    if (winRateNum < globalWinRate) return '#ff4b4b';
+    return '#888';
+}
+
 // --- TEXT FORMATTER ---
 function formatDescription(text) {
     if (!text) return "";
@@ -132,30 +188,28 @@ async function getCardStats() {
                 uniqueUsers, 
                 uniqueCardsSeen,
                 uniqueRelicsSeen: Object.keys(relicStats).length,
-                uniqueEventsSeen: Object.keys(eventStats).length
+                uniqueEventsSeen: Object.keys(eventStats).length,
+                uniqueCharsSeen: Object.keys(charStats).length
             });
         });
     });
 }
 
 async function buildGeneralCategory(cat) {
-    return new Promise((resolve, reject) => {
-        db.all(`SELECT * FROM ${cat.table} ORDER BY ${cat.titleField} ASC`, (err, items) => {
-            if (err) return reject(err);
-            
-            console.log(`📂 Building ${items.length} pages for ${cat.folder}...`);
-            const root = ensureDir(path.join(PATHS.WEB_ROOT, cat.folder));
-            
-            for (const item of items) {
-                const title = item[cat.titleField];
-                if (!title) continue;
-                const slug = slugify(title);
-                const dir = ensureDir(path.join(root, slug));
-                
-                const subtitle = [item.rarity, item.type, item.act].filter(Boolean).join(' • ');
-                const description = formatDescription(item.description || item.flavor || item.unlock_text || "");
+    const items = await query(`SELECT * FROM ${cat.table} ORDER BY ${cat.titleField} ASC`);
+    console.log(`📂 Building ${items.length} pages for ${cat.folder}...`);
+    const root = ensureDir(path.join(PATHS.WEB_ROOT, cat.folder));
+    
+    for (const item of items) {
+        const title = item[cat.titleField];
+        if (!title) continue;
+        const slug = slugify(title);
+        const dir = ensureDir(path.join(root, slug));
+        
+        const subtitle = [item.rarity, item.type, item.act].filter(Boolean).join(' • ');
+        const description = formatDescription(item.description || item.flavor || item.unlock_text || "");
 
-                const detailHtml = `
+        const detailHtml = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -182,17 +236,17 @@ async function buildGeneralCategory(cat) {
     </div>
 </body>
 </html>`;
-                fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
-            }
+        fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
+    }
 
-            // Index Page
-            const itemLinks = items.map(i => {
-                const title = i[cat.titleField];
-                if (!title) return '';
-                return `<a href="/${cat.folder}/${slugify(title)}/" class="item-link">${title}</a>`;
-            }).join('');
+    // Index Page
+    const itemLinks = items.map(i => {
+        const title = i[cat.titleField];
+        if (!title) return '';
+        return `<a href="/${cat.folder}/${slugify(title)}/" class="item-link">${title}</a>`;
+    }).join('');
 
-            const indexHtml = `
+    const indexHtml = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -214,10 +268,7 @@ async function buildGeneralCategory(cat) {
     <div class="grid">${itemLinks}</div>
 </body>
 </html>`;
-            fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
-            resolve();
-        });
-    });
+    fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
 }
 
 async function buildRelics(relics, runStats) {
@@ -232,24 +283,9 @@ async function buildRelics(relics, runStats) {
         const stats = runStats.relicStats[cleanRelicId] || { seen: 0, wins: 0, videos: [] };
         const winRateNum = stats.seen > 0 ? (stats.wins / stats.seen) * 100 : 0;
         const winRate = winRateNum.toFixed(1);
-        
-        let wrColor = '#888'; 
-        if (stats.seen > 0) {
-            if (winRateNum > runStats.globalWinRate) wrColor = '#00ff89';
-            else if (winRateNum < runStats.globalWinRate) wrColor = '#ff4b4b';
-        }
 
-        let videosHtml = '';
-        if (stats.videos && stats.videos.length > 0) {
-            const videoLinks = stats.videos.map(v => {
-                let buttons = '';
-                if (v.ltg) buttons += `<a href="https://letstrygg.com${v.ltg}" class="vid-btn ltg-btn" target="_blank">Run Summary</a>`;
-                if (v.yt) buttons += `<a href="https://www.youtube.com/watch?v=${v.yt}" class="vid-btn yt-btn" target="_blank"><span class="material-symbols-outlined">smart_display</span> YouTube</a>`;
-                return `<div class="video-panel">${buttons}</div>`;
-            }).join('');
-
-            videosHtml = `<div class="featured-videos"><h3>Featured Videos</h3><div class="video-grid">${videoLinks}</div></div>`;
-        }
+        const wrColor = getWinRateColor(stats.seen, winRateNum, runStats.globalWinRate);
+        const videosHtml = generateVideoPanel(stats.videos, "Featured Videos");
 
         const subtitle = [relic.rarity, relic.pool ? `${relic.pool} Pool` : null].filter(Boolean).join(' • ');
         const description = formatDescription(relic.description || relic.description_raw || "");
@@ -310,15 +346,9 @@ async function buildRelics(relics, runStats) {
         const winRateNum = stats.seen > 0 ? (stats.wins / stats.seen) * 100 : 0;
         const poolClass = (relic.pool || 'shared').toLowerCase();
 
-        let wrText = '';
-        let wrColor = '#888';
-        let barStyle = 'background: #444;'; 
-        if (stats.seen > 0) {
-            wrText = `${winRateNum.toFixed(0)}% Winrate`;
-            if (winRateNum > runStats.globalWinRate) wrColor = '#00ff89';
-            else if (winRateNum < runStats.globalWinRate) wrColor = '#ff4b4b';
-            barStyle = `background: linear-gradient(to right, #00ff89 ${winRateNum}%, #ff4b4b ${winRateNum}%);`;
-        }
+        const wrText = stats.seen > 0 ? `${winRateNum.toFixed(0)}% Winrate` : '';
+        const wrColor = getWinRateColor(stats.seen, winRateNum, runStats.globalWinRate);
+        const barStyle = getWinBarStyle(stats.seen, winRateNum);
 
         return `
         <a href="/relics/${slug}/" class="card-item ${poolClass}">
@@ -343,13 +373,6 @@ async function buildRelics(relics, runStats) {
         .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #888; }
         .breadcrumbs a { color: #4a90e2; text-decoration: none; }
 
-        .stats-summary { background: #1a1a1a; border: 1px solid #333; padding: 25px; border-radius: 12px; margin-bottom: 40px; }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
-        .stat-item { text-align: center; }
-        .stat-label { font-size: 0.7rem; color: #888; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
-        .stat-value { font-size: 1.4rem; font-weight: bold; color: #fff; }
-        .stat-sub { font-size: 0.8rem; color: #666; font-weight: normal; }
-
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; }
         .card-item { position: relative; overflow: hidden; background: #1a1a1a; border: 1px solid #333; padding: 15px; text-decoration: none; color: inherit; display: flex; justify-content: space-between; border-radius: 8px; transition: border-color 0.2s; }
         .card-item:hover { border-color: #ffd700; }
@@ -360,18 +383,7 @@ async function buildRelics(relics, runStats) {
 <body>
     <nav class="breadcrumbs"><a href="/">spire2stats</a> / relics</nav>
     <h1>Slay the Spire 2 Relics</h1>
-    <div class="stats-summary">
-        <div class="stats-grid">
-            <div class="stat-item"><div class="stat-label">Total Runs</div><div class="stat-value">${runStats.totalRuns}</div></div>
-            <div class="stat-item"><div class="stat-label">Wins / Losses</div><div class="stat-value"><span style="color: #00ff89">${runStats.totalWins}</span> <span style="color: #444">/</span> <span style="color: #ff4b4b">${runStats.totalLosses}</span></div></div>
-            <div class="stat-item"><div class="stat-label">Overall Winrate</div><div class="stat-value">${runStats.globalWinRate.toFixed(1)}%</div></div>
-            <div class="stat-item"><div class="stat-label">Contributors</div><div class="stat-value">${runStats.uniqueUsers}</div></div>
-            <div class="stat-item">
-                <div class="stat-label">Relics Seen</div>
-                <div class="stat-value">${relicsSeen === totalRelics ? totalRelics : `${relicsSeen} <span class="stat-sub">/ ${totalRelics} relics</span>`}</div>
-            </div>
-        </div>
-    </div>
+    ${generateSummaryPanel(runStats, "Relics", totalRelics, relicsSeen)}
     <div class="grid">${relicLinks}</div>
 </body>
 </html>`;
@@ -389,23 +401,9 @@ async function buildEvents(events, runStats) {
         const stats = runStats.eventStats[event.event_id] || { seen: 0, wins: 0, videos: [] };
         const winRateNum = stats.seen > 0 ? (stats.wins / stats.seen) * 100 : 0;
         const winRate = winRateNum.toFixed(1);
-        
-        let wrColor = '#888'; 
-        if (stats.seen > 0) {
-            if (winRateNum > runStats.globalWinRate) wrColor = '#00ff89';
-            else if (winRateNum < runStats.globalWinRate) wrColor = '#ff4b4b';
-        }
 
-        let videosHtml = '';
-        if (stats.videos && stats.videos.length > 0) {
-            const videoLinks = stats.videos.map(v => {
-                let buttons = '';
-                if (v.ltg) buttons += `<a href="https://letstrygg.com${v.ltg}" class="vid-btn ltg-btn" target="_blank">Run Summary</a>`;
-                if (v.yt) buttons += `<a href="https://www.youtube.com/watch?v=${v.yt}" class="vid-btn yt-btn" target="_blank"><span class="material-symbols-outlined">smart_display</span> YouTube</a>`;
-                return `<div class="video-panel">${buttons}</div>`;
-            }).join('');
-            videosHtml = `<div class="featured-videos"><h3>Associated Runs</h3><div class="video-grid">${videoLinks}</div></div>`;
-        }
+        const wrColor = getWinRateColor(stats.seen, winRateNum, runStats.globalWinRate);
+        const videosHtml = generateVideoPanel(stats.videos);
 
         const options = JSON.parse(event.options || '[]');
         let optionsHtml = '';
@@ -479,15 +477,9 @@ async function buildEvents(events, runStats) {
         const stats = runStats.eventStats[e.event_id] || { seen: 0, wins: 0 };
         const winRateNum = stats.seen > 0 ? (stats.wins / stats.seen) * 100 : 0;
         
-        let wrText = '';
-        let wrColor = '#888';
-        let barStyle = 'background: #444;'; 
-        if (stats.seen > 0) {
-            wrText = `${winRateNum.toFixed(0)}% Winrate`;
-            if (winRateNum > runStats.globalWinRate) wrColor = '#00ff89';
-            else if (winRateNum < runStats.globalWinRate) wrColor = '#ff4b4b';
-            barStyle = `background: linear-gradient(to right, #00ff89 ${winRateNum}%, #ff4b4b ${winRateNum}%);`;
-        }
+        const wrText = stats.seen > 0 ? `${winRateNum.toFixed(0)}% Winrate` : '';
+        const wrColor = getWinRateColor(stats.seen, winRateNum, runStats.globalWinRate);
+        const barStyle = getWinBarStyle(stats.seen, winRateNum);
 
         return `
         <a href="/events/${slug}/" class="card-item">
@@ -512,13 +504,6 @@ async function buildEvents(events, runStats) {
         .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #888; }
         .breadcrumbs a { color: #4a90e2; text-decoration: none; }
 
-        .stats-summary { background: #1a1a1a; border: 1px solid #333; padding: 25px; border-radius: 12px; margin-bottom: 40px; }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
-        .stat-item { text-align: center; }
-        .stat-label { font-size: 0.7rem; color: #888; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
-        .stat-value { font-size: 1.4rem; font-weight: bold; color: #fff; }
-        .stat-sub { font-size: 0.8rem; color: #666; font-weight: normal; }
-
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; }
         .card-item { position: relative; overflow: hidden; background: #1a1a1a; border: 1px solid #333; padding: 15px; text-decoration: none; color: inherit; display: flex; justify-content: space-between; border-radius: 8px; transition: border-color 0.2s; }
         .card-item:hover { border-color: #ffd700; }
@@ -528,18 +513,7 @@ async function buildEvents(events, runStats) {
 <body>
     <nav class="breadcrumbs"><a href="/">spire2stats</a> / events</nav>
     <h1>Slay the Spire 2 Events</h1>
-    <div class="stats-summary">
-        <div class="stats-grid">
-            <div class="stat-item"><div class="stat-label">Total Runs</div><div class="stat-value">${runStats.totalRuns}</div></div>
-            <div class="stat-item"><div class="stat-label">Wins / Losses</div><div class="stat-value"><span style="color: #00ff89">${runStats.totalWins}</span> <span style="color: #444">/</span> <span style="color: #ff4b4b">${runStats.totalLosses}</span></div></div>
-            <div class="stat-item"><div class="stat-label">Overall Winrate</div><div class="stat-value">${runStats.globalWinRate.toFixed(1)}%</div></div>
-            <div class="stat-item"><div class="stat-label">Contributors</div><div class="stat-value">${runStats.uniqueUsers}</div></div>
-            <div class="stat-item">
-                <div class="stat-label">Events Seen</div>
-                <div class="stat-value">${eventsSeen === totalEvents ? totalEvents : `${eventsSeen} <span class="stat-sub">/ ${totalEvents} events</span>`}</div>
-            </div>
-        </div>
-    </div>
+    ${generateSummaryPanel(runStats, "Events", totalEvents, eventsSeen)}
     <div class="grid">${eventLinks}</div>
 </body>
 </html>`;
@@ -568,25 +542,15 @@ async function buildCharacters(chars, runStats) {
                 const losses = stats.seen - stats.wins;
                 const charColorClass = displayName.toLowerCase();
 
-                // Associated Videos
-                let videosHtml = '';
-                if (stats.videos && stats.videos.length > 0) {
-                    const videoLinks = stats.videos.map(v => {
-                        let buttons = '';
-                        if (v.ltg) buttons += `<a href="https://letstrygg.com${v.ltg}" class="vid-btn ltg-btn" target="_blank">Run Summary</a>`;
-                        if (v.yt) buttons += `<a href="https://www.youtube.com/watch?v=${v.yt}" class="vid-btn yt-btn" target="_blank"><span class="material-symbols-outlined">smart_display</span> YouTube</a>`;
-                        return `<div class="video-panel">${buttons}</div>`;
-                    }).join('');
-                    videosHtml = `<div class="featured-videos"><h3>Associated Runs</h3><div class="video-grid">${videoLinks}</div></div>`;
-                }
+                const videosHtml = generateVideoPanel(stats.videos);
 
                 // Character Cards
-                const charCards = await new Promise(res => db.all("SELECT * FROM cards WHERE LOWER(color) = ? ORDER BY rarity, name ASC", [displayName.toLowerCase()], (e, r) => res(r || [])));
+                const charCards = await query("SELECT * FROM cards WHERE LOWER(color) = ? ORDER BY rarity, name ASC", [displayName.toLowerCase()]);
                 const cardItemsHtml = charCards.map(c => {
                     const cardStats = runStats.stats[c.card_id] || { seen: 0, wins: 0 };
                     const cWrNum = cardStats.seen > 0 ? (cardStats.wins / cardStats.seen) * 100 : 0;
-                    let wrText = cardStats.seen > 0 ? `${cWrNum.toFixed(0)}% WR` : '';
-                    let barStyle = cardStats.seen > 0 ? `background: linear-gradient(to right, #00ff89 ${cWrNum}%, #ff4b4b ${cWrNum}%);` : 'background: #444;';
+                    const wrText = cardStats.seen > 0 ? `${cWrNum.toFixed(0)}% WR` : '';
+                    const barStyle = getWinBarStyle(cardStats.seen, cWrNum);
                     return `<a href="/cards/${slugify(c.name)}/" class="card-item ${charColorClass}">
                         <div class="card-info"><span class="card-name">${c.name}</span></div>
                         <div class="card-stats"><div class="win-rate">${wrText}</div><div class="run-count">${cardStats.seen} runs</div></div>
@@ -595,7 +559,7 @@ async function buildCharacters(chars, runStats) {
                 }).join('');
 
                 // Character Relics
-                const charRelics = await new Promise(res => db.all("SELECT * FROM relics WHERE LOWER(pool) = ? ORDER BY rarity, name ASC", [displayName.toLowerCase()], (e, r) => res(r || [])));
+                const charRelics = await query("SELECT * FROM relics WHERE LOWER(pool) = ? ORDER BY rarity, name ASC", [displayName.toLowerCase()]);
                 const relicItemsHtml = charRelics.map(r => `<a href="/relics/${slugify(r.name)}/" class="item-link">${r.name}</a>`).join('');
 
                 const detailHtml = `
@@ -651,7 +615,7 @@ async function buildCharacters(chars, runStats) {
                 const charKey = (c.character_id || '').replace('CHARACTER.', '').toUpperCase();
                 const stats = runStats.charStats[charKey] || { seen: 0, wins: 0 };
                 const wrNum = stats.seen > 0 ? (stats.wins / stats.seen) * 100 : 0;
-                let barStyle = stats.seen > 0 ? `background: linear-gradient(to right, #00ff89 ${wrNum}%, #ff4b4b ${wrNum}%);` : 'background: #444;';
+                const barStyle = getWinBarStyle(stats.seen, wrNum);
                 return `
                 <a href="/characters/${slugify(displayName)}/" class="card-item ${displayName.toLowerCase()}">
                     <div class="card-info"><span class="card-name">${displayName}</span></div>
@@ -674,11 +638,6 @@ async function buildCharacters(chars, runStats) {
         body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; }
         .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #888; }
         .breadcrumbs a { color: #4a90e2; text-decoration: none; }
-        .stats-summary { background: #1a1a1a; border: 1px solid #333; padding: 25px; border-radius: 12px; margin-bottom: 40px; }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
-        .stat-item { text-align: center; }
-        .stat-label { font-size: 0.7rem; color: #888; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
-        .stat-value { font-size: 1.4rem; font-weight: bold; color: #fff; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
         .card-item { position: relative; overflow: hidden; background: #1a1a1a; border: 1px solid #333; padding: 15px; text-decoration: none; color: inherit; display: flex; justify-content: space-between; border-radius: 8px; transition: border-color 0.2s; }
         .card-item:hover { border-color: #ffd700; }
@@ -689,14 +648,7 @@ async function buildCharacters(chars, runStats) {
 <body>
     <nav class="breadcrumbs"><a href="/">spire2stats</a> / characters</nav>
     <h1>Slay the Spire 2 Characters</h1>
-    <div class="stats-summary">
-        <div class="stats-grid">
-            <div class="stat-item"><div class="stat-label">Total Runs</div><div class="stat-value">${runStats.totalRuns}</div></div>
-            <div class="stat-item"><div class="stat-label">Wins / Losses</div><div class="stat-value"><span style="color: #00ff89">${runStats.totalWins}</span> <span style="color: #444">/</span> <span style="color: #ff4b4b">${runStats.totalLosses}</span></div></div>
-            <div class="stat-item"><div class="stat-label">Overall Winrate</div><div class="stat-value">${runStats.globalWinRate.toFixed(1)}%</div></div>
-            <div class="stat-item"><div class="stat-label">Contributors</div><div class="stat-value">${runStats.uniqueUsers}</div></div>
-        </div>
-    </div>
+    ${generateSummaryPanel(runStats, "Characters", chars.length, runStats.uniqueCharsSeen)}
     <div class="grid">${charLinks}</div>
 </body>
 </html>`;
@@ -704,12 +656,7 @@ async function buildCharacters(chars, runStats) {
 }
 
 async function getAllCards() {
-    return new Promise((resolve, reject) => {
-        db.all("SELECT * FROM cards ORDER BY color, name ASC", (err, rows) => {
-            if (err) reject(err);
-            else resolve(rows);
-        });
-    });
+    return query("SELECT * FROM cards ORDER BY color, name ASC");
 }
 
 async function build() {
@@ -722,26 +669,9 @@ async function build() {
             console.log(`🗃️  Sample card_id from cards table: "${cards[0].card_id}" (Card Name: ${cards[0].name})`);
         }
 
-        const chars = await new Promise((resolve, reject) => {
-            db.all("SELECT * FROM characters ORDER BY name ASC", (err, rows) => {
-                if (err) reject(err);
-                else resolve(rows);
-            });
-        });
-
-        const relics = await new Promise((resolve, reject) => {
-            db.all("SELECT * FROM relics ORDER BY name ASC", (err, rows) => {
-                if (err) reject(err);
-                else resolve(rows);
-            });
-        });
-
-        const events = await new Promise((resolve, reject) => {
-            db.all("SELECT * FROM events ORDER BY name ASC", (err, rows) => {
-                if (err) reject(err);
-                else resolve(rows);
-            });
-        });
+        const chars = await query("SELECT * FROM characters ORDER BY name ASC");
+        const relics = await query("SELECT * FROM relics ORDER BY name ASC");
+        const events = await query("SELECT * FROM events ORDER BY name ASC");
 
         const cardStats = await getCardStats();
         const cardsRoot = ensureDir(path.join(PATHS.WEB_ROOT, 'cards'));
@@ -759,35 +689,9 @@ async function build() {
             const stats = cardStats.stats[cleanCardId] || { seen: 0, wins: 0, videos: [] };
             const winRateNum = stats.seen > 0 ? (stats.wins / stats.seen) * 100 : 0;
             const winRate = winRateNum.toFixed(1);
-            
-            let wrColor = '#888'; 
-            if (stats.seen > 0) {
-                if (winRateNum > cardStats.globalWinRate) wrColor = '#00ff89';
-                else if (winRateNum < cardStats.globalWinRate) wrColor = '#ff4b4b';
-            }
 
-            let videosHtml = '';
-            if (stats.videos && stats.videos.length > 0) {
-                const videoLinks = stats.videos.map(v => {
-                    let buttons = '';
-                    if (v.ltg) {
-                        buttons += `<a href="https://letstrygg.com${v.ltg}" class="vid-btn ltg-btn" target="_blank">Run Summary</a>`;
-                    }
-                    if (v.yt) {
-                        buttons += `
-                        <a href="https://www.youtube.com/watch?v=${v.yt}" class="vid-btn yt-btn" target="_blank">
-                            <span class="material-symbols-outlined">smart_display</span> YouTube
-                        </a>`;
-                    }
-                    return `<div class="video-panel">${buttons}</div>`;
-                }).join('');
-
-                videosHtml = `
-                <div class="featured-videos">
-                    <h3>Featured Videos</h3>
-                    <div class="video-grid">${videoLinks}</div>
-                </div>`;
-            }
+            const wrColor = getWinRateColor(stats.seen, winRateNum, cardStats.globalWinRate);
+            const videosHtml = generateVideoPanel(stats.videos, "Featured Videos");
 
             const detailHtml = `
 <!DOCTYPE html>
@@ -872,16 +776,9 @@ async function build() {
             const stats = cardStats.stats[cleanCardId] || { seen: 0, wins: 0 };
             const winRateNum = stats.seen > 0 ? (stats.wins / stats.seen) * 100 : 0;
 
-            let wrText = '';
-            let wrColor = '#888';
-            let barStyle = 'background: #444;'; 
-
-            if (stats.seen > 0) {
-                wrText = `${winRateNum.toFixed(0)}% Winrate`;
-                if (winRateNum > cardStats.globalWinRate) wrColor = '#00ff89';
-                else if (winRateNum < cardStats.globalWinRate) wrColor = '#ff4b4b';
-                barStyle = `background: linear-gradient(to right, #00ff89 ${winRateNum}%, #ff4b4b ${winRateNum}%);`;
-            }
+            const wrText = stats.seen > 0 ? `${winRateNum.toFixed(0)}% Winrate` : '';
+            const wrColor = getWinRateColor(stats.seen, winRateNum, cardStats.globalWinRate);
+            const barStyle = getWinBarStyle(stats.seen, winRateNum);
 
             return `
             <a href="/cards/${slug}/" class="card-item ${card.color}">
@@ -907,13 +804,6 @@ async function build() {
         .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #888; }
         .breadcrumbs a { color: #4a90e2; text-decoration: none; }
         .breadcrumbs a:hover { text-decoration: underline; }
-        
-        .stats-summary { background: #1a1a1a; border: 1px solid #333; padding: 25px; border-radius: 12px; margin-bottom: 40px; }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
-        .stat-item { text-align: center; }
-        .stat-label { font-size: 0.7rem; color: #888; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
-        .stat-value { font-size: 1.4rem; font-weight: bold; color: #fff; }
-        .stat-sub { font-size: 0.8rem; color: #666; font-weight: normal; }
 
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
         .card-item {
@@ -977,19 +867,12 @@ async function build() {
         console.log('🏠 Generating root landing page...');
         const lastUpdated = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 
-        const cardSub = cardStats.uniqueCardsSeen === totalCards ? totalCards : `${cardStats.uniqueCardsSeen} / ${totalCards}`;
+        const getSubText = (seen, total) => seen === total ? total : `${seen} / ${total}`;
 
-        const totalChars = chars.length;
-        const uniqueCharsSeen = Object.keys(cardStats.charStats).length;
-        const charSub = uniqueCharsSeen === totalChars ? totalChars : `${uniqueCharsSeen} / ${totalChars}`;
-
-        const totalRelics = relics.length;
-        const uniqueRelicsSeen = Object.keys(cardStats.relicStats).length;
-        const relicSub = uniqueRelicsSeen === totalRelics ? totalRelics : `${uniqueRelicsSeen} / ${totalRelics}`;
-
-        const totalEvents = events.length;
-        const uniqueEventsSeen = Object.keys(cardStats.eventStats).length;
-        const eventSub = uniqueEventsSeen === totalEvents ? totalEvents : `${uniqueEventsSeen} / ${totalEvents}`;
+        const cardSub = getSubText(cardStats.uniqueCardsSeen, totalCards);
+        const charSub = getSubText(cardStats.uniqueCharsSeen, chars.length);
+        const relicSub = getSubText(cardStats.uniqueRelicsSeen, relics.length);
+        const eventSub = getSubText(cardStats.uniqueEventsSeen, events.length);
 
         // Generate the Cards link with stats first
         let landingLinks = `<a href="/cards/" class="item-link"><div>Cards</div><div class="stat-sub">${cardSub}</div></a>`;
