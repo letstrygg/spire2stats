@@ -90,13 +90,13 @@ function generateSummaryPanel(runStats, label, total, seen) {
     return `
     <div class="stats-summary">
         <div class="stats-grid">
-            <div class="stat-item"><div class="stat-label">Total Runs</div><div class="stat-value">${runStats.totalRuns}</div></div>
-            <div class="stat-item"><div class="stat-label">Wins / Losses</div><div class="stat-value"><span style="color: #00ff89">${runStats.totalWins}</span> <span style="color: #444">/</span> <span style="color: #ff4b4b">${runStats.totalLosses}</span></div></div>
-            <div class="stat-item"><div class="stat-label">Overall Winrate</div><div class="stat-value">${runStats.globalWinRate.toFixed(1)}%</div></div>
+            <div class="stat-item"><div class="stat-label">Total Runs</div><div class="stat-value"><data value="${runStats.totalRuns}">${runStats.totalRuns}</data></div></div>
+            <div class="stat-item"><div class="stat-label">Wins / Losses</div><div class="stat-value"><data value="${runStats.totalWins}"><span style="color: #00ff89">${runStats.totalWins}</span></data> <span style="color: #444">/</span> <data value="${runStats.totalLosses}"><span style="color: #ff4b4b">${runStats.totalLosses}</span></data></div></div>
+            <div class="stat-item"><div class="stat-label">Overall Winrate</div><div class="stat-value"><data value="${runStats.globalWinRate.toFixed(1)}">${runStats.globalWinRate.toFixed(1)}%</data></div></div>
             <div class="stat-item"><div class="stat-label">Contributors</div><div class="stat-value">${runStats.uniqueUsers}</div></div>
             <div class="stat-item">
                 <div class="stat-label">${label} Seen</div>
-                <div class="stat-value">${completionHtml}</div>
+                <div class="stat-value"><data value="${seen}">${completionHtml}</data></div>
             </div>
         </div>
     </div>`;
@@ -133,13 +133,21 @@ function getItemStats(stats, globalWinRate) {
     const seen = stats?.seen || 0;
     const wins = stats?.wins || 0;
     const num = seen > 0 ? (wins / seen) * 100 : 0;
+    const losses = seen - wins;
     return {
-        seen, wins, num,
+        seen, wins, losses, num,
         formatted: num.toFixed(1),
         color: getWinRateColor(seen, num, globalWinRate),
         bar: getWinBarStyle(seen, num),
         text: seen > 0 ? `${num.toFixed(0)}% Winrate` : ''
     };
+}
+
+/** Helper to generate a semantic, SEO-friendly paragraph for run data */
+function generateSemanticStatsParagraph(name, stats, contextLabel) {
+    if (stats.seen === 0) return `<p>No runs recorded for the <strong>${name}</strong> ${contextLabel.toLowerCase()} yet.</p>`;
+    return `
+    <p>Based on tracked gameplay, <strong>${name}</strong> currently has a <data value="${stats.num}"><strong style="color: ${stats.color}">${stats.formatted}% winrate</strong></data> across <data value="${stats.seen}"><strong>${stats.seen} total runs</strong></data> (<span style="color: #00ff89">${stats.wins} Wins</span> / <span style="color: #ff4b4b">${stats.losses} Losses</span>) as of <time datetime="${ISO_BUILD_DATE}">${FORMATTED_BUILD_DATE}</time>.</p>`;
 }
 
 /** Helper to wrap content in the standard site layout */
@@ -321,8 +329,7 @@ async function buildRelics(relics, runStats) {
             relic.name,
             `
             <div class="stats-summary">
-                <h2>Run Data</h2>
-                ${stats.seen > 0 ? `<p>This relic was found in <span class="stat-val">${stats.seen}</span> runs with a <span class="stat-val" style="color: ${stats.color}">${stats.formatted}%</span> winrate.</p>` : `<p>No runs recorded for this relic yet.</p>`}
+                ${generateSemanticStatsParagraph(relic.name, stats, 'relic')}
             </div>
             <div class="relic-box">
                 <h1>${relic.name}</h1>
@@ -348,7 +355,7 @@ async function buildRelics(relics, runStats) {
         const poolClass = (relic.pool || 'shared').toLowerCase();
 
         return `
-        <a href="/relics/${slug}/" class="card-item ${poolClass}">
+        <a href="/relics/${slug}/" class="card-item ${poolClass}" aria-label="${relic.name}: ${stats.seen} runs, ${stats.text}">
             <div class="card-info"><span class="card-name">${relic.name}</span></div>
             <div class="card-stats">
                 <div class="win-rate" style="color: ${stats.color}">${stats.text}</div>
@@ -405,8 +412,7 @@ async function buildEvents(events, runStats) {
             event.name, 
             `
             <div class="stats-summary">
-                <h2>Run Data</h2>
-                ${stats.seen > 0 ? `<p>This event was encountered in <span class="stat-val">${stats.seen}</span> runs with a <span class="stat-val" style="color: ${stats.color}">${stats.formatted}%</span> winrate for those runs.</p>` : `<p>No runs recorded for this event yet.</p>`}
+                ${generateSemanticStatsParagraph(event.name, stats, 'event')}
             </div>
             <div class="event-box">
                 <h1>${event.name}</h1>
@@ -430,7 +436,7 @@ async function buildEvents(events, runStats) {
         const stats = getItemStats(runStats.eventStats[e.event_id], runStats.globalWinRate);
 
         return `
-        <a href="/events/${slug}/" class="card-item">
+        <a href="/events/${slug}/" class="card-item" aria-label="${e.name}: ${stats.seen} runs, ${stats.text}">
             <div class="card-info"><span class="card-name">${e.name}</span></div>
             <div class="card-stats">
                 <div class="win-rate" style="color: ${stats.color}">${stats.text}</div>
@@ -473,7 +479,6 @@ async function buildCharacters(chars, runStats) {
         if (rawStats.seen > 0) console.log(`   ✅ Found ${rawStats.seen} runs for ${charKey}`);
         else console.log(`   ⚠️ No runs found for ID "${charKey}"`);
 
-                const losses = rawStats.seen - rawStats.wins;
                 const videosHtml = generateVideoPanel(rawStats.videos);
 
                 // Character Cards
@@ -496,7 +501,7 @@ async function buildCharacters(chars, runStats) {
                     `
                     <h1>${displayName}</h1>
                     <div class="stats-summary">
-                        <p>This character has been played in <span class="stat-val">${rawStats.seen}</span> runs with a <span class="stat-val" style="color: ${stats.color}">${stats.formatted}%</span> winrate (<span style="color: #00ff89">${rawStats.wins} Wins</span> / <span style="color: #ff4b4b">${losses} Losses</span>).</p>
+                        ${generateSemanticStatsParagraph(displayName, stats, 'character')}
                     </div>
                     <div style="background: #1a1a1a; padding: 25px; border-radius: 12px; border: 1px solid #333; line-height: 1.6; max-width: 800px;">${formatDescription(char.description)}</div>
                     ${videosHtml}
@@ -518,7 +523,7 @@ async function buildCharacters(chars, runStats) {
                 const stats = getItemStats(runStats.charStats[charKey], runStats.globalWinRate);
 
                 return `
-                <a href="/characters/${slugify(displayName)}/" class="card-item ${displayName.toLowerCase()}">
+                <a href="/characters/${slugify(displayName)}/" class="card-item ${displayName.toLowerCase()}" aria-label="${displayName}: ${stats.wins} wins, ${stats.losses} losses">
                     <div class="card-info"><span class="card-name">${displayName}</span></div>
                     <div class="card-stats">
                         <div class="win-rate" style="color: ${stats.color}">${stats.text}</div>
@@ -582,8 +587,7 @@ async function build() {
                 card.name, 
                 `
                 <div class="stats-summary">
-                    <h2>Run Data</h2>
-                    ${stats.seen > 0 ? `<p>This card was found in <span class="stat-val">${stats.seen}</span> run final decks with a <span class="stat-val" style="color: ${stats.color}">${stats.formatted}%</span> winrate.</p>` : `<p>No runs recorded for this card yet.</p>`}
+                    ${generateSemanticStatsParagraph(card.name, stats, 'card')}
                 </div>
                 <div class="card-display">
                     <div class="card">
@@ -620,7 +624,7 @@ async function build() {
             const stats = getItemStats(cardStats.stats[cleanCardId], cardStats.globalWinRate);
 
             return `
-            <a href="/cards/${slug}/" class="card-item ${card.color}">
+            <a href="/cards/${slug}/" class="card-item ${card.color}" aria-label="${card.name}: ${stats.seen} runs, ${stats.text}">
                 <div class="card-info"><span class="card-name">${card.name}</span></div>
                 <div class="card-stats">
                     <div class="win-rate" style="color: ${stats.color}">${stats.text}</div>
