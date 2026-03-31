@@ -5,23 +5,61 @@
     <meta charset="UTF-8">
     <title>Symbiote - Spire 2 Stats</title>
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <style>
         body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; }
         .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #888; }
         .breadcrumbs a { color: #4a90e2; text-decoration: none; }
-        .breadcrumbs a:hover { text-decoration: underline; }
-        .item-box { background: #1a1a1a; border: 1px solid #333; padding: 30px; border-radius: 12px; max-width: 700px; }
-        .subtitle { color: #888; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 15px; }
-        .description { line-height: 1.6; font-size: 1.15rem; border-top: 1px solid #333; padding-top: 15px; }
-        .text-gold { color: #ffd700; } .text-red { color: #ff4b4b; } .text-green { color: #00ff89; }
+        .stats-summary { background: #1a1a1a; border: 1px solid #333; padding: 20px; border-radius: 8px; margin-bottom: 30px; max-width: 800px; }
+        .stat-val { color: #ffd700; font-weight: bold; }
+        .event-box { background: #1a1a1a; border: 1px solid #333; padding: 30px; border-radius: 12px; max-width: 800px; line-height: 1.6; }
+        .subtitle { color: #888; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .options-section { margin-top: 40px; max-width: 800px; }
+        .options-grid { display: grid; gap: 15px; }
+        .option-card { background: #1a1a1a; border: 1px solid #333; border-left: 4px solid #4a90e2; padding: 15px; border-radius: 4px; }
+        .option-title { font-weight: bold; color: #ffd700; margin-bottom: 5px; }
+        .option-desc { font-size: 0.95rem; color: #ccc; }
+        .featured-videos { margin-top: 40px; max-width: 800px; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+        .video-panel { background: #1a1a1a; border: 1px solid #333; padding: 12px; border-radius: 8px; display: flex; flex-direction: column; gap: 8px; }
+        .vid-btn { display: flex; align-items: center; justify-content: center; padding: 8px; border-radius: 4px; text-decoration: none; font-size: 0.85rem; font-weight: bold; color: #fff; transition: background 0.2s; }
+        .ltg-btn { background: #333; } .yt-btn { background: #2a2a2a; border: 1px solid #444; }
+        .yt-btn .material-symbols-outlined { color: #ff4b4b; margin-right: 6px; font-size: 1.2rem; }
     </style>
 </head>
 <body>
     <nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/events/">events</a> / symbiote</nav>
-    <div class="item-box">
+    <div class="stats-summary">
+        <h2>Run Data</h2>
+        <p>No runs recorded for this event yet.</p>
+    </div>
+    <div class="event-box">
         <h1>Symbiote</h1>
-        <div class="subtitle">Shared</div>
+        <div class="subtitle">Unknown Act • Shared</div>
         <div class="description">Along your travels, you stumble upon a dark, amorphous polyp. You can sense that it is very old, and very evil.<br><br><em>Approach...</em></div>
     </div>
+    
+            <div class="options-section">
+                <h3>Choices & Outcomes</h3>
+                <div class="options-grid">
+                    
+                        <div class="option-card">
+                            <div class="option-title">Approach</div>
+                            <div class="option-desc"><span class="text-gold">Enchant</span> an Attack with <span class="text-purple">Corrupted</span>.</div>
+                        </div>
+                    
+                        <div class="option-card">
+                            <div class="option-title">Locked</div>
+                            <div class="option-desc">None of your Attacks can be Enchanted.</div>
+                        </div>
+                    
+                        <div class="option-card">
+                            <div class="option-title">Kill with Fire</div>
+                            <div class="option-desc">Choose a card to <span class="text-gold">Transform</span>.</div>
+                        </div>
+                    
+                </div>
+            </div>
+    
 </body>
 </html>
