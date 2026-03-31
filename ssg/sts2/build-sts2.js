@@ -67,7 +67,7 @@ async function getCardStats() {
             const stats = {}; // Card stats
             const charStats = {}; // Character stats
             rows.forEach(row => {
-                const charId = (row.character || '').replace(/^CHARACTER\./, '');
+                const charId = (row.character || '').replace(/^CHARACTER\./, '').toUpperCase();
                 if (!charStats[charId]) charStats[charId] = { seen: 0, wins: 0, videos: [] };
                 charStats[charId].seen++;
                 if (row.win) charStats[charId].wins++;
@@ -196,14 +196,15 @@ async function buildCharacters(runStats) {
             const root = ensureDir(path.join(PATHS.WEB_ROOT, 'characters'));
 
             for (const char of chars) {
-                const slug = slugify(char.name);
+                const displayName = char.name.replace(/^The\s+/i, '');
+                const slug = slugify(displayName);
                 const dir = ensureDir(path.join(root, slug));
-                const charKey = char.character_id;
+                const charKey = (char.character_id || '').replace(/^CHARACTER\./, '').toUpperCase();
                 const stats = runStats.charStats[charKey] || { seen: 0, wins: 0, videos: [] };
                 
                 const winRateNum = stats.seen > 0 ? (stats.wins / stats.seen) * 100 : 0;
                 const losses = stats.seen - stats.wins;
-                const charColorClass = char.name.toLowerCase();
+                const charColorClass = displayName.toLowerCase();
 
                 // Associated Videos
                 let videosHtml = '';
@@ -218,7 +219,7 @@ async function buildCharacters(runStats) {
                 }
 
                 // Character Cards
-                const charCards = await new Promise(res => db.all("SELECT * FROM cards WHERE LOWER(color) = ? ORDER BY rarity, name ASC", [char.name.toLowerCase()], (e, r) => res(r || [])));
+                const charCards = await new Promise(res => db.all("SELECT * FROM cards WHERE LOWER(color) = ? ORDER BY rarity, name ASC", [displayName.toLowerCase()], (e, r) => res(r || [])));
                 const cardItemsHtml = charCards.map(c => {
                     const cardStats = runStats.stats[c.card_id] || { seen: 0, wins: 0 };
                     const cWrNum = cardStats.seen > 0 ? (cardStats.wins / cardStats.seen) * 100 : 0;
@@ -232,7 +233,7 @@ async function buildCharacters(runStats) {
                 }).join('');
 
                 // Character Relics
-                const charRelics = await new Promise(res => db.all("SELECT * FROM relics WHERE LOWER(pool) = ? ORDER BY rarity, name ASC", [char.name.toLowerCase()], (e, r) => res(r || [])));
+                const charRelics = await new Promise(res => db.all("SELECT * FROM relics WHERE LOWER(pool) = ? ORDER BY rarity, name ASC", [displayName.toLowerCase()], (e, r) => res(r || [])));
                 const relicItemsHtml = charRelics.map(r => `<a href="/relics/${slugify(r.name)}/" class="item-link">${r.name}</a>`).join('');
 
                 const detailHtml = `
@@ -265,17 +266,17 @@ async function buildCharacters(runStats) {
     </style>
 </head>
 <body>
-    <nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/characters/">characters</a> / ${char.name.toLowerCase()}</nav>
-    <h1>${char.name}</h1>
+    <nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/characters/">characters</a> / ${displayName.toLowerCase()}</nav>
+    <h1>${displayName}</h1>
     <div class="stats-summary">
         <p>This character has been played in <span class="stat-val">${stats.seen}</span> runs with a <span class="stat-val">${winRateNum.toFixed(1)}%</span> winrate (<span style="color: #00ff89">${stats.wins} Wins</span> / <span style="color: #ff4b4b">${losses} Losses</span>).</p>
     </div>
     <div style="background: #1a1a1a; padding: 25px; border-radius: 12px; border: 1px solid #333; line-height: 1.6; max-width: 800px;">${formatDescription(char.description)}</div>
     
     ${videosHtml}
-    <h2 class="section-title">${char.name} Cards</h2>
+    <h2 class="section-title">${displayName} Cards</h2>
     <div class="grid">${cardItemsHtml}</div>
-    <h2 class="section-title">${char.name} Relics</h2>
+    <h2 class="section-title">${displayName} Relics</h2>
     <div class="grid">${relicItemsHtml}</div>
 </body>
 </html>`;
@@ -284,12 +285,14 @@ async function buildCharacters(runStats) {
 
             // Index Page
             const charLinks = chars.map(c => {
-                const stats = runStats.charStats[c.character_id] || { seen: 0, wins: 0 };
+                const displayName = c.name.replace(/^The\s+/i, '');
+                const charKey = (c.character_id || '').replace(/^CHARACTER\./, '').toUpperCase();
+                const stats = runStats.charStats[charKey] || { seen: 0, wins: 0 };
                 const wrNum = stats.seen > 0 ? (stats.wins / stats.seen) * 100 : 0;
                 let barStyle = stats.seen > 0 ? `background: linear-gradient(to right, #00ff89 ${wrNum}%, #ff4b4b ${wrNum}%);` : 'background: #444;';
                 return `
-                <a href="/characters/${slugify(c.name)}/" class="card-item ${c.name.toLowerCase()}">
-                    <div class="card-info"><span class="card-name">${c.name}</span></div>
+                <a href="/characters/${slugify(displayName)}/" class="card-item ${displayName.toLowerCase()}">
+                    <div class="card-info"><span class="card-name">${displayName}</span></div>
                     <div class="card-stats">
                         <div class="win-rate">${stats.seen > 0 ? wrNum.toFixed(0) + '%' : ''}</div>
                         <div class="run-count">${stats.wins}W / ${stats.seen - stats.wins}L</div>

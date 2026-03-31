@@ -1,0 +1,396 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Silent - Spire 2 Stats</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; }
+        .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #888; }
+        .breadcrumbs a { color: #4a90e2; text-decoration: none; }
+        .stats-summary { background: #1a1a1a; border: 1px solid #333; padding: 25px; border-radius: 12px; margin-bottom: 30px; max-width: 800px; }
+        .stat-val { color: #ffd700; font-weight: bold; }
+        .section-title { border-bottom: 1px solid #333; padding-bottom: 10px; margin: 40px 0 20px 0; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
+        .card-item { position: relative; overflow: hidden; background: #1a1a1a; border: 1px solid #333; padding: 15px; text-decoration: none; color: inherit; display: flex; justify-content: space-between; border-radius: 8px; transition: border-color 0.2s; }
+        .card-name { font-weight: bold; } .card-stats { text-align: right; } .win-rate { color: #ffd700; font-weight: bold; font-size: 0.9rem; } .run-count { font-size: 0.7rem; color: #666; text-transform: uppercase; } .win-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; }
+        .ironclad { border-left: 4px solid #ff4b4b; } .silent { border-left: 4px solid #00ff89; } .defect { border-left: 4px solid #4a90e2; } .necrobinder { border-left: 4px solid #c18cff; } .regent { border-left: 4px solid #e67e22; }
+        .item-link { background: #1a1a1a; border: 1px solid #333; padding: 12px; border-radius: 8px; text-decoration: none; color: inherit; text-align: center; font-weight: bold; transition: border-color 0.2s; }
+        .item-link:hover { border-color: #ffd700; }
+        .featured-videos { margin-top: 40px; max-width: 1200px; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+        .video-panel { background: #1a1a1a; border: 1px solid #333; padding: 12px; border-radius: 8px; display: flex; flex-direction: column; gap: 8px; }
+        .vid-btn { display: flex; align-items: center; justify-content: center; padding: 8px; border-radius: 4px; text-decoration: none; font-size: 0.85rem; font-weight: bold; color: #fff; transition: background 0.2s; }
+        .ltg-btn { background: #333; } .yt-btn { background: #2a2a2a; border: 1px solid #444; }
+        .yt-btn .material-symbols-outlined { color: #ff4b4b; margin-right: 6px; font-size: 1.2rem; }
+    </style>
+</head>
+<body>
+    <nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/characters/">characters</a> / silent</nav>
+    <h1>Silent</h1>
+    <div class="stats-summary">
+        <p>This character has been played in <span class="stat-val">0</span> runs with a <span class="stat-val">0.0%</span> winrate (<span style="color: #00ff89">0 Wins</span> / <span style="color: #ff4b4b">0 Losses</span>).</p>
+    </div>
+    <div style="background: #1a1a1a; padding: 25px; border-radius: 12px; border: 1px solid #333; line-height: 1.6; max-width: 800px;"></div>
+    
+    
+    <h2 class="section-title">Silent Cards</h2>
+    <div class="grid"><a href="/cards/suppress/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Suppress</span></div>
+                        <div class="card-stats"><div class="win-rate">0% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+                    </a><a href="/cards/wraith-form/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Wraith Form</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/defend/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Defend</span></div>
+                        <div class="card-stats"><div class="win-rate">45% WR</div><div class="run-count">11 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 45.45454545454545%, #ff4b4b 45.45454545454545%);"></div>
+                    </a><a href="/cards/neutralize/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Neutralize</span></div>
+                        <div class="card-stats"><div class="win-rate">50% WR</div><div class="run-count">10 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+                    </a><a href="/cards/strike/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Strike</span></div>
+                        <div class="card-stats"><div class="win-rate">40% WR</div><div class="run-count">10 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 40%, #ff4b4b 40%);"></div>
+                    </a><a href="/cards/survivor/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Survivor</span></div>
+                        <div class="card-stats"><div class="win-rate">45% WR</div><div class="run-count">11 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 45.45454545454545%, #ff4b4b 45.45454545454545%);"></div>
+                    </a><a href="/cards/acrobatics/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Acrobatics</span></div>
+                        <div class="card-stats"><div class="win-rate">67% WR</div><div class="run-count">6 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 66.66666666666666%, #ff4b4b 66.66666666666666%);"></div>
+                    </a><a href="/cards/anticipate/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Anticipate</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/backflip/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Backflip</span></div>
+                        <div class="card-stats"><div class="win-rate">50% WR</div><div class="run-count">4 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+                    </a><a href="/cards/blade-dance/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Blade Dance</span></div>
+                        <div class="card-stats"><div class="win-rate">0% WR</div><div class="run-count">2 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+                    </a><a href="/cards/cloak-and-dagger/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Cloak and Dagger</span></div>
+                        <div class="card-stats"><div class="win-rate">67% WR</div><div class="run-count">3 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 66.66666666666666%, #ff4b4b 66.66666666666666%);"></div>
+                    </a><a href="/cards/dagger-spray/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Dagger Spray</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/dagger-throw/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Dagger Throw</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">2 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/deadly-poison/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Deadly Poison</span></div>
+                        <div class="card-stats"><div class="win-rate">25% WR</div><div class="run-count">4 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 25%, #ff4b4b 25%);"></div>
+                    </a><a href="/cards/deflect/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Deflect</span></div>
+                        <div class="card-stats"><div class="win-rate">0% WR</div><div class="run-count">2 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+                    </a><a href="/cards/dodge-and-roll/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Dodge and Roll</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/flick-flack/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Flick-Flack</span></div>
+                        <div class="card-stats"><div class="win-rate">67% WR</div><div class="run-count">6 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 66.66666666666666%, #ff4b4b 66.66666666666666%);"></div>
+                    </a><a href="/cards/leading-strike/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Leading Strike</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/piercing-wail/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Piercing Wail</span></div>
+                        <div class="card-stats"><div class="win-rate">50% WR</div><div class="run-count">6 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+                    </a><a href="/cards/poisoned-stab/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Poisoned Stab</span></div>
+                        <div class="card-stats"><div class="win-rate">67% WR</div><div class="run-count">3 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 66.66666666666666%, #ff4b4b 66.66666666666666%);"></div>
+                    </a><a href="/cards/prepared/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Prepared</span></div>
+                        <div class="card-stats"><div class="win-rate">50% WR</div><div class="run-count">8 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+                    </a><a href="/cards/ricochet/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Ricochet</span></div>
+                        <div class="card-stats"><div class="win-rate">33% WR</div><div class="run-count">3 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 33.33333333333333%, #ff4b4b 33.33333333333333%);"></div>
+                    </a><a href="/cards/slice/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Slice</span></div>
+                        <div class="card-stats"><div class="win-rate">0% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+                    </a><a href="/cards/snakebite/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Snakebite</span></div>
+                        <div class="card-stats"><div class="win-rate">50% WR</div><div class="run-count">2 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+                    </a><a href="/cards/sucker-punch/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Sucker Punch</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/untouchable/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Untouchable</span></div>
+                        <div class="card-stats"><div class="win-rate">71% WR</div><div class="run-count">7 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 71.42857142857143%, #ff4b4b 71.42857142857143%);"></div>
+                    </a><a href="/cards/abrasive/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Abrasive</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/accelerant/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Accelerant</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/adrenaline/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Adrenaline</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">2 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/afterimage/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Afterimage</span></div>
+                        <div class="card-stats"><div class="win-rate">80% WR</div><div class="run-count">5 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 80%, #ff4b4b 80%);"></div>
+                    </a><a href="/cards/assassinate/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Assassinate</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/blade-of-ink/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Blade of Ink</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/bullet-time/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Bullet Time</span></div>
+                        <div class="card-stats"><div class="win-rate">0% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+                    </a><a href="/cards/burst/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Burst</span></div>
+                        <div class="card-stats"><div class="win-rate">0% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+                    </a><a href="/cards/corrosive-wave/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Corrosive Wave</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/echoing-slash/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Echoing Slash</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/envenom/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Envenom</span></div>
+                        <div class="card-stats"><div class="win-rate">0% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+                    </a><a href="/cards/fan-of-knives/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Fan of Knives</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/grand-finale/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Grand Finale</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/knife-trap/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Knife Trap</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/malaise/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Malaise</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/master-planner/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Master Planner</span></div>
+                        <div class="card-stats"><div class="win-rate">0% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+                    </a><a href="/cards/murder/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Murder</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/nightmare/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Nightmare</span></div>
+                        <div class="card-stats"><div class="win-rate">50% WR</div><div class="run-count">2 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+                    </a><a href="/cards/serpent-form/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Serpent Form</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/shadow-step/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Shadow Step</span></div>
+                        <div class="card-stats"><div class="win-rate">50% WR</div><div class="run-count">2 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+                    </a><a href="/cards/shadowmeld/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Shadowmeld</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/sneaky/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Sneaky</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/storm-of-steel/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Storm of Steel</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/the-hunt/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">The Hunt</span></div>
+                        <div class="card-stats"><div class="win-rate">0% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+                    </a><a href="/cards/tools-of-the-trade/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Tools of the Trade</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">3 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/tracking/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Tracking</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/accuracy/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Accuracy</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/backstab/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Backstab</span></div>
+                        <div class="card-stats"><div class="win-rate">0% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+                    </a><a href="/cards/blur/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Blur</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/bouncing-flask/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Bouncing Flask</span></div>
+                        <div class="card-stats"><div class="win-rate">33% WR</div><div class="run-count">3 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 33.33333333333333%, #ff4b4b 33.33333333333333%);"></div>
+                    </a><a href="/cards/bubble-bubble/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Bubble Bubble</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/calculated-gamble/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Calculated Gamble</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">2 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/dash/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Dash</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/escape-plan/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Escape Plan</span></div>
+                        <div class="card-stats"><div class="win-rate">50% WR</div><div class="run-count">2 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+                    </a><a href="/cards/expertise/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Expertise</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/expose/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Expose</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/finisher/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Finisher</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/flanking/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Flanking</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/flechettes/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Flechettes</span></div>
+                        <div class="card-stats"><div class="win-rate">0% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+                    </a><a href="/cards/follow-through/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Follow Through</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/footwork/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Footwork</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/hand-trick/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Hand Trick</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/haze/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Haze</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">4 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/hidden-daggers/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Hidden Daggers</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/infinite-blades/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Infinite Blades</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/leg-sweep/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Leg Sweep</span></div>
+                        <div class="card-stats"><div class="win-rate">0% WR</div><div class="run-count">2 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+                    </a><a href="/cards/memento-mori/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Memento Mori</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/mirage/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Mirage</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/noxious-fumes/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Noxious Fumes</span></div>
+                        <div class="card-stats"><div class="win-rate">33% WR</div><div class="run-count">3 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 33.33333333333333%, #ff4b4b 33.33333333333333%);"></div>
+                    </a><a href="/cards/outbreak/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Outbreak</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/phantom-blades/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Phantom Blades</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/pinpoint/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Pinpoint</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/pounce/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Pounce</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/precise-cut/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Precise Cut</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/predator/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Predator</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/reflex/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Reflex</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/skewer/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Skewer</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/speedster/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Speedster</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/strangle/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Strangle</span></div>
+                        <div class="card-stats"><div class="win-rate">0% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+                    </a><a href="/cards/tactician/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Tactician</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">3 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/up-my-sleeve/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Up My Sleeve</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/well-laid-plans/" class="card-item silent">
+                        <div class="card-info"><span class="card-name">Well-Laid Plans</span></div>
+                        <div class="card-stats"><div class="win-rate">67% WR</div><div class="run-count">3 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 66.66666666666666%, #ff4b4b 66.66666666666666%);"></div>
+                    </a></div>
+    <h2 class="section-title">Silent Relics</h2>
+    <div class="grid"><a href="/relics/snecko-skull/" class="item-link">Snecko Skull</a><a href="/relics/helical-dart/" class="item-link">Helical Dart</a><a href="/relics/paper-krane/" class="item-link">Paper Krane</a><a href="/relics/tough-bandages/" class="item-link">Tough Bandages</a><a href="/relics/ninja-scroll/" class="item-link">Ninja Scroll</a><a href="/relics/ring-of-the-snake/" class="item-link">Ring of the Snake</a><a href="/relics/tingsha/" class="item-link">Tingsha</a><a href="/relics/twisted-funnel/" class="item-link">Twisted Funnel</a></div>
+</body>
+</html>

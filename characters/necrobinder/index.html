@@ -1,0 +1,396 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Necrobinder - Spire 2 Stats</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; }
+        .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #888; }
+        .breadcrumbs a { color: #4a90e2; text-decoration: none; }
+        .stats-summary { background: #1a1a1a; border: 1px solid #333; padding: 25px; border-radius: 12px; margin-bottom: 30px; max-width: 800px; }
+        .stat-val { color: #ffd700; font-weight: bold; }
+        .section-title { border-bottom: 1px solid #333; padding-bottom: 10px; margin: 40px 0 20px 0; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
+        .card-item { position: relative; overflow: hidden; background: #1a1a1a; border: 1px solid #333; padding: 15px; text-decoration: none; color: inherit; display: flex; justify-content: space-between; border-radius: 8px; transition: border-color 0.2s; }
+        .card-name { font-weight: bold; } .card-stats { text-align: right; } .win-rate { color: #ffd700; font-weight: bold; font-size: 0.9rem; } .run-count { font-size: 0.7rem; color: #666; text-transform: uppercase; } .win-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; }
+        .ironclad { border-left: 4px solid #ff4b4b; } .silent { border-left: 4px solid #00ff89; } .defect { border-left: 4px solid #4a90e2; } .necrobinder { border-left: 4px solid #c18cff; } .regent { border-left: 4px solid #e67e22; }
+        .item-link { background: #1a1a1a; border: 1px solid #333; padding: 12px; border-radius: 8px; text-decoration: none; color: inherit; text-align: center; font-weight: bold; transition: border-color 0.2s; }
+        .item-link:hover { border-color: #ffd700; }
+        .featured-videos { margin-top: 40px; max-width: 1200px; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+        .video-panel { background: #1a1a1a; border: 1px solid #333; padding: 12px; border-radius: 8px; display: flex; flex-direction: column; gap: 8px; }
+        .vid-btn { display: flex; align-items: center; justify-content: center; padding: 8px; border-radius: 4px; text-decoration: none; font-size: 0.85rem; font-weight: bold; color: #fff; transition: background 0.2s; }
+        .ltg-btn { background: #333; } .yt-btn { background: #2a2a2a; border: 1px solid #444; }
+        .yt-btn .material-symbols-outlined { color: #ff4b4b; margin-right: 6px; font-size: 1.2rem; }
+    </style>
+</head>
+<body>
+    <nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/characters/">characters</a> / necrobinder</nav>
+    <h1>Necrobinder</h1>
+    <div class="stats-summary">
+        <p>This character has been played in <span class="stat-val">0</span> runs with a <span class="stat-val">0.0%</span> winrate (<span style="color: #00ff89">0 Wins</span> / <span style="color: #ff4b4b">0 Losses</span>).</p>
+    </div>
+    <div style="background: #1a1a1a; padding: 25px; border-radius: 12px; border: 1px solid #333; line-height: 1.6; max-width: 800px;"></div>
+    
+    
+    <h2 class="section-title">Necrobinder Cards</h2>
+    <div class="grid"><a href="/cards/forbidden-grimoire/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Forbidden Grimoire</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/protector/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Protector</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/bodyguard/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Bodyguard</span></div>
+                        <div class="card-stats"><div class="win-rate">57% WR</div><div class="run-count">7 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 57.14285714285714%, #ff4b4b 57.14285714285714%);"></div>
+                    </a><a href="/cards/defend/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Defend</span></div>
+                        <div class="card-stats"><div class="win-rate">40% WR</div><div class="run-count">5 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 40%, #ff4b4b 40%);"></div>
+                    </a><a href="/cards/strike/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Strike</span></div>
+                        <div class="card-stats"><div class="win-rate">25% WR</div><div class="run-count">4 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 25%, #ff4b4b 25%);"></div>
+                    </a><a href="/cards/unleash/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Unleash</span></div>
+                        <div class="card-stats"><div class="win-rate">50% WR</div><div class="run-count">6 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+                    </a><a href="/cards/afterlife/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Afterlife</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/blight-strike/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Blight Strike</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/defile/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Defile</span></div>
+                        <div class="card-stats"><div class="win-rate">0% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+                    </a><a href="/cards/defy/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Defy</span></div>
+                        <div class="card-stats"><div class="win-rate">75% WR</div><div class="run-count">4 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 75%, #ff4b4b 75%);"></div>
+                    </a><a href="/cards/drain-power/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Drain Power</span></div>
+                        <div class="card-stats"><div class="win-rate">0% WR</div><div class="run-count">2 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+                    </a><a href="/cards/fear/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Fear</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/flatten/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Flatten</span></div>
+                        <div class="card-stats"><div class="win-rate">75% WR</div><div class="run-count">4 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 75%, #ff4b4b 75%);"></div>
+                    </a><a href="/cards/grave-warden/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Grave Warden</span></div>
+                        <div class="card-stats"><div class="win-rate">71% WR</div><div class="run-count">7 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 71.42857142857143%, #ff4b4b 71.42857142857143%);"></div>
+                    </a><a href="/cards/graveblast/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Graveblast</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/invoke/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Invoke</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/negative-pulse/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Negative Pulse</span></div>
+                        <div class="card-stats"><div class="win-rate">50% WR</div><div class="run-count">2 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+                    </a><a href="/cards/poke/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Poke</span></div>
+                        <div class="card-stats"><div class="win-rate">33% WR</div><div class="run-count">3 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 33.33333333333333%, #ff4b4b 33.33333333333333%);"></div>
+                    </a><a href="/cards/pull-aggro/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Pull Aggro</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/reap/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Reap</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/reave/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Reave</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/scourge/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Scourge</span></div>
+                        <div class="card-stats"><div class="win-rate">50% WR</div><div class="run-count">4 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+                    </a><a href="/cards/sculpting-strike/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Sculpting Strike</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/snap/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Snap</span></div>
+                        <div class="card-stats"><div class="win-rate">0% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+                    </a><a href="/cards/sow/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Sow</span></div>
+                        <div class="card-stats"><div class="win-rate">33% WR</div><div class="run-count">3 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 33.33333333333333%, #ff4b4b 33.33333333333333%);"></div>
+                    </a><a href="/cards/wisp/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Wisp</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/banshees-cry/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Banshee's Cry</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/call-of-the-void/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Call of the Void</span></div>
+                        <div class="card-stats"><div class="win-rate">50% WR</div><div class="run-count">2 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+                    </a><a href="/cards/demesne/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Demesne</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">2 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/devour-life/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Devour Life</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/eidolon/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Eidolon</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/end-of-days/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">End of Days</span></div>
+                        <div class="card-stats"><div class="win-rate">0% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+                    </a><a href="/cards/eradicate/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Eradicate</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/glimpse-beyond/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Glimpse Beyond</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/hang/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Hang</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/misery/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Misery</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/necro-mastery/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Necro Mastery</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/neurosurge/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Neurosurge</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">2 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/oblivion/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Oblivion</span></div>
+                        <div class="card-stats"><div class="win-rate">0% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+                    </a><a href="/cards/reanimate/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Reanimate</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/reaper-form/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Reaper Form</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/sacrifice/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Sacrifice</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/seance/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Seance</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/sentry-mode/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Sentry Mode</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/shared-fate/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Shared Fate</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/soul-storm/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Soul Storm</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/spirit-of-ash/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Spirit of Ash</span></div>
+                        <div class="card-stats"><div class="win-rate">50% WR</div><div class="run-count">2 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+                    </a><a href="/cards/squeeze/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Squeeze</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/the-scythe/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">The Scythe</span></div>
+                        <div class="card-stats"><div class="win-rate">33% WR</div><div class="run-count">3 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 33.33333333333333%, #ff4b4b 33.33333333333333%);"></div>
+                    </a><a href="/cards/times-up/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Time's Up</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/transfigure/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Transfigure</span></div>
+                        <div class="card-stats"><div class="win-rate">0% WR</div><div class="run-count">2 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+                    </a><a href="/cards/undeath/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Undeath</span></div>
+                        <div class="card-stats"><div class="win-rate">0% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+                    </a><a href="/cards/bone-shards/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Bone Shards</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/borrowed-time/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Borrowed Time</span></div>
+                        <div class="card-stats"><div class="win-rate">80% WR</div><div class="run-count">5 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 80%, #ff4b4b 80%);"></div>
+                    </a><a href="/cards/bury/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Bury</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/calcify/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Calcify</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/capture-spirit/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Capture Spirit</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/cleanse/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Cleanse</span></div>
+                        <div class="card-stats"><div class="win-rate">50% WR</div><div class="run-count">2 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+                    </a><a href="/cards/countdown/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Countdown</span></div>
+                        <div class="card-stats"><div class="win-rate">0% WR</div><div class="run-count">2 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+                    </a><a href="/cards/danse-macabre/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Danse Macabre</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/death-march/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Death March</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/deaths-door/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Death's Door</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/deathbringer/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Deathbringer</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">2 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/debilitate/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Debilitate</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/delay/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Delay</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/dirge/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Dirge</span></div>
+                        <div class="card-stats"><div class="win-rate">0% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+                    </a><a href="/cards/dredge/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Dredge</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/enfeebling-touch/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Enfeebling Touch</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/fetch/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Fetch</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/friendship/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Friendship</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/haunt/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Haunt</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">2 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/high-five/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">High Five</span></div>
+                        <div class="card-stats"><div class="win-rate">0% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+                    </a><a href="/cards/legion-of-bone/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Legion of Bone</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/lethality/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Lethality</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/melancholy/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Melancholy</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/no-escape/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">No Escape</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/pagestorm/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Pagestorm</span></div>
+                        <div class="card-stats"><div class="win-rate">67% WR</div><div class="run-count">3 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 66.66666666666666%, #ff4b4b 66.66666666666666%);"></div>
+                    </a><a href="/cards/parse/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Parse</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">2 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/pull-from-below/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Pull from Below</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/putrefy/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Putrefy</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/rattle/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Rattle</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/right-hand-hand/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Right Hand Hand</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/severance/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Severance</span></div>
+                        <div class="card-stats"><div class="win-rate">100% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+                    </a><a href="/cards/shroud/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Shroud</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/sic-em/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Sic 'Em</span></div>
+                        <div class="card-stats"><div class="win-rate">33% WR</div><div class="run-count">3 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 33.33333333333333%, #ff4b4b 33.33333333333333%);"></div>
+                    </a><a href="/cards/sleight-of-flesh/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Sleight of Flesh</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a><a href="/cards/spur/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Spur</span></div>
+                        <div class="card-stats"><div class="win-rate">0% WR</div><div class="run-count">1 runs</div></div>
+                        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+                    </a><a href="/cards/veilpiercer/" class="card-item necrobinder">
+                        <div class="card-info"><span class="card-name">Veilpiercer</span></div>
+                        <div class="card-stats"><div class="win-rate"></div><div class="run-count">0 runs</div></div>
+                        <div class="win-bar" style="background: #444;"></div>
+                    </a></div>
+    <h2 class="section-title">Necrobinder Relics</h2>
+    <div class="grid"><a href="/relics/bone-flute/" class="item-link">Bone Flute</a><a href="/relics/big-hat/" class="item-link">Big Hat</a><a href="/relics/bookmark/" class="item-link">Bookmark</a><a href="/relics/ivory-tile/" class="item-link">Ivory Tile</a><a href="/relics/undying-sigil/" class="item-link">Undying Sigil</a><a href="/relics/bound-phylactery/" class="item-link">Bound Phylactery</a><a href="/relics/book-repair-knife/" class="item-link">Book Repair Knife</a><a href="/relics/funerary-mask/" class="item-link">Funerary Mask</a></div>
+</body>
+</html>
