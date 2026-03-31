@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Spoils of Battle - Spire 2 Stats</title>
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <style>
         body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; }
         .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #888; }
@@ -13,6 +14,16 @@
         .stats-summary { background: #1a1a1a; border: 1px solid #333; padding: 20px; border-radius: 8px; margin-bottom: 30px; max-width: 800px; }
         .stat-val { color: #ffd700; font-weight: bold; }
         
+        .featured-videos { margin-top: 40px; max-width: 800px; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+        .video-panel { background: #1a1a1a; border: 1px solid #333; padding: 12px; border-radius: 8px; display: flex; flex-direction: column; gap: 8px; }
+        .vid-btn { display: flex; align-items: center; justify-content: center; padding: 8px; border-radius: 4px; text-decoration: none; font-size: 0.85rem; font-weight: bold; color: #fff; transition: background 0.2s; }
+        .ltg-btn { background: #333; }
+        .ltg-btn:hover { background: #444; }
+        .yt-btn { background: #2a2a2a; border: 1px solid #444; }
+        .yt-btn:hover { background: #333; }
+        .yt-btn .material-symbols-outlined { color: #ff4b4b; margin-right: 6px; font-size: 1.2rem; }
+
         .sts-card-display { display: flex; gap: 40px; align-items: center; flex-wrap: wrap; }
         .sts-card { position: relative; border: 2px solid #444; border-radius: 12px; padding: 25px; width: 320px; background: #1a1a1a; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
         .cost-circle { position: absolute; top: -15px; left: -15px; background: #ffd700; color: #000; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.3rem; border: 3px solid #121212; }
@@ -50,5 +61,14 @@
             <div class="card-footer">Common</div>
         </div>
     </div>
+
+    
+                <div class="featured-videos">
+                    <h3>Featured Videos</h3>
+                    <div class="video-grid"><div class="video-panel"><a href="https://letstrygg.com/yt/letstrygg/slay-the-spire-2/season-1/sts2-s01e08.html" class="vid-btn ltg-btn" target="_blank">Run Summary</a>
+                        <a href="https://www.youtube.com/watch?v=l8Ih44aCOr8" class="vid-btn yt-btn" target="_blank">
+                            <span class="material-symbols-outlined">smart_display</span> YouTube
+                        </a></div></div>
+                </div>
 </body>
 </html>

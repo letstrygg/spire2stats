@@ -22,17 +22,24 @@ async function run() {
     try {
         console.log('📡 Connecting to Supabase and checking local database...');
 
-        // 1. Ensure the yt_video column exists
+        // 1. Ensure the yt_video and ltg_url columns exist
         await new Promise((resolve, reject) => {
             db.all("PRAGMA table_info(runs)", (err, columns) => {
                 if (err) return reject(err);
                 const hasVideoCol = columns.some(c => c.name === 'yt_video');
+                const hasLtgUrlCol = columns.some(c => c.name === 'ltg_url');
                 
-                if (!hasVideoCol) {
-                    console.log('➕ Adding yt_video column to local runs table...');
-                    db.run("ALTER TABLE runs ADD COLUMN yt_video TEXT", (alterErr) => {
-                        if (alterErr) reject(alterErr);
-                        else resolve();
+                if (!hasVideoCol || !hasLtgUrlCol) {
+                    db.serialize(() => {
+                        if (!hasVideoCol) {
+                            console.log('➕ Adding yt_video column to local runs table...');
+                            db.run("ALTER TABLE runs ADD COLUMN yt_video TEXT");
+                        }
+                        if (!hasLtgUrlCol) {
+                            console.log('➕ Adding ltg_url column to local runs table...');
+                            db.run("ALTER TABLE runs ADD COLUMN ltg_url TEXT");
+                        }
+                        db.get("SELECT 1", () => resolve());
                     });
                 } else {
                     resolve();
@@ -40,10 +47,12 @@ async function run() {
             });
         });
 
-        // 2. Fetch run video mappings from Supabase
+        // 2. Fetch run video mappings and URLs from Supabase
         const { data: remoteRuns, error } = await supabase
             .from('ltg_sts2_runs')
-            .select('id, video_id')
+            .select(`
+                id, video_id, ltg_videos ( url )
+            `)
             .not('video_id', 'is', null);
 
         if (error) throw error;
@@ -52,17 +61,18 @@ async function run() {
             return;
         }
 
-        console.log(`🔍 Found ${remoteRuns.length} video links in Supabase. Syncing...`);
+        console.log(`🔍 Found ${remoteRuns.length} video/URL links in Supabase. Syncing...`);
 
         // 3. Update local database
         db.serialize(() => {
             db.run("BEGIN TRANSACTION");
 
-            const stmt = db.prepare("UPDATE runs SET yt_video = ? WHERE id = ?");
+            const stmt = db.prepare("UPDATE runs SET yt_video = ?, ltg_url = ? WHERE id = ?");
             let updatedCount = 0;
 
             for (const run of remoteRuns) {
-                stmt.run(run.video_id, run.id, function(err) {
+                const url = run.ltg_videos?.url || null;
+                stmt.run(run.video_id, url, run.id, function(err) {
                     if (!err && this.changes > 0) {
                         updatedCount++;
                     }
@@ -71,7 +81,7 @@ async function run() {
 
             stmt.finalize();
             db.run("COMMIT", () => {
-                console.log(`✨ Success: Updated ${updatedCount} local runs with YouTube video IDs.`);
+                console.log(`✨ Success: Updated ${updatedCount} local runs with video IDs and URLs.`);
                 db.close();
             });
         });

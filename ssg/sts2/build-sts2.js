@@ -55,7 +55,7 @@ function getCostDisplay(card) {
 
 async function getCardStats() {
     return new Promise((resolve, reject) => {
-        db.all("SELECT deck_list, win, username FROM runs", (err, rows) => {
+        db.all("SELECT deck_list, win, username, yt_video, ltg_url FROM runs", (err, rows) => {
             if (err) return reject(err);
             
             console.log(`📡 Database returned ${rows.length} run rows.`);
@@ -71,9 +71,13 @@ async function getCardStats() {
                 // Strip 'CARD.' prefix to match the card_id in the database
                 const uniqueCardsInDeck = new Set(deck.map(c => (c.id || '').replace(/^CARD\./, '')));
                 uniqueCardsInDeck.forEach(cardId => {
-                    if (!stats[cardId]) stats[cardId] = { seen: 0, wins: 0 };
+                    if (!stats[cardId]) stats[cardId] = { seen: 0, wins: 0, videos: [] };
                     stats[cardId].seen++;
                     if (row.win) stats[cardId].wins++;
+
+                    if (row.yt_video || row.ltg_url) {
+                        stats[cardId].videos.push({ yt: row.yt_video, ltg: row.ltg_url });
+                    }
                 });
             });
             
@@ -203,7 +207,7 @@ async function build() {
             const costDisplay = getCostDisplay(card);
             const description = formatDescription(card.description);
             
-            const stats = cardStats.stats[card.card_id] || { seen: 0, wins: 0 };
+            const stats = cardStats.stats[card.card_id] || { seen: 0, wins: 0, videos: [] };
             const winRateNum = stats.seen > 0 ? (stats.wins / stats.seen) * 100 : 0;
             const winRate = winRateNum.toFixed(1);
             
@@ -213,6 +217,29 @@ async function build() {
                 else if (winRateNum < cardStats.globalWinRate) wrColor = '#ff4b4b';
             }
 
+            let videosHtml = '';
+            if (stats.videos && stats.videos.length > 0) {
+                const videoLinks = stats.videos.map(v => {
+                    let buttons = '';
+                    if (v.ltg) {
+                        buttons += `<a href="https://letstrygg.com${v.ltg}" class="vid-btn ltg-btn" target="_blank">Run Summary</a>`;
+                    }
+                    if (v.yt) {
+                        buttons += `
+                        <a href="https://www.youtube.com/watch?v=${v.yt}" class="vid-btn yt-btn" target="_blank">
+                            <span class="material-symbols-outlined">smart_display</span> YouTube
+                        </a>`;
+                    }
+                    return `<div class="video-panel">${buttons}</div>`;
+                }).join('');
+
+                videosHtml = `
+                <div class="featured-videos">
+                    <h3>Featured Videos</h3>
+                    <div class="video-grid">${videoLinks}</div>
+                </div>`;
+            }
+
             const detailHtml = `
 <!DOCTYPE html>
 <html lang="en">
@@ -220,6 +247,7 @@ async function build() {
     <meta charset="UTF-8">
     <title>${card.name} - Spire 2 Stats</title>
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <style>
         body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; }
         .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #888; }
@@ -228,6 +256,16 @@ async function build() {
         .stats-summary { background: #1a1a1a; border: 1px solid #333; padding: 20px; border-radius: 8px; margin-bottom: 30px; max-width: 800px; }
         .stat-val { color: #ffd700; font-weight: bold; }
         
+        .featured-videos { margin-top: 40px; max-width: 800px; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+        .video-panel { background: #1a1a1a; border: 1px solid #333; padding: 12px; border-radius: 8px; display: flex; flex-direction: column; gap: 8px; }
+        .vid-btn { display: flex; align-items: center; justify-content: center; padding: 8px; border-radius: 4px; text-decoration: none; font-size: 0.85rem; font-weight: bold; color: #fff; transition: background 0.2s; }
+        .ltg-btn { background: #333; }
+        .ltg-btn:hover { background: #444; }
+        .yt-btn { background: #2a2a2a; border: 1px solid #444; }
+        .yt-btn:hover { background: #333; }
+        .yt-btn .material-symbols-outlined { color: #ff4b4b; margin-right: 6px; font-size: 1.2rem; }
+
         .sts-card-display { display: flex; gap: 40px; align-items: center; flex-wrap: wrap; }
         .sts-card { position: relative; border: 2px solid #444; border-radius: 12px; padding: 25px; width: 320px; background: #1a1a1a; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
         .cost-circle { position: absolute; top: -15px; left: -15px; background: #ffd700; color: #000; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.3rem; border: 3px solid #121212; }
@@ -268,6 +306,8 @@ async function build() {
             <div class="card-footer">${card.rarity}</div>
         </div>
     </div>
+
+    ${videosHtml}
 </body>
 </html>`;
 
