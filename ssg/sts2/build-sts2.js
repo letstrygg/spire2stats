@@ -34,7 +34,6 @@ const CATEGORIES = [
     { table: 'encounters', folder: 'encounters', titleField: 'name' },
     { table: 'acts', folder: 'acts', titleField: 'name' },
     { table: 'achievements', folder: 'achievements', titleField: 'name' },
-    { table: 'ascensions', folder: 'ascensions', titleField: 'name' },
     { table: 'afflictions', folder: 'afflictions', titleField: 'name' },
     { table: 'enchantments', folder: 'enchantments', titleField: 'name' },
     { table: 'epochs', folder: 'epochs', titleField: 'title' },
@@ -94,11 +93,11 @@ function getCostDisplay(card) {
 }
 
 async function getCardStats() {
-    const rows = await query("SELECT character, relic_list, deck_list, path_history, win, username, yt_video, ltg_url FROM runs");
+    const rows = await query("SELECT character, relic_list, deck_list, path_history, win, username, yt_video, ltg_url, ascension FROM runs");
     console.log(`📡 Database returned ${rows.length} run rows.`);
 
     const totalRuns = rows.length;
-    if (totalRuns === 0) return { stats: {}, charStats: {}, relicStats: {}, eventStats: {}, globalWinRate: 0, totalRuns: 0, totalWins: 0, totalLosses: 0, uniqueUsers: 0, uniqueCardsSeen: 0, uniqueRelicsSeen: 0, uniqueEventsSeen: 0, uniqueCharsSeen: 0 };
+    if (totalRuns === 0) return { stats: {}, charStats: {}, relicStats: {}, eventStats: {}, ascensionStats: {}, globalWinRate: 0, totalRuns: 0, totalWins: 0, totalLosses: 0, uniqueUsers: 0, uniqueCardsSeen: 0, uniqueRelicsSeen: 0, uniqueEventsSeen: 0, uniqueCharsSeen: 0, uniqueAscensionsSeen: 0 };
 
             const totalWins = rows.filter(r => r.win).length;
             const globalWinRate = totalRuns > 0 ? (totalWins / totalRuns) * 100 : 0;
@@ -108,6 +107,7 @@ async function getCardStats() {
             const charStats = {}; // Character stats
             const relicStats = {}; // Relic stats
             const eventStats = {}; // Event stats
+            const ascensionStats = {}; // Ascension stats
 
             const updateStat = (obj, id, win, video) => {
                 if (!obj[id]) obj[id] = { seen: 0, wins: 0, videos: [] };
@@ -137,10 +137,13 @@ async function getCardStats() {
                 const deck = JSON.parse(row.deck_list || '[]');
                 const uniqueCardsInDeck = new Set(deck.map(c => c.id || ''));
                 uniqueCardsInDeck.forEach(cardId => updateStat(stats, cardId, row.win, video));
+
+                const ascLevel = String(row.ascension || 0);
+                updateStat(ascensionStats, ascLevel, row.win, video);
             });
             
             const uniqueCardsSeen = Object.keys(stats).length;
-            console.log(`📊 Processed stats for ${uniqueCardsSeen} cards, ${Object.keys(relicStats).length} relics, and ${Object.keys(eventStats).length} events across ${totalRuns} runs.`);
+            console.log(`📊 Processed stats for ${uniqueCardsSeen} cards, ${Object.keys(relicStats).length} relics, ${Object.keys(eventStats).length} events, and ${Object.keys(ascensionStats).length} ascensions across ${totalRuns} runs.`);
 
             console.log(` Character keys found in runs: [${Object.keys(charStats).join(', ')}]`);
 
@@ -149,6 +152,7 @@ async function getCardStats() {
                 charStats,
                 relicStats,
                 eventStats,
+                ascensionStats,
                 globalWinRate, 
                 totalRuns, 
                 totalWins, 
@@ -157,7 +161,8 @@ async function getCardStats() {
                 uniqueCardsSeen,
                 uniqueRelicsSeen: Object.keys(relicStats).length,
                 uniqueEventsSeen: Object.keys(eventStats).length,
-                uniqueCharsSeen: Object.keys(charStats).length
+                uniqueCharsSeen: Object.keys(charStats).length,
+                uniqueAscensionsSeen: Object.keys(ascensionStats).length
             };
 }
 
@@ -319,6 +324,64 @@ async function buildEvents(events, runStats, sitemap) {
     fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
 }
 
+async function buildAscensions(ascensions, runStats, sitemap) {
+    console.log(`📈 Building ${ascensions.length} ascension pages...`);
+    const root = ensureDir(path.join(PATHS.WEB_ROOT, 'ascensions'));
+
+    for (const asc of ascensions) {
+        const title = asc.name || `Ascension ${asc.level}`;
+        const slug = slugify(title);
+        const dir = ensureDir(path.join(root, slug));
+        
+        const rawStats = runStats.ascensionStats[String(asc.level)] || { seen: 0, wins: 0, videos: [] };
+        const stats = getItemStats(rawStats, runStats.globalWinRate);
+        const videosHtml = generateVideoPanel(rawStats.videos);
+
+        const detailHtml = wrapLayout(
+            title, 
+            `
+            <div class="stats-summary">
+                ${generateSemanticStatsParagraph(title, stats, 'ascension')}
+            </div>
+            <div class="item-box">
+                <h1>${title}</h1>
+                <div class="subtitle">Level ${asc.level}</div>
+                <div class="description">${formatDescription(asc.description)}</div>
+            </div>
+            ${videosHtml}`,
+            [{ name: 'ascensions', url: '/ascensions/' }, { name: title, url: '' }],
+            `${title} winrates and run statistics for Slay the Spire 2.`,
+            generateItemJsonLd(title, "Ascension", stats)
+        );
+        fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
+        sitemap.add(`/ascensions/${slug}/`);
+    }
+
+    // Index Page
+    sitemap.add('/ascensions/');
+    const totalAsc = ascensions.length;
+    const ascSeen = runStats.uniqueAscensionsSeen;
+    const ascLinks = ascensions.map(asc => {
+        const title = asc.name || `Ascension ${asc.level}`;
+        const slug = slugify(title);
+        const stats = getItemStats(runStats.ascensionStats[String(asc.level)], runStats.globalWinRate);
+
+        return `
+        <a href="/ascensions/${slug}/" class="card-item" aria-label="${title}: ${stats.seen} runs, ${stats.text}">
+            <div class="card-info"><span class="card-name">${title}</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: ${stats.color}">${stats.text}</div>
+                <div class="run-count">${stats.seen} runs</div>
+            </div>
+            <div class="win-bar" style="${stats.bar}"></div>
+        </a>`;
+    }).join('');
+
+    const indexDesc = `Global winrates and statistics per Ascension level in Slay the Spire 2.`;
+    const indexHtml = wrapLayout('Ascensions Database', `<h1>Slay the Spire 2 Ascensions</h1>${generateSummaryPanel(runStats, "Ascensions", totalAsc, ascSeen)}<div class="grid">${ascLinks}</div>`, [{ name: 'ascensions', url: '' }], indexDesc, generateCollectionJsonLd(`Ascensions Database`, indexDesc));
+    fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
+}
+
 async function buildCharacters(chars, runStats, sitemap) {
     console.log(`👤 Building ${chars.length} character pages...`);
     const root = ensureDir(path.join(PATHS.WEB_ROOT, 'characters'));
@@ -411,6 +474,7 @@ async function build() {
         const chars = await query("SELECT * FROM characters ORDER BY name ASC");
         const relics = await query("SELECT * FROM relics ORDER BY name ASC");
         const events = await query("SELECT * FROM events ORDER BY name ASC");
+        const ascensions = await query("SELECT * FROM ascensions ORDER BY level ASC");
 
         const cardStats = await getCardStats();
         const cardsRoot = ensureDir(path.join(PATHS.WEB_ROOT, 'cards'));
@@ -481,12 +545,14 @@ async function build() {
         const charSub = getSubText(cardStats.uniqueCharsSeen, chars.length);
         const relicSub = getSubText(cardStats.uniqueRelicsSeen, relics.length);
         const eventSub = getSubText(cardStats.uniqueEventsSeen, events.length);
+        const ascSub = getSubText(cardStats.uniqueAscensionsSeen, ascensions.length);
 
         // Generate the Cards link with stats first
         let landingLinks = `<a href="/cards/" class="item-link-large"><div>Cards</div><div class="stat-sub">${cardSub}</div></a>`;
         landingLinks += `<a href="/characters/" class="item-link-large"><div>Characters</div><div class="stat-sub">${charSub}</div></a>`;
         landingLinks += `<a href="/relics/" class="item-link-large"><div>Relics</div><div class="stat-sub">${relicSub}</div></a>`;
         landingLinks += `<a href="/events/" class="item-link-large"><div>Events</div><div class="stat-sub">${eventSub}</div></a>`;
+        landingLinks += `<a href="/ascensions/" class="item-link-large"><div>Ascensions</div><div class="stat-sub">${ascSub}</div></a>`;
 
         // Append the rest of the categories
         landingLinks += CATEGORIES.map(cat => {
@@ -538,6 +604,9 @@ async function build() {
 
         // --- EVENTS ---
         await buildEvents(events, cardStats, sitemap);
+
+        // --- ASCENSIONS ---
+        await buildAscensions(ascensions, cardStats, sitemap);
 
         // --- GENERAL CATEGORY BUILDS ---
         for (const cat of CATEGORIES) {
