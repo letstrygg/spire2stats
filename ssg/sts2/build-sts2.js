@@ -38,22 +38,24 @@ async function getCardStats() {
             if (err) return reject(err);
             
             console.log(`📡 Database returned ${rows.length} run rows.`);
-            if (rows.length > 0) console.log(`🔍 Sample raw deck_list from first run: ${rows[0].deck_list?.substring(0, 150)}...`);
+
+            const totalRuns = rows.length;
+            const totalWins = rows.filter(r => r.win).length;
+            const globalWinRate = totalRuns > 0 ? (totalWins / totalRuns) * 100 : 0;
 
             const stats = {};
             rows.forEach(row => {
                 const deck = JSON.parse(row.deck_list || '[]');
                 // Strip 'CARD.' prefix to match the card_id in the database
-                const uniqueCardsInDeck = new Set(deck.map(c => c.id.replace(/^CARD\./, '')));
+                const uniqueCardsInDeck = new Set(deck.map(c => (c.id || '').replace(/^CARD\./, '')));
                 uniqueCardsInDeck.forEach(cardId => {
                     if (!stats[cardId]) stats[cardId] = { seen: 0, wins: 0 };
                     stats[cardId].seen++;
                     if (row.win) stats[cardId].wins++;
                 });
             });
-            console.log(`🔑 Sample keys (fixed):`, Object.keys(stats).slice(0, 10));
-            console.log(`� Processed stats for ${Object.keys(stats).length} unique cards across ${rows.length} runs.`);
-            resolve(stats);
+            console.log(`📊 Processed stats for ${Object.keys(stats).length} unique cards across ${rows.length} runs. Global Average: ${globalWinRate.toFixed(1)}%`);
+            resolve({ stats, globalWinRate });
         });
     });
 }
@@ -87,8 +89,15 @@ async function build() {
             const costDisplay = getCostDisplay(card);
             const description = formatDescription(card.description);
             
-            const stats = cardStats[card.card_id] || { seen: 0, wins: 0 };
-            const winRate = stats.seen > 0 ? ((stats.wins / stats.seen) * 100).toFixed(1) : "0.0";
+            const stats = cardStats.stats[card.card_id] || { seen: 0, wins: 0 };
+            const winRateNum = stats.seen > 0 ? (stats.wins / stats.seen) * 100 : 0;
+            const winRate = winRateNum.toFixed(1);
+            
+            let wrColor = '#888'; 
+            if (stats.seen > 0) {
+                if (winRateNum > cardStats.globalWinRate) wrColor = '#00ff89';
+                else if (winRateNum < cardStats.globalWinRate) wrColor = '#ff4b4b';
+            }
 
             const detailHtml = `
 <!DOCTYPE html>
@@ -120,7 +129,10 @@ async function build() {
 
     <div class="stats-summary">
         <h2>Run Data</h2>
-        <p>This card was found in <span class="stat-val">${stats.seen}</span> run final decks with a <span class="stat-val">${winRate}%</span> winrate.</p>
+        ${stats.seen > 0 ? 
+            `<p>This card was found in <span class="stat-val">${stats.seen}</span> run final decks with a <span class="stat-val" style="color: ${wrColor}">${winRate}%</span> winrate.</p>` :
+            `<p>No runs recorded for this card yet.</p>`
+        }
     </div>
 
     <div class="sts-card-display">
@@ -151,8 +163,19 @@ async function build() {
         
         const cardLinks = cards.map(card => {
             const slug = slugify(card.name);
-            const stats = cardStats[card.card_id] || { seen: 0, wins: 0 };
-            const winRate = stats.seen > 0 ? ((stats.wins / stats.seen) * 100).toFixed(0) : "0";
+            const stats = cardStats.stats[card.card_id] || { seen: 0, wins: 0 };
+            const winRateNum = stats.seen > 0 ? (stats.wins / stats.seen) * 100 : 0;
+
+            let wrText = '';
+            let wrColor = '#888';
+            let barStyle = 'background: #444;'; 
+
+            if (stats.seen > 0) {
+                wrText = `${winRateNum.toFixed(0)}% Winrate`;
+                if (winRateNum > cardStats.globalWinRate) wrColor = '#00ff89';
+                else if (winRateNum < cardStats.globalWinRate) wrColor = '#ff4b4b';
+                barStyle = `background: linear-gradient(to right, #00ff89 ${winRateNum}%, #ff4b4b ${winRateNum}%);`;
+            }
 
             return `
             <a href="/cards/${slug}/" class="card-item ${card.color}">
@@ -160,10 +183,10 @@ async function build() {
                     <span class="card-name">${card.name}</span>
                 </div>
                 <div class="card-stats">
-                    <div class="win-rate">${winRate}% Winrate</div>
+                    <div class="win-rate" style="color: ${wrColor}">${wrText}</div>
                     <div class="run-count">${stats.seen} runs</div>
                 </div>
-                <div class="win-bar" style="background: linear-gradient(to right, #00ff89 ${winRate}%, #ff4b4b ${winRate}%);"></div>
+                <div class="win-bar" style="${barStyle}"></div>
             </a>`;
         }).join('');
 
