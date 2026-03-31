@@ -54,7 +54,7 @@ function getCostDisplay(card) {
 
 async function getCardStats() {
     return new Promise((resolve, reject) => {
-        db.all("SELECT deck_list, win, username, yt_video, ltg_url FROM runs", (err, rows) => {
+        db.all("SELECT character, deck_list, win, username, yt_video, ltg_url FROM runs", (err, rows) => {
             if (err) return reject(err);
             
             console.log(`📡 Database returned ${rows.length} run rows.`);
@@ -89,7 +89,9 @@ async function getCardStats() {
             });
             
             const uniqueCardsSeen = Object.keys(stats).length;
-            console.log(`📊 Processed stats for ${uniqueCardsSeen} unique cards across ${totalRuns} runs. Global Average: ${globalWinRate.toFixed(1)}%`);
+            console.log(`📊 Processed stats for ${uniqueCardsSeen} unique cards across ${totalRuns} runs.`);
+            console.log(` Character keys found in runs: [${Object.keys(charStats).join(', ')}]`);
+
             resolve({ 
                 stats, 
                 charStats,
@@ -198,9 +200,16 @@ async function buildCharacters(runStats) {
                 const displayName = char.name.replace(/^The\s+/i, '');
                 const slug = slugify(displayName);
                 const dir = ensureDir(path.join(root, slug));
-                const charKey = (char.character_id || '').toUpperCase();
+                // Normalize character ID to match sanitized run data
+                const charKey = (char.character_id || '').replace('CHARACTER.', '').toUpperCase();
+
+                console.log(`🔍 Mapping Character: "${displayName}" (ID: ${charKey})`);
+
                 const stats = runStats.charStats[charKey] || { seen: 0, wins: 0, videos: [] };
                 
+                if (stats.seen > 0) console.log(`   ✅ Found ${stats.seen} runs for ${charKey}`);
+                else console.log(`   ⚠️ No runs found for ID "${charKey}"`);
+
                 const winRateNum = stats.seen > 0 ? (stats.wins / stats.seen) * 100 : 0;
                 const losses = stats.seen - stats.wins;
                 const charColorClass = displayName.toLowerCase();
@@ -285,7 +294,7 @@ async function buildCharacters(runStats) {
             // Index Page
             const charLinks = chars.map(c => {
                 const displayName = c.name.replace(/^The\s+/i, '');
-                const charKey = (c.character_id || '').toUpperCase();
+                const charKey = (c.character_id || '').replace('CHARACTER.', '').toUpperCase();
                 const stats = runStats.charStats[charKey] || { seen: 0, wins: 0 };
                 const wrNum = stats.seen > 0 ? (stats.wins / stats.seen) * 100 : 0;
                 let barStyle = stats.seen > 0 ? `background: linear-gradient(to right, #00ff89 ${wrNum}%, #ff4b4b ${wrNum}%);` : 'background: #444;';

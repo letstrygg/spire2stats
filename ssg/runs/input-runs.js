@@ -112,6 +112,11 @@ async function run() {
                         return entry;
                     });
 
+                    const cleanChar = player.character?.replace('CHARACTER.', '');
+                    if (runCount === 0) {
+                        console.log(`🔍 Sanitization check: "${player.character}" -> "${cleanChar}"`);
+                    }
+
                     stmt.run(
                         runId, username, rawData.schema_version, rawData.build_id, 
                         rawData.platform_type, String(rawData.seed), rawData.start_time, 
@@ -120,7 +125,7 @@ async function run() {
                         rawData.killed_by_encounter?.replace('ENCOUNTER.', '') || null,
                         rawData.killed_by_event?.replace('EVENT.', '') || null,
                         JSON.stringify((rawData.acts || []).map(a => a.replace('ACT.', ''))),
-                        player.character?.replace('CHARACTER.', ''),
+                        cleanChar,
                         JSON.stringify(cleanRelics),
                         JSON.stringify(cleanDeck),
                         JSON.stringify(pathHistory)
