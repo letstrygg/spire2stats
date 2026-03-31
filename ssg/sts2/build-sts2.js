@@ -270,14 +270,14 @@ async function buildRelics(relics, runStats, sitemap) {
 
     const indexDesc = `View global winrates, run statistics, and win/loss records for all Slay the Spire 2 relics.`;
     const indexHtml = wrapLayout(
-        'Relics Database', 
+        'Relics', 
         `
         <h1>Slay the Spire 2 Relics</h1>
         ${generateSummaryPanel(runStats, "Relics", totalRelics, relicsSeen)}
         <div class="grid">${relicLinks}</div>`,
         [{ name: 'relics', url: '' }],
         indexDesc,
-        generateCollectionJsonLd(`Relics Database`, indexDesc)
+        generateCollectionJsonLd(`Relics`, indexDesc)
     );
     fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
 }
@@ -320,14 +320,14 @@ async function buildEvents(events, runStats, sitemap) {
 
     const indexDesc = `View global winrates, run statistics, and encounter records for all Slay the Spire 2 events.`;
     const indexHtml = wrapLayout(
-        'Events Database', 
+        'Events', 
         `
         <h1>Slay the Spire 2 Events</h1>
         ${generateSummaryPanel(runStats, "Events", totalEvents, eventsSeen)}
         <div class="grid">${eventLinks}</div>`,
         [{ name: 'events', url: '' }],
         indexDesc,
-        generateCollectionJsonLd(`Events Database`, indexDesc)
+        generateCollectionJsonLd(`Events`, indexDesc)
     );
     fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
 }
@@ -387,7 +387,7 @@ async function buildAscensions(ascensions, runStats, sitemap) {
     }).join('');
 
     const indexDesc = `Global winrates and statistics per Ascension level in Slay the Spire 2.`;
-    const indexHtml = wrapLayout('Ascensions Database', `<h1>Slay the Spire 2 Ascensions</h1>${generateSummaryPanel(runStats, "Ascensions", totalAsc, ascSeen)}<div class="grid">${ascLinks}</div>`, [{ name: 'ascensions', url: '' }], indexDesc, generateCollectionJsonLd(`Ascensions Database`, indexDesc));
+    const indexHtml = wrapLayout('Ascensions', `<h1>Slay the Spire 2 Ascensions</h1>${generateSummaryPanel(runStats, "Ascensions", totalAsc, ascSeen)}<div class="grid">${ascLinks}</div>`, [{ name: 'ascensions', url: '' }], indexDesc, generateCollectionJsonLd(`Ascensions`, indexDesc));
     fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
 }
 
@@ -450,7 +450,7 @@ async function buildEnchantments(enchantments, runStats, sitemap) {
     }).join('');
 
     const indexDesc = `View global winrates and run statistics for all Slay the Spire 2 enchantments.`;
-    const indexHtml = wrapLayout('Enchantments Database', `<h1>Slay the Spire 2 Enchantments</h1>${generateSummaryPanel(runStats, "Enchantments", total, seen)}<div class="grid">${links}</div>`, [{ name: 'enchantments', url: '' }], indexDesc, generateCollectionJsonLd(`Enchantments Database`, indexDesc));
+    const indexHtml = wrapLayout('Enchantments', `<h1>Slay the Spire 2 Enchantments</h1>${generateSummaryPanel(runStats, "Enchantments", total, seen)}<div class="grid">${links}</div>`, [{ name: 'enchantments', url: '' }], indexDesc, generateCollectionJsonLd(`Enchantments`, indexDesc));
     fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
 }
 
@@ -515,14 +515,14 @@ async function buildCharacters(chars, runStats, sitemap) {
 
             const indexDesc = `View global winrates, run statistics, and win/loss records for all Slay the Spire 2 characters.`;
             const indexHtml = wrapLayout(
-                'Characters Database', 
+                'Characters', 
                 `
                 <h1>Slay the Spire 2 Characters</h1>
                 ${generateSummaryPanel(runStats, "Characters", chars.length, runStats.uniqueCharsSeen)}
                 <div class="grid">${charLinks}</div>`,
                 [{ name: 'characters', url: '' }],
                 indexDesc,
-                generateCollectionJsonLd(`Characters Database`, indexDesc)
+                generateCollectionJsonLd(`Characters`, indexDesc)
             );
             fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
 }
@@ -595,14 +595,14 @@ async function build() {
 
         const indexDesc = `View global winrates, run statistics, and pick-rate records for all Slay the Spire 2 cards.`;
         const indexHtml = wrapLayout(
-            'Cards Database', 
+            'Cards', 
             `
             <h1>Slay the Spire 2 Cards</h1>
             ${generateSummaryPanel(cardStats, "Cards", totalCards, cardStats.uniqueCardsSeen)}
             <div class="grid">${cardLinks}</div>`,
             [{ name: 'cards', url: '' }],
             indexDesc,
-            generateCollectionJsonLd(`Cards Database`, indexDesc)
+            generateCollectionJsonLd(`Cards`, indexDesc)
         );
 
         fs.writeFileSync(path.join(cardsRoot, 'index.html'), indexHtml);
