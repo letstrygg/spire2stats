@@ -114,13 +114,14 @@ export class Sitemap {
         this.urls = [];
     }
 
-    add(path, videos = []) {
+    add(path, videos = [], itemName = '', itemType = '') {
         this.urls.push({
             loc: `${this.baseUrl}${path.startsWith('/') ? path : '/' + path}`,
             lastmod: ISO_BUILD_DATE,
             videos: videos.map(v => ({
                 thumbnail: v.yt ? `https://img.youtube.com/vi/${v.yt}/hqdefault.jpg` : null,
-                title: `Slay the Spire 2 Run featuring this item`,
+                title: itemName && itemType ? `${itemName} ${itemType} - Slay the Spire 2 Gameplay Run` : `Slay the Spire 2 Run featuring this item`,
+                description: itemName && itemType ? `Watch a Slay the Spire 2 run featuring the ${itemName} ${itemType}.` : `Gameplay and statistics for Slay the Spire 2.`,
                 player: v.yt ? `https://www.youtube.com/embed/${v.yt}` : null
             })).filter(v => v.player)
         });
@@ -132,7 +133,7 @@ export class Sitemap {
     <video:video>
       <video:thumbnail_loc>${v.thumbnail}</video:thumbnail_loc>
       <video:title>${v.title}</video:title>
-      <video:description>Gameplay and statistics for Slay the Spire 2.</video:description>
+      <video:description>${v.description}</video:description>
       <video:player_loc>${v.player}</video:player_loc>
     </video:video>`).join('');
 

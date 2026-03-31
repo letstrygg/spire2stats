@@ -188,7 +188,8 @@ async function buildGeneralCategory(cat, sitemap) {
             generateItemJsonLd(title, cat.folder.slice(0, -1), null)
         );
         fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
-        sitemap.add(`/${cat.folder}/${slug}/`);
+        const typeLabel = cat.folder === 'stories' ? 'Story' : cat.folder.charAt(0).toUpperCase() + cat.folder.slice(1, -1);
+        sitemap.add(`/${cat.folder}/${slug}/`, [], title, typeLabel);
     }
 
     // Index Page
@@ -231,7 +232,7 @@ async function buildRelics(relics, runStats, sitemap) {
 
         const detailHtml = relicDetailTemplate(relic, stats, videosHtml);
         fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
-        sitemap.add(`/relics/${slug}/`, rawStats.videos);
+        sitemap.add(`/events/${slug}/`, stats.videos, event.name, 'Event');
     }
 
     // Index Page
@@ -356,7 +357,7 @@ async function buildCharacters(chars, runStats, sitemap) {
 
                 const detailHtml = characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, relicItemsHtml, displayName);
                 fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
-                sitemap.add(`/characters/${slug}/`, rawStats.videos);
+                sitemap.add(`/characters/${slug}/`, rawStats.videos, displayName, 'Character');
     }
 
     // Index Page
@@ -432,7 +433,7 @@ async function build() {
             const detailHtml = cardDetailTemplate(card, stats, videosHtml, costDisplay);
 
             fs.writeFileSync(path.join(cardDir, 'index.html'), detailHtml);
-            sitemap.add(`/cards/${slug}/`, rawStats.videos);
+            sitemap.add(`/cards/${slug}/`, rawStats.videos, card.name, 'Card');
         }
 
         // --- INDEX PAGE ---
