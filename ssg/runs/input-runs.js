@@ -85,11 +85,11 @@ async function run() {
 
                     // Parse End-of-Run Deck & Relics
                     const cleanDeck = (player.deck || []).map(c => ({
-                        id: c.id,
+                        id: c.id?.replace('CARD.', ''),
                         upgrades: c.current_upgrade_level || 0,
                         enchantment: c.enchantment?.id || null
                     }));
-                    const cleanRelics = (player.relics || []).map(r => r.id);
+                    const cleanRelics = (player.relics || []).map(r => r.id?.replace('RELIC.', ''));
 
                     // Parse Encounter & Pathing History
                     const pathHistory = (rawData.map_point_history || []).flat().map(pt => {
@@ -117,9 +117,10 @@ async function run() {
                         rawData.platform_type, String(rawData.seed), rawData.start_time, 
                         rawData.run_time, rawData.ascension, rawData.game_mode, 
                         rawData.win ? 1 : 0, rawData.was_abandoned ? 1 : 0,
-                        rawData.killed_by_encounter, rawData.killed_by_event,
-                        JSON.stringify(rawData.acts || []),
-                        player.character,
+                        rawData.killed_by_encounter?.replace('ENCOUNTER.', '') || null,
+                        rawData.killed_by_event?.replace('EVENT.', '') || null,
+                        JSON.stringify((rawData.acts || []).map(a => a.replace('ACT.', ''))),
+                        player.character?.replace('CHARACTER.', ''),
                         JSON.stringify(cleanRelics),
                         JSON.stringify(cleanDeck),
                         JSON.stringify(pathHistory)

@@ -67,7 +67,7 @@ async function getCardStats() {
             const stats = {}; // Card stats
             const charStats = {}; // Character stats
             rows.forEach(row => {
-                const charId = (row.character || '').replace(/^CHARACTER\./, '').toUpperCase();
+                const charId = (row.character || '').toUpperCase(); // Matches clean IDs like "SILENT"
                 if (!charStats[charId]) charStats[charId] = { seen: 0, wins: 0, videos: [] };
                 charStats[charId].seen++;
                 if (row.win) charStats[charId].wins++;
@@ -76,8 +76,7 @@ async function getCardStats() {
                 }
 
                 const deck = JSON.parse(row.deck_list || '[]');
-                // Strip 'CARD.' prefix to match the card_id in the database
-                const uniqueCardsInDeck = new Set(deck.map(c => (c.id || '').replace(/^CARD\./, '')));
+                const uniqueCardsInDeck = new Set(deck.map(c => c.id || ''));
                 uniqueCardsInDeck.forEach(cardId => {
                     if (!stats[cardId]) stats[cardId] = { seen: 0, wins: 0, videos: [] };
                     stats[cardId].seen++;
@@ -199,7 +198,7 @@ async function buildCharacters(runStats) {
                 const displayName = char.name.replace(/^The\s+/i, '');
                 const slug = slugify(displayName);
                 const dir = ensureDir(path.join(root, slug));
-                const charKey = (char.character_id || '').replace(/^CHARACTER\./, '').toUpperCase();
+                const charKey = (char.character_id || '').replace('CHARACTER.', '').toUpperCase();
                 const stats = runStats.charStats[charKey] || { seen: 0, wins: 0, videos: [] };
                 
                 const winRateNum = stats.seen > 0 ? (stats.wins / stats.seen) * 100 : 0;
@@ -286,7 +285,7 @@ async function buildCharacters(runStats) {
             // Index Page
             const charLinks = chars.map(c => {
                 const displayName = c.name.replace(/^The\s+/i, '');
-                const charKey = (c.character_id || '').replace(/^CHARACTER\./, '').toUpperCase();
+                const charKey = (c.character_id || '').toUpperCase();
                 const stats = runStats.charStats[charKey] || { seen: 0, wins: 0 };
                 const wrNum = stats.seen > 0 ? (stats.wins / stats.seen) * 100 : 0;
                 let barStyle = stats.seen > 0 ? `background: linear-gradient(to right, #00ff89 ${wrNum}%, #ff4b4b ${wrNum}%);` : 'background: #444;';
@@ -373,7 +372,8 @@ async function build() {
             const costDisplay = getCostDisplay(card);
             const description = formatDescription(card.description);
             
-            const stats = cardStats.stats[card.card_id] || { seen: 0, wins: 0, videos: [] };
+            const cleanCardId = (card.card_id || '').replace('CARD.', '');
+            const stats = cardStats.stats[cleanCardId] || { seen: 0, wins: 0, videos: [] };
             const winRateNum = stats.seen > 0 ? (stats.wins / stats.seen) * 100 : 0;
             const winRate = winRateNum.toFixed(1);
             
@@ -486,7 +486,8 @@ async function build() {
         const totalCards = cards.length;
         const cardLinks = cards.map(card => {
             const slug = slugify(card.name);
-            const stats = cardStats.stats[card.card_id] || { seen: 0, wins: 0 };
+            const cleanCardId = (card.card_id || '').replace('CARD.', '');
+            const stats = cardStats.stats[cleanCardId] || { seen: 0, wins: 0 };
             const winRateNum = stats.seen > 0 ? (stats.wins / stats.seen) * 100 : 0;
 
             let wrText = '';
