@@ -99,39 +99,47 @@ async function build() {
     <link rel="stylesheet" href="/css/main.css">
     <style>
         body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; }
-        .card-preview { border: 2px solid #444; border-radius: 12px; padding: 20px; max-width: 400px; background: #1a1a1a; }
-        .card-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        .cost { color: #ffd700; font-weight: bold; font-size: 1.2em; }
-        .type-rarity { color: #888; text-transform: uppercase; font-size: 0.8em; margin: 10px 0; }
-        .description { line-height: 1.6; font-size: 1.1em; }
+        .back-link { display: block; margin-bottom: 30px; color: #4a90e2; text-decoration: none; }
+        .stats-summary { background: #1a1a1a; border: 1px solid #333; padding: 20px; border-radius: 8px; margin-bottom: 30px; max-width: 800px; }
+        .stat-val { color: #ffd700; font-weight: bold; }
+        
+        .sts-card-display { display: flex; gap: 40px; align-items: center; flex-wrap: wrap; }
+        .sts-card { position: relative; border: 2px solid #444; border-radius: 12px; padding: 25px; width: 320px; background: #1a1a1a; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .cost-circle { position: absolute; top: -15px; left: -15px; background: #ffd700; color: #000; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.3rem; border: 3px solid #121212; }
+        .card-title { font-size: 1.5rem; font-weight: bold; margin-bottom: 10px; text-align: center; }
+        .type-banner { background: #2a2a2a; color: #888; text-transform: uppercase; font-size: 0.75rem; padding: 4px; text-align: center; margin: 10px -25px; border-top: 1px solid #333; border-bottom: 1px solid #333; }
+        .description { line-height: 1.5; font-size: 1rem; min-height: 100px; display: flex; align-items: center; justify-content: center; text-align: center; }
+        .card-footer { margin-top: 15px; text-align: right; color: #555; font-size: 0.8rem; font-style: italic; }
+        .arrow { font-size: 3rem; color: #333; }
+
         .text-gold { color: #ffd700; } .text-red { color: #ff4b4b; } .text-green { color: #00ff89; }
-        .back-link { display: block; margin-top: 30px; color: #4a90e2; text-decoration: none; }
-        .stats-box { margin-top: 20px; display: flex; gap: 20px; border-top: 1px solid #333; padding-top: 15px; }
-        .stat-item { flex: 1; }
-        .stat-label { font-size: 0.75rem; color: #888; text-transform: uppercase; margin-bottom: 4px; }
-        .stat-value { font-size: 1.2rem; font-weight: bold; color: #fff; }
     </style>
 </head>
 <body>
-    <div class="card-preview">
-        <div class="card-header">
-            <h1>${card.name}</h1>
-            <div class="cost">${costDisplay}</div>
+    <a href="/cards/" class="back-link">← Back to all cards</a>
+
+    <div class="stats-summary">
+        <h2>Run Data</h2>
+        <p>This card was found in <span class="stat-val">${stats.seen}</span> run final decks with a <span class="stat-val">${winRate}%</span> winrate.</p>
+    </div>
+
+    <div class="sts-card-display">
+        <div class="sts-card">
+            <div class="cost-circle">${costDisplay}</div>
+            <div class="card-title">${card.name}</div>
+            <div class="type-banner">${card.color} ${card.type}</div>
+            <div class="description">${description}</div>
+            <div class="card-footer">${card.rarity}</div>
         </div>
-        <div class="type-rarity">${card.color} ${card.type} &bull; ${card.rarity}</div>
-        <div class="description">${description}</div>
-        <div class="stats-box">
-            <div class="stat-item">
-                <div class="stat-label">Pick Frequency</div>
-                <div class="stat-value">${stats.seen} runs</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-label">Win Rate</div>
-                <div class="stat-value">${winRate}%</div>
-            </div>
+        <div class="arrow">→</div>
+        <div class="sts-card">
+            <div class="cost-circle">${costDisplay}</div>
+            <div class="card-title text-green">${card.name}+</div>
+            <div class="type-banner">${card.color} ${card.type}</div>
+            <div class="description">${description}</div>
+            <div class="card-footer">${card.rarity}</div>
         </div>
     </div>
-    <a href="/cards/" class="back-link">← Back to all cards</a>
 </body>
 </html>`;
 
@@ -143,7 +151,6 @@ async function build() {
         
         const cardLinks = cards.map(card => {
             const slug = slugify(card.name);
-            const cost = getCostDisplay(card);
             const stats = cardStats[card.card_id] || { seen: 0, wins: 0 };
             const winRate = stats.seen > 0 ? ((stats.wins / stats.seen) * 100).toFixed(0) : "0";
 
@@ -151,12 +158,12 @@ async function build() {
             <a href="/cards/${slug}/" class="card-item ${card.color}">
                 <div class="card-info">
                     <span class="card-name">${card.name}</span>
-                    <span class="card-meta">${cost} • ${card.rarity}</span>
                 </div>
                 <div class="card-stats">
-                    <div class="win-rate">${winRate}%</div>
+                    <div class="win-rate">${winRate}% Winrate</div>
                     <div class="run-count">${stats.seen} runs</div>
                 </div>
+                <div class="win-bar" style="background: linear-gradient(to right, #00ff89 ${winRate}%, #ff4b4b ${winRate}%);"></div>
             </a>`;
         }).join('');
 
@@ -170,16 +177,18 @@ async function build() {
         body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
         .card-item {
+            position: relative;
+            overflow: hidden;
             background: #1a1a1a; border: 1px solid #333; padding: 15px; text-decoration: none; color: inherit;
             display: flex; justify-content: space-between; border-radius: 8px; transition: border-color 0.2s;
         }
         .card-item:hover { border-color: #ffd700; }
-        .card-info { display: flex; flex-direction: column; }
-        .card-name { font-weight: bold; margin-bottom: 4px; }
-        .card-meta { font-size: 0.75rem; color: #888; }
+        .card-info { display: flex; flex-direction: column; justify-content: center; }
+        .card-name { font-weight: bold; }
         .card-stats { text-align: right; display: flex; flex-direction: column; justify-content: center; }
         .win-rate { color: #ffd700; font-weight: bold; font-size: 1.1rem; }
         .run-count { font-size: 0.7rem; color: #666; text-transform: uppercase; }
+        .win-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; }
         .ironclad { border-left: 4px solid #ff4b4b; }
         .silent { border-left: 4px solid #00ff89; }
         .defect { border-left: 4px solid #4a90e2; }
