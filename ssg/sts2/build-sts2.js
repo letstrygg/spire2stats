@@ -672,7 +672,7 @@ async function build() {
             </a>`;
         }).join('');
 
-        const landingDesc = "Comprehensive gameplay statistics and database for Slay the Spire 2. Tracked winrates, card details, relic data, and more.";
+        const landingDesc = "Winrate Statistics for Slay the Spire 2.";
         const landingHtml = wrapLayout(
             "",
             `
