@@ -1,0 +1,15 @@
+title: LTG YouTube Gameplay
+description: Let's Play Gameplay Series and New Indie Games.
+url: "https://letstrygg.com"
+baseurl: ""
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-seo-tag
+  
+supabase_url: "https://fnwmtytnltmqjaflfwyr.supabase.co"
+supabase_anon_key: "sb_publishable_y12qZF_dSbUPmV_aieiUgA_CibDsxQV"
+
+exclude:
+#    - game
+- local-tools

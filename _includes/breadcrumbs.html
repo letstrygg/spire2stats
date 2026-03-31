@@ -1,0 +1,100 @@
+<div class="breadcrumbs">
+  <a href="/">letstrygg.com</a>
+
+  {% assign url_parts = page.url | split: '/' %}
+  {% assign current_path = "" %}
+  
+  {% comment %} 1. Initialize the JSON-LD payload with the root domain {% endcomment %}
+  {% capture json_ld %}
+  {
+    "@type": "ListItem",
+    "position": 1,
+    "name": "letstrygg.com",
+    "item": "https://letstrygg.com/"
+  }
+  {% endcapture %}
+  {% assign json_pos = 2 %}
+
+  {% for part in url_parts %}
+    {% comment %} Completely skip empty parts, index files, and the episodes folder {% endcomment %}
+    {% if part != "" and part != "index.html" and part != "episodes" %}
+      {% assign current_path = current_path | append: "/" | append: part %}
+      <span style="margin: 0 10px; opacity: 0.5;">/</span>
+      
+      {% assign link_text = "" %}
+      {% assign item_url = "" %}
+      
+      {% if forloop.last %}
+        <strong class="breadcrumb-current">
+          {% if part contains '-ep-' %}
+            {% comment %} Legacy episode formatting {% endcomment %}
+            {% assign ep_slug = part | replace: ".html", "" %}
+            {% assign ep_pieces = ep_slug | split: "-ep-" %}
+            {% assign ep_num = ep_pieces[1] %}
+            
+            {% assign ep_padded = ep_num %}
+            {% if ep_num.size == 1 %}
+              {% assign ep_padded = "00" | append: ep_num %}
+            {% elsif ep_num.size == 2 %}
+              {% assign ep_padded = "0" | append: ep_num %}
+            {% endif %}
+            
+            {% assign link_text = "Ep " | append: ep_padded %}
+            {{ link_text }}
+          {% else %}
+            {% comment %} Standard pages & New SSG Watch Pages {% endcomment %}
+            {% assign link_text = page.title | split: " – " | first | split: " - " | first | strip %}
+            {{ link_text }}
+          {% endif %}
+        </strong>
+        {% assign item_url = "https://letstrygg.com" | append: page.url %}
+        
+      {% else %}
+        {% comment %} Safely check if this is a season folder {% endcomment %}
+        {% assign first_char = part | slice: 0, 1 %}
+        {% assign remainder = part | remove_first: 's' | replace: '_', '' %}
+        {% assign check_chars = remainder | replace: '0','' | replace: '1','' | replace: '2','' | replace: '3','' | replace: '4','' | replace: '5','' | replace: '6','' | replace: '7','' | replace: '8','' | replace: '9','' %}
+        
+        {% if first_char == 's' and remainder != "" and check_chars == "" %}
+          {% assign s_num = part | remove_first: 's' | replace: '_', '.' %}
+          {% assign link_text = 'Season ' | append: s_num %}
+        {% else %}
+          {% comment %} Auto-Titleize folder names {% endcomment %}
+          {% assign words = part | split: '-' %}
+          {% for word in words %}
+            {% assign cap_word = word | capitalize %}
+            {% assign link_text = link_text | append: cap_word | append: " " %}
+          {% endfor %}
+          {% assign link_text = link_text | strip %}
+        {% endif %}
+        
+        <a href="{{ current_path }}/" class="breadcrumb-link">{{ link_text }}</a>
+        {% assign item_url = "https://letstrygg.com" | append: current_path | append: "/" %}
+      {% endif %}
+      
+      {% comment %} 2. Dynamically append this breadcrumb to the JSON-LD string {% endcomment %}
+      {% capture json_ld_append %}
+      ,{
+        "@type": "ListItem",
+        "position": {{ json_pos }},
+        "name": "{{ link_text | replace: '"', '\"' }}",
+        "item": "{{ item_url }}"
+      }
+      {% endcapture %}
+      {% assign json_ld = json_ld | append: json_ld_append %}
+      {% assign json_pos = json_pos | plus: 1 %}
+      
+    {% endif %}
+  {% endfor %}
+</div>
+
+{% comment %} 3. Output the hidden schema for Google {% endcomment %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {{ json_ld }}
+  ]
+}
+</script>

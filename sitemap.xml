@@ -1,0 +1,41 @@
+---
+layout: null
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="{{ '/sitemap.xsl' | relative_url }}"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  {% assign sorted_pages = site.pages | sort: "url" %}
+  {% for page in sorted_pages %}
+    {% assign last_char = page.url | slice: -1 %}
+    {% if page.url contains '.html' or last_char == '/' %}
+      {% unless page.url contains '404' or page.sitemap == false %}
+      <url>
+        <loc>{{ page.url | absolute_url }}</loc>
+        <lastmod>
+        {%- if page.last_modified_at -%}
+          {{ page.last_modified_at | date_to_xmlschema }}
+        {%- elsif page.date -%}
+          {{ page.date | date_to_xmlschema }}
+        {%- else -%}
+          {{ site.time | date_to_xmlschema }}
+        {%- endif -%}
+        </lastmod>
+        
+        {% if page.layout == 'watch' and page.thumbnail %}
+          {% assign video_id = page.thumbnail | split: '/vi/' | last | split: '/' | first %}
+          <video:video>
+            <video:thumbnail_loc>{{ page.thumbnail }}</video:thumbnail_loc>
+            <video:title>{{ page.title | xml_escape }}</video:title>
+            <video:description>{{ page.description | xml_escape }}</video:description>
+            <video:player_loc>https://www.youtube.com/embed/{{ video_id }}</video:player_loc>
+            {% if page.duration_seconds %}<video:duration>{{ page.duration_seconds }}</video:duration>{% endif %}
+            {% if page.upload_date %}<video:publication_date>{{ page.upload_date | date_to_xmlschema }}</video:publication_date>{% endif %}
+          </video:video>
+        {% endif %}
+
+      </url>
+      {% endunless %}
+    {% endif %}
+  {% endfor %}
+</urlset>

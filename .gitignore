@@ -1,0 +1,5 @@
+node_modules/
+/sync_logs/
+_site/
+.jekyll-metadata
+.jekyll-cache/
