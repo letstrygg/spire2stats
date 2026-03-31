@@ -55,7 +55,7 @@ function getCostDisplay(card) {
 
 async function getCardStats() {
     return new Promise((resolve, reject) => {
-        db.all("SELECT deck_list, win FROM runs", (err, rows) => {
+        db.all("SELECT deck_list, win, username FROM runs", (err, rows) => {
             if (err) return reject(err);
             
             console.log(`📡 Database returned ${rows.length} run rows.`);
@@ -63,6 +63,7 @@ async function getCardStats() {
             const totalRuns = rows.length;
             const totalWins = rows.filter(r => r.win).length;
             const globalWinRate = totalRuns > 0 ? (totalWins / totalRuns) * 100 : 0;
+            const uniqueUsers = new Set(rows.map(r => r.username)).size;
 
             const stats = {};
             rows.forEach(row => {
@@ -75,8 +76,18 @@ async function getCardStats() {
                     if (row.win) stats[cardId].wins++;
                 });
             });
-            console.log(`📊 Processed stats for ${Object.keys(stats).length} unique cards across ${rows.length} runs. Global Average: ${globalWinRate.toFixed(1)}%`);
-            resolve({ stats, globalWinRate });
+            
+            const uniqueCardsSeen = Object.keys(stats).length;
+            console.log(`📊 Processed stats for ${uniqueCardsSeen} unique cards across ${totalRuns} runs. Global Average: ${globalWinRate.toFixed(1)}%`);
+            resolve({ 
+                stats, 
+                globalWinRate, 
+                totalRuns, 
+                totalWins, 
+                totalLosses: totalRuns - totalWins, 
+                uniqueUsers, 
+                uniqueCardsSeen 
+            });
         });
     });
 }
@@ -266,6 +277,7 @@ async function build() {
         // --- INDEX PAGE ---
         console.log('📂 Generating index page...');
         
+        const totalCards = cards.length;
         const cardLinks = cards.map(card => {
             const slug = slugify(card.name);
             const stats = cardStats.stats[card.card_id] || { seen: 0, wins: 0 };
@@ -306,6 +318,14 @@ async function build() {
         .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #888; }
         .breadcrumbs a { color: #4a90e2; text-decoration: none; }
         .breadcrumbs a:hover { text-decoration: underline; }
+        
+        .stats-summary { background: #1a1a1a; border: 1px solid #333; padding: 25px; border-radius: 12px; margin-bottom: 40px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
+        .stat-item { text-align: center; }
+        .stat-label { font-size: 0.7rem; color: #888; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
+        .stat-value { font-size: 1.4rem; font-weight: bold; color: #fff; }
+        .stat-sub { font-size: 0.8rem; color: #666; font-weight: normal; }
+
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
         .card-item {
             position: relative;
@@ -330,6 +350,32 @@ async function build() {
 <body>
     <nav class="breadcrumbs"><a href="/">spire2stats</a> / cards</nav>
     <h1>Slay the Spire 2 Cards</h1>
+
+    <div class="stats-summary">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-label">Total Runs</div>
+                <div class="stat-value">${cardStats.totalRuns}</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Wins / Losses</div>
+                <div class="stat-value"><span style="color: #00ff89">${cardStats.totalWins}</span> <span style="color: #444">/</span> <span style="color: #ff4b4b">${cardStats.totalLosses}</span></div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Global Winrate</div>
+                <div class="stat-value" style="color: #ffd700">${cardStats.globalWinRate.toFixed(1)}%</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Contributors</div>
+                <div class="stat-value">${cardStats.uniqueUsers}</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Catalog Variety</div>
+                <div class="stat-value">${cardStats.uniqueCardsSeen} <span class="stat-sub">/ ${totalCards} cards</span></div>
+            </div>
+        </div>
+    </div>
+
     <div class="grid">
         ${cardLinks}
     </div>
