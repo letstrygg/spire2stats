@@ -345,7 +345,7 @@ async function buildAscensions(ascensions, runStats, sitemap) {
             </div>
             <div class="item-box">
                 <h1>${title}</h1>
-                <div class="subtitle">Level ${asc.level}</div>
+                <div class="subtitle">Ascension: Level ${asc.level}</div>
                 <div class="description">${formatDescription(asc.description)}</div>
             </div>
             ${videosHtml}`,
@@ -364,11 +364,12 @@ async function buildAscensions(ascensions, runStats, sitemap) {
     const ascLinks = ascensions.map(asc => {
         const title = asc.name || `Ascension ${asc.level}`;
         const slug = slugify(title);
+        const displayName = `Asc. ${asc.level} ${asc.name || ''}`.trim();
         const stats = getItemStats(runStats.ascensionStats[String(asc.level)], runStats.globalWinRate);
 
         return `
-        <a href="/ascensions/${slug}/" class="card-item" aria-label="${title}: ${stats.seen} runs, ${stats.text}">
-            <div class="card-info"><span class="card-name">${title}</span></div>
+        <a href="/ascensions/${slug}/" class="card-item" aria-label="${displayName}: ${stats.seen} runs, ${stats.text}">
+            <div class="card-info"><span class="card-name">${displayName}</span></div>
             <div class="card-stats">
                 <div class="win-rate" style="color: ${stats.color}">${stats.text}</div>
                 <div class="run-count">${stats.seen} runs</div>
