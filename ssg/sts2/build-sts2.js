@@ -25,7 +25,7 @@ function generateItemJsonLd(name, category, stats) {
   "@context": "https://schema.org",
   "@type": "ItemPage",
   "name": "${name} - Spire 2 Stats",
-  "description": "Gameplay statistics for ${name} in Slay the Spire 2. Winrate: ${wr}%. Total Runs: ${seen}.",
+  "description": "${name} gameplay statistics for Slay the Spire 2. Winrate: ${wr}%. Total Runs: ${seen}.",
   "dateModified": "${ISO_BUILD_DATE}",
   "mainEntity": {
     "@type": "Thing",
@@ -274,7 +274,7 @@ async function buildGeneralCategory(cat) {
                 <div class="description">${description}</div>
             </div>`,
             [{ name: cat.folder, url: `/${cat.folder}/` }, { name: title, url: '' }],
-            `View details and descriptions for the Slay the Spire 2 ${cat.folder.slice(0, -1)}: ${title}.`,
+            `${title} ${cat.folder.slice(0, -1)} details and descriptions for Slay the Spire 2.`,
             generateItemJsonLd(title, cat.folder.slice(0, -1), null)
         );
         fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
@@ -332,7 +332,7 @@ async function buildRelics(relics, runStats) {
             </div>
             ${videosHtml}`,
             [{ name: 'relics', url: '/relics/' }, { name: relic.name.toLowerCase(), url: '' }],
-            `Detailed winrates and run statistics for the ${relic.name} in Slay the Spire 2, based on tracked gameplay.`,
+            `${relic.name} relic winrates and run statistics for Slay the Spire 2, based on tracked gameplay.`,
             generateItemJsonLd(relic.name, "Relic", stats)
         );
         fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
@@ -416,7 +416,7 @@ async function buildEvents(events, runStats) {
             ${optionsHtml}
             ${videosHtml}`,
             [{ name: 'events', url: '/events/' }, { name: event.name, url: '' }],
-            `Detailed winrates and run statistics for the ${event.name} event in Slay the Spire 2.`,
+            `${event.name} event winrates and run statistics for Slay the Spire 2.`,
             generateItemJsonLd(event.name, "Event", stats)
         );
         fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
@@ -505,7 +505,7 @@ async function buildCharacters(chars, runStats) {
                     <h2 class="section-title">${displayName} Relics</h2>
                     <div class="grid">${relicItemsHtml}</div>`,
                     [{ name: 'characters', url: '/characters/' }, { name: displayName, url: '' }],
-                    `Detailed winrates and run statistics for the ${displayName} in Slay the Spire 2.`,
+                    `${displayName} winrates and run statistics for Slay the Spire 2.`,
                     generateItemJsonLd(displayName, "Character", stats)
                 );
                 fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
@@ -604,7 +604,7 @@ async function build() {
                 </div>
                 ${videosHtml}`,
                 [{ name: 'cards', url: '/cards/' }, { name: card.name, url: '' }],
-                `Detailed winrates and run statistics for the ${card.name} card in Slay the Spire 2.`,
+                `${card.name} card winrates and run statistics for Slay the Spire 2.`,
                 generateItemJsonLd(card.name, "Card", stats)
             );
 
