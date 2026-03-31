@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://letstrygg.com/sitemap.xml
+Sitemap: https://spire2stats.com/sitemap.xml

@@ -5,20 +5,20 @@ export const FORMATTED_BUILD_DATE = BUILD_DATE.toLocaleDateString('en-US', { mon
 export const ISO_BUILD_DATE = BUILD_DATE.toISOString();
 
 const CHARACTER_COLORS = {
-    'IRONCLAD': '255, 101, 101',
-    'SILENT': '127, 255, 0',
-    'DEFECT': '135, 206, 235',
-    'NECROBINDER': '193, 140, 255',
-    'REGENT': '230, 126, 34'
+    'IRONCLAD': '215, 50, 50',
+    'SILENT': '46, 204, 113',
+    'DEFECT': '74, 144, 226',
+    'NECROBINDER': '155, 89, 182',
+    'REGENT': '211, 84, 0'
 };
 
-/** Returns an inline style for 20% opacity character background */
+/** Returns an inline style for 30% opacity character background */
 export function getCharacterBgStyle(name) {
     if (!name) return '';
     // Normalize name: "Ironclad Pool" -> "IRONCLAD", "The Silent" -> "SILENT"
     const cleanName = name.toUpperCase().replace(/ POOL$/i, '').replace(/^THE\s+/i, '').trim();
     const rgb = CHARACTER_COLORS[cleanName];
-    return rgb ? `background-color: rgba(${rgb}, 0.2);` : '';
+    return rgb ? `background-color: rgba(${rgb}, 0.3);` : '';
 }
 
 export function generateItemJsonLd(name, category, stats) {
