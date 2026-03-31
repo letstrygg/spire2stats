@@ -37,18 +37,22 @@ async function getCardStats() {
         db.all("SELECT deck_list, win FROM runs", (err, rows) => {
             if (err) return reject(err);
             
+            console.log(`📡 Database returned ${rows.length} run rows.`);
+            if (rows.length > 0) console.log(`🔍 Sample raw deck_list from first run: ${rows[0].deck_list?.substring(0, 150)}...`);
+
             const stats = {};
             rows.forEach(row => {
                 const deck = JSON.parse(row.deck_list || '[]');
-                // We only care if the card appeared at least once in the deck
-                const uniqueCardsInDeck = new Set(deck.map(c => c.id));
+                // Strip 'CARD.' prefix to match the card_id in the database
+                const uniqueCardsInDeck = new Set(deck.map(c => c.id.replace(/^CARD\./, '')));
                 uniqueCardsInDeck.forEach(cardId => {
                     if (!stats[cardId]) stats[cardId] = { seen: 0, wins: 0 };
                     stats[cardId].seen++;
                     if (row.win) stats[cardId].wins++;
                 });
             });
-            console.log(`📊 Processed stats for ${Object.keys(stats).length} unique cards across ${rows.length} runs.`);
+            console.log(`🔑 Sample keys (fixed):`, Object.keys(stats).slice(0, 10));
+            console.log(`� Processed stats for ${Object.keys(stats).length} unique cards across ${rows.length} runs.`);
             resolve(stats);
         });
     });
@@ -67,6 +71,10 @@ async function build() {
     try {
         console.log('🛠️  Starting build process...');
         const cards = await getAllCards();
+        if (cards.length > 0) {
+            console.log(`🗃️  Sample card_id from cards table: "${cards[0].card_id}" (Card Name: ${cards[0].name})`);
+        }
+
         const cardStats = await getCardStats();
         const cardsRoot = ensureDir(path.join(PATHS.WEB_ROOT, 'cards'));
 
