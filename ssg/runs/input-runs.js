@@ -21,6 +21,9 @@ async function run() {
         const db = new sqlite3.Database(DB_FILE);
 
         db.serialize(() => {
+            // 0. Drop the table to ensure schema is synchronized with code
+            db.run("DROP TABLE IF EXISTS runs");
+
             // 1. Setup the runs table with the expanded schema
             db.run(`
                 CREATE TABLE IF NOT EXISTS runs (
@@ -59,6 +62,7 @@ async function run() {
             `);
 
             const folders = fs.readdirSync(UNPKG_DIR).filter(f => fs.statSync(path.join(UNPKG_DIR, f)).isDirectory());
+            let runCount = 0;
 
             for (const folder of folders) {
                 const username = folder.split('_')[0];
@@ -112,12 +116,13 @@ async function run() {
                         JSON.stringify(cleanDeck),
                         JSON.stringify(pathHistory)
                     );
+                    runCount++;
                 }
             }
 
             stmt.finalize();
             db.run("COMMIT", () => {
-                console.log('✨ Success: Run database updated with detailed history.');
+                console.log(`✨ Success: Run database updated with ${runCount} runs.`);
                 db.close();
             });
         });

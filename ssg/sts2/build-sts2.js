@@ -48,6 +48,7 @@ async function getCardStats() {
                     if (row.win) stats[cardId].wins++;
                 });
             });
+            console.log(`📊 Processed stats for ${Object.keys(stats).length} unique cards across ${rows.length} runs.`);
             resolve(stats);
         });
     });
