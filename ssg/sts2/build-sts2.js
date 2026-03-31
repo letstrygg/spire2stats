@@ -188,20 +188,16 @@ async function buildGeneralCategory(cat) {
     });
 }
 
-async function buildCharacters(runStats) {
-    return new Promise((resolve, reject) => {
-        db.all(`SELECT * FROM characters ORDER BY name ASC`, async (err, chars) => {
-            if (err) return reject(err);
+async function buildCharacters(chars, runStats) {
+    console.log(`👤 Building ${chars.length} character pages...`);
+    const root = ensureDir(path.join(PATHS.WEB_ROOT, 'characters'));
 
-            console.log(`👤 Building ${chars.length} character pages...`);
-            const root = ensureDir(path.join(PATHS.WEB_ROOT, 'characters'));
-
-            for (const char of chars) {
-                const displayName = char.name.replace(/^The\s+/i, '');
-                const slug = slugify(displayName);
-                const dir = ensureDir(path.join(root, slug));
-                // Normalize character ID to match sanitized run data
-                const charKey = (char.character_id || '').replace('CHARACTER.', '').toUpperCase();
+    for (const char of chars) {
+        const displayName = char.name.replace(/^The\s+/i, '');
+        const slug = slugify(displayName);
+        const dir = ensureDir(path.join(root, slug));
+        // Normalize character ID to match sanitized run data
+        const charKey = (char.character_id || '').replace('CHARACTER.', '').toUpperCase();
 
                 console.log(`🔍 Mapping Character: "${displayName}" (ID: ${charKey})`);
 
@@ -289,10 +285,10 @@ async function buildCharacters(runStats) {
 </body>
 </html>`;
                 fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
-            }
+    }
 
-            // Index Page
-            const charLinks = chars.map(c => {
+    // Index Page
+    const charLinks = chars.map(c => {
                 const displayName = c.name.replace(/^The\s+/i, '');
                 const charKey = (c.character_id || '').replace('CHARACTER.', '').toUpperCase();
                 const stats = runStats.charStats[charKey] || { seen: 0, wins: 0 };
@@ -347,9 +343,6 @@ async function buildCharacters(runStats) {
 </body>
 </html>`;
             fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
-            resolve();
-        });
-    });
 }
 
 async function getAllCards() {
@@ -365,9 +358,18 @@ async function build() {
     try {
         console.log('🛠️  Starting build process...');
         const cards = await getAllCards();
+        const totalCards = cards.length;
+
         if (cards.length > 0) {
             console.log(`🗃️  Sample card_id from cards table: "${cards[0].card_id}" (Card Name: ${cards[0].name})`);
         }
+
+        const chars = await new Promise((resolve, reject) => {
+            db.all("SELECT * FROM characters ORDER BY name ASC", (err, rows) => {
+                if (err) reject(err);
+                else resolve(rows);
+            });
+        });
 
         const cardStats = await getCardStats();
         const cardsRoot = ensureDir(path.join(PATHS.WEB_ROOT, 'cards'));
@@ -492,7 +494,6 @@ async function build() {
         // --- INDEX PAGE ---
         console.log('📂 Generating index page...');
         
-        const totalCards = cards.length;
         const cardLinks = cards.map(card => {
             const slug = slugify(card.name);
             const cleanCardId = (card.card_id || '').replace('CARD.', '');
@@ -587,7 +588,7 @@ async function build() {
             </div>
             <div class="stat-item">
                 <div class="stat-label">Cards Seen</div>
-                <div class="stat-value">${cardStats.uniqueCardsSeen} <span class="stat-sub">/ ${totalCards} cards</span></div>
+                <div class="stat-value">${cardStats.uniqueCardsSeen === totalCards ? totalCards : `${cardStats.uniqueCardsSeen} <span class="stat-sub">/ ${totalCards} cards</span>`}</div>
             </div>
         </div>
     </div>
@@ -604,9 +605,16 @@ async function build() {
         console.log('🏠 Generating root landing page...');
         const lastUpdated = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 
+        const cardSub = cardStats.uniqueCardsSeen === totalCards ? totalCards : `${cardStats.uniqueCardsSeen} / ${totalCards}`;
+
+        const totalChars = chars.length;
+        const uniqueCharsSeen = Object.keys(cardStats.charStats).length;
+        const charSub = uniqueCharsSeen === totalChars ? totalChars : `${uniqueCharsSeen} / ${totalChars}`;
+
         // Generate the Cards link with stats first
-        let landingLinks = `<a href="/cards/" class="item-link"><div>Cards</div><div class="stat-sub">${cardStats.uniqueCardsSeen} / ${totalCards}</div></a>`;
-        
+        let landingLinks = `<a href="/cards/" class="item-link"><div>Cards</div><div class="stat-sub">${cardSub}</div></a>`;
+        landingLinks += `<a href="/characters/" class="item-link"><div>Characters</div><div class="stat-sub">${charSub}</div></a>`;
+
         // Append the rest of the categories
         landingLinks += CATEGORIES.map(cat => {
             const display = cat.folder.charAt(0).toUpperCase() + cat.folder.slice(1);
@@ -671,7 +679,7 @@ async function build() {
         fs.writeFileSync(path.join(PATHS.WEB_ROOT, 'index.html'), landingHtml);
 
         // --- CHARACTERS ---
-        await buildCharacters(cardStats);
+        await buildCharacters(chars, cardStats);
 
         // --- GENERAL CATEGORY BUILDS ---
         for (const cat of CATEGORIES) {
