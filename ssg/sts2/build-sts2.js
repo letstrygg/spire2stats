@@ -188,8 +188,7 @@ async function buildGeneralCategory(cat, sitemap) {
             generateItemJsonLd(title, cat.folder.slice(0, -1), null)
         );
         fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
-        const typeLabel = cat.folder === 'stories' ? 'Story' : cat.folder.charAt(0).toUpperCase() + cat.folder.slice(1, -1);
-        sitemap.add(`/${cat.folder}/${slug}/`, [], title, typeLabel);
+            sitemap.add(`/${cat.folder}/${slug}/`);
     }
 
     // Index Page
@@ -232,7 +231,7 @@ async function buildRelics(relics, runStats, sitemap) {
 
         const detailHtml = relicDetailTemplate(relic, stats, videosHtml);
         fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
-        sitemap.add(`/relics/${slug}/`, rawStats.videos, relic.name, 'Relic');
+        sitemap.add(`/relics/${slug}/`);
     }
 
     // Index Page
@@ -284,7 +283,7 @@ async function buildEvents(events, runStats, sitemap) {
         const videosHtml = generateVideoPanel(rawStats.videos);
         const detailHtml = eventDetailTemplate(event, stats, videosHtml);
         fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
-        sitemap.add(`/events/${slug}/`, rawStats.videos, event.name, 'Event');
+        sitemap.add(`/events/${slug}/`);
     }
 
     // Index Page
@@ -358,7 +357,7 @@ async function buildCharacters(chars, runStats, sitemap) {
 
                 const detailHtml = characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, relicItemsHtml, displayName);
                 fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
-                sitemap.add(`/characters/${slug}/`, rawStats.videos, displayName, 'Character');
+                sitemap.add(`/characters/${slug}/`);
     }
 
     // Index Page
@@ -434,7 +433,7 @@ async function build() {
             const detailHtml = cardDetailTemplate(card, stats, videosHtml, costDisplay);
 
             fs.writeFileSync(path.join(cardDir, 'index.html'), detailHtml);
-            sitemap.add(`/cards/${slug}/`, rawStats.videos, card.name, 'Card');
+            sitemap.add(`/cards/${slug}/`);
         }
 
         // --- INDEX PAGE ---

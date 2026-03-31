@@ -106,7 +106,7 @@ export function formatDescription(text) {
 
 /**
  * Rich Sitemap Generator
- * Handles standard indexing and Google Video Search extensions
+ * Handles standard indexing
  */
 export class Sitemap {
     constructor(baseUrl) {
@@ -114,37 +114,21 @@ export class Sitemap {
         this.urls = [];
     }
 
-    add(path, videos = [], itemName = '', itemType = '') {
+    add(path) {
         this.urls.push({
             loc: `${this.baseUrl}${path.startsWith('/') ? path : '/' + path}`,
-            lastmod: ISO_BUILD_DATE,
-            videos: videos.map(v => ({
-                thumbnail: v.yt ? `https://img.youtube.com/vi/${v.yt}/hqdefault.jpg` : null,
-                title: itemName && itemType ? `${itemName} ${itemType} - Slay the Spire 2 Gameplay Run` : `Slay the Spire 2 Run featuring this item`,
-                description: itemName && itemType ? `Watch a Slay the Spire 2 run featuring the ${itemName} ${itemType}.` : `Gameplay and statistics for Slay the Spire 2.`,
-                player: v.yt ? `https://www.youtube.com/embed/${v.yt}` : null
-            })).filter(v => v.player)
+            lastmod: ISO_BUILD_DATE
         });
     }
 
     generateXml() {
-        const entries = this.urls.map(u => {
-            let videoXml = u.videos.map(v => `
-    <video:video>
-      <video:thumbnail_loc>${v.thumbnail}</video:thumbnail_loc>
-      <video:title>${v.title}</video:title>
-      <video:description>${v.description}</video:description>
-      <video:player_loc>${v.player}</video:player_loc>
-    </video:video>`).join('');
-
-            return `  <url>
+        const entries = this.urls.map(u => `  <url>
     <loc>${u.loc}</loc>
-    <lastmod>${u.lastmod}</lastmod>${videoXml}
-  </url>`;
-        }).join('\n');
+    <lastmod>${u.lastmod}</lastmod>
+  </url>`).join('\n');
 
         return `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${entries}
 </urlset>`;
     }
