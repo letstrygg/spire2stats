@@ -6,11 +6,12 @@
 .game-page-wrapper {
     /* Replace global colors with Spire colors */
     --red: #ff6565;
-    --green: #7fff00;
+    --green: #8dff8d;
     --yellow: #f6c043;
     --blue: #87ceeb;
     --purple: #c18cff;
 	--orange: #e67e22;
+    --upgrade: #7fff00;
     
     font-family: 'Kreon', serif;
     font-size: 1.4rem;

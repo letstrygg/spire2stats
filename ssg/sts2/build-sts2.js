@@ -111,7 +111,6 @@ async function build() {
         .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #888; }
         .breadcrumbs a { color: #4a90e2; text-decoration: none; }
         .breadcrumbs a:hover { text-decoration: underline; }
-        .back-link { display: block; margin-bottom: 30px; color: #4a90e2; text-decoration: none; }
         .stats-summary { background: #1a1a1a; border: 1px solid #333; padding: 20px; border-radius: 8px; margin-bottom: 30px; max-width: 800px; }
         .stat-val { color: #ffd700; font-weight: bold; }
         
@@ -129,7 +128,6 @@ async function build() {
 </head>
 <body>
     <nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/cards/">cards</a> / ${card.name.toLowerCase()}</nav>
-    <a href="/cards/" class="back-link">← Back to all cards</a>
 
     <div class="stats-summary">
         <h2>Run Data</h2>
