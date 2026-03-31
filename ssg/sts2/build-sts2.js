@@ -672,7 +672,7 @@ async function build() {
             </div>
             <div class="stat-item">
                 <div class="stat-label">Global Winrate</div>
-                <div class="stat-value" style="color: #ffd700">${cardStats.globalWinRate.toFixed(1)}%</div>
+                <div class="stat-value">${cardStats.globalWinRate.toFixed(1)}%</div>
             </div>
             <div class="stat-item">
                 <div class="stat-label">Contributors</div>
