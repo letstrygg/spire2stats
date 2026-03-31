@@ -8,34 +8,41 @@ import { ensureDir } from '../sts2/paths.js';
  * Extracts a specific run backup zip into a dedicated subfolder.
  */
 
-const ZIP_PATH = 'C:\\GitHub\\sts2\\runs_pkg\\letstrygg_runs_2026-03-31_02-18-28.zip';
+const PKG_DIR = 'C:\\GitHub\\sts2\\runs_pkg\\';
 const DEST_BASE_DIR = 'C:\\GitHub\\sts2\\runs_unpkg\\';
 
 async function unpkgRuns() {
     try {
         console.log('🛠️  Starting run unpackaging...');
 
-        if (!fs.existsSync(ZIP_PATH)) {
-            throw new Error(`Zip file not found: ${ZIP_PATH}`);
+        if (!fs.existsSync(PKG_DIR)) {
+            throw new Error(`Package directory not found: ${PKG_DIR}`);
         }
 
-        // 1. Determine target directory name from zip filename
-        const folderName = path.basename(ZIP_PATH, '.zip');
-        const targetDir = path.join(DEST_BASE_DIR, folderName);
+        const files = fs.readdirSync(PKG_DIR).filter(f => f.endsWith('.zip'));
 
-        // 2. Ensure destination root and specific subfolder exist
-        ensureDir(targetDir);
+        if (files.length === 0) {
+            console.log('ℹ️ No zip files found in package directory.');
+            return;
+        }
 
-        console.log(`📦 Extracting: ${path.basename(ZIP_PATH)}`);
-        console.log(`📂 Destination: ${targetDir}`);
+        for (const file of files) {
+            const zipPath = path.join(PKG_DIR, file);
+            const folderName = path.basename(file, '.zip');
+            const targetDir = path.join(DEST_BASE_DIR, folderName);
 
-        // 3. Perform extraction
-        const directory = await unzipper.Open.file(ZIP_PATH);
-        await directory.extract({ path: targetDir });
+            ensureDir(targetDir);
 
-        // 4. Remove the source zip file upon success
-        fs.unlinkSync(ZIP_PATH);
-        console.log(`✨ Unpackaging complete and source file removed!`);
+            console.log(`📦 Extracting: ${file}`);
+            const directory = await unzipper.Open.file(zipPath);
+            await directory.extract({ path: targetDir });
+
+            // 4. Remove the source zip file upon success
+            fs.unlinkSync(zipPath);
+            console.log(`✅ Unpacked and removed source: ${file}`);
+        }
+
+        console.log(`✨ All discovered packages processed!`);
 
     } catch (error) {
         console.error('❌ Unpackaging failed:', error.message);

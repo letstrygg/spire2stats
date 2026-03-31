@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import sqlite3 from 'sqlite3';
+import archiver from 'archiver';
 import { PATHS, ensureDir } from '../sts2/paths.js';
 
 /**
@@ -9,16 +10,21 @@ import { PATHS, ensureDir } from '../sts2/paths.js';
  */
 
 const UNPKG_DIR = 'C:\\GitHub\\sts2\\runs_unpkg\\';
+const PROCESSED_DIR = 'C:\\GitHub\\sts2\\runs_processed\\';
 const DB_FILE = PATHS.DATABASE;
 
 async function run() {
     try {
         console.log(`📂 Scanning for unpacked runs in: ${UNPKG_DIR}`);
         if (!fs.existsSync(UNPKG_DIR)) {
-            throw new Error(`Unpack directory not found at ${UNPKG_DIR}`);
+            console.log('ℹ️ No runs found to process.');
+            return;
         }
 
         const db = new sqlite3.Database(DB_FILE);
+        const folders = fs.readdirSync(UNPKG_DIR).filter(f => fs.statSync(path.join(UNPKG_DIR, f)).isDirectory());
+        let runCount = 0;
+        let success = false;
 
         db.serialize(() => {
             // 1. Setup the runs table with the expanded schema
@@ -66,11 +72,7 @@ async function run() {
                     was_abandoned=excluded.was_abandoned, killed_by_encounter=excluded.killed_by_encounter,
                     killed_by_event=excluded.killed_by_event, acts=excluded.acts,
                     character=excluded.character, relic_list=excluded.relic_list,
-                    deck_list=excluded.deck_list, path_history=excluded.path_history
-            `);
-
-            const folders = fs.readdirSync(UNPKG_DIR).filter(f => fs.statSync(path.join(UNPKG_DIR, f)).isDirectory());
-            let runCount = 0;
+                    deck_list=excluded.deck_list, path_history=excluded.path_history`);
 
             for (const folder of folders) {
                 const username = folder.split('_')[0];
@@ -135,9 +137,19 @@ async function run() {
             }
 
             stmt.finalize();
-            db.run("COMMIT", () => {
-                console.log(`✨ Success: Run database updated with ${runCount} runs.`);
+            db.run("COMMIT", (err) => {
+                if (err) {
+                    console.error('❌ Commit failed:', err.message);
+                } else {
+                    success = true;
+                    console.log(`✨ Success: Run database updated with ${runCount} runs.`);
+                }
                 db.close();
+                
+                // Trigger archival if DB import was successful
+                if (success && runCount > 0) {
+                    archiveProcessedRuns(folders);
+                }
             });
         });
 
@@ -145,6 +157,76 @@ async function run() {
         console.error('❌ Import failed:', error.message);
         process.exit(1);
     }
+}
+
+async function archiveProcessedRuns(folders) {
+    console.log('📦 Archiving and cleaning up processed run folders...');
+    ensureDir(PROCESSED_DIR);
+
+    const getTime = (name) => name.match(/(\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2})/)?.[1] || "";
+
+    for (const folder of folders) {
+        const folderPath = path.join(UNPKG_DIR, folder);
+        const zipName = `${folder}.zip`;
+        const tempZipPath = path.join(UNPKG_DIR, zipName);
+        const username = folder.split('_')[0];
+
+        try {
+            await zipFolder(folderPath, tempZipPath);
+
+            const existingZips = fs.readdirSync(PROCESSED_DIR).filter(f => f.startsWith(username) && f.endsWith('.zip'));
+            let keepNewZip = true;
+            const newZipStats = fs.statSync(tempZipPath);
+            const newTime = getTime(folder);
+
+            for (const existing of existingZips) {
+                const existingPath = path.join(PROCESSED_DIR, existing);
+                const existingStats = fs.statSync(existingPath);
+                const existingTime = getTime(existing);
+
+                if (newTime > existingTime) {
+                    fs.unlinkSync(existingPath);
+                } else if (newTime < existingTime) {
+                    keepNewZip = false;
+                    break;
+                } else {
+                    // Timestamps are identical, check file size
+                    if (newZipStats.size >= existingStats.size) {
+                        fs.unlinkSync(existingPath);
+                    } else {
+                        keepNewZip = false;
+                        break;
+                    }
+                }
+            }
+
+            if (keepNewZip) {
+                fs.renameSync(tempZipPath, path.join(PROCESSED_DIR, zipName));
+                console.log(`✅ Archived newest version: ${zipName}`);
+            } else {
+                fs.unlinkSync(tempZipPath);
+                console.log(`🗑️  Discarded older/duplicate data: ${folder}`);
+            }
+
+            fs.rmSync(folderPath, { recursive: true, force: true });
+
+        } catch (err) {
+            console.error(`⚠️ Failed to archive folder ${folder}:`, err.message);
+        }
+    }
+    console.log('✨ Archival process complete.');
+}
+
+function zipFolder(sourceDir, outPath) {
+    return new Promise((resolve, reject) => {
+        const output = fs.createWriteStream(outPath);
+        const archive = archiver('zip', { zlib: { level: 9 } });
+        output.on('close', resolve);
+        archive.on('error', reject);
+        archive.pipe(output);
+        archive.directory(sourceDir, false);
+        archive.finalize();
+    });
 }
 
 run();
