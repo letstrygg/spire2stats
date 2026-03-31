@@ -338,6 +338,43 @@ async function build() {
 
         fs.writeFileSync(path.join(cardsRoot, 'index.html'), indexHtml);
 
+        // --- ROOT LANDING PAGE ---
+        console.log('🏠 Generating root landing page...');
+        const landingCats = ['cards', ...CATEGORIES.map(c => c.folder)];
+        const landingLinks = landingCats.map(cat => {
+            const display = cat.charAt(0).toUpperCase() + cat.slice(1);
+            return `<a href="/${cat}/" class="item-link">${display}</a>`;
+        }).join('');
+
+        const landingHtml = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spire 2 Stats - Slay the Spire 2 Database</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <style>
+        body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; text-align: center; }
+        .hero { margin-bottom: 50px; padding: 60px 20px; background: #1a1a1a; border-radius: 12px; border: 1px solid #333; }
+        .hero h1 { font-size: 3.5rem; margin: 0; color: #ffd700; }
+        .hero p { font-size: 1.2rem; color: #888; margin-top: 10px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; max-width: 1200px; margin: 0 auto; }
+        .item-link { background: #1a1a1a; border: 1px solid #333; padding: 30px; border-radius: 8px; text-decoration: none; color: inherit; font-weight: bold; font-size: 1.3rem; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
+        .item-link:hover { border-color: #4a90e2; background: #222; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>Spire 2 Stats</h1>
+        <p>The complete Slay the Spire 2 Database and Analytics.</p>
+    </div>
+    <div class="grid">
+        ${landingLinks}
+    </div>
+</body>
+</html>`;
+        fs.writeFileSync(path.join(PATHS.WEB_ROOT, 'index.html'), landingHtml);
+
         // --- GENERAL CATEGORY BUILDS ---
         for (const cat of CATEGORIES) {
             await buildGeneralCategory(cat);

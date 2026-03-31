@@ -1,56 +1,27 @@
----
-layout: new
-title: "Spire 2 Stats"
-permalink: /
----
-<style>
-  /* Centering Container */
-  .landing-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 80vh; 
-    padding: 0 20px; /* Slight margin on left/right */
-  }
 
-  /* Keep the grid constrained so it doesn't stretch too far */
-  .landing-grid {
-    width: 100%;
-    max-width: 1400px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-  }
-
-  .feature-panel { display: flex; flex-direction: column; height: 100%; }
-  .feature-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; gap: 10px; }
-  .feature-title { margin: 0; font-size: 1.4rem; display: flex; align-items: center; gap: 10px; }
-  
-  /* Expandable Details Styling */
-  .expandable-info { margin-top: auto; border-top: 1px dashed var(--border); padding-top: 15px; }
-  .expandable-info summary { cursor: pointer; font-weight: bold; color: var(--blue); outline: none; list-style: none; display: flex; align-items: center; justify-content: space-between; font-size: 0.9rem; user-select: none; }
-  .expandable-info summary::-webkit-details-marker { display: none; }
-  .expandable-info summary::after { content: "expand_more"; font-family: "Material Symbols Outlined"; font-size: 20px; transition: transform 0.2s; }
-  .expandable-info[open] summary::after { transform: rotate(180deg); }
-  .expandable-info p { margin: 15px 0 0 0; font-size: 0.95rem; line-height: 1.5; color: var(--gray); }
-</style>
-
-<div class="landing-wrapper">
-  <div class="landing-grid">
-    
-    <div class="panel feature-panel">
-      <div class="feature-content">
-        <h2 class="feature-title"><span class="material-symbols-outlined blue">style</span> Cards</h2>
-        <p style="margin: 0; color: var(--text);">Slay the Spire 2 Win Rates and Run Statistics.</p>
-        
-        <a href="/cards/" class="btn btn-blue" style="text-align: center; margin-top: 10px;">View Cards</a>
-
-        <details class="expandable-info">
-          <summary>About the Database</summary>
-          <p>Card win rate statistics.</p>
-        </details>
-      </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spire 2 Stats - Slay the Spire 2 Database</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <style>
+        body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; text-align: center; }
+        .hero { margin-bottom: 50px; padding: 60px 20px; background: #1a1a1a; border-radius: 12px; border: 1px solid #333; }
+        .hero h1 { font-size: 3.5rem; margin: 0; color: #ffd700; }
+        .hero p { font-size: 1.2rem; color: #888; margin-top: 10px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; max-width: 1200px; margin: 0 auto; }
+        .item-link { background: #1a1a1a; border: 1px solid #333; padding: 30px; border-radius: 8px; text-decoration: none; color: inherit; font-weight: bold; font-size: 1.3rem; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
+        .item-link:hover { border-color: #4a90e2; background: #222; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>Spire 2 Stats</h1>
+        <p>The complete Slay the Spire 2 Database and Analytics.</p>
     </div>
-
-  </div>
-</div>
+    <div class="grid">
+        <a href="/cards/" class="item-link">Cards</a><a href="/relics/" class="item-link">Relics</a><a href="/potions/" class="item-link">Potions</a><a href="/characters/" class="item-link">Characters</a><a href="/monsters/" class="item-link">Monsters</a><a href="/events/" class="item-link">Events</a><a href="/encounters/" class="item-link">Encounters</a><a href="/acts/" class="item-link">Acts</a><a href="/achievements/" class="item-link">Achievements</a><a href="/ascensions/" class="item-link">Ascensions</a><a href="/afflictions/" class="item-link">Afflictions</a><a href="/enchantments/" class="item-link">Enchantments</a><a href="/epochs/" class="item-link">Epochs</a><a href="/keywords/" class="item-link">Keywords</a><a href="/intents/" class="item-link">Intents</a><a href="/modifiers/" class="item-link">Modifiers</a><a href="/orbs/" class="item-link">Orbs</a><a href="/powers/" class="item-link">Powers</a><a href="/stories/" class="item-link">Stories</a>
+    </div>
+</body>
+</html>
