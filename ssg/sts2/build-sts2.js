@@ -10,6 +10,27 @@ import { PATHS, ensureDir, slugify } from './paths.js';
 
 const db = new sqlite3.Database(PATHS.DATABASE);
 
+const CATEGORIES = [
+    { table: 'relics', folder: 'relics', titleField: 'name' },
+    { table: 'potions', folder: 'potions', titleField: 'name' },
+    { table: 'characters', folder: 'characters', titleField: 'name' },
+    { table: 'monsters', folder: 'monsters', titleField: 'name' },
+    { table: 'events', folder: 'events', titleField: 'name' },
+    { table: 'encounters', folder: 'encounters', titleField: 'name' },
+    { table: 'acts', folder: 'acts', titleField: 'name' },
+    { table: 'achievements', folder: 'achievements', titleField: 'name' },
+    { table: 'ascensions', folder: 'ascensions', titleField: 'name' },
+    { table: 'afflictions', folder: 'afflictions', titleField: 'name' },
+    { table: 'enchantments', folder: 'enchantments', titleField: 'name' },
+    { table: 'epochs', folder: 'epochs', titleField: 'title' },
+    { table: 'keywords', folder: 'keywords', titleField: 'name' },
+    { table: 'intents', folder: 'intents', titleField: 'name' },
+    { table: 'modifiers', folder: 'modifiers', titleField: 'name' },
+    { table: 'orbs', folder: 'orbs', titleField: 'name' },
+    { table: 'powers', folder: 'powers', titleField: 'name' },
+    { table: 'stories', folder: 'stories', titleField: 'name' }
+];
+
 // --- TEXT FORMATTER ---
 function formatDescription(text) {
     if (!text) return "";
@@ -56,6 +77,88 @@ async function getCardStats() {
             });
             console.log(`📊 Processed stats for ${Object.keys(stats).length} unique cards across ${rows.length} runs. Global Average: ${globalWinRate.toFixed(1)}%`);
             resolve({ stats, globalWinRate });
+        });
+    });
+}
+
+async function buildGeneralCategory(cat) {
+    return new Promise((resolve, reject) => {
+        db.all(`SELECT * FROM ${cat.table} ORDER BY ${cat.titleField} ASC`, (err, items) => {
+            if (err) return reject(err);
+            
+            console.log(`📂 Building ${items.length} pages for ${cat.folder}...`);
+            const root = ensureDir(path.join(PATHS.WEB_ROOT, cat.folder));
+            
+            for (const item of items) {
+                const title = item[cat.titleField];
+                if (!title) continue;
+                const slug = slugify(title);
+                const dir = ensureDir(path.join(root, slug));
+                
+                const subtitle = [item.rarity, item.type, item.act].filter(Boolean).join(' • ');
+                const description = formatDescription(item.description || item.flavor || item.unlock_text || "");
+
+                const detailHtml = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>${title} - Spire 2 Stats</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <style>
+        body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; }
+        .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #888; }
+        .breadcrumbs a { color: #4a90e2; text-decoration: none; }
+        .breadcrumbs a:hover { text-decoration: underline; }
+        .item-box { background: #1a1a1a; border: 1px solid #333; padding: 30px; border-radius: 12px; max-width: 700px; }
+        .subtitle { color: #888; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 15px; }
+        .description { line-height: 1.6; font-size: 1.15rem; border-top: 1px solid #333; padding-top: 15px; }
+        .text-gold { color: #ffd700; } .text-red { color: #ff4b4b; } .text-green { color: #00ff89; }
+    </style>
+</head>
+<body>
+    <nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/${cat.folder}/">${cat.folder}</a> / ${title.toLowerCase()}</nav>
+    <div class="item-box">
+        <h1>${title}</h1>
+        ${subtitle ? `<div class="subtitle">${subtitle}</div>` : ''}
+        <div class="description">${description}</div>
+    </div>
+</body>
+</html>`;
+                fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
+            }
+
+            // Index Page
+            const itemLinks = items.map(i => {
+                const title = i[cat.titleField];
+                if (!title) return '';
+                return `<a href="/${cat.folder}/${slugify(title)}/" class="item-link">${title}</a>`;
+            }).join('');
+
+            const indexHtml = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>${cat.folder.toUpperCase()} - Spire 2 Stats</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <style>
+        body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; }
+        .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #888; }
+        .breadcrumbs a { color: #4a90e2; text-decoration: none; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+        .item-link { background: #1a1a1a; border: 1px solid #333; padding: 15px; border-radius: 8px; text-decoration: none; color: inherit; text-align: center; font-weight: bold; transition: border-color 0.2s; }
+        .item-link:hover { border-color: #4a90e2; }
+    </style>
+</head>
+<body>
+    <nav class="breadcrumbs"><a href="/">spire2stats</a> / ${cat.folder}</nav>
+    <h1>${cat.folder.charAt(0).toUpperCase() + cat.folder.slice(1)}</h1>
+    <div class="grid">${itemLinks}</div>
+</body>
+</html>`;
+            fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
+            resolve();
         });
     });
 }
@@ -234,6 +337,11 @@ async function build() {
 </html>`;
 
         fs.writeFileSync(path.join(cardsRoot, 'index.html'), indexHtml);
+
+        // --- GENERAL CATEGORY BUILDS ---
+        for (const cat of CATEGORIES) {
+            await buildGeneralCategory(cat);
+        }
 
         console.log('✨ Build complete!');
         db.close();
