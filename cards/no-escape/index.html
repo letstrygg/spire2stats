@@ -14,6 +14,10 @@
         .description { line-height: 1.6; font-size: 1.1em; }
         .text-gold { color: #ffd700; } .text-red { color: #ff4b4b; } .text-green { color: #00ff89; }
         .back-link { display: block; margin-top: 30px; color: #4a90e2; text-decoration: none; }
+        .stats-box { margin-top: 20px; display: flex; gap: 20px; border-top: 1px solid #333; padding-top: 15px; }
+        .stat-item { flex: 1; }
+        .stat-label { font-size: 0.75rem; color: #888; text-transform: uppercase; margin-bottom: 4px; }
+        .stat-value { font-size: 1.2rem; font-weight: bold; color: #fff; }
     </style>
 </head>
 <body>
@@ -24,6 +28,16 @@
         </div>
         <div class="type-rarity">necrobinder Skill &bull; Uncommon</div>
         <div class="description">Apply 10 <span class="text-gold">Doom</span>, plus an additional 5 <span class="text-gold">Doom</span> for every 10 <span class="text-gold">Doom</span> already on this enemy.[IsTargeting]</div>
+        <div class="stats-box">
+            <div class="stat-item">
+                <div class="stat-label">Pick Frequency</div>
+                <div class="stat-value">0 runs</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Win Rate</div>
+                <div class="stat-value">0.0%</div>
+            </div>
+        </div>
     </div>
     <a href="/cards/" class="back-link">← Back to all cards</a>
 </body>
