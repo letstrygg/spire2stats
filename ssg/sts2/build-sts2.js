@@ -301,6 +301,8 @@ async function buildRelics(relics, runStats) {
     }
 
     // Index Page
+    const totalRelics = relics.length;
+    const relicsSeen = runStats.uniqueRelicsSeen;
     const relicLinks = relics.map(relic => {
         const slug = slugify(relic.name);
         const cleanRelicId = (relic.relic_id || '').replace('RELIC.', '');
@@ -340,6 +342,14 @@ async function buildRelics(relics, runStats) {
         body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; }
         .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #888; }
         .breadcrumbs a { color: #4a90e2; text-decoration: none; }
+
+        .stats-summary { background: #1a1a1a; border: 1px solid #333; padding: 25px; border-radius: 12px; margin-bottom: 40px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
+        .stat-item { text-align: center; }
+        .stat-label { font-size: 0.7rem; color: #888; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
+        .stat-value { font-size: 1.4rem; font-weight: bold; color: #fff; }
+        .stat-sub { font-size: 0.8rem; color: #666; font-weight: normal; }
+
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; }
         .card-item { position: relative; overflow: hidden; background: #1a1a1a; border: 1px solid #333; padding: 15px; text-decoration: none; color: inherit; display: flex; justify-content: space-between; border-radius: 8px; transition: border-color 0.2s; }
         .card-item:hover { border-color: #ffd700; }
@@ -350,6 +360,18 @@ async function buildRelics(relics, runStats) {
 <body>
     <nav class="breadcrumbs"><a href="/">spire2stats</a> / relics</nav>
     <h1>Slay the Spire 2 Relics</h1>
+    <div class="stats-summary">
+        <div class="stats-grid">
+            <div class="stat-item"><div class="stat-label">Total Runs</div><div class="stat-value">${runStats.totalRuns}</div></div>
+            <div class="stat-item"><div class="stat-label">Wins / Losses</div><div class="stat-value"><span style="color: #00ff89">${runStats.totalWins}</span> <span style="color: #444">/</span> <span style="color: #ff4b4b">${runStats.totalLosses}</span></div></div>
+            <div class="stat-item"><div class="stat-label">Overall Winrate</div><div class="stat-value">${runStats.globalWinRate.toFixed(1)}%</div></div>
+            <div class="stat-item"><div class="stat-label">Contributors</div><div class="stat-value">${runStats.uniqueUsers}</div></div>
+            <div class="stat-item">
+                <div class="stat-label">Relics Seen</div>
+                <div class="stat-value">${relicsSeen === totalRelics ? totalRelics : `${relicsSeen} <span class="stat-sub">/ ${totalRelics} relics</span>`}</div>
+            </div>
+        </div>
+    </div>
     <div class="grid">${relicLinks}</div>
 </body>
 </html>`;
@@ -450,6 +472,8 @@ async function buildEvents(events, runStats) {
     }
 
     // Index Page
+    const totalEvents = events.length;
+    const eventsSeen = runStats.uniqueEventsSeen;
     const eventLinks = events.map(e => {
         const slug = slugify(e.name);
         const stats = runStats.eventStats[e.event_id] || { seen: 0, wins: 0 };
@@ -487,6 +511,14 @@ async function buildEvents(events, runStats) {
         body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; }
         .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #888; }
         .breadcrumbs a { color: #4a90e2; text-decoration: none; }
+
+        .stats-summary { background: #1a1a1a; border: 1px solid #333; padding: 25px; border-radius: 12px; margin-bottom: 40px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
+        .stat-item { text-align: center; }
+        .stat-label { font-size: 0.7rem; color: #888; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
+        .stat-value { font-size: 1.4rem; font-weight: bold; color: #fff; }
+        .stat-sub { font-size: 0.8rem; color: #666; font-weight: normal; }
+
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; }
         .card-item { position: relative; overflow: hidden; background: #1a1a1a; border: 1px solid #333; padding: 15px; text-decoration: none; color: inherit; display: flex; justify-content: space-between; border-radius: 8px; transition: border-color 0.2s; }
         .card-item:hover { border-color: #ffd700; }
@@ -496,6 +528,18 @@ async function buildEvents(events, runStats) {
 <body>
     <nav class="breadcrumbs"><a href="/">spire2stats</a> / events</nav>
     <h1>Slay the Spire 2 Events</h1>
+    <div class="stats-summary">
+        <div class="stats-grid">
+            <div class="stat-item"><div class="stat-label">Total Runs</div><div class="stat-value">${runStats.totalRuns}</div></div>
+            <div class="stat-item"><div class="stat-label">Wins / Losses</div><div class="stat-value"><span style="color: #00ff89">${runStats.totalWins}</span> <span style="color: #444">/</span> <span style="color: #ff4b4b">${runStats.totalLosses}</span></div></div>
+            <div class="stat-item"><div class="stat-label">Overall Winrate</div><div class="stat-value">${runStats.globalWinRate.toFixed(1)}%</div></div>
+            <div class="stat-item"><div class="stat-label">Contributors</div><div class="stat-value">${runStats.uniqueUsers}</div></div>
+            <div class="stat-item">
+                <div class="stat-label">Events Seen</div>
+                <div class="stat-value">${eventsSeen === totalEvents ? totalEvents : `${eventsSeen} <span class="stat-sub">/ ${totalEvents} events</span>`}</div>
+            </div>
+        </div>
+    </div>
     <div class="grid">${eventLinks}</div>
 </body>
 </html>`;
