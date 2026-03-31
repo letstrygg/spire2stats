@@ -89,7 +89,10 @@ async function getCardStats() {
                 const pathHistory = JSON.parse(row.path_history || '[]');
                 const uniqueEventsInRun = new Set();
                 pathHistory.forEach(p => {
-                    if (p.event_id) uniqueEventsInRun.add(p.event_id);
+                    if (p.event_id) {
+                        // Strip prefix to match events table IDs (e.g., 'EVENT.NEOW' -> 'NEOW')
+                        uniqueEventsInRun.add(p.event_id.replace('EVENT.', ''));
+                    }
                 });
                 uniqueEventsInRun.forEach(eventId => {
                     if (!eventStats[eventId]) eventStats[eventId] = { seen: 0, wins: 0, videos: [] };

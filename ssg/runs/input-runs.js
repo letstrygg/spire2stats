@@ -101,10 +101,10 @@ async function run() {
                         };
 
                         if (['boss', 'monster', 'elite'].includes(room.room_type)) {
-                            entry.encounter_id = room.model_id;
-                            entry.monster_ids = room.monster_ids;
+                            entry.encounter_id = room.model_id?.replace('ENCOUNTER.', '');
+                            entry.monster_ids = (room.monster_ids || []).map(m => m.replace('MONSTER.', ''));
                         } else if (room.room_type === 'event') {
-                            entry.event_id = room.model_id;
+                            entry.event_id = room.model_id?.replace('EVENT.', '');
                         } else if (room.room_type === 'rest_site') {
                             entry.rest_choices = stats.rest_site_choices || [];
                         }
