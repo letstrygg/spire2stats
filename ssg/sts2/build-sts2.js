@@ -198,7 +198,7 @@ async function buildCharacters(runStats) {
                 const displayName = char.name.replace(/^The\s+/i, '');
                 const slug = slugify(displayName);
                 const dir = ensureDir(path.join(root, slug));
-                const charKey = (char.character_id || '').replace('CHARACTER.', '').toUpperCase();
+                const charKey = (char.character_id || '').toUpperCase();
                 const stats = runStats.charStats[charKey] || { seen: 0, wins: 0, videos: [] };
                 
                 const winRateNum = stats.seen > 0 ? (stats.wins / stats.seen) * 100 : 0;
