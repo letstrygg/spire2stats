@@ -97,7 +97,7 @@ export function wrapLayout(title, content, breadcrumbs = [], description = "", h
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>${title} - Spire 2 Stats</title>
+    <title>${title ? `${title} - ` : ''}Spire 2 Stats</title>
     ${metaDesc}
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />

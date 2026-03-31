@@ -674,7 +674,7 @@ async function build() {
 
         const landingDesc = "Comprehensive gameplay statistics and database for Slay the Spire 2. Tracked winrates, card details, relic data, and more.";
         const landingHtml = wrapLayout(
-            "Home",
+            "",
             `
     <h1>Slay the Spire 2 Stats</h1>
     <p style="font-size: 0.8rem; color: #666; margin-top: -15px; margin-bottom: 20px; text-transform: uppercase;">
