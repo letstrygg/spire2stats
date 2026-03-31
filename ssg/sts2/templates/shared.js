@@ -1,3 +1,4 @@
+import fs from 'fs';
 // --- BUILD DATE CONSTANTS ---
 const BUILD_DATE = new Date();
 export const FORMATTED_BUILD_DATE = BUILD_DATE.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
@@ -101,4 +102,53 @@ export function formatDescription(text) {
         .replace(/\[jitter\](.*?)\[\/jitter\]/g, '<strong>$1</strong>')
         .replace(/\[energy:(\d+)\]/ig, '<span class="icon-energy">[E]</span>')
         .replace(/\n/g, '<br>');
+}
+
+/**
+ * Rich Sitemap Generator
+ * Handles standard indexing and Google Video Search extensions
+ */
+export class Sitemap {
+    constructor(baseUrl) {
+        this.baseUrl = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+        this.urls = [];
+    }
+
+    add(path, videos = []) {
+        this.urls.push({
+            loc: `${this.baseUrl}${path.startsWith('/') ? path : '/' + path}`,
+            lastmod: ISO_BUILD_DATE,
+            videos: videos.map(v => ({
+                thumbnail: v.yt ? `https://img.youtube.com/vi/${v.yt}/hqdefault.jpg` : null,
+                title: `Slay the Spire 2 Run featuring this item`,
+                player: v.yt ? `https://www.youtube.com/embed/${v.yt}` : null
+            })).filter(v => v.player)
+        });
+    }
+
+    generateXml() {
+        const entries = this.urls.map(u => {
+            let videoXml = u.videos.map(v => `
+    <video:video>
+      <video:thumbnail_loc>${v.thumbnail}</video:thumbnail_loc>
+      <video:title>${v.title}</video:title>
+      <video:description>Gameplay and statistics for Slay the Spire 2.</video:description>
+      <video:player_loc>${v.player}</video:player_loc>
+    </video:video>`).join('');
+
+            return `  <url>
+    <loc>${u.loc}</loc>
+    <lastmod>${u.lastmod}</lastmod>${videoXml}
+  </url>`;
+        }).join('\n');
+
+        return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+${entries}
+</urlset>`;
+    }
+
+    save(outputPath) {
+        fs.writeFileSync(outputPath, this.generateXml());
+    }
 }

@@ -12,7 +12,8 @@ import {
     generateVideoPanel, 
     generateSemanticStatsParagraph, 
     wrapLayout, 
-    formatDescription 
+    formatDescription,
+    Sitemap
 } from './templates/shared.js';
 
 import { cardDetailTemplate } from './templates/card.js';
@@ -160,7 +161,7 @@ async function getCardStats() {
             };
 }
 
-async function buildGeneralCategory(cat) {
+async function buildGeneralCategory(cat, sitemap) {
     const items = await query(`SELECT * FROM ${cat.table} ORDER BY ${cat.titleField} ASC`);
     console.log(`📂 Building ${items.length} pages for ${cat.folder}...`);
     const root = ensureDir(path.join(PATHS.WEB_ROOT, cat.folder));
@@ -187,9 +188,11 @@ async function buildGeneralCategory(cat) {
             generateItemJsonLd(title, cat.folder.slice(0, -1), null)
         );
         fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
+        sitemap.add(`/${cat.folder}/${slug}/`);
     }
 
     // Index Page
+    sitemap.add(`/${cat.folder}/`);
     const itemLinks = items.map(i => {
         const title = i[cat.titleField];
         if (!title) return '';
@@ -210,7 +213,7 @@ async function buildGeneralCategory(cat) {
     fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
 }
 
-async function buildRelics(relics, runStats) {
+async function buildRelics(relics, runStats, sitemap) {
     console.log(`🏺 Building ${relics.length} relic pages...`);
     const root = ensureDir(path.join(PATHS.WEB_ROOT, 'relics'));
 
@@ -228,9 +231,11 @@ async function buildRelics(relics, runStats) {
 
         const detailHtml = relicDetailTemplate(relic, stats, videosHtml);
         fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
+        sitemap.add(`/relics/${slug}/`, rawStats.videos);
     }
 
     // Index Page
+    sitemap.add('/relics/');
     const totalRelics = relics.length;
     const relicsSeen = runStats.uniqueRelicsSeen;
     const relicLinks = relics.map(relic => {
@@ -264,7 +269,7 @@ async function buildRelics(relics, runStats) {
     fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
 }
 
-async function buildEvents(events, runStats) {
+async function buildEvents(events, runStats, sitemap) {
     console.log(`🌀 Building ${events.length} event pages...`);
     const root = ensureDir(path.join(PATHS.WEB_ROOT, 'events'));
 
@@ -277,9 +282,11 @@ async function buildEvents(events, runStats) {
         const videosHtml = generateVideoPanel(stats.videos);
         const detailHtml = eventDetailTemplate(event, stats, videosHtml);
         fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
+        sitemap.add(`/events/${slug}/`, stats.videos);
     }
 
     // Index Page
+    sitemap.add('/events/');
     const totalEvents = events.length;
     const eventsSeen = runStats.uniqueEventsSeen;
     const eventLinks = events.map(e => {
@@ -311,7 +318,7 @@ async function buildEvents(events, runStats) {
     fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
 }
 
-async function buildCharacters(chars, runStats) {
+async function buildCharacters(chars, runStats, sitemap) {
     console.log(`👤 Building ${chars.length} character pages...`);
     const root = ensureDir(path.join(PATHS.WEB_ROOT, 'characters'));
 
@@ -349,9 +356,11 @@ async function buildCharacters(chars, runStats) {
 
                 const detailHtml = characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, relicItemsHtml, displayName);
                 fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
+                sitemap.add(`/characters/${slug}/`, rawStats.videos);
     }
 
     // Index Page
+    sitemap.add('/characters/');
     const charLinks = chars.map(c => {
                 const displayName = c.name.replace(/^The\s+/i, '');
                 const charKey = (c.character_id || '').replace('CHARACTER.', '').toUpperCase();
@@ -392,6 +401,8 @@ async function build() {
         const cards = await getAllCards();
         const totalCards = cards.length;
 
+        const sitemap = new Sitemap('https://spire2stats.com');
+
         if (cards.length > 0) {
             console.log(`🗃️  Sample card_id from cards table: "${cards[0].card_id}" (Card Name: ${cards[0].name})`);
         }
@@ -421,9 +432,11 @@ async function build() {
             const detailHtml = cardDetailTemplate(card, stats, videosHtml, costDisplay);
 
             fs.writeFileSync(path.join(cardDir, 'index.html'), detailHtml);
+            sitemap.add(`/cards/${slug}/`, rawStats.videos);
         }
 
         // --- INDEX PAGE ---
+        sitemap.add('/cards/');
         console.log('📂 Generating index page...');
         
         const cardLinks = cards.map(card => {
@@ -458,6 +471,7 @@ async function build() {
 
         // --- ROOT LANDING PAGE ---
         console.log('🏠 Generating root landing page...');
+        sitemap.add('/');
         const lastUpdated = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 
         const getSubText = (seen, total) => seen === total ? total : `${seen} / ${total}`;
@@ -516,18 +530,21 @@ async function build() {
         fs.writeFileSync(path.join(PATHS.WEB_ROOT, 'index.html'), landingHtml);
 
         // --- CHARACTERS ---
-        await buildCharacters(chars, cardStats);
+        await buildCharacters(chars, cardStats, sitemap);
 
         // --- RELICS ---
-        await buildRelics(relics, cardStats);
+        await buildRelics(relics, cardStats, sitemap);
 
         // --- EVENTS ---
-        await buildEvents(events, cardStats);
+        await buildEvents(events, cardStats, sitemap);
 
         // --- GENERAL CATEGORY BUILDS ---
         for (const cat of CATEGORIES) {
-            await buildGeneralCategory(cat);
+            await buildGeneralCategory(cat, sitemap);
         }
+
+        console.log('🗺️  Saving sitemap.xml...');
+        sitemap.save(path.join(PATHS.WEB_ROOT, 'sitemap.xml'));
 
         console.log('✨ Build complete!');
         db.close();
