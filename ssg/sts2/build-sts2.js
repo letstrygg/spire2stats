@@ -492,8 +492,17 @@ async function buildCharacters(chars, runStats, sitemap) {
                 // Character Relics
                 const charRelics = await query("SELECT * FROM relics WHERE LOWER(pool) = ? ORDER BY rarity, name ASC", [displayName.toLowerCase()]);
                 const relicItemsHtml = charRelics.map(r => {
+                    const cleanRelicId = (r.relic_id || '').replace('RELIC.', '');
+                    const rStats = getItemStats(runStats.relicStats[cleanRelicId], runStats.globalWinRate);
                     const bgStyle = getCharacterBgStyle(displayName);
-                    return `<a href="/relics/${slugify(r.name)}/" class="item-link" style="${bgStyle}">${r.name}</a>`;
+                    return `<a href="/relics/${slugify(r.name)}/" class="card-item ${displayName.toLowerCase()}" style="${bgStyle}" aria-label="${r.name}: ${rStats.seen} runs, ${rStats.text}">
+                        <div class="card-info"><span class="card-name">${r.name}</span></div>
+                        <div class="card-stats">
+                            <div class="win-rate" style="color: ${rStats.color}">${rStats.text}</div>
+                            <div class="run-count">${rStats.seen} runs</div>
+                        </div>
+                        <div class="win-bar" style="${rStats.bar}"></div>
+                    </a>`;
                 }).join('');
 
                 const detailHtml = characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, relicItemsHtml, displayName);
