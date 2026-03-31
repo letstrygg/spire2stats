@@ -1,7 +1,8 @@
-import { wrapLayout, generateSemanticStatsParagraph, generateItemJsonLd, formatDescription } from './shared.js';
+import { wrapLayout, generateSemanticStatsParagraph, generateItemJsonLd, formatDescription, getCharacterBgStyle } from './shared.js';
 
 export function cardDetailTemplate(card, stats, videosHtml, costDisplay) {
     const description = formatDescription(card.description);
+    const bgStyle = getCharacterBgStyle(card.color);
     return wrapLayout(
         card.name, 
         `
@@ -9,7 +10,7 @@ export function cardDetailTemplate(card, stats, videosHtml, costDisplay) {
             ${generateSemanticStatsParagraph(card.name, stats, 'card')}
         </div>
         <div class="card-display">
-            <div class="card">
+            <div class="card" style="${bgStyle}">
                 <div class="cost-circle">${costDisplay}</div>
                 <div class="card-title">${card.name}</div>
                 <div class="type-banner">${card.color || ''} ${card.type}</div>
@@ -17,7 +18,7 @@ export function cardDetailTemplate(card, stats, videosHtml, costDisplay) {
                 <div class="card-footer">${card.rarity}</div>
             </div>
             <div class="card-arrow">→</div>
-            <div class="card">
+            <div class="card" style="${bgStyle}">
                 <div class="cost-circle">${costDisplay}</div>
                 <div class="card-title text-green">${card.name}+</div>
                 <div class="type-banner">${card.color || ''} ${card.type}</div>

@@ -13,6 +13,7 @@ import {
     generateSemanticStatsParagraph, 
     wrapLayout, 
     formatDescription,
+    getCharacterBgStyle,
     Sitemap
 } from './templates/shared.js';
 
@@ -256,9 +257,10 @@ async function buildRelics(relics, runStats, sitemap) {
         const cleanRelicId = (relic.relic_id || '').replace('RELIC.', '');
         const stats = getItemStats(runStats.relicStats[cleanRelicId], runStats.globalWinRate);
         const poolClass = (relic.pool || 'shared').toLowerCase();
+        const bgStyle = getCharacterBgStyle(relic.pool);
 
         return `
-        <a href="/relics/${slug}/" class="card-item ${poolClass}" aria-label="${relic.name}: ${stats.seen} runs, ${stats.text}">
+        <a href="/relics/${slug}/" class="card-item ${poolClass}" style="${bgStyle}" aria-label="${relic.name}: ${stats.seen} runs, ${stats.text}">
             <div class="card-info"><span class="card-name">${relic.name}</span></div>
             <div class="card-stats">
                 <div class="win-rate" style="color: ${stats.color}">${stats.text}</div>
@@ -479,7 +481,8 @@ async function buildCharacters(chars, runStats, sitemap) {
                 const charCards = await query("SELECT * FROM cards WHERE LOWER(color) = ? ORDER BY rarity, name ASC", [displayName.toLowerCase()]);
                 const cardItemsHtml = charCards.map(c => {
                     const cStats = getItemStats(runStats.stats[c.card_id], runStats.globalWinRate);
-                    return `<a href="/cards/${slugify(c.name)}/" class="card-item ${displayName.toLowerCase()}">
+                    const bgStyle = getCharacterBgStyle(displayName);
+                    return `<a href="/cards/${slugify(c.name)}/" class="card-item ${displayName.toLowerCase()}" style="${bgStyle}">
                         <div class="card-info"><span class="card-name">${c.name}</span></div>
                         <div class="card-stats"><div class="win-rate">${cStats.text}</div><div class="run-count">${cStats.seen} runs</div></div>
                         <div class="win-bar" style="${cStats.bar}"></div>
@@ -488,7 +491,10 @@ async function buildCharacters(chars, runStats, sitemap) {
 
                 // Character Relics
                 const charRelics = await query("SELECT * FROM relics WHERE LOWER(pool) = ? ORDER BY rarity, name ASC", [displayName.toLowerCase()]);
-                const relicItemsHtml = charRelics.map(r => `<a href="/relics/${slugify(r.name)}/" class="item-link">${r.name}</a>`).join('');
+                const relicItemsHtml = charRelics.map(r => {
+                    const bgStyle = getCharacterBgStyle(displayName);
+                    return `<a href="/relics/${slugify(r.name)}/" class="item-link" style="${bgStyle}">${r.name}</a>`;
+                }).join('');
 
                 const detailHtml = characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, relicItemsHtml, displayName);
                 fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
@@ -501,9 +507,10 @@ async function buildCharacters(chars, runStats, sitemap) {
                 const displayName = c.name.replace(/^The\s+/i, '');
                 const charKey = (c.character_id || '').replace('CHARACTER.', '').toUpperCase();
                 const stats = getItemStats(runStats.charStats[charKey], runStats.globalWinRate);
+                const bgStyle = getCharacterBgStyle(displayName);
 
                 return `
-                <a href="/characters/${slugify(displayName)}/" class="card-item ${displayName.toLowerCase()}" aria-label="${displayName}: ${stats.wins} wins, ${stats.losses} losses">
+                <a href="/characters/${slugify(displayName)}/" class="card-item ${displayName.toLowerCase()}" style="${bgStyle}" aria-label="${displayName}: ${stats.wins} wins, ${stats.losses} losses">
                     <div class="card-info"><span class="card-name">${displayName}</span></div>
                     <div class="card-stats">
                         <div class="win-rate" style="color: ${stats.color}">${stats.text}</div>
@@ -581,9 +588,10 @@ async function build() {
             const slug = slugify(card.name);
             const cleanCardId = (card.card_id || '').replace('CARD.', '');
             const stats = getItemStats(cardStats.stats[cleanCardId], cardStats.globalWinRate);
+            const bgStyle = getCharacterBgStyle(card.color);
 
             return `
-            <a href="/cards/${slug}/" class="card-item ${card.color}" aria-label="${card.name}: ${stats.seen} runs, ${stats.text}">
+            <a href="/cards/${slug}/" class="card-item ${card.color}" style="${bgStyle}" aria-label="${card.name}: ${stats.seen} runs, ${stats.text}">
                 <div class="card-info"><span class="card-name">${card.name}</span></div>
                 <div class="card-stats">
                     <div class="win-rate" style="color: ${stats.color}">${stats.text}</div>
