@@ -232,7 +232,7 @@ async function buildRelics(relics, runStats, sitemap) {
 
         const detailHtml = relicDetailTemplate(relic, stats, videosHtml);
         fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
-        sitemap.add(`/events/${slug}/`, stats.videos, event.name, 'Event');
+        sitemap.add(`/relics/${slug}/`, rawStats.videos, relic.name, 'Relic');
     }
 
     // Index Page
@@ -278,12 +278,13 @@ async function buildEvents(events, runStats, sitemap) {
         const slug = slugify(event.name);
         const dir = ensureDir(path.join(root, slug));
         
-        const stats = getItemStats(runStats.eventStats[event.event_id], runStats.globalWinRate);
+        const rawStats = runStats.eventStats[event.event_id] || { seen: 0, wins: 0, videos: [] };
+        const stats = getItemStats(rawStats, runStats.globalWinRate);
 
-        const videosHtml = generateVideoPanel(stats.videos);
+        const videosHtml = generateVideoPanel(rawStats.videos);
         const detailHtml = eventDetailTemplate(event, stats, videosHtml);
         fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
-        sitemap.add(`/events/${slug}/`, stats.videos);
+        sitemap.add(`/events/${slug}/`, rawStats.videos, event.name, 'Event');
     }
 
     // Index Page
