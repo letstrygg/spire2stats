@@ -386,10 +386,15 @@ async function build() {
 
         // --- ROOT LANDING PAGE ---
         console.log('🏠 Generating root landing page...');
-        const landingCats = ['cards', ...CATEGORIES.map(c => c.folder)];
-        const landingLinks = landingCats.map(cat => {
-            const display = cat.charAt(0).toUpperCase() + cat.slice(1);
-            return `<a href="/${cat}/" class="item-link">${display}</a>`;
+        const lastUpdated = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+        // Generate the Cards link with stats first
+        let landingLinks = `<a href="/cards/" class="item-link"><div>Cards</div><div class="stat-sub">${cardStats.uniqueCardsSeen} / ${totalCards}</div></a>`;
+        
+        // Append the rest of the categories
+        landingLinks += CATEGORIES.map(cat => {
+            const display = cat.folder.charAt(0).toUpperCase() + cat.folder.slice(1);
+            return `<a href="/${cat.folder}/" class="item-link">${display}</a>`;
         }).join('');
 
         const landingHtml = `
@@ -403,16 +408,52 @@ async function build() {
         body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; text-align: center; }
         .hero { margin-bottom: 50px; padding: 60px 20px; background: #1a1a1a; border-radius: 12px; border: 1px solid #333; }
         .hero h1 { font-size: 3.5rem; margin: 0; color: #ffd700; }
-        .hero p { font-size: 1.2rem; color: #888; margin-top: 10px; }
+        .hero h2 { color: #ffd700; margin: 0; }
+        .hero p { font-size: 1.1rem; color: #888; margin-top: 10px; }
+
+        .stats-summary { background: #1a1a1a; border: 1px solid #333; padding: 25px; border-radius: 12px; margin: 0 auto 40px auto; max-width: 1200px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
+        .stat-item { text-align: center; }
+        .stat-label { font-size: 0.7rem; color: #888; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
+        .stat-value { font-size: 1.4rem; font-weight: bold; color: #fff; }
+        .stat-sub { font-size: 0.8rem; color: #666; font-weight: normal; margin-top: 4px; }
+
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; max-width: 1200px; margin: 0 auto; }
-        .item-link { background: #1a1a1a; border: 1px solid #333; padding: 30px; border-radius: 8px; text-decoration: none; color: inherit; font-weight: bold; font-size: 1.3rem; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
+        .item-link { background: #1a1a1a; border: 1px solid #333; padding: 30px; border-radius: 8px; text-decoration: none; color: inherit; font-weight: bold; font-size: 1.3rem; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .item-link:hover { border-color: #4a90e2; background: #222; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
     </style>
 </head>
 <body>
     <div class="hero">
-        <h2>Spire 2 Stats</h2>
+        <h1>Spire 2 Stats</h1>
+        <p>The complete Slay the Spire 2 Database and Analytics.</p>
     </div>
+
+    <div class="stats-summary">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-label">Total Runs</div>
+                <div class="stat-value">${cardStats.totalRuns}</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Wins / Losses</div>
+                <div class="stat-value"><span style="color: #00ff89">${cardStats.totalWins}</span> <span style="color: #444">/</span> <span style="color: #ff4b4b">${cardStats.totalLosses}</span></div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Global Winrate</div>
+                <div class="stat-value" style="color: #ffd700">${cardStats.globalWinRate.toFixed(1)}%</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Contributors</div>
+                <div class="stat-value">${cardStats.uniqueUsers}</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Last Updated</div>
+                <div class="stat-value" style="font-size: 1.1rem;">${lastUpdated}</div>
+            </div>
+        </div>
+    </div>
+
     <div class="grid">
         ${landingLinks}
     </div>
