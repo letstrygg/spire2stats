@@ -21,9 +21,6 @@ async function run() {
         const db = new sqlite3.Database(DB_FILE);
 
         db.serialize(() => {
-            // 0. Drop the table to ensure schema is synchronized with code
-            db.run("DROP TABLE IF EXISTS runs");
-
             // 1. Setup the runs table with the expanded schema
             db.run(`
                 CREATE TABLE IF NOT EXISTS runs (
@@ -45,7 +42,8 @@ async function run() {
                     character TEXT,
                     relic_list TEXT,
                     deck_list TEXT,
-                    path_history TEXT
+                    path_history TEXT,
+                    yt_video TEXT
                 )
             `);
 
@@ -53,12 +51,22 @@ async function run() {
             db.run("BEGIN TRANSACTION");
 
             const stmt = db.prepare(`
-                INSERT OR REPLACE INTO runs (
+                INSERT INTO runs (
                     id, username, schema_version, build_id, platform_type, seed, 
                     start_time, run_time, ascension, game_mode, win, was_abandoned, 
                     killed_by_encounter, killed_by_event, acts, character, 
                     relic_list, deck_list, path_history
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(id) DO UPDATE SET
+                    username=excluded.username, schema_version=excluded.schema_version,
+                    build_id=excluded.build_id, platform_type=excluded.platform_type,
+                    seed=excluded.seed, start_time=excluded.start_time,
+                    run_time=excluded.run_time, ascension=excluded.ascension,
+                    game_mode=excluded.game_mode, win=excluded.win,
+                    was_abandoned=excluded.was_abandoned, killed_by_encounter=excluded.killed_by_encounter,
+                    killed_by_event=excluded.killed_by_event, acts=excluded.acts,
+                    character=excluded.character, relic_list=excluded.relic_list,
+                    deck_list=excluded.deck_list, path_history=excluded.path_history
             `);
 
             const folders = fs.readdirSync(UNPKG_DIR).filter(f => fs.statSync(path.join(UNPKG_DIR, f)).isDirectory());
