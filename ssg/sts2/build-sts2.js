@@ -411,8 +411,7 @@ async function build() {
 </head>
 <body>
     <div class="hero">
-        <h1>Spire 2 Stats</h1>
-        <p>The complete Slay the Spire 2 Database and Analytics.</p>
+        <h2>Spire 2 Stats</h2>
     </div>
     <div class="grid">
         ${landingLinks}
