@@ -639,17 +639,37 @@ async function build() {
         const enchantmentSub = getSubText(cardStats.uniqueEnchantmentsSeen, enchantments.length);
 
         // Generate the Cards link with stats first
-        let landingLinks = `<a href="/cards/" class="item-link-large"><div>Cards</div><div class="stat-sub">${cardSub}</div></a>`;
-        landingLinks += `<a href="/characters/" class="item-link-large"><div>Characters</div><div class="stat-sub">${charSub}</div></a>`;
-        landingLinks += `<a href="/relics/" class="item-link-large"><div>Relics</div><div class="stat-sub">${relicSub}</div></a>`;
-        landingLinks += `<a href="/events/" class="item-link-large"><div>Events</div><div class="stat-sub">${eventSub}</div></a>`;
-        landingLinks += `<a href="/ascensions/" class="item-link-large"><div>Ascensions</div><div class="stat-sub">${ascSub}</div></a>`;
-        landingLinks += `<a href="/enchantments/" class="item-link-large"><div>Enchantments</div><div class="stat-sub">${enchantmentSub}</div></a>`;
+        let landingLinks = `<a href="/cards/" class="card-item">
+            <div class="card-info"><span class="card-name">Cards</span></div>
+            <div class="card-stats"><div class="run-count">${cardSub}</div></div>
+        </a>`;
+        landingLinks += `<a href="/characters/" class="card-item">
+            <div class="card-info"><span class="card-name">Characters</span></div>
+            <div class="card-stats"><div class="run-count">${charSub}</div></div>
+        </a>`;
+        landingLinks += `<a href="/relics/" class="card-item">
+            <div class="card-info"><span class="card-name">Relics</span></div>
+            <div class="card-stats"><div class="run-count">${relicSub}</div></div>
+        </a>`;
+        landingLinks += `<a href="/events/" class="card-item">
+            <div class="card-info"><span class="card-name">Events</span></div>
+            <div class="card-stats"><div class="run-count">${eventSub}</div></div>
+        </a>`;
+        landingLinks += `<a href="/ascensions/" class="card-item">
+            <div class="card-info"><span class="card-name">Ascensions</span></div>
+            <div class="card-stats"><div class="run-count">${ascSub}</div></div>
+        </a>`;
+        landingLinks += `<a href="/enchantments/" class="card-item">
+            <div class="card-info"><span class="card-name">Enchantments</span></div>
+            <div class="card-stats"><div class="run-count">${enchantmentSub}</div></div>
+        </a>`;
 
         // Append the rest of the categories
         landingLinks += CATEGORIES.map(cat => {
             const display = cat.folder.charAt(0).toUpperCase() + cat.folder.slice(1);
-            return `<a href="/${cat.folder}/" class="item-link-large">${display}</a>`;
+            return `<a href="/${cat.folder}/" class="card-item">
+                <div class="card-info"><span class="card-name">${display}</span></div>
+            </a>`;
         }).join('');
 
         const landingDesc = "Comprehensive gameplay statistics and database for Slay the Spire 2. Tracked winrates, card details, relic data, and more.";
@@ -683,7 +703,8 @@ async function build() {
     <div class="grid">${landingLinks}</div>`,
             [],
             landingDesc,
-            generateCollectionJsonLd("Slay the Spire 2 Stats Hub", landingDesc)
+            generateCollectionJsonLd("Slay the Spire 2 Stats Hub", landingDesc),
+            `<link rel="stylesheet" href="/css/game/sts2-style.css">`
         );
 
         fs.writeFileSync(path.join(PATHS.WEB_ROOT, 'index.html'), landingHtml);
