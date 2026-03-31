@@ -4,25 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-  <title>{% if page.title %}{{ page.title }} | {% endif %}letstrygg</title>
+  <title>{% if page.title %}{{ page.title }} | {% endif %}Spire 2 Stats</title>
   {% if page.description %}
   <meta name="description" content="{{ page.description }}">
   {% endif %}
   {% if page.tags and page.tags != "" %}
   <meta name="keywords" content="{{ page.tags }}">
   {% endif %}
-  <link rel="canonical" href="https://letstrygg.com{{ page.permalink }}">
+  <link rel="canonical" href="https://spire2stats.com{{ page.permalink }}">
 
-  <meta property="og:site_name" content="letstrygg">
-  <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}letstrygg{% endif %}">
-  <meta property="og:url" content="https://letstrygg.com{{ page.permalink }}">
+  <meta property="og:site_name" content="Spire 2 Stats">
+  <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}Spire 2 Stats{% endif %}">
+  <meta property="og:url" content="https://spire2stats.com{{ page.permalink }}">
   <meta name="theme-color" content="#0085e3"> 
-
-	<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
-	<script>
-		window.SUPABASE_URL = '{{ site.supabase_url }}';
-		window.SUPABASE_ANON_KEY = '{{ site.supabase_anon_key }}';
-	</script>
   
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/legacy-quarantine.css">
@@ -40,30 +34,20 @@
 <body data-overlayscrollbars-initialize>
 
 <header>
-  <h1 class="title"><a href="{{ '/' | relative_url }}">letstrygg.com</a></h1>
-  <p class="subtitle">Let's Play Series and New Indie Games.</p>
+  <h1 class="title"><a href="{{ '/' | relative_url }}">spire2stats.com</a></h1>
+  <p class="subtitle">The complete Slay the Spire 2 Database and Analytics.</p>
 </header>
-
-{% include ui.html %}
-{% include theme_toggle.html %}
 
 <main class="{% if page.url != '/' and page.url != '/index.html' %}site-container{% endif %}">
   {% if page.url != '/' and page.url != '/index.html' %}
     <div class="top-nav-wrapper" style="margin-top: 5px; margin-bottom: 5px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
         <div style="flex: 1; min-width: 250px;">
-            {% include breadcrumbs.html %}
         </div>
-    {% include search.html %}
     </div>
   {% endif %}
 
   {{ content }}
 </main>
-
-{% include sidebar.html %}
-
-{% include chat_widget.html %}
-
 <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.14.0/browser/overlayscrollbars.browser.es6.min.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
