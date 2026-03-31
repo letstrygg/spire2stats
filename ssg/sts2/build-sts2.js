@@ -3,54 +3,27 @@ import path from 'path';
 import sqlite3 from 'sqlite3';
 import { PATHS, ensureDir, slugify } from './paths.js';
 
+import { 
+    ISO_BUILD_DATE, 
+    FORMATTED_BUILD_DATE, 
+    generateItemJsonLd, 
+    generateCollectionJsonLd, 
+    generateSummaryPanel, 
+    generateVideoPanel, 
+    generateSemanticStatsParagraph, 
+    wrapLayout, 
+    formatDescription 
+} from './templates/shared.js';
+
+import { cardDetailTemplate } from './templates/card.js';
+import { relicDetailTemplate } from './templates/relic.js';
+import { eventDetailTemplate } from './templates/event.js';
+import { characterDetailTemplate } from './templates/character.js';
+
 /**
  * Slay the Spire 2 - Static Site Generator
  * Reads from local SQLite and builds the card database
  */
-
-// --- BUILD DATE CONSTANTS ---
-const BUILD_DATE = new Date();
-const FORMATTED_BUILD_DATE = BUILD_DATE.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-const ISO_BUILD_DATE = BUILD_DATE.toISOString();
-
-/**
- * Helper to generate JSON-LD for individual item pages
- */
-function generateItemJsonLd(name, category, stats) {
-    const wr = stats?.formatted || "0.0";
-    const seen = stats?.seen || 0;
-    return `
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "ItemPage",
-  "name": "${name} - Spire 2 Stats",
-  "description": "${name} gameplay statistics for Slay the Spire 2. Winrate: ${wr}%. Total Runs: ${seen}.",
-  "dateModified": "${ISO_BUILD_DATE}",
-  "mainEntity": {
-    "@type": "Thing",
-    "name": "${name}",
-    "alternateName": "Slay the Spire 2 ${category}"
-  }
-}
-</script>`;
-}
-
-/**
- * Helper to generate JSON-LD for collection pages
- */
-function generateCollectionJsonLd(name, description) {
-    return `
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  "name": "${name} - Spire 2 Stats",
-  "description": "${description}",
-  "dateModified": "${ISO_BUILD_DATE}"
-}
-</script>`;
-}
 
 const db = new sqlite3.Database(PATHS.DATABASE);
 
@@ -84,36 +57,6 @@ async function query(sql, params = []) {
     });
 }
 
-/** Generates the consistent top summary panel for index pages */
-function generateSummaryPanel(runStats, label, total, seen) {
-    const completionHtml = seen === total ? total : `${seen} <span class="stat-sub">/ ${total} ${label.toLowerCase()}</span>`;
-    return `
-    <div class="stats-summary">
-        <div class="stats-grid">
-            <div class="stat-item"><div class="stat-label">Total Runs</div><div class="stat-value"><data value="${runStats.totalRuns}">${runStats.totalRuns}</data></div></div>
-            <div class="stat-item"><div class="stat-label">Wins / Losses</div><div class="stat-value"><data value="${runStats.totalWins}"><span style="color: #00ff89">${runStats.totalWins}</span></data> <span style="color: #444">/</span> <data value="${runStats.totalLosses}"><span style="color: #ff4b4b">${runStats.totalLosses}</span></data></div></div>
-            <div class="stat-item"><div class="stat-label">Overall Winrate</div><div class="stat-value"><data value="${runStats.globalWinRate.toFixed(1)}">${runStats.globalWinRate.toFixed(1)}%</data></div></div>
-            <div class="stat-item"><div class="stat-label">Contributors</div><div class="stat-value">${runStats.uniqueUsers}</div></div>
-            <div class="stat-item">
-                <div class="stat-label">${label} Seen</div>
-                <div class="stat-value"><data value="${seen}">${completionHtml}</data></div>
-            </div>
-        </div>
-    </div>`;
-}
-
-/** Generates associated video grid panels */
-function generateVideoPanel(videos, title = "Associated Runs") {
-    if (!videos || videos.length === 0) return '';
-    const videoLinks = videos.map(v => {
-        let buttons = '';
-        if (v.ltg) buttons += `<a href="https://letstrygg.com${v.ltg}" class="vid-btn ltg-btn" target="_blank">Run Summary</a>`;
-        if (v.yt) buttons += `<a href="https://www.youtube.com/watch?v=${v.yt}" class="vid-btn yt-btn" target="_blank"><span class="material-symbols-outlined">smart_display</span> YouTube</a>`;
-        return `<div class="video-panel">${buttons}</div>`;
-    }).join('');
-    return `<div class="featured-videos"><h3>${title}</h3><div class="video-grid">${videoLinks}</div></div>`;
-}
-
 /** Helper for win bar background styles */
 function getWinBarStyle(seen, winRateNum) {
     if (seen === 0) return 'background: #444;';
@@ -141,48 +84,6 @@ function getItemStats(stats, globalWinRate) {
         bar: getWinBarStyle(seen, num),
         text: seen > 0 ? `${num.toFixed(0)}% Winrate` : ''
     };
-}
-
-/** Helper to generate a semantic, SEO-friendly paragraph for run data */
-function generateSemanticStatsParagraph(name, stats, contextLabel) {
-    if (stats.seen === 0) return `<p>No runs recorded for the <strong>${name}</strong> ${contextLabel.toLowerCase()} yet.</p>`;
-    return `
-    <p>Based on tracked gameplay, <strong>${name}</strong> currently has a <data value="${stats.num}"><strong style="color: ${stats.color}">${stats.formatted}% winrate</strong></data> across <data value="${stats.seen}"><strong>${stats.seen} total runs</strong></data> (<span style="color: #00ff89">${stats.wins} Wins</span> / <span style="color: #ff4b4b">${stats.losses} Losses</span>) as of <time datetime="${ISO_BUILD_DATE}">${FORMATTED_BUILD_DATE}</time>.</p>`;
-}
-
-/** Helper to wrap content in the standard site layout */
-function wrapLayout(title, content, breadcrumbs = [], description = "", headExtra = "") {
-    const bcHtml = breadcrumbs.length > 0 
-        ? `<nav class="breadcrumbs"><a href="/">spire2stats</a> / ${breadcrumbs.map((b, i) => i === breadcrumbs.length - 1 ? b.name.toLowerCase() : `<a href="${b.url}">${b.name.toLowerCase()}</a>`).join(' / ')}</nav>`
-        : '';
-    const metaDesc = description ? `<meta name="description" content="${description}">` : '';
-    return `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>${title} - Spire 2 Stats</title>
-    ${metaDesc}
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    ${headExtra}
-</head>
-<body>${bcHtml}${content}</body></html>`;
-}
-
-// --- TEXT FORMATTER ---
-function formatDescription(text) {
-    if (!text) return "";
-    return text
-        .replace(/\[gold\](.*?)\[\/gold\]/g, '<span class="text-gold">$1</span>')
-        .replace(/\[blue\](.*?)\[\/blue\]/g, '<span class="text-blue">$1</span>')
-        .replace(/\[green\](.*?)\[\/green\]/g, '<span class="text-green">$1</span>')
-        .replace(/\[red\](.*?)\[\/red\]/g, '<span class="text-red">$1</span>')
-        .replace(/\[purple\](.*?)\[\/purple\]/g, '<span class="text-purple">$1</span>')
-        .replace(/\[pink\](.*?)\[\/pink\]/g, '<span class="text-purple">$1</span>')
-        .replace(/\[sine\](.*?)\[\/sine\]/g, '<em>$1</em>')
-        .replace(/\[jitter\](.*?)\[\/jitter\]/g, '<strong>$1</strong>')
-        .replace(/\[energy:(\d+)\]/ig, '<span class="icon-energy">[E]</span>')
-        .replace(/\n/g, '<br>');
 }
 
 function getCostDisplay(card) {
@@ -325,23 +226,7 @@ async function buildRelics(relics, runStats) {
         const subtitle = [relic.rarity, relic.pool ? `${relic.pool} Pool` : null].filter(Boolean).join(' • ');
         const descriptionHtml = formatDescription(relic.description || relic.description_raw || "");
 
-        const detailHtml = wrapLayout(
-            relic.name,
-            `
-            <div class="stats-summary">
-                ${generateSemanticStatsParagraph(relic.name, stats, 'relic')}
-            </div>
-            <div class="relic-box">
-                <h1>${relic.name}</h1>
-                <div class="subtitle">${subtitle}</div>
-                <div class="description">${descriptionHtml}</div>
-                ${relic.flavor ? `<div class="flavor">${relic.flavor}</div>` : ''}
-            </div>
-            ${videosHtml}`,
-            [{ name: 'relics', url: '/relics/' }, { name: relic.name.toLowerCase(), url: '' }],
-            `${relic.name} relic winrates and run statistics for Slay the Spire 2, based on tracked gameplay.`,
-            generateItemJsonLd(relic.name, "Relic", stats)
-        );
+        const detailHtml = relicDetailTemplate(relic, stats, videosHtml);
         fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
     }
 
@@ -390,41 +275,7 @@ async function buildEvents(events, runStats) {
         const stats = getItemStats(runStats.eventStats[event.event_id], runStats.globalWinRate);
 
         const videosHtml = generateVideoPanel(stats.videos);
-
-        const options = JSON.parse(event.options || '[]');
-        let optionsHtml = '';
-        if (options.length > 0) {
-            optionsHtml = `
-            <div class="options-section">
-                <h3>Choices & Outcomes</h3>
-                <div class="options-grid">
-                    ${options.map(opt => `
-                        <div class="option-card">
-                            <div class="option-title">${opt.title || opt.id}</div>
-                            <div class="option-desc">${formatDescription(opt.description)}</div>
-                        </div>
-                    `).join('')}
-                </div>
-            </div>`;
-        }
-
-        const detailHtml = wrapLayout(
-            event.name, 
-            `
-            <div class="stats-summary">
-                ${generateSemanticStatsParagraph(event.name, stats, 'event')}
-            </div>
-            <div class="event-box">
-                <h1>${event.name}</h1>
-                <div class="subtitle">${event.act || 'Unknown Act'} • ${event.type || 'Event'}</div>
-                <div class="description">${formatDescription(event.description)}</div>
-            </div>
-            ${optionsHtml}
-            ${videosHtml}`,
-            [{ name: 'events', url: '/events/' }, { name: event.name, url: '' }],
-            `${event.name} event winrates and run statistics for Slay the Spire 2.`,
-            generateItemJsonLd(event.name, "Event", stats)
-        );
+        const detailHtml = eventDetailTemplate(event, stats, videosHtml);
         fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
     }
 
@@ -496,23 +347,7 @@ async function buildCharacters(chars, runStats) {
                 const charRelics = await query("SELECT * FROM relics WHERE LOWER(pool) = ? ORDER BY rarity, name ASC", [displayName.toLowerCase()]);
                 const relicItemsHtml = charRelics.map(r => `<a href="/relics/${slugify(r.name)}/" class="item-link">${r.name}</a>`).join('');
 
-                const detailHtml = wrapLayout(
-                    char.name, 
-                    `
-                    <h1>${displayName}</h1>
-                    <div class="stats-summary">
-                        ${generateSemanticStatsParagraph(displayName, stats, 'character')}
-                    </div>
-                    <div style="background: #1a1a1a; padding: 25px; border-radius: 12px; border: 1px solid #333; line-height: 1.6; max-width: 800px;">${formatDescription(char.description)}</div>
-                    ${videosHtml}
-                    <h2 class="section-title">${displayName} Cards</h2>
-                    <div class="grid">${cardItemsHtml}</div>
-                    <h2 class="section-title">${displayName} Relics</h2>
-                    <div class="grid">${relicItemsHtml}</div>`,
-                    [{ name: 'characters', url: '/characters/' }, { name: displayName, url: '' }],
-                    `${displayName} winrates and run statistics for Slay the Spire 2.`,
-                    generateItemJsonLd(displayName, "Character", stats)
-                );
+                const detailHtml = characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, relicItemsHtml, displayName);
                 fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
     }
 
@@ -583,34 +418,7 @@ async function build() {
 
             const videosHtml = generateVideoPanel(rawStats.videos, "Featured Videos");
 
-            const detailHtml = wrapLayout(
-                card.name, 
-                `
-                <div class="stats-summary">
-                    ${generateSemanticStatsParagraph(card.name, stats, 'card')}
-                </div>
-                <div class="card-display">
-                    <div class="card">
-                        <div class="cost-circle">${costDisplay}</div>
-                        <div class="card-title">${card.name}</div>
-                        <div class="type-banner">${card.color || ''} ${card.type}</div>
-                        <div class="description">${description}</div>
-                        <div class="card-footer">${card.rarity}</div>
-                    </div>
-                    <div class="card-arrow">→</div>
-                    <div class="card">
-                        <div class="cost-circle">${costDisplay}</div>
-                        <div class="card-title text-green">${card.name}+</div>
-                        <div class="type-banner">${card.color || ''} ${card.type}</div>
-                        <div class="description">${description}</div>
-                        <div class="card-footer">${card.rarity}</div>
-                    </div>
-                </div>
-                ${videosHtml}`,
-                [{ name: 'cards', url: '/cards/' }, { name: card.name, url: '' }],
-                `${card.name} card winrates and run statistics for Slay the Spire 2.`,
-                generateItemJsonLd(card.name, "Card", stats)
-            );
+            const detailHtml = cardDetailTemplate(card, stats, videosHtml, costDisplay);
 
             fs.writeFileSync(path.join(cardDir, 'index.html'), detailHtml);
         }
