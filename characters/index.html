@@ -3,20 +3,75 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CHARACTERS - Spire 2 Stats</title>
+    <title>Characters - Spire 2 Stats</title>
     <link rel="stylesheet" href="/css/main.css">
     <style>
         body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; }
         .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #888; }
         .breadcrumbs a { color: #4a90e2; text-decoration: none; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
-        .item-link { background: #1a1a1a; border: 1px solid #333; padding: 15px; border-radius: 8px; text-decoration: none; color: inherit; text-align: center; font-weight: bold; transition: border-color 0.2s; }
-        .item-link:hover { border-color: #4a90e2; }
+        .stats-summary { background: #1a1a1a; border: 1px solid #333; padding: 25px; border-radius: 12px; margin-bottom: 40px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
+        .stat-item { text-align: center; }
+        .stat-label { font-size: 0.7rem; color: #888; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
+        .stat-value { font-size: 1.4rem; font-weight: bold; color: #fff; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
+        .card-item { position: relative; overflow: hidden; background: #1a1a1a; border: 1px solid #333; padding: 15px; text-decoration: none; color: inherit; display: flex; justify-content: space-between; border-radius: 8px; transition: border-color 0.2s; }
+        .card-item:hover { border-color: #ffd700; }
+        .card-name { font-weight: bold; } .card-stats { text-align: right; } .win-rate { color: #ffd700; font-weight: bold; font-size: 1.1rem; } .run-count { font-size: 0.7rem; color: #666; text-transform: uppercase; } .win-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; }
+        .ironclad { border-left: 4px solid #ff4b4b; } .silent { border-left: 4px solid #00ff89; } .defect { border-left: 4px solid #4a90e2; } .necrobinder { border-left: 4px solid #c18cff; } .regent { border-left: 4px solid #e67e22; }
     </style>
 </head>
 <body>
     <nav class="breadcrumbs"><a href="/">spire2stats</a> / characters</nav>
-    <h1>Characters</h1>
-    <div class="grid"><a href="/characters/the-defect/" class="item-link">The Defect</a><a href="/characters/the-ironclad/" class="item-link">The Ironclad</a><a href="/characters/the-necrobinder/" class="item-link">The Necrobinder</a><a href="/characters/the-regent/" class="item-link">The Regent</a><a href="/characters/the-silent/" class="item-link">The Silent</a></div>
+    <h1>Slay the Spire 2 Characters</h1>
+    <div class="stats-summary">
+        <div class="stats-grid">
+            <div class="stat-item"><div class="stat-label">Total Runs</div><div class="stat-value">46</div></div>
+            <div class="stat-item"><div class="stat-label">Wins / Losses</div><div class="stat-value"><span style="color: #00ff89">24</span> <span style="color: #444">/</span> <span style="color: #ff4b4b">22</span></div></div>
+            <div class="stat-item"><div class="stat-label">Overall Winrate</div><div class="stat-value">52.2%</div></div>
+            <div class="stat-item"><div class="stat-label">Contributors</div><div class="stat-value">1</div></div>
+        </div>
+    </div>
+    <div class="grid">
+                <a href="/characters/the-defect/" class="card-item the defect">
+                    <div class="card-info"><span class="card-name">The Defect</span></div>
+                    <div class="card-stats">
+                        <div class="win-rate"></div>
+                        <div class="run-count">0W / 0L</div>
+                    </div>
+                    <div class="win-bar" style="background: #444;"></div>
+                </a>
+                <a href="/characters/the-ironclad/" class="card-item the ironclad">
+                    <div class="card-info"><span class="card-name">The Ironclad</span></div>
+                    <div class="card-stats">
+                        <div class="win-rate"></div>
+                        <div class="run-count">0W / 0L</div>
+                    </div>
+                    <div class="win-bar" style="background: #444;"></div>
+                </a>
+                <a href="/characters/the-necrobinder/" class="card-item the necrobinder">
+                    <div class="card-info"><span class="card-name">The Necrobinder</span></div>
+                    <div class="card-stats">
+                        <div class="win-rate"></div>
+                        <div class="run-count">0W / 0L</div>
+                    </div>
+                    <div class="win-bar" style="background: #444;"></div>
+                </a>
+                <a href="/characters/the-regent/" class="card-item the regent">
+                    <div class="card-info"><span class="card-name">The Regent</span></div>
+                    <div class="card-stats">
+                        <div class="win-rate"></div>
+                        <div class="run-count">0W / 0L</div>
+                    </div>
+                    <div class="win-bar" style="background: #444;"></div>
+                </a>
+                <a href="/characters/the-silent/" class="card-item the silent">
+                    <div class="card-info"><span class="card-name">The Silent</span></div>
+                    <div class="card-stats">
+                        <div class="win-rate"></div>
+                        <div class="run-count">0W / 0L</div>
+                    </div>
+                    <div class="win-bar" style="background: #444;"></div>
+                </a></div>
 </body>
 </html>

@@ -13,7 +13,6 @@ const db = new sqlite3.Database(PATHS.DATABASE);
 const CATEGORIES = [
     { table: 'relics', folder: 'relics', titleField: 'name' },
     { table: 'potions', folder: 'potions', titleField: 'name' },
-    { table: 'characters', folder: 'characters', titleField: 'name' },
     { table: 'monsters', folder: 'monsters', titleField: 'name' },
     { table: 'events', folder: 'events', titleField: 'name' },
     { table: 'encounters', folder: 'encounters', titleField: 'name' },
@@ -65,8 +64,17 @@ async function getCardStats() {
             const globalWinRate = totalRuns > 0 ? (totalWins / totalRuns) * 100 : 0;
             const uniqueUsers = new Set(rows.map(r => r.username)).size;
 
-            const stats = {};
+            const stats = {}; // Card stats
+            const charStats = {}; // Character stats
             rows.forEach(row => {
+                const charId = (row.character || '').replace(/^CHARACTER\./, '');
+                if (!charStats[charId]) charStats[charId] = { seen: 0, wins: 0, videos: [] };
+                charStats[charId].seen++;
+                if (row.win) charStats[charId].wins++;
+                if (row.yt_video || row.ltg_url) {
+                    charStats[charId].videos.push({ yt: row.yt_video, ltg: row.ltg_url });
+                }
+
                 const deck = JSON.parse(row.deck_list || '[]');
                 // Strip 'CARD.' prefix to match the card_id in the database
                 const uniqueCardsInDeck = new Set(deck.map(c => (c.id || '').replace(/^CARD\./, '')));
@@ -85,6 +93,7 @@ async function getCardStats() {
             console.log(`📊 Processed stats for ${uniqueCardsSeen} unique cards across ${totalRuns} runs. Global Average: ${globalWinRate.toFixed(1)}%`);
             resolve({ 
                 stats, 
+                charStats,
                 globalWinRate, 
                 totalRuns, 
                 totalWins, 
@@ -170,6 +179,160 @@ async function buildGeneralCategory(cat) {
     <nav class="breadcrumbs"><a href="/">spire2stats</a> / ${cat.folder}</nav>
     <h1>${cat.folder.charAt(0).toUpperCase() + cat.folder.slice(1)}</h1>
     <div class="grid">${itemLinks}</div>
+</body>
+</html>`;
+            fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
+            resolve();
+        });
+    });
+}
+
+async function buildCharacters(runStats) {
+    return new Promise((resolve, reject) => {
+        db.all(`SELECT * FROM characters ORDER BY name ASC`, async (err, chars) => {
+            if (err) return reject(err);
+
+            console.log(`👤 Building ${chars.length} character pages...`);
+            const root = ensureDir(path.join(PATHS.WEB_ROOT, 'characters'));
+
+            for (const char of chars) {
+                const slug = slugify(char.name);
+                const dir = ensureDir(path.join(root, slug));
+                const charKey = char.character_id;
+                const stats = runStats.charStats[charKey] || { seen: 0, wins: 0, videos: [] };
+                
+                const winRateNum = stats.seen > 0 ? (stats.wins / stats.seen) * 100 : 0;
+                const losses = stats.seen - stats.wins;
+                const charColorClass = char.name.toLowerCase();
+
+                // Associated Videos
+                let videosHtml = '';
+                if (stats.videos && stats.videos.length > 0) {
+                    const videoLinks = stats.videos.map(v => {
+                        let buttons = '';
+                        if (v.ltg) buttons += `<a href="https://letstrygg.com${v.ltg}" class="vid-btn ltg-btn" target="_blank">Run Summary</a>`;
+                        if (v.yt) buttons += `<a href="https://www.youtube.com/watch?v=${v.yt}" class="vid-btn yt-btn" target="_blank"><span class="material-symbols-outlined">smart_display</span> YouTube</a>`;
+                        return `<div class="video-panel">${buttons}</div>`;
+                    }).join('');
+                    videosHtml = `<div class="featured-videos"><h3>Associated Runs</h3><div class="video-grid">${videoLinks}</div></div>`;
+                }
+
+                // Character Cards
+                const charCards = await new Promise(res => db.all("SELECT * FROM cards WHERE LOWER(color) = ? ORDER BY rarity, name ASC", [char.name.toLowerCase()], (e, r) => res(r || [])));
+                const cardItemsHtml = charCards.map(c => {
+                    const cardStats = runStats.stats[c.card_id] || { seen: 0, wins: 0 };
+                    const cWrNum = cardStats.seen > 0 ? (cardStats.wins / cardStats.seen) * 100 : 0;
+                    let wrText = cardStats.seen > 0 ? `${cWrNum.toFixed(0)}% WR` : '';
+                    let barStyle = cardStats.seen > 0 ? `background: linear-gradient(to right, #00ff89 ${cWrNum}%, #ff4b4b ${cWrNum}%);` : 'background: #444;';
+                    return `<a href="/cards/${slugify(c.name)}/" class="card-item ${charColorClass}">
+                        <div class="card-info"><span class="card-name">${c.name}</span></div>
+                        <div class="card-stats"><div class="win-rate">${wrText}</div><div class="run-count">${cardStats.seen} runs</div></div>
+                        <div class="win-bar" style="${barStyle}"></div>
+                    </a>`;
+                }).join('');
+
+                // Character Relics
+                const charRelics = await new Promise(res => db.all("SELECT * FROM relics WHERE LOWER(pool) = ? ORDER BY rarity, name ASC", [char.name.toLowerCase()], (e, r) => res(r || [])));
+                const relicItemsHtml = charRelics.map(r => `<a href="/relics/${slugify(r.name)}/" class="item-link">${r.name}</a>`).join('');
+
+                const detailHtml = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>${char.name} - Spire 2 Stats</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; }
+        .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #888; }
+        .breadcrumbs a { color: #4a90e2; text-decoration: none; }
+        .stats-summary { background: #1a1a1a; border: 1px solid #333; padding: 25px; border-radius: 12px; margin-bottom: 30px; max-width: 800px; }
+        .stat-val { color: #ffd700; font-weight: bold; }
+        .section-title { border-bottom: 1px solid #333; padding-bottom: 10px; margin: 40px 0 20px 0; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
+        .card-item { position: relative; overflow: hidden; background: #1a1a1a; border: 1px solid #333; padding: 15px; text-decoration: none; color: inherit; display: flex; justify-content: space-between; border-radius: 8px; transition: border-color 0.2s; }
+        .card-name { font-weight: bold; } .card-stats { text-align: right; } .win-rate { color: #ffd700; font-weight: bold; font-size: 0.9rem; } .run-count { font-size: 0.7rem; color: #666; text-transform: uppercase; } .win-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; }
+        .ironclad { border-left: 4px solid #ff4b4b; } .silent { border-left: 4px solid #00ff89; } .defect { border-left: 4px solid #4a90e2; } .necrobinder { border-left: 4px solid #c18cff; } .regent { border-left: 4px solid #e67e22; }
+        .item-link { background: #1a1a1a; border: 1px solid #333; padding: 12px; border-radius: 8px; text-decoration: none; color: inherit; text-align: center; font-weight: bold; transition: border-color 0.2s; }
+        .item-link:hover { border-color: #ffd700; }
+        .featured-videos { margin-top: 40px; max-width: 1200px; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+        .video-panel { background: #1a1a1a; border: 1px solid #333; padding: 12px; border-radius: 8px; display: flex; flex-direction: column; gap: 8px; }
+        .vid-btn { display: flex; align-items: center; justify-content: center; padding: 8px; border-radius: 4px; text-decoration: none; font-size: 0.85rem; font-weight: bold; color: #fff; transition: background 0.2s; }
+        .ltg-btn { background: #333; } .yt-btn { background: #2a2a2a; border: 1px solid #444; }
+        .yt-btn .material-symbols-outlined { color: #ff4b4b; margin-right: 6px; font-size: 1.2rem; }
+    </style>
+</head>
+<body>
+    <nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/characters/">characters</a> / ${char.name.toLowerCase()}</nav>
+    <h1>${char.name}</h1>
+    <div class="stats-summary">
+        <p>This character has been played in <span class="stat-val">${stats.seen}</span> runs with a <span class="stat-val">${winRateNum.toFixed(1)}%</span> winrate (<span style="color: #00ff89">${stats.wins} Wins</span> / <span style="color: #ff4b4b">${losses} Losses</span>).</p>
+    </div>
+    <div style="background: #1a1a1a; padding: 25px; border-radius: 12px; border: 1px solid #333; line-height: 1.6; max-width: 800px;">${formatDescription(char.description)}</div>
+    
+    ${videosHtml}
+    <h2 class="section-title">${char.name} Cards</h2>
+    <div class="grid">${cardItemsHtml}</div>
+    <h2 class="section-title">${char.name} Relics</h2>
+    <div class="grid">${relicItemsHtml}</div>
+</body>
+</html>`;
+                fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
+            }
+
+            // Index Page
+            const charLinks = chars.map(c => {
+                const stats = runStats.charStats[c.character_id] || { seen: 0, wins: 0 };
+                const wrNum = stats.seen > 0 ? (stats.wins / stats.seen) * 100 : 0;
+                let barStyle = stats.seen > 0 ? `background: linear-gradient(to right, #00ff89 ${wrNum}%, #ff4b4b ${wrNum}%);` : 'background: #444;';
+                return `
+                <a href="/characters/${slugify(c.name)}/" class="card-item ${c.name.toLowerCase()}">
+                    <div class="card-info"><span class="card-name">${c.name}</span></div>
+                    <div class="card-stats">
+                        <div class="win-rate">${stats.seen > 0 ? wrNum.toFixed(0) + '%' : ''}</div>
+                        <div class="run-count">${stats.wins}W / ${stats.seen - stats.wins}L</div>
+                    </div>
+                    <div class="win-bar" style="${barStyle}"></div>
+                </a>`;
+            }).join('');
+
+            const indexHtml = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Characters - Spire 2 Stats</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <style>
+        body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; }
+        .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #888; }
+        .breadcrumbs a { color: #4a90e2; text-decoration: none; }
+        .stats-summary { background: #1a1a1a; border: 1px solid #333; padding: 25px; border-radius: 12px; margin-bottom: 40px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
+        .stat-item { text-align: center; }
+        .stat-label { font-size: 0.7rem; color: #888; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
+        .stat-value { font-size: 1.4rem; font-weight: bold; color: #fff; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
+        .card-item { position: relative; overflow: hidden; background: #1a1a1a; border: 1px solid #333; padding: 15px; text-decoration: none; color: inherit; display: flex; justify-content: space-between; border-radius: 8px; transition: border-color 0.2s; }
+        .card-item:hover { border-color: #ffd700; }
+        .card-name { font-weight: bold; } .card-stats { text-align: right; } .win-rate { color: #ffd700; font-weight: bold; font-size: 1.1rem; } .run-count { font-size: 0.7rem; color: #666; text-transform: uppercase; } .win-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; }
+        .ironclad { border-left: 4px solid #ff4b4b; } .silent { border-left: 4px solid #00ff89; } .defect { border-left: 4px solid #4a90e2; } .necrobinder { border-left: 4px solid #c18cff; } .regent { border-left: 4px solid #e67e22; }
+    </style>
+</head>
+<body>
+    <nav class="breadcrumbs"><a href="/">spire2stats</a> / characters</nav>
+    <h1>Slay the Spire 2 Characters</h1>
+    <div class="stats-summary">
+        <div class="stats-grid">
+            <div class="stat-item"><div class="stat-label">Total Runs</div><div class="stat-value">${runStats.totalRuns}</div></div>
+            <div class="stat-item"><div class="stat-label">Wins / Losses</div><div class="stat-value"><span style="color: #00ff89">${runStats.totalWins}</span> <span style="color: #444">/</span> <span style="color: #ff4b4b">${runStats.totalLosses}</span></div></div>
+            <div class="stat-item"><div class="stat-label">Overall Winrate</div><div class="stat-value">${runStats.globalWinRate.toFixed(1)}%</div></div>
+            <div class="stat-item"><div class="stat-label">Contributors</div><div class="stat-value">${runStats.uniqueUsers}</div></div>
+        </div>
+    </div>
+    <div class="grid">${charLinks}</div>
 </body>
 </html>`;
             fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
@@ -493,6 +656,9 @@ async function build() {
 </body>
 </html>`;
         fs.writeFileSync(path.join(PATHS.WEB_ROOT, 'index.html'), landingHtml);
+
+        // --- CHARACTERS ---
+        await buildCharacters(cardStats);
 
         // --- GENERAL CATEGORY BUILDS ---
         for (const cat of CATEGORIES) {
