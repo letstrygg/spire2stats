@@ -32,6 +32,27 @@ function getCostDisplay(card) {
     return [cost, star].filter(Boolean).join(' ');
 }
 
+async function getCardStats() {
+    return new Promise((resolve, reject) => {
+        db.all("SELECT deck_list, win FROM runs", (err, rows) => {
+            if (err) return reject(err);
+            
+            const stats = {};
+            rows.forEach(row => {
+                const deck = JSON.parse(row.deck_list || '[]');
+                // We only care if the card appeared at least once in the deck
+                const uniqueCardsInDeck = new Set(deck.map(c => c.id));
+                uniqueCardsInDeck.forEach(cardId => {
+                    if (!stats[cardId]) stats[cardId] = { seen: 0, wins: 0 };
+                    stats[cardId].seen++;
+                    if (row.win) stats[cardId].wins++;
+                });
+            });
+            resolve(stats);
+        });
+    });
+}
+
 async function getAllCards() {
     return new Promise((resolve, reject) => {
         db.all("SELECT * FROM cards ORDER BY color, name ASC", (err, rows) => {
@@ -45,6 +66,7 @@ async function build() {
     try {
         console.log('🛠️  Starting build process...');
         const cards = await getAllCards();
+        const cardStats = await getCardStats();
         const cardsRoot = ensureDir(path.join(PATHS.WEB_ROOT, 'cards'));
 
         console.log(`🎴 Generating ${cards.length} card pages...`);
@@ -55,6 +77,9 @@ async function build() {
             
             const costDisplay = getCostDisplay(card);
             const description = formatDescription(card.description);
+            
+            const stats = cardStats[card.card_id] || { seen: 0, wins: 0 };
+            const winRate = stats.seen > 0 ? ((stats.wins / stats.seen) * 100).toFixed(1) : "0.0";
 
             const detailHtml = `
 <!DOCTYPE html>
@@ -72,6 +97,10 @@ async function build() {
         .description { line-height: 1.6; font-size: 1.1em; }
         .text-gold { color: #ffd700; } .text-red { color: #ff4b4b; } .text-green { color: #00ff89; }
         .back-link { display: block; margin-top: 30px; color: #4a90e2; text-decoration: none; }
+        .stats-box { margin-top: 20px; display: flex; gap: 20px; border-top: 1px solid #333; padding-top: 15px; }
+        .stat-item { flex: 1; }
+        .stat-label { font-size: 0.75rem; color: #888; text-transform: uppercase; margin-bottom: 4px; }
+        .stat-value { font-size: 1.2rem; font-weight: bold; color: #fff; }
     </style>
 </head>
 <body>
@@ -82,6 +111,16 @@ async function build() {
         </div>
         <div class="type-rarity">${card.color} ${card.type} &bull; ${card.rarity}</div>
         <div class="description">${description}</div>
+        <div class="stats-box">
+            <div class="stat-item">
+                <div class="stat-label">Pick Frequency</div>
+                <div class="stat-value">${stats.seen} runs</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Win Rate</div>
+                <div class="stat-value">${winRate}%</div>
+            </div>
+        </div>
     </div>
     <a href="/cards/" class="back-link">← Back to all cards</a>
 </body>
@@ -96,10 +135,19 @@ async function build() {
         const cardLinks = cards.map(card => {
             const slug = slugify(card.name);
             const cost = getCostDisplay(card);
+            const stats = cardStats[card.card_id] || { seen: 0, wins: 0 };
+            const winRate = stats.seen > 0 ? ((stats.wins / stats.seen) * 100).toFixed(0) : "0";
+
             return `
             <a href="/cards/${slug}/" class="card-item ${card.color}">
-                <span class="card-name">${card.name}</span>
-                <span class="card-cost">${cost}</span>
+                <div class="card-info">
+                    <span class="card-name">${card.name}</span>
+                    <span class="card-meta">${cost} • ${card.rarity}</span>
+                </div>
+                <div class="card-stats">
+                    <div class="win-rate">${winRate}%</div>
+                    <div class="run-count">${stats.seen} runs</div>
+                </div>
             </a>`;
         }).join('');
 
@@ -112,12 +160,17 @@ async function build() {
     <style>
         body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
-        .card-item { 
+        .card-item {
             background: #1a1a1a; border: 1px solid #333; padding: 15px; text-decoration: none; color: inherit;
             display: flex; justify-content: space-between; border-radius: 8px; transition: border-color 0.2s;
         }
         .card-item:hover { border-color: #ffd700; }
-        .card-cost { color: #ffd700; font-weight: bold; }
+        .card-info { display: flex; flex-direction: column; }
+        .card-name { font-weight: bold; margin-bottom: 4px; }
+        .card-meta { font-size: 0.75rem; color: #888; }
+        .card-stats { text-align: right; display: flex; flex-direction: column; justify-content: center; }
+        .win-rate { color: #ffd700; font-weight: bold; font-size: 1.1rem; }
+        .run-count { font-size: 0.7rem; color: #666; text-transform: uppercase; }
         .ironclad { border-left: 4px solid #ff4b4b; }
         .silent { border-left: 4px solid #00ff89; }
         .defect { border-left: 4px solid #4a90e2; }
