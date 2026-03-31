@@ -362,15 +362,15 @@ async function build() {
                 <div class="stat-value"><span style="color: #00ff89">${cardStats.totalWins}</span> <span style="color: #444">/</span> <span style="color: #ff4b4b">${cardStats.totalLosses}</span></div>
             </div>
             <div class="stat-item">
-                <div class="stat-label">Global Winrate</div>
-                <div class="stat-value" style="color: #ffd700">${cardStats.globalWinRate.toFixed(1)}%</div>
+                <div class="stat-label">Overall Winrate</div>
+                <div class="stat-value">${cardStats.globalWinRate.toFixed(1)}%</div>
             </div>
             <div class="stat-item">
                 <div class="stat-label">Contributors</div>
                 <div class="stat-value">${cardStats.uniqueUsers}</div>
             </div>
             <div class="stat-item">
-                <div class="stat-label">Catalog Variety</div>
+                <div class="stat-label">Cards Seen</div>
                 <div class="stat-value">${cardStats.uniqueCardsSeen} <span class="stat-sub">/ ${totalCards} cards</span></div>
             </div>
         </div>
