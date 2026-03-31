@@ -35,7 +35,6 @@ const CATEGORIES = [
     { table: 'acts', folder: 'acts', titleField: 'name' },
     { table: 'achievements', folder: 'achievements', titleField: 'name' },
     { table: 'afflictions', folder: 'afflictions', titleField: 'name' },
-    { table: 'enchantments', folder: 'enchantments', titleField: 'name' },
     { table: 'epochs', folder: 'epochs', titleField: 'title' },
     { table: 'keywords', folder: 'keywords', titleField: 'name' },
     { table: 'intents', folder: 'intents', titleField: 'name' },
@@ -97,7 +96,7 @@ async function getCardStats() {
     console.log(`📡 Database returned ${rows.length} run rows.`);
 
     const totalRuns = rows.length;
-    if (totalRuns === 0) return { stats: {}, charStats: {}, relicStats: {}, eventStats: {}, ascensionStats: {}, globalWinRate: 0, totalRuns: 0, totalWins: 0, totalLosses: 0, uniqueUsers: 0, uniqueCardsSeen: 0, uniqueRelicsSeen: 0, uniqueEventsSeen: 0, uniqueCharsSeen: 0, uniqueAscensionsSeen: 0 };
+    if (totalRuns === 0) return { stats: {}, charStats: {}, relicStats: {}, eventStats: {}, ascensionStats: {}, enchantmentStats: {}, globalWinRate: 0, totalRuns: 0, totalWins: 0, totalLosses: 0, uniqueUsers: 0, uniqueCardsSeen: 0, uniqueRelicsSeen: 0, uniqueEventsSeen: 0, uniqueCharsSeen: 0, uniqueAscensionsSeen: 0, uniqueEnchantmentsSeen: 0 };
 
             const totalWins = rows.filter(r => r.win).length;
             const globalWinRate = totalRuns > 0 ? (totalWins / totalRuns) * 100 : 0;
@@ -108,6 +107,7 @@ async function getCardStats() {
             const relicStats = {}; // Relic stats
             const eventStats = {}; // Event stats
             const ascensionStats = {}; // Ascension stats
+            const enchantmentStats = {}; // Enchantment stats
 
             const updateStat = (obj, id, win, video) => {
                 if (!obj[id]) obj[id] = { seen: 0, wins: 0, videos: [] };
@@ -138,12 +138,18 @@ async function getCardStats() {
                 const uniqueCardsInDeck = new Set(deck.map(c => c.id || ''));
                 uniqueCardsInDeck.forEach(cardId => updateStat(stats, cardId, row.win, video));
 
+                const uniqueEnchantmentsInDeck = new Set();
+                deck.forEach(c => {
+                    if (c.enchantment) uniqueEnchantmentsInDeck.add(c.enchantment.replace('ENCHANTMENT.', ''));
+                });
+                uniqueEnchantmentsInDeck.forEach(eId => updateStat(enchantmentStats, eId, row.win, video));
+
                 const ascLevel = String(row.ascension || 0);
                 updateStat(ascensionStats, ascLevel, row.win, video);
             });
             
             const uniqueCardsSeen = Object.keys(stats).length;
-            console.log(`📊 Processed stats for ${uniqueCardsSeen} cards, ${Object.keys(relicStats).length} relics, ${Object.keys(eventStats).length} events, and ${Object.keys(ascensionStats).length} ascensions across ${totalRuns} runs.`);
+            console.log(`📊 Processed stats for ${uniqueCardsSeen} cards, ${Object.keys(relicStats).length} relics, ${Object.keys(eventStats).length} events, ${Object.keys(enchantmentStats).length} enchantments, and ${Object.keys(ascensionStats).length} ascensions across ${totalRuns} runs.`);
 
             console.log(` Character keys found in runs: [${Object.keys(charStats).join(', ')}]`);
 
@@ -153,6 +159,7 @@ async function getCardStats() {
                 relicStats,
                 eventStats,
                 ascensionStats,
+                enchantmentStats,
                 globalWinRate, 
                 totalRuns, 
                 totalWins, 
@@ -162,7 +169,8 @@ async function getCardStats() {
                 uniqueRelicsSeen: Object.keys(relicStats).length,
                 uniqueEventsSeen: Object.keys(eventStats).length,
                 uniqueCharsSeen: Object.keys(charStats).length,
-                uniqueAscensionsSeen: Object.keys(ascensionStats).length
+                uniqueAscensionsSeen: Object.keys(ascensionStats).length,
+                uniqueEnchantmentsSeen: Object.keys(enchantmentStats).length
             };
 }
 
@@ -213,7 +221,7 @@ async function buildGeneralCategory(cat, sitemap) {
         <div class="grid">${itemLinks}</div>`, 
         [{ name: cat.folder, url: '' }],
         indexDesc,
-        generateCollectionJsonLd(`${catName} Database`, indexDesc)
+        generateCollectionJsonLd(`${catName}`, indexDesc)
     );
     fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
 }
@@ -383,6 +391,69 @@ async function buildAscensions(ascensions, runStats, sitemap) {
     fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
 }
 
+async function buildEnchantments(enchantments, runStats, sitemap) {
+    console.log(`✨ Building ${enchantments.length} enchantment pages...`);
+    const root = ensureDir(path.join(PATHS.WEB_ROOT, 'enchantments'));
+
+    for (const enchantment of enchantments) {
+        const title = enchantment.name;
+        const slug = slugify(title);
+        const dir = ensureDir(path.join(root, slug));
+        
+        const cleanId = (enchantment.enchantment_id || '').replace('ENCHANTMENT.', '');
+        const rawStats = runStats.enchantmentStats[cleanId] || { seen: 0, wins: 0, videos: [] };
+        const stats = getItemStats(rawStats, runStats.globalWinRate);
+
+        const videosHtml = generateVideoPanel(rawStats.videos);
+        const descriptionHtml = formatDescription(enchantment.description || "");
+        const extraText = enchantment.extra_card_text ? `<div class="extra-text">Adds: ${formatDescription(enchantment.extra_card_text)}</div>` : '';
+
+        const detailHtml = wrapLayout(
+            title, 
+            `
+            <div class="stats-summary">
+                ${generateSemanticStatsParagraph(title, stats, 'enchantment')}
+            </div>
+            <div class="item-box">
+                <h1>${title}</h1>
+                <div class="subtitle">Enchantment • ${enchantment.card_type || 'Any'}</div>
+                <div class="description">${descriptionHtml}</div>
+                ${extraText}
+            </div>
+            ${videosHtml}`,
+            [{ name: 'enchantments', url: '/enchantments/' }, { name: title, url: '' }],
+            `${title} enchantment winrates and run statistics for Slay the Spire 2.`,
+            generateItemJsonLd(title, "Enchantment", stats)
+        );
+        fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
+        sitemap.add(`/enchantments/${slug}/`);
+    }
+
+    // Index Page
+    sitemap.add('/enchantments/');
+    const total = enchantments.length;
+    const seen = runStats.uniqueEnchantmentsSeen;
+    const links = enchantments.map(e => {
+        const slug = slugify(e.name);
+        const cleanId = (e.enchantment_id || '').replace('ENCHANTMENT.', '');
+        const stats = getItemStats(runStats.enchantmentStats[cleanId], runStats.globalWinRate);
+
+        return `
+        <a href="/enchantments/${slug}/" class="card-item" aria-label="${e.name}: ${stats.seen} runs, ${stats.text}">
+            <div class="card-info"><span class="card-name">${e.name}</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: ${stats.color}">${stats.text}</div>
+                <div class="run-count">${stats.seen} runs</div>
+            </div>
+            <div class="win-bar" style="${stats.bar}"></div>
+        </a>`;
+    }).join('');
+
+    const indexDesc = `View global winrates and run statistics for all Slay the Spire 2 enchantments.`;
+    const indexHtml = wrapLayout('Enchantments Database', `<h1>Slay the Spire 2 Enchantments</h1>${generateSummaryPanel(runStats, "Enchantments", total, seen)}<div class="grid">${links}</div>`, [{ name: 'enchantments', url: '' }], indexDesc, generateCollectionJsonLd(`Enchantments Database`, indexDesc));
+    fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
+}
+
 async function buildCharacters(chars, runStats, sitemap) {
     console.log(`👤 Building ${chars.length} character pages...`);
     const root = ensureDir(path.join(PATHS.WEB_ROOT, 'characters'));
@@ -476,6 +547,7 @@ async function build() {
         const relics = await query("SELECT * FROM relics ORDER BY name ASC");
         const events = await query("SELECT * FROM events ORDER BY name ASC");
         const ascensions = await query("SELECT * FROM ascensions ORDER BY level ASC");
+        const enchantments = await query("SELECT * FROM enchantments ORDER BY name ASC");
 
         const cardStats = await getCardStats();
         const cardsRoot = ensureDir(path.join(PATHS.WEB_ROOT, 'cards'));
@@ -547,6 +619,7 @@ async function build() {
         const relicSub = getSubText(cardStats.uniqueRelicsSeen, relics.length);
         const eventSub = getSubText(cardStats.uniqueEventsSeen, events.length);
         const ascSub = getSubText(cardStats.uniqueAscensionsSeen, ascensions.length);
+        const enchantmentSub = getSubText(cardStats.uniqueEnchantmentsSeen, enchantments.length);
 
         // Generate the Cards link with stats first
         let landingLinks = `<a href="/cards/" class="item-link-large"><div>Cards</div><div class="stat-sub">${cardSub}</div></a>`;
@@ -554,6 +627,7 @@ async function build() {
         landingLinks += `<a href="/relics/" class="item-link-large"><div>Relics</div><div class="stat-sub">${relicSub}</div></a>`;
         landingLinks += `<a href="/events/" class="item-link-large"><div>Events</div><div class="stat-sub">${eventSub}</div></a>`;
         landingLinks += `<a href="/ascensions/" class="item-link-large"><div>Ascensions</div><div class="stat-sub">${ascSub}</div></a>`;
+        landingLinks += `<a href="/enchantments/" class="item-link-large"><div>Enchantments</div><div class="stat-sub">${enchantmentSub}</div></a>`;
 
         // Append the rest of the categories
         landingLinks += CATEGORIES.map(cat => {
@@ -608,6 +682,9 @@ async function build() {
 
         // --- ASCENSIONS ---
         await buildAscensions(ascensions, cardStats, sitemap);
+
+        // --- ENCHANTMENTS ---
+        await buildEnchantments(enchantments, cardStats, sitemap);
 
         // --- GENERAL CATEGORY BUILDS ---
         for (const cat of CATEGORIES) {
