@@ -8,6 +8,50 @@ import { PATHS, ensureDir, slugify } from './paths.js';
  * Reads from local SQLite and builds the card database
  */
 
+// --- BUILD DATE CONSTANTS ---
+const BUILD_DATE = new Date();
+const FORMATTED_BUILD_DATE = BUILD_DATE.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+const ISO_BUILD_DATE = BUILD_DATE.toISOString();
+
+/**
+ * Helper to generate JSON-LD for individual item pages
+ */
+function generateItemJsonLd(name, category, stats) {
+    const wr = stats?.formatted || "0.0";
+    const seen = stats?.seen || 0;
+    return `
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemPage",
+  "name": "${name} - Spire 2 Stats",
+  "description": "Gameplay statistics for ${name} in Slay the Spire 2. Winrate: ${wr}%. Total Runs: ${seen}.",
+  "dateModified": "${ISO_BUILD_DATE}",
+  "mainEntity": {
+    "@type": "Thing",
+    "name": "${name}",
+    "alternateName": "Slay the Spire 2 ${category}"
+  }
+}
+</script>`;
+}
+
+/**
+ * Helper to generate JSON-LD for collection pages
+ */
+function generateCollectionJsonLd(name, description) {
+    return `
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "${name} - Spire 2 Stats",
+  "description": "${description}",
+  "dateModified": "${ISO_BUILD_DATE}"
+}
+</script>`;
+}
+
 const db = new sqlite3.Database(PATHS.DATABASE);
 
 const CATEGORIES = [
@@ -99,17 +143,20 @@ function getItemStats(stats, globalWinRate) {
 }
 
 /** Helper to wrap content in the standard site layout */
-function wrapLayout(title, content, breadcrumbs = []) {
+function wrapLayout(title, content, breadcrumbs = [], description = "", headExtra = "") {
     const bcHtml = breadcrumbs.length > 0 
         ? `<nav class="breadcrumbs"><a href="/">spire2stats</a> / ${breadcrumbs.map((b, i) => i === breadcrumbs.length - 1 ? b.name.toLowerCase() : `<a href="${b.url}">${b.name.toLowerCase()}</a>`).join(' / ')}</nav>`
         : '';
+    const metaDesc = description ? `<meta name="description" content="${description}">` : '';
     return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>${title} - Spire 2 Stats</title>
+    ${metaDesc}
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    ${headExtra}
 </head>
 <body>${bcHtml}${content}</body></html>`;
 }
@@ -218,13 +265,18 @@ async function buildGeneralCategory(cat) {
         const subtitle = [item.rarity, item.type, item.act].filter(Boolean).join(' • ');
         const description = formatDescription(item.description || item.flavor || item.unlock_text || "");
 
-        const detailHtml = wrapLayout(title, `
+        const detailHtml = wrapLayout(
+            title, 
+            `
             <div class="item-box">
                 <h1>${title}</h1>
                 ${subtitle ? `<div class="subtitle">${subtitle}</div>` : ''}
                 <div class="description">${description}</div>
-            </div>`, 
-            [{ name: cat.folder, url: `/${cat.folder}/` }, { name: title, url: '' }]);
+            </div>`,
+            [{ name: cat.folder, url: `/${cat.folder}/` }, { name: title, url: '' }],
+            `View details and descriptions for the Slay the Spire 2 ${cat.folder.slice(0, -1)}: ${title}.`,
+            generateItemJsonLd(title, cat.folder.slice(0, -1), null)
+        );
         fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
     }
 
@@ -235,10 +287,17 @@ async function buildGeneralCategory(cat) {
         return `<a href="/${cat.folder}/${slugify(title)}/" class="item-link">${title}</a>`;
     }).join('');
 
-    const indexHtml = wrapLayout(cat.folder.toUpperCase(), `
-        <h1>${cat.folder.charAt(0).toUpperCase() + cat.folder.slice(1)}</h1>
+    const catName = cat.folder.charAt(0).toUpperCase() + cat.folder.slice(1);
+    const indexDesc = `Complete list of Slay the Spire 2 ${cat.folder.toLowerCase()} from the game database.`;
+    const indexHtml = wrapLayout(
+        cat.folder.toUpperCase(), 
+        `
+        <h1>${catName}</h1>
         <div class="grid">${itemLinks}</div>`, 
-        [{ name: cat.folder, url: '' }]);
+        [{ name: cat.folder, url: '' }],
+        indexDesc,
+        generateCollectionJsonLd(`${catName} Database`, indexDesc)
+    );
     fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
 }
 
@@ -251,40 +310,31 @@ async function buildRelics(relics, runStats) {
         const dir = ensureDir(path.join(root, slug));
         
         const cleanRelicId = (relic.relic_id || '').replace('RELIC.', '');
-        const stats = runStats.relicStats[cleanRelicId] || { seen: 0, wins: 0, videos: [] };
-        const winRateNum = stats.seen > 0 ? (stats.wins / stats.seen) * 100 : 0;
-        const winRate = winRateNum.toFixed(1);
+        const rawStats = runStats.relicStats[cleanRelicId] || { seen: 0, wins: 0, videos: [] };
+        const stats = getItemStats(rawStats, runStats.globalWinRate);
 
-        const wrColor = getWinRateColor(stats.seen, winRateNum, runStats.globalWinRate);
-        const videosHtml = generateVideoPanel(stats.videos, "Featured Videos");
-
+        const videosHtml = generateVideoPanel(rawStats.videos, "Featured Videos");
         const subtitle = [relic.rarity, relic.pool ? `${relic.pool} Pool` : null].filter(Boolean).join(' • ');
-        const description = formatDescription(relic.description || relic.description_raw || "");
+        const descriptionHtml = formatDescription(relic.description || relic.description_raw || "");
 
-        const detailHtml = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>${relic.name} - Spire 2 Stats</title>
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-</head>
-<body>
-    <nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/relics/">relics</a> / ${relic.name.toLowerCase()}</nav>
-    <div class="stats-summary">
-        <h2>Run Data</h2>
-        ${stats.seen > 0 ? `<p>This relic was found in <span class="stat-val">${stats.seen}</span> runs with a <span class="stat-val" style="color: ${wrColor}">${winRate}%</span> winrate.</p>` : `<p>No runs recorded for this relic yet.</p>`}
-    </div>
-    <div class="relic-box">
-        <h1>${relic.name}</h1>
-        <div class="subtitle">${subtitle}</div>
-        <div class="description">${description}</div>
-        ${relic.flavor ? `<div class="flavor">${relic.flavor}</div>` : ''}
-    </div>
-    ${videosHtml}
-</body>
-</html>`;
+        const detailHtml = wrapLayout(
+            relic.name,
+            `
+            <div class="stats-summary">
+                <h2>Run Data</h2>
+                ${stats.seen > 0 ? `<p>This relic was found in <span class="stat-val">${stats.seen}</span> runs with a <span class="stat-val" style="color: ${stats.color}">${stats.formatted}%</span> winrate.</p>` : `<p>No runs recorded for this relic yet.</p>`}
+            </div>
+            <div class="relic-box">
+                <h1>${relic.name}</h1>
+                <div class="subtitle">${subtitle}</div>
+                <div class="description">${descriptionHtml}</div>
+                ${relic.flavor ? `<div class="flavor">${relic.flavor}</div>` : ''}
+            </div>
+            ${videosHtml}`,
+            [{ name: 'relics', url: '/relics/' }, { name: relic.name.toLowerCase(), url: '' }],
+            `Detailed winrates and run statistics for the ${relic.name} in Slay the Spire 2, based on tracked gameplay.`,
+            generateItemJsonLd(relic.name, "Relic", stats)
+        );
         fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
     }
 
@@ -308,11 +358,17 @@ async function buildRelics(relics, runStats) {
         </a>`;
     }).join('');
 
-    const indexHtml = wrapLayout('Relics Database', `
+    const indexDesc = `View global winrates, run statistics, and win/loss records for all Slay the Spire 2 relics.`;
+    const indexHtml = wrapLayout(
+        'Relics Database', 
+        `
         <h1>Slay the Spire 2 Relics</h1>
         ${generateSummaryPanel(runStats, "Relics", totalRelics, relicsSeen)}
         <div class="grid">${relicLinks}</div>`,
-        [{ name: 'relics', url: '' }]);
+        [{ name: 'relics', url: '' }],
+        indexDesc,
+        generateCollectionJsonLd(`Relics Database`, indexDesc)
+    );
     fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
 }
 
@@ -345,7 +401,9 @@ async function buildEvents(events, runStats) {
             </div>`;
         }
 
-        const detailHtml = wrapLayout(event.name, `
+        const detailHtml = wrapLayout(
+            event.name, 
+            `
             <div class="stats-summary">
                 <h2>Run Data</h2>
                 ${stats.seen > 0 ? `<p>This event was encountered in <span class="stat-val">${stats.seen}</span> runs with a <span class="stat-val" style="color: ${stats.color}">${stats.formatted}%</span> winrate for those runs.</p>` : `<p>No runs recorded for this event yet.</p>`}
@@ -357,7 +415,10 @@ async function buildEvents(events, runStats) {
             </div>
             ${optionsHtml}
             ${videosHtml}`,
-            [{ name: 'events', url: '/events/' }, { name: event.name, url: '' }]);
+            [{ name: 'events', url: '/events/' }, { name: event.name, url: '' }],
+            `Detailed winrates and run statistics for the ${event.name} event in Slay the Spire 2.`,
+            generateItemJsonLd(event.name, "Event", stats)
+        );
         fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
     }
 
@@ -379,11 +440,17 @@ async function buildEvents(events, runStats) {
         </a>`;
     }).join('');
 
-    const indexHtml = wrapLayout('Events Database', `
+    const indexDesc = `View global winrates, run statistics, and encounter records for all Slay the Spire 2 events.`;
+    const indexHtml = wrapLayout(
+        'Events Database', 
+        `
         <h1>Slay the Spire 2 Events</h1>
         ${generateSummaryPanel(runStats, "Events", totalEvents, eventsSeen)}
         <div class="grid">${eventLinks}</div>`,
-        [{ name: 'events', url: '' }]);
+        [{ name: 'events', url: '' }],
+        indexDesc,
+        generateCollectionJsonLd(`Events Database`, indexDesc)
+    );
     fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
 }
 
@@ -424,7 +491,9 @@ async function buildCharacters(chars, runStats) {
                 const charRelics = await query("SELECT * FROM relics WHERE LOWER(pool) = ? ORDER BY rarity, name ASC", [displayName.toLowerCase()]);
                 const relicItemsHtml = charRelics.map(r => `<a href="/relics/${slugify(r.name)}/" class="item-link">${r.name}</a>`).join('');
 
-                const detailHtml = wrapLayout(char.name, `
+                const detailHtml = wrapLayout(
+                    char.name, 
+                    `
                     <h1>${displayName}</h1>
                     <div class="stats-summary">
                         <p>This character has been played in <span class="stat-val">${rawStats.seen}</span> runs with a <span class="stat-val" style="color: ${stats.color}">${stats.formatted}%</span> winrate (<span style="color: #00ff89">${rawStats.wins} Wins</span> / <span style="color: #ff4b4b">${losses} Losses</span>).</p>
@@ -435,7 +504,10 @@ async function buildCharacters(chars, runStats) {
                     <div class="grid">${cardItemsHtml}</div>
                     <h2 class="section-title">${displayName} Relics</h2>
                     <div class="grid">${relicItemsHtml}</div>`,
-                    [{ name: 'characters', url: '/characters/' }, { name: displayName, url: '' }]);
+                    [{ name: 'characters', url: '/characters/' }, { name: displayName, url: '' }],
+                    `Detailed winrates and run statistics for the ${displayName} in Slay the Spire 2.`,
+                    generateItemJsonLd(displayName, "Character", stats)
+                );
                 fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
     }
 
@@ -456,11 +528,17 @@ async function buildCharacters(chars, runStats) {
                 </a>`;
             }).join('');
 
-            const indexHtml = wrapLayout('Characters Database', `
+            const indexDesc = `View global winrates, run statistics, and win/loss records for all Slay the Spire 2 characters.`;
+            const indexHtml = wrapLayout(
+                'Characters Database', 
+                `
                 <h1>Slay the Spire 2 Characters</h1>
                 ${generateSummaryPanel(runStats, "Characters", chars.length, runStats.uniqueCharsSeen)}
                 <div class="grid">${charLinks}</div>`,
-                [{ name: 'characters', url: '' }]);
+                [{ name: 'characters', url: '' }],
+                indexDesc,
+                generateCollectionJsonLd(`Characters Database`, indexDesc)
+            );
             fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
 }
 
@@ -500,7 +578,9 @@ async function build() {
 
             const videosHtml = generateVideoPanel(rawStats.videos, "Featured Videos");
 
-            const detailHtml = wrapLayout(card.name, `
+            const detailHtml = wrapLayout(
+                card.name, 
+                `
                 <div class="stats-summary">
                     <h2>Run Data</h2>
                     ${stats.seen > 0 ? `<p>This card was found in <span class="stat-val">${stats.seen}</span> run final decks with a <span class="stat-val" style="color: ${stats.color}">${stats.formatted}%</span> winrate.</p>` : `<p>No runs recorded for this card yet.</p>`}
@@ -523,7 +603,10 @@ async function build() {
                     </div>
                 </div>
                 ${videosHtml}`,
-                [{ name: 'cards', url: '/cards/' }, { name: card.name, url: '' }]);
+                [{ name: 'cards', url: '/cards/' }, { name: card.name, url: '' }],
+                `Detailed winrates and run statistics for the ${card.name} card in Slay the Spire 2.`,
+                generateItemJsonLd(card.name, "Card", stats)
+            );
 
             fs.writeFileSync(path.join(cardDir, 'index.html'), detailHtml);
         }
@@ -547,11 +630,17 @@ async function build() {
             </a>`;
         }).join('');
 
-        const indexHtml = wrapLayout('Cards Database', `
+        const indexDesc = `View global winrates, run statistics, and pick-rate records for all Slay the Spire 2 cards.`;
+        const indexHtml = wrapLayout(
+            'Cards Database', 
+            `
             <h1>Slay the Spire 2 Cards</h1>
             ${generateSummaryPanel(cardStats, "Cards", totalCards, cardStats.uniqueCardsSeen)}
             <div class="grid">${cardLinks}</div>`,
-            [{ name: 'cards', url: '' }]);
+            [{ name: 'cards', url: '' }],
+            indexDesc,
+            generateCollectionJsonLd(`Cards Database`, indexDesc)
+        );
 
         fs.writeFileSync(path.join(cardsRoot, 'index.html'), indexHtml);
 
@@ -578,17 +667,14 @@ async function build() {
             return `<a href="/${cat.folder}/" class="item-link-large">${display}</a>`;
         }).join('');
 
-        const landingHtml = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Spire 2 Stats - Slay the Spire 2 Database</title>
-    <link rel="stylesheet" href="/css/main.css">
-</head>
-<body>
+        const landingDesc = "Comprehensive gameplay statistics and database for Slay the Spire 2. Tracked winrates, card details, relic data, and more.";
+        const landingHtml = wrapLayout(
+            "Home",
+            `
     <h1>Slay the Spire 2 Stats</h1>
-
+    <p style="font-size: 0.8rem; color: #666; margin-top: -15px; margin-bottom: 20px; text-transform: uppercase;">
+        Data last updated: <time datetime="${ISO_BUILD_DATE}">${FORMATTED_BUILD_DATE}</time>
+    </p>
     <div class="stats-summary">
         <div class="stats-grid">
             <div class="stat-item">
@@ -607,18 +693,14 @@ async function build() {
                 <div class="stat-label">Contributors</div>
                 <div class="stat-value">${cardStats.uniqueUsers}</div>
             </div>
-            <div class="stat-item">
-                <div class="stat-label">Last Updated</div>
-                <div class="stat-value" style="font-size: 1.1rem;">${lastUpdated}</div>
-            </div>
         </div>
     </div>
+    <div class="grid">${landingLinks}</div>`,
+            [],
+            landingDesc,
+            generateCollectionJsonLd("Slay the Spire 2 Stats Hub", landingDesc)
+        );
 
-    <div class="grid">
-        ${landingLinks}
-    </div>
-</body>
-</html>`;
         fs.writeFileSync(path.join(PATHS.WEB_ROOT, 'index.html'), landingHtml);
 
         // --- CHARACTERS ---
