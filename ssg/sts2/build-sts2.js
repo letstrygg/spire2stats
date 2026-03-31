@@ -96,7 +96,7 @@ function formatDescription(text) {
         .replace(/\[pink\](.*?)\[\/pink\]/g, '<span class="text-purple">$1</span>')
         .replace(/\[sine\](.*?)\[\/sine\]/g, '<em>$1</em>')
         .replace(/\[jitter\](.*?)\[\/jitter\]/g, '<strong>$1</strong>')
-        .replace(/\[energy:(\d+)\]/ig, '<span class="icon-energy">($1)</span>')
+        .replace(/\[energy:(\d+)\]/ig, '<span class="icon-energy">[E]</span>')
         .replace(/\n/g, '<br>');
 }
 
@@ -216,16 +216,6 @@ async function buildGeneralCategory(cat) {
     <meta charset="UTF-8">
     <title>${title} - Spire 2 Stats</title>
     <link rel="stylesheet" href="/css/main.css">
-    <style>
-        body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; }
-        .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #888; }
-        .breadcrumbs a { color: #4a90e2; text-decoration: none; }
-        .breadcrumbs a:hover { text-decoration: underline; }
-        .item-box { background: #1a1a1a; border: 1px solid #333; padding: 30px; border-radius: 12px; max-width: 700px; }
-        .subtitle { color: #888; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 15px; }
-        .description { line-height: 1.6; font-size: 1.15rem; border-top: 1px solid #333; padding-top: 15px; }
-        .text-gold { color: #ffd700; } .text-red { color: #ff4b4b; } .text-green { color: #00ff89; }
-    </style>
 </head>
 <body>
     <nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/${cat.folder}/">${cat.folder}</a> / ${title.toLowerCase()}</nav>
@@ -253,14 +243,6 @@ async function buildGeneralCategory(cat) {
     <meta charset="UTF-8">
     <title>${cat.folder.toUpperCase()} - Spire 2 Stats</title>
     <link rel="stylesheet" href="/css/main.css">
-    <style>
-        body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; }
-        .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #888; }
-        .breadcrumbs a { color: #4a90e2; text-decoration: none; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
-        .item-link { background: #1a1a1a; border: 1px solid #333; padding: 15px; border-radius: 8px; text-decoration: none; color: inherit; text-align: center; font-weight: bold; transition: border-color 0.2s; }
-        .item-link:hover { border-color: #4a90e2; }
-    </style>
 </head>
 <body>
     <nav class="breadcrumbs"><a href="/">spire2stats</a> / ${cat.folder}</nav>
@@ -298,25 +280,6 @@ async function buildRelics(relics, runStats) {
     <title>${relic.name} - Spire 2 Stats</title>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <style>
-        body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; }
-        .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #888; }
-        .breadcrumbs a { color: #4a90e2; text-decoration: none; }
-        .breadcrumbs a:hover { text-decoration: underline; }
-        .stats-summary { background: #1a1a1a; border: 1px solid #333; padding: 20px; border-radius: 8px; margin-bottom: 30px; max-width: 800px; }
-        .stat-val { color: #ffd700; font-weight: bold; }
-        .relic-box { background: #1a1a1a; border: 1px solid #333; padding: 30px; border-radius: 12px; max-width: 700px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
-        .subtitle { color: #888; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        .description { line-height: 1.6; font-size: 1.15rem; margin-bottom: 20px; }
-        .flavor { color: #666; font-style: italic; border-top: 1px solid #222; padding-top: 15px; font-size: 0.95rem; }
-        .featured-videos { margin-top: 40px; max-width: 800px; }
-        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
-        .video-panel { background: #1a1a1a; border: 1px solid #333; padding: 12px; border-radius: 8px; display: flex; flex-direction: column; gap: 8px; }
-        .vid-btn { display: flex; align-items: center; justify-content: center; padding: 8px; border-radius: 4px; text-decoration: none; font-size: 0.85rem; font-weight: bold; color: #fff; transition: background 0.2s; }
-        .ltg-btn { background: #333; } .ltg-btn:hover { background: #444; }
-        .yt-btn { background: #2a2a2a; border: 1px solid #444; } .yt-btn:hover { background: #333; }
-        .yt-btn .material-symbols-outlined { color: #ff4b4b; margin-right: 6px; font-size: 1.2rem; }
-    </style>
 </head>
 <body>
     <nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/relics/">relics</a> / ${relic.name.toLowerCase()}</nav>
@@ -368,17 +331,6 @@ async function buildRelics(relics, runStats) {
     <meta charset="UTF-8">
     <title>Relics Database - Spire 2 Stats</title>
     <link rel="stylesheet" href="/css/main.css">
-    <style>
-        body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; }
-        .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #888; }
-        .breadcrumbs a { color: #4a90e2; text-decoration: none; }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; }
-        .card-item { position: relative; overflow: hidden; background: #1a1a1a; border: 1px solid #333; padding: 15px; text-decoration: none; color: inherit; display: flex; justify-content: space-between; border-radius: 8px; transition: border-color 0.2s; }
-        .card-item:hover { border-color: #ffd700; }
-        .card-name { font-weight: bold; } .card-stats { text-align: right; } .win-rate { color: #ffd700; font-weight: bold; font-size: 1.1rem; } .run-count { font-size: 0.7rem; color: #666; text-transform: uppercase; } .win-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; }
-        .ironclad { border-left: 4px solid #ff4b4b; } .silent { border-left: 4px solid #00ff89; } .defect { border-left: 4px solid #4a90e2; } .necrobinder { border-left: 4px solid #c18cff; } .regent { border-left: 4px solid #e67e22; }
-    </style>
 </head>
 <body>
     <nav class="breadcrumbs"><a href="/">spire2stats</a> / relics</nav>
@@ -430,26 +382,6 @@ async function buildEvents(events, runStats) {
     <title>${event.name} - Spire 2 Stats</title>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <style>
-        body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; }
-        .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #888; }
-        .breadcrumbs a { color: #4a90e2; text-decoration: none; }
-        .stats-summary { background: #1a1a1a; border: 1px solid #333; padding: 20px; border-radius: 8px; margin-bottom: 30px; max-width: 800px; }
-        .stat-val { color: #ffd700; font-weight: bold; }
-        .event-box { background: #1a1a1a; border: 1px solid #333; padding: 30px; border-radius: 12px; max-width: 800px; line-height: 1.6; }
-        .subtitle { color: #888; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        .options-section { margin-top: 40px; max-width: 800px; }
-        .options-grid { display: grid; gap: 15px; }
-        .option-card { background: #1a1a1a; border: 1px solid #333; border-left: 4px solid #4a90e2; padding: 15px; border-radius: 4px; }
-        .option-title { font-weight: bold; color: #ffd700; margin-bottom: 5px; }
-        .option-desc { font-size: 0.95rem; color: #ccc; }
-        .featured-videos { margin-top: 40px; max-width: 800px; }
-        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
-        .video-panel { background: #1a1a1a; border: 1px solid #333; padding: 12px; border-radius: 8px; display: flex; flex-direction: column; gap: 8px; }
-        .vid-btn { display: flex; align-items: center; justify-content: center; padding: 8px; border-radius: 4px; text-decoration: none; font-size: 0.85rem; font-weight: bold; color: #fff; transition: background 0.2s; }
-        .ltg-btn { background: #333; } .yt-btn { background: #2a2a2a; border: 1px solid #444; }
-        .yt-btn .material-symbols-outlined { color: #ff4b4b; margin-right: 6px; font-size: 1.2rem; }
-    </style>
 </head>
 <body>
     <nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/events/">events</a> / ${event.name.toLowerCase()}</nav>
@@ -499,16 +431,6 @@ async function buildEvents(events, runStats) {
     <meta charset="UTF-8">
     <title>Events Database - Spire 2 Stats</title>
     <link rel="stylesheet" href="/css/main.css">
-    <style>
-        body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; }
-        .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #888; }
-        .breadcrumbs a { color: #4a90e2; text-decoration: none; }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; }
-        .card-item { position: relative; overflow: hidden; background: #1a1a1a; border: 1px solid #333; padding: 15px; text-decoration: none; color: inherit; display: flex; justify-content: space-between; border-radius: 8px; transition: border-color 0.2s; }
-        .card-item:hover { border-color: #ffd700; }
-        .card-name { font-weight: bold; } .card-stats { text-align: right; } .win-rate { color: #ffd700; font-weight: bold; font-size: 1.1rem; } .run-count { font-size: 0.7rem; color: #666; text-transform: uppercase; } .win-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; }
-    </style>
 </head>
 <body>
     <nav class="breadcrumbs"><a href="/">spire2stats</a> / events</nav>
@@ -531,12 +453,12 @@ async function buildCharacters(chars, runStats) {
         // Normalize character ID to match sanitized run data
         const charKey = (char.character_id || '').replace('CHARACTER.', '').toUpperCase();
 
-                console.log(`🔍 Mapping Character: "${displayName}" (ID: ${charKey})`);
+        console.log(`🔍 Mapping Character: "${displayName}" (ID: ${charKey})`);
 
-                const stats = runStats.charStats[charKey] || { seen: 0, wins: 0, videos: [] };
+        const stats = runStats.charStats[charKey] || { seen: 0, wins: 0, videos: [] };
                 
-                if (stats.seen > 0) console.log(`   ✅ Found ${stats.seen} runs for ${charKey}`);
-                else console.log(`   ⚠️ No runs found for ID "${charKey}"`);
+        if (stats.seen > 0) console.log(`   ✅ Found ${stats.seen} runs for ${charKey}`);
+        else console.log(`   ⚠️ No runs found for ID "${charKey}"`);
 
                 const winRateNum = stats.seen > 0 ? (stats.wins / stats.seen) * 100 : 0;
                 const losses = stats.seen - stats.wins;
@@ -570,26 +492,6 @@ async function buildCharacters(chars, runStats) {
     <title>${char.name} - Spire 2 Stats</title>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <style>
-        body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; }
-        .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #888; }
-        .breadcrumbs a { color: #4a90e2; text-decoration: none; }
-        .stats-summary { background: #1a1a1a; border: 1px solid #333; padding: 25px; border-radius: 12px; margin-bottom: 30px; max-width: 800px; }
-        .stat-val { color: #ffd700; font-weight: bold; }
-        .section-title { border-bottom: 1px solid #333; padding-bottom: 10px; margin: 40px 0 20px 0; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
-        .card-item { position: relative; overflow: hidden; background: #1a1a1a; border: 1px solid #333; padding: 15px; text-decoration: none; color: inherit; display: flex; justify-content: space-between; border-radius: 8px; transition: border-color 0.2s; }
-        .card-name { font-weight: bold; } .card-stats { text-align: right; } .win-rate { color: #ffd700; font-weight: bold; font-size: 0.9rem; } .run-count { font-size: 0.7rem; color: #666; text-transform: uppercase; } .win-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; }
-        .ironclad { border-left: 4px solid #ff4b4b; } .silent { border-left: 4px solid #00ff89; } .defect { border-left: 4px solid #4a90e2; } .necrobinder { border-left: 4px solid #c18cff; } .regent { border-left: 4px solid #e67e22; }
-        .item-link { background: #1a1a1a; border: 1px solid #333; padding: 12px; border-radius: 8px; text-decoration: none; color: inherit; text-align: center; font-weight: bold; transition: border-color 0.2s; }
-        .item-link:hover { border-color: #ffd700; }
-        .featured-videos { margin-top: 40px; max-width: 1200px; }
-        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
-        .video-panel { background: #1a1a1a; border: 1px solid #333; padding: 12px; border-radius: 8px; display: flex; flex-direction: column; gap: 8px; }
-        .vid-btn { display: flex; align-items: center; justify-content: center; padding: 8px; border-radius: 4px; text-decoration: none; font-size: 0.85rem; font-weight: bold; color: #fff; transition: background 0.2s; }
-        .ltg-btn { background: #333; } .yt-btn { background: #2a2a2a; border: 1px solid #444; }
-        .yt-btn .material-symbols-outlined { color: #ff4b4b; margin-right: 6px; font-size: 1.2rem; }
-    </style>
 </head>
 <body>
     <nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/characters/">characters</a> / ${displayName.toLowerCase()}</nav>
@@ -634,16 +536,6 @@ async function buildCharacters(chars, runStats) {
     <meta charset="UTF-8">
     <title>Characters - Spire 2 Stats</title>
     <link rel="stylesheet" href="/css/main.css">
-    <style>
-        body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; }
-        .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #888; }
-        .breadcrumbs a { color: #4a90e2; text-decoration: none; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
-        .card-item { position: relative; overflow: hidden; background: #1a1a1a; border: 1px solid #333; padding: 15px; text-decoration: none; color: inherit; display: flex; justify-content: space-between; border-radius: 8px; transition: border-color 0.2s; }
-        .card-item:hover { border-color: #ffd700; }
-        .card-name { font-weight: bold; } .card-stats { text-align: right; } .win-rate { color: #ffd700; font-weight: bold; font-size: 1.1rem; } .run-count { font-size: 0.7rem; color: #666; text-transform: uppercase; } .win-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; }
-        .ironclad { border-left: 4px solid #ff4b4b; } .silent { border-left: 4px solid #00ff89; } .defect { border-left: 4px solid #4a90e2; } .necrobinder { border-left: 4px solid #c18cff; } .regent { border-left: 4px solid #e67e22; }
-    </style>
 </head>
 <body>
     <nav class="breadcrumbs"><a href="/">spire2stats</a> / characters</nav>
@@ -701,35 +593,6 @@ async function build() {
     <title>${card.name} - Spire 2 Stats</title>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <style>
-        body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; }
-        .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #888; }
-        .breadcrumbs a { color: #4a90e2; text-decoration: none; }
-        .breadcrumbs a:hover { text-decoration: underline; }
-        .stats-summary { background: #1a1a1a; border: 1px solid #333; padding: 20px; border-radius: 8px; margin-bottom: 30px; max-width: 800px; }
-        .stat-val { color: #ffd700; font-weight: bold; }
-        
-        .featured-videos { margin-top: 40px; max-width: 800px; }
-        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
-        .video-panel { background: #1a1a1a; border: 1px solid #333; padding: 12px; border-radius: 8px; display: flex; flex-direction: column; gap: 8px; }
-        .vid-btn { display: flex; align-items: center; justify-content: center; padding: 8px; border-radius: 4px; text-decoration: none; font-size: 0.85rem; font-weight: bold; color: #fff; transition: background 0.2s; }
-        .ltg-btn { background: #333; }
-        .ltg-btn:hover { background: #444; }
-        .yt-btn { background: #2a2a2a; border: 1px solid #444; }
-        .yt-btn:hover { background: #333; }
-        .yt-btn .material-symbols-outlined { color: #ff4b4b; margin-right: 6px; font-size: 1.2rem; }
-
-        .sts-card-display { display: flex; gap: 40px; align-items: center; flex-wrap: wrap; }
-        .sts-card { position: relative; border: 2px solid #444; border-radius: 12px; padding: 25px; width: 320px; background: #1a1a1a; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
-        .cost-circle { position: absolute; top: -15px; left: -15px; background: #ffd700; color: #000; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.3rem; border: 3px solid #121212; }
-        .card-title { font-size: 1.5rem; font-weight: bold; margin-bottom: 10px; text-align: center; }
-        .type-banner { background: #2a2a2a; color: #888; text-transform: uppercase; font-size: 0.75rem; padding: 4px; text-align: center; margin: 10px -25px; border-top: 1px solid #333; border-bottom: 1px solid #333; }
-        .description { line-height: 1.5; font-size: 1rem; min-height: 100px; display: flex; align-items: center; justify-content: center; text-align: center; }
-        .card-footer { margin-top: 15px; text-align: right; color: #555; font-size: 0.8rem; font-style: italic; }
-        .arrow { font-size: 3rem; color: #333; }
-
-        .text-gold { color: #ffd700; } .text-red { color: #ff4b4b; } .text-green { color: #00ff89; }
-    </style>
 </head>
 <body>
     <nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/cards/">cards</a> / ${card.name.toLowerCase()}</nav>
@@ -746,15 +609,15 @@ async function build() {
         <div class="sts-card">
             <div class="cost-circle">${costDisplay}</div>
             <div class="card-title">${card.name}</div>
-            <div class="type-banner">${card.color} ${card.type}</div>
+            <div class="type-banner">${card.color || ''} ${card.type}</div>
             <div class="description">${description}</div>
             <div class="card-footer">${card.rarity}</div>
         </div>
-        <div class="arrow">→</div>
+        <div class="sts-card-arrow">→</div>
         <div class="sts-card">
             <div class="cost-circle">${costDisplay}</div>
             <div class="card-title text-green">${card.name}+</div>
-            <div class="type-banner">${card.color} ${card.type}</div>
+            <div class="type-banner">${card.color || ''} ${card.type}</div>
             <div class="description">${description}</div>
             <div class="card-footer">${card.rarity}</div>
         </div>
@@ -799,32 +662,7 @@ async function build() {
 <head>
     <meta charset="UTF-8">
     <title>Cards Database - Spire 2 Stats</title>
-    <style>
-        body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; }
-        .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #888; }
-        .breadcrumbs a { color: #4a90e2; text-decoration: none; }
-        .breadcrumbs a:hover { text-decoration: underline; }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
-        .card-item {
-            position: relative;
-            overflow: hidden;
-            background: #1a1a1a; border: 1px solid #333; padding: 15px; text-decoration: none; color: inherit;
-            display: flex; justify-content: space-between; border-radius: 8px; transition: border-color 0.2s;
-        }
-        .card-item:hover { border-color: #ffd700; }
-        .card-info { display: flex; flex-direction: column; justify-content: center; }
-        .card-name { font-weight: bold; }
-        .card-stats { text-align: right; display: flex; flex-direction: column; justify-content: center; }
-        .win-rate { color: #ffd700; font-weight: bold; font-size: 1.1rem; }
-        .run-count { font-size: 0.7rem; color: #666; text-transform: uppercase; }
-        .win-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; }
-        .ironclad { border-left: 4px solid #ff4b4b; }
-        .silent { border-left: 4px solid #00ff89; }
-        .defect { border-left: 4px solid #4a90e2; }
-        .necrobinder { border-left: 4px solid #c18cff; }
-        .regent { border-left: 4px solid #e67e22; }
-    </style>
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
     <nav class="breadcrumbs"><a href="/">spire2stats</a> / cards</nav>
@@ -875,15 +713,15 @@ async function build() {
         const eventSub = getSubText(cardStats.uniqueEventsSeen, events.length);
 
         // Generate the Cards link with stats first
-        let landingLinks = `<a href="/cards/" class="item-link"><div>Cards</div><div class="stat-sub">${cardSub}</div></a>`;
-        landingLinks += `<a href="/characters/" class="item-link"><div>Characters</div><div class="stat-sub">${charSub}</div></a>`;
-        landingLinks += `<a href="/relics/" class="item-link"><div>Relics</div><div class="stat-sub">${relicSub}</div></a>`;
-        landingLinks += `<a href="/events/" class="item-link"><div>Events</div><div class="stat-sub">${eventSub}</div></a>`;
+        let landingLinks = `<a href="/cards/" class="item-link-large"><div>Cards</div><div class="stat-sub">${cardSub}</div></a>`;
+        landingLinks += `<a href="/characters/" class="item-link-large"><div>Characters</div><div class="stat-sub">${charSub}</div></a>`;
+        landingLinks += `<a href="/relics/" class="item-link-large"><div>Relics</div><div class="stat-sub">${relicSub}</div></a>`;
+        landingLinks += `<a href="/events/" class="item-link-large"><div>Events</div><div class="stat-sub">${eventSub}</div></a>`;
 
         // Append the rest of the categories
         landingLinks += CATEGORIES.map(cat => {
             const display = cat.folder.charAt(0).toUpperCase() + cat.folder.slice(1);
-            return `<a href="/${cat.folder}/" class="item-link">${display}</a>`;
+            return `<a href="/${cat.folder}/" class="item-link-large">${display}</a>`;
         }).join('');
 
         const landingHtml = `
@@ -893,20 +731,6 @@ async function build() {
     <meta charset="UTF-8">
     <title>Spire 2 Stats - Slay the Spire 2 Database</title>
     <link rel="stylesheet" href="/css/main.css">
-    <style>
-        body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; }
-
-        .stats-summary { background: #1a1a1a; border: 1px solid #333; padding: 25px; border-radius: 12px; margin-bottom: 40px; max-width: 1200px; }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
-        .stat-item { text-align: center; }
-        .stat-label { font-size: 0.7rem; color: #888; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
-        .stat-value { font-size: 1.4rem; font-weight: bold; color: #fff; }
-        .stat-sub { font-size: 0.8rem; color: #666; font-weight: normal; margin-top: 4px; }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; max-width: 1200px; }
-        .item-link { background: #1a1a1a; border: 1px solid #333; padding: 30px; border-radius: 8px; text-decoration: none; color: inherit; font-weight: bold; font-size: 1.3rem; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .item-link:hover { border-color: #4a90e2; background: #222; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-    </style>
 </head>
 <body>
     <h1>Slay the Spire 2 Stats</h1>

@@ -19,9 +19,9 @@ const TABLES = [
     {
         name: 'characters',
         file: 'characters.json',
-        columns: 'character_id, name, hp, gold, energy, deck, relics',
-        schema: `character_id TEXT, name TEXT NOT NULL, hp INTEGER, gold INTEGER, energy INTEGER, deck TEXT, relics TEXT`,
-        map: (c) => [c.id ?? c.character, c.name, c.hp ?? c.starting_hp ?? c.StartingHp ?? c.max_hp, c.gold ?? c.starting_gold ?? c.StartingGold, c.energy ?? c.max_energy ?? c.MaxEnergy ?? c.energy_per_turn, JSON.stringify(c.deck ?? c.starting_deck ?? c.StartingDeck ?? []), JSON.stringify(c.relics ?? c.starting_relics ?? c.StartingRelics ?? [])]
+        columns: 'character_id, name, hp, gold, energy, description, deck, relics',
+        schema: `character_id TEXT, name TEXT NOT NULL, hp INTEGER, gold INTEGER, energy INTEGER, description TEXT, deck TEXT, relics TEXT`,
+        map: (c) => [c.id ?? c.character, c.name, c.hp ?? c.starting_hp ?? c.StartingHp ?? c.max_hp, c.gold ?? c.starting_gold ?? c.StartingGold, c.energy ?? c.max_energy ?? c.MaxEnergy ?? c.energy_per_turn, c.description || '', JSON.stringify(c.deck ?? c.starting_deck ?? c.StartingDeck ?? []), JSON.stringify(c.relics ?? c.starting_relics ?? c.StartingRelics ?? [])]
     },
     {
         name: 'afflictions',
