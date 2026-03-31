@@ -465,7 +465,7 @@ body.sidebar-open-squish .left-sidebar { left: 0; }
 
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; }
 .card-item { position: relative; overflow: hidden; background: #1a1a1a; border: 1px solid #333; padding: 15px; text-decoration: none; color: inherit; display: flex; justify-content: space-between; border-radius: 8px; transition: border-color 0.2s; }
-.card-item:hover { border-color: #ffd700; }
+.card-item:hover { border-color: var(--border-hover) }
 .card-name { font-weight: bold; } .card-stats { text-align: right; } .win-rate { color: #ffd700; font-weight: bold; font-size: 1.1rem; } .run-count { font-size: 0.7rem; color: #666; text-transform: uppercase; } .win-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; }
 
 .ironclad { border-left: 4px solid #ff4b4b; } .silent { border-left: 4px solid #00ff89; } .defect { border-left: 4px solid #4a90e2; } .necrobinder { border-left: 4px solid #c18cff; } .regent { border-left: 4px solid #e67e22; }
