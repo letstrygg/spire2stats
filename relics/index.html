@@ -3,20 +3,2334 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>RELICS - Spire 2 Stats</title>
+    <title>Relics Database - Spire 2 Stats</title>
     <link rel="stylesheet" href="/css/main.css">
     <style>
         body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; }
         .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #888; }
         .breadcrumbs a { color: #4a90e2; text-decoration: none; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
-        .item-link { background: #1a1a1a; border: 1px solid #333; padding: 15px; border-radius: 8px; text-decoration: none; color: inherit; text-align: center; font-weight: bold; transition: border-color 0.2s; }
-        .item-link:hover { border-color: #4a90e2; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; }
+        .card-item { position: relative; overflow: hidden; background: #1a1a1a; border: 1px solid #333; padding: 15px; text-decoration: none; color: inherit; display: flex; justify-content: space-between; border-radius: 8px; transition: border-color 0.2s; }
+        .card-item:hover { border-color: #ffd700; }
+        .card-name { font-weight: bold; } .card-stats { text-align: right; } .win-rate { color: #ffd700; font-weight: bold; font-size: 1.1rem; } .run-count { font-size: 0.7rem; color: #666; text-transform: uppercase; } .win-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; }
+        .ironclad { border-left: 4px solid #ff4b4b; } .silent { border-left: 4px solid #00ff89; } .defect { border-left: 4px solid #4a90e2; } .necrobinder { border-left: 4px solid #c18cff; } .regent { border-left: 4px solid #e67e22; }
     </style>
 </head>
 <body>
     <nav class="breadcrumbs"><a href="/">spire2stats</a> / relics</nav>
-    <h1>Relics</h1>
-    <div class="grid"><a href="/relics/akabeko/" class="item-link">Akabeko</a><a href="/relics/alchemical-coffer/" class="item-link">Alchemical Coffer</a><a href="/relics/amethyst-aubergine/" class="item-link">Amethyst Aubergine</a><a href="/relics/anchor/" class="item-link">Anchor</a><a href="/relics/anchor/" class="item-link">Anchor???</a><a href="/relics/arcane-scroll/" class="item-link">Arcane Scroll</a><a href="/relics/archaic-tooth/" class="item-link">Archaic Tooth</a><a href="/relics/art-of-war/" class="item-link">Art of War</a><a href="/relics/astrolabe/" class="item-link">Astrolabe</a><a href="/relics/bag-of-marbles/" class="item-link">Bag of Marbles</a><a href="/relics/bag-of-preparation/" class="item-link">Bag of Preparation</a><a href="/relics/beating-remnant/" class="item-link">Beating Remnant</a><a href="/relics/beautiful-bracelet/" class="item-link">Beautiful Bracelet</a><a href="/relics/bellows/" class="item-link">Bellows</a><a href="/relics/belt-buckle/" class="item-link">Belt Buckle</a><a href="/relics/big-hat/" class="item-link">Big Hat</a><a href="/relics/big-mushroom/" class="item-link">Big Mushroom</a><a href="/relics/biiig-hug/" class="item-link">Biiig Hug</a><a href="/relics/bing-bong/" class="item-link">Bing Bong</a><a href="/relics/black-blood/" class="item-link">Black Blood</a><a href="/relics/black-star/" class="item-link">Black Star</a><a href="/relics/blessed-antler/" class="item-link">Blessed Antler</a><a href="/relics/blood-vial/" class="item-link">Blood Vial</a><a href="/relics/blood-vial/" class="item-link">Blood Vial???</a><a href="/relics/blood-soaked-rose/" class="item-link">Blood-Soaked Rose</a><a href="/relics/bone-flute/" class="item-link">Bone Flute</a><a href="/relics/bone-tea/" class="item-link">Bone Tea</a><a href="/relics/book-repair-knife/" class="item-link">Book Repair Knife</a><a href="/relics/book-of-five-rings/" class="item-link">Book of Five Rings</a><a href="/relics/bookmark/" class="item-link">Bookmark</a><a href="/relics/booming-conch/" class="item-link">Booming Conch</a><a href="/relics/bound-phylactery/" class="item-link">Bound Phylactery</a><a href="/relics/bowler-hat/" class="item-link">Bowler Hat</a><a href="/relics/bread/" class="item-link">Bread</a><a href="/relics/brilliant-scarf/" class="item-link">Brilliant Scarf</a><a href="/relics/brimstone/" class="item-link">Brimstone</a><a href="/relics/bronze-scales/" class="item-link">Bronze Scales</a><a href="/relics/burning-blood/" class="item-link">Burning Blood</a><a href="/relics/burning-sticks/" class="item-link">Burning Sticks</a><a href="/relics/byrdpip/" class="item-link">Byrdpip</a><a href="/relics/calling-bell/" class="item-link">Calling Bell</a><a href="/relics/candelabra/" class="item-link">Candelabra</a><a href="/relics/captains-wheel/" class="item-link">Captain's Wheel</a><a href="/relics/cauldron/" class="item-link">Cauldron</a><a href="/relics/centennial-puzzle/" class="item-link">Centennial Puzzle</a><a href="/relics/chandelier/" class="item-link">Chandelier</a><a href="/relics/charons-ashes/" class="item-link">Charon's Ashes</a><a href="/relics/chemical-x/" class="item-link">Chemical X</a><a href="/relics/choices-paradox/" class="item-link">Choices Paradox</a><a href="/relics/circlet/" class="item-link">Circlet</a><a href="/relics/claws/" class="item-link">Claws</a><a href="/relics/cloak-clasp/" class="item-link">Cloak Clasp</a><a href="/relics/cracked-core/" class="item-link">Cracked Core</a><a href="/relics/crossbow/" class="item-link">Crossbow</a><a href="/relics/cursed-pearl/" class="item-link">Cursed Pearl</a><a href="/relics/darkstone-periapt/" class="item-link">Darkstone Periapt</a><a href="/relics/data-disk/" class="item-link">Data Disk</a><a href="/relics/daughter-of-the-wind/" class="item-link">Daughter of the Wind</a><a href="/relics/delicate-frond/" class="item-link">Delicate Frond</a><a href="/relics/demon-tongue/" class="item-link">Demon Tongue</a><a href="/relics/diamond-diadem/" class="item-link">Diamond Diadem</a><a href="/relics/dingy-rug/" class="item-link">Dingy Rug</a><a href="/relics/distinguished-cape/" class="item-link">Distinguished Cape</a><a href="/relics/divine-destiny/" class="item-link">Divine Destiny</a><a href="/relics/divine-right/" class="item-link">Divine Right</a><a href="/relics/dollys-mirror/" class="item-link">Dolly's Mirror</a><a href="/relics/dragon-fruit/" class="item-link">Dragon Fruit</a><a href="/relics/dream-catcher/" class="item-link">Dream Catcher</a><a href="/relics/driftwood/" class="item-link">Driftwood</a><a href="/relics/dusty-tome/" class="item-link">Dusty Tome</a><a href="/relics/ectoplasm/" class="item-link">Ectoplasm</a><a href="/relics/electric-shrymp/" class="item-link">Electric Shrymp</a><a href="/relics/ember-tea/" class="item-link">Ember Tea</a><a href="/relics/emotion-chip/" class="item-link">Emotion Chip</a><a href="/relics/empty-cage/" class="item-link">Empty Cage</a><a href="/relics/eternal-feather/" class="item-link">Eternal Feather</a><a href="/relics/fencing-manual/" class="item-link">Fencing Manual</a><a href="/relics/festive-popper/" class="item-link">Festive Popper</a><a href="/relics/fiddle/" class="item-link">Fiddle</a><a href="/relics/forgotten-soul/" class="item-link">Forgotten Soul</a><a href="/relics/fragrant-mushroom/" class="item-link">Fragrant Mushroom</a><a href="/relics/fresnel-lens/" class="item-link">Fresnel Lens</a><a href="/relics/frozen-egg/" class="item-link">Frozen Egg</a><a href="/relics/funerary-mask/" class="item-link">Funerary Mask</a><a href="/relics/fur-coat/" class="item-link">Fur Coat</a><a href="/relics/galactic-dust/" class="item-link">Galactic Dust</a><a href="/relics/gambling-chip/" class="item-link">Gambling Chip</a><a href="/relics/game-piece/" class="item-link">Game Piece</a><a href="/relics/ghost-seed/" class="item-link">Ghost Seed</a><a href="/relics/girya/" class="item-link">Girya</a><a href="/relics/glass-eye/" class="item-link">Glass Eye</a><a href="/relics/glitter/" class="item-link">Glitter</a><a href="/relics/gnarled-hammer/" class="item-link">Gnarled Hammer</a><a href="/relics/gold-plated-cables/" class="item-link">Gold-Plated Cables</a><a href="/relics/golden-compass/" class="item-link">Golden Compass</a><a href="/relics/golden-pearl/" class="item-link">Golden Pearl</a><a href="/relics/gorget/" class="item-link">Gorget</a><a href="/relics/gremlin-horn/" class="item-link">Gremlin Horn</a><a href="/relics/hand-drill/" class="item-link">Hand Drill</a><a href="/relics/happy-flower/" class="item-link">Happy Flower</a><a href="/relics/happy-flower/" class="item-link">Happy Flower???</a><a href="/relics/helical-dart/" class="item-link">Helical Dart</a><a href="/relics/history-course/" class="item-link">History Course</a><a href="/relics/horn-cleat/" class="item-link">Horn Cleat</a><a href="/relics/ice-cream/" class="item-link">Ice Cream</a><a href="/relics/infused-core/" class="item-link">Infused Core</a><a href="/relics/intimidating-helmet/" class="item-link">Intimidating Helmet</a><a href="/relics/iron-club/" class="item-link">Iron Club</a><a href="/relics/ivory-tile/" class="item-link">Ivory Tile</a><a href="/relics/jeweled-mask/" class="item-link">Jeweled Mask</a><a href="/relics/jewelry-box/" class="item-link">Jewelry Box</a><a href="/relics/joss-paper/" class="item-link">Joss Paper</a><a href="/relics/juzu-bracelet/" class="item-link">Juzu Bracelet</a><a href="/relics/kifuda/" class="item-link">Kifuda</a><a href="/relics/kunai/" class="item-link">Kunai</a><a href="/relics/kusarigama/" class="item-link">Kusarigama</a><a href="/relics/lantern/" class="item-link">Lantern</a><a href="/relics/large-capsule/" class="item-link">Large Capsule</a><a href="/relics/lasting-candy/" class="item-link">Lasting Candy</a><a href="/relics/lava-lamp/" class="item-link">Lava Lamp</a><a href="/relics/lava-rock/" class="item-link">Lava Rock</a><a href="/relics/lead-paperweight/" class="item-link">Lead Paperweight</a><a href="/relics/leafy-poultice/" class="item-link">Leafy Poultice</a><a href="/relics/lees-waffle/" class="item-link">Lee's Waffle</a><a href="/relics/lees-waffle/" class="item-link">Lee's Waffle???</a><a href="/relics/letter-opener/" class="item-link">Letter Opener</a><a href="/relics/lizard-tail/" class="item-link">Lizard Tail</a><a href="/relics/looming-fruit/" class="item-link">Looming Fruit</a><a href="/relics/lords-parasol/" class="item-link">Lord's Parasol</a><a href="/relics/lost-coffer/" class="item-link">Lost Coffer</a><a href="/relics/lost-wisp/" class="item-link">Lost Wisp</a><a href="/relics/lucky-fysh/" class="item-link">Lucky Fysh</a><a href="/relics/lunar-pastry/" class="item-link">Lunar Pastry</a><a href="/relics/mango/" class="item-link">Mango</a><a href="/relics/mango/" class="item-link">Mango???</a><a href="/relics/massive-scroll/" class="item-link">Massive Scroll</a><a href="/relics/maw-bank/" class="item-link">Maw Bank</a><a href="/relics/meal-ticket/" class="item-link">Meal Ticket</a><a href="/relics/meat-cleaver/" class="item-link">Meat Cleaver</a><a href="/relics/meat-on-the-bone/" class="item-link">Meat on the Bone</a><a href="/relics/membership-card/" class="item-link">Membership Card</a><a href="/relics/mercury-hourglass/" class="item-link">Mercury Hourglass</a><a href="/relics/metronome/" class="item-link">Metronome</a><a href="/relics/mini-regent/" class="item-link">Mini Regent</a><a href="/relics/miniature-cannon/" class="item-link">Miniature Cannon</a><a href="/relics/miniature-tent/" class="item-link">Miniature Tent</a><a href="/relics/molten-egg/" class="item-link">Molten Egg</a><a href="/relics/mr-struggles/" class="item-link">Mr. Struggles</a><a href="/relics/mummified-hand/" class="item-link">Mummified Hand</a><a href="/relics/music-box/" class="item-link">Music Box</a><a href="/relics/mystic-lighter/" class="item-link">Mystic Lighter</a><a href="/relics/neows-torment/" class="item-link">Neow's Torment</a><a href="/relics/new-leaf/" class="item-link">New Leaf</a><a href="/relics/ninja-scroll/" class="item-link">Ninja Scroll</a><a href="/relics/nunchaku/" class="item-link">Nunchaku</a><a href="/relics/nutritious-oyster/" class="item-link">Nutritious Oyster</a><a href="/relics/nutritious-soup/" class="item-link">Nutritious Soup</a><a href="/relics/oddly-smooth-stone/" class="item-link">Oddly Smooth Stone</a><a href="/relics/old-coin/" class="item-link">Old Coin</a><a href="/relics/orange-dough/" class="item-link">Orange Dough</a><a href="/relics/orichalcum/" class="item-link">Orichalcum</a><a href="/relics/orichalcum/" class="item-link">Orichalcum???</a><a href="/relics/ornamental-fan/" class="item-link">Ornamental Fan</a><a href="/relics/orrery/" class="item-link">Orrery</a><a href="/relics/paels-blood/" class="item-link">Pael's Blood</a><a href="/relics/paels-claw/" class="item-link">Pael's Claw</a><a href="/relics/paels-eye/" class="item-link">Pael's Eye</a><a href="/relics/paels-flesh/" class="item-link">Pael's Flesh</a><a href="/relics/paels-growth/" class="item-link">Pael's Growth</a><a href="/relics/paels-horn/" class="item-link">Pael's Horn</a><a href="/relics/paels-legion/" class="item-link">Pael's Legion</a><a href="/relics/paels-tears/" class="item-link">Pael's Tears</a><a href="/relics/paels-tooth/" class="item-link">Pael's Tooth</a><a href="/relics/paels-wing/" class="item-link">Pael's Wing</a><a href="/relics/pandoras-box/" class="item-link">Pandora's Box</a><a href="/relics/pantograph/" class="item-link">Pantograph</a><a href="/relics/paper-krane/" class="item-link">Paper Krane</a><a href="/relics/paper-phrog/" class="item-link">Paper Phrog</a><a href="/relics/parrying-shield/" class="item-link">Parrying Shield</a><a href="/relics/pear/" class="item-link">Pear</a><a href="/relics/pen-nib/" class="item-link">Pen Nib</a><a href="/relics/pendulum/" class="item-link">Pendulum</a><a href="/relics/permafrost/" class="item-link">Permafrost</a><a href="/relics/petrified-toad/" class="item-link">Petrified Toad</a><a href="/relics/philosophers-stone/" class="item-link">Philosopher's Stone</a><a href="/relics/phylactery-unbound/" class="item-link">Phylactery Unbound</a><a href="/relics/planisphere/" class="item-link">Planisphere</a><a href="/relics/pocketwatch/" class="item-link">Pocketwatch</a><a href="/relics/pollinous-core/" class="item-link">Pollinous Core</a><a href="/relics/pomander/" class="item-link">Pomander</a><a href="/relics/potion-belt/" class="item-link">Potion Belt</a><a href="/relics/power-cell/" class="item-link">Power Cell</a><a href="/relics/prayer-wheel/" class="item-link">Prayer Wheel</a><a href="/relics/precarious-shears/" class="item-link">Precarious Shears</a><a href="/relics/precise-scissors/" class="item-link">Precise Scissors</a><a href="/relics/preserved-fog/" class="item-link">Preserved Fog</a><a href="/relics/prismatic-gem/" class="item-link">Prismatic Gem</a><a href="/relics/pumpkin-candle/" class="item-link">Pumpkin Candle</a><a href="/relics/punch-dagger/" class="item-link">Punch Dagger</a><a href="/relics/radiant-pearl/" class="item-link">Radiant Pearl</a><a href="/relics/rainbow-ring/" class="item-link">Rainbow Ring</a><a href="/relics/razor-tooth/" class="item-link">Razor Tooth</a><a href="/relics/red-mask/" class="item-link">Red Mask</a><a href="/relics/red-skull/" class="item-link">Red Skull</a><a href="/relics/regal-pillow/" class="item-link">Regal Pillow</a><a href="/relics/regalite/" class="item-link">Regalite</a><a href="/relics/reptile-trinket/" class="item-link">Reptile Trinket</a><a href="/relics/ring-of-the-drake/" class="item-link">Ring of the Drake</a><a href="/relics/ring-of-the-snake/" class="item-link">Ring of the Snake</a><a href="/relics/ringing-triangle/" class="item-link">Ringing Triangle</a><a href="/relics/ripple-basin/" class="item-link">Ripple Basin</a><a href="/relics/royal-poison/" class="item-link">Royal Poison</a><a href="/relics/royal-stamp/" class="item-link">Royal Stamp</a><a href="/relics/ruined-helmet/" class="item-link">Ruined Helmet</a><a href="/relics/runic-capacitor/" class="item-link">Runic Capacitor</a><a href="/relics/runic-pyramid/" class="item-link">Runic Pyramid</a><a href="/relics/sai/" class="item-link">Sai</a><a href="/relics/sand-castle/" class="item-link">Sand Castle</a><a href="/relics/screaming-flagon/" class="item-link">Screaming Flagon</a><a href="/relics/scroll-boxes/" class="item-link">Scroll Boxes</a><a href="/relics/sea-glass/" class="item-link">Sea Glass</a><a href="/relics/seal-of-gold/" class="item-link">Seal of Gold</a><a href="/relics/self-forming-clay/" class="item-link">Self-Forming Clay</a><a href="/relics/sere-talon/" class="item-link">Sere Talon</a><a href="/relics/shovel/" class="item-link">Shovel</a><a href="/relics/shuriken/" class="item-link">Shuriken</a><a href="/relics/signet-ring/" class="item-link">Signet Ring</a><a href="/relics/silver-crucible/" class="item-link">Silver Crucible</a><a href="/relics/sling-of-courage/" class="item-link">Sling of Courage</a><a href="/relics/small-capsule/" class="item-link">Small Capsule</a><a href="/relics/snecko-eye/" class="item-link">Snecko Eye</a><a href="/relics/snecko-eye/" class="item-link">Snecko Eye???</a><a href="/relics/snecko-skull/" class="item-link">Snecko Skull</a><a href="/relics/sozu/" class="item-link">Sozu</a><a href="/relics/sparkling-rouge/" class="item-link">Sparkling Rouge</a><a href="/relics/spiked-gauntlets/" class="item-link">Spiked Gauntlets</a><a href="/relics/stone-calendar/" class="item-link">Stone Calendar</a><a href="/relics/stone-cracker/" class="item-link">Stone Cracker</a><a href="/relics/stone-humidifier/" class="item-link">Stone Humidifier</a><a href="/relics/storybook/" class="item-link">Storybook</a><a href="/relics/strawberry/" class="item-link">Strawberry</a><a href="/relics/strike-dummy/" class="item-link">Strike Dummy</a><a href="/relics/strike-dummy/" class="item-link">Strike Dummy???</a><a href="/relics/sturdy-clamp/" class="item-link">Sturdy Clamp</a><a href="/relics/sword-of-jade/" class="item-link">Sword of Jade</a><a href="/relics/sword-of-stone/" class="item-link">Sword of Stone</a><a href="/relics/symbiotic-virus/" class="item-link">Symbiotic Virus</a><a href="/relics/tanxs-whistle/" class="item-link">Tanx's Whistle</a><a href="/relics/tea-of-discourtesy/" class="item-link">Tea of Discourtesy</a><a href="/relics/the-abacus/" class="item-link">The Abacus</a><a href="/relics/the-boot/" class="item-link">The Boot</a><a href="/relics/the-chosen-cheese/" class="item-link">The Chosen Cheese</a><a href="/relics/the-courier/" class="item-link">The Courier</a><a href="/relics/the-merchants-rug/" class="item-link">The Merchant's Rug???</a><a href="/relics/throwing-axe/" class="item-link">Throwing Axe</a><a href="/relics/tingsha/" class="item-link">Tingsha</a><a href="/relics/tiny-mailbox/" class="item-link">Tiny Mailbox</a><a href="/relics/toasty-mittens/" class="item-link">Toasty Mittens</a><a href="/relics/toolbox/" class="item-link">Toolbox</a><a href="/relics/touch-of-orobas/" class="item-link">Touch of Orobas</a><a href="/relics/tough-bandages/" class="item-link">Tough Bandages</a><a href="/relics/toxic-egg/" class="item-link">Toxic Egg</a><a href="/relics/toy-box/" class="item-link">Toy Box</a><a href="/relics/tri-boomerang/" class="item-link">Tri-Boomerang</a><a href="/relics/tungsten-rod/" class="item-link">Tungsten Rod</a><a href="/relics/tuning-fork/" class="item-link">Tuning Fork</a><a href="/relics/twisted-funnel/" class="item-link">Twisted Funnel</a><a href="/relics/unceasing-top/" class="item-link">Unceasing Top</a><a href="/relics/undying-sigil/" class="item-link">Undying Sigil</a><a href="/relics/unsettling-lamp/" class="item-link">Unsettling Lamp</a><a href="/relics/vajra/" class="item-link">Vajra</a><a href="/relics/vakuucardselector/" class="item-link">VakuuCardSelector</a><a href="/relics/vambrace/" class="item-link">Vambrace</a><a href="/relics/velvet-choker/" class="item-link">Velvet Choker</a><a href="/relics/venerable-tea-set/" class="item-link">Venerable Tea Set</a><a href="/relics/venerable-tea-set/" class="item-link">Venerable Tea Set???</a><a href="/relics/very-hot-cocoa/" class="item-link">Very Hot Cocoa</a><a href="/relics/vexing-puzzlebox/" class="item-link">Vexing Puzzlebox</a><a href="/relics/vitruvian-minion/" class="item-link">Vitruvian Minion</a><a href="/relics/war-hammer/" class="item-link">War Hammer</a><a href="/relics/war-paint/" class="item-link">War Paint</a><a href="/relics/whetstone/" class="item-link">Whetstone</a><a href="/relics/whispering-earring/" class="item-link">Whispering Earring</a><a href="/relics/white-beast-statue/" class="item-link">White Beast Statue</a><a href="/relics/white-star/" class="item-link">White Star</a><a href="/relics/wing-charm/" class="item-link">Wing Charm</a><a href="/relics/wongo-customer-appreciation-badge/" class="item-link">Wongo Customer Appreciation Badge</a><a href="/relics/wongos-mystery-ticket/" class="item-link">Wongo's Mystery Ticket</a><a href="/relics/yummy-cookie/" class="item-link">Yummy Cookie</a></div>
+    <h1>Slay the Spire 2 Relics</h1>
+    <div class="grid">
+        <a href="/relics/akabeko/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Akabeko</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">50% Winrate</div>
+                <div class="run-count">4 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+        </a>
+        <a href="/relics/alchemical-coffer/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Alchemical Coffer</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/amethyst-aubergine/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Amethyst Aubergine</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">75% Winrate</div>
+                <div class="run-count">4 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 75%, #ff4b4b 75%);"></div>
+        </a>
+        <a href="/relics/anchor/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Anchor</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">50% Winrate</div>
+                <div class="run-count">4 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+        </a>
+        <a href="/relics/anchor/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Anchor???</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/arcane-scroll/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Arcane Scroll</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">50% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+        </a>
+        <a href="/relics/archaic-tooth/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Archaic Tooth</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">25% Winrate</div>
+                <div class="run-count">4 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 25%, #ff4b4b 25%);"></div>
+        </a>
+        <a href="/relics/art-of-war/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Art of War</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/astrolabe/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Astrolabe</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/bag-of-marbles/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Bag of Marbles</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">33% Winrate</div>
+                <div class="run-count">3 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 33.33333333333333%, #ff4b4b 33.33333333333333%);"></div>
+        </a>
+        <a href="/relics/bag-of-preparation/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Bag of Preparation</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">70% Winrate</div>
+                <div class="run-count">10 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 70%, #ff4b4b 70%);"></div>
+        </a>
+        <a href="/relics/beating-remnant/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Beating Remnant</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">50% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+        </a>
+        <a href="/relics/beautiful-bracelet/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Beautiful Bracelet</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">4 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/bellows/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Bellows</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/belt-buckle/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Belt Buckle</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/big-hat/" class="card-item necrobinder">
+            <div class="card-info"><span class="card-name">Big Hat</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/big-mushroom/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Big Mushroom</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/biiig-hug/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Biiig Hug</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/bing-bong/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Bing Bong</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/black-blood/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Black Blood</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">0% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+        </a>
+        <a href="/relics/black-star/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Black Star</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/blessed-antler/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Blessed Antler</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/blood-vial/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Blood Vial</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">67% Winrate</div>
+                <div class="run-count">6 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 66.66666666666666%, #ff4b4b 66.66666666666666%);"></div>
+        </a>
+        <a href="/relics/blood-vial/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Blood Vial???</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/blood-soaked-rose/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Blood-Soaked Rose</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/bone-flute/" class="card-item necrobinder">
+            <div class="card-info"><span class="card-name">Bone Flute</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/bone-tea/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Bone Tea</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/book-repair-knife/" class="card-item necrobinder">
+            <div class="card-info"><span class="card-name">Book Repair Knife</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/book-of-five-rings/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Book of Five Rings</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">3 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/bookmark/" class="card-item necrobinder">
+            <div class="card-info"><span class="card-name">Bookmark</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/booming-conch/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Booming Conch</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/bound-phylactery/" class="card-item necrobinder">
+            <div class="card-info"><span class="card-name">Bound Phylactery</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">63% Winrate</div>
+                <div class="run-count">8 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 62.5%, #ff4b4b 62.5%);"></div>
+        </a>
+        <a href="/relics/bowler-hat/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Bowler Hat</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">33% Winrate</div>
+                <div class="run-count">3 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 33.33333333333333%, #ff4b4b 33.33333333333333%);"></div>
+        </a>
+        <a href="/relics/bread/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Bread</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/brilliant-scarf/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Brilliant Scarf</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/brimstone/" class="card-item ironclad">
+            <div class="card-info"><span class="card-name">Brimstone</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/bronze-scales/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Bronze Scales</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">0% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+        </a>
+        <a href="/relics/burning-blood/" class="card-item ironclad">
+            <div class="card-info"><span class="card-name">Burning Blood</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">80% Winrate</div>
+                <div class="run-count">5 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 80%, #ff4b4b 80%);"></div>
+        </a>
+        <a href="/relics/burning-sticks/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Burning Sticks</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/byrdpip/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Byrdpip</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/calling-bell/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Calling Bell</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/candelabra/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Candelabra</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">60% Winrate</div>
+                <div class="run-count">5 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 60%, #ff4b4b 60%);"></div>
+        </a>
+        <a href="/relics/captains-wheel/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Captain's Wheel</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">50% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+        </a>
+        <a href="/relics/cauldron/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Cauldron</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/centennial-puzzle/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Centennial Puzzle</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">80% Winrate</div>
+                <div class="run-count">5 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 80%, #ff4b4b 80%);"></div>
+        </a>
+        <a href="/relics/chandelier/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Chandelier</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">75% Winrate</div>
+                <div class="run-count">4 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 75%, #ff4b4b 75%);"></div>
+        </a>
+        <a href="/relics/charons-ashes/" class="card-item ironclad">
+            <div class="card-info"><span class="card-name">Charon's Ashes</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/chemical-x/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Chemical X</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/choices-paradox/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Choices Paradox</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/circlet/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Circlet</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/claws/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Claws</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/cloak-clasp/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Cloak Clasp</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/cracked-core/" class="card-item defect">
+            <div class="card-info"><span class="card-name">Cracked Core</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">50% Winrate</div>
+                <div class="run-count">6 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+        </a>
+        <a href="/relics/crossbow/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Crossbow</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">3 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/cursed-pearl/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Cursed Pearl</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">0% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+        </a>
+        <a href="/relics/darkstone-periapt/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Darkstone Periapt</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/data-disk/" class="card-item defect">
+            <div class="card-info"><span class="card-name">Data Disk</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">33% Winrate</div>
+                <div class="run-count">3 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 33.33333333333333%, #ff4b4b 33.33333333333333%);"></div>
+        </a>
+        <a href="/relics/daughter-of-the-wind/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Daughter of the Wind</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/delicate-frond/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Delicate Frond</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/demon-tongue/" class="card-item ironclad">
+            <div class="card-info"><span class="card-name">Demon Tongue</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/diamond-diadem/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Diamond Diadem</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/dingy-rug/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Dingy Rug</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/distinguished-cape/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Distinguished Cape</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/divine-destiny/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Divine Destiny</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/divine-right/" class="card-item regent">
+            <div class="card-info"><span class="card-name">Divine Right</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">43% Winrate</div>
+                <div class="run-count">14 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 42.857142857142854%, #ff4b4b 42.857142857142854%);"></div>
+        </a>
+        <a href="/relics/dollys-mirror/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Dolly's Mirror</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/dragon-fruit/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Dragon Fruit</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/dream-catcher/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Dream Catcher</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">0% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+        </a>
+        <a href="/relics/driftwood/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Driftwood</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/dusty-tome/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Dusty Tome</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/ectoplasm/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Ectoplasm</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/electric-shrymp/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Electric Shrymp</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">0% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+        </a>
+        <a href="/relics/ember-tea/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Ember Tea</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">50% Winrate</div>
+                <div class="run-count">6 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+        </a>
+        <a href="/relics/emotion-chip/" class="card-item defect">
+            <div class="card-info"><span class="card-name">Emotion Chip</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/empty-cage/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Empty Cage</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/eternal-feather/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Eternal Feather</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">57% Winrate</div>
+                <div class="run-count">7 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 57.14285714285714%, #ff4b4b 57.14285714285714%);"></div>
+        </a>
+        <a href="/relics/fencing-manual/" class="card-item regent">
+            <div class="card-info"><span class="card-name">Fencing Manual</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/festive-popper/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Festive Popper</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">60% Winrate</div>
+                <div class="run-count">5 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 60%, #ff4b4b 60%);"></div>
+        </a>
+        <a href="/relics/fiddle/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Fiddle</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/forgotten-soul/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Forgotten Soul</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">4 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/fragrant-mushroom/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Fragrant Mushroom</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">6 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/fresnel-lens/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Fresnel Lens</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">50% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+        </a>
+        <a href="/relics/frozen-egg/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Frozen Egg</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/funerary-mask/" class="card-item necrobinder">
+            <div class="card-info"><span class="card-name">Funerary Mask</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/fur-coat/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Fur Coat</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">3 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/galactic-dust/" class="card-item regent">
+            <div class="card-info"><span class="card-name">Galactic Dust</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/gambling-chip/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Gambling Chip</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">33% Winrate</div>
+                <div class="run-count">3 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 33.33333333333333%, #ff4b4b 33.33333333333333%);"></div>
+        </a>
+        <a href="/relics/game-piece/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Game Piece</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/ghost-seed/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Ghost Seed</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/girya/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Girya</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">50% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+        </a>
+        <a href="/relics/glass-eye/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Glass Eye</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/glitter/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Glitter</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">0% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+        </a>
+        <a href="/relics/gnarled-hammer/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Gnarled Hammer</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/gold-plated-cables/" class="card-item defect">
+            <div class="card-info"><span class="card-name">Gold-Plated Cables</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/golden-compass/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Golden Compass</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">50% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+        </a>
+        <a href="/relics/golden-pearl/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Golden Pearl</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">50% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+        </a>
+        <a href="/relics/gorget/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Gorget</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">5 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/gremlin-horn/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Gremlin Horn</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">80% Winrate</div>
+                <div class="run-count">5 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 80%, #ff4b4b 80%);"></div>
+        </a>
+        <a href="/relics/hand-drill/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Hand Drill</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/happy-flower/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Happy Flower</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">86% Winrate</div>
+                <div class="run-count">7 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 85.71428571428571%, #ff4b4b 85.71428571428571%);"></div>
+        </a>
+        <a href="/relics/happy-flower/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Happy Flower???</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">67% Winrate</div>
+                <div class="run-count">3 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 66.66666666666666%, #ff4b4b 66.66666666666666%);"></div>
+        </a>
+        <a href="/relics/helical-dart/" class="card-item silent">
+            <div class="card-info"><span class="card-name">Helical Dart</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">0% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+        </a>
+        <a href="/relics/history-course/" class="card-item shared">
+            <div class="card-info"><span class="card-name">History Course</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/horn-cleat/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Horn Cleat</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">67% Winrate</div>
+                <div class="run-count">3 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 66.66666666666666%, #ff4b4b 66.66666666666666%);"></div>
+        </a>
+        <a href="/relics/ice-cream/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Ice Cream</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/infused-core/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Infused Core</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/intimidating-helmet/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Intimidating Helmet</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/iron-club/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Iron Club</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/ivory-tile/" class="card-item necrobinder">
+            <div class="card-info"><span class="card-name">Ivory Tile</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/jeweled-mask/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Jeweled Mask</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/jewelry-box/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Jewelry Box</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/joss-paper/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Joss Paper</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">0% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+        </a>
+        <a href="/relics/juzu-bracelet/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Juzu Bracelet</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">40% Winrate</div>
+                <div class="run-count">5 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 40%, #ff4b4b 40%);"></div>
+        </a>
+        <a href="/relics/kifuda/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Kifuda</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/kunai/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Kunai</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/kusarigama/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Kusarigama</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/lantern/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Lantern</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">4 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/large-capsule/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Large Capsule</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/lasting-candy/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Lasting Candy</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/lava-lamp/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Lava Lamp</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/lava-rock/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Lava Rock</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/lead-paperweight/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Lead Paperweight</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">50% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+        </a>
+        <a href="/relics/leafy-poultice/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Leafy Poultice</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">40% Winrate</div>
+                <div class="run-count">10 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 40%, #ff4b4b 40%);"></div>
+        </a>
+        <a href="/relics/lees-waffle/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Lee's Waffle</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/lees-waffle/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Lee's Waffle???</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/letter-opener/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Letter Opener</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">4 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/lizard-tail/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Lizard Tail</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">75% Winrate</div>
+                <div class="run-count">4 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 75%, #ff4b4b 75%);"></div>
+        </a>
+        <a href="/relics/looming-fruit/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Looming Fruit</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/lords-parasol/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Lord's Parasol</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/lost-coffer/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Lost Coffer</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/lost-wisp/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Lost Wisp</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/lucky-fysh/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Lucky Fysh</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">0% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+        </a>
+        <a href="/relics/lunar-pastry/" class="card-item regent">
+            <div class="card-info"><span class="card-name">Lunar Pastry</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/mango/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Mango</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/mango/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Mango???</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/massive-scroll/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Massive Scroll</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/maw-bank/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Maw Bank</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/meal-ticket/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Meal Ticket</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">25% Winrate</div>
+                <div class="run-count">4 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 25%, #ff4b4b 25%);"></div>
+        </a>
+        <a href="/relics/meat-cleaver/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Meat Cleaver</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/meat-on-the-bone/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Meat on the Bone</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/membership-card/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Membership Card</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/mercury-hourglass/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Mercury Hourglass</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">33% Winrate</div>
+                <div class="run-count">3 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 33.33333333333333%, #ff4b4b 33.33333333333333%);"></div>
+        </a>
+        <a href="/relics/metronome/" class="card-item defect">
+            <div class="card-info"><span class="card-name">Metronome</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/mini-regent/" class="card-item regent">
+            <div class="card-info"><span class="card-name">Mini Regent</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/miniature-cannon/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Miniature Cannon</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/miniature-tent/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Miniature Tent</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/molten-egg/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Molten Egg</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/mr-struggles/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Mr. Struggles</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/mummified-hand/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Mummified Hand</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">75% Winrate</div>
+                <div class="run-count">4 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 75%, #ff4b4b 75%);"></div>
+        </a>
+        <a href="/relics/music-box/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Music Box</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">67% Winrate</div>
+                <div class="run-count">3 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 66.66666666666666%, #ff4b4b 66.66666666666666%);"></div>
+        </a>
+        <a href="/relics/mystic-lighter/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Mystic Lighter</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/neows-torment/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Neow's Torment</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">50% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+        </a>
+        <a href="/relics/new-leaf/" class="card-item shared">
+            <div class="card-info"><span class="card-name">New Leaf</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">25% Winrate</div>
+                <div class="run-count">4 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 25%, #ff4b4b 25%);"></div>
+        </a>
+        <a href="/relics/ninja-scroll/" class="card-item silent">
+            <div class="card-info"><span class="card-name">Ninja Scroll</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/nunchaku/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Nunchaku</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">50% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+        </a>
+        <a href="/relics/nutritious-oyster/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Nutritious Oyster</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/nutritious-soup/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Nutritious Soup</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/oddly-smooth-stone/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Oddly Smooth Stone</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">8 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/old-coin/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Old Coin</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/orange-dough/" class="card-item regent">
+            <div class="card-info"><span class="card-name">Orange Dough</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/orichalcum/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Orichalcum</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">33% Winrate</div>
+                <div class="run-count">3 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 33.33333333333333%, #ff4b4b 33.33333333333333%);"></div>
+        </a>
+        <a href="/relics/orichalcum/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Orichalcum???</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/ornamental-fan/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Ornamental Fan</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">75% Winrate</div>
+                <div class="run-count">4 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 75%, #ff4b4b 75%);"></div>
+        </a>
+        <a href="/relics/orrery/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Orrery</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/paels-blood/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Pael's Blood</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">3 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/paels-claw/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Pael's Claw</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/paels-eye/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Pael's Eye</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/paels-flesh/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Pael's Flesh</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/paels-growth/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Pael's Growth</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/paels-horn/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Pael's Horn</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/paels-legion/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Pael's Legion</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/paels-tears/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Pael's Tears</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/paels-tooth/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Pael's Tooth</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">67% Winrate</div>
+                <div class="run-count">3 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 66.66666666666666%, #ff4b4b 66.66666666666666%);"></div>
+        </a>
+        <a href="/relics/paels-wing/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Pael's Wing</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">50% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+        </a>
+        <a href="/relics/pandoras-box/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Pandora's Box</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/pantograph/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Pantograph</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">50% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+        </a>
+        <a href="/relics/paper-krane/" class="card-item silent">
+            <div class="card-info"><span class="card-name">Paper Krane</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/paper-phrog/" class="card-item ironclad">
+            <div class="card-info"><span class="card-name">Paper Phrog</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/parrying-shield/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Parrying Shield</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/pear/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Pear</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/pen-nib/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Pen Nib</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">33% Winrate</div>
+                <div class="run-count">3 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 33.33333333333333%, #ff4b4b 33.33333333333333%);"></div>
+        </a>
+        <a href="/relics/pendulum/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Pendulum</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">91% Winrate</div>
+                <div class="run-count">11 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 90.9090909090909%, #ff4b4b 90.9090909090909%);"></div>
+        </a>
+        <a href="/relics/permafrost/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Permafrost</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">50% Winrate</div>
+                <div class="run-count">4 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+        </a>
+        <a href="/relics/petrified-toad/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Petrified Toad</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">50% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+        </a>
+        <a href="/relics/philosophers-stone/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Philosopher's Stone</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/phylactery-unbound/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Phylactery Unbound</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/planisphere/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Planisphere</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/pocketwatch/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Pocketwatch</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/pollinous-core/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Pollinous Core</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/pomander/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Pomander</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/potion-belt/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Potion Belt</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">63% Winrate</div>
+                <div class="run-count">8 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 62.5%, #ff4b4b 62.5%);"></div>
+        </a>
+        <a href="/relics/power-cell/" class="card-item defect">
+            <div class="card-info"><span class="card-name">Power Cell</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/prayer-wheel/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Prayer Wheel</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/precarious-shears/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Precarious Shears</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">83% Winrate</div>
+                <div class="run-count">6 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 83.33333333333334%, #ff4b4b 83.33333333333334%);"></div>
+        </a>
+        <a href="/relics/precise-scissors/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Precise Scissors</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/preserved-fog/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Preserved Fog</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/prismatic-gem/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Prismatic Gem</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/pumpkin-candle/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Pumpkin Candle</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/punch-dagger/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Punch Dagger</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/radiant-pearl/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Radiant Pearl</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/rainbow-ring/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Rainbow Ring</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">0% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+        </a>
+        <a href="/relics/razor-tooth/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Razor Tooth</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/red-mask/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Red Mask</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">50% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+        </a>
+        <a href="/relics/red-skull/" class="card-item ironclad">
+            <div class="card-info"><span class="card-name">Red Skull</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/regal-pillow/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Regal Pillow</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/regalite/" class="card-item regent">
+            <div class="card-info"><span class="card-name">Regalite</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/reptile-trinket/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Reptile Trinket</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">0% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+        </a>
+        <a href="/relics/ring-of-the-drake/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Ring of the Drake</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">67% Winrate</div>
+                <div class="run-count">3 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 66.66666666666666%, #ff4b4b 66.66666666666666%);"></div>
+        </a>
+        <a href="/relics/ring-of-the-snake/" class="card-item silent">
+            <div class="card-info"><span class="card-name">Ring of the Snake</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">38% Winrate</div>
+                <div class="run-count">8 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 37.5%, #ff4b4b 37.5%);"></div>
+        </a>
+        <a href="/relics/ringing-triangle/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Ringing Triangle</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">0% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+        </a>
+        <a href="/relics/ripple-basin/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Ripple Basin</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/royal-poison/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Royal Poison</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">3 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/royal-stamp/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Royal Stamp</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/ruined-helmet/" class="card-item ironclad">
+            <div class="card-info"><span class="card-name">Ruined Helmet</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/runic-capacitor/" class="card-item defect">
+            <div class="card-info"><span class="card-name">Runic Capacitor</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/runic-pyramid/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Runic Pyramid</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/sai/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Sai</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">0% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+        </a>
+        <a href="/relics/sand-castle/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Sand Castle</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">0% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+        </a>
+        <a href="/relics/screaming-flagon/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Screaming Flagon</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/scroll-boxes/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Scroll Boxes</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">40% Winrate</div>
+                <div class="run-count">5 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 40%, #ff4b4b 40%);"></div>
+        </a>
+        <a href="/relics/sea-glass/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Sea Glass</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/seal-of-gold/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Seal of Gold</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/self-forming-clay/" class="card-item ironclad">
+            <div class="card-info"><span class="card-name">Self-Forming Clay</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/sere-talon/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Sere Talon</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/shovel/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Shovel</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">0% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+        </a>
+        <a href="/relics/shuriken/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Shuriken</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">67% Winrate</div>
+                <div class="run-count">3 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 66.66666666666666%, #ff4b4b 66.66666666666666%);"></div>
+        </a>
+        <a href="/relics/signet-ring/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Signet Ring</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/silver-crucible/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Silver Crucible</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">64% Winrate</div>
+                <div class="run-count">11 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 63.63636363636363%, #ff4b4b 63.63636363636363%);"></div>
+        </a>
+        <a href="/relics/sling-of-courage/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Sling of Courage</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/small-capsule/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Small Capsule</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/snecko-eye/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Snecko Eye</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/snecko-eye/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Snecko Eye???</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/snecko-skull/" class="card-item silent">
+            <div class="card-info"><span class="card-name">Snecko Skull</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/sozu/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Sozu</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/sparkling-rouge/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Sparkling Rouge</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">71% Winrate</div>
+                <div class="run-count">7 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 71.42857142857143%, #ff4b4b 71.42857142857143%);"></div>
+        </a>
+        <a href="/relics/spiked-gauntlets/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Spiked Gauntlets</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/stone-calendar/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Stone Calendar</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/stone-cracker/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Stone Cracker</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">50% Winrate</div>
+                <div class="run-count">4 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+        </a>
+        <a href="/relics/stone-humidifier/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Stone Humidifier</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/storybook/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Storybook</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/strawberry/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Strawberry</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">80% Winrate</div>
+                <div class="run-count">5 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 80%, #ff4b4b 80%);"></div>
+        </a>
+        <a href="/relics/strike-dummy/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Strike Dummy</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">86% Winrate</div>
+                <div class="run-count">7 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 85.71428571428571%, #ff4b4b 85.71428571428571%);"></div>
+        </a>
+        <a href="/relics/strike-dummy/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Strike Dummy???</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/sturdy-clamp/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Sturdy Clamp</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/sword-of-jade/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Sword of Jade</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/sword-of-stone/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Sword of Stone</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/symbiotic-virus/" class="card-item defect">
+            <div class="card-info"><span class="card-name">Symbiotic Virus</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/tanxs-whistle/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Tanx's Whistle</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/tea-of-discourtesy/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Tea of Discourtesy</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/the-abacus/" class="card-item shared">
+            <div class="card-info"><span class="card-name">The Abacus</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/the-boot/" class="card-item shared">
+            <div class="card-info"><span class="card-name">The Boot</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/the-chosen-cheese/" class="card-item shared">
+            <div class="card-info"><span class="card-name">The Chosen Cheese</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">33% Winrate</div>
+                <div class="run-count">3 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 33.33333333333333%, #ff4b4b 33.33333333333333%);"></div>
+        </a>
+        <a href="/relics/the-courier/" class="card-item shared">
+            <div class="card-info"><span class="card-name">The Courier</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/the-merchants-rug/" class="card-item shared">
+            <div class="card-info"><span class="card-name">The Merchant's Rug???</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/throwing-axe/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Throwing Axe</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/tingsha/" class="card-item silent">
+            <div class="card-info"><span class="card-name">Tingsha</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/tiny-mailbox/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Tiny Mailbox</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">20% Winrate</div>
+                <div class="run-count">5 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 20%, #ff4b4b 20%);"></div>
+        </a>
+        <a href="/relics/toasty-mittens/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Toasty Mittens</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/toolbox/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Toolbox</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/touch-of-orobas/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Touch of Orobas</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">60% Winrate</div>
+                <div class="run-count">5 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 60%, #ff4b4b 60%);"></div>
+        </a>
+        <a href="/relics/tough-bandages/" class="card-item silent">
+            <div class="card-info"><span class="card-name">Tough Bandages</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/toxic-egg/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Toxic Egg</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/toy-box/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Toy Box</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">0% Winrate</div>
+                <div class="run-count">3 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+        </a>
+        <a href="/relics/tri-boomerang/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Tri-Boomerang</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/tungsten-rod/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Tungsten Rod</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/tuning-fork/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Tuning Fork</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">3 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/twisted-funnel/" class="card-item silent">
+            <div class="card-info"><span class="card-name">Twisted Funnel</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/unceasing-top/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Unceasing Top</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">67% Winrate</div>
+                <div class="run-count">6 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 66.66666666666666%, #ff4b4b 66.66666666666666%);"></div>
+        </a>
+        <a href="/relics/undying-sigil/" class="card-item necrobinder">
+            <div class="card-info"><span class="card-name">Undying Sigil</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/unsettling-lamp/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Unsettling Lamp</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/vajra/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Vajra</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">8 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/vakuucardselector/" class="card-item shared">
+            <div class="card-info"><span class="card-name">VakuuCardSelector</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/vambrace/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Vambrace</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">5 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/velvet-choker/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Velvet Choker</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/venerable-tea-set/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Venerable Tea Set</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">75% Winrate</div>
+                <div class="run-count">8 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 75%, #ff4b4b 75%);"></div>
+        </a>
+        <a href="/relics/venerable-tea-set/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Venerable Tea Set???</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">75% Winrate</div>
+                <div class="run-count">4 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 75%, #ff4b4b 75%);"></div>
+        </a>
+        <a href="/relics/very-hot-cocoa/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Very Hot Cocoa</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">3 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/vexing-puzzlebox/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Vexing Puzzlebox</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/vitruvian-minion/" class="card-item regent">
+            <div class="card-info"><span class="card-name">Vitruvian Minion</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/war-hammer/" class="card-item shared">
+            <div class="card-info"><span class="card-name">War Hammer</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/war-paint/" class="card-item shared">
+            <div class="card-info"><span class="card-name">War Paint</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">86% Winrate</div>
+                <div class="run-count">7 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 85.71428571428571%, #ff4b4b 85.71428571428571%);"></div>
+        </a>
+        <a href="/relics/whetstone/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Whetstone</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">64% Winrate</div>
+                <div class="run-count">11 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 63.63636363636363%, #ff4b4b 63.63636363636363%);"></div>
+        </a>
+        <a href="/relics/whispering-earring/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Whispering Earring</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a>
+        <a href="/relics/white-beast-statue/" class="card-item shared">
+            <div class="card-info"><span class="card-name">White Beast Statue</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">50% Winrate</div>
+                <div class="run-count">2 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
+        </a>
+        <a href="/relics/white-star/" class="card-item shared">
+            <div class="card-info"><span class="card-name">White Star</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #ff4b4b">0% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
+        </a>
+        <a href="/relics/wing-charm/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Wing Charm</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/wongo-customer-appreciation-badge/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Wongo Customer Appreciation Badge</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/wongos-mystery-ticket/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Wongo's Mystery Ticket</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #888"></div>
+                <div class="run-count">0 runs</div>
+            </div>
+            <div class="win-bar" style="background: #444;"></div>
+        </a>
+        <a href="/relics/yummy-cookie/" class="card-item shared">
+            <div class="card-info"><span class="card-name">Yummy Cookie</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: #00ff89">100% Winrate</div>
+                <div class="run-count">1 runs</div>
+            </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
+        </a></div>
 </body>
 </html>

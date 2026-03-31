@@ -11,7 +11,6 @@ import { PATHS, ensureDir, slugify } from './paths.js';
 const db = new sqlite3.Database(PATHS.DATABASE);
 
 const CATEGORIES = [
-    { table: 'relics', folder: 'relics', titleField: 'name' },
     { table: 'potions', folder: 'potions', titleField: 'name' },
     { table: 'monsters', folder: 'monsters', titleField: 'name' },
     { table: 'events', folder: 'events', titleField: 'name' },
@@ -54,7 +53,7 @@ function getCostDisplay(card) {
 
 async function getCardStats() {
     return new Promise((resolve, reject) => {
-        db.all("SELECT character, deck_list, win, username, yt_video, ltg_url FROM runs", (err, rows) => {
+        db.all("SELECT character, relic_list, deck_list, win, username, yt_video, ltg_url FROM runs", (err, rows) => {
             if (err) return reject(err);
             
             console.log(`📡 Database returned ${rows.length} run rows.`);
@@ -66,6 +65,7 @@ async function getCardStats() {
 
             const stats = {}; // Card stats
             const charStats = {}; // Character stats
+            const relicStats = {}; // Relic stats
             rows.forEach(row => {
                 const charId = (row.character || '').toUpperCase(); // Matches clean IDs like "SILENT"
                 if (!charStats[charId]) charStats[charId] = { seen: 0, wins: 0, videos: [] };
@@ -74,6 +74,17 @@ async function getCardStats() {
                 if (row.yt_video || row.ltg_url) {
                     charStats[charId].videos.push({ yt: row.yt_video, ltg: row.ltg_url });
                 }
+
+                const relics = JSON.parse(row.relic_list || '[]');
+                relics.forEach(relicId => {
+                    if (!relicStats[relicId]) relicStats[relicId] = { seen: 0, wins: 0, videos: [] };
+                    relicStats[relicId].seen++;
+                    if (row.win) relicStats[relicId].wins++;
+
+                    if (row.yt_video || row.ltg_url) {
+                        relicStats[relicId].videos.push({ yt: row.yt_video, ltg: row.ltg_url });
+                    }
+                });
 
                 const deck = JSON.parse(row.deck_list || '[]');
                 const uniqueCardsInDeck = new Set(deck.map(c => c.id || ''));
@@ -89,18 +100,20 @@ async function getCardStats() {
             });
             
             const uniqueCardsSeen = Object.keys(stats).length;
-            console.log(`📊 Processed stats for ${uniqueCardsSeen} unique cards across ${totalRuns} runs.`);
+            console.log(`📊 Processed stats for ${uniqueCardsSeen} cards and ${Object.keys(relicStats).length} relics across ${totalRuns} runs.`);
             console.log(` Character keys found in runs: [${Object.keys(charStats).join(', ')}]`);
 
             resolve({ 
                 stats, 
                 charStats,
+                relicStats,
                 globalWinRate, 
                 totalRuns, 
                 totalWins, 
                 totalLosses: totalRuns - totalWins, 
                 uniqueUsers, 
-                uniqueCardsSeen 
+                uniqueCardsSeen,
+                uniqueRelicsSeen: Object.keys(relicStats).length
             });
         });
     });
@@ -186,6 +199,142 @@ async function buildGeneralCategory(cat) {
             resolve();
         });
     });
+}
+
+async function buildRelics(relics, runStats) {
+    console.log(`🏺 Building ${relics.length} relic pages...`);
+    const root = ensureDir(path.join(PATHS.WEB_ROOT, 'relics'));
+
+    for (const relic of relics) {
+        const slug = slugify(relic.name);
+        const dir = ensureDir(path.join(root, slug));
+        
+        const cleanRelicId = (relic.relic_id || '').replace('RELIC.', '');
+        const stats = runStats.relicStats[cleanRelicId] || { seen: 0, wins: 0, videos: [] };
+        const winRateNum = stats.seen > 0 ? (stats.wins / stats.seen) * 100 : 0;
+        const winRate = winRateNum.toFixed(1);
+        
+        let wrColor = '#888'; 
+        if (stats.seen > 0) {
+            if (winRateNum > runStats.globalWinRate) wrColor = '#00ff89';
+            else if (winRateNum < runStats.globalWinRate) wrColor = '#ff4b4b';
+        }
+
+        let videosHtml = '';
+        if (stats.videos && stats.videos.length > 0) {
+            const videoLinks = stats.videos.map(v => {
+                let buttons = '';
+                if (v.ltg) buttons += `<a href="https://letstrygg.com${v.ltg}" class="vid-btn ltg-btn" target="_blank">Run Summary</a>`;
+                if (v.yt) buttons += `<a href="https://www.youtube.com/watch?v=${v.yt}" class="vid-btn yt-btn" target="_blank"><span class="material-symbols-outlined">smart_display</span> YouTube</a>`;
+                return `<div class="video-panel">${buttons}</div>`;
+            }).join('');
+
+            videosHtml = `<div class="featured-videos"><h3>Featured Videos</h3><div class="video-grid">${videoLinks}</div></div>`;
+        }
+
+        const subtitle = [relic.rarity, relic.pool ? `${relic.pool} Pool` : null].filter(Boolean).join(' • ');
+        const description = formatDescription(relic.description || relic.description_raw || "");
+
+        const detailHtml = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>${relic.name} - Spire 2 Stats</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; }
+        .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #888; }
+        .breadcrumbs a { color: #4a90e2; text-decoration: none; }
+        .breadcrumbs a:hover { text-decoration: underline; }
+        .stats-summary { background: #1a1a1a; border: 1px solid #333; padding: 20px; border-radius: 8px; margin-bottom: 30px; max-width: 800px; }
+        .stat-val { color: #ffd700; font-weight: bold; }
+        .relic-box { background: #1a1a1a; border: 1px solid #333; padding: 30px; border-radius: 12px; max-width: 700px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .subtitle { color: #888; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .description { line-height: 1.6; font-size: 1.15rem; margin-bottom: 20px; }
+        .flavor { color: #666; font-style: italic; border-top: 1px solid #222; padding-top: 15px; font-size: 0.95rem; }
+        .featured-videos { margin-top: 40px; max-width: 800px; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+        .video-panel { background: #1a1a1a; border: 1px solid #333; padding: 12px; border-radius: 8px; display: flex; flex-direction: column; gap: 8px; }
+        .vid-btn { display: flex; align-items: center; justify-content: center; padding: 8px; border-radius: 4px; text-decoration: none; font-size: 0.85rem; font-weight: bold; color: #fff; transition: background 0.2s; }
+        .ltg-btn { background: #333; } .ltg-btn:hover { background: #444; }
+        .yt-btn { background: #2a2a2a; border: 1px solid #444; } .yt-btn:hover { background: #333; }
+        .yt-btn .material-symbols-outlined { color: #ff4b4b; margin-right: 6px; font-size: 1.2rem; }
+    </style>
+</head>
+<body>
+    <nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/relics/">relics</a> / ${relic.name.toLowerCase()}</nav>
+    <div class="stats-summary">
+        <h2>Run Data</h2>
+        ${stats.seen > 0 ? `<p>This relic was held in <span class="stat-val">${stats.seen}</span> final decks with a <span class="stat-val" style="color: ${wrColor}">${winRate}%</span> winrate.</p>` : `<p>No runs recorded for this relic yet.</p>`}
+    </div>
+    <div class="relic-box">
+        <h1>${relic.name}</h1>
+        <div class="subtitle">${subtitle}</div>
+        <div class="description">${description}</div>
+        ${relic.flavor ? `<div class="flavor">${relic.flavor}</div>` : ''}
+    </div>
+    ${videosHtml}
+</body>
+</html>`;
+        fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
+    }
+
+    // Index Page
+    const relicLinks = relics.map(relic => {
+        const slug = slugify(relic.name);
+        const cleanRelicId = (relic.relic_id || '').replace('RELIC.', '');
+        const stats = runStats.relicStats[cleanRelicId] || { seen: 0, wins: 0 };
+        const winRateNum = stats.seen > 0 ? (stats.wins / stats.seen) * 100 : 0;
+        const poolClass = (relic.pool || 'shared').toLowerCase();
+
+        let wrText = '';
+        let wrColor = '#888';
+        let barStyle = 'background: #444;'; 
+        if (stats.seen > 0) {
+            wrText = `${winRateNum.toFixed(0)}% Winrate`;
+            if (winRateNum > runStats.globalWinRate) wrColor = '#00ff89';
+            else if (winRateNum < runStats.globalWinRate) wrColor = '#ff4b4b';
+            barStyle = `background: linear-gradient(to right, #00ff89 ${winRateNum}%, #ff4b4b ${winRateNum}%);`;
+        }
+
+        return `
+        <a href="/relics/${slug}/" class="card-item ${poolClass}">
+            <div class="card-info"><span class="card-name">${relic.name}</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: ${wrColor}">${wrText}</div>
+                <div class="run-count">${stats.seen} runs</div>
+            </div>
+            <div class="win-bar" style="${barStyle}"></div>
+        </a>`;
+    }).join('');
+
+    const indexHtml = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Relics Database - Spire 2 Stats</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <style>
+        body { background: #121212; color: #e0e0e0; font-family: sans-serif; padding: 40px; }
+        .breadcrumbs { margin-bottom: 20px; font-size: 0.9rem; color: #888; }
+        .breadcrumbs a { color: #4a90e2; text-decoration: none; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; }
+        .card-item { position: relative; overflow: hidden; background: #1a1a1a; border: 1px solid #333; padding: 15px; text-decoration: none; color: inherit; display: flex; justify-content: space-between; border-radius: 8px; transition: border-color 0.2s; }
+        .card-item:hover { border-color: #ffd700; }
+        .card-name { font-weight: bold; } .card-stats { text-align: right; } .win-rate { color: #ffd700; font-weight: bold; font-size: 1.1rem; } .run-count { font-size: 0.7rem; color: #666; text-transform: uppercase; } .win-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; }
+        .ironclad { border-left: 4px solid #ff4b4b; } .silent { border-left: 4px solid #00ff89; } .defect { border-left: 4px solid #4a90e2; } .necrobinder { border-left: 4px solid #c18cff; } .regent { border-left: 4px solid #e67e22; }
+    </style>
+</head>
+<body>
+    <nav class="breadcrumbs"><a href="/">spire2stats</a> / relics</nav>
+    <h1>Slay the Spire 2 Relics</h1>
+    <div class="grid">${relicLinks}</div>
+</body>
+</html>`;
+    fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
 }
 
 async function buildCharacters(chars, runStats) {
@@ -366,6 +515,13 @@ async function build() {
 
         const chars = await new Promise((resolve, reject) => {
             db.all("SELECT * FROM characters ORDER BY name ASC", (err, rows) => {
+                if (err) reject(err);
+                else resolve(rows);
+            });
+        });
+
+        const relics = await new Promise((resolve, reject) => {
+            db.all("SELECT * FROM relics ORDER BY name ASC", (err, rows) => {
                 if (err) reject(err);
                 else resolve(rows);
             });
@@ -611,9 +767,14 @@ async function build() {
         const uniqueCharsSeen = Object.keys(cardStats.charStats).length;
         const charSub = uniqueCharsSeen === totalChars ? totalChars : `${uniqueCharsSeen} / ${totalChars}`;
 
+        const totalRelics = relics.length;
+        const uniqueRelicsSeen = Object.keys(cardStats.relicStats).length;
+        const relicSub = uniqueRelicsSeen === totalRelics ? totalRelics : `${uniqueRelicsSeen} / ${totalRelics}`;
+
         // Generate the Cards link with stats first
         let landingLinks = `<a href="/cards/" class="item-link"><div>Cards</div><div class="stat-sub">${cardSub}</div></a>`;
         landingLinks += `<a href="/characters/" class="item-link"><div>Characters</div><div class="stat-sub">${charSub}</div></a>`;
+        landingLinks += `<a href="/relics/" class="item-link"><div>Relics</div><div class="stat-sub">${relicSub}</div></a>`;
 
         // Append the rest of the categories
         landingLinks += CATEGORIES.map(cat => {
@@ -680,6 +841,9 @@ async function build() {
 
         // --- CHARACTERS ---
         await buildCharacters(chars, cardStats);
+
+        // --- RELICS ---
+        await buildRelics(relics, cardStats);
 
         // --- GENERAL CATEGORY BUILDS ---
         for (const cat of CATEGORIES) {
