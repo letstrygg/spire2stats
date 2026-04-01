@@ -154,7 +154,7 @@ async function build() {
                         <div class="win-rate" style="color: ${statusColor}">${statusText}</div>
                         <div class="run-count">Ascension ${run.ascension || 0}</div>
                     </div>
-                    <div class="win-bar" style="background: ${statusColor};"></div>
+                    
                 </a>`;
             }).join('');
 
