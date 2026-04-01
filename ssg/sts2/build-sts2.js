@@ -660,7 +660,7 @@ async function buildContributePage(sitemap) {
                 <h2 style="color: var(--gold, #ffd700); font-size: 1.2rem;">Step 1: Locate your Run History</h2>
                 <p>On Windows, navigate to your Steam user data folder for Slay the Spire 2. It is usually located at:</p>
                 <div class="code-block" style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; border: 1px solid #444; font-family: monospace; word-break: break-all; margin: 15px 0;">
-                    C:\\Users\\<strong style="color: #4bff87; background: rgba(75, 255, 135, 0.1); padding: 2px 4px; border-radius: 3px;">{Your_Windows_Username}</strong>\\AppData\\Roaming\\SlayTheSpire2\\steam\\76561199053362469\\profile1\\saves
+                    C:\\Users\\<strong style="color: #4bff87; background: rgba(75, 255, 135, 0.1); padding: 2px 4px; border-radius: 3px;">{Your_Windows_Username}</strong>\\AppData\\Roaming\\SlayTheSpire2\\steam\\<strong style="color: #4bff87; background: rgba(75, 255, 135, 0.1); padding: 2px 4px; border-radius: 3px;">{Your_Steam_Folder}</strong>\\profile1\\saves
                 </div>
                 <p class="text-muted" style="font-size: 0.85rem;">Pro tip: You can also paste <strong style="color: #4bff87; background: rgba(75, 255, 135, 0.1); padding: 2px 4px; border-radius: 3px;"><code>%appdata%\\SlayTheSpire2\\steam</code></strong> into your File Explorer address bar to jump there more quickly.</p>
             </section>
