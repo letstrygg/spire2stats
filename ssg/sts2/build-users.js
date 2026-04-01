@@ -58,7 +58,8 @@ async function build() {
 
         const seedUsers = [
             { name: 'LetsTryGG', slug: 'letstrygg' },
-            { name: 'Falterfire', slug: 'falterfire' }
+            { name: 'Falterfire', slug: 'falterfire' },
+            { name: 'RarelyVlolent', slug: 'rarelyvlolent' }
         ];
 
         for (const user of seedUsers) {
