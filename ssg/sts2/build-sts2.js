@@ -262,7 +262,8 @@ async function getCardStats() {
                 uniqueCharsSeen: Object.keys(charStats).length,
                 uniqueAscensionsSeen: Object.keys(ascensionStats).length,
                 uniqueEnchantmentsSeen: Object.keys(enchantmentStats).length,
-                uniqueMonstersSeen: Object.keys(monsterStats).length
+                uniqueMonstersSeen: Object.keys(monsterStats).length,
+                uniqueEncountersSeen: Object.keys(encounterStats).length
             };
 }
 

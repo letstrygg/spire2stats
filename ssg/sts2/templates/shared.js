@@ -121,7 +121,7 @@ export function generateLethalityIndexSummary(runStats, lethalStats, label, tota
     <div class="averages-panel" style="margin: 20px 0; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
         <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px;">
             <div class="stat-item" style="text-align: center;">
-                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Total Faced</div>
+                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Total ${label} Faced</div>
                 <div class="stat-value" style="font-size: 1.5rem; font-weight: bold;">${totalFaced}</div>
             </div>
             <div class="stat-item" style="text-align: center;">
@@ -130,7 +130,7 @@ export function generateLethalityIndexSummary(runStats, lethalStats, label, tota
             </div>
             <div class="stat-item" style="text-align: center;">
                 <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Avg Lethality</div>
-                <div class="stat-value" style="font-size: 1.5rem; font-weight: bold; color: #ffb84b">${lethalityRate}%</div>
+                <div class="stat-value" style="font-size: 1.5rem; font-weight: bold; color: #ff4b4b">${lethalityRate}%</div>
             </div>
             <div class="stat-item" style="text-align: center;">
                 <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">${label} Seen</div>
