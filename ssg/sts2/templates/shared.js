@@ -82,6 +82,37 @@ export function generateVideoPanel(videos, title = "Associated Runs") {
     return `<div class="featured-videos"><h3>${title}</h3><div class="video-grid">${videoLinks}</div></div>`;
 }
 
+/** Generates a summary of average stats for encounters/events/monsters */
+export function generateAveragesPanel(stats, count, title = "Averages") {
+    if (!count || count === 0) return '';
+    const avg = (val) => (val / count).toFixed(1);
+    const goldTotal = (stats.gold_lost || 0) + (stats.gold_stolen || 0);
+    const maxHpDelta = (stats.max_hp_gained || 0) - (stats.max_hp_lost || 0);
+
+    return `
+    <div class="averages-panel" style="margin: 20px 0; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+        <h3 style="text-align: center; margin-top: 0; margin-bottom: 15px; color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">${title}</h3>
+        <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px;">
+            <div class="stat-item" style="text-align: center;">
+                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Avg Damage</div>
+                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold; color: #ff4b4b">${avg(stats.damage_taken || 0)}</div>
+            </div>
+            <div class="stat-item" style="text-align: center;">
+                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Avg Healed</div>
+                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold; color: #00ff89">${avg(stats.hp_healed || 0)}</div>
+            </div>
+            <div class="stat-item" style="text-align: center;">
+                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Avg Gold Loss</div>
+                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold; color: #ffb84b">${avg(goldTotal)}</div>
+            </div>
+            <div class="stat-item" style="text-align: center;">
+                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Max HP Change</div>
+                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold; color: ${maxHpDelta >= 0 ? '#00ff89' : '#ff4b4b'}">${maxHpDelta > 0 ? '+' : ''}${avg(maxHpDelta)}</div>
+            </div>
+        </div>
+    </div>`;
+}
+
 /** Generates a grid of links to runs with embedded video buttons */
 export function generateRunLinksList(runs, title = "Recent Runs") {
     if (!runs || runs.length === 0) return '';

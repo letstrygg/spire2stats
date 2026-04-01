@@ -11,6 +11,7 @@ import {
     generateSummaryPanel, 
     generateVideoPanel, 
     generateRunLinksList,
+    generateAveragesPanel,
     generateSemanticStatsParagraph, 
     wrapLayout, 
     formatDescription,
@@ -132,7 +133,7 @@ async function getCardStats() {
             });
 
             const updateStat = (obj, id, win, video, runMeta) => {
-                if (!obj[id]) obj[id] = { seen: 0, wins: 0, runs: [] };
+                if (!obj[id]) obj[id] = { seen: 0, wins: 0, runs: [], damage_taken: 0, hp_healed: 0, gold_lost: 0, gold_stolen: 0, max_hp_gained: 0, max_hp_lost: 0, occurrences: 0 };
                 obj[id].seen++;
                 if (win) obj[id].wins++;
                 
@@ -155,19 +156,48 @@ async function getCardStats() {
                 const pathHistory = JSON.parse(row.path_history || '[]');
                 const uniqueEventsInRun = new Set();
                 pathHistory.forEach(p => {
+                    const floorStats = {
+                        damage_taken: p.current_hp !== undefined ? (p.damage_taken || 0) : 0,
+                        hp_healed: p.hp_healed || 0,
+                        gold_lost: p.gold_lost || 0,
+                        gold_stolen: p.gold_stolen || 0,
+                        max_hp_gained: p.max_hp_gained || 0,
+                        max_hp_lost: p.max_hp_lost || 0
+                    };
+
                     if (p.event_id) {
-                        // Strip prefix to match events table IDs (e.g., 'EVENT.NEOW' -> 'NEOW')
-                        uniqueEventsInRun.add(p.event_id.replace('EVENT.', ''));
+                        const eid = p.event_id.replace('EVENT.', '');
+                        uniqueEventsInRun.add(eid);
+                        if (!eventStats[eid]) eventStats[eid] = { seen: 0, wins: 0, runs: [], damage_taken: 0, hp_healed: 0, gold_lost: 0, gold_stolen: 0, max_hp_gained: 0, max_hp_lost: 0, occurrences: 0 };
+                        eventStats[eid].occurrences++;
+                        eventStats[eid].damage_taken += floorStats.damage_taken;
+                        eventStats[eid].hp_healed += floorStats.hp_healed;
+                        eventStats[eid].gold_lost += floorStats.gold_lost;
+                        eventStats[eid].gold_stolen += floorStats.gold_stolen;
+                        eventStats[eid].max_hp_gained += floorStats.max_hp_gained;
+                        eventStats[eid].max_hp_lost += floorStats.max_hp_lost;
                     }
                     if (p.encounter_id) {
-                        if (!encounterStats[p.encounter_id]) encounterStats[p.encounter_id] = { encountered: 0, kills: 0, lethalRuns: [] };
+                        if (!encounterStats[p.encounter_id]) encounterStats[p.encounter_id] = { encountered: 0, kills: 0, lethalRuns: [], damage_taken: 0, hp_healed: 0, gold_lost: 0, gold_stolen: 0, max_hp_gained: 0, max_hp_lost: 0 };
                         encounterStats[p.encounter_id].encountered++;
+                        encounterStats[p.encounter_id].damage_taken += floorStats.damage_taken;
+                        encounterStats[p.encounter_id].hp_healed += floorStats.hp_healed;
+                        encounterStats[p.encounter_id].gold_lost += floorStats.gold_lost;
+                        encounterStats[p.encounter_id].gold_stolen += floorStats.gold_stolen;
+                        encounterStats[p.encounter_id].max_hp_gained += floorStats.max_hp_gained;
+                        encounterStats[p.encounter_id].max_hp_lost += floorStats.max_hp_lost;
                     }
                     if (p.monster_ids) {
                         p.monster_ids.forEach(mid => {
                             const cleanMid = mid.replace(/(_NORMAL|_BOSS|_ELITE)$/, '');
-                            if (!monsterStats[cleanMid]) monsterStats[cleanMid] = { encountered: 0, kills: 0, lethalRuns: [] };
+                            if (!monsterStats[cleanMid]) monsterStats[cleanMid] = { encountered: 0, kills: 0, lethalRuns: [], damage_taken: 0, hp_healed: 0, gold_lost: 0, gold_stolen: 0, max_hp_gained: 0, max_hp_lost: 0 };
                             monsterStats[cleanMid].encountered++;
+                            monsterStats[cleanMid].damage_taken += floorStats.damage_taken;
+                            monsterStats[cleanMid].hp_healed += floorStats.hp_healed;
+                            monsterStats[cleanMid].gold_lost += floorStats.gold_lost;
+                            monsterStats[cleanMid].gold_stolen += floorStats.gold_stolen;
+                            monsterStats[cleanMid].max_hp_gained += floorStats.max_hp_gained;
+                            monsterStats[cleanMid].max_hp_lost += floorStats.max_hp_lost;
                         });
                     }
                 });
@@ -177,7 +207,7 @@ async function getCardStats() {
                     const killerEncounter = row.killed_by_encounter;
                     
                     // Attribute kill to the encounter
-                    if (!encounterStats[killerEncounter]) encounterStats[killerEncounter] = { encountered: 0, kills: 0, lethalRuns: [] };
+                    if (!encounterStats[killerEncounter]) encounterStats[killerEncounter] = { encountered: 0, kills: 0, lethalRuns: [], damage_taken: 0, hp_healed: 0, gold_lost: 0, gold_stolen: 0, max_hp_gained: 0, max_hp_lost: 0 };
                     encounterStats[killerEncounter].kills++;
                     encounterStats[killerEncounter].lethalRuns.push(runMeta);
 
@@ -185,7 +215,7 @@ async function getCardStats() {
                     const associatedMonsters = encounterMap[killerEncounter] || [];
                     associatedMonsters.forEach(mid => {
                         const cleanMid = mid.replace(/(_NORMAL|_BOSS|_ELITE)$/, '');
-                        if (!monsterStats[cleanMid]) monsterStats[cleanMid] = { encountered: 0, kills: 0, lethalRuns: [] };
+                        if (!monsterStats[cleanMid]) monsterStats[cleanMid] = { encountered: 0, kills: 0, lethalRuns: [], damage_taken: 0, hp_healed: 0, gold_lost: 0, gold_stolen: 0, max_hp_gained: 0, max_hp_lost: 0 };
                         monsterStats[cleanMid].kills++;
                         monsterStats[cleanMid].lethalRuns.push(runMeta);
                     });
@@ -341,9 +371,10 @@ async function buildEvents(events, runStats, sitemap) {
         const slug = slugify(event.name);
         const dir = ensureDir(path.join(root, slug));
         
-        const rawStats = runStats.eventStats[event.event_id] || { seen: 0, wins: 0, runs: [] };
+        const rawStats = runStats.eventStats[event.event_id] || { seen: 0, wins: 0, runs: [], occurrences: 0 };
         const stats = getItemStats(rawStats, runStats.globalWinRate);
-        const videosHtml = generateRunLinksList(rawStats.runs, `Runs featuring ${event.name}`);
+        const averagesHtml = generateAveragesPanel(rawStats, rawStats.occurrences, "Averages per event visit");
+        const videosHtml = averagesHtml + generateRunLinksList(rawStats.runs, `Runs featuring ${event.name}`);
         const detailHtml = eventDetailTemplate(event, stats, videosHtml);
         fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
         sitemap.add(`/events/${slug}/`);
@@ -564,6 +595,7 @@ async function buildEncounters(encounters, runStats, sitemap) {
         
         const stats = runStats.encounterStats[encounter.encounter_id] || { encountered: 0, kills: 0, lethalRuns: [] };
         const lethalRunsHtml = generateRunLinksList(stats.lethalRuns, `Runs where ${encounter.name} defeated the player`);
+        const averagesHtml = generateAveragesPanel(stats, stats.encountered, "Averages for this encounter");
         const subtitle = [encounter.room_type, encounter.act].filter(Boolean).join(' • ');
         
         const detailHtml = wrapLayout(
@@ -577,6 +609,7 @@ async function buildEncounters(encounters, runStats, sitemap) {
                     <p>Total Player Kills: <strong style="color: #ff4b4b; font-size: 1.2em;">${stats.kills}</strong></p>
                 </div>
             </div>
+            ${averagesHtml}
             ${lethalRunsHtml ? `<div style="margin-top: 40px;"><h3>Lethal Runs</h3><p class="text-muted">Runs where this encounter defeated the player:</p>${lethalRunsHtml}</div>` : ''}`,
             [{ name: 'encounters', url: '/encounters/' }, { name: encounter.name, url: '' }],
             `${encounter.name} encounter lethality statistics and history for Slay the Spire 2.`,
@@ -619,6 +652,7 @@ async function buildMonsters(monsters, runStats, sitemap) {
         
         const stats = runStats.monsterStats[monster.monster_id] || { encountered: 0, kills: 0, lethalRuns: [] };
         const lethalRunsHtml = generateRunLinksList(stats.lethalRuns, `Runs where ${monster.name} killed the player`);
+        const averagesHtml = generateAveragesPanel(stats, stats.encountered, "Averages for encounters with this monster");
         const subtitle = [monster.type, monster.min_hp ? `${monster.min_hp}-${monster.max_hp} HP` : null].filter(Boolean).join(' • ');
         
         const detailHtml = wrapLayout(
@@ -632,6 +666,7 @@ async function buildMonsters(monsters, runStats, sitemap) {
                     <p>Total Kills: <strong style="color: #ff4b4b; font-size: 1.2em;">${stats.kills}</strong></p>
                 </div>
             </div>
+            ${averagesHtml}
             ${lethalRunsHtml ? `<div style="margin-top: 40px;"><h3>Lethal Runs</h3><p class="text-muted">Runs where this monster delivered the finishing blow:</p>${lethalRunsHtml}</div>` : ''}`,
             [{ name: 'monsters', url: '/monsters/' }, { name: monster.name, url: '' }],
             `${monster.name} lethality statistics and kill history for Slay the Spire 2.`,
