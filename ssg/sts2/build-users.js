@@ -168,7 +168,7 @@ async function build() {
                 }
 
                 return `
-                <div class="card-item ${statusClass} ${charClass}" style="border-left-width: 2px; --char-color: ${charColor}; display: flex; flex-direction: column;">
+                <div class="card-item ${statusClass} ${charClass}" style="display: flex; flex-direction: column;">
                     <a href="/users/${user.slug}/runs/${run.id}/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
                         <div class="card-info">
                             <span class="card-name">
@@ -189,7 +189,6 @@ async function build() {
             const indexHtml = wrapLayout(
                 user.display_name,
                 `<style>
-                    .card-item:hover { border-color: var(--char-color) !important; }
                     .run-video-links { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 8px; }
                     .run-vid-btn { 
                         padding: 2px 8px; 
