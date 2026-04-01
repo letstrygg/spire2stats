@@ -1,9 +1,8 @@
-import { wrapLayout, generateSemanticStatsParagraph, generateItemJsonLd, formatDescription, getCharacterBgStyle } from './shared.js';
+import { wrapLayout, generateSemanticStatsParagraph, generateItemJsonLd, formatDescription } from './shared.js';
 
 export function relicDetailTemplate(relic, stats, videosHtml) {
     const subtitle = [relic.rarity, relic.pool ? `${relic.pool} Pool` : null].filter(Boolean).join(' • ');
     const descriptionHtml = formatDescription(relic.description || relic.description_raw || "");
-    const bgStyle = getCharacterBgStyle(relic.pool);
 
     return wrapLayout(
         relic.name,
@@ -11,7 +10,7 @@ export function relicDetailTemplate(relic, stats, videosHtml) {
         <div class="stats-summary">
             ${generateSemanticStatsParagraph(relic.name, stats, 'relic')}
         </div>
-        <div class="relic-box" style="${bgStyle}">
+        <div class="relic-box">
             <h1>${relic.name}</h1>
             <div class="subtitle">${subtitle}</div>
             <div class="description">${descriptionHtml}</div>

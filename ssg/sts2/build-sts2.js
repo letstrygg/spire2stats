@@ -96,7 +96,7 @@ function getCostDisplay(card) {
 }
 
 /** Helper to generate standardized card-item HTML for index pages */
-function generateCardItemHtml(url, name, stats, extraClass = '', bgStyle = '') {
+function generateCardItemHtml(url, name, stats, extraClass = '') {
     let subtitleHtml = '';
     if (extraClass && name.toLowerCase() !== extraClass.toLowerCase()) {
         const charId = extraClass.toUpperCase();
@@ -105,7 +105,7 @@ function generateCardItemHtml(url, name, stats, extraClass = '', bgStyle = '') {
     }
 
     return `
-    <a href="${url}" class="card-item ${extraClass ? extraClass.toLowerCase() : ''}" style="${bgStyle}" aria-label="${name}: ${stats.seen} runs, ${stats.text}">
+    <a href="${url}" class="card-item ${extraClass ? extraClass.toLowerCase() : ''}" aria-label="${name}: ${stats.seen} runs, ${stats.text}">
         <div class="card-info"><span class="card-name">${name}${subtitleHtml}</span></div>
         <div class="card-stats">
             <div class="win-rate" style="color: ${stats.color}">${stats.text}</div>
@@ -356,8 +356,7 @@ async function buildRelics(relics, runStats, sitemap) {
         const cleanRelicId = (relic.relic_id || '').replace('RELIC.', '');
         const stats = getItemStats(runStats.relicStats[cleanRelicId], runStats.globalWinRate);
         const poolClass = (relic.pool || 'shared').toLowerCase();
-        const bgStyle = getCharacterBgStyle(relic.pool);
-        return generateCardItemHtml(`/relics/${slug}/`, relic.name, stats, poolClass, bgStyle);
+        return generateCardItemHtml(`/relics/${slug}/`, relic.name, stats, poolClass);
     }).join('');
 
     const indexDesc = `View global winrates, run statistics, and win/loss records for all Slay the Spire 2 relics.`;
@@ -544,8 +543,7 @@ async function buildCharacters(chars, runStats, sitemap) {
                 const charCards = await query("SELECT * FROM cards WHERE LOWER(color) = ? ORDER BY rarity, name ASC", [displayName.toLowerCase()]);
                 const cardItemsHtml = charCards.map(c => {
                     const cStats = getItemStats(runStats.stats[c.card_id], runStats.globalWinRate);
-                    const bgStyle = getCharacterBgStyle(displayName);
-                    return `<a href="/cards/${slugify(c.name)}/" class="card-item ${displayName.toLowerCase()}" style="${bgStyle}">
+                    return `<a href="/cards/${slugify(c.name)}/" class="card-item ${displayName.toLowerCase()}">
                         <div class="card-info"><span class="card-name">${c.name}</span></div>
                         <div class="card-stats"><div class="win-rate">${cStats.text}</div><div class="run-count">${cStats.seen} runs</div></div>
                         <div class="win-bar" style="${cStats.bar}"></div>
@@ -557,8 +555,7 @@ async function buildCharacters(chars, runStats, sitemap) {
                 const relicItemsHtml = charRelics.map(r => {
                     const cleanRelicId = (r.relic_id || '').replace('RELIC.', '');
                     const rStats = getItemStats(runStats.relicStats[cleanRelicId], runStats.globalWinRate);
-                    const bgStyle = getCharacterBgStyle(displayName);
-                    return `<a href="/relics/${slugify(r.name)}/" class="card-item ${displayName.toLowerCase()}" style="${bgStyle}" aria-label="${r.name}: ${rStats.seen} runs, ${rStats.text}">
+                    return `<a href="/relics/${slugify(r.name)}/" class="card-item ${displayName.toLowerCase()}" aria-label="${r.name}: ${rStats.seen} runs, ${rStats.text}">
                         <div class="card-info"><span class="card-name">${r.name}</span></div>
                         <div class="card-stats">
                             <div class="win-rate" style="color: ${rStats.color}">${rStats.text}</div>
@@ -579,7 +576,7 @@ async function buildCharacters(chars, runStats, sitemap) {
                 const displayName = c.name.replace(/^The\s+/i, '');
                 const charKey = (c.character_id || '').replace('CHARACTER.', '').toUpperCase();
                 const stats = getItemStats(runStats.charStats[charKey], runStats.globalWinRate);
-                return generateCardItemHtml(`/characters/${slugify(displayName)}/`, displayName, stats, displayName.toLowerCase(), '');
+                return generateCardItemHtml(`/characters/${slugify(displayName)}/`, displayName, stats, displayName.toLowerCase());
             }).join('');
 
             const indexDesc = `View global winrates, run statistics, and win/loss records for all Slay the Spire 2 characters.`;
@@ -859,8 +856,7 @@ async function build() {
             const slug = slugify(card.name);
             const cleanCardId = (card.card_id || '').replace('CARD.', '');
             const stats = getItemStats(cardStats.stats[cleanCardId], cardStats.globalWinRate);
-            const bgStyle = getCharacterBgStyle(card.color);
-            return generateCardItemHtml(`/cards/${slug}/`, card.name, stats, card.color, bgStyle);
+        return generateCardItemHtml(`/cards/${slug}/`, card.name, stats, card.color);
         }).join('');
 
         const indexDesc = `View global winrates, run statistics, and pick-rate records for all Slay the Spire 2 cards.`;
