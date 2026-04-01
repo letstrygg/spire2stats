@@ -86,6 +86,25 @@ export function generateVideoPanel(videos, title = "Associated Runs") {
     return `<div class="featured-videos"><h3>${title}</h3><div class="video-grid">${videoLinks}</div></div>`;
 }
 
+/** Generates a summary box for monster/encounter lethality */
+export function generateLethalitySummaryBox(stats, label = "Monster") {
+    const encounteredLabel = label === "Monster" ? "Times Encountered" : "Times Faced";
+    const killsLabel = label === "Monster" ? "Total Kills" : "Player Kills";
+    return `
+    <div class="averages-panel" style="margin: 20px 0; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+        <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
+            <div class="stat-item" style="text-align: center;">
+                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">${encounteredLabel}</div>
+                <div class="stat-value" style="font-size: 1.5rem; font-weight: bold;">${stats.encountered || 0}</div>
+            </div>
+            <div class="stat-item" style="text-align: center;">
+                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">${killsLabel}</div>
+                <div class="stat-value" style="font-size: 1.5rem; font-weight: bold; color: #ff4b4b">${stats.kills || 0}</div>
+            </div>
+        </div>
+    </div>`;
+}
+
 /** Generates a summary of average stats for encounters/events/monsters */
 export function generateAveragesPanel(stats, count, title = "Averages") {
     if (!count || count === 0) return '';

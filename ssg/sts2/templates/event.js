@@ -1,6 +1,6 @@
-import { wrapLayout, generateSemanticStatsParagraph, generateItemJsonLd, formatDescription } from './shared.js';
+import { wrapLayout, generateItemSummaryBox, generateItemJsonLd, formatDescription } from './shared.js';
 
-export function eventDetailTemplate(event, stats, videosHtml) {
+export function eventDetailTemplate(event, stats, averagesHtml, videosHtml) {
     const options = JSON.parse(event.options || '[]');
     let optionsHtml = '';
     if (options.length > 0) {
@@ -21,9 +21,8 @@ export function eventDetailTemplate(event, stats, videosHtml) {
     return wrapLayout(
         event.name, 
         `
-        <div class="stats-summary">
-            ${generateSemanticStatsParagraph(event.name, stats, 'event')}
-        </div>
+        ${generateItemSummaryBox(event.name, stats)}
+        ${averagesHtml}
         <div class="event-box">
             <h1>${event.name}</h1>
             <div class="subtitle">${event.act || 'Unknown Act'} • ${event.type || 'Event'}</div>

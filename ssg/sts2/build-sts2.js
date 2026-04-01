@@ -12,6 +12,7 @@ import {
     generateVideoPanel, 
     generateRunLinksList,
     generateAveragesPanel,
+    generateLethalitySummaryBox,
     generateSemanticStatsParagraph, 
     wrapLayout, 
     formatDescription,
@@ -375,8 +376,8 @@ async function buildEvents(events, runStats, sitemap) {
         const rawStats = runStats.eventStats[cleanId] || { seen: 0, wins: 0, runs: [], occurrences: 0 };
         const stats = getItemStats(rawStats, runStats.globalWinRate);
         const averagesHtml = generateAveragesPanel(rawStats, rawStats.occurrences, "Averages per event visit");
-        const videosHtml = averagesHtml + generateRunLinksList(rawStats.runs, `Runs featuring ${event.name}`);
-        const detailHtml = eventDetailTemplate(event, stats, videosHtml);
+        const videosHtml = generateRunLinksList(rawStats.runs, `Runs featuring ${event.name}`);
+        const detailHtml = eventDetailTemplate(event, stats, averagesHtml, videosHtml);
         fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
         sitemap.add(`/events/${slug}/`);
     }
@@ -603,15 +604,15 @@ async function buildEncounters(encounters, runStats, sitemap) {
         const detailHtml = wrapLayout(
             encounter.name, 
             `
+            ${generateLethalitySummaryBox(stats, "Encounter")}
+            ${averagesHtml}
             <div class="item-box">
                 <h1>${encounter.name}</h1>
                 <div class="subtitle">${subtitle}</div>
                 <div class="description">
-                    <p>This encounter has been faced <strong>${stats.encountered}</strong> times.</p>
-                    <p>Total Player Kills: <strong style="color: #ff4b4b; font-size: 1.2em;">${stats.kills}</strong></p>
+                    <p>Encounter composition and historical statistics from tracked Slay the Spire 2 gameplay.</p>
                 </div>
             </div>
-            ${averagesHtml}
             ${lethalRunsHtml ? `<div style="margin-top: 40px;"><h3>Lethal Runs</h3><p class="text-muted">Runs where this encounter defeated the player:</p>${lethalRunsHtml}</div>` : ''}`,
             [{ name: 'encounters', url: '/encounters/' }, { name: encounter.name, url: '' }],
             `${encounter.name} encounter lethality statistics and history for Slay the Spire 2.`,
@@ -662,15 +663,15 @@ async function buildMonsters(monsters, runStats, sitemap) {
         const detailHtml = wrapLayout(
             monster.name, 
             `
+            ${generateLethalitySummaryBox(stats, "Monster")}
+            ${averagesHtml}
             <div class="item-box">
                 <h1>${monster.name}</h1>
                 <div class="subtitle">${subtitle}</div>
                 <div class="description">
-                    <p>This monster has been encountered <strong>${stats.encountered}</strong> times.</p>
-                    <p>Total Kills: <strong style="color: #ff4b4b; font-size: 1.2em;">${stats.kills}</strong></p>
+                    <p>Monster behavior data and finishing blow records for Slay the Spire 2.</p>
                 </div>
             </div>
-            ${averagesHtml}
             ${lethalRunsHtml ? `<div style="margin-top: 40px;"><h3>Lethal Runs</h3><p class="text-muted">Runs where this monster delivered the finishing blow:</p>${lethalRunsHtml}</div>` : ''}`,
             [{ name: 'monsters', url: '/monsters/' }, { name: monster.name, url: '' }],
             `${monster.name} lethality statistics and kill history for Slay the Spire 2.`,
