@@ -571,8 +571,7 @@ async function buildCharacters(chars, runStats, sitemap) {
                 const displayName = c.name.replace(/^The\s+/i, '');
                 const charKey = (c.character_id || '').replace('CHARACTER.', '').toUpperCase();
                 const stats = getItemStats(runStats.charStats[charKey], runStats.globalWinRate);
-                const bgStyle = getCharacterBgStyle(displayName);
-                return generateCardItemHtml(`/characters/${slugify(displayName)}/`, displayName, stats, displayName.toLowerCase(), bgStyle);
+                return generateCardItemHtml(`/characters/${slugify(displayName)}/`, displayName, stats, displayName.toLowerCase(), '');
             }).join('');
 
             const indexDesc = `View global winrates, run statistics, and win/loss records for all Slay the Spire 2 characters.`;
