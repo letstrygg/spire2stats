@@ -124,7 +124,17 @@ async function run() {
                         const entry = {
                             floor: pt.floor ?? (idx + 1), // Use index as fallback floor if property is missing
                             room_type: room.room_type,
-                            hp: stats.current_hp
+                            current_hp: stats.current_hp,
+                            max_hp: stats.max_hp,
+                            current_gold: stats.current_gold,
+                            damage_taken: stats.damage_taken,
+                            hp_healed: stats.hp_healed,
+                            gold_gained: stats.gold_gained,
+                            gold_lost: stats.gold_lost,
+                            gold_spent: stats.gold_spent,
+                            gold_stolen: stats.gold_stolen,
+                            max_hp_gained: stats.max_hp_gained,
+                            max_hp_lost: stats.max_hp_lost
                         };
 
                         if (['boss', 'monster', 'elite'].includes(room.room_type)) {

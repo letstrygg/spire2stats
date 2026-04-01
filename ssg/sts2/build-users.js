@@ -178,7 +178,7 @@ async function build() {
                 const floorData = Array.isArray(pathHistory) 
                     ? pathHistory.map((p, idx) => ({ 
                         floor: p.floor ?? (idx + 1), 
-                        hp: p.hp 
+                        hp: p.current_hp 
                     })).filter(p => p.hp !== undefined)
                     : [];
 
