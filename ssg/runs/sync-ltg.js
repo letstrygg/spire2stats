@@ -13,7 +13,8 @@ const SCRIPTS = [
     'ssg/runs/unpkg-runs.js',   // 2. Unpack from runs_pkg to runs_unpkg
     'ssg/runs/input-runs.js',   // 3. Import to SQLite and archive to runs_processed
     'ssg/runs/input-videos.js', // 4. Sync YouTube IDs/URLs from Supabase
-    'ssg/sts2/build-sts2.js'    // 5. Re-build sts2 directory
+    'ssg/sts2/build-sts2.js',   // 5. Re-build sts2 directory
+    'ssg/sts2/build-users.js'   // 6. Re-build user directory and run pages
 ];
 
 async function runSync() {

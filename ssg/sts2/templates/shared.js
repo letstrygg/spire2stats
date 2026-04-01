@@ -94,7 +94,7 @@ export function generateRunLinksList(runs, globalWinRate) {
         
         return `
         <a href="/users/${userSlug}/runs/${run.id}/" class="card-item ${statusClass}" style="padding: 10px; font-size: 0.9rem;">
-            <div class="card-info"><span class="card-name">Run by ${run.username}</span></div>
+            <div class="card-info"><span class="card-name">Run ${run.user_run_num} ${run.username}</span></div>
             <div class="card-stats">
                 <div class="win-rate" style="color: ${statusColor}">${statusText}</div>
             </div>
