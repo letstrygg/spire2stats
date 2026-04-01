@@ -146,7 +146,7 @@ async function build() {
                 const runNumber = run.user_run_num;
                 
                 return `
-                <a href="/users/${user.slug}/runs/${run.id}/" class="card-item ${statusClass} ${charClass}" style="${bgStyle}">
+                <a href="/users/${user.slug}/runs/${run.id}/" class="card-item ${statusClass} ${charClass}" style="border-left-width: 6px;">
                     <div class="card-info">
                         <span class="card-name">Run ${runNumber} - ${charName}</span>
                     </div>
@@ -154,6 +154,7 @@ async function build() {
                         <div class="win-rate" style="color: ${statusColor}">${statusText}</div>
                         <div class="run-count">Ascension ${run.ascension || 0}</div>
                     </div>
+                    <div class="win-bar" style="background: ${statusColor};"></div>
                 </a>`;
             }).join('');
 
