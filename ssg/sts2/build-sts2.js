@@ -132,10 +132,14 @@ async function getCardStats() {
             });
 
             const updateStat = (obj, id, win, video, runMeta) => {
-                if (!obj[id]) obj[id] = { seen: 0, wins: 0, videos: [], runs: [] };
+                if (!obj[id]) obj[id] = { seen: 0, wins: 0, runs: [] };
                 obj[id].seen++;
                 if (win) obj[id].wins++;
-                if (video.yt || video.ltg) obj[id].videos.push(video);
+                
+                if (!runMeta.video && (video.yt || video.ltg)) {
+                    runMeta.video = video;
+                }
+                
                 obj[id].runs.push(runMeta);
             };
 
@@ -291,11 +295,9 @@ async function buildRelics(relics, runStats, sitemap) {
         const dir = ensureDir(path.join(root, slug));
         
         const cleanRelicId = (relic.relic_id || '').replace('RELIC.', '');
-        const rawStats = runStats.relicStats[cleanRelicId] || { seen: 0, wins: 0, videos: [] };
+        const rawStats = runStats.relicStats[cleanRelicId] || { seen: 0, wins: 0, runs: [] };
         const stats = getItemStats(rawStats, runStats.globalWinRate);
-        const runsHtml = generateRunLinksList(rawStats.runs, runStats.globalWinRate);
-
-        const videosHtml = generateVideoPanel(rawStats.videos, "Featured Videos") + runsHtml;
+        const videosHtml = generateRunLinksList(rawStats.runs, `Runs featuring ${relic.name}`);
         const subtitle = [relic.rarity, relic.pool ? `${relic.pool} Pool` : null].filter(Boolean).join(' • ');
         const descriptionHtml = formatDescription(relic.description || relic.description_raw || "");
 
@@ -339,11 +341,9 @@ async function buildEvents(events, runStats, sitemap) {
         const slug = slugify(event.name);
         const dir = ensureDir(path.join(root, slug));
         
-        const rawStats = runStats.eventStats[event.event_id] || { seen: 0, wins: 0, videos: [] };
+        const rawStats = runStats.eventStats[event.event_id] || { seen: 0, wins: 0, runs: [] };
         const stats = getItemStats(rawStats, runStats.globalWinRate);
-        const runsHtml = generateRunLinksList(rawStats.runs, runStats.globalWinRate);
-
-        const videosHtml = generateVideoPanel(rawStats.videos) + runsHtml;
+        const videosHtml = generateRunLinksList(rawStats.runs, `Runs featuring ${event.name}`);
         const detailHtml = eventDetailTemplate(event, stats, videosHtml);
         fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
         sitemap.add(`/events/${slug}/`);
@@ -382,10 +382,9 @@ async function buildAscensions(ascensions, runStats, sitemap) {
         const slug = slugify(title);
         const dir = ensureDir(path.join(root, slug));
         
-        const rawStats = runStats.ascensionStats[String(asc.level)] || { seen: 0, wins: 0, videos: [] };
+        const rawStats = runStats.ascensionStats[String(asc.level)] || { seen: 0, wins: 0, runs: [] };
         const stats = getItemStats(rawStats, runStats.globalWinRate);
-        const runsHtml = generateRunLinksList(rawStats.runs, runStats.globalWinRate);
-        const videosHtml = generateVideoPanel(rawStats.videos) + runsHtml;
+        const videosHtml = generateRunLinksList(rawStats.runs, `Runs at Ascension ${asc.level}`);
 
         const detailHtml = wrapLayout(
             title, 
@@ -434,11 +433,9 @@ async function buildEnchantments(enchantments, runStats, sitemap) {
         const dir = ensureDir(path.join(root, slug));
         
         const cleanId = (enchantment.enchantment_id || '').replace('ENCHANTMENT.', '');
-        const rawStats = runStats.enchantmentStats[cleanId] || { seen: 0, wins: 0, videos: [] };
+        const rawStats = runStats.enchantmentStats[cleanId] || { seen: 0, wins: 0, runs: [] };
         const stats = getItemStats(rawStats, runStats.globalWinRate);
-
-        const runsHtml = generateRunLinksList(rawStats.runs, runStats.globalWinRate);
-        const videosHtml = generateVideoPanel(rawStats.videos) + runsHtml;
+        const videosHtml = generateRunLinksList(rawStats.runs, `Runs featuring ${enchantment.name}`);
         const descriptionHtml = formatDescription(enchantment.description || "");
         const extraText = enchantment.extra_card_text ? `<div class="extra-text">Adds: ${formatDescription(enchantment.extra_card_text)}</div>` : '';
 
@@ -492,14 +489,13 @@ async function buildCharacters(chars, runStats, sitemap) {
 
         console.log(`🔍 Mapping Character: "${displayName}" (ID: ${charKey})`);
 
-        const rawStats = runStats.charStats[charKey] || { seen: 0, wins: 0, videos: [] };
+        const rawStats = runStats.charStats[charKey] || { seen: 0, wins: 0, runs: [] };
         const stats = getItemStats(rawStats, runStats.globalWinRate);
                 
         if (rawStats.seen > 0) console.log(`   ✅ Found ${rawStats.seen} runs for ${charKey}`);
         else console.log(`   ⚠️ No runs found for ID "${charKey}"`);
 
-                const runsHtml = generateRunLinksList(rawStats.runs, runStats.globalWinRate);
-                const videosHtml = generateVideoPanel(rawStats.videos) + runsHtml;
+                const videosHtml = generateRunLinksList(rawStats.runs, `Recent Runs as ${displayName}`);
 
                 // Character Cards
                 const charCards = await query("SELECT * FROM cards WHERE LOWER(color) = ? ORDER BY rarity, name ASC", [displayName.toLowerCase()]);
@@ -567,8 +563,7 @@ async function buildEncounters(encounters, runStats, sitemap) {
         const dir = ensureDir(path.join(root, slug));
         
         const stats = runStats.encounterStats[encounter.encounter_id] || { encountered: 0, kills: 0, lethalRuns: [] };
-        const lethalRunsHtml = generateRunLinksList(stats.lethalRuns, runStats.globalWinRate);
-
+        const lethalRunsHtml = generateRunLinksList(stats.lethalRuns, `Runs where ${encounter.name} defeated the player`);
         const subtitle = [encounter.room_type, encounter.act].filter(Boolean).join(' • ');
         
         const detailHtml = wrapLayout(
@@ -623,8 +618,7 @@ async function buildMonsters(monsters, runStats, sitemap) {
         const dir = ensureDir(path.join(root, slug));
         
         const stats = runStats.monsterStats[monster.monster_id] || { encountered: 0, kills: 0, lethalRuns: [] };
-        const lethalRunsHtml = generateRunLinksList(stats.lethalRuns, runStats.globalWinRate);
-
+        const lethalRunsHtml = generateRunLinksList(stats.lethalRuns, `Runs where ${monster.name} killed the player`);
         const subtitle = [monster.type, monster.min_hp ? `${monster.min_hp}-${monster.max_hp} HP` : null].filter(Boolean).join(' • ');
         
         const detailHtml = wrapLayout(
@@ -711,10 +705,8 @@ async function build() {
             
             const cleanCardId = (card.card_id || '').replace('CARD.', '');
             const stats = getItemStats(cardStats.stats[cleanCardId], cardStats.globalWinRate);
-            const rawStats = cardStats.stats[cleanCardId] || { videos: [], runs: [] };
-            const runsHtml = generateRunLinksList(rawStats.runs, cardStats.globalWinRate);
-
-            const videosHtml = generateVideoPanel(rawStats.videos, "Featured Videos") + runsHtml;
+            const rawStats = cardStats.stats[cleanCardId] || { runs: [] };
+            const videosHtml = generateRunLinksList(rawStats.runs, `Runs featuring ${card.name}`);
 
             const detailHtml = cardDetailTemplate(card, stats, videosHtml, costDisplay);
 

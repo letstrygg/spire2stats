@@ -82,26 +82,66 @@ export function generateVideoPanel(videos, title = "Associated Runs") {
     return `<div class="featured-videos"><h3>${title}</h3><div class="video-grid">${videoLinks}</div></div>`;
 }
 
-/** Generates a grid of links to runs */
-export function generateRunLinksList(runs, globalWinRate) {
+/** Generates a grid of links to runs with embedded video buttons */
+export function generateRunLinksList(runs, title = "Recent Runs") {
     if (!runs || runs.length === 0) return '';
     
+    const style = `
+    <style>
+        .run-video-links { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 8px; }
+        .run-vid-btn { 
+            background: rgba(255,255,255,0.05); 
+            border: 1px solid rgba(255,255,255,0.1); 
+            padding: 2px 8px; 
+            border-radius: 4px; 
+            color: #ccc; 
+            text-decoration: none; 
+            font-size: 0.7rem; 
+            font-weight: bold; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 4px;
+            transition: all 0.2s;
+        }
+        .run-vid-btn:hover { background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.3); }
+        .run-vid-btn .material-symbols-outlined { font-size: 16px; }
+    </style>`;
+
     const links = runs.slice(0, 12).map(run => {
         const statusClass = run.win ? 'win' : 'loss';
         const statusText = run.win ? 'Victory' : 'Defeat';
         const statusColor = run.win ? '#00ff89' : '#ff4b4b';
         const userSlug = run.username.toLowerCase();
+
+        let videoButtons = '';
+        if (run.video) {
+            if (run.video.ltg) {
+                const match = run.video.ltg.match(/s(\d+)e(\d+)\.html/i);
+                const epLabel = match ? `S${match[1].padStart(2, '0')}E${match[2].padStart(2, '0')}` : 'Run';
+                videoButtons += `<a href="https://letstrygg.com${run.video.ltg}" class="run-vid-btn ltg" target="_blank">${epLabel}</a>`;
+            }
+            if (run.video.yt) {
+                videoButtons += `
+                <a href="https://www.youtube.com/watch?v=${run.video.yt}" class="run-vid-btn yt" target="_blank">
+                    <span class="material-symbols-outlined" style="color: #ff4b4b;">smart_display</span>YouTube
+                </a>`;
+            }
+        }
         
         return `
-        <a href="/users/${userSlug}/runs/${run.id}/" class="card-item ${statusClass}" style="padding: 10px; font-size: 0.9rem;">
-            <div class="card-info"><span class="card-name">Run ${run.user_run_num} ${run.username}</span></div>
-            <div class="card-stats">
-                <div class="win-rate" style="color: ${statusColor}">${statusText}</div>
-            </div>
-        </a>`;
+        <div class="card-item ${statusClass}" style="padding: 10px; font-size: 0.9rem; display: flex; flex-direction: column; justify-content: space-between;">
+            <a href="/users/${userSlug}/runs/${run.id}/" style="text-decoration: none; color: inherit; display: block; flex-grow: 1;">
+                <div class="card-info"><span class="card-name">Run ${run.user_run_num} ${run.username}</span></div>
+                <div class="card-stats">
+                    <div class="win-rate" style="color: ${statusColor}">${statusText}</div>
+                </div>
+            </a>
+            ${videoButtons ? `<div class="run-video-links">${videoButtons}</div>` : ''}
+            <div class="win-bar" style="background: ${run.win ? '#00ff89' : '#ff4b4b'};"></div>
+        </div>`;
     }).join('');
 
-    return `<div class="recent-runs" style="margin-top: 30px;"><h3>Recent Runs</h3><div class="grid">${links}</div></div>`;
+    return `${style}<div class="recent-runs" style="margin-top: 30px;"><h3>${title}</h3><div class="grid">${links}</div></div>`;
 }
 
 export function generateSemanticStatsParagraph(name, stats, contextLabel) {
