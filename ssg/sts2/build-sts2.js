@@ -32,7 +32,6 @@ const db = new sqlite3.Database(PATHS.DATABASE);
 
 const CATEGORIES = [
     { table: 'potions', folder: 'potions', titleField: 'name' },
-    { table: 'monsters', folder: 'monsters', titleField: 'name' },
     { table: 'encounters', folder: 'encounters', titleField: 'name' },
     { table: 'acts', folder: 'acts', titleField: 'name' },
     { table: 'achievements', folder: 'achievements', titleField: 'name' },
@@ -94,11 +93,11 @@ function getCostDisplay(card) {
 }
 
 async function getCardStats() {
-    const rows = await query("SELECT id, user_run_num, character, relic_list, deck_list, path_history, win, username, yt_video, ltg_url, ascension FROM runs");
+    const rows = await query("SELECT id, user_run_num, character, relic_list, deck_list, path_history, win, username, yt_video, ltg_url, ascension, killed_by_encounter FROM runs");
     console.log(`📡 Database returned ${rows.length} run rows.`);
 
     const totalRuns = rows.length;
-    if (totalRuns === 0) return { stats: {}, charStats: {}, relicStats: {}, eventStats: {}, ascensionStats: {}, enchantmentStats: {}, globalWinRate: 0, totalRuns: 0, totalWins: 0, totalLosses: 0, uniqueUsers: 0, uniqueCardsSeen: 0, uniqueRelicsSeen: 0, uniqueEventsSeen: 0, uniqueCharsSeen: 0, uniqueAscensionsSeen: 0, uniqueEnchantmentsSeen: 0 };
+    if (totalRuns === 0) return { stats: {}, charStats: {}, relicStats: {}, eventStats: {}, ascensionStats: {}, enchantmentStats: {}, monsterStats: {}, globalWinRate: 0, totalRuns: 0, totalWins: 0, totalLosses: 0, uniqueUsers: 0, uniqueCardsSeen: 0, uniqueRelicsSeen: 0, uniqueEventsSeen: 0, uniqueCharsSeen: 0, uniqueAscensionsSeen: 0, uniqueEnchantmentsSeen: 0, uniqueMonstersSeen: 0 };
 
             const totalWins = rows.filter(r => r.win).length;
             const globalWinRate = totalRuns > 0 ? (totalWins / totalRuns) * 100 : 0;
@@ -110,6 +109,13 @@ async function getCardStats() {
             const eventStats = {}; // Event stats
             const ascensionStats = {}; // Ascension stats
             const enchantmentStats = {}; // Enchantment stats
+            const monsterStats = {}; // Monster stats
+
+            const encounterRows = await query("SELECT encounter_id, monsters FROM encounters");
+            const encounterMap = {};
+            encounterRows.forEach(enc => {
+                encounterMap[enc.encounter_id] = JSON.parse(enc.monsters || '[]');
+            });
 
             const updateStat = (obj, id, win, video, runMeta) => {
                 if (!obj[id]) obj[id] = { seen: 0, wins: 0, videos: [], runs: [] };
@@ -135,8 +141,24 @@ async function getCardStats() {
                         // Strip prefix to match events table IDs (e.g., 'EVENT.NEOW' -> 'NEOW')
                         uniqueEventsInRun.add(p.event_id.replace('EVENT.', ''));
                     }
+                    if (p.monster_ids) {
+                        p.monster_ids.forEach(mid => {
+                            if (!monsterStats[mid]) monsterStats[mid] = { encountered: 0, kills: 0, lethalRuns: [] };
+                            monsterStats[mid].encountered++;
+                        });
+                    }
                 });
                 uniqueEventsInRun.forEach(eventId => updateStat(eventStats, eventId, row.win, video, runMeta));
+
+                if (!row.win && row.killed_by_encounter) {
+                    const killerEncounter = row.killed_by_encounter;
+                    const associatedMonsters = encounterMap[killerEncounter] || [];
+                    associatedMonsters.forEach(mid => {
+                        if (!monsterStats[mid]) monsterStats[mid] = { encountered: 0, kills: 0, lethalRuns: [] };
+                        monsterStats[mid].kills++;
+                        monsterStats[mid].lethalRuns.push(runMeta);
+                    });
+                }
 
                 const deck = JSON.parse(row.deck_list || '[]');
                 const uniqueCardsInDeck = new Set(deck.map(c => c.id || ''));
@@ -164,6 +186,7 @@ async function getCardStats() {
                 eventStats,
                 ascensionStats,
                 enchantmentStats,
+                monsterStats,
                 globalWinRate, 
                 totalRuns, 
                 totalWins, 
@@ -174,7 +197,8 @@ async function getCardStats() {
                 uniqueEventsSeen: Object.keys(eventStats).length,
                 uniqueCharsSeen: Object.keys(charStats).length,
                 uniqueAscensionsSeen: Object.keys(ascensionStats).length,
-                uniqueEnchantmentsSeen: Object.keys(enchantmentStats).length
+                uniqueEnchantmentsSeen: Object.keys(enchantmentStats).length,
+                uniqueMonstersSeen: Object.keys(monsterStats).length
             };
 }
 
@@ -551,6 +575,62 @@ async function buildCharacters(chars, runStats, sitemap) {
             fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
 }
 
+async function buildMonsters(monsters, runStats, sitemap) {
+    console.log(`👹 Building ${monsters.length} monster pages...`);
+    const root = ensureDir(path.join(PATHS.WEB_ROOT, 'monsters'));
+
+    for (const monster of monsters) {
+        const slug = slugify(monster.name);
+        const dir = ensureDir(path.join(root, slug));
+        
+        const stats = runStats.monsterStats[monster.monster_id] || { encountered: 0, kills: 0, lethalRuns: [] };
+        const lethalRunsHtml = generateRunLinksList(stats.lethalRuns, runStats.globalWinRate);
+
+        const subtitle = [monster.type, monster.min_hp ? `${monster.min_hp}-${monster.max_hp} HP` : null].filter(Boolean).join(' • ');
+        
+        const detailHtml = wrapLayout(
+            monster.name, 
+            `
+            <div class="item-box">
+                <h1>${monster.name}</h1>
+                <div class="subtitle">${subtitle}</div>
+                <div class="description">
+                    <p>This monster has been encountered <strong>${stats.encountered}</strong> times.</p>
+                    <p>Total Kills: <strong style="color: #ff4b4b; font-size: 1.2em;">${stats.kills}</strong></p>
+                </div>
+            </div>
+            ${lethalRunsHtml ? `<div style="margin-top: 40px;"><h3>Lethal Runs</h3><p class="text-muted">Runs where this monster delivered the finishing blow:</p>${lethalRunsHtml}</div>` : ''}`,
+            [{ name: 'monsters', url: '/monsters/' }, { name: monster.name, url: '' }],
+            `${monster.name} lethality statistics and kill history for Slay the Spire 2.`,
+            generateItemJsonLd(monster.name, "Monster", null)
+        );
+        fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
+        sitemap.add(`/monsters/${slug}/`);
+    }
+
+    // Index Page
+    sitemap.add('/monsters/');
+    const monsterLinks = monsters.map(m => {
+        const slug = slugify(m.name);
+        const stats = runStats.monsterStats[m.monster_id] || { encountered: 0, kills: 0 };
+        const killDisplay = stats.kills > 0 ? `<div style="color: #ff4b4b; font-size: 1.5rem; font-weight: bold;">${stats.kills} Kills</div>` : '';
+
+        return `
+        <a href="/monsters/${slug}/" class="card-item" aria-label="${m.name}: encountered ${stats.encountered} times">
+            <div class="card-info">
+                <span class="card-name">${m.name}</span>
+                <div style="color: #888; font-size: 0.75rem;">Encountered ${stats.encountered} times</div>
+            </div>
+            <div class="card-stats">
+                ${killDisplay}
+            </div>
+        </a>`;
+    }).join('');
+
+    const indexHtml = wrapLayout('Monsters', `<h1>Slay the Spire 2 Monsters</h1><div class="grid">${monsterLinks}</div>`, [{ name: 'monsters', url: '' }], "View Slay the Spire 2 monster lethality and encounter rates.");
+    fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
+}
+
 async function getAllCards() {
     return query("SELECT * FROM cards ORDER BY color, name ASC");
 }
@@ -570,6 +650,7 @@ async function build() {
         const chars = await query("SELECT * FROM characters ORDER BY name ASC");
         const relics = await query("SELECT * FROM relics ORDER BY name ASC");
         const events = await query("SELECT * FROM events ORDER BY name ASC");
+        const monsters = await query("SELECT * FROM monsters ORDER BY name ASC");
         const ascensions = await query("SELECT * FROM ascensions ORDER BY level ASC");
         const enchantments = await query("SELECT * FROM enchantments ORDER BY name ASC");
         const users = await query("SELECT * FROM users ORDER BY display_name ASC");
@@ -647,6 +728,7 @@ async function build() {
         const charSub = getSubText(cardStats.uniqueCharsSeen, chars.length);
         const relicSub = getSubText(cardStats.uniqueRelicsSeen, relics.length);
         const eventSub = getSubText(cardStats.uniqueEventsSeen, events.length);
+        const monsterSub = getSubText(cardStats.uniqueMonstersSeen, monsters.length);
         const ascSub = getSubText(cardStats.uniqueAscensionsSeen, ascensions.length);
         const enchantmentSub = getSubText(cardStats.uniqueEnchantmentsSeen, enchantments.length);
 
@@ -666,6 +748,10 @@ async function build() {
         landingLinks += `<a href="/events/" class="card-item">
             <div class="card-info"><span class="card-name">Events</span></div>
             <div class="card-stats"><div class="run-count">${eventSub}</div></div>
+        </a>`;
+        landingLinks += `<a href="/monsters/" class="card-item">
+            <div class="card-info"><span class="card-name">Monsters</span></div>
+            <div class="card-stats"><div class="run-count">${monsterSub}</div></div>
         </a>`;
         landingLinks += `<a href="/ascensions/" class="card-item">
             <div class="card-info"><span class="card-name">Ascensions</span></div>
@@ -743,6 +829,9 @@ async function build() {
 
         // --- EVENTS ---
         await buildEvents(events, cardStats, sitemap);
+
+        // --- MONSTERS ---
+        await buildMonsters(monsters, cardStats, sitemap);
 
         // --- ASCENSIONS ---
         await buildAscensions(ascensions, cardStats, sitemap);
