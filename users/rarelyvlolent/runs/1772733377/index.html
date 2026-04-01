@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Run 1 - RarelyVlolent - Spire 2 Stats</title>
+    <meta name="description" content="Detailed view of RarelyVlolent's Slay the Spire 2 run 1.">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="/css/game/sts2-style.css">
+</head>
+<body><nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/users/rarelyvlolent/">rarelyvlolent</a> / run 1772733377</nav>
+                    <div class="game-page-wrapper">
+                        <div class="item-box" style="background-color: rgba(215, 50, 50, 0.3); max-width: 1000px; margin: 0 auto; text-align: center;">
+                            <h1 style="font-size: 2.5rem; margin-bottom: 10px;">Run 1</h1>
+                            <div class="subtitle" style="font-size: 1.2rem; margin-bottom: 30px;">
+                                <a href="/characters/ironclad/" style="color: inherit; text-decoration: underline;">Ironclad</a> • 
+                                <a href="/ascensions/no-ascension/" style="color: inherit; text-decoration: underline;">No Ascension</a> • 
+                                <strong style="color: #ff4b4b">Defeat</strong>
+                            </div>
+                            
+                            <div class="run-summary-container" style="background: rgba(0,0,0,0.4); padding: 25px; border-radius: 12px; border: 1px solid #444; margin-bottom: 40px;">
+                                <h3 style="margin-top: 0; color: #ccc; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px;">Health Progression</h3>
+                                <div style="height: 350px; width: 100%;">
+                                    <canvas id="hpChart"></canvas>
+                                </div>
+                            </div>
+
+                            <div class="run-details-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; text-align: left;">
+                                <section>
+                                    <h3 style="color: var(--gold, #ffd700); border-bottom: 1px solid #333; padding-bottom: 5px;">Deck</h3>
+                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;"><a href="/cards/strike/" class="item-link">Strike</a><a href="/cards/defend/" class="item-link">Defend</a><a href="/cards/bash/" class="item-link">Bash</a><a href="/cards/setup-strike/" class="item-link">Setup Strike</a><a href="/cards/breakthrough/" class="item-link">Breakthrough</a><a href="/cards/dismantle/" class="item-link">Dismantle</a><a href="/cards/shrug-it-off/" class="item-link">Shrug It Off</a><a href="/cards/thunderclap/" class="item-link">Thunderclap</a><a href="/cards/uppercut/" class="item-link">Uppercut</a><a href="/cards/byrd-swoop/" class="item-link">Byrd Swoop</a><a href="/cards/tremble/" class="item-link">Tremble</a><a href="/cards/rampage/" class="item-link">Rampage</a><a href="/cards/primal-force/" class="item-link">Primal Force</a><a href="/cards/sword-boomerang/" class="item-link">Sword Boomerang</a><a href="/cards/howl-from-beyond/" class="item-link">Howl from Beyond</a><a href="/cards/burning-pact/" class="item-link">Burning Pact</a><a href="/cards/pyre/" class="item-link">Pyre</a><a href="/cards/whirlwind/" class="item-link">Whirlwind</a><a href="/cards/iron-wave/" class="item-link">Iron Wave</a><a href="/cards/metamorphosis/" class="item-link">Metamorphosis</a></div>
+                                </section>
+                                <section>
+                                    <h3 style="color: var(--purple, #b388ff); border-bottom: 1px solid #333; padding-bottom: 5px;">Enchantments</h3>
+                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;"><span class="text-muted">None</span></div>
+                                </section>
+                                <section>
+                                    <h3 style="color: var(--red, #ff5252); border-bottom: 1px solid #333; padding-bottom: 5px;">Relics</h3>
+                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;"><a href="/relics/burning-blood/" class="item-link">Burning Blood</a><a href="/relics/byrdpip/" class="item-link">Byrdpip</a><a href="/relics/gorget/" class="item-link">Gorget</a><a href="/relics/war-paint/" class="item-link">War Paint</a><a href="/relics/seal-of-gold/" class="item-link">Seal of Gold</a><a href="/relics/vajra/" class="item-link">Vajra</a><a href="/relics/centennial-puzzle/" class="item-link">Centennial Puzzle</a></div>
+                                </section>
+                                <section>
+                                    <h3 style="color: var(--blue, #448aff); border-bottom: 1px solid #333; padding-bottom: 5px;">Events</h3>
+                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;"><a href="/events/byrdonis-nest/" class="item-link">Byrdonis Nest</a><a href="/events/sapphire-seed/" class="item-link">Sapphire Seed</a><a href="/events/tezcatara/" class="item-link">Tezcatara</a><a href="/events/spirit-grafter/" class="item-link">Spirit Grafter</a></div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                    <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const ctx = document.getElementById('hpChart').getContext('2d');
+                        if (!ctx) return;
+                        const rawRuns = [{"label":"Run 1 (Ironclad)","win":false,"floorData":[{"floor":1,"hp":80},{"floor":2,"hp":79},{"floor":3,"hp":78},{"floor":4,"hp":80},{"floor":5,"hp":80},{"floor":6,"hp":80},{"floor":7,"hp":80},{"floor":8,"hp":73},{"floor":9,"hp":73},{"floor":10,"hp":73},{"floor":11,"hp":80},{"floor":12,"hp":80},{"floor":13,"hp":80},{"floor":14,"hp":80},{"floor":15,"hp":80},{"floor":16,"hp":80},{"floor":17,"hp":49},{"floor":18,"hp":80},{"floor":19,"hp":80},{"floor":20,"hp":75},{"floor":21,"hp":72},{"floor":22,"hp":72},{"floor":23,"hp":72},{"floor":24,"hp":72},{"floor":25,"hp":35},{"floor":26,"hp":35},{"floor":27,"hp":39},{"floor":28,"hp":39},{"floor":29,"hp":39},{"floor":30,"hp":37},{"floor":31,"hp":62},{"floor":32,"hp":62},{"floor":33,"hp":0}]}];
+                        console.log("📈 Chart Data received by browser:", rawRuns);
+
+                        if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) {
+                            console.warn("⚠️ No floor data available for HP graph.");
+                            return;
+                        }
+
+                        const maxFloor = Math.max(...rawRuns[0].floorData.map(d => d.floor), 1);
+                        const labels = Array.from({length: maxFloor}, (_, i) => i + 1);
+                        const color = "#ff4b4b";
+
+                        const hpMap = {}; 
+                        rawRuns[0].floorData.forEach(d => { hpMap[d.floor] = d.hp; });
+                        const dataArr = labels.map(floor => hpMap[floor] !== undefined ? hpMap[floor] : null);
+
+                        new Chart(ctx, {
+                            type: 'line',
+                            data: { labels: labels, datasets: [{
+                                label: rawRuns[0].label,
+                                data: dataArr,
+                                borderColor: color,
+                                backgroundColor: color + '15',
+                                borderWidth: 2,
+                                fill: true,
+                                tension: 0.3,
+                                spanGaps: true
+                            }]},
+                            options: {
+                                responsive: true, maintainAspectRatio: false,
+                                interaction: { mode: 'index', intersect: false },
+                                scales: { 
+                                    y: { 
+                                        beginAtZero: true, 
+                                        grid: { color: 'rgba(255,255,255,0.05)' },
+                                        ticks: { color: '#888' },
+                                        title: { display: true, text: 'Hit Points', color: '#666' }
+                                    }, 
+                                    x: { 
+                                        grid: { color: 'rgba(255,255,255,0.05)' },
+                                        ticks: { color: '#888' },
+                                        title: { display: true, text: 'Floor', color: '#666' }
+                                    } 
+                                },
+                                plugins: {
+                                    legend: { display: false }
+                                }
+                            }
+                        });
+                    });
+                    </script>
+                    <link rel="stylesheet" href="/css/game/sts2-style.css"></body></html>

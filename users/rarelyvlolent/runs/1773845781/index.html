@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Run 91 - RarelyVlolent - Spire 2 Stats</title>
+    <meta name="description" content="Detailed view of RarelyVlolent's Slay the Spire 2 run 91.">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="/css/game/sts2-style.css">
+</head>
+<body><nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/users/rarelyvlolent/">rarelyvlolent</a> / run 1773845781</nav>
+                    <div class="game-page-wrapper">
+                        <div class="item-box" style="background-color: rgba(211, 84, 0, 0.3); max-width: 1000px; margin: 0 auto; text-align: center;">
+                            <h1 style="font-size: 2.5rem; margin-bottom: 10px;">Run 91</h1>
+                            <div class="subtitle" style="font-size: 1.2rem; margin-bottom: 30px;">
+                                <a href="/characters/regent/" style="color: inherit; text-decoration: underline;">Regent</a> • 
+                                <a href="/ascensions/ascenders-bane/" style="color: inherit; text-decoration: underline;">Ascender's Bane</a> • 
+                                <strong style="color: #ff4b4b">Defeat</strong>
+                            </div>
+                            
+                            <div class="run-summary-container" style="background: rgba(0,0,0,0.4); padding: 25px; border-radius: 12px; border: 1px solid #444; margin-bottom: 40px;">
+                                <h3 style="margin-top: 0; color: #ccc; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px;">Health Progression</h3>
+                                <div style="height: 350px; width: 100%;">
+                                    <canvas id="hpChart"></canvas>
+                                </div>
+                            </div>
+
+                            <div class="run-details-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; text-align: left;">
+                                <section>
+                                    <h3 style="color: var(--gold, #ffd700); border-bottom: 1px solid #333; padding-bottom: 5px;">Deck</h3>
+                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;"><a href="/cards/strike/" class="item-link">Strike</a><a href="/cards/defend/" class="item-link">Defend</a><a href="/cards/falling-star/" class="item-link">Falling Star</a><a href="/cards/venerate/" class="item-link">Venerate</a><a href="/cards/ascenders-bane/" class="item-link">Ascender's Bane</a><a href="/cards/stardust/" class="item-link">Stardust</a><a href="/cards/gather-light/" class="item-link">Gather Light</a><a href="/cards/hegemony/" class="item-link">Hegemony</a><a href="/cards/knockout-blow/" class="item-link">Knockout Blow</a><a href="/cards/reflect/" class="item-link">Reflect</a><a href="/cards/entrench/" class="item-link">Entrench</a><a href="/cards/big-bang/" class="item-link">Big Bang</a><a href="/cards/charge/" class="item-link">CHARGE!!</a><a href="/cards/patter/" class="item-link">Patter</a><a href="/cards/pale-blue-dot/" class="item-link">Pale Blue Dot</a><a href="/cards/hidden-cache/" class="item-link">Hidden Cache</a><a href="/cards/make-it-so/" class="item-link">Make It So</a><a href="/cards/crescent-spear/" class="item-link">Crescent Spear</a><a href="/cards/resonance/" class="item-link">Resonance</a></div>
+                                </section>
+                                <section>
+                                    <h3 style="color: var(--purple, #b388ff); border-bottom: 1px solid #333; padding-bottom: 5px;">Enchantments</h3>
+                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;"><a href="/enchantments/enchantmentnimble/" class="item-link">ENCHANTMENT.NIMBLE</a><a href="/enchantments/enchantmentswift/" class="item-link">ENCHANTMENT.SWIFT</a></div>
+                                </section>
+                                <section>
+                                    <h3 style="color: var(--red, #ff5252); border-bottom: 1px solid #333; padding-bottom: 5px;">Relics</h3>
+                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;"><a href="/relics/divine-right/" class="item-link">Divine Right</a><a href="/relics/golden-pearl/" class="item-link">Golden Pearl</a><a href="/relics/lantern/" class="item-link">Lantern</a><a href="/relics/fencing-manual/" class="item-link">Fencing Manual</a><a href="/relics/potion-belt/" class="item-link">Potion Belt</a><a href="/relics/letter-opener/" class="item-link">Letter Opener</a><a href="/relics/very-hot-cocoa/" class="item-link">Very Hot Cocoa</a><a href="/relics/gremlin-horn/" class="item-link">Gremlin Horn</a><a href="/relics/blood-vial/" class="item-link">Blood Vial</a><a href="/relics/iron-club/" class="item-link">Iron Club</a><a href="/relics/centennial-puzzle/" class="item-link">Centennial Puzzle</a><a href="/relics/anchor/" class="item-link">Anchor</a><a href="/relics/whetstone/" class="item-link">Whetstone</a></div>
+                                </section>
+                                <section>
+                                    <h3 style="color: var(--blue, #448aff); border-bottom: 1px solid #333; padding-bottom: 5px;">Events</h3>
+                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;"><a href="/events/neow/" class="item-link">Neow</a><a href="/events/trash-heap/" class="item-link">Trash Heap</a><a href="/events/tezcatara/" class="item-link">Tezcatara</a><a href="/events/self-help-book/" class="item-link">Self-Help Book</a><a href="/events/the-lantern-key/" class="item-link">The Lantern Key</a><a href="/events/tanx/" class="item-link">Tanx</a><a href="/events/reflections-snoitcelfer/" class="item-link">Reflections snoitcelfeR</a><a href="/events/relic-trader/" class="item-link">Relic Trader</a><a href="/events/potion-courier/" class="item-link">Potion Courier</a></div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                    <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const ctx = document.getElementById('hpChart').getContext('2d');
+                        if (!ctx) return;
+                        const rawRuns = [{"label":"Run 91 (Regent)","win":false,"floorData":[{"floor":1,"hp":60},{"floor":2,"hp":50},{"floor":3,"hp":50},{"floor":4,"hp":50},{"floor":5,"hp":48},{"floor":6,"hp":39},{"floor":7,"hp":36},{"floor":8,"hp":58},{"floor":9,"hp":58},{"floor":10,"hp":58},{"floor":11,"hp":58},{"floor":12,"hp":50},{"floor":13,"hp":50},{"floor":14,"hp":50},{"floor":15,"hp":50},{"floor":16,"hp":50},{"floor":17,"hp":22},{"floor":18,"hp":64},{"floor":19,"hp":60},{"floor":20,"hp":60},{"floor":21,"hp":60},{"floor":22,"hp":53},{"floor":23,"hp":53},{"floor":24,"hp":53},{"floor":25,"hp":47},{"floor":26,"hp":47},{"floor":27,"hp":47},{"floor":28,"hp":46},{"floor":29,"hp":46},{"floor":30,"hp":42},{"floor":31,"hp":54},{"floor":32,"hp":54},{"floor":33,"hp":13},{"floor":34,"hp":62},{"floor":35,"hp":64},{"floor":36,"hp":66},{"floor":37,"hp":66},{"floor":38,"hp":66},{"floor":39,"hp":68},{"floor":40,"hp":68},{"floor":41,"hp":68},{"floor":42,"hp":68},{"floor":43,"hp":37},{"floor":44,"hp":59},{"floor":45,"hp":59},{"floor":46,"hp":59},{"floor":47,"hp":59},{"floor":48,"hp":0}]}];
+                        console.log("📈 Chart Data received by browser:", rawRuns);
+
+                        if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) {
+                            console.warn("⚠️ No floor data available for HP graph.");
+                            return;
+                        }
+
+                        const maxFloor = Math.max(...rawRuns[0].floorData.map(d => d.floor), 1);
+                        const labels = Array.from({length: maxFloor}, (_, i) => i + 1);
+                        const color = "#ff4b4b";
+
+                        const hpMap = {}; 
+                        rawRuns[0].floorData.forEach(d => { hpMap[d.floor] = d.hp; });
+                        const dataArr = labels.map(floor => hpMap[floor] !== undefined ? hpMap[floor] : null);
+
+                        new Chart(ctx, {
+                            type: 'line',
+                            data: { labels: labels, datasets: [{
+                                label: rawRuns[0].label,
+                                data: dataArr,
+                                borderColor: color,
+                                backgroundColor: color + '15',
+                                borderWidth: 2,
+                                fill: true,
+                                tension: 0.3,
+                                spanGaps: true
+                            }]},
+                            options: {
+                                responsive: true, maintainAspectRatio: false,
+                                interaction: { mode: 'index', intersect: false },
+                                scales: { 
+                                    y: { 
+                                        beginAtZero: true, 
+                                        grid: { color: 'rgba(255,255,255,0.05)' },
+                                        ticks: { color: '#888' },
+                                        title: { display: true, text: 'Hit Points', color: '#666' }
+                                    }, 
+                                    x: { 
+                                        grid: { color: 'rgba(255,255,255,0.05)' },
+                                        ticks: { color: '#888' },
+                                        title: { display: true, text: 'Floor', color: '#666' }
+                                    } 
+                                },
+                                plugins: {
+                                    legend: { display: false }
+                                }
+                            }
+                        });
+                    });
+                    </script>
+                    <link rel="stylesheet" href="/css/game/sts2-style.css"></body></html>
