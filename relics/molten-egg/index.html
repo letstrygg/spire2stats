@@ -13,7 +13,7 @@
   "@type": "ItemPage",
   "name": "Molten Egg - Spire 2 Stats",
   "description": "Molten Egg gameplay statistics for Slay the Spire 2. Winrate: 50.0%. Total Runs: 8.",
-  "dateModified": "2026-04-01T20:26:27.478Z",
+  "dateModified": "2026-04-01T21:43:26.092Z",
   "mainEntity": {
     "@type": "Thing",
     "name": "Molten Egg",
@@ -66,87 +66,145 @@
             align-items: center; 
             gap: 4px;
             transition: all 0.2s;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
         }
         .run-vid-btn:hover { background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.3); }
         .run-vid-btn .material-symbols-outlined { font-size: 16px; }
     </style><div class="recent-runs" style="margin-top: 30px;"><h3>Runs featuring Molten Egg</h3><div class="grid">
-        <div class="card-item win" style="padding: 10px; font-size: 0.9rem; display: flex; flex-direction: column; justify-content: space-between;">
-            <a href="/users/falterfire/runs/1774044561/" style="text-decoration: none; color: inherit; display: block; flex-grow: 1;">
-                <div class="card-info"><span class="card-name">Run 45 falterfire</span></div>
-                <div class="card-stats">
-                    <div class="win-rate" style="color: var(--green)">Victory</div>
-                </div>
-            </a>
-            
-            <div class="win-bar" style="background: var(--green);"></div>
-        </div>
-        <div class="card-item win" style="padding: 10px; font-size: 0.9rem; display: flex; flex-direction: column; justify-content: space-between;">
-            <a href="/users/falterfire/runs/1774812157/" style="text-decoration: none; color: inherit; display: block; flex-grow: 1;">
-                <div class="card-info"><span class="card-name">Run 70 falterfire</span></div>
-                <div class="card-stats">
-                    <div class="win-rate" style="color: var(--green)">Victory</div>
-                </div>
-            </a>
-            
-            <div class="win-bar" style="background: var(--green);"></div>
-        </div>
-        <div class="card-item loss" style="padding: 10px; font-size: 0.9rem; display: flex; flex-direction: column; justify-content: space-between;">
-            <a href="/users/rarelyvlolent/runs/1772810226/" style="text-decoration: none; color: inherit; display: block; flex-grow: 1;">
-                <div class="card-info"><span class="card-name">Run 9 rarelyvlolent</span></div>
-                <div class="card-stats">
-                    <div class="win-rate" style="color: var(--red)">Defeat</div>
-                </div>
-            </a>
-            
-            <div class="win-bar" style="background: var(--red);"></div>
-        </div>
-        <div class="card-item loss" style="padding: 10px; font-size: 0.9rem; display: flex; flex-direction: column; justify-content: space-between;">
-            <a href="/users/rarelyvlolent/runs/1772949727/" style="text-decoration: none; color: inherit; display: block; flex-grow: 1;">
-                <div class="card-info"><span class="card-name">Run 24 rarelyvlolent</span></div>
-                <div class="card-stats">
-                    <div class="win-rate" style="color: var(--red)">Defeat</div>
-                </div>
-            </a>
-            
-            <div class="win-bar" style="background: var(--red);"></div>
-        </div>
-        <div class="card-item loss" style="padding: 10px; font-size: 0.9rem; display: flex; flex-direction: column; justify-content: space-between;">
-            <a href="/users/rarelyvlolent/runs/1773291994/" style="text-decoration: none; color: inherit; display: block; flex-grow: 1;">
-                <div class="card-info"><span class="card-name">Run 44 rarelyvlolent</span></div>
-                <div class="card-stats">
-                    <div class="win-rate" style="color: var(--red)">Defeat</div>
-                </div>
-            </a>
-            
-            <div class="win-bar" style="background: var(--red);"></div>
-        </div>
-        <div class="card-item win" style="padding: 10px; font-size: 0.9rem; display: flex; flex-direction: column; justify-content: space-between;">
-            <a href="/users/rarelyvlolent/runs/1773464178/" style="text-decoration: none; color: inherit; display: block; flex-grow: 1;">
-                <div class="card-info"><span class="card-name">Run 61 rarelyvlolent</span></div>
-                <div class="card-stats">
-                    <div class="win-rate" style="color: var(--green)">Victory</div>
-                </div>
-            </a>
-            
-            <div class="win-bar" style="background: var(--green);"></div>
-        </div>
-        <div class="card-item loss" style="padding: 10px; font-size: 0.9rem; display: flex; flex-direction: column; justify-content: space-between;">
-            <a href="/users/rarelyvlolent/runs/1773782057/" style="text-decoration: none; color: inherit; display: block; flex-grow: 1;">
-                <div class="card-info"><span class="card-name">Run 79 rarelyvlolent</span></div>
-                <div class="card-stats">
-                    <div class="win-rate" style="color: var(--red)">Defeat</div>
-                </div>
-            </a>
-            
-            <div class="win-bar" style="background: var(--red);"></div>
-        </div>
-        <div class="card-item win" style="padding: 10px; font-size: 0.9rem; display: flex; flex-direction: column; justify-content: space-between;">
-            <a href="/users/rarelyvlolent/runs/1773811895/" style="text-decoration: none; color: inherit; display: block; flex-grow: 1;">
-                <div class="card-info"><span class="card-name">Run 88 rarelyvlolent</span></div>
-                <div class="card-stats">
-                    <div class="win-rate" style="color: var(--green)">Victory</div>
-                </div>
-            </a>
-            
-            <div class="win-bar" style="background: var(--green);"></div>
-        </div></div></div></body></html>
+    <div class="card-item win ironclad" style="display: flex; flex-direction: column;">
+        <a href="/users/falterfire/runs/1774044561/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
+            <div class="card-info">
+                <span class="card-name">
+                    <span style="font-size: 0.7rem; color: var(--gray); text-transform: uppercase; display: block; margin-bottom: 2px;">falterfire</span>
+                    Run 45<br><span style="color: var(--color-ironclad)">IRONCLAD</span>
+                </span>
+            </div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: var(--green)">Victory</div>
+                <div class="run-count" style="font-size: 0.7rem; opacity: 0.6;">Build v0.99.1</div>
+                <div class="run-count">Ascension 6</div>
+            </div>
+        </a>
+        
+        <div class="win-bar" style="background: var(--green);"></div>
+    </div>
+    <div class="card-item win necrobinder" style="display: flex; flex-direction: column;">
+        <a href="/users/falterfire/runs/1774812157/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
+            <div class="card-info">
+                <span class="card-name">
+                    <span style="font-size: 0.7rem; color: var(--gray); text-transform: uppercase; display: block; margin-bottom: 2px;">falterfire</span>
+                    Run 70<br><span style="color: var(--color-necrobinder)">NECROBINDER</span>
+                </span>
+            </div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: var(--green)">Victory</div>
+                <div class="run-count" style="font-size: 0.7rem; opacity: 0.6;">Build v0.99.1</div>
+                <div class="run-count">Ascension 9</div>
+            </div>
+        </a>
+        
+        <div class="win-bar" style="background: var(--green);"></div>
+    </div>
+    <div class="card-item loss regent" style="display: flex; flex-direction: column;">
+        <a href="/users/rarelyvlolent/runs/1772810226/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
+            <div class="card-info">
+                <span class="card-name">
+                    <span style="font-size: 0.7rem; color: var(--gray); text-transform: uppercase; display: block; margin-bottom: 2px;">rarelyvlolent</span>
+                    Run 9<br><span style="color: var(--color-regent)">REGENT</span>
+                </span>
+            </div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: var(--red)">Defeat</div>
+                <div class="run-count" style="font-size: 0.7rem; opacity: 0.6;">Build v0.98.1</div>
+                <div class="run-count">Ascension 1</div>
+            </div>
+        </a>
+        
+        <div class="win-bar" style="background: var(--red);"></div>
+    </div>
+    <div class="card-item loss defect" style="display: flex; flex-direction: column;">
+        <a href="/users/rarelyvlolent/runs/1772949727/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
+            <div class="card-info">
+                <span class="card-name">
+                    <span style="font-size: 0.7rem; color: var(--gray); text-transform: uppercase; display: block; margin-bottom: 2px;">rarelyvlolent</span>
+                    Run 24<br><span style="color: var(--color-defect)">DEFECT</span>
+                </span>
+            </div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: var(--red)">Defeat</div>
+                <div class="run-count" style="font-size: 0.7rem; opacity: 0.6;">Build v0.98.2</div>
+                <div class="run-count">Ascension 2</div>
+            </div>
+        </a>
+        
+        <div class="win-bar" style="background: var(--red);"></div>
+    </div>
+    <div class="card-item loss regent" style="display: flex; flex-direction: column;">
+        <a href="/users/rarelyvlolent/runs/1773291994/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
+            <div class="card-info">
+                <span class="card-name">
+                    <span style="font-size: 0.7rem; color: var(--gray); text-transform: uppercase; display: block; margin-bottom: 2px;">rarelyvlolent</span>
+                    Run 44<br><span style="color: var(--color-regent)">REGENT</span>
+                </span>
+            </div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: var(--red)">Defeat</div>
+                <div class="run-count" style="font-size: 0.7rem; opacity: 0.6;">Build v0.98.3</div>
+                <div class="run-count">Ascension 5</div>
+            </div>
+        </a>
+        
+        <div class="win-bar" style="background: var(--red);"></div>
+    </div>
+    <div class="card-item win silent" style="display: flex; flex-direction: column;">
+        <a href="/users/rarelyvlolent/runs/1773464178/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
+            <div class="card-info">
+                <span class="card-name">
+                    <span style="font-size: 0.7rem; color: var(--gray); text-transform: uppercase; display: block; margin-bottom: 2px;">rarelyvlolent</span>
+                    Run 61<br><span style="color: var(--color-silent)">SILENT</span>
+                </span>
+            </div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: var(--green)">Victory</div>
+                <div class="run-count" style="font-size: 0.7rem; opacity: 0.6;">Build v0.98.3</div>
+                <div class="run-count">Ascension 4</div>
+            </div>
+        </a>
+        
+        <div class="win-bar" style="background: var(--green);"></div>
+    </div>
+    <div class="card-item loss regent" style="display: flex; flex-direction: column;">
+        <a href="/users/rarelyvlolent/runs/1773782057/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
+            <div class="card-info">
+                <span class="card-name">
+                    <span style="font-size: 0.7rem; color: var(--gray); text-transform: uppercase; display: block; margin-bottom: 2px;">rarelyvlolent</span>
+                    Run 79<br><span style="color: var(--color-regent)">REGENT</span>
+                </span>
+            </div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: var(--red)">Defeat</div>
+                <div class="run-count" style="font-size: 0.7rem; opacity: 0.6;">Build v0.99.1</div>
+                <div class="run-count">Ascension 5</div>
+            </div>
+        </a>
+        
+        <div class="win-bar" style="background: var(--red);"></div>
+    </div>
+    <div class="card-item win defect" style="display: flex; flex-direction: column;">
+        <a href="/users/rarelyvlolent/runs/1773811895/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
+            <div class="card-info">
+                <span class="card-name">
+                    <span style="font-size: 0.7rem; color: var(--gray); text-transform: uppercase; display: block; margin-bottom: 2px;">rarelyvlolent</span>
+                    Run 88<br><span style="color: var(--color-defect)">DEFECT</span>
+                </span>
+            </div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: var(--green)">Victory</div>
+                <div class="run-count" style="font-size: 0.7rem; opacity: 0.6;">Build v0.99.1</div>
+                <div class="run-count">Ascension 5</div>
+            </div>
+        </a>
+        
+        <div class="win-bar" style="background: var(--green);"></div>
+    </div></div></div></body></html>

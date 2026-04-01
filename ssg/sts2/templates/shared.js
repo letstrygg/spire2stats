@@ -189,47 +189,63 @@ export function generateRunLinksList(runs, title = "Recent Runs") {
             align-items: center; 
             gap: 4px;
             transition: all 0.2s;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
         }
         .run-vid-btn:hover { background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.3); }
         .run-vid-btn .material-symbols-outlined { font-size: 16px; }
     </style>`;
 
-    const links = runs.slice(0, 12).map(run => {
-        const statusClass = run.win ? 'win' : 'loss';
-        const statusText = run.win ? 'Victory' : 'Defeat';
-        const statusColor = run.win ? 'var(--green)' : 'var(--red)';
-        const userSlug = run.username.toLowerCase();
-
-        let videoButtons = '';
-        if (run.video) {
-            if (run.video.ltg) {
-                const match = run.video.ltg.match(/s(\d+)e(\d+)\.html/i);
-                const epLabel = match ? `S${match[1].padStart(2, '0')}E${match[2].padStart(2, '0')}` : 'Run';
-                videoButtons += `<a href="https://letstrygg.com${run.video.ltg}" class="run-vid-btn ltg" target="_blank">${epLabel}</a>`;
-            }
-            if (run.video.yt) {
-                videoButtons += `
-                <a href="https://www.youtube.com/watch?v=${run.video.yt}" class="run-vid-btn yt" target="_blank">
-                    <span class="material-symbols-outlined" style="color: #ff4b4b;">smart_display</span>YouTube
-                </a>`;
-            }
-        }
-        
-        return `
-        <div class="card-item ${statusClass}" style="padding: 10px; font-size: 0.9rem; display: flex; flex-direction: column; justify-content: space-between;">
-            <a href="/users/${userSlug}/runs/${run.id}/" style="text-decoration: none; color: inherit; display: block; flex-grow: 1;">
-                <div class="card-info"><span class="card-name">Run ${run.user_run_num} ${run.username}</span></div>
-                <div class="card-stats">
-                    <div class="win-rate" style="color: ${statusColor}">${statusText}</div>
-                </div>
-            </a>
-            ${videoButtons ? `<div class="run-video-links">${videoButtons}</div>` : ''}
-            <div class="win-bar" style="background: ${statusColor};"></div>
-        </div>`;
-    }).join('');
-
+    const links = runs.slice(0, 12).map(run => generateRunCardHtml(run, { display_name: run.username, slug: run.username?.toLowerCase() })).join('');
     return `${style}<div class="recent-runs" style="margin-top: 30px;"><h3>${title}</h3><div class="grid">${links}</div></div>`;
 }
+
+/** Generates a standard run card HTML used across the site */
+export function generateRunCardHtml(run, user) {
+    const charId = (run.character || 'Unknown').replace('CHARACTER.', '').toUpperCase();
+    const charClass = charId.toLowerCase();
+    const charColor = CHARACTER_COLORS[charId] || 'var(--gray)';
+    const statusClass = run.win ? 'win' : 'loss';
+    const statusText = run.win ? 'Victory' : 'Defeat';
+    const statusColor = run.win ? 'var(--green)' : 'var(--red)';
+
+    const ytId = run.yt_video || run.video?.yt;
+    const ltgUrl = run.ltg_url || run.video?.ltg;
+
+    let videoButtons = '';
+    if (ytId || ltgUrl) {
+        let btns = '';
+        if (ltgUrl) {
+            const match = ltgUrl.match(/s(\d+)e(\d+)\.html/i);
+            const epLabel = match ? `S${match[1].padStart(2, '0')}E${match[2].padStart(2, '0')}` : 'Run';
+            btns += `<a href="https://letstrygg.com${ltgUrl}" class="run-vid-btn ltg" target="_blank">${epLabel}</a>`;
+        }
+        if (ytId) {
+            btns += `<a href="https://www.youtube.com/watch?v=${ytId}" class="run-vid-btn yt" target="_blank"><span class="material-symbols-outlined" style="color: #ff4b4b;">smart_display</span>YouTube</a>`;
+        }
+        videoButtons = `<div class="run-video-links">${btns}</div>`;
+    }
+
+    return `
+    <div class="card-item ${statusClass} ${charClass}" style="display: flex; flex-direction: column;">
+        <a href="/users/${user.slug}/runs/${run.id}/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
+            <div class="card-info">
+                <span class="card-name">
+                    <span style="font-size: 0.7rem; color: var(--gray); text-transform: uppercase; display: block; margin-bottom: 2px;">${user.display_name}</span>
+                    Run ${run.user_run_num}<br><span style="color: ${charColor}">${charId}</span>
+                </span>
+            </div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: ${statusColor}">${statusText}</div>
+                <div class="run-count" style="font-size: 0.7rem; opacity: 0.6;">Build ${run.build_id || 'Unknown'}</div>
+                <div class="run-count">Ascension ${run.ascension || 0}</div>
+            </div>
+        </a>
+        ${videoButtons}
+        <div class="win-bar" style="background: ${statusColor};"></div>
+    </div>`;
+}
+        
 
 export function generateItemSummaryBox(name, stats) {
     if (!stats || stats.seen === 0) return `<div class="averages-panel" style="margin: 20px 0; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); text-align: center; color: #666;">No runs recorded for ${name} yet.</div>`;

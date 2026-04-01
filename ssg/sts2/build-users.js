@@ -7,6 +7,7 @@ import {
     generateItemJsonLd,
     getCharacterBgStyle,
     generateItemSummaryBox,
+    generateRunCardHtml,
     CHARACTER_COLORS
 } from './templates/shared.js';
 
@@ -138,53 +139,7 @@ async function build() {
             };
 
             // --- USER DIRECTORY (index.html) ---
-            const runLinksHtml = userRuns.map((run, index) => {
-                const charName = (run.character || 'Unknown').replace('CHARACTER.', '');
-                const charClass = charName.toLowerCase();
-                const bgStyle = getCharacterBgStyle(charName);
-                const statusClass = run.win ? 'win' : 'loss';
-                const statusText = run.win ? 'Victory' : 'Defeat';
-                const statusColor = run.win ? 'var(--green)' : 'var(--red)';
-                const runNumber = run.user_run_num;
-                
-                const charId = (run.character || '').replace('CHARACTER.', '').toUpperCase();
-                const charColor = CHARACTER_COLORS[charId] || 'var(--gray)';
-
-                let videoButtons = '';
-                if (run.ltg_url || run.yt_video) {
-                    let btns = '';
-                    if (run.ltg_url) {
-                        const match = run.ltg_url.match(/s(\d+)e(\d+)\.html/i);
-                        const epLabel = match ? `S${match[1].padStart(2, '0')}E${match[2].padStart(2, '0')}` : 'Run';
-                        btns += `<a href="https://letstrygg.com${run.ltg_url}" class="run-vid-btn ltg" target="_blank">${epLabel}</a>`;
-                    }
-                    if (run.yt_video) {
-                        btns += `
-                        <a href="https://www.youtube.com/watch?v=${run.yt_video}" class="run-vid-btn yt" target="_blank">
-                            <span class="material-symbols-outlined" style="color: #ff4b4b;">smart_display</span>YouTube
-                        </a>`;
-                    }
-                    videoButtons = `<div class="run-video-links">${btns}</div>`;
-                }
-
-                return `
-                <div class="card-item ${statusClass} ${charClass}" style="display: flex; flex-direction: column;">
-                    <a href="/users/${user.slug}/runs/${run.id}/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
-                        <div class="card-info">
-                            <span class="card-name">
-                                <span style="font-size: 0.7rem; color: var(--gray); text-transform: uppercase; display: block; margin-bottom: 2px;">${user.display_name}</span>
-                                Run ${runNumber}<br><span style="color: ${charColor}">${charName}</span>
-                            </span>
-                        </div>
-                        <div class="card-stats">
-                            <div class="win-rate" style="color: ${statusColor}">${statusText}</div>
-                            <div class="run-count" style="font-size: 0.7rem; opacity: 0.6;">Build ${run.build_id || 'Unknown'}</div>
-                            <div class="run-count">Ascension ${run.ascension || 0}</div>
-                        </div>
-                    </a>
-                    ${videoButtons}
-                </div>`;
-            }).join('');
+            const runLinksHtml = userRuns.map(run => generateRunCardHtml(run, user)).join('');
 
             const indexHtml = wrapLayout(
                 user.display_name,

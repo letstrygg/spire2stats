@@ -108,7 +108,7 @@ function generateCardItemHtml(url, name, stats, extraClass = '', bgStyle = '') {
 }
 
 async function getCardStats() {
-    const rows = await query("SELECT id, user_run_num, character, relic_list, deck_list, path_history, win, username, yt_video, ltg_url, ascension, killed_by_encounter FROM runs");
+    const rows = await query("SELECT id, user_run_num, character, relic_list, deck_list, path_history, win, username, yt_video, ltg_url, ascension, build_id, killed_by_encounter FROM runs");
     console.log(`📡 Database returned ${rows.length} run rows.`);
 
     const totalRuns = rows.length;
@@ -148,7 +148,7 @@ async function getCardStats() {
 
             rows.forEach(row => {
                 const video = { yt: row.yt_video, ltg: row.ltg_url };
-                const runMeta = { id: row.id, user_run_num: row.user_run_num, username: row.username, win: row.win };
+                const runMeta = { id: row.id, user_run_num: row.user_run_num, username: row.username, win: row.win, character: row.character, build_id: row.build_id, ascension: row.ascension };
                 const charId = (row.character || '').toUpperCase(); // Matches clean IDs like "SILENT"
                 updateStat(charStats, charId, row.win, video, runMeta);
 
