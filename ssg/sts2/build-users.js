@@ -124,7 +124,7 @@ async function build() {
                 return `
                 <a href="/users/${user.slug}/runs/${run.id}/" class="card-item ${statusClass} ${charClass}" style="${bgStyle}">
                     <div class="card-info">
-                        <span class="card-name">Run #${runNumber} - ${charName}</span>
+                        <span class="card-name">Run ${runNumber} - ${charName}</span>
                     </div>
                     <div class="card-stats">
                         <div class="win-rate" style="color: ${statusColor}">${statusText}</div>
@@ -193,17 +193,17 @@ async function build() {
                 }
 
                 const chartJson = JSON.stringify([{
-                    label: `Run #${runNumber} (${charName})`,
+                    label: `Run ${runNumber} (${charName})`,
                     win: !!run.win,
                     floorData: floorData
                 }]);
 
                 const runHtml = wrapLayout(
-                    `Run #${runNumber} - ${user.display_name}`,
+                    `Run ${runNumber} - ${user.display_name}`,
                     `
                     <div class="game-page-wrapper">
                         <div class="item-box" style="${bgStyle} max-width: 1000px; margin: 0 auto; text-align: center;">
-                            <h1 style="font-size: 2.5rem; margin-bottom: 10px;">Run #${runNumber}</h1>
+                            <h1 style="font-size: 2.5rem; margin-bottom: 10px;">Run ${runNumber}</h1>
                             <div class="subtitle" style="font-size: 1.2rem; margin-bottom: 30px;">
                                 <a href="/characters/${charSlug}/" style="color: inherit; text-decoration: underline;">${charName}</a> • 
                                 <a href="/ascensions/${ascSlug}/" style="color: inherit; text-decoration: underline;">${ascName}</a> • 
@@ -295,8 +295,8 @@ async function build() {
                     });
                     </script>
                     <link rel="stylesheet" href="/css/game/sts2-style.css">`,
-                    [{ name: user.display_name, url: `/users/${user.slug}/` }, { name: `Run #${run.id}`, url: '' }],
-                    `Detailed view of ${user.display_name}'s Slay the Spire 2 run #${runNumber}.`,
+                    [{ name: user.display_name, url: `/users/${user.slug}/` }, { name: `Run ${run.id}`, url: '' }],
+                    `Detailed view of ${user.display_name}'s Slay the Spire 2 run ${runNumber}.`,
                     `<link rel="stylesheet" href="/css/game/sts2-style.css">`
                 );
                 fs.writeFileSync(path.join(runDir, 'index.html'), runHtml);
