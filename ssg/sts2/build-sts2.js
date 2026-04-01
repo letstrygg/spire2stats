@@ -673,7 +673,7 @@ async function buildContributePage(sitemap) {
 
             <section style="margin-top: 30px;">
                 <h2 style="color: var(--gold, #ffd700); font-size: 1.2rem;">Step 3: Send it Over</h2>
-                <p>Once you have <code>history.zip</code>, share it with me using either method below:</p>
+                <p>Once you have <code>username_history.zip</code>, share it using,</p>
                 <ul style="line-height: 1.8;">
                     <li><strong>Discord:</strong> Join our <a href="https://discord.gg/wMEWQut72X" target="_blank" style="color: #448aff; font-weight: bold;">Discord Community</a> and upload the file.</li>
                     <li><strong>Email:</strong> Attach it to an email and send to <a href="mailto:letstrygg@gmail.com" style="color: var(--blue, #448aff);">letstrygg@gmail.com</a>.</li>
