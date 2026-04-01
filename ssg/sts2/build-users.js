@@ -76,6 +76,31 @@ async function build() {
             a.name || `Ascension ${a.level}`
         ]));
 
+        // --- GLOBAL USERS DIRECTORY (users/index.html) ---
+        console.log('📂 Building global users directory...');
+        ensureDir(path.join(PATHS.WEB_ROOT, 'users'));
+
+        const contributorLinks = users.map(user => {
+            const count = allRuns.filter(r => {
+                const runUser = (r.username || '').toLowerCase();
+                return runUser === user.slug.toLowerCase() || runUser === user.display_name.toLowerCase();
+            }).length;
+
+            return `
+            <a href="/users/${user.slug}/" class="card-item contributor-card">
+                <div class="card-info"><span class="card-name">${user.display_name}</span></div>
+                <div class="card-stats"><div class="run-count">${count} runs</div></div>
+            </a>`;
+        }).join('');
+
+        const usersIndexHtml = wrapLayout(
+            'Users',
+            `<h1>Contributors</h1><div class="grid">${contributorLinks || '<p>No contributors found.</p>'}</div>`,
+            [{ name: 'Users', url: '' }],
+            `View all Slay the Spire 2 contributors and their run history.`
+        );
+        fs.writeFileSync(path.join(PATHS.WEB_ROOT, 'users', 'index.html'), usersIndexHtml);
+
         for (const user of users) {
             console.log(`📂 Building pages for user: ${user.display_name}...`);
             const userRoot = ensureDir(path.join(PATHS.WEB_ROOT, 'users', user.slug));
