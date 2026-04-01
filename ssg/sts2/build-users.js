@@ -37,10 +37,10 @@ async function runCommand(sql, params = []) {
 
 /** Helper for win rate text color logic */
 function getWinRateColor(seen, winRateNum, globalWinRate) {
-    if (seen === 0) return '#888';
-    if (winRateNum > globalWinRate) return '#00ff89';
-    if (winRateNum < globalWinRate) return '#ff4b4b';
-    return '#888';
+    if (seen === 0) return 'var(--gray)';
+    if (winRateNum > globalWinRate) return 'var(--green)';
+    if (winRateNum < globalWinRate) return 'var(--red)';
+    return 'var(--gray)';
 }
 
 async function build() {
@@ -144,12 +144,11 @@ async function build() {
                 const bgStyle = getCharacterBgStyle(charName);
                 const statusClass = run.win ? 'win' : 'loss';
                 const statusText = run.win ? 'Victory' : 'Defeat';
-                const statusColor = run.win ? '#00ff89' : '#ff4b4b';
+                const statusColor = run.win ? 'var(--green)' : 'var(--red)';
                 const runNumber = run.user_run_num;
                 
                 const charId = (run.character || '').replace('CHARACTER.', '').toUpperCase();
-                const charRgb = CHARACTER_COLORS[charId] || '170, 170, 170';
-                const charColor = `rgb(${charRgb})`;
+                const charColor = CHARACTER_COLORS[charId] || 'var(--gray)';
                 
                 return `
                 <a href="/users/${user.slug}/runs/${run.id}/" class="card-item ${statusClass} ${charClass}" style="border-left-width: 6px; --char-color: ${charColor};">

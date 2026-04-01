@@ -5,11 +5,11 @@ export const FORMATTED_BUILD_DATE = BUILD_DATE.toLocaleDateString('en-US', { mon
 export const ISO_BUILD_DATE = BUILD_DATE.toISOString();
 
 export const CHARACTER_COLORS = {
-    'IRONCLAD': '215, 50, 50',
-    'SILENT': '46, 204, 113',
-    'DEFECT': '74, 144, 226',
-    'NECROBINDER': '155, 89, 182',
-    'REGENT': '211, 84, 0'
+    'IRONCLAD': 'var(--color-ironclad)',
+    'SILENT': 'var(--color-silent)',
+    'DEFECT': 'var(--color-defect)',
+    'NECROBINDER': 'var(--color-necrobinder)',
+    'REGENT': 'var(--color-regent)'
 };
 
 /** Returns an inline style for 30% opacity character background */
@@ -17,8 +17,8 @@ export function getCharacterBgStyle(name) {
     if (!name) return '';
     // Normalize name: "Ironclad Pool" -> "IRONCLAD", "The Silent" -> "SILENT"
     const cleanName = name.toUpperCase().replace(/ POOL$/i, '').replace(/^THE\s+/i, '').trim();
-    const rgb = CHARACTER_COLORS[cleanName];
-    return rgb ? `background-color: rgba(${rgb}, 0.3);` : '';
+    const colorVar = CHARACTER_COLORS[cleanName];
+    return colorVar ? `background-color: color-mix(in srgb, ${colorVar} 30%, transparent);` : '';
 }
 
 export function generateItemJsonLd(name, category, stats) {
@@ -179,8 +179,6 @@ export function generateRunLinksList(runs, title = "Recent Runs") {
     <style>
         .run-video-links { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 8px; }
         .run-vid-btn { 
-            background: rgba(255,255,255,0.05); 
-            border: 1px solid rgba(255,255,255,0.1); 
             padding: 2px 8px; 
             border-radius: 4px; 
             color: #ccc; 
@@ -199,7 +197,7 @@ export function generateRunLinksList(runs, title = "Recent Runs") {
     const links = runs.slice(0, 12).map(run => {
         const statusClass = run.win ? 'win' : 'loss';
         const statusText = run.win ? 'Victory' : 'Defeat';
-        const statusColor = run.win ? '#00ff89' : '#ff4b4b';
+        const statusColor = run.win ? 'var(--green)' : 'var(--red)';
         const userSlug = run.username.toLowerCase();
 
         let videoButtons = '';
@@ -226,7 +224,7 @@ export function generateRunLinksList(runs, title = "Recent Runs") {
                 </div>
             </a>
             ${videoButtons ? `<div class="run-video-links">${videoButtons}</div>` : ''}
-            <div class="win-bar" style="background: ${run.win ? '#00ff89' : '#ff4b4b'};"></div>
+            <div class="win-bar" style="background: ${statusColor};"></div>
         </div>`;
     }).join('');
 

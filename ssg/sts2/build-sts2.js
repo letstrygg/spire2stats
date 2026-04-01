@@ -67,10 +67,10 @@ function getWinBarStyle(seen, winRateNum) {
 
 /** Helper for win rate text color logic */
 function getWinRateColor(seen, winRateNum, globalWinRate) {
-    if (seen === 0) return '#888';
-    if (winRateNum > globalWinRate) return '#00ff89';
-    if (winRateNum < globalWinRate) return '#ff4b4b';
-    return '#888';
+    if (seen === 0) return 'var(--gray)';
+    if (winRateNum > globalWinRate) return 'var(--green)';
+    if (winRateNum < globalWinRate) return 'var(--red)';
+    return 'var(--gray)';
 }
 
 /** Standardizes item statistics for display */
@@ -643,19 +643,19 @@ async function buildEncounters(encounters, runStats, sitemap) {
         const stats = runStats.encounterStats[cleanId] || { encountered: 0, kills: 0, damage_taken: 0 };
         const avgDmg = stats.encountered > 0 ? stats.damage_taken / stats.encountered : 0;
         const dmgPercent = maxAvgDmg > 0 ? (avgDmg / maxAvgDmg) * 100 : 0;
-        const killDisplay = stats.kills > 0 ? `<div style="color: #ff4b4b; font-size: 1.5rem; font-weight: bold;">${stats.kills} Kills</div>` : '';
+        const killDisplay = stats.kills > 0 ? `<div style="color: var(--red); font-size: 1.5rem; font-weight: bold;">${stats.kills} Kills</div>` : '';
 
         return `
         <a href="/encounters/${slug}/" class="card-item" aria-label="${e.name}: encountered ${stats.encountered} times">
             <div class="card-info">
                 <span class="card-name">${e.name}</span>
                 <div style="color: #888; font-size: 0.75rem;">Encountered ${stats.encountered} times</div>
-                <div style="color: #ff4b4b; font-size: 0.75rem;">Avg Dmg: ${avgDmg.toFixed(1)}</div>
+                <div style="color: var(--red); font-size: 0.75rem;">Avg Dmg: ${avgDmg.toFixed(1)}</div>
             </div>
             <div class="card-stats">
                 ${killDisplay}
             </div>
-            <div class="win-bar" style="background: linear-gradient(to right, #ff4b4b ${dmgPercent}%, transparent ${dmgPercent}%);"></div>
+            <div class="win-bar" style="background: linear-gradient(to right, var(--red) ${dmgPercent}%, transparent ${dmgPercent}%);"></div>
         </a>`;
     }).join('');
 
