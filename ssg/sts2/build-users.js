@@ -158,7 +158,7 @@ async function build() {
                 const ascSlug = slugify(ascName);
 
                 const bgStyle = getCharacterBgStyle(charName);
-                
+                const statusColor = run.win ? '#00ff89' : '#ff4b4b';
                 const deck = JSON.parse(run.deck_list || '[]');
                 const relicIds = JSON.parse(run.relic_list || '[]');
                 const pathHistory = JSON.parse(run.path_history || '[]');
@@ -174,10 +174,13 @@ async function build() {
                 const uniqueEventIds = [...new Set(pathHistory.filter(p => p.event_id).map(p => p.event_id))];
                 const eventsLinks = uniqueEventIds.map(id => `<a href="/events/${slugify(eventLookup[id] || id)}/" class="item-link">${eventLookup[id] || id}</a>`).join('');
 
-                // Chart.js Data processing
-                const floorData = pathHistory.map(p => ({ floor: p.floor, hp: p.hp })).filter(p => p.floor !== undefined && p.hp !== undefined);
+                // Chart.js Data processing - Ensure we have a valid array of floor data
+                const floorData = Array.isArray(pathHistory) 
+                    ? pathHistory.map(p => ({ floor: p.floor, hp: p.hp })).filter(p => p.floor !== undefined && p.hp !== undefined)
+                    : [];
+
                 const chartJson = JSON.stringify([{
-                    label: `Run ${run.id} (${charName})`,
+                    label: `Run #${runNumber} (${charName})`,
                     win: !!run.win,
                     floorData: floorData
                 }]);
@@ -185,37 +188,39 @@ async function build() {
                 const runHtml = wrapLayout(
                     `Run #${runNumber} - ${user.display_name}`,
                     `
-                    <div class="item-box" style="${bgStyle}">
-                        <h1>Run #${runNumber}</h1>
-                        <div class="subtitle">
-                            <a href="/characters/${charSlug}/">${charName}</a> • 
-                            <a href="/ascensions/${ascSlug}/">${ascName}</a> • 
-                            <span style="color: ${run.win ? '#00ff89' : '#ff4b4b'}">${run.win ? 'Victory' : 'Defeat'}</span>
-                        </div>
-                        
-                        <div class="run-summary-container" style="margin-top: 30px; margin-bottom: 30px; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; border: 1px solid var(--border, #333);">
-                            <h3 style="margin-top: 0; color: var(--text-muted, #aaa); font-size: 1.1em; border-bottom: 1px solid var(--border, #333); padding-bottom: 10px; margin-bottom: 15px;">Run Summary: HP per Floor</h3>
-                            <div style="height: 300px; width: 100%;">
-                                <canvas id="hpChart_${run.id}"></canvas>
+                    <div class="game-page-wrapper">
+                        <div class="item-box" style="${bgStyle} max-width: 1000px; margin: 0 auto; text-align: center;">
+                            <h1 style="font-size: 2.5rem; margin-bottom: 10px;">Run #${runNumber}</h1>
+                            <div class="subtitle" style="font-size: 1.2rem; margin-bottom: 30px;">
+                                <a href="/characters/${charSlug}/" style="color: inherit; text-decoration: underline;">${charName}</a> • 
+                                <a href="/ascensions/${ascSlug}/" style="color: inherit; text-decoration: underline;">${ascName}</a> • 
+                                <strong style="color: ${statusColor}">${run.win ? 'Victory' : 'Defeat'}</strong>
                             </div>
-                        </div>
+                            
+                            <div class="run-summary-container" style="background: rgba(0,0,0,0.4); padding: 25px; border-radius: 12px; border: 1px solid #444; margin-bottom: 40px;">
+                                <h3 style="margin-top: 0; color: #ccc; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px;">Health Progression</h3>
+                                <div style="height: 350px; width: 100%;">
+                                    <canvas id="hpChart"></canvas>
+                                </div>
+                            </div>
 
-                        <div class="run-details-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; text-align: left;">
-                            <div>
-                                <h3>Deck</h3>
-                                <div class="grid-sm">${cardsLinks || 'No cards recorded.'}</div>
-                            </div>
-                            <div>
-                                <h3>Enchantments</h3>
-                                <div class="grid-sm">${enchsLinks || 'No enchantments used.'}</div>
-                            </div>
-                            <div>
-                                <h3>Relics</h3>
-                                <div class="grid-sm">${relicsLinks || 'No relics obtained.'}</div>
-                            </div>
-                            <div>
-                                <h3>Events</h3>
-                                <div class="grid-sm">${eventsLinks || 'No events encountered.'}</div>
+                            <div class="run-details-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; text-align: left;">
+                                <section>
+                                    <h3 style="color: var(--gold, #ffd700); border-bottom: 1px solid #333; padding-bottom: 5px;">Deck</h3>
+                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;">${cardsLinks || '<span class="text-muted">No cards</span>'}</div>
+                                </section>
+                                <section>
+                                    <h3 style="color: var(--purple, #b388ff); border-bottom: 1px solid #333; padding-bottom: 5px;">Enchantments</h3>
+                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;">${enchsLinks || '<span class="text-muted">None</span>'}</div>
+                                </section>
+                                <section>
+                                    <h3 style="color: var(--red, #ff5252); border-bottom: 1px solid #333; padding-bottom: 5px;">Relics</h3>
+                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;">${relicsLinks || '<span class="text-muted">None</span>'}</div>
+                                </section>
+                                <section>
+                                    <h3 style="color: var(--blue, #448aff); border-bottom: 1px solid #333; padding-bottom: 5px;">Events</h3>
+                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;">${eventsLinks || '<span class="text-muted">None</span>'}</div>
+                                </section>
                             </div>
                         </div>
                     </div>
@@ -223,16 +228,16 @@ async function build() {
                     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                     <script>
                     document.addEventListener("DOMContentLoaded", function() {
-                        const ctx = document.getElementById('hpChart_${run.id}');
+                        const ctx = document.getElementById('hpChart').getContext('2d');
                         if (!ctx) return;
                         const rawRuns = ${chartJson};
                         if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) return;
 
-                        const maxFloor = Math.max(...rawRuns[0].floorData.map(d => d.floor));
+                        const maxFloor = Math.max(...rawRuns[0].floorData.map(d => d.floor), 1);
                         const labels = Array.from({length: maxFloor}, (_, i) => i + 1);
-                        const color = run.win ? '#00ff89' : '#ff4b4b';
+                        const color = "${statusColor}";
 
-                        const hpMap = {};
+                        const hpMap = {}; 
                         rawRuns[0].floorData.forEach(d => { hpMap[d.floor] = d.hp; });
                         const dataArr = labels.map(floor => hpMap[floor] !== undefined ? hpMap[floor] : null);
 
@@ -242,7 +247,7 @@ async function build() {
                                 label: rawRuns[0].label,
                                 data: dataArr,
                                 borderColor: color,
-                                backgroundColor: color + '22',
+                                backgroundColor: color + '15',
                                 borderWidth: 2,
                                 fill: true,
                                 tension: 0.3,
@@ -250,13 +255,31 @@ async function build() {
                             }]},
                             options: {
                                 responsive: true, maintainAspectRatio: false,
-                                scales: { y: { beginAtZero: true, grid: { color: '#333' } }, x: { grid: { color: '#333' } } }
+                                interaction: { mode: 'index', intersect: false },
+                                scales: { 
+                                    y: { 
+                                        beginAtZero: true, 
+                                        grid: { color: 'rgba(255,255,255,0.05)' },
+                                        ticks: { color: '#888' },
+                                        title: { display: true, text: 'Hit Points', color: '#666' }
+                                    }, 
+                                    x: { 
+                                        grid: { color: 'rgba(255,255,255,0.05)' },
+                                        ticks: { color: '#888' },
+                                        title: { display: true, text: 'Floor', color: '#666' }
+                                    } 
+                                },
+                                plugins: {
+                                    legend: { display: false }
+                                }
                             }
                         });
                     });
-                    </script>`,
+                    </script>
+                    <link rel="stylesheet" href="/css/game/sts2-style.css">`,
                     [{ name: user.display_name, url: `/users/${user.slug}/` }, { name: `Run #${run.id}`, url: '' }],
-                    `Detailed view of ${user.display_name}'s Slay the Spire 2 run #${runNumber}.`
+                    `Detailed view of ${user.display_name}'s Slay the Spire 2 run #${runNumber}.`,
+                    `<link rel="stylesheet" href="/css/game/sts2-style.css">`
                 );
                 fs.writeFileSync(path.join(runDir, 'index.html'), runHtml);
             }

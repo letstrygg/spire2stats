@@ -6,40 +6,42 @@
     <meta name="description" content="Detailed view of Falterfire's Slay the Spire 2 run #38.">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    
+    <link rel="stylesheet" href="/css/game/sts2-style.css">
 </head>
 <body><nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/users/falterfire/">falterfire</a> / run #1773801078</nav>
-                    <div class="item-box" style="background-color: rgba(215, 50, 50, 0.3);">
-                        <h1>Run #38</h1>
-                        <div class="subtitle">
-                            <a href="/characters/ironclad/">Ironclad</a> • 
-                            <a href="/ascensions/ascenders-bane/">Ascender's Bane</a> • 
-                            <span style="color: #00ff89">Victory</span>
-                        </div>
-                        
-                        <div class="run-summary-container" style="margin-top: 30px; margin-bottom: 30px; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; border: 1px solid var(--border, #333);">
-                            <h3 style="margin-top: 0; color: var(--text-muted, #aaa); font-size: 1.1em; border-bottom: 1px solid var(--border, #333); padding-bottom: 10px; margin-bottom: 15px;">Run Summary: HP per Floor</h3>
-                            <div style="height: 300px; width: 100%;">
-                                <canvas id="hpChart_1773801078"></canvas>
+                    <div class="game-page-wrapper">
+                        <div class="item-box" style="background-color: rgba(215, 50, 50, 0.3); max-width: 1000px; margin: 0 auto; text-align: center;">
+                            <h1 style="font-size: 2.5rem; margin-bottom: 10px;">Run #38</h1>
+                            <div class="subtitle" style="font-size: 1.2rem; margin-bottom: 30px;">
+                                <a href="/characters/ironclad/" style="color: inherit; text-decoration: underline;">Ironclad</a> • 
+                                <a href="/ascensions/ascenders-bane/" style="color: inherit; text-decoration: underline;">Ascender's Bane</a> • 
+                                <strong style="color: #00ff89">Victory</strong>
                             </div>
-                        </div>
+                            
+                            <div class="run-summary-container" style="background: rgba(0,0,0,0.4); padding: 25px; border-radius: 12px; border: 1px solid #444; margin-bottom: 40px;">
+                                <h3 style="margin-top: 0; color: #ccc; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px;">Health Progression</h3>
+                                <div style="height: 350px; width: 100%;">
+                                    <canvas id="hpChart"></canvas>
+                                </div>
+                            </div>
 
-                        <div class="run-details-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; text-align: left;">
-                            <div>
-                                <h3>Deck</h3>
-                                <div class="grid-sm"><a href="/cards/strike/" class="item-link">Strike</a><a href="/cards/defend/" class="item-link">Defend</a><a href="/cards/bash/" class="item-link">Bash</a><a href="/cards/ascenders-bane/" class="item-link">Ascender's Bane</a><a href="/cards/flame-barrier/" class="item-link">Flame Barrier</a><a href="/cards/spite/" class="item-link">Spite</a><a href="/cards/true-grit/" class="item-link">True Grit</a><a href="/cards/pommel-strike/" class="item-link">Pommel Strike</a><a href="/cards/howl-from-beyond/" class="item-link">Howl from Beyond</a><a href="/cards/dark-embrace/" class="item-link">Dark Embrace</a><a href="/cards/havoc/" class="item-link">Havoc</a><a href="/cards/blood-wall/" class="item-link">Blood Wall</a><a href="/cards/crimson-mantle/" class="item-link">Crimson Mantle</a><a href="/cards/shrug-it-off/" class="item-link">Shrug It Off</a><a href="/cards/burning-pact/" class="item-link">Burning Pact</a><a href="/cards/inferno/" class="item-link">Inferno</a><a href="/cards/bludgeon/" class="item-link">Bludgeon</a><a href="/cards/iron-wave/" class="item-link">Iron Wave</a><a href="/cards/evil-eye/" class="item-link">Evil Eye</a><a href="/cards/feed/" class="item-link">Feed</a><a href="/cards/breakthrough/" class="item-link">Breakthrough</a><a href="/cards/feel-no-pain/" class="item-link">Feel No Pain</a><a href="/cards/juggling/" class="item-link">Juggling</a><a href="/cards/mad-science/" class="item-link">Mad Science</a><a href="/cards/demon-form/" class="item-link">Demon Form</a><a href="/cards/headbutt/" class="item-link">Headbutt</a></div>
-                            </div>
-                            <div>
-                                <h3>Enchantments</h3>
-                                <div class="grid-sm"><a href="/enchantments/enchantmentswift/" class="item-link">ENCHANTMENT.SWIFT</a></div>
-                            </div>
-                            <div>
-                                <h3>Relics</h3>
-                                <div class="grid-sm"><a href="/relics/burning-blood/" class="item-link">Burning Blood</a><a href="/relics/new-leaf/" class="item-link">New Leaf</a><a href="/relics/festive-popper/" class="item-link">Festive Popper</a><a href="/relics/girya/" class="item-link">Girya</a><a href="/relics/juzu-bracelet/" class="item-link">Juzu Bracelet</a><a href="/relics/sozu/" class="item-link">Sozu</a><a href="/relics/demon-tongue/" class="item-link">Demon Tongue</a><a href="/relics/vambrace/" class="item-link">Vambrace</a><a href="/relics/potion-belt/" class="item-link">Potion Belt</a><a href="/relics/toolbox/" class="item-link">Toolbox</a><a href="/relics/throwing-axe/" class="item-link">Throwing Axe</a><a href="/relics/history-course/" class="item-link">History Course</a><a href="/relics/anchor/" class="item-link">Anchor???</a><a href="/relics/happy-flower/" class="item-link">Happy Flower</a><a href="/relics/oddly-smooth-stone/" class="item-link">Oddly Smooth Stone</a><a href="/relics/vajra/" class="item-link">Vajra</a></div>
-                            </div>
-                            <div>
-                                <h3>Events</h3>
-                                <div class="grid-sm"><a href="/events/neow/" class="item-link">Neow</a><a href="/events/abyssal-baths/" class="item-link">Abyssal Baths</a><a href="/events/punch-off/" class="item-link">Punch Off</a><a href="/events/spiraling-whirlpool/" class="item-link">Spiraling Whirlpool</a><a href="/events/self-help-book/" class="item-link">Self-Help Book</a><a href="/events/slippery-bridge/" class="item-link">Slippery Bridge</a><a href="/events/darv/" class="item-link">Darv</a><a href="/events/the-lantern-key/" class="item-link">The Lantern Key</a><a href="/events/tanx/" class="item-link">Tanx</a><a href="/events/war-historian-repy/" class="item-link">War Historian, Repy</a><a href="/events/battleworn-dummy/" class="item-link">Battleworn Dummy</a><a href="/events/the-merchant/" class="item-link">The Merchant???</a><a href="/events/tinker-time/" class="item-link">Tinker Time</a><a href="/events/crystal-sphere/" class="item-link">Crystal Sphere</a></div>
+                            <div class="run-details-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; text-align: left;">
+                                <section>
+                                    <h3 style="color: var(--gold, #ffd700); border-bottom: 1px solid #333; padding-bottom: 5px;">Deck</h3>
+                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;"><a href="/cards/strike/" class="item-link">Strike</a><a href="/cards/defend/" class="item-link">Defend</a><a href="/cards/bash/" class="item-link">Bash</a><a href="/cards/ascenders-bane/" class="item-link">Ascender's Bane</a><a href="/cards/flame-barrier/" class="item-link">Flame Barrier</a><a href="/cards/spite/" class="item-link">Spite</a><a href="/cards/true-grit/" class="item-link">True Grit</a><a href="/cards/pommel-strike/" class="item-link">Pommel Strike</a><a href="/cards/howl-from-beyond/" class="item-link">Howl from Beyond</a><a href="/cards/dark-embrace/" class="item-link">Dark Embrace</a><a href="/cards/havoc/" class="item-link">Havoc</a><a href="/cards/blood-wall/" class="item-link">Blood Wall</a><a href="/cards/crimson-mantle/" class="item-link">Crimson Mantle</a><a href="/cards/shrug-it-off/" class="item-link">Shrug It Off</a><a href="/cards/burning-pact/" class="item-link">Burning Pact</a><a href="/cards/inferno/" class="item-link">Inferno</a><a href="/cards/bludgeon/" class="item-link">Bludgeon</a><a href="/cards/iron-wave/" class="item-link">Iron Wave</a><a href="/cards/evil-eye/" class="item-link">Evil Eye</a><a href="/cards/feed/" class="item-link">Feed</a><a href="/cards/breakthrough/" class="item-link">Breakthrough</a><a href="/cards/feel-no-pain/" class="item-link">Feel No Pain</a><a href="/cards/juggling/" class="item-link">Juggling</a><a href="/cards/mad-science/" class="item-link">Mad Science</a><a href="/cards/demon-form/" class="item-link">Demon Form</a><a href="/cards/headbutt/" class="item-link">Headbutt</a></div>
+                                </section>
+                                <section>
+                                    <h3 style="color: var(--purple, #b388ff); border-bottom: 1px solid #333; padding-bottom: 5px;">Enchantments</h3>
+                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;"><a href="/enchantments/enchantmentswift/" class="item-link">ENCHANTMENT.SWIFT</a></div>
+                                </section>
+                                <section>
+                                    <h3 style="color: var(--red, #ff5252); border-bottom: 1px solid #333; padding-bottom: 5px;">Relics</h3>
+                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;"><a href="/relics/burning-blood/" class="item-link">Burning Blood</a><a href="/relics/new-leaf/" class="item-link">New Leaf</a><a href="/relics/festive-popper/" class="item-link">Festive Popper</a><a href="/relics/girya/" class="item-link">Girya</a><a href="/relics/juzu-bracelet/" class="item-link">Juzu Bracelet</a><a href="/relics/sozu/" class="item-link">Sozu</a><a href="/relics/demon-tongue/" class="item-link">Demon Tongue</a><a href="/relics/vambrace/" class="item-link">Vambrace</a><a href="/relics/potion-belt/" class="item-link">Potion Belt</a><a href="/relics/toolbox/" class="item-link">Toolbox</a><a href="/relics/throwing-axe/" class="item-link">Throwing Axe</a><a href="/relics/history-course/" class="item-link">History Course</a><a href="/relics/anchor/" class="item-link">Anchor???</a><a href="/relics/happy-flower/" class="item-link">Happy Flower</a><a href="/relics/oddly-smooth-stone/" class="item-link">Oddly Smooth Stone</a><a href="/relics/vajra/" class="item-link">Vajra</a></div>
+                                </section>
+                                <section>
+                                    <h3 style="color: var(--blue, #448aff); border-bottom: 1px solid #333; padding-bottom: 5px;">Events</h3>
+                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;"><a href="/events/neow/" class="item-link">Neow</a><a href="/events/abyssal-baths/" class="item-link">Abyssal Baths</a><a href="/events/punch-off/" class="item-link">Punch Off</a><a href="/events/spiraling-whirlpool/" class="item-link">Spiraling Whirlpool</a><a href="/events/self-help-book/" class="item-link">Self-Help Book</a><a href="/events/slippery-bridge/" class="item-link">Slippery Bridge</a><a href="/events/darv/" class="item-link">Darv</a><a href="/events/the-lantern-key/" class="item-link">The Lantern Key</a><a href="/events/tanx/" class="item-link">Tanx</a><a href="/events/war-historian-repy/" class="item-link">War Historian, Repy</a><a href="/events/battleworn-dummy/" class="item-link">Battleworn Dummy</a><a href="/events/the-merchant/" class="item-link">The Merchant???</a><a href="/events/tinker-time/" class="item-link">Tinker Time</a><a href="/events/crystal-sphere/" class="item-link">Crystal Sphere</a></div>
+                                </section>
                             </div>
                         </div>
                     </div>
@@ -47,16 +49,16 @@
                     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                     <script>
                     document.addEventListener("DOMContentLoaded", function() {
-                        const ctx = document.getElementById('hpChart_1773801078');
+                        const ctx = document.getElementById('hpChart').getContext('2d');
                         if (!ctx) return;
-                        const rawRuns = [{"label":"Run 1773801078 (Ironclad)","win":true,"floorData":[]}];
+                        const rawRuns = [{"label":"Run #38 (Ironclad)","win":true,"floorData":[]}];
                         if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) return;
 
-                        const maxFloor = Math.max(...rawRuns[0].floorData.map(d => d.floor));
+                        const maxFloor = Math.max(...rawRuns[0].floorData.map(d => d.floor), 1);
                         const labels = Array.from({length: maxFloor}, (_, i) => i + 1);
-                        const color = run.win ? '#00ff89' : '#ff4b4b';
+                        const color = "#00ff89";
 
-                        const hpMap = {};
+                        const hpMap = {}; 
                         rawRuns[0].floorData.forEach(d => { hpMap[d.floor] = d.hp; });
                         const dataArr = labels.map(floor => hpMap[floor] !== undefined ? hpMap[floor] : null);
 
@@ -66,7 +68,7 @@
                                 label: rawRuns[0].label,
                                 data: dataArr,
                                 borderColor: color,
-                                backgroundColor: color + '22',
+                                backgroundColor: color + '15',
                                 borderWidth: 2,
                                 fill: true,
                                 tension: 0.3,
@@ -74,8 +76,25 @@
                             }]},
                             options: {
                                 responsive: true, maintainAspectRatio: false,
-                                scales: { y: { beginAtZero: true, grid: { color: '#333' } }, x: { grid: { color: '#333' } } }
+                                interaction: { mode: 'index', intersect: false },
+                                scales: { 
+                                    y: { 
+                                        beginAtZero: true, 
+                                        grid: { color: 'rgba(255,255,255,0.05)' },
+                                        ticks: { color: '#888' },
+                                        title: { display: true, text: 'Hit Points', color: '#666' }
+                                    }, 
+                                    x: { 
+                                        grid: { color: 'rgba(255,255,255,0.05)' },
+                                        ticks: { color: '#888' },
+                                        title: { display: true, text: 'Floor', color: '#666' }
+                                    } 
+                                },
+                                plugins: {
+                                    legend: { display: false }
+                                }
                             }
                         });
                     });
-                    </script></body></html>
+                    </script>
+                    <link rel="stylesheet" href="/css/game/sts2-style.css"></body></html>

@@ -6,40 +6,42 @@
     <meta name="description" content="Detailed view of Falterfire's Slay the Spire 2 run #25.">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    
+    <link rel="stylesheet" href="/css/game/sts2-style.css">
 </head>
 <body><nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/users/falterfire/">falterfire</a> / run #1773282265</nav>
-                    <div class="item-box" style="background-color: rgba(74, 144, 226, 0.3);">
-                        <h1>Run #25</h1>
-                        <div class="subtitle">
-                            <a href="/characters/defect/">Defect</a> • 
-                            <a href="/ascensions/poverty/">Poverty</a> • 
-                            <span style="color: #ff4b4b">Defeat</span>
-                        </div>
-                        
-                        <div class="run-summary-container" style="margin-top: 30px; margin-bottom: 30px; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; border: 1px solid var(--border, #333);">
-                            <h3 style="margin-top: 0; color: var(--text-muted, #aaa); font-size: 1.1em; border-bottom: 1px solid var(--border, #333); padding-bottom: 10px; margin-bottom: 15px;">Run Summary: HP per Floor</h3>
-                            <div style="height: 300px; width: 100%;">
-                                <canvas id="hpChart_1773282265"></canvas>
+                    <div class="game-page-wrapper">
+                        <div class="item-box" style="background-color: rgba(74, 144, 226, 0.3); max-width: 1000px; margin: 0 auto; text-align: center;">
+                            <h1 style="font-size: 2.5rem; margin-bottom: 10px;">Run #25</h1>
+                            <div class="subtitle" style="font-size: 1.2rem; margin-bottom: 30px;">
+                                <a href="/characters/defect/" style="color: inherit; text-decoration: underline;">Defect</a> • 
+                                <a href="/ascensions/poverty/" style="color: inherit; text-decoration: underline;">Poverty</a> • 
+                                <strong style="color: #ff4b4b">Defeat</strong>
                             </div>
-                        </div>
+                            
+                            <div class="run-summary-container" style="background: rgba(0,0,0,0.4); padding: 25px; border-radius: 12px; border: 1px solid #444; margin-bottom: 40px;">
+                                <h3 style="margin-top: 0; color: #ccc; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px;">Health Progression</h3>
+                                <div style="height: 350px; width: 100%;">
+                                    <canvas id="hpChart"></canvas>
+                                </div>
+                            </div>
 
-                        <div class="run-details-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; text-align: left;">
-                            <div>
-                                <h3>Deck</h3>
-                                <div class="grid-sm"><a href="/cards/strike/" class="item-link">Strike</a><a href="/cards/defend/" class="item-link">Defend</a><a href="/cards/zap/" class="item-link">Zap</a><a href="/cards/dualcast/" class="item-link">Dualcast</a><a href="/cards/focused-strike/" class="item-link">Focused Strike</a><a href="/cards/momentum-strike/" class="item-link">Momentum Strike</a><a href="/cards/glasswork/" class="item-link">Glasswork</a><a href="/cards/white-noise/" class="item-link">White Noise</a><a href="/cards/boot-sequence/" class="item-link">Boot Sequence</a><a href="/cards/ball-lightning/" class="item-link">Ball Lightning</a><a href="/cards/cold-snap/" class="item-link">Cold Snap</a><a href="/cards/defragment/" class="item-link">Defragment</a><a href="/cards/thunder/" class="item-link">Thunder</a><a href="/cards/consuming-shadow/" class="item-link">Consuming Shadow</a><a href="/cards/chaos/" class="item-link">Chaos</a><a href="/cards/go-for-the-eyes/" class="item-link">Go for the Eyes</a><a href="/cards/metamorphosis/" class="item-link">Metamorphosis</a><a href="/cards/echo-form/" class="item-link">Echo Form</a><a href="/cards/charge-battery/" class="item-link">Charge Battery</a><a href="/cards/decay/" class="item-link">Decay</a><a href="/cards/mad-science/" class="item-link">Mad Science</a><a href="/cards/subroutine/" class="item-link">Subroutine</a></div>
-                            </div>
-                            <div>
-                                <h3>Enchantments</h3>
-                                <div class="grid-sm"><a href="/enchantments/enchantmentsouls_power/" class="item-link">ENCHANTMENT.SOULS_POWER</a><a href="/enchantments/enchantmentswift/" class="item-link">ENCHANTMENT.SWIFT</a></div>
-                            </div>
-                            <div>
-                                <h3>Relics</h3>
-                                <div class="grid-sm"><a href="/relics/cracked-core/" class="item-link">Cracked Core</a><a href="/relics/scroll-boxes/" class="item-link">Scroll Boxes</a><a href="/relics/the-chosen-cheese/" class="item-link">The Chosen Cheese</a><a href="/relics/vambrace/" class="item-link">Vambrace</a><a href="/relics/sparkling-rouge/" class="item-link">Sparkling Rouge</a><a href="/relics/bag-of-preparation/" class="item-link">Bag of Preparation</a><a href="/relics/planisphere/" class="item-link">Planisphere</a><a href="/relics/happy-flower/" class="item-link">Happy Flower</a><a href="/relics/yummy-cookie/" class="item-link">Yummy Cookie</a><a href="/relics/strawberry/" class="item-link">Strawberry</a><a href="/relics/vexing-puzzlebox/" class="item-link">Vexing Puzzlebox</a><a href="/relics/symbiotic-virus/" class="item-link">Symbiotic Virus</a><a href="/relics/brilliant-scarf/" class="item-link">Brilliant Scarf</a><a href="/relics/blood-vial/" class="item-link">Blood Vial</a></div>
-                            </div>
-                            <div>
-                                <h3>Events</h3>
-                                <div class="grid-sm"><a href="/events/neow/" class="item-link">Neow</a><a href="/events/room-full-of-cheese/" class="item-link">Room Full of Cheese</a><a href="/events/this-or-that/" class="item-link">This or That?</a><a href="/events/tezcatara/" class="item-link">Tezcatara</a><a href="/events/self-help-book/" class="item-link">Self-Help Book</a><a href="/events/spirit-grafter/" class="item-link">Spirit Grafter</a><a href="/events/nonupeipe/" class="item-link">Nonupeipe</a><a href="/events/grave-of-the-forgotten/" class="item-link">Grave of the Forgotten</a><a href="/events/tinker-time/" class="item-link">Tinker Time</a><a href="/events/potion-courier/" class="item-link">Potion Courier</a></div>
+                            <div class="run-details-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; text-align: left;">
+                                <section>
+                                    <h3 style="color: var(--gold, #ffd700); border-bottom: 1px solid #333; padding-bottom: 5px;">Deck</h3>
+                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;"><a href="/cards/strike/" class="item-link">Strike</a><a href="/cards/defend/" class="item-link">Defend</a><a href="/cards/zap/" class="item-link">Zap</a><a href="/cards/dualcast/" class="item-link">Dualcast</a><a href="/cards/focused-strike/" class="item-link">Focused Strike</a><a href="/cards/momentum-strike/" class="item-link">Momentum Strike</a><a href="/cards/glasswork/" class="item-link">Glasswork</a><a href="/cards/white-noise/" class="item-link">White Noise</a><a href="/cards/boot-sequence/" class="item-link">Boot Sequence</a><a href="/cards/ball-lightning/" class="item-link">Ball Lightning</a><a href="/cards/cold-snap/" class="item-link">Cold Snap</a><a href="/cards/defragment/" class="item-link">Defragment</a><a href="/cards/thunder/" class="item-link">Thunder</a><a href="/cards/consuming-shadow/" class="item-link">Consuming Shadow</a><a href="/cards/chaos/" class="item-link">Chaos</a><a href="/cards/go-for-the-eyes/" class="item-link">Go for the Eyes</a><a href="/cards/metamorphosis/" class="item-link">Metamorphosis</a><a href="/cards/echo-form/" class="item-link">Echo Form</a><a href="/cards/charge-battery/" class="item-link">Charge Battery</a><a href="/cards/decay/" class="item-link">Decay</a><a href="/cards/mad-science/" class="item-link">Mad Science</a><a href="/cards/subroutine/" class="item-link">Subroutine</a></div>
+                                </section>
+                                <section>
+                                    <h3 style="color: var(--purple, #b388ff); border-bottom: 1px solid #333; padding-bottom: 5px;">Enchantments</h3>
+                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;"><a href="/enchantments/enchantmentsouls_power/" class="item-link">ENCHANTMENT.SOULS_POWER</a><a href="/enchantments/enchantmentswift/" class="item-link">ENCHANTMENT.SWIFT</a></div>
+                                </section>
+                                <section>
+                                    <h3 style="color: var(--red, #ff5252); border-bottom: 1px solid #333; padding-bottom: 5px;">Relics</h3>
+                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;"><a href="/relics/cracked-core/" class="item-link">Cracked Core</a><a href="/relics/scroll-boxes/" class="item-link">Scroll Boxes</a><a href="/relics/the-chosen-cheese/" class="item-link">The Chosen Cheese</a><a href="/relics/vambrace/" class="item-link">Vambrace</a><a href="/relics/sparkling-rouge/" class="item-link">Sparkling Rouge</a><a href="/relics/bag-of-preparation/" class="item-link">Bag of Preparation</a><a href="/relics/planisphere/" class="item-link">Planisphere</a><a href="/relics/happy-flower/" class="item-link">Happy Flower</a><a href="/relics/yummy-cookie/" class="item-link">Yummy Cookie</a><a href="/relics/strawberry/" class="item-link">Strawberry</a><a href="/relics/vexing-puzzlebox/" class="item-link">Vexing Puzzlebox</a><a href="/relics/symbiotic-virus/" class="item-link">Symbiotic Virus</a><a href="/relics/brilliant-scarf/" class="item-link">Brilliant Scarf</a><a href="/relics/blood-vial/" class="item-link">Blood Vial</a></div>
+                                </section>
+                                <section>
+                                    <h3 style="color: var(--blue, #448aff); border-bottom: 1px solid #333; padding-bottom: 5px;">Events</h3>
+                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;"><a href="/events/neow/" class="item-link">Neow</a><a href="/events/room-full-of-cheese/" class="item-link">Room Full of Cheese</a><a href="/events/this-or-that/" class="item-link">This or That?</a><a href="/events/tezcatara/" class="item-link">Tezcatara</a><a href="/events/self-help-book/" class="item-link">Self-Help Book</a><a href="/events/spirit-grafter/" class="item-link">Spirit Grafter</a><a href="/events/nonupeipe/" class="item-link">Nonupeipe</a><a href="/events/grave-of-the-forgotten/" class="item-link">Grave of the Forgotten</a><a href="/events/tinker-time/" class="item-link">Tinker Time</a><a href="/events/potion-courier/" class="item-link">Potion Courier</a></div>
+                                </section>
                             </div>
                         </div>
                     </div>
@@ -47,16 +49,16 @@
                     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                     <script>
                     document.addEventListener("DOMContentLoaded", function() {
-                        const ctx = document.getElementById('hpChart_1773282265');
+                        const ctx = document.getElementById('hpChart').getContext('2d');
                         if (!ctx) return;
-                        const rawRuns = [{"label":"Run 1773282265 (Defect)","win":false,"floorData":[]}];
+                        const rawRuns = [{"label":"Run #25 (Defect)","win":false,"floorData":[]}];
                         if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) return;
 
-                        const maxFloor = Math.max(...rawRuns[0].floorData.map(d => d.floor));
+                        const maxFloor = Math.max(...rawRuns[0].floorData.map(d => d.floor), 1);
                         const labels = Array.from({length: maxFloor}, (_, i) => i + 1);
-                        const color = run.win ? '#00ff89' : '#ff4b4b';
+                        const color = "#ff4b4b";
 
-                        const hpMap = {};
+                        const hpMap = {}; 
                         rawRuns[0].floorData.forEach(d => { hpMap[d.floor] = d.hp; });
                         const dataArr = labels.map(floor => hpMap[floor] !== undefined ? hpMap[floor] : null);
 
@@ -66,7 +68,7 @@
                                 label: rawRuns[0].label,
                                 data: dataArr,
                                 borderColor: color,
-                                backgroundColor: color + '22',
+                                backgroundColor: color + '15',
                                 borderWidth: 2,
                                 fill: true,
                                 tension: 0.3,
@@ -74,8 +76,25 @@
                             }]},
                             options: {
                                 responsive: true, maintainAspectRatio: false,
-                                scales: { y: { beginAtZero: true, grid: { color: '#333' } }, x: { grid: { color: '#333' } } }
+                                interaction: { mode: 'index', intersect: false },
+                                scales: { 
+                                    y: { 
+                                        beginAtZero: true, 
+                                        grid: { color: 'rgba(255,255,255,0.05)' },
+                                        ticks: { color: '#888' },
+                                        title: { display: true, text: 'Hit Points', color: '#666' }
+                                    }, 
+                                    x: { 
+                                        grid: { color: 'rgba(255,255,255,0.05)' },
+                                        ticks: { color: '#888' },
+                                        title: { display: true, text: 'Floor', color: '#666' }
+                                    } 
+                                },
+                                plugins: {
+                                    legend: { display: false }
+                                }
                             }
                         });
                     });
-                    </script></body></html>
+                    </script>
+                    <link rel="stylesheet" href="/css/game/sts2-style.css"></body></html>

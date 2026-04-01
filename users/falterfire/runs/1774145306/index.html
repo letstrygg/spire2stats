@@ -6,40 +6,42 @@
     <meta name="description" content="Detailed view of Falterfire's Slay the Spire 2 run #48.">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    
+    <link rel="stylesheet" href="/css/game/sts2-style.css">
 </head>
 <body><nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/users/falterfire/">falterfire</a> / run #1774145306</nav>
-                    <div class="item-box" style="background-color: rgba(211, 84, 0, 0.3);">
-                        <h1>Run #48</h1>
-                        <div class="subtitle">
-                            <a href="/characters/regent/">Regent</a> • 
-                            <a href="/ascensions/gloom/">Gloom</a> • 
-                            <span style="color: #ff4b4b">Defeat</span>
-                        </div>
-                        
-                        <div class="run-summary-container" style="margin-top: 30px; margin-bottom: 30px; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; border: 1px solid var(--border, #333);">
-                            <h3 style="margin-top: 0; color: var(--text-muted, #aaa); font-size: 1.1em; border-bottom: 1px solid var(--border, #333); padding-bottom: 10px; margin-bottom: 15px;">Run Summary: HP per Floor</h3>
-                            <div style="height: 300px; width: 100%;">
-                                <canvas id="hpChart_1774145306"></canvas>
+                    <div class="game-page-wrapper">
+                        <div class="item-box" style="background-color: rgba(211, 84, 0, 0.3); max-width: 1000px; margin: 0 auto; text-align: center;">
+                            <h1 style="font-size: 2.5rem; margin-bottom: 10px;">Run #48</h1>
+                            <div class="subtitle" style="font-size: 1.2rem; margin-bottom: 30px;">
+                                <a href="/characters/regent/" style="color: inherit; text-decoration: underline;">Regent</a> • 
+                                <a href="/ascensions/gloom/" style="color: inherit; text-decoration: underline;">Gloom</a> • 
+                                <strong style="color: #ff4b4b">Defeat</strong>
                             </div>
-                        </div>
+                            
+                            <div class="run-summary-container" style="background: rgba(0,0,0,0.4); padding: 25px; border-radius: 12px; border: 1px solid #444; margin-bottom: 40px;">
+                                <h3 style="margin-top: 0; color: #ccc; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px;">Health Progression</h3>
+                                <div style="height: 350px; width: 100%;">
+                                    <canvas id="hpChart"></canvas>
+                                </div>
+                            </div>
 
-                        <div class="run-details-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; text-align: left;">
-                            <div>
-                                <h3>Deck</h3>
-                                <div class="grid-sm"><a href="/cards/defend/" class="item-link">Defend</a><a href="/cards/falling-star/" class="item-link">Falling Star</a><a href="/cards/venerate/" class="item-link">Venerate</a><a href="/cards/ascenders-bane/" class="item-link">Ascender's Bane</a><a href="/cards/shining-strike/" class="item-link">Shining Strike</a><a href="/cards/terraforming/" class="item-link">Terraforming</a><a href="/cards/charge/" class="item-link">CHARGE!!</a><a href="/cards/neutron-aegis/" class="item-link">Neutron Aegis</a><a href="/cards/wrought-in-war/" class="item-link">Wrought in War</a><a href="/cards/cosmic-indifference/" class="item-link">Cosmic Indifference</a><a href="/cards/child-of-the-stars/" class="item-link">Child of the Stars</a><a href="/cards/cloak-of-stars/" class="item-link">Cloak of Stars</a><a href="/cards/gather-light/" class="item-link">Gather Light</a><a href="/cards/heirloom-hammer/" class="item-link">Heirloom Hammer</a><a href="/cards/astral-pulse/" class="item-link">Astral Pulse</a><a href="/cards/manifest-authority/" class="item-link">Manifest Authority</a><a href="/cards/prowess/" class="item-link">Prowess</a><a href="/cards/know-thy-place/" class="item-link">Know Thy Place</a><a href="/cards/spoils-of-battle/" class="item-link">Spoils of Battle</a><a href="/cards/hegemony/" class="item-link">Hegemony</a><a href="/cards/crush-under/" class="item-link">Crush Under</a><a href="/cards/orbit/" class="item-link">Orbit</a><a href="/cards/patter/" class="item-link">Patter</a><a href="/cards/comet/" class="item-link">Comet</a><a href="/cards/bulwark/" class="item-link">Bulwark</a><a href="/cards/clumsy/" class="item-link">Clumsy</a></div>
-                            </div>
-                            <div>
-                                <h3>Enchantments</h3>
-                                <div class="grid-sm"><a href="/enchantments/enchantmentroyally_approved/" class="item-link">ENCHANTMENT.ROYALLY_APPROVED</a></div>
-                            </div>
-                            <div>
-                                <h3>Relics</h3>
-                                <div class="grid-sm"><a href="/relics/divine-right/" class="item-link">Divine Right</a><a href="/relics/leafy-poultice/" class="item-link">Leafy Poultice</a><a href="/relics/mango/" class="item-link">Mango</a><a href="/relics/bag-of-preparation/" class="item-link">Bag of Preparation</a><a href="/relics/seal-of-gold/" class="item-link">Seal of Gold</a><a href="/relics/royal-stamp/" class="item-link">Royal Stamp</a><a href="/relics/lantern/" class="item-link">Lantern</a><a href="/relics/galactic-dust/" class="item-link">Galactic Dust</a><a href="/relics/vajra/" class="item-link">Vajra</a><a href="/relics/permafrost/" class="item-link">Permafrost</a><a href="/relics/blessed-antler/" class="item-link">Blessed Antler</a><a href="/relics/orichalcum/" class="item-link">Orichalcum</a><a href="/relics/petrified-toad/" class="item-link">Petrified Toad</a><a href="/relics/parrying-shield/" class="item-link">Parrying Shield</a><a href="/relics/sparkling-rouge/" class="item-link">Sparkling Rouge</a><a href="/relics/venerable-tea-set/" class="item-link">Venerable Tea Set</a><a href="/relics/gremlin-horn/" class="item-link">Gremlin Horn</a></div>
-                            </div>
-                            <div>
-                                <h3>Events</h3>
-                                <div class="grid-sm"><a href="/events/neow/" class="item-link">Neow</a><a href="/events/tablet-of-truth/" class="item-link">Tablet of Truth</a><a href="/events/whispering-hollow/" class="item-link">Whispering Hollow</a><a href="/events/wellspring/" class="item-link">Wellspring</a><a href="/events/tezcatara/" class="item-link">Tezcatara</a><a href="/events/brain-leech/" class="item-link">Brain Leech</a><a href="/events/nonupeipe/" class="item-link">Nonupeipe</a><a href="/events/symbiote/" class="item-link">Symbiote</a><a href="/events/this-or-that/" class="item-link">This or That?</a><a href="/events/relic-trader/" class="item-link">Relic Trader</a></div>
+                            <div class="run-details-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; text-align: left;">
+                                <section>
+                                    <h3 style="color: var(--gold, #ffd700); border-bottom: 1px solid #333; padding-bottom: 5px;">Deck</h3>
+                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;"><a href="/cards/defend/" class="item-link">Defend</a><a href="/cards/falling-star/" class="item-link">Falling Star</a><a href="/cards/venerate/" class="item-link">Venerate</a><a href="/cards/ascenders-bane/" class="item-link">Ascender's Bane</a><a href="/cards/shining-strike/" class="item-link">Shining Strike</a><a href="/cards/terraforming/" class="item-link">Terraforming</a><a href="/cards/charge/" class="item-link">CHARGE!!</a><a href="/cards/neutron-aegis/" class="item-link">Neutron Aegis</a><a href="/cards/wrought-in-war/" class="item-link">Wrought in War</a><a href="/cards/cosmic-indifference/" class="item-link">Cosmic Indifference</a><a href="/cards/child-of-the-stars/" class="item-link">Child of the Stars</a><a href="/cards/cloak-of-stars/" class="item-link">Cloak of Stars</a><a href="/cards/gather-light/" class="item-link">Gather Light</a><a href="/cards/heirloom-hammer/" class="item-link">Heirloom Hammer</a><a href="/cards/astral-pulse/" class="item-link">Astral Pulse</a><a href="/cards/manifest-authority/" class="item-link">Manifest Authority</a><a href="/cards/prowess/" class="item-link">Prowess</a><a href="/cards/know-thy-place/" class="item-link">Know Thy Place</a><a href="/cards/spoils-of-battle/" class="item-link">Spoils of Battle</a><a href="/cards/hegemony/" class="item-link">Hegemony</a><a href="/cards/crush-under/" class="item-link">Crush Under</a><a href="/cards/orbit/" class="item-link">Orbit</a><a href="/cards/patter/" class="item-link">Patter</a><a href="/cards/comet/" class="item-link">Comet</a><a href="/cards/bulwark/" class="item-link">Bulwark</a><a href="/cards/clumsy/" class="item-link">Clumsy</a></div>
+                                </section>
+                                <section>
+                                    <h3 style="color: var(--purple, #b388ff); border-bottom: 1px solid #333; padding-bottom: 5px;">Enchantments</h3>
+                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;"><a href="/enchantments/enchantmentroyally_approved/" class="item-link">ENCHANTMENT.ROYALLY_APPROVED</a></div>
+                                </section>
+                                <section>
+                                    <h3 style="color: var(--red, #ff5252); border-bottom: 1px solid #333; padding-bottom: 5px;">Relics</h3>
+                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;"><a href="/relics/divine-right/" class="item-link">Divine Right</a><a href="/relics/leafy-poultice/" class="item-link">Leafy Poultice</a><a href="/relics/mango/" class="item-link">Mango</a><a href="/relics/bag-of-preparation/" class="item-link">Bag of Preparation</a><a href="/relics/seal-of-gold/" class="item-link">Seal of Gold</a><a href="/relics/royal-stamp/" class="item-link">Royal Stamp</a><a href="/relics/lantern/" class="item-link">Lantern</a><a href="/relics/galactic-dust/" class="item-link">Galactic Dust</a><a href="/relics/vajra/" class="item-link">Vajra</a><a href="/relics/permafrost/" class="item-link">Permafrost</a><a href="/relics/blessed-antler/" class="item-link">Blessed Antler</a><a href="/relics/orichalcum/" class="item-link">Orichalcum</a><a href="/relics/petrified-toad/" class="item-link">Petrified Toad</a><a href="/relics/parrying-shield/" class="item-link">Parrying Shield</a><a href="/relics/sparkling-rouge/" class="item-link">Sparkling Rouge</a><a href="/relics/venerable-tea-set/" class="item-link">Venerable Tea Set</a><a href="/relics/gremlin-horn/" class="item-link">Gremlin Horn</a></div>
+                                </section>
+                                <section>
+                                    <h3 style="color: var(--blue, #448aff); border-bottom: 1px solid #333; padding-bottom: 5px;">Events</h3>
+                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;"><a href="/events/neow/" class="item-link">Neow</a><a href="/events/tablet-of-truth/" class="item-link">Tablet of Truth</a><a href="/events/whispering-hollow/" class="item-link">Whispering Hollow</a><a href="/events/wellspring/" class="item-link">Wellspring</a><a href="/events/tezcatara/" class="item-link">Tezcatara</a><a href="/events/brain-leech/" class="item-link">Brain Leech</a><a href="/events/nonupeipe/" class="item-link">Nonupeipe</a><a href="/events/symbiote/" class="item-link">Symbiote</a><a href="/events/this-or-that/" class="item-link">This or That?</a><a href="/events/relic-trader/" class="item-link">Relic Trader</a></div>
+                                </section>
                             </div>
                         </div>
                     </div>
@@ -47,16 +49,16 @@
                     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                     <script>
                     document.addEventListener("DOMContentLoaded", function() {
-                        const ctx = document.getElementById('hpChart_1774145306');
+                        const ctx = document.getElementById('hpChart').getContext('2d');
                         if (!ctx) return;
-                        const rawRuns = [{"label":"Run 1774145306 (Regent)","win":false,"floorData":[]}];
+                        const rawRuns = [{"label":"Run #48 (Regent)","win":false,"floorData":[]}];
                         if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) return;
 
-                        const maxFloor = Math.max(...rawRuns[0].floorData.map(d => d.floor));
+                        const maxFloor = Math.max(...rawRuns[0].floorData.map(d => d.floor), 1);
                         const labels = Array.from({length: maxFloor}, (_, i) => i + 1);
-                        const color = run.win ? '#00ff89' : '#ff4b4b';
+                        const color = "#ff4b4b";
 
-                        const hpMap = {};
+                        const hpMap = {}; 
                         rawRuns[0].floorData.forEach(d => { hpMap[d.floor] = d.hp; });
                         const dataArr = labels.map(floor => hpMap[floor] !== undefined ? hpMap[floor] : null);
 
@@ -66,7 +68,7 @@
                                 label: rawRuns[0].label,
                                 data: dataArr,
                                 borderColor: color,
-                                backgroundColor: color + '22',
+                                backgroundColor: color + '15',
                                 borderWidth: 2,
                                 fill: true,
                                 tension: 0.3,
@@ -74,8 +76,25 @@
                             }]},
                             options: {
                                 responsive: true, maintainAspectRatio: false,
-                                scales: { y: { beginAtZero: true, grid: { color: '#333' } }, x: { grid: { color: '#333' } } }
+                                interaction: { mode: 'index', intersect: false },
+                                scales: { 
+                                    y: { 
+                                        beginAtZero: true, 
+                                        grid: { color: 'rgba(255,255,255,0.05)' },
+                                        ticks: { color: '#888' },
+                                        title: { display: true, text: 'Hit Points', color: '#666' }
+                                    }, 
+                                    x: { 
+                                        grid: { color: 'rgba(255,255,255,0.05)' },
+                                        ticks: { color: '#888' },
+                                        title: { display: true, text: 'Floor', color: '#666' }
+                                    } 
+                                },
+                                plugins: {
+                                    legend: { display: false }
+                                }
                             }
                         });
                     });
-                    </script></body></html>
+                    </script>
+                    <link rel="stylesheet" href="/css/game/sts2-style.css"></body></html>
