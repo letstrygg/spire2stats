@@ -200,10 +200,7 @@ export function generateRunLinksList(runs, title = "Recent Runs") {
     return `
     ${style}
     <div class="recent-runs" style="margin-top: 30px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-            <h3 style="margin: 0;">${title}</h3>
-            <button onclick="toggleWinBars()" class="btn btn-gray" style="font-size: 0.65rem; padding: 4px 10px;">Toggle Win-Bars</button>
-        </div>
+        <h3 style="margin-bottom: 15px;">${title}</h3>
         <div class="grid">${links}</div>
     </div>`;
 }
@@ -300,16 +297,7 @@ export function wrapLayout(title, content, breadcrumbs = [], description = "", h
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     ${headExtra}
 </head>
-<body>
-<script>(function(){if(localStorage.getItem('hideWinBars')==='true')document.body.classList.add('hide-win-bars');})();</script>
-${bcHtml}${content}
-<script>
-function toggleWinBars() {
-    const isHidden = document.body.classList.toggle('hide-win-bars');
-    localStorage.setItem('hideWinBars', isHidden);
-}
-</script>
-</body></html>`;
+<body>${bcHtml}${content}</body></html>`;
 }
 
 export function formatDescription(text) {
