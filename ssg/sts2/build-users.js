@@ -151,7 +151,7 @@ async function build() {
                 const charColor = CHARACTER_COLORS[charId] || 'var(--gray)';
                 
                 return `
-                <a href="/users/${user.slug}/runs/${run.id}/" class="card-item ${statusClass} ${charClass}" style="border-left-width: 6px; --char-color: ${charColor};">
+                <a href="/users/${user.slug}/runs/${run.id}/" class="card-item ${statusClass} ${charClass}" style="border-left-width: 2px; --char-color: ${charColor};">
                     <div class="card-info">
                         <span class="card-name">Run ${runNumber}<br><span style="color: ${charColor}">${charName}</span></span>
                     </div>
