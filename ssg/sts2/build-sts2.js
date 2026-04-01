@@ -10,6 +10,7 @@ import {
     generateCollectionJsonLd, 
     generateSummaryPanel, 
     generateVideoPanel, 
+    generateRunLinksList,
     generateSemanticStatsParagraph, 
     wrapLayout, 
     formatDescription,
@@ -93,7 +94,7 @@ function getCostDisplay(card) {
 }
 
 async function getCardStats() {
-    const rows = await query("SELECT character, relic_list, deck_list, path_history, win, username, yt_video, ltg_url, ascension FROM runs");
+    const rows = await query("SELECT id, character, relic_list, deck_list, path_history, win, username, yt_video, ltg_url, ascension FROM runs");
     console.log(`📡 Database returned ${rows.length} run rows.`);
 
     const totalRuns = rows.length;
@@ -110,20 +111,22 @@ async function getCardStats() {
             const ascensionStats = {}; // Ascension stats
             const enchantmentStats = {}; // Enchantment stats
 
-            const updateStat = (obj, id, win, video) => {
-                if (!obj[id]) obj[id] = { seen: 0, wins: 0, videos: [] };
+            const updateStat = (obj, id, win, video, runMeta) => {
+                if (!obj[id]) obj[id] = { seen: 0, wins: 0, videos: [], runs: [] };
                 obj[id].seen++;
                 if (win) obj[id].wins++;
                 if (video.yt || video.ltg) obj[id].videos.push(video);
+                obj[id].runs.push(runMeta);
             };
 
             rows.forEach(row => {
                 const video = { yt: row.yt_video, ltg: row.ltg_url };
+                const runMeta = { id: row.id, username: row.username, win: row.win };
                 const charId = (row.character || '').toUpperCase(); // Matches clean IDs like "SILENT"
-                updateStat(charStats, charId, row.win, video);
+                updateStat(charStats, charId, row.win, video, runMeta);
 
                 const relics = JSON.parse(row.relic_list || '[]');
-                relics.forEach(relicId => updateStat(relicStats, relicId, row.win, video));
+                relics.forEach(relicId => updateStat(relicStats, relicId, row.win, video, runMeta));
 
                 const pathHistory = JSON.parse(row.path_history || '[]');
                 const uniqueEventsInRun = new Set();
@@ -133,20 +136,20 @@ async function getCardStats() {
                         uniqueEventsInRun.add(p.event_id.replace('EVENT.', ''));
                     }
                 });
-                uniqueEventsInRun.forEach(eventId => updateStat(eventStats, eventId, row.win, video));
+                uniqueEventsInRun.forEach(eventId => updateStat(eventStats, eventId, row.win, video, runMeta));
 
                 const deck = JSON.parse(row.deck_list || '[]');
                 const uniqueCardsInDeck = new Set(deck.map(c => c.id || ''));
-                uniqueCardsInDeck.forEach(cardId => updateStat(stats, cardId, row.win, video));
+                uniqueCardsInDeck.forEach(cardId => updateStat(stats, cardId, row.win, video, runMeta));
 
                 const uniqueEnchantmentsInDeck = new Set();
                 deck.forEach(c => {
                     if (c.enchantment) uniqueEnchantmentsInDeck.add(c.enchantment.replace('ENCHANTMENT.', ''));
                 });
-                uniqueEnchantmentsInDeck.forEach(eId => updateStat(enchantmentStats, eId, row.win, video));
+                uniqueEnchantmentsInDeck.forEach(eId => updateStat(enchantmentStats, eId, row.win, video, runMeta));
 
                 const ascLevel = String(row.ascension || 0);
-                updateStat(ascensionStats, ascLevel, row.win, video);
+                updateStat(ascensionStats, ascLevel, row.win, video, runMeta);
             });
             
             const uniqueCardsSeen = Object.keys(stats).length;
@@ -238,8 +241,9 @@ async function buildRelics(relics, runStats, sitemap) {
         const cleanRelicId = (relic.relic_id || '').replace('RELIC.', '');
         const rawStats = runStats.relicStats[cleanRelicId] || { seen: 0, wins: 0, videos: [] };
         const stats = getItemStats(rawStats, runStats.globalWinRate);
+        const runsHtml = generateRunLinksList(rawStats.runs, runStats.globalWinRate);
 
-        const videosHtml = generateVideoPanel(rawStats.videos, "Featured Videos");
+        const videosHtml = generateVideoPanel(rawStats.videos, "Featured Videos") + runsHtml;
         const subtitle = [relic.rarity, relic.pool ? `${relic.pool} Pool` : null].filter(Boolean).join(' • ');
         const descriptionHtml = formatDescription(relic.description || relic.description_raw || "");
 
@@ -294,8 +298,9 @@ async function buildEvents(events, runStats, sitemap) {
         
         const rawStats = runStats.eventStats[event.event_id] || { seen: 0, wins: 0, videos: [] };
         const stats = getItemStats(rawStats, runStats.globalWinRate);
+        const runsHtml = generateRunLinksList(rawStats.runs, runStats.globalWinRate);
 
-        const videosHtml = generateVideoPanel(rawStats.videos);
+        const videosHtml = generateVideoPanel(rawStats.videos) + runsHtml;
         const detailHtml = eventDetailTemplate(event, stats, videosHtml);
         fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
         sitemap.add(`/events/${slug}/`);
@@ -345,7 +350,8 @@ async function buildAscensions(ascensions, runStats, sitemap) {
         
         const rawStats = runStats.ascensionStats[String(asc.level)] || { seen: 0, wins: 0, videos: [] };
         const stats = getItemStats(rawStats, runStats.globalWinRate);
-        const videosHtml = generateVideoPanel(rawStats.videos);
+        const runsHtml = generateRunLinksList(rawStats.runs, runStats.globalWinRate);
+        const videosHtml = generateVideoPanel(rawStats.videos) + runsHtml;
 
         const detailHtml = wrapLayout(
             title, 
@@ -406,7 +412,8 @@ async function buildEnchantments(enchantments, runStats, sitemap) {
         const rawStats = runStats.enchantmentStats[cleanId] || { seen: 0, wins: 0, videos: [] };
         const stats = getItemStats(rawStats, runStats.globalWinRate);
 
-        const videosHtml = generateVideoPanel(rawStats.videos);
+        const runsHtml = generateRunLinksList(rawStats.runs, runStats.globalWinRate);
+        const videosHtml = generateVideoPanel(rawStats.videos) + runsHtml;
         const descriptionHtml = formatDescription(enchantment.description || "");
         const extraText = enchantment.extra_card_text ? `<div class="extra-text">Adds: ${formatDescription(enchantment.extra_card_text)}</div>` : '';
 
@@ -475,7 +482,8 @@ async function buildCharacters(chars, runStats, sitemap) {
         if (rawStats.seen > 0) console.log(`   ✅ Found ${rawStats.seen} runs for ${charKey}`);
         else console.log(`   ⚠️ No runs found for ID "${charKey}"`);
 
-                const videosHtml = generateVideoPanel(rawStats.videos);
+                const runsHtml = generateRunLinksList(rawStats.runs, runStats.globalWinRate);
+                const videosHtml = generateVideoPanel(rawStats.videos) + runsHtml;
 
                 // Character Cards
                 const charCards = await query("SELECT * FROM cards WHERE LOWER(color) = ? ORDER BY rarity, name ASC", [displayName.toLowerCase()]);
@@ -582,9 +590,10 @@ async function build() {
             
             const cleanCardId = (card.card_id || '').replace('CARD.', '');
             const stats = getItemStats(cardStats.stats[cleanCardId], cardStats.globalWinRate);
-            const rawStats = cardStats.stats[cleanCardId] || { videos: [] };
+            const rawStats = cardStats.stats[cleanCardId] || { videos: [], runs: [] };
+            const runsHtml = generateRunLinksList(rawStats.runs, cardStats.globalWinRate);
 
-            const videosHtml = generateVideoPanel(rawStats.videos, "Featured Videos");
+            const videosHtml = generateVideoPanel(rawStats.videos, "Featured Videos") + runsHtml;
 
             const detailHtml = cardDetailTemplate(card, stats, videosHtml, costDisplay);
 

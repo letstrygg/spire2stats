@@ -82,6 +82,28 @@ export function generateVideoPanel(videos, title = "Associated Runs") {
     return `<div class="featured-videos"><h3>${title}</h3><div class="video-grid">${videoLinks}</div></div>`;
 }
 
+/** Generates a grid of links to runs */
+export function generateRunLinksList(runs, globalWinRate) {
+    if (!runs || runs.length === 0) return '';
+    
+    const links = runs.slice(0, 12).map(run => {
+        const statusClass = run.win ? 'win' : 'loss';
+        const statusText = run.win ? 'Victory' : 'Defeat';
+        const statusColor = run.win ? '#00ff89' : '#ff4b4b';
+        const userSlug = run.username.toLowerCase();
+        
+        return `
+        <a href="/users/${userSlug}/runs/${run.id}/" class="card-item ${statusClass}" style="padding: 10px; font-size: 0.9rem;">
+            <div class="card-info"><span class="card-name">Run by ${run.username}</span></div>
+            <div class="card-stats">
+                <div class="win-rate" style="color: ${statusColor}">${statusText}</div>
+            </div>
+        </a>`;
+    }).join('');
+
+    return `<div class="recent-runs" style="margin-top: 30px;"><h3>Recent Runs</h3><div class="grid">${links}</div></div>`;
+}
+
 export function generateSemanticStatsParagraph(name, stats, contextLabel) {
     if (stats.seen === 0) return `<p>No runs recorded for the <strong>${name}</strong> ${contextLabel.toLowerCase()} yet.</p>`;
     return `
