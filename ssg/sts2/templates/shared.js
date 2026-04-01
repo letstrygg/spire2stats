@@ -175,30 +175,8 @@ export function generateAveragesPanel(stats, count, title = "Averages") {
 export function generateRunLinksList(runs, title = "Recent Runs") {
     if (!runs || runs.length === 0) return '';
     
-    const style = `
-    <style>
-        .run-video-links { justify-content: space-evenly; font-weight: 600; display: flex; flex-wrap: wrap; padding-top: 4px; }
-        .run-vid-btn { 
-            padding: 2px 8px; 
-            border-radius: 4px; 
-            color: #ccc; 
-            text-decoration: none; 
-            font-size: 0.7rem; 
-            font-weight: bold; 
-            display: inline-flex; 
-            align-items: center; 
-            gap: 4px;
-            transition: all 0.2s;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .run-vid-btn:hover { background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.3); }
-        .run-vid-btn .material-symbols-outlined { font-size: 16px; }
-    </style>`;
-
     const links = runs.slice(0, 12).map(run => generateRunCardHtml(run, { display_name: run.username, slug: run.username?.toLowerCase() })).join('');
     return `
-    ${style}
     <div class="recent-runs" style="margin-top: 30px;">
         <h3 style="margin-bottom: 15px;">${title}</h3>
         <div class="grid">${links}</div>
