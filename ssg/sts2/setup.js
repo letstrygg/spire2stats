@@ -51,6 +51,7 @@ export async function setupDatabase() {
                 db.run(`
                     CREATE TABLE IF NOT EXISTS runs (
                         id TEXT PRIMARY KEY,
+                        user_run_num INTEGER,
                         username TEXT,
                         schema_version TEXT,
                         build_id TEXT,

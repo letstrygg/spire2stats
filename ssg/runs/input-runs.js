@@ -22,7 +22,28 @@ async function run() {
         }
 
         const db = new sqlite3.Database(DB_FILE);
+
+        // Ensure the schema is up to date for existing tables
+        await new Promise((resolve, reject) => {
+            db.all("PRAGMA table_info(runs)", (err, columns) => {
+                if (err) return reject(err);
+                if (columns.length === 0) return resolve();
+
+                const hasUserRunNum = columns.some(c => c.name === 'user_run_num');
+                if (!hasUserRunNum) {
+                    console.log('➕ Adding missing column: user_run_num to existing runs table...');
+                    db.run("ALTER TABLE runs ADD COLUMN user_run_num INTEGER", (err) => {
+                        if (err) reject(err);
+                        else resolve();
+                    });
+                } else {
+                    resolve();
+                }
+            });
+        });
+
         const folders = fs.readdirSync(UNPKG_DIR).filter(f => fs.statSync(path.join(UNPKG_DIR, f)).isDirectory());
+
         let runCount = 0;
         let success = false;
 
@@ -31,6 +52,7 @@ async function run() {
             db.run(`
                 CREATE TABLE IF NOT EXISTS runs (
                     id TEXT PRIMARY KEY,
+                    user_run_num INTEGER,
                     username TEXT,
                     schema_version TEXT,
                     build_id TEXT,
@@ -49,7 +71,8 @@ async function run() {
                     relic_list TEXT,
                     deck_list TEXT,
                     path_history TEXT,
-                    yt_video TEXT
+                    yt_video TEXT,
+                    ltg_url TEXT
                 )
             `);
 
@@ -64,7 +87,8 @@ async function run() {
                     relic_list, deck_list, path_history
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ON CONFLICT(id) DO UPDATE SET
-                    username=excluded.username, schema_version=excluded.schema_version,
+                    username=excluded.username, 
+                    schema_version=excluded.schema_version,
                     build_id=excluded.build_id, platform_type=excluded.platform_type,
                     seed=excluded.seed, start_time=excluded.start_time,
                     run_time=excluded.run_time, ascension=excluded.ascension,
@@ -138,12 +162,13 @@ async function run() {
             }
 
             stmt.finalize();
-            db.run("COMMIT", (err) => {
+            db.run("COMMIT", async (err) => {
                 if (err) {
                     console.error('❌ Commit failed:', err.message);
                 } else {
+                    await recalculateUserRunNumbers(db);
                     success = true;
-                    console.log(`✨ Success: Run database updated with ${runCount} runs.`);
+                    console.log(`✨ Success: Run database updated with ${runCount} runs and corrected sequential numbers.`);
                 }
                 db.close();
                 
@@ -157,6 +182,34 @@ async function run() {
     } catch (error) {
         console.error('❌ Import failed:', error.message);
         process.exit(1);
+    }
+}
+
+async function recalculateUserRunNumbers(db) {
+    process.stdout.write('🔢 Recalculating user run sequence numbers... ');
+    const users = await new Promise((res, rej) => {
+        db.all("SELECT DISTINCT username FROM runs", (err, rows) => err ? rej(err) : res(rows || []));
+    });
+
+    for (const user of users) {
+        const runs = await new Promise((res, rej) => {
+            // Order by ID (timestamp) to ensure chronological order. 
+            // Using CAST(id AS INTEGER) handles potential string length sorting issues.
+            db.all("SELECT id FROM runs WHERE username = ? ORDER BY CAST(id AS INTEGER) ASC", [user.username], (err, rows) => err ? rej(err) : res(rows || []));
+        });
+
+        await new Promise((res, rej) => {
+            db.serialize(() => {
+                db.run("BEGIN TRANSACTION");
+                const updateStmt = db.prepare("UPDATE runs SET user_run_num = ? WHERE id = ?");
+                runs.forEach((run, index) => {
+                    updateStmt.run(index + 1, run.id);
+                });
+                updateStmt.finalize();
+                db.run("COMMIT", (err) => err ? rej(err) : res());
+            });
+        });
+        console.log(`\n   ✅ User: ${user.username} - Assigned numbers 1 to ${runs.length}`);
     }
 }
 

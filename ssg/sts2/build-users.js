@@ -119,7 +119,7 @@ async function build() {
                 const statusClass = run.win ? 'win' : 'loss';
                 const statusText = run.win ? 'Victory' : 'Defeat';
                 const statusColor = run.win ? '#00ff89' : '#ff4b4b';
-                const runNumber = userRuns.length - index;
+                const runNumber = run.user_run_num;
                 
                 return `
                 <a href="/users/${user.slug}/runs/${run.id}/" class="card-item ${statusClass} ${charClass}" style="${bgStyle}">
@@ -145,7 +145,7 @@ async function build() {
             // --- INDIVIDUAL RUN PAGES ---
             for (let i = 0; i < userRuns.length; i++) {
                 const run = userRuns[i];
-                const runNumber = userRuns.length - i;
+                const runNumber = run.user_run_num;
                 
                 const runDir = ensureDir(path.join(userRunsDir, String(run.id)));
                 
