@@ -149,25 +149,61 @@ async function build() {
                 
                 const charId = (run.character || '').replace('CHARACTER.', '').toUpperCase();
                 const charColor = CHARACTER_COLORS[charId] || 'var(--gray)';
-                
+
+                let videoButtons = '';
+                if (run.ltg_url || run.yt_video) {
+                    let btns = '';
+                    if (run.ltg_url) {
+                        const match = run.ltg_url.match(/s(\d+)e(\d+)\.html/i);
+                        const epLabel = match ? `S${match[1].padStart(2, '0')}E${match[2].padStart(2, '0')}` : 'Run';
+                        btns += `<a href="https://letstrygg.com${run.ltg_url}" class="run-vid-btn ltg" target="_blank">${epLabel}</a>`;
+                    }
+                    if (run.yt_video) {
+                        btns += `
+                        <a href="https://www.youtube.com/watch?v=${run.yt_video}" class="run-vid-btn yt" target="_blank">
+                            <span class="material-symbols-outlined" style="color: #ff4b4b;">smart_display</span>YouTube
+                        </a>`;
+                    }
+                    videoButtons = `<div class="run-video-links">${btns}</div>`;
+                }
+
                 return `
-                <a href="/users/${user.slug}/runs/${run.id}/" class="card-item ${statusClass} ${charClass}" style="border-left-width: 2px; --char-color: ${charColor};">
-                    <div class="card-info">
-                        <span class="card-name">Run ${runNumber}<br><span style="color: ${charColor}">${charName}</span></span>
-                    </div>
-                    <div class="card-stats">
-                        <div class="win-rate" style="color: ${statusColor}">${statusText}</div>
-                        <div class="run-count" style="font-size: 0.7rem; opacity: 0.6;">Build ${run.build_id || 'Unknown'}</div>
-                        <div class="run-count">Ascension ${run.ascension || 0}</div>
-                    </div>
-                    
-                </a>`;
+                <div class="card-item ${statusClass} ${charClass}" style="border-left-width: 2px; --char-color: ${charColor}; display: flex; flex-direction: column;">
+                    <a href="/users/${user.slug}/runs/${run.id}/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
+                        <div class="card-info">
+                            <span class="card-name">Run ${runNumber}<br><span style="color: ${charColor}">${charName}</span></span>
+                        </div>
+                        <div class="card-stats">
+                            <div class="win-rate" style="color: ${statusColor}">${statusText}</div>
+                            <div class="run-count" style="font-size: 0.7rem; opacity: 0.6;">Build ${run.build_id || 'Unknown'}</div>
+                            <div class="run-count">Ascension ${run.ascension || 0}</div>
+                        </div>
+                    </a>
+                    ${videoButtons}
+                </div>`;
             }).join('');
 
             const indexHtml = wrapLayout(
                 user.display_name,
                 `<style>
                     .card-item:hover { border-color: var(--char-color) !important; }
+                    .run-video-links { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 8px; }
+                    .run-vid-btn { 
+                        padding: 2px 8px; 
+                        border-radius: 4px; 
+                        color: #ccc; 
+                        text-decoration: none; 
+                        font-size: 0.7rem; 
+                        font-weight: bold; 
+                        display: inline-flex; 
+                        align-items: center; 
+                        gap: 4px;
+                        transition: all 0.2s;
+                        background: rgba(255,255,255,0.05);
+                        border: 1px solid rgba(255,255,255,0.1);
+                    }
+                    .run-vid-btn:hover { background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.3); }
+                    .run-vid-btn .material-symbols-outlined { font-size: 16px; }
                 </style>
                 ${generateItemSummaryBox(user.display_name, userStats)}
                 <h1>Runs by ${user.display_name}</h1>
