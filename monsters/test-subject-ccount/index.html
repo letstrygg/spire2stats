@@ -13,7 +13,7 @@
   "@type": "ItemPage",
   "name": "Test Subject #C{Count} - Spire 2 Stats",
   "description": "Test Subject #C{Count} gameplay statistics for Slay the Spire 2. Winrate: 0.0%. Total Runs: 0.",
-  "dateModified": "2026-04-01T06:03:52.672Z",
+  "dateModified": "2026-04-01T06:15:30.528Z",
   "mainEntity": {
     "@type": "Thing",
     "name": "Test Subject #C{Count}",
@@ -23,14 +23,19 @@
 </script>
 </head>
 <body><nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/monsters/">monsters</a> / test subject #c{count}</nav>
-            <div class="item-box">
-                <h1>Test Subject #C{Count}</h1>
-                <div class="subtitle">Boss</div>
-                <div class="description">
-                    <p>This monster has been encountered <strong>21</strong> times.</p>
-                    <p>Total Kills: <strong style="color: #ff4b4b; font-size: 1.2em;">2</strong></p>
-                </div>
+            
+    <div class="averages-panel" style="margin: 20px 0; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+        <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
+            <div class="stat-item" style="text-align: center;">
+                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Times Encountered</div>
+                <div class="stat-value" style="font-size: 1.5rem; font-weight: bold;">21</div>
             </div>
+            <div class="stat-item" style="text-align: center;">
+                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Total Kills</div>
+                <div class="stat-value" style="font-size: 1.5rem; font-weight: bold; color: #ff4b4b">2</div>
+            </div>
+        </div>
+    </div>
             
     <div class="averages-panel" style="margin: 20px 0; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
         <h3 style="text-align: center; margin-top: 0; margin-bottom: 15px; color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Averages for encounters with this monster</h3>
@@ -53,6 +58,13 @@
             </div>
         </div>
     </div>
+            <div class="item-box">
+                <h1>Test Subject #C{Count}</h1>
+                <div class="subtitle">Boss</div>
+                <div class="description">
+                    <p>Monster behavior data and finishing blow records for Slay the Spire 2.</p>
+                </div>
+            </div>
             <div style="margin-top: 40px;"><h3>Lethal Runs</h3><p class="text-muted">Runs where this monster delivered the finishing blow:</p>
     <style>
         .run-video-links { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 8px; }
