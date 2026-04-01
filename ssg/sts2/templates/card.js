@@ -1,4 +1,4 @@
-import { wrapLayout, generateSemanticStatsParagraph, generateItemJsonLd, formatDescription, getCharacterBgStyle } from './shared.js';
+import { wrapLayout, generateItemSummaryBox, generateItemJsonLd, formatDescription, getCharacterBgStyle } from './shared.js';
 
 export function cardDetailTemplate(card, stats, videosHtml, costDisplay) {
     const description = formatDescription(card.description);
@@ -6,9 +6,7 @@ export function cardDetailTemplate(card, stats, videosHtml, costDisplay) {
     return wrapLayout(
         card.name, 
         `
-        <div class="stats-summary">
-            ${generateSemanticStatsParagraph(card.name, stats, 'card')}
-        </div>
+        ${generateItemSummaryBox(card.name, stats)}
         <div class="card-display">
             <div class="card" style="${bgStyle}">
                 <div class="cost-circle">${costDisplay}</div>

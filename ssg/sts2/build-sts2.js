@@ -833,23 +833,19 @@ async function build() {
     <p style="font-size: 0.8rem; color: #666; margin-top: -15px; margin-bottom: 20px; text-transform: uppercase;">
         Data last updated: <time datetime="${ISO_BUILD_DATE}">${FORMATTED_BUILD_DATE}</time>
     </p>
-    <div class="stats-summary">
-        <div class="stats-grid">
-            <div class="stat-item">
-                <div class="stat-label">Total Runs</div>
-                <div class="stat-value">${cardStats.totalRuns}</div>
+    <div class="averages-panel" style="margin: 20px 0; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+        <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
+            <div class="stat-item" style="text-align: center;">
+                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Total Runs</div>
+                <div class="stat-value" style="font-size: 1.5rem; font-weight: bold;">${cardStats.totalRuns}</div>
             </div>
-            <div class="stat-item">
-                <div class="stat-label">Wins / Losses</div>
-                <div class="stat-value"><span style="color: #00ff89">${cardStats.totalWins}</span> <span style="color: #444">/</span> <span style="color: #ff4b4b">${cardStats.totalLosses}</span></div>
+            <div class="stat-item" style="text-align: center;">
+                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Overall Winrate</div>
+                <div class="stat-value" style="font-size: 1.5rem; font-weight: bold; color: #00ff89">${cardStats.globalWinRate.toFixed(1)}%</div>
             </div>
-            <div class="stat-item">
-                <div class="stat-label">Global Winrate</div>
-                <div class="stat-value">${cardStats.globalWinRate.toFixed(1)}%</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-label">Contributors</div>
-                <div class="stat-value">${cardStats.uniqueUsers}</div>
+            <div class="stat-item" style="text-align: center;">
+                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Contributors</div>
+                <div class="stat-value" style="font-size: 1.5rem; font-weight: bold;">${cardStats.uniqueUsers}</div>
             </div>
         </div>
     </div>

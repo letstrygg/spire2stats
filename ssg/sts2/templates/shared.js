@@ -55,17 +55,21 @@ export function generateCollectionJsonLd(name, description) {
 }
 
 export function generateSummaryPanel(runStats, label, total, seen) {
-    const completionHtml = seen === total ? total : `${seen} <span class="stat-sub">/ ${total} ${label.toLowerCase()}</span>`;
+    const completionHtml = seen === total ? total : `${seen} <span style="color: #444; font-size: 0.8em;">/ ${total}</span>`;
     return `
-    <div class="stats-summary">
-        <div class="stats-grid">
-            <div class="stat-item"><div class="stat-label">Total Runs</div><div class="stat-value"><data value="${runStats.totalRuns}">${runStats.totalRuns}</data></div></div>
-            <div class="stat-item"><div class="stat-label">Wins / Losses</div><div class="stat-value"><data value="${runStats.totalWins}"><span style="color: #00ff89">${runStats.totalWins}</span></data> <span style="color: #444">/</span> <data value="${runStats.totalLosses}"><span style="color: #ff4b4b">${runStats.totalLosses}</span></data></div></div>
-            <div class="stat-item"><div class="stat-label">Overall Winrate</div><div class="stat-value"><data value="${runStats.globalWinRate.toFixed(1)}">${runStats.globalWinRate.toFixed(1)}%</data></div></div>
-            <div class="stat-item"><div class="stat-label">Contributors</div><div class="stat-value">${runStats.uniqueUsers}</div></div>
-            <div class="stat-item">
-                <div class="stat-label">${label} Seen</div>
-                <div class="stat-value"><data value="${seen}">${completionHtml}</data></div>
+    <div class="averages-panel" style="margin: 20px 0; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+        <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px;">
+            <div class="stat-item" style="text-align: center;">
+                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Total Runs</div>
+                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold;">${runStats.totalRuns}</div>
+            </div>
+            <div class="stat-item" style="text-align: center;">
+                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Overall Winrate</div>
+                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold; color: #00ff89">${runStats.globalWinRate.toFixed(1)}%</div>
+            </div>
+            <div class="stat-item" style="text-align: center;">
+                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">${label} Seen</div>
+                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold;">${completionHtml}</div>
             </div>
         </div>
     </div>`;
@@ -175,10 +179,34 @@ export function generateRunLinksList(runs, title = "Recent Runs") {
     return `${style}<div class="recent-runs" style="margin-top: 30px;"><h3>${title}</h3><div class="grid">${links}</div></div>`;
 }
 
-export function generateSemanticStatsParagraph(name, stats, contextLabel) {
-    if (stats.seen === 0) return `<p>No runs recorded for the <strong>${name}</strong> ${contextLabel.toLowerCase()} yet.</p>`;
+export function generateItemSummaryBox(name, stats) {
+    if (!stats || stats.seen === 0) return `<div class="averages-panel" style="margin: 20px 0; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); text-align: center; color: #666;">No runs recorded for ${name} yet.</div>`;
+    
     return `
-    <p>Based on tracked gameplay, <strong>${name}</strong> currently has a <data value="${stats.num}"><strong style="color: ${stats.color}">${stats.formatted}% winrate</strong></data> across <data value="${stats.seen}"><strong>${stats.seen} total runs</strong></data> (<span style="color: #00ff89">${stats.wins} Wins</span> / <span style="color: #ff4b4b">${stats.losses} Losses</span>) as of <time datetime="${ISO_BUILD_DATE}">${FORMATTED_BUILD_DATE}</time>.</p>`;
+    <div class="averages-panel" style="margin: 20px 0; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+        <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px;">
+            <div class="stat-item" style="text-align: center;">
+                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Winrate</div>
+                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold; color: ${stats.color}">${stats.formatted}%</div>
+            </div>
+            <div class="stat-item" style="text-align: center;">
+                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Total Runs</div>
+                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold;">${stats.seen}</div>
+            </div>
+            <div class="stat-item" style="text-align: center;">
+                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Wins</div>
+                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold; color: #00ff89">${stats.wins}</div>
+            </div>
+            <div class="stat-item" style="text-align: center;">
+                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Losses</div>
+                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold; color: #ff4b4b">${stats.losses}</div>
+            </div>
+        </div>
+    </div>`;
+}
+
+export function generateSemanticStatsParagraph(name, stats, contextLabel) {
+    return generateItemSummaryBox(name, stats);
 }
 
 export function wrapLayout(title, content, breadcrumbs = [], description = "", headExtra = "") {
