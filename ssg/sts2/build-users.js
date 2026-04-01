@@ -176,8 +176,21 @@ async function build() {
 
                 // Chart.js Data processing - Ensure we have a valid array of floor data
                 const floorData = Array.isArray(pathHistory) 
-                    ? pathHistory.map(p => ({ floor: p.floor, hp: p.hp })).filter(p => p.floor !== undefined && p.hp !== undefined)
+                    ? pathHistory.map((p, idx) => ({ 
+                        floor: p.floor ?? (idx + 1), 
+                        hp: p.hp 
+                    })).filter(p => p.hp !== undefined)
                     : [];
+
+                // Server-side debug logging for the first run of each user
+                if (i === 0) {
+                    console.log(`   🔍 [DEBUG] User: ${user.display_name}, Run: #${runNumber}`);
+                    console.log(`      Path History length: ${pathHistory.length}`);
+                    console.log(`      Floor Data processed: ${floorData.length} points`);
+                    if (pathHistory.length > 0 && floorData.length === 0) {
+                        console.log(`      ⚠️ WARNING: floorData filtered to zero. Sample entry:`, JSON.stringify(pathHistory[0]));
+                    }
+                }
 
                 const chartJson = JSON.stringify([{
                     label: `Run #${runNumber} (${charName})`,
@@ -231,7 +244,12 @@ async function build() {
                         const ctx = document.getElementById('hpChart').getContext('2d');
                         if (!ctx) return;
                         const rawRuns = ${chartJson};
-                        if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) return;
+                        console.log("📈 Chart Data received by browser:", rawRuns);
+
+                        if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) {
+                            console.warn("⚠️ No floor data available for HP graph.");
+                            return;
+                        }
 
                         const maxFloor = Math.max(...rawRuns[0].floorData.map(d => d.floor), 1);
                         const labels = Array.from({length: maxFloor}, (_, i) => i + 1);

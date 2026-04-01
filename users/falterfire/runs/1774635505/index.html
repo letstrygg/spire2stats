@@ -51,8 +51,13 @@
                     document.addEventListener("DOMContentLoaded", function() {
                         const ctx = document.getElementById('hpChart').getContext('2d');
                         if (!ctx) return;
-                        const rawRuns = [{"label":"Run #64 (Necrobinder)","win":false,"floorData":[]}];
-                        if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) return;
+                        const rawRuns = [{"label":"Run #64 (Necrobinder)","win":false,"floorData":[{"floor":1,"hp":52},{"floor":2,"hp":51},{"floor":3,"hp":37},{"floor":4,"hp":31},{"floor":5,"hp":29},{"floor":6,"hp":54},{"floor":7,"hp":50},{"floor":8,"hp":17},{"floor":9,"hp":0}]}];
+                        console.log("📈 Chart Data received by browser:", rawRuns);
+
+                        if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) {
+                            console.warn("⚠️ No floor data available for HP graph.");
+                            return;
+                        }
 
                         const maxFloor = Math.max(...rawRuns[0].floorData.map(d => d.floor), 1);
                         const labels = Array.from({length: maxFloor}, (_, i) => i + 1);

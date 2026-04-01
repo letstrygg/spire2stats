@@ -51,8 +51,13 @@
                     document.addEventListener("DOMContentLoaded", function() {
                         const ctx = document.getElementById('hpChart').getContext('2d');
                         if (!ctx) return;
-                        const rawRuns = [{"label":"Run #9 (Regent)","win":false,"floorData":[]}];
-                        if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) return;
+                        const rawRuns = [{"label":"Run #9 (Regent)","win":false,"floorData":[{"floor":1,"hp":75},{"floor":2,"hp":75},{"floor":3,"hp":71},{"floor":4,"hp":65},{"floor":5,"hp":65},{"floor":6,"hp":57},{"floor":7,"hp":50},{"floor":8,"hp":50},{"floor":9,"hp":49},{"floor":10,"hp":49},{"floor":11,"hp":49},{"floor":12,"hp":49},{"floor":13,"hp":49},{"floor":14,"hp":34},{"floor":15,"hp":34},{"floor":16,"hp":34},{"floor":17,"hp":12},{"floor":18,"hp":75},{"floor":19,"hp":55},{"floor":20,"hp":52},{"floor":21,"hp":52},{"floor":22,"hp":30},{"floor":23,"hp":0}]}];
+                        console.log("📈 Chart Data received by browser:", rawRuns);
+
+                        if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) {
+                            console.warn("⚠️ No floor data available for HP graph.");
+                            return;
+                        }
 
                         const maxFloor = Math.max(...rawRuns[0].floorData.map(d => d.floor), 1);
                         const labels = Array.from({length: maxFloor}, (_, i) => i + 1);

@@ -94,11 +94,11 @@ async function run() {
                     const cleanRelics = (player.relics || []).map(r => r.id?.replace('RELIC.', ''));
 
                     // Parse Encounter & Pathing History
-                    const pathHistory = (rawData.map_point_history || []).flat().map(pt => {
+                    const pathHistory = (rawData.map_point_history || []).flat().map((pt, idx) => {
                         const room = pt.rooms?.[0] || {};
                         const stats = pt.player_stats?.[0] || {};
                         const entry = {
-                            floor: pt.floor,
+                            floor: pt.floor ?? (idx + 1), // Use index as fallback floor if property is missing
                             room_type: room.room_type,
                             hp: stats.current_hp
                         };

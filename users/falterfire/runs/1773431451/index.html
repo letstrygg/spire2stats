@@ -51,8 +51,13 @@
                     document.addEventListener("DOMContentLoaded", function() {
                         const ctx = document.getElementById('hpChart').getContext('2d');
                         if (!ctx) return;
-                        const rawRuns = [{"label":"Run #29 (Silent)","win":true,"floorData":[]}];
-                        if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) return;
+                        const rawRuns = [{"label":"Run #29 (Silent)","win":true,"floorData":[{"floor":1,"hp":56},{"floor":2,"hp":54},{"floor":3,"hp":53},{"floor":4,"hp":53},{"floor":5,"hp":35},{"floor":6,"hp":35},{"floor":7,"hp":35},{"floor":8,"hp":56},{"floor":9,"hp":56},{"floor":10,"hp":56},{"floor":11,"hp":56},{"floor":12,"hp":56},{"floor":13,"hp":56},{"floor":14,"hp":50},{"floor":15,"hp":39},{"floor":16,"hp":39},{"floor":17,"hp":34},{"floor":18,"hp":62},{"floor":19,"hp":62},{"floor":20,"hp":61},{"floor":21,"hp":47},{"floor":22,"hp":42},{"floor":23,"hp":35},{"floor":24,"hp":35},{"floor":25,"hp":35},{"floor":26,"hp":35},{"floor":27,"hp":34},{"floor":28,"hp":37},{"floor":29,"hp":59},{"floor":30,"hp":59},{"floor":31,"hp":56},{"floor":32,"hp":56},{"floor":33,"hp":72},{"floor":34,"hp":75},{"floor":35,"hp":77},{"floor":36,"hp":77},{"floor":37,"hp":78},{"floor":38,"hp":78},{"floor":39,"hp":78},{"floor":40,"hp":79},{"floor":41,"hp":79},{"floor":42,"hp":79},{"floor":43,"hp":80},{"floor":44,"hp":81},{"floor":45,"hp":81},{"floor":46,"hp":87},{"floor":47,"hp":87},{"floor":48,"hp":85}]}];
+                        console.log("📈 Chart Data received by browser:", rawRuns);
+
+                        if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) {
+                            console.warn("⚠️ No floor data available for HP graph.");
+                            return;
+                        }
 
                         const maxFloor = Math.max(...rawRuns[0].floorData.map(d => d.floor), 1);
                         const labels = Array.from({length: maxFloor}, (_, i) => i + 1);
