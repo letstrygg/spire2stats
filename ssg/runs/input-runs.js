@@ -99,7 +99,8 @@ async function run() {
                         const stats = pt.player_stats?.[0] || {};
                         const entry = {
                             floor: pt.floor,
-                            room_type: room.room_type
+                            room_type: room.room_type,
+                            hp: stats.current_hp
                         };
 
                         if (['boss', 'monster', 'elite'].includes(room.room_type)) {

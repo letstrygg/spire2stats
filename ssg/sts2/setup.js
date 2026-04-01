@@ -50,14 +50,27 @@ export async function setupDatabase() {
 
                 db.run(`
                     CREATE TABLE IF NOT EXISTS runs (
-                        id INTEGER PRIMARY KEY,
-                        run_id TEXT UNIQUE,
-                        character TEXT,
+                        id TEXT PRIMARY KEY,
+                        username TEXT,
+                        schema_version TEXT,
+                        build_id TEXT,
+                        platform_type TEXT,
+                        seed TEXT,
+                        start_time TEXT,
+                        run_time INTEGER,
                         ascension INTEGER,
-                        victory BOOLEAN,
-                        score INTEGER,
-                        playtime INTEGER,
-                        timestamp DATETIME
+                        game_mode TEXT,
+                        win INTEGER,
+                        was_abandoned INTEGER,
+                        killed_by_encounter TEXT,
+                        killed_by_event TEXT,
+                        acts TEXT,
+                        character TEXT,
+                        relic_list TEXT,
+                        deck_list TEXT,
+                        path_history TEXT,
+                        yt_video TEXT,
+                        ltg_url TEXT
                     )
                 `);
 
