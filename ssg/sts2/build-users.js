@@ -163,7 +163,10 @@ async function build() {
                     .run-vid-btn .material-symbols-outlined { font-size: 16px; }
                 </style>
                 ${generateItemSummaryBox(user.display_name, userStats)}
-                <h1>Runs by ${user.display_name}</h1>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h1 style="margin: 0;">Runs by ${user.display_name}</h1>
+                    <button onclick="document.body.classList.toggle('hide-win-bars')" class="btn btn-gray" style="font-size: 0.7rem;">Toggle Win-Bars</button>
+                </div>
                 <div class="grid">${runLinksHtml || '<p>No runs recorded yet.</p>'}</div>`,
                 [{ name: 'Users', url: '/users/' }, { name: user.display_name, url: '' }],
                 `View Slay the Spire 2 run history and statistics for ${user.display_name}.`

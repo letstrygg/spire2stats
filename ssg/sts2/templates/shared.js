@@ -197,7 +197,15 @@ export function generateRunLinksList(runs, title = "Recent Runs") {
     </style>`;
 
     const links = runs.slice(0, 12).map(run => generateRunCardHtml(run, { display_name: run.username, slug: run.username?.toLowerCase() })).join('');
-    return `${style}<div class="recent-runs" style="margin-top: 30px;"><h3>${title}</h3><div class="grid">${links}</div></div>`;
+    return `
+    ${style}
+    <div class="recent-runs" style="margin-top: 30px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <h3 style="margin: 0;">${title}</h3>
+            <button onclick="document.body.classList.toggle('hide-win-bars')" class="btn btn-gray" style="font-size: 0.65rem; padding: 4px 10px;">Toggle Win-Bars</button>
+        </div>
+        <div class="grid">${links}</div>
+    </div>`;
 }
 
 /** Generates a standard run card HTML used across the site */
