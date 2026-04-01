@@ -4,7 +4,7 @@ const BUILD_DATE = new Date();
 export const FORMATTED_BUILD_DATE = BUILD_DATE.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 export const ISO_BUILD_DATE = BUILD_DATE.toISOString();
 
-const CHARACTER_COLORS = {
+export const CHARACTER_COLORS = {
     'IRONCLAD': '215, 50, 50',
     'SILENT': '46, 204, 113',
     'DEFECT': '74, 144, 226',

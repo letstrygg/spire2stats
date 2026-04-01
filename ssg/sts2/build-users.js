@@ -6,7 +6,8 @@ import {
     wrapLayout, 
     generateItemJsonLd,
     getCharacterBgStyle,
-    generateItemSummaryBox
+    generateItemSummaryBox,
+    CHARACTER_COLORS
 } from './templates/shared.js';
 
 /**
@@ -146,13 +147,18 @@ async function build() {
                 const statusColor = run.win ? '#00ff89' : '#ff4b4b';
                 const runNumber = run.user_run_num;
                 
+                const charId = (run.character || '').replace('CHARACTER.', '').toUpperCase();
+                const charRgb = CHARACTER_COLORS[charId] || '170, 170, 170';
+                const charColor = `rgb(${charRgb})`;
+                
                 return `
-                <a href="/users/${user.slug}/runs/${run.id}/" class="card-item ${statusClass} ${charClass}" style="border-left-width: 6px;">
+                <a href="/users/${user.slug}/runs/${run.id}/" class="card-item ${statusClass} ${charClass}" style="border-left-width: 6px; --char-color: ${charColor};">
                     <div class="card-info">
-                        <span class="card-name">Run ${runNumber}<br>${charName}</span>
+                        <span class="card-name">Run ${runNumber}<br><span style="color: ${charColor}">${charName}</span></span>
                     </div>
                     <div class="card-stats">
                         <div class="win-rate" style="color: ${statusColor}">${statusText}</div>
+                        <div class="run-count" style="font-size: 0.7rem; opacity: 0.6;">Build ${run.build_id || 'Unknown'}</div>
                         <div class="run-count">Ascension ${run.ascension || 0}</div>
                     </div>
                     
@@ -161,7 +167,10 @@ async function build() {
 
             const indexHtml = wrapLayout(
                 user.display_name,
-                `${generateItemSummaryBox(user.display_name, userStats)}
+                `<style>
+                    .card-item:hover { border-color: var(--char-color) !important; }
+                </style>
+                ${generateItemSummaryBox(user.display_name, userStats)}
                 <h1>Runs by ${user.display_name}</h1>
                 <div class="grid">${runLinksHtml || '<p>No runs recorded yet.</p>'}</div>`,
                 [{ name: 'Users', url: '/users/' }, { name: user.display_name, url: '' }],
