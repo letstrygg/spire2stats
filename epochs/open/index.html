@@ -13,7 +13,7 @@
   "@type": "ItemPage",
   "name": "Open - Spire 2 Stats",
   "description": "Open gameplay statistics for Slay the Spire 2. Winrate: 0.0%. Total Runs: 0.",
-  "dateModified": "2026-04-01T22:11:46.420Z",
+  "dateModified": "2026-04-01T22:19:29.702Z",
   "mainEntity": {
     "@type": "Thing",
     "name": "Open",
@@ -22,9 +22,18 @@
 }
 </script>
 </head>
-<body><nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/epochs/">epochs</a> / open</nav>
+<body>
+<script>(function(){if(localStorage.getItem('hideWinBars')==='true')document.body.classList.add('hide-win-bars');})();</script>
+<nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/epochs/">epochs</a> / open</nav>
             <div class="item-box">
                 <h1>Open</h1>
                 
                 <div class="description">The clouds churn maliciously as <span class="text-blue">The Capital</span> trembles beneath a storm so violent that none dare to leave their homes.<br><br>Twelve days later, the rain stops.<br>The clouds remain, but the <span class="text-purple">Flame</span> has gone out.<br><br>The <span class="text-gold">Spire</span> opens its doors once more.</div>
-            </div></body></html>
+            </div>
+<script>
+function toggleWinBars() {
+    const isHidden = document.body.classList.toggle('hide-win-bars');
+    localStorage.setItem('hideWinBars', isHidden);
+}
+</script>
+</body></html>

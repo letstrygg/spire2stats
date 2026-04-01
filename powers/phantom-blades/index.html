@@ -13,7 +13,7 @@
   "@type": "ItemPage",
   "name": "Phantom Blades - Spire 2 Stats",
   "description": "Phantom Blades gameplay statistics for Slay the Spire 2. Winrate: 0.0%. Total Runs: 0.",
-  "dateModified": "2026-04-01T22:11:46.420Z",
+  "dateModified": "2026-04-01T22:19:29.702Z",
   "mainEntity": {
     "@type": "Thing",
     "name": "Phantom Blades",
@@ -22,9 +22,18 @@
 }
 </script>
 </head>
-<body><nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/powers/">powers</a> / phantom blades</nav>
+<body>
+<script>(function(){if(localStorage.getItem('hideWinBars')==='true')document.body.classList.add('hide-win-bars');})();</script>
+<nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/powers/">powers</a> / phantom blades</nav>
             <div class="item-box">
                 <h1>Phantom Blades</h1>
                 <div class="subtitle">Buff</div>
                 <div class="description"><span class="text-gold">Shivs</span> gain <span class="text-gold">Retain</span>.<br>The first <span class="text-gold">Shiv</span> you play each turn deals <span class="text-blue">9</span> additional damage.</div>
-            </div></body></html>
+            </div>
+<script>
+function toggleWinBars() {
+    const isHidden = document.body.classList.toggle('hide-win-bars');
+    localStorage.setItem('hideWinBars', isHidden);
+}
+</script>
+</body></html>

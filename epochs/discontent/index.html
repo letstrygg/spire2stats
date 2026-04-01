@@ -13,7 +13,7 @@
   "@type": "ItemPage",
   "name": "Discontent - Spire 2 Stats",
   "description": "Discontent gameplay statistics for Slay the Spire 2. Winrate: 0.0%. Total Runs: 0.",
-  "dateModified": "2026-04-01T22:11:46.420Z",
+  "dateModified": "2026-04-01T22:19:29.702Z",
   "mainEntity": {
     "@type": "Thing",
     "name": "Discontent",
@@ -22,9 +22,18 @@
 }
 </script>
 </head>
-<body><nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/epochs/">epochs</a> / discontent</nav>
+<body>
+<script>(function(){if(localStorage.getItem('hideWinBars')==='true')document.body.classList.add('hide-win-bars');})();</script>
+<nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/epochs/">epochs</a> / discontent</nav>
             <div class="item-box">
                 <h1>Discontent</h1>
                 
                 <div class="description">On his home planet, the Regent proclaims to be the heir to the Sun and decides that all the other planets must know!<br><br>“Why do you wish for this, Regent? We have everything we need! We needn't eat, we have peace, we cannot die, and we are fashionable!” a fellow [orange]Starrian[/orange] pleads.<br><br><strong>“You are BORING!”</strong></div>
-            </div></body></html>
+            </div>
+<script>
+function toggleWinBars() {
+    const isHidden = document.body.classList.toggle('hide-win-bars');
+    localStorage.setItem('hideWinBars', isHidden);
+}
+</script>
+</body></html>

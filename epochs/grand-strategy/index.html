@@ -13,7 +13,7 @@
   "@type": "ItemPage",
   "name": "Grand Strategy - Spire 2 Stats",
   "description": "Grand Strategy gameplay statistics for Slay the Spire 2. Winrate: 0.0%. Total Runs: 0.",
-  "dateModified": "2026-04-01T22:11:46.420Z",
+  "dateModified": "2026-04-01T22:19:29.702Z",
   "mainEntity": {
     "@type": "Thing",
     "name": "Grand Strategy",
@@ -22,9 +22,18 @@
 }
 </script>
 </head>
-<body><nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/epochs/">epochs</a> / grand strategy</nav>
+<body>
+<script>(function(){if(localStorage.getItem('hideWinBars')==='true')document.body.classList.add('hide-win-bars');})();</script>
+<nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/epochs/">epochs</a> / grand strategy</nav>
             <div class="item-box">
                 <h1>Grand Strategy</h1>
                 
                 <div class="description">“Defeat!? Me!!? The <span class="text-gold">Regent of Starris</span>, does not know defeat! The <span class="text-red">strange man</span> at the top of this tower must be defeated by me and only me!”<br><br>[orange]The Regent[/orange] devises a <span class="text-blue">royally brilliant plan</span> to become stronger. To immortalize this, it is etched into a nearby stone.<br><br>[b]T R Y     H A R D E R[/b]</div>
-            </div></body></html>
+            </div>
+<script>
+function toggleWinBars() {
+    const isHidden = document.body.classList.toggle('hide-win-bars');
+    localStorage.setItem('hideWinBars', isHidden);
+}
+</script>
+</body></html>

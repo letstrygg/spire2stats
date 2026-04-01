@@ -13,7 +13,7 @@
   "@type": "ItemPage",
   "name": "Reflect - Spire 2 Stats",
   "description": "Reflect gameplay statistics for Slay the Spire 2. Winrate: 0.0%. Total Runs: 0.",
-  "dateModified": "2026-04-01T22:11:46.420Z",
+  "dateModified": "2026-04-01T22:19:29.702Z",
   "mainEntity": {
     "@type": "Thing",
     "name": "Reflect",
@@ -22,9 +22,18 @@
 }
 </script>
 </head>
-<body><nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/powers/">powers</a> / reflect</nav>
+<body>
+<script>(function(){if(localStorage.getItem('hideWinBars')==='true')document.body.classList.add('hide-win-bars');})();</script>
+<nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/powers/">powers</a> / reflect</nav>
             <div class="item-box">
                 <h1>Reflect</h1>
                 <div class="subtitle">Buff</div>
                 <div class="description">Blocked damage is reflected to your attacker.</div>
-            </div></body></html>
+            </div>
+<script>
+function toggleWinBars() {
+    const isHidden = document.body.classList.toggle('hide-win-bars');
+    localStorage.setItem('hideWinBars', isHidden);
+}
+</script>
+</body></html>

@@ -13,7 +13,7 @@
   "@type": "ItemPage",
   "name": "Foul Potion - Spire 2 Stats",
   "description": "Foul Potion gameplay statistics for Slay the Spire 2. Winrate: 0.0%. Total Runs: 0.",
-  "dateModified": "2026-04-01T22:11:46.420Z",
+  "dateModified": "2026-04-01T22:19:29.702Z",
   "mainEntity": {
     "@type": "Thing",
     "name": "Foul Potion",
@@ -22,9 +22,18 @@
 }
 </script>
 </head>
-<body><nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/potions/">potions</a> / foul potion</nav>
+<body>
+<script>(function(){if(localStorage.getItem('hideWinBars')==='true')document.body.classList.add('hide-win-bars');})();</script>
+<nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/potions/">potions</a> / foul potion</nav>
             <div class="item-box">
                 <h1>Foul Potion</h1>
                 <div class="subtitle">Event</div>
                 <div class="description">Deal <span class="text-blue">12</span> damage to EVERYONE.<br>Can be thrown at the <span class="text-gold">Merchant</span> for <span class="text-blue">100</span> <span class="text-gold">Gold</span> instead.</div>
-            </div></body></html>
+            </div>
+<script>
+function toggleWinBars() {
+    const isHidden = document.body.classList.toggle('hide-win-bars');
+    localStorage.setItem('hideWinBars', isHidden);
+}
+</script>
+</body></html>

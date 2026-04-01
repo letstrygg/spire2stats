@@ -13,7 +13,7 @@
   "@type": "ItemPage",
   "name": "Crab Rage - Spire 2 Stats",
   "description": "Crab Rage gameplay statistics for Slay the Spire 2. Winrate: 0.0%. Total Runs: 0.",
-  "dateModified": "2026-04-01T22:11:46.420Z",
+  "dateModified": "2026-04-01T22:19:29.702Z",
   "mainEntity": {
     "@type": "Thing",
     "name": "Crab Rage",
@@ -22,9 +22,18 @@
 }
 </script>
 </head>
-<body><nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/powers/">powers</a> / crab rage</nav>
+<body>
+<script>(function(){if(localStorage.getItem('hideWinBars')==='true')document.body.classList.add('hide-win-bars');})();</script>
+<nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/powers/">powers</a> / crab rage</nav>
             <div class="item-box">
                 <h1>Crab Rage</h1>
                 <div class="subtitle">Buff</div>
                 <div class="description">When an ally dies, <span class="text-gold">this creature</span> gains <span class="text-blue">5</span> <span class="text-gold">Strength</span> and <span class="text-blue">99</span> <span class="text-gold">Block</span>.</div>
-            </div></body></html>
+            </div>
+<script>
+function toggleWinBars() {
+    const isHidden = document.body.classList.toggle('hide-win-bars');
+    localStorage.setItem('hideWinBars', isHidden);
+}
+</script>
+</body></html>

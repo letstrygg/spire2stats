@@ -13,7 +13,7 @@
   "@type": "ItemPage",
   "name": "Sleight of Flesh - Spire 2 Stats",
   "description": "Sleight of Flesh gameplay statistics for Slay the Spire 2. Winrate: 0.0%. Total Runs: 0.",
-  "dateModified": "2026-04-01T22:11:46.420Z",
+  "dateModified": "2026-04-01T22:19:29.702Z",
   "mainEntity": {
     "@type": "Thing",
     "name": "Sleight of Flesh",
@@ -22,9 +22,18 @@
 }
 </script>
 </head>
-<body><nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/powers/">powers</a> / sleight of flesh</nav>
+<body>
+<script>(function(){if(localStorage.getItem('hideWinBars')==='true')document.body.classList.add('hide-win-bars');})();</script>
+<nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/powers/">powers</a> / sleight of flesh</nav>
             <div class="item-box">
                 <h1>Sleight of Flesh</h1>
                 <div class="subtitle">Buff</div>
                 <div class="description">Whenever you apply a debuff to an enemy, they take <span class="text-blue">13</span> damage.</div>
-            </div></body></html>
+            </div>
+<script>
+function toggleWinBars() {
+    const isHidden = document.body.classList.toggle('hide-win-bars');
+    localStorage.setItem('hideWinBars', isHidden);
+}
+</script>
+</body></html>

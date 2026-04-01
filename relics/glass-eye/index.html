@@ -13,7 +13,7 @@
   "@type": "ItemPage",
   "name": "Glass Eye - Spire 2 Stats",
   "description": "Glass Eye gameplay statistics for Slay the Spire 2. Winrate: 0.0%. Total Runs: 0.",
-  "dateModified": "2026-04-01T22:11:46.420Z",
+  "dateModified": "2026-04-01T22:19:29.702Z",
   "mainEntity": {
     "@type": "Thing",
     "name": "Glass Eye",
@@ -22,7 +22,9 @@
 }
 </script>
 </head>
-<body><nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/relics/">relics</a> / glass eye</nav>
+<body>
+<script>(function(){if(localStorage.getItem('hideWinBars')==='true')document.body.classList.add('hide-win-bars');})();</script>
+<nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/relics/">relics</a> / glass eye</nav>
         <div class="stats-summary">
             <div class="averages-panel" style="margin: 20px 0; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); text-align: center; color: #666;">No runs recorded for Glass Eye yet.</div>
         </div>
@@ -32,4 +34,11 @@
             <div class="description">Upon pickup, obtain <span class="text-blue">2</span> <span class="text-gold">Common</span> cards, <span class="text-blue">2</span> <span class="text-gold">Uncommon</span> cards, and <span class="text-blue">1</span> <span class="text-gold">Rare</span> card.</div>
             <div class="flavor">[red]Details for this relic will be revealed in the future...[/red]</div>
         </div>
-        </body></html>
+        
+<script>
+function toggleWinBars() {
+    const isHidden = document.body.classList.toggle('hide-win-bars');
+    localStorage.setItem('hideWinBars', isHidden);
+}
+</script>
+</body></html>

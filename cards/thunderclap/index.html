@@ -13,7 +13,7 @@
   "@type": "ItemPage",
   "name": "Thunderclap - Spire 2 Stats",
   "description": "Thunderclap gameplay statistics for Slay the Spire 2. Winrate: 47.8%. Total Runs: 23.",
-  "dateModified": "2026-04-01T22:11:46.420Z",
+  "dateModified": "2026-04-01T22:19:29.702Z",
   "mainEntity": {
     "@type": "Thing",
     "name": "Thunderclap",
@@ -22,7 +22,9 @@
 }
 </script>
 </head>
-<body><nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/cards/">cards</a> / thunderclap</nav>
+<body>
+<script>(function(){if(localStorage.getItem('hideWinBars')==='true')document.body.classList.add('hide-win-bars');})();</script>
+<nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/cards/">cards</a> / thunderclap</nav>
         
     <div class="averages-panel" style="margin: 20px 0; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
         <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px;">
@@ -85,7 +87,7 @@
     <div class="recent-runs" style="margin-top: 30px;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
             <h3 style="margin: 0;">Runs featuring Thunderclap</h3>
-            <button onclick="document.body.classList.toggle('hide-win-bars')" class="btn btn-gray" style="font-size: 0.65rem; padding: 4px 10px;">Toggle Win-Bars</button>
+            <button onclick="toggleWinBars()" class="btn btn-gray" style="font-size: 0.65rem; padding: 4px 10px;">Toggle Win-Bars</button>
         </div>
         <div class="grid">
     <div class="card-item win ironclad" style="display: flex; flex-direction: column;">
@@ -292,4 +294,11 @@
         
         <div class="win-bar" style="background: var(--red);"></div>
     </div></div>
-    </div></body></html>
+    </div>
+<script>
+function toggleWinBars() {
+    const isHidden = document.body.classList.toggle('hide-win-bars');
+    localStorage.setItem('hideWinBars', isHidden);
+}
+</script>
+</body></html>

@@ -13,7 +13,7 @@
   "@type": "ItemPage",
   "name": "Knockdown - Spire 2 Stats",
   "description": "Knockdown gameplay statistics for Slay the Spire 2. Winrate: 0.0%. Total Runs: 0.",
-  "dateModified": "2026-04-01T22:11:46.420Z",
+  "dateModified": "2026-04-01T22:19:29.702Z",
   "mainEntity": {
     "@type": "Thing",
     "name": "Knockdown",
@@ -22,9 +22,18 @@
 }
 </script>
 </head>
-<body><nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/powers/">powers</a> / knockdown</nav>
+<body>
+<script>(function(){if(localStorage.getItem('hideWinBars')==='true')document.body.classList.add('hide-win-bars');})();</script>
+<nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/powers/">powers</a> / knockdown</nav>
             <div class="item-box">
                 <h1>Knockdown</h1>
                 <div class="subtitle">Debuff</div>
                 <div class="description">This creature takes <span class="text-blue">[Amount]</span> times the damage from other players this turn.</div>
-            </div></body></html>
+            </div>
+<script>
+function toggleWinBars() {
+    const isHidden = document.body.classList.toggle('hide-win-bars');
+    localStorage.setItem('hideWinBars', isHidden);
+}
+</script>
+</body></html>
