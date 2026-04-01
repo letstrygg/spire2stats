@@ -78,7 +78,7 @@ async function build() {
 
         for (const user of users) {
             console.log(`📂 Building pages for user: ${user.display_name}...`);
-            const userRoot = ensureDir(path.join(PATHS.WEB_ROOT, user.slug));
+            const userRoot = ensureDir(path.join(PATHS.WEB_ROOT, 'users', user.slug));
             const userRunsDir = ensureDir(path.join(userRoot, 'runs'));
 
             const userRuns = allRuns.filter(r => {
@@ -95,7 +95,7 @@ async function build() {
                 const statusText = run.win ? 'Victory' : 'Defeat';
                 
                 return `
-                <a href="/${user.slug}/runs/${run.id}/" class="card-item ${statusClass} ${charClass}" style="${bgStyle}">
+                <a href="/users/${user.slug}/runs/${run.id}/" class="card-item ${statusClass} ${charClass}" style="${bgStyle}">
                     <div class="card-info">
                         <span class="card-name">Run #${run.id} - ${charName}</span>
                     </div>
@@ -110,7 +110,7 @@ async function build() {
                 user.display_name,
                 `<h1>Runs by ${user.display_name}</h1>
                 <div class="grid">${runLinksHtml || '<p>No runs recorded yet.</p>'}</div>`,
-                [{ name: 'Users', url: '#' }, { name: user.display_name, url: '' }],
+                [{ name: 'Users', url: '/users/' }, { name: user.display_name, url: '' }],
                 `View Slay the Spire 2 run history and statistics for ${user.display_name}.`
             );
             fs.writeFileSync(path.join(userRoot, 'index.html'), indexHtml);
@@ -225,7 +225,7 @@ async function build() {
                         });
                     });
                     </script>`,
-                    [{ name: user.display_name, url: `/${user.slug}/` }, { name: `Run #${run.id}`, url: '' }],
+                    [{ name: user.display_name, url: `/users/${user.slug}/` }, { name: `Run #${run.id}`, url: '' }],
                     `Detailed view of ${user.display_name}'s Slay the Spire 2 run #${run.id}.`
                 );
                 fs.writeFileSync(path.join(runDir, 'index.html'), runHtml);

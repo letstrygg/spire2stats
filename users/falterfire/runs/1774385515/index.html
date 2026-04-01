@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Run #1774385515 - Falterfire - Spire 2 Stats</title>
+    <meta name="description" content="Detailed view of Falterfire's Slay the Spire 2 run #1774385515.">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+</head>
+<body><nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/users/falterfire/">falterfire</a> / run #1774385515</nav>
+                    <div class="item-box" style="background-color: rgba(74, 144, 226, 0.3);">
+                        <h1>Run #1774385515</h1>
+                        <div class="subtitle">
+                            <a href="/characters/defect/">Defect</a> • 
+                            <a href="/ascensions/scarcity/">Scarcity</a> • 
+                            Victory
+                        </div>
+                        
+                        <div class="run-summary-container" style="margin-top: 30px; margin-bottom: 30px; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; border: 1px solid var(--border, #333);">
+                            <h3 style="margin-top: 0; color: var(--text-muted, #aaa); font-size: 1.1em; border-bottom: 1px solid var(--border, #333); padding-bottom: 10px; margin-bottom: 15px;">Run Summary: HP per Floor</h3>
+                            <div style="height: 300px; width: 100%;">
+                                <canvas id="hpChart_1774385515"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="run-details-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; text-align: left;">
+                            <div>
+                                <h3>Deck</h3>
+                                <div class="grid-sm"><a href="/cards/defend/" class="item-link">Defend</a><a href="/cards/zap/" class="item-link">Zap</a><a href="/cards/dualcast/" class="item-link">Dualcast</a><a href="/cards/ascenders-bane/" class="item-link">Ascender's Bane</a><a href="/cards/supercritical/" class="item-link">Supercritical</a><a href="/cards/compact/" class="item-link">Compact</a><a href="/cards/null/" class="item-link">Null</a><a href="/cards/sweeping-beam/" class="item-link">Sweeping Beam</a><a href="/cards/ball-lightning/" class="item-link">Ball Lightning</a><a href="/cards/genetic-algorithm/" class="item-link">Genetic Algorithm</a><a href="/cards/ftl/" class="item-link">FTL</a><a href="/cards/charge-battery/" class="item-link">Charge Battery</a><a href="/cards/voltaic/" class="item-link">Voltaic</a><a href="/cards/boost-away/" class="item-link">Boost Away</a><a href="/cards/lightning-rod/" class="item-link">Lightning Rod</a><a href="/cards/strike/" class="item-link">Strike</a><a href="/cards/white-noise/" class="item-link">White Noise</a><a href="/cards/go-for-the-eyes/" class="item-link">Go for the Eyes</a><a href="/cards/spinner/" class="item-link">Spinner</a><a href="/cards/hologram/" class="item-link">Hologram</a><a href="/cards/bulk-up/" class="item-link">Bulk Up</a><a href="/cards/tempest/" class="item-link">Tempest</a><a href="/cards/loop/" class="item-link">Loop</a><a href="/cards/clumsy/" class="item-link">Clumsy</a></div>
+                            </div>
+                            <div>
+                                <h3>Enchantments</h3>
+                                <div class="grid-sm"><a href="/enchantments/enchantmentperfect_fit/" class="item-link">ENCHANTMENT.PERFECT_FIT</a></div>
+                            </div>
+                            <div>
+                                <h3>Relics</h3>
+                                <div class="grid-sm"><a href="/relics/cracked-core/" class="item-link">Cracked Core</a><a href="/relics/arcane-scroll/" class="item-link">Arcane Scroll</a><a href="/relics/kusarigama/" class="item-link">Kusarigama</a><a href="/relics/reptile-trinket/" class="item-link">Reptile Trinket</a><a href="/relics/shuriken/" class="item-link">Shuriken</a><a href="/relics/paels-tooth/" class="item-link">Pael's Tooth</a><a href="/relics/meal-ticket/" class="item-link">Meal Ticket</a><a href="/relics/sparkling-rouge/" class="item-link">Sparkling Rouge</a><a href="/relics/nunchaku/" class="item-link">Nunchaku</a><a href="/relics/juzu-bracelet/" class="item-link">Juzu Bracelet</a><a href="/relics/diamond-diadem/" class="item-link">Diamond Diadem</a><a href="/relics/history-course/" class="item-link">History Course</a><a href="/relics/gremlin-horn/" class="item-link">Gremlin Horn</a><a href="/relics/potion-belt/" class="item-link">Potion Belt</a><a href="/relics/akabeko/" class="item-link">Akabeko</a><a href="/relics/vajra/" class="item-link">Vajra</a></div>
+                            </div>
+                            <div>
+                                <h3>Events</h3>
+                                <div class="grid-sm"><a href="/events/neow/" class="item-link">Neow</a><a href="/events/sapphire-seed/" class="item-link">Sapphire Seed</a><a href="/events/pael/" class="item-link">Pael</a><a href="/events/welcome-to-wongos/" class="item-link">Welcome to Wongo's</a><a href="/events/field-of-man-sized-holes/" class="item-link">Field of Man-Sized Holes</a><a href="/events/the-lantern-key/" class="item-link">The Lantern Key</a><a href="/events/nonupeipe/" class="item-link">Nonupeipe</a><a href="/events/war-historian-repy/" class="item-link">War Historian, Repy</a><a href="/events/this-or-that/" class="item-link">This or That?</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                    <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const ctx = document.getElementById('hpChart_1774385515');
+                        if (!ctx) return;
+                        const rawRuns = [{"label":"Run 1774385515 (Defect)","win":true,"floorData":[]}];
+                        if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) return;
+
+                        const maxFloor = Math.max(...rawRuns[0].floorData.map(d => d.floor));
+                        const labels = Array.from({length: maxFloor}, (_, i) => i + 1);
+                        const color = run.win ? '#00ff89' : '#ff4b4b';
+
+                        const hpMap = {};
+                        rawRuns[0].floorData.forEach(d => { hpMap[d.floor] = d.hp; });
+                        const dataArr = labels.map(floor => hpMap[floor] !== undefined ? hpMap[floor] : null);
+
+                        new Chart(ctx, {
+                            type: 'line',
+                            data: { labels: labels, datasets: [{
+                                label: rawRuns[0].label,
+                                data: dataArr,
+                                borderColor: color,
+                                backgroundColor: color + '22',
+                                borderWidth: 2,
+                                fill: true,
+                                tension: 0.3,
+                                spanGaps: true
+                            }]},
+                            options: {
+                                responsive: true, maintainAspectRatio: false,
+                                scales: { y: { beginAtZero: true, grid: { color: '#333' } }, x: { grid: { color: '#333' } } }
+                            }
+                        });
+                    });
+                    </script></body></html>

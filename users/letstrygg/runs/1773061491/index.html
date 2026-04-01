@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Run #1773061491 - LetsTryGG - Spire 2 Stats</title>
+    <meta name="description" content="Detailed view of LetsTryGG's Slay the Spire 2 run #1773061491.">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+</head>
+<body><nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/users/letstrygg/">letstrygg</a> / run #1773061491</nav>
+                    <div class="item-box" style="background-color: rgba(211, 84, 0, 0.3);">
+                        <h1>Run #1773061491</h1>
+                        <div class="subtitle">
+                            <a href="/characters/regent/">Regent</a> • 
+                            <a href="/ascensions/swarming-elites/">Swarming Elites</a> • 
+                            Defeat
+                        </div>
+                        
+                        <div class="run-summary-container" style="margin-top: 30px; margin-bottom: 30px; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; border: 1px solid var(--border, #333);">
+                            <h3 style="margin-top: 0; color: var(--text-muted, #aaa); font-size: 1.1em; border-bottom: 1px solid var(--border, #333); padding-bottom: 10px; margin-bottom: 15px;">Run Summary: HP per Floor</h3>
+                            <div style="height: 300px; width: 100%;">
+                                <canvas id="hpChart_1773061491"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="run-details-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; text-align: left;">
+                            <div>
+                                <h3>Deck</h3>
+                                <div class="grid-sm"><a href="/cards/strike/" class="item-link">Strike</a><a href="/cards/defend/" class="item-link">Defend</a><a href="/cards/wrought-in-war/" class="item-link">Wrought in War</a><a href="/cards/photon-cut/" class="item-link">Photon Cut</a><a href="/cards/glimmer/" class="item-link">Glimmer</a><a href="/cards/quasar/" class="item-link">Quasar</a><a href="/cards/tyranny/" class="item-link">Tyranny</a><a href="/cards/venerate/" class="item-link">Venerate</a><a href="/cards/furnace/" class="item-link">Furnace</a><a href="/cards/big-bang/" class="item-link">Big Bang</a><a href="/cards/parry/" class="item-link">Parry</a><a href="/cards/solar-strike/" class="item-link">Solar Strike</a></div>
+                            </div>
+                            <div>
+                                <h3>Enchantments</h3>
+                                <div class="grid-sm"><a href="/enchantments/enchantmentsharp/" class="item-link">ENCHANTMENT.SHARP</a></div>
+                            </div>
+                            <div>
+                                <h3>Relics</h3>
+                                <div class="grid-sm"><a href="/relics/divine-right/" class="item-link">Divine Right</a><a href="/relics/silver-crucible/" class="item-link">Silver Crucible</a><a href="/relics/bowler-hat/" class="item-link">Bowler Hat</a><a href="/relics/paels-tooth/" class="item-link">Pael's Tooth</a><a href="/relics/ember-tea/" class="item-link">Ember Tea</a></div>
+                            </div>
+                            <div>
+                                <h3>Events</h3>
+                                <div class="grid-sm"><a href="/events/neow/" class="item-link">Neow</a><a href="/events/this-or-that/" class="item-link">This or That?</a><a href="/events/the-legends-were-true/" class="item-link">The Legends Were True</a><a href="/events/the-sunken-statue/" class="item-link">The Sunken Statue</a><a href="/events/self-help-book/" class="item-link">Self-Help Book</a><a href="/events/pael/" class="item-link">Pael</a><a href="/events/tea-master/" class="item-link">Tea Master</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                    <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const ctx = document.getElementById('hpChart_1773061491');
+                        if (!ctx) return;
+                        const rawRuns = [{"label":"Run 1773061491 (Regent)","win":false,"floorData":[]}];
+                        if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) return;
+
+                        const maxFloor = Math.max(...rawRuns[0].floorData.map(d => d.floor));
+                        const labels = Array.from({length: maxFloor}, (_, i) => i + 1);
+                        const color = run.win ? '#00ff89' : '#ff4b4b';
+
+                        const hpMap = {};
+                        rawRuns[0].floorData.forEach(d => { hpMap[d.floor] = d.hp; });
+                        const dataArr = labels.map(floor => hpMap[floor] !== undefined ? hpMap[floor] : null);
+
+                        new Chart(ctx, {
+                            type: 'line',
+                            data: { labels: labels, datasets: [{
+                                label: rawRuns[0].label,
+                                data: dataArr,
+                                borderColor: color,
+                                backgroundColor: color + '22',
+                                borderWidth: 2,
+                                fill: true,
+                                tension: 0.3,
+                                spanGaps: true
+                            }]},
+                            options: {
+                                responsive: true, maintainAspectRatio: false,
+                                scales: { y: { beginAtZero: true, grid: { color: '#333' } }, x: { grid: { color: '#333' } } }
+                            }
+                        });
+                    });
+                    </script></body></html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Run #1774722036 - Falterfire - Spire 2 Stats</title>
+    <meta name="description" content="Detailed view of Falterfire's Slay the Spire 2 run #1774722036.">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+</head>
+<body><nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/users/falterfire/">falterfire</a> / run #1774722036</nav>
+                    <div class="item-box" style="background-color: rgba(211, 84, 0, 0.3);">
+                        <h1>Run #1774722036</h1>
+                        <div class="subtitle">
+                            <a href="/characters/regent/">Regent</a> • 
+                            <a href="/ascensions/deadly-enemies/">Deadly Enemies</a> • 
+                            Victory
+                        </div>
+                        
+                        <div class="run-summary-container" style="margin-top: 30px; margin-bottom: 30px; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; border: 1px solid var(--border, #333);">
+                            <h3 style="margin-top: 0; color: var(--text-muted, #aaa); font-size: 1.1em; border-bottom: 1px solid var(--border, #333); padding-bottom: 10px; margin-bottom: 15px;">Run Summary: HP per Floor</h3>
+                            <div style="height: 300px; width: 100%;">
+                                <canvas id="hpChart_1774722036"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="run-details-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; text-align: left;">
+                            <div>
+                                <h3>Deck</h3>
+                                <div class="grid-sm"><a href="/cards/defend/" class="item-link">Defend</a><a href="/cards/falling-star/" class="item-link">Falling Star</a><a href="/cards/venerate/" class="item-link">Venerate</a><a href="/cards/ascenders-bane/" class="item-link">Ascender's Bane</a><a href="/cards/cloak-of-stars/" class="item-link">Cloak of Stars</a><a href="/cards/hegemony/" class="item-link">Hegemony</a><a href="/cards/manifest-authority/" class="item-link">Manifest Authority</a><a href="/cards/crush-under/" class="item-link">Crush Under</a><a href="/cards/furnace/" class="item-link">Furnace</a><a href="/cards/know-thy-place/" class="item-link">Know Thy Place</a><a href="/cards/strike/" class="item-link">Strike</a><a href="/cards/photon-cut/" class="item-link">Photon Cut</a><a href="/cards/bombardment/" class="item-link">Bombardment</a><a href="/cards/summon-forth/" class="item-link">Summon Forth</a><a href="/cards/patter/" class="item-link">Patter</a><a href="/cards/mad-science/" class="item-link">Mad Science</a><a href="/cards/arsenal/" class="item-link">Arsenal</a></div>
+                            </div>
+                            <div>
+                                <h3>Enchantments</h3>
+                                <div class="grid-sm">No enchantments used.</div>
+                            </div>
+                            <div>
+                                <h3>Relics</h3>
+                                <div class="grid-sm"><a href="/relics/divine-right/" class="item-link">Divine Right</a><a href="/relics/new-leaf/" class="item-link">New Leaf</a><a href="/relics/darkstone-periapt/" class="item-link">Darkstone Periapt</a><a href="/relics/lantern/" class="item-link">Lantern</a><a href="/relics/strike-dummy/" class="item-link">Strike Dummy</a><a href="/relics/bowler-hat/" class="item-link">Bowler Hat</a><a href="/relics/paels-tooth/" class="item-link">Pael's Tooth</a><a href="/relics/anchor/" class="item-link">Anchor???</a><a href="/relics/lees-waffle/" class="item-link">Lee's Waffle???</a><a href="/relics/candelabra/" class="item-link">Candelabra</a><a href="/relics/captains-wheel/" class="item-link">Captain's Wheel</a><a href="/relics/lunar-pastry/" class="item-link">Lunar Pastry</a><a href="/relics/spiked-gauntlets/" class="item-link">Spiked Gauntlets</a><a href="/relics/history-course/" class="item-link">History Course</a><a href="/relics/pear/" class="item-link">Pear</a><a href="/relics/festive-popper/" class="item-link">Festive Popper</a><a href="/relics/regalite/" class="item-link">Regalite</a><a href="/relics/unceasing-top/" class="item-link">Unceasing Top</a></div>
+                            </div>
+                            <div>
+                                <h3>Events</h3>
+                                <div class="grid-sm"><a href="/events/neow/" class="item-link">Neow</a><a href="/events/sunken-treasury/" class="item-link">Sunken Treasury</a><a href="/events/trash-heap/" class="item-link">Trash Heap</a><a href="/events/brain-leech/" class="item-link">Brain Leech</a><a href="/events/endless-conveyor/" class="item-link">Endless Conveyor</a><a href="/events/pael/" class="item-link">Pael</a><a href="/events/the-merchant/" class="item-link">The Merchant???</a><a href="/events/the-lantern-key/" class="item-link">The Lantern Key</a><a href="/events/tanx/" class="item-link">Tanx</a><a href="/events/war-historian-repy/" class="item-link">War Historian, Repy</a><a href="/events/tinker-time/" class="item-link">Tinker Time</a><a href="/events/battleworn-dummy/" class="item-link">Battleworn Dummy</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                    <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const ctx = document.getElementById('hpChart_1774722036');
+                        if (!ctx) return;
+                        const rawRuns = [{"label":"Run 1774722036 (Regent)","win":true,"floorData":[]}];
+                        if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) return;
+
+                        const maxFloor = Math.max(...rawRuns[0].floorData.map(d => d.floor));
+                        const labels = Array.from({length: maxFloor}, (_, i) => i + 1);
+                        const color = run.win ? '#00ff89' : '#ff4b4b';
+
+                        const hpMap = {};
+                        rawRuns[0].floorData.forEach(d => { hpMap[d.floor] = d.hp; });
+                        const dataArr = labels.map(floor => hpMap[floor] !== undefined ? hpMap[floor] : null);
+
+                        new Chart(ctx, {
+                            type: 'line',
+                            data: { labels: labels, datasets: [{
+                                label: rawRuns[0].label,
+                                data: dataArr,
+                                borderColor: color,
+                                backgroundColor: color + '22',
+                                borderWidth: 2,
+                                fill: true,
+                                tension: 0.3,
+                                spanGaps: true
+                            }]},
+                            options: {
+                                responsive: true, maintainAspectRatio: false,
+                                scales: { y: { beginAtZero: true, grid: { color: '#333' } }, x: { grid: { color: '#333' } } }
+                            }
+                        });
+                    });
+                    </script></body></html>

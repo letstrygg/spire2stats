@@ -678,7 +678,7 @@ async function build() {
         const contributorLinks = users.map(user => {
             const count = runCounts[user.slug.toLowerCase()] || 0;
             return `
-            <a href="/${user.slug}/" class="card-item contributor-card">
+            <a href="/users/${user.slug}/" class="card-item contributor-card">
                 <div class="card-info"><span class="card-name">${user.display_name}</span></div>
                 <div class="card-stats"><div class="run-count">${count} runs</div></div>
             </a>`;

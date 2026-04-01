@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Run #1773329004 - Falterfire - Spire 2 Stats</title>
+    <meta name="description" content="Detailed view of Falterfire's Slay the Spire 2 run #1773329004.">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+</head>
+<body><nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/users/falterfire/">falterfire</a> / run #1773329004</nav>
+                    <div class="item-box" style="background-color: rgba(74, 144, 226, 0.3);">
+                        <h1>Run #1773329004</h1>
+                        <div class="subtitle">
+                            <a href="/characters/defect/">Defect</a> • 
+                            <a href="/ascensions/poverty/">Poverty</a> • 
+                            Defeat
+                        </div>
+                        
+                        <div class="run-summary-container" style="margin-top: 30px; margin-bottom: 30px; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; border: 1px solid var(--border, #333);">
+                            <h3 style="margin-top: 0; color: var(--text-muted, #aaa); font-size: 1.1em; border-bottom: 1px solid var(--border, #333); padding-bottom: 10px; margin-bottom: 15px;">Run Summary: HP per Floor</h3>
+                            <div style="height: 300px; width: 100%;">
+                                <canvas id="hpChart_1773329004"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="run-details-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; text-align: left;">
+                            <div>
+                                <h3>Deck</h3>
+                                <div class="grid-sm"><a href="/cards/zap/" class="item-link">Zap</a><a href="/cards/dualcast/" class="item-link">Dualcast</a><a href="/cards/uproar/" class="item-link">Uproar</a><a href="/cards/ball-lightning/" class="item-link">Ball Lightning</a><a href="/cards/charge-battery/" class="item-link">Charge Battery</a><a href="/cards/claw/" class="item-link">Claw</a><a href="/cards/leap/" class="item-link">Leap</a><a href="/cards/machine-learning/" class="item-link">Machine Learning</a><a href="/cards/cold-snap/" class="item-link">Cold Snap</a><a href="/cards/creative-ai/" class="item-link">Creative AI</a><a href="/cards/capacitor/" class="item-link">Capacitor</a><a href="/cards/multi-cast/" class="item-link">Multi-Cast</a><a href="/cards/all-for-one/" class="item-link">All for One</a><a href="/cards/hologram/" class="item-link">Hologram</a><a href="/cards/lightning-rod/" class="item-link">Lightning Rod</a><a href="/cards/entropy/" class="item-link">Entropy</a><a href="/cards/thunder/" class="item-link">Thunder</a></div>
+                            </div>
+                            <div>
+                                <h3>Enchantments</h3>
+                                <div class="grid-sm"><a href="/enchantments/enchantmentsharp/" class="item-link">ENCHANTMENT.SHARP</a></div>
+                            </div>
+                            <div>
+                                <h3>Relics</h3>
+                                <div class="grid-sm"><a href="/relics/cracked-core/" class="item-link">Cracked Core</a><a href="/relics/lava-rock/" class="item-link">Lava Rock</a><a href="/relics/amethyst-aubergine/" class="item-link">Amethyst Aubergine</a><a href="/relics/rainbow-ring/" class="item-link">Rainbow Ring</a><a href="/relics/toxic-egg/" class="item-link">Toxic Egg</a><a href="/relics/whetstone/" class="item-link">Whetstone</a><a href="/relics/girya/" class="item-link">Girya</a><a href="/relics/pandoras-box/" class="item-link">Pandora's Box</a></div>
+                            </div>
+                            <div>
+                                <h3>Events</h3>
+                                <div class="grid-sm"><a href="/events/neow/" class="item-link">Neow</a><a href="/events/jungle-maze-adventure/" class="item-link">Jungle Maze Adventure</a><a href="/events/self-help-book/" class="item-link">Self-Help Book</a><a href="/events/wellspring/" class="item-link">Wellspring</a><a href="/events/aroma-of-chaos/" class="item-link">Aroma of Chaos</a><a href="/events/unrest-site/" class="item-link">Unrest Site</a><a href="/events/darv/" class="item-link">Darv</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                    <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const ctx = document.getElementById('hpChart_1773329004');
+                        if (!ctx) return;
+                        const rawRuns = [{"label":"Run 1773329004 (Defect)","win":false,"floorData":[]}];
+                        if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) return;
+
+                        const maxFloor = Math.max(...rawRuns[0].floorData.map(d => d.floor));
+                        const labels = Array.from({length: maxFloor}, (_, i) => i + 1);
+                        const color = run.win ? '#00ff89' : '#ff4b4b';
+
+                        const hpMap = {};
+                        rawRuns[0].floorData.forEach(d => { hpMap[d.floor] = d.hp; });
+                        const dataArr = labels.map(floor => hpMap[floor] !== undefined ? hpMap[floor] : null);
+
+                        new Chart(ctx, {
+                            type: 'line',
+                            data: { labels: labels, datasets: [{
+                                label: rawRuns[0].label,
+                                data: dataArr,
+                                borderColor: color,
+                                backgroundColor: color + '22',
+                                borderWidth: 2,
+                                fill: true,
+                                tension: 0.3,
+                                spanGaps: true
+                            }]},
+                            options: {
+                                responsive: true, maintainAspectRatio: false,
+                                scales: { y: { beginAtZero: true, grid: { color: '#333' } }, x: { grid: { color: '#333' } } }
+                            }
+                        });
+                    });
+                    </script></body></html>
