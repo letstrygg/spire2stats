@@ -4,7 +4,8 @@ import sqlite3 from 'sqlite3';
 import { PATHS, ensureDir, slugify } from './paths.js';
 import { 
     wrapLayout, 
-    generateItemJsonLd
+    generateItemJsonLd,
+    getCharacterBgStyle
 } from './templates/shared.js';
 
 /**
@@ -71,11 +72,13 @@ async function build() {
             // --- USER DIRECTORY (index.html) ---
             const runLinksHtml = userRuns.map(run => {
                 const charName = (run.character || 'Unknown').replace('CHARACTER.', '');
+                const charClass = charName.toLowerCase();
+                const bgStyle = getCharacterBgStyle(charName);
                 const statusClass = run.win ? 'win' : 'loss';
                 const statusText = run.win ? 'Victory' : 'Defeat';
                 
                 return `
-                <a href="/${user.slug}/runs/${run.id}/" class="card-item ${statusClass}">
+                <a href="/${user.slug}/runs/${run.id}/" class="card-item ${statusClass} ${charClass}" style="${bgStyle}">
                     <div class="card-info">
                         <span class="card-name">Run #${run.id} - ${charName}</span>
                     </div>
@@ -99,11 +102,12 @@ async function build() {
             for (const run of userRuns) {
                 const runDir = ensureDir(path.join(userRunsDir, String(run.id)));
                 const charName = (run.character || 'Unknown').replace('CHARACTER.', '');
+                const bgStyle = getCharacterBgStyle(charName);
 
                 const runHtml = wrapLayout(
                     `Run #${run.id} - ${user.display_name}`,
                     `
-                    <div class="item-box">
+                    <div class="item-box" style="${bgStyle}">
                         <h1>Run #${run.id}</h1>
                         <div class="subtitle">${charName} • Ascension ${run.ascension || 0} • ${run.win ? 'Victory' : 'Defeat'}</div>
                         <div class="description">
