@@ -171,7 +171,10 @@ async function build() {
                 <div class="card-item ${statusClass} ${charClass}" style="border-left-width: 2px; --char-color: ${charColor}; display: flex; flex-direction: column;">
                     <a href="/users/${user.slug}/runs/${run.id}/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
                         <div class="card-info">
-                            <span class="card-name">Run ${runNumber}<br><span style="color: ${charColor}">${charName}</span></span>
+                            <span class="card-name">
+                                <span style="font-size: 0.7rem; color: var(--gray); text-transform: uppercase; display: block; margin-bottom: 2px;">${user.display_name}</span>
+                                Run ${runNumber}<br><span style="color: ${charColor}">${charName}</span>
+                            </span>
                         </div>
                         <div class="card-stats">
                             <div class="win-rate" style="color: ${statusColor}">${statusText}</div>
