@@ -97,16 +97,22 @@ function getCostDisplay(card) {
 
 /** Helper to generate standardized card-item HTML for index pages */
 function generateCardItemHtml(url, name, stats, extraClass = '') {
+    const charId = (extraClass || '').toUpperCase();
+    const charColor = CHARACTER_COLORS[charId] || 'var(--gray)';
     let subtitleHtml = '';
-    if (extraClass && name.toLowerCase() !== extraClass.toLowerCase()) {
-        const charId = extraClass.toUpperCase();
-        const charColor = CHARACTER_COLORS[charId] || 'var(--gray)';
-        subtitleHtml = `<br><span style="color: ${charColor}; font-size: 0.8em; font-weight: normal; text-transform: capitalize;">${extraClass}</span>`;
+    let nameStyle = '';
+
+    if (extraClass) {
+        if (name.toLowerCase() !== extraClass.toLowerCase()) {
+            subtitleHtml = `<br><span style="color: ${charColor}; font-size: 0.8em; font-weight: normal; text-transform: capitalize;">${extraClass}</span>`;
+        } else {
+            nameStyle = `style="color: ${charColor}"`;
+        }
     }
 
     return `
     <a href="${url}" class="card-item ${extraClass ? extraClass.toLowerCase() : ''}" aria-label="${name}: ${stats.seen} runs, ${stats.text}">
-        <div class="card-info"><span class="card-name">${name}${subtitleHtml}</span></div>
+        <div class="card-info"><span class="card-name" ${nameStyle}>${name}${subtitleHtml}</span></div>
         <div class="card-stats">
             <div class="win-rate" style="color: ${stats.color}">${stats.text}</div>
             <div class="run-count">${stats.seen} runs</div>
