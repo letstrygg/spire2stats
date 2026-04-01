@@ -40,6 +40,15 @@ export async function setupDatabase() {
                 `);
 
                 db.run(`
+                    CREATE TABLE IF NOT EXISTS users (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        display_name TEXT NOT NULL,
+                        slug TEXT NOT NULL UNIQUE,
+                        supabase_user_id TEXT
+                    )
+                `);
+
+                db.run(`
                     CREATE TABLE IF NOT EXISTS runs (
                         id INTEGER PRIMARY KEY,
                         run_id TEXT UNIQUE,
