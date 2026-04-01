@@ -11,8 +11,71 @@
 <body><nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/falterfire/">falterfire</a> / run #1773454518</nav>
                     <div class="item-box" style="background-color: rgba(215, 50, 50, 0.3);">
                         <h1>Run #1773454518</h1>
-                        <div class="subtitle">IRONCLAD • Ascension 4 • Defeat</div>
-                        <div class="description">
-                            <p>Statistics and path history for this run will be displayed here.</p>
+                        <div class="subtitle">
+                            <a href="/characters/ironclad/">Ironclad</a> • 
+                            <a href="/ascensions/tight-belt/">Tight Belt</a> • 
+                            Defeat
                         </div>
-                    </div></body></html>
+                        
+                        <div class="run-summary-container" style="margin-top: 30px; margin-bottom: 30px; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; border: 1px solid var(--border, #333);">
+                            <h3 style="margin-top: 0; color: var(--text-muted, #aaa); font-size: 1.1em; border-bottom: 1px solid var(--border, #333); padding-bottom: 10px; margin-bottom: 15px;">Run Summary: HP per Floor</h3>
+                            <div style="height: 300px; width: 100%;">
+                                <canvas id="hpChart_1773454518"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="run-details-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; text-align: left;">
+                            <div>
+                                <h3>Deck</h3>
+                                <div class="grid-sm"><a href="/cards/strike/" class="item-link">Strike</a><a href="/cards/defend/" class="item-link">Defend</a><a href="/cards/bash/" class="item-link">Bash</a><a href="/cards/cinder/" class="item-link">Cinder</a><a href="/cards/perfected-strike/" class="item-link">Perfected Strike</a><a href="/cards/juggling/" class="item-link">Juggling</a><a href="/cards/shrug-it-off/" class="item-link">Shrug It Off</a><a href="/cards/pommel-strike/" class="item-link">Pommel Strike</a><a href="/cards/ashen-strike/" class="item-link">Ashen Strike</a><a href="/cards/thunderclap/" class="item-link">Thunderclap</a><a href="/cards/inflame/" class="item-link">Inflame</a><a href="/cards/true-grit/" class="item-link">True Grit</a><a href="/cards/fiend-fire/" class="item-link">Fiend Fire</a><a href="/cards/unrelenting/" class="item-link">Unrelenting</a><a href="/cards/stone-armor/" class="item-link">Stone Armor</a></div>
+                            </div>
+                            <div>
+                                <h3>Enchantments</h3>
+                                <div class="grid-sm">No enchantments used.</div>
+                            </div>
+                            <div>
+                                <h3>Relics</h3>
+                                <div class="grid-sm"><a href="/relics/burning-blood/" class="item-link">Burning Blood</a><a href="/relics/scroll-boxes/" class="item-link">Scroll Boxes</a><a href="/relics/darkstone-periapt/" class="item-link">Darkstone Periapt</a><a href="/relics/orichalcum/" class="item-link">Orichalcum</a><a href="/relics/festive-popper/" class="item-link">Festive Popper</a><a href="/relics/bag-of-marbles/" class="item-link">Bag of Marbles</a><a href="/relics/paels-wing/" class="item-link">Pael's Wing</a><a href="/relics/frozen-egg/" class="item-link">Frozen Egg</a><a href="/relics/potion-belt/" class="item-link">Potion Belt</a><a href="/relics/happy-flower/" class="item-link">Happy Flower</a><a href="/relics/game-piece/" class="item-link">Game Piece</a><a href="/relics/intimidating-helmet/" class="item-link">Intimidating Helmet</a><a href="/relics/pear/" class="item-link">Pear</a></div>
+                            </div>
+                            <div>
+                                <h3>Events</h3>
+                                <div class="grid-sm"><a href="/events/neow/" class="item-link">Neow</a><a href="/events/trash-heap/" class="item-link">Trash Heap</a><a href="/events/this-or-that/" class="item-link">This or That?</a><a href="/events/slippery-bridge/" class="item-link">Slippery Bridge</a><a href="/events/drowning-beacon/" class="item-link">Drowning Beacon</a><a href="/events/pael/" class="item-link">Pael</a><a href="/events/the-lost-wisp/" class="item-link">The Lost Wisp</a><a href="/events/infested-automaton/" class="item-link">Infested Automaton</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                    <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const ctx = document.getElementById('hpChart_1773454518');
+                        if (!ctx) return;
+                        const rawRuns = [{"label":"Run 1773454518 (Ironclad)","win":false,"floorData":[]}];
+                        if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) return;
+
+                        const maxFloor = Math.max(...rawRuns[0].floorData.map(d => d.floor));
+                        const labels = Array.from({length: maxFloor}, (_, i) => i + 1);
+                        const color = run.win ? '#00ff89' : '#ff4b4b';
+
+                        const hpMap = {};
+                        rawRuns[0].floorData.forEach(d => { hpMap[d.floor] = d.hp; });
+                        const dataArr = labels.map(floor => hpMap[floor] !== undefined ? hpMap[floor] : null);
+
+                        new Chart(ctx, {
+                            type: 'line',
+                            data: { labels: labels, datasets: [{
+                                label: rawRuns[0].label,
+                                data: dataArr,
+                                borderColor: color,
+                                backgroundColor: color + '22',
+                                borderWidth: 2,
+                                fill: true,
+                                tension: 0.3,
+                                spanGaps: true
+                            }]},
+                            options: {
+                                responsive: true, maintainAspectRatio: false,
+                                scales: { y: { beginAtZero: true, grid: { color: '#333' } }, x: { grid: { color: '#333' } } }
+                            }
+                        });
+                    });
+                    </script></body></html>

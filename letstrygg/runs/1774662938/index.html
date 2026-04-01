@@ -11,8 +11,71 @@
 <body><nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/letstrygg/">letstrygg</a> / run #1774662938</nav>
                     <div class="item-box" style="background-color: rgba(74, 144, 226, 0.3);">
                         <h1>Run #1774662938</h1>
-                        <div class="subtitle">DEFECT • Ascension 3 • Victory</div>
-                        <div class="description">
-                            <p>Statistics and path history for this run will be displayed here.</p>
+                        <div class="subtitle">
+                            <a href="/characters/defect/">Defect</a> • 
+                            <a href="/ascensions/poverty/">Poverty</a> • 
+                            Victory
                         </div>
-                    </div></body></html>
+                        
+                        <div class="run-summary-container" style="margin-top: 30px; margin-bottom: 30px; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; border: 1px solid var(--border, #333);">
+                            <h3 style="margin-top: 0; color: var(--text-muted, #aaa); font-size: 1.1em; border-bottom: 1px solid var(--border, #333); padding-bottom: 10px; margin-bottom: 15px;">Run Summary: HP per Floor</h3>
+                            <div style="height: 300px; width: 100%;">
+                                <canvas id="hpChart_1774662938"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="run-details-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; text-align: left;">
+                            <div>
+                                <h3>Deck</h3>
+                                <div class="grid-sm"><a href="/cards/defend/" class="item-link">Defend</a><a href="/cards/zap/" class="item-link">Zap</a><a href="/cards/dualcast/" class="item-link">Dualcast</a><a href="/cards/focused-strike/" class="item-link">Focused Strike</a><a href="/cards/lightning-rod/" class="item-link">Lightning Rod</a><a href="/cards/glacier/" class="item-link">Glacier</a><a href="/cards/coolheaded/" class="item-link">Coolheaded</a><a href="/cards/defragment/" class="item-link">Defragment</a><a href="/cards/signal-boost/" class="item-link">Signal Boost</a><a href="/cards/brightest-flame/" class="item-link">Brightest Flame</a><a href="/cards/voltaic/" class="item-link">Voltaic</a><a href="/cards/ultimate-defend/" class="item-link">Ultimate Defend</a><a href="/cards/turbo/" class="item-link">TURBO</a><a href="/cards/capacitor/" class="item-link">Capacitor</a><a href="/cards/tempest/" class="item-link">Tempest</a><a href="/cards/claw/" class="item-link">Claw</a><a href="/cards/overclock/" class="item-link">Overclock</a><a href="/cards/thunder/" class="item-link">Thunder</a><a href="/cards/reboot/" class="item-link">Reboot</a><a href="/cards/double-energy/" class="item-link">Double Energy</a><a href="/cards/chill/" class="item-link">Chill</a><a href="/cards/ftl/" class="item-link">FTL</a></div>
+                            </div>
+                            <div>
+                                <h3>Enchantments</h3>
+                                <div class="grid-sm"><a href="/enchantments/enchantmentsown/" class="item-link">ENCHANTMENT.SOWN</a><a href="/enchantments/enchantmentswift/" class="item-link">ENCHANTMENT.SWIFT</a></div>
+                            </div>
+                            <div>
+                                <h3>Relics</h3>
+                                <div class="grid-sm"><a href="/relics/cracked-core/" class="item-link">Cracked Core</a><a href="/relics/precarious-shears/" class="item-link">Precarious Shears</a><a href="/relics/pendulum/" class="item-link">Pendulum</a><a href="/relics/storybook/" class="item-link">Storybook</a><a href="/relics/prayer-wheel/" class="item-link">Prayer Wheel</a><a href="/relics/potion-belt/" class="item-link">Potion Belt</a><a href="/relics/venerable-tea-set/" class="item-link">Venerable Tea Set</a><a href="/relics/ice-cream/" class="item-link">Ice Cream</a><a href="/relics/candelabra/" class="item-link">Candelabra</a><a href="/relics/beautiful-bracelet/" class="item-link">Beautiful Bracelet</a><a href="/relics/bellows/" class="item-link">Bellows</a></div>
+                            </div>
+                            <div>
+                                <h3>Events</h3>
+                                <div class="grid-sm"><a href="/events/neow/" class="item-link">Neow</a><a href="/events/sapphire-seed/" class="item-link">Sapphire Seed</a><a href="/events/the-legends-were-true/" class="item-link">The Legends Were True</a><a href="/events/tablet-of-truth/" class="item-link">Tablet of Truth</a><a href="/events/tezcatara/" class="item-link">Tezcatara</a><a href="/events/amalgamator/" class="item-link">Amalgamator</a><a href="/events/this-or-that/" class="item-link">This or That?</a><a href="/events/nonupeipe/" class="item-link">Nonupeipe</a><a href="/events/self-help-book/" class="item-link">Self-Help Book</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                    <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const ctx = document.getElementById('hpChart_1774662938');
+                        if (!ctx) return;
+                        const rawRuns = [{"label":"Run 1774662938 (Defect)","win":true,"floorData":[]}];
+                        if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) return;
+
+                        const maxFloor = Math.max(...rawRuns[0].floorData.map(d => d.floor));
+                        const labels = Array.from({length: maxFloor}, (_, i) => i + 1);
+                        const color = run.win ? '#00ff89' : '#ff4b4b';
+
+                        const hpMap = {};
+                        rawRuns[0].floorData.forEach(d => { hpMap[d.floor] = d.hp; });
+                        const dataArr = labels.map(floor => hpMap[floor] !== undefined ? hpMap[floor] : null);
+
+                        new Chart(ctx, {
+                            type: 'line',
+                            data: { labels: labels, datasets: [{
+                                label: rawRuns[0].label,
+                                data: dataArr,
+                                borderColor: color,
+                                backgroundColor: color + '22',
+                                borderWidth: 2,
+                                fill: true,
+                                tension: 0.3,
+                                spanGaps: true
+                            }]},
+                            options: {
+                                responsive: true, maintainAspectRatio: false,
+                                scales: { y: { beginAtZero: true, grid: { color: '#333' } }, x: { grid: { color: '#333' } } }
+                            }
+                        });
+                    });
+                    </script></body></html>

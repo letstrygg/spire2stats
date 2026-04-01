@@ -11,8 +11,71 @@
 <body><nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/letstrygg/">letstrygg</a> / run #1774463936</nav>
                     <div class="item-box" style="background-color: rgba(211, 84, 0, 0.3);">
                         <h1>Run #1774463936</h1>
-                        <div class="subtitle">REGENT • Ascension 4 • Victory</div>
-                        <div class="description">
-                            <p>Statistics and path history for this run will be displayed here.</p>
+                        <div class="subtitle">
+                            <a href="/characters/regent/">Regent</a> • 
+                            <a href="/ascensions/tight-belt/">Tight Belt</a> • 
+                            Victory
                         </div>
-                    </div></body></html>
+                        
+                        <div class="run-summary-container" style="margin-top: 30px; margin-bottom: 30px; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; border: 1px solid var(--border, #333);">
+                            <h3 style="margin-top: 0; color: var(--text-muted, #aaa); font-size: 1.1em; border-bottom: 1px solid var(--border, #333); padding-bottom: 10px; margin-bottom: 15px;">Run Summary: HP per Floor</h3>
+                            <div style="height: 300px; width: 100%;">
+                                <canvas id="hpChart_1774463936"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="run-details-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; text-align: left;">
+                            <div>
+                                <h3>Deck</h3>
+                                <div class="grid-sm"><a href="/cards/strike/" class="item-link">Strike</a><a href="/cards/defend/" class="item-link">Defend</a><a href="/cards/falling-star/" class="item-link">Falling Star</a><a href="/cards/venerate/" class="item-link">Venerate</a><a href="/cards/glow/" class="item-link">Glow</a><a href="/cards/cosmic-indifference/" class="item-link">Cosmic Indifference</a><a href="/cards/radiate/" class="item-link">Radiate</a><a href="/cards/patter/" class="item-link">Patter</a><a href="/cards/reflect/" class="item-link">Reflect</a><a href="/cards/kingly-kick/" class="item-link">Kingly Kick</a><a href="/cards/dying-star/" class="item-link">Dying Star</a><a href="/cards/terraforming/" class="item-link">Terraforming</a><a href="/cards/glimmer/" class="item-link">Glimmer</a><a href="/cards/genesis/" class="item-link">Genesis</a><a href="/cards/alignment/" class="item-link">Alignment</a><a href="/cards/big-bang/" class="item-link">Big Bang</a><a href="/cards/child-of-the-stars/" class="item-link">Child of the Stars</a><a href="/cards/orbit/" class="item-link">Orbit</a><a href="/cards/mad-science/" class="item-link">Mad Science</a><a href="/cards/lunar-blast/" class="item-link">Lunar Blast</a></div>
+                            </div>
+                            <div>
+                                <h3>Enchantments</h3>
+                                <div class="grid-sm"><a href="/enchantments/enchantmentspiral/" class="item-link">ENCHANTMENT.SPIRAL</a><a href="/enchantments/enchantmentclone/" class="item-link">ENCHANTMENT.CLONE</a><a href="/enchantments/enchantmentcorrupted/" class="item-link">ENCHANTMENT.CORRUPTED</a></div>
+                            </div>
+                            <div>
+                                <h3>Relics</h3>
+                                <div class="grid-sm"><a href="/relics/divine-right/" class="item-link">Divine Right</a><a href="/relics/scroll-boxes/" class="item-link">Scroll Boxes</a><a href="/relics/strawberry/" class="item-link">Strawberry</a><a href="/relics/happy-flower/" class="item-link">Happy Flower</a><a href="/relics/vajra/" class="item-link">Vajra</a><a href="/relics/sword-of-jade/" class="item-link">Sword of Jade</a><a href="/relics/amethyst-aubergine/" class="item-link">Amethyst Aubergine</a><a href="/relics/paels-growth/" class="item-link">Pael's Growth</a><a href="/relics/gorget/" class="item-link">Gorget</a><a href="/relics/potion-belt/" class="item-link">Potion Belt</a><a href="/relics/oddly-smooth-stone/" class="item-link">Oddly Smooth Stone</a><a href="/relics/horn-cleat/" class="item-link">Horn Cleat</a><a href="/relics/war-hammer/" class="item-link">War Hammer</a><a href="/relics/lees-waffle/" class="item-link">Lee's Waffle???</a><a href="/relics/happy-flower/" class="item-link">Happy Flower???</a><a href="/relics/book-of-five-rings/" class="item-link">Book of Five Rings</a><a href="/relics/tiny-mailbox/" class="item-link">Tiny Mailbox</a><a href="/relics/strike-dummy/" class="item-link">Strike Dummy</a><a href="/relics/royal-poison/" class="item-link">Royal Poison</a><a href="/relics/pendulum/" class="item-link">Pendulum</a></div>
+                            </div>
+                            <div>
+                                <h3>Events</h3>
+                                <div class="grid-sm"><a href="/events/neow/" class="item-link">Neow</a><a href="/events/spiraling-whirlpool/" class="item-link">Spiraling Whirlpool</a><a href="/events/this-or-that/" class="item-link">This or That?</a><a href="/events/the-sunken-statue/" class="item-link">The Sunken Statue</a><a href="/events/pael/" class="item-link">Pael</a><a href="/events/crystal-sphere/" class="item-link">Crystal Sphere</a><a href="/events/tanx/" class="item-link">Tanx</a><a href="/events/the-merchant/" class="item-link">The Merchant???</a><a href="/events/symbiote/" class="item-link">Symbiote</a><a href="/events/tinker-time/" class="item-link">Tinker Time</a><a href="/events/the-round-tea-party/" class="item-link">The Round Tea Party</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                    <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const ctx = document.getElementById('hpChart_1774463936');
+                        if (!ctx) return;
+                        const rawRuns = [{"label":"Run 1774463936 (Regent)","win":true,"floorData":[]}];
+                        if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) return;
+
+                        const maxFloor = Math.max(...rawRuns[0].floorData.map(d => d.floor));
+                        const labels = Array.from({length: maxFloor}, (_, i) => i + 1);
+                        const color = run.win ? '#00ff89' : '#ff4b4b';
+
+                        const hpMap = {};
+                        rawRuns[0].floorData.forEach(d => { hpMap[d.floor] = d.hp; });
+                        const dataArr = labels.map(floor => hpMap[floor] !== undefined ? hpMap[floor] : null);
+
+                        new Chart(ctx, {
+                            type: 'line',
+                            data: { labels: labels, datasets: [{
+                                label: rawRuns[0].label,
+                                data: dataArr,
+                                borderColor: color,
+                                backgroundColor: color + '22',
+                                borderWidth: 2,
+                                fill: true,
+                                tension: 0.3,
+                                spanGaps: true
+                            }]},
+                            options: {
+                                responsive: true, maintainAspectRatio: false,
+                                scales: { y: { beginAtZero: true, grid: { color: '#333' } }, x: { grid: { color: '#333' } } }
+                            }
+                        });
+                    });
+                    </script></body></html>

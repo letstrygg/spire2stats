@@ -11,8 +11,71 @@
 <body><nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/letstrygg/">letstrygg</a> / run #1774910854</nav>
                     <div class="item-box" style="background-color: rgba(74, 144, 226, 0.3);">
                         <h1>Run #1774910854</h1>
-                        <div class="subtitle">DEFECT • Ascension 4 • Defeat</div>
-                        <div class="description">
-                            <p>Statistics and path history for this run will be displayed here.</p>
+                        <div class="subtitle">
+                            <a href="/characters/defect/">Defect</a> • 
+                            <a href="/ascensions/tight-belt/">Tight Belt</a> • 
+                            Defeat
                         </div>
-                    </div></body></html>
+                        
+                        <div class="run-summary-container" style="margin-top: 30px; margin-bottom: 30px; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; border: 1px solid var(--border, #333);">
+                            <h3 style="margin-top: 0; color: var(--text-muted, #aaa); font-size: 1.1em; border-bottom: 1px solid var(--border, #333); padding-bottom: 10px; margin-bottom: 15px;">Run Summary: HP per Floor</h3>
+                            <div style="height: 300px; width: 100%;">
+                                <canvas id="hpChart_1774910854"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="run-details-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; text-align: left;">
+                            <div>
+                                <h3>Deck</h3>
+                                <div class="grid-sm"><a href="/cards/strike/" class="item-link">Strike</a><a href="/cards/defend/" class="item-link">Defend</a><a href="/cards/zap/" class="item-link">Zap</a><a href="/cards/dualcast/" class="item-link">Dualcast</a><a href="/cards/cold-snap/" class="item-link">Cold Snap</a><a href="/cards/hotfix/" class="item-link">Hotfix</a><a href="/cards/chill/" class="item-link">Chill</a><a href="/cards/coolheaded/" class="item-link">Coolheaded</a><a href="/cards/claw/" class="item-link">Claw</a><a href="/cards/turbo/" class="item-link">TURBO</a><a href="/cards/all-for-one/" class="item-link">All for One</a><a href="/cards/compile-driver/" class="item-link">Compile Driver</a><a href="/cards/adaptive-strike/" class="item-link">Adaptive Strike</a><a href="/cards/beam-cell/" class="item-link">Beam Cell</a><a href="/cards/loop/" class="item-link">Loop</a><a href="/cards/buffer/" class="item-link">Buffer</a><a href="/cards/go-for-the-eyes/" class="item-link">Go for the Eyes</a><a href="/cards/scrape/" class="item-link">Scrape</a><a href="/cards/supercritical/" class="item-link">Supercritical</a><a href="/cards/double-energy/" class="item-link">Double Energy</a><a href="/cards/bulk-up/" class="item-link">Bulk Up</a></div>
+                            </div>
+                            <div>
+                                <h3>Enchantments</h3>
+                                <div class="grid-sm"><a href="/enchantments/enchantmentspiral/" class="item-link">ENCHANTMENT.SPIRAL</a><a href="/enchantments/enchantmentnimble/" class="item-link">ENCHANTMENT.NIMBLE</a></div>
+                            </div>
+                            <div>
+                                <h3>Relics</h3>
+                                <div class="grid-sm"><a href="/relics/cracked-core/" class="item-link">Cracked Core</a><a href="/relics/scroll-boxes/" class="item-link">Scroll Boxes</a><a href="/relics/shovel/" class="item-link">Shovel</a><a href="/relics/juzu-bracelet/" class="item-link">Juzu Bracelet</a><a href="/relics/bronze-scales/" class="item-link">Bronze Scales</a><a href="/relics/blood-vial/" class="item-link">Blood Vial</a><a href="/relics/sand-castle/" class="item-link">Sand Castle</a><a href="/relics/tiny-mailbox/" class="item-link">Tiny Mailbox</a><a href="/relics/sparkling-rouge/" class="item-link">Sparkling Rouge</a><a href="/relics/music-box/" class="item-link">Music Box</a><a href="/relics/happy-flower/" class="item-link">Happy Flower</a><a href="/relics/akabeko/" class="item-link">Akabeko</a><a href="/relics/happy-flower/" class="item-link">Happy Flower???</a><a href="/relics/venerable-tea-set/" class="item-link">Venerable Tea Set???</a><a href="/relics/beating-remnant/" class="item-link">Beating Remnant</a></div>
+                            </div>
+                            <div>
+                                <h3>Events</h3>
+                                <div class="grid-sm"><a href="/events/neow/" class="item-link">Neow</a><a href="/events/spiraling-whirlpool/" class="item-link">Spiraling Whirlpool</a><a href="/events/self-help-book/" class="item-link">Self-Help Book</a><a href="/events/drowning-beacon/" class="item-link">Drowning Beacon</a><a href="/events/orobas/" class="item-link">Orobas</a><a href="/events/slippery-bridge/" class="item-link">Slippery Bridge</a><a href="/events/symbiote/" class="item-link">Symbiote</a><a href="/events/vakuu/" class="item-link">Vakuu</a><a href="/events/crystal-sphere/" class="item-link">Crystal Sphere</a><a href="/events/the-merchant/" class="item-link">The Merchant???</a><a href="/events/potion-courier/" class="item-link">Potion Courier</a><a href="/events/battleworn-dummy/" class="item-link">Battleworn Dummy</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                    <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const ctx = document.getElementById('hpChart_1774910854');
+                        if (!ctx) return;
+                        const rawRuns = [{"label":"Run 1774910854 (Defect)","win":false,"floorData":[]}];
+                        if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) return;
+
+                        const maxFloor = Math.max(...rawRuns[0].floorData.map(d => d.floor));
+                        const labels = Array.from({length: maxFloor}, (_, i) => i + 1);
+                        const color = run.win ? '#00ff89' : '#ff4b4b';
+
+                        const hpMap = {};
+                        rawRuns[0].floorData.forEach(d => { hpMap[d.floor] = d.hp; });
+                        const dataArr = labels.map(floor => hpMap[floor] !== undefined ? hpMap[floor] : null);
+
+                        new Chart(ctx, {
+                            type: 'line',
+                            data: { labels: labels, datasets: [{
+                                label: rawRuns[0].label,
+                                data: dataArr,
+                                borderColor: color,
+                                backgroundColor: color + '22',
+                                borderWidth: 2,
+                                fill: true,
+                                tension: 0.3,
+                                spanGaps: true
+                            }]},
+                            options: {
+                                responsive: true, maintainAspectRatio: false,
+                                scales: { y: { beginAtZero: true, grid: { color: '#333' } }, x: { grid: { color: '#333' } } }
+                            }
+                        });
+                    });
+                    </script></body></html>

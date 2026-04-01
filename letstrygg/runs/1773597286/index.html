@@ -11,8 +11,71 @@
 <body><nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/letstrygg/">letstrygg</a> / run #1773597286</nav>
                     <div class="item-box" style="background-color: rgba(155, 89, 182, 0.3);">
                         <h1>Run #1773597286</h1>
-                        <div class="subtitle">NECROBINDER • Ascension 2 • Victory</div>
-                        <div class="description">
-                            <p>Statistics and path history for this run will be displayed here.</p>
+                        <div class="subtitle">
+                            <a href="/characters/necrobinder/">Necrobinder</a> • 
+                            <a href="/ascensions/weary-traveler/">Weary Traveler</a> • 
+                            Victory
                         </div>
-                    </div></body></html>
+                        
+                        <div class="run-summary-container" style="margin-top: 30px; margin-bottom: 30px; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; border: 1px solid var(--border, #333);">
+                            <h3 style="margin-top: 0; color: var(--text-muted, #aaa); font-size: 1.1em; border-bottom: 1px solid var(--border, #333); padding-bottom: 10px; margin-bottom: 15px;">Run Summary: HP per Floor</h3>
+                            <div style="height: 300px; width: 100%;">
+                                <canvas id="hpChart_1773597286"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="run-details-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; text-align: left;">
+                            <div>
+                                <h3>Deck</h3>
+                                <div class="grid-sm"><a href="/cards/defend/" class="item-link">Defend</a><a href="/cards/bodyguard/" class="item-link">Bodyguard</a><a href="/cards/unleash/" class="item-link">Unleash</a><a href="/cards/flatten/" class="item-link">Flatten</a><a href="/cards/grave-warden/" class="item-link">Grave Warden</a><a href="/cards/poke/" class="item-link">Poke</a><a href="/cards/right-hand-hand/" class="item-link">Right Hand Hand</a><a href="/cards/flash-of-steel/" class="item-link">Flash of Steel</a><a href="/cards/deathbringer/" class="item-link">Deathbringer</a><a href="/cards/parse/" class="item-link">Parse</a><a href="/cards/seance/" class="item-link">Seance</a><a href="/cards/haunt/" class="item-link">Haunt</a><a href="/cards/wisp/" class="item-link">Wisp</a></div>
+                            </div>
+                            <div>
+                                <h3>Enchantments</h3>
+                                <div class="grid-sm"><a href="/enchantments/enchantmentnimble/" class="item-link">ENCHANTMENT.NIMBLE</a><a href="/enchantments/enchantmentswift/" class="item-link">ENCHANTMENT.SWIFT</a></div>
+                            </div>
+                            <div>
+                                <h3>Relics</h3>
+                                <div class="grid-sm"><a href="/relics/bound-phylactery/" class="item-link">Bound Phylactery</a><a href="/relics/precarious-shears/" class="item-link">Precarious Shears</a><a href="/relics/venerable-tea-set/" class="item-link">Venerable Tea Set</a><a href="/relics/ember-tea/" class="item-link">Ember Tea</a><a href="/relics/golden-compass/" class="item-link">Golden Compass</a><a href="/relics/kusarigama/" class="item-link">Kusarigama</a><a href="/relics/funerary-mask/" class="item-link">Funerary Mask</a><a href="/relics/anchor/" class="item-link">Anchor</a><a href="/relics/nunchaku/" class="item-link">Nunchaku</a><a href="/relics/war-paint/" class="item-link">War Paint</a><a href="/relics/beautiful-bracelet/" class="item-link">Beautiful Bracelet</a><a href="/relics/strike-dummy/" class="item-link">Strike Dummy</a><a href="/relics/centennial-puzzle/" class="item-link">Centennial Puzzle</a><a href="/relics/letter-opener/" class="item-link">Letter Opener</a></div>
+                            </div>
+                            <div>
+                                <h3>Events</h3>
+                                <div class="grid-sm"><a href="/events/neow/" class="item-link">Neow</a><a href="/events/brain-leech/" class="item-link">Brain Leech</a><a href="/events/luminous-choir/" class="item-link">Luminous Choir</a><a href="/events/tea-master/" class="item-link">Tea Master</a><a href="/events/self-help-book/" class="item-link">Self-Help Book</a><a href="/events/tezcatara/" class="item-link">Tezcatara</a><a href="/events/spirit-grafter/" class="item-link">Spirit Grafter</a><a href="/events/potion-courier/" class="item-link">Potion Courier</a><a href="/events/field-of-man-sized-holes/" class="item-link">Field of Man-Sized Holes</a><a href="/events/ranwid-the-elder/" class="item-link">Ranwid the Elder</a><a href="/events/nonupeipe/" class="item-link">Nonupeipe</a><a href="/events/this-or-that/" class="item-link">This or That?</a><a href="/events/relic-trader/" class="item-link">Relic Trader</a><a href="/events/the-future-of-potions/" class="item-link">The Future of Potions?</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                    <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const ctx = document.getElementById('hpChart_1773597286');
+                        if (!ctx) return;
+                        const rawRuns = [{"label":"Run 1773597286 (Necrobinder)","win":true,"floorData":[]}];
+                        if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) return;
+
+                        const maxFloor = Math.max(...rawRuns[0].floorData.map(d => d.floor));
+                        const labels = Array.from({length: maxFloor}, (_, i) => i + 1);
+                        const color = run.win ? '#00ff89' : '#ff4b4b';
+
+                        const hpMap = {};
+                        rawRuns[0].floorData.forEach(d => { hpMap[d.floor] = d.hp; });
+                        const dataArr = labels.map(floor => hpMap[floor] !== undefined ? hpMap[floor] : null);
+
+                        new Chart(ctx, {
+                            type: 'line',
+                            data: { labels: labels, datasets: [{
+                                label: rawRuns[0].label,
+                                data: dataArr,
+                                borderColor: color,
+                                backgroundColor: color + '22',
+                                borderWidth: 2,
+                                fill: true,
+                                tension: 0.3,
+                                spanGaps: true
+                            }]},
+                            options: {
+                                responsive: true, maintainAspectRatio: false,
+                                scales: { y: { beginAtZero: true, grid: { color: '#333' } }, x: { grid: { color: '#333' } } }
+                            }
+                        });
+                    });
+                    </script></body></html>

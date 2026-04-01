@@ -11,8 +11,71 @@
 <body><nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/falterfire/">falterfire</a> / run #1773543482</nav>
                     <div class="item-box" style="background-color: rgba(74, 144, 226, 0.3);">
                         <h1>Run #1773543482</h1>
-                        <div class="subtitle">DEFECT • Ascension 4 • Defeat</div>
-                        <div class="description">
-                            <p>Statistics and path history for this run will be displayed here.</p>
+                        <div class="subtitle">
+                            <a href="/characters/defect/">Defect</a> • 
+                            <a href="/ascensions/tight-belt/">Tight Belt</a> • 
+                            Defeat
                         </div>
-                    </div></body></html>
+                        
+                        <div class="run-summary-container" style="margin-top: 30px; margin-bottom: 30px; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; border: 1px solid var(--border, #333);">
+                            <h3 style="margin-top: 0; color: var(--text-muted, #aaa); font-size: 1.1em; border-bottom: 1px solid var(--border, #333); padding-bottom: 10px; margin-bottom: 15px;">Run Summary: HP per Floor</h3>
+                            <div style="height: 300px; width: 100%;">
+                                <canvas id="hpChart_1773543482"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="run-details-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; text-align: left;">
+                            <div>
+                                <h3>Deck</h3>
+                                <div class="grid-sm"><a href="/cards/strike/" class="item-link">Strike</a><a href="/cards/defend/" class="item-link">Defend</a><a href="/cards/zap/" class="item-link">Zap</a><a href="/cards/dualcast/" class="item-link">Dualcast</a><a href="/cards/go-for-the-eyes/" class="item-link">Go for the Eyes</a><a href="/cards/momentum-strike/" class="item-link">Momentum Strike</a><a href="/cards/claw/" class="item-link">Claw</a><a href="/cards/refract/" class="item-link">Refract</a><a href="/cards/glasswork/" class="item-link">Glasswork</a><a href="/cards/byrdonis-egg/" class="item-link">Byrdonis Egg</a></div>
+                            </div>
+                            <div>
+                                <h3>Enchantments</h3>
+                                <div class="grid-sm">No enchantments used.</div>
+                            </div>
+                            <div>
+                                <h3>Relics</h3>
+                                <div class="grid-sm"><a href="/relics/cracked-core/" class="item-link">Cracked Core</a><a href="/relics/new-leaf/" class="item-link">New Leaf</a><a href="/relics/sword-of-stone/" class="item-link">Sword of Stone</a><a href="/relics/lantern/" class="item-link">Lantern</a><a href="/relics/pear/" class="item-link">Pear</a><a href="/relics/miniature-cannon/" class="item-link">Miniature Cannon</a></div>
+                            </div>
+                            <div>
+                                <h3>Events</h3>
+                                <div class="grid-sm"><a href="/events/neow/" class="item-link">Neow</a><a href="/events/the-sunken-statue/" class="item-link">The Sunken Statue</a><a href="/events/morphic-grove/" class="item-link">Morphic Grove</a><a href="/events/byrdonis-nest/" class="item-link">Byrdonis Nest</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                    <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const ctx = document.getElementById('hpChart_1773543482');
+                        if (!ctx) return;
+                        const rawRuns = [{"label":"Run 1773543482 (Defect)","win":false,"floorData":[]}];
+                        if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) return;
+
+                        const maxFloor = Math.max(...rawRuns[0].floorData.map(d => d.floor));
+                        const labels = Array.from({length: maxFloor}, (_, i) => i + 1);
+                        const color = run.win ? '#00ff89' : '#ff4b4b';
+
+                        const hpMap = {};
+                        rawRuns[0].floorData.forEach(d => { hpMap[d.floor] = d.hp; });
+                        const dataArr = labels.map(floor => hpMap[floor] !== undefined ? hpMap[floor] : null);
+
+                        new Chart(ctx, {
+                            type: 'line',
+                            data: { labels: labels, datasets: [{
+                                label: rawRuns[0].label,
+                                data: dataArr,
+                                borderColor: color,
+                                backgroundColor: color + '22',
+                                borderWidth: 2,
+                                fill: true,
+                                tension: 0.3,
+                                spanGaps: true
+                            }]},
+                            options: {
+                                responsive: true, maintainAspectRatio: false,
+                                scales: { y: { beginAtZero: true, grid: { color: '#333' } }, x: { grid: { color: '#333' } } }
+                            }
+                        });
+                    });
+                    </script></body></html>
