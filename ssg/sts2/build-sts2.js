@@ -12,6 +12,7 @@ import {
     generateVideoPanel, 
     generateRunLinksList,
     generateAveragesPanel,
+    generateLethalityIndexSummary,
     generateLethalitySummaryBox,
     generateSemanticStatsParagraph, 
     wrapLayout, 
@@ -642,7 +643,7 @@ async function buildEncounters(encounters, runStats, sitemap) {
         </a>`;
     }).join('');
 
-    const indexHtml = wrapLayout('Encounters', `<h1>Slay the Spire 2 Encounters</h1><div class="grid">${encounterLinks}</div>`, [{ name: 'encounters', url: '' }], "View Slay the Spire 2 encounter lethality and encounter rates.");
+    const indexHtml = wrapLayout('Encounters', `<h1>Slay the Spire 2 Encounters</h1>${generateLethalityIndexSummary(runStats, runStats.encounterStats, "Encounters", encounters.length, runStats.uniqueEncountersSeen)}<div class="grid">${encounterLinks}</div>`, [{ name: 'encounters', url: '' }], "View Slay the Spire 2 encounter lethality and encounter rates.");
     fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
 }
 
@@ -701,7 +702,7 @@ async function buildMonsters(monsters, runStats, sitemap) {
         </a>`;
     }).join('');
 
-    const indexHtml = wrapLayout('Monsters', `<h1>Slay the Spire 2 Monsters</h1><div class="grid">${monsterLinks}</div>`, [{ name: 'monsters', url: '' }], "View Slay the Spire 2 monster lethality and encounter rates.");
+    const indexHtml = wrapLayout('Monsters', `<h1>Slay the Spire 2 Monsters</h1>${generateLethalityIndexSummary(runStats, runStats.monsterStats, "Monsters", monsters.length, runStats.uniqueMonstersSeen)}<div class="grid">${monsterLinks}</div>`, [{ name: 'monsters', url: '' }], "View Slay the Spire 2 monster lethality and encounter rates.");
     fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
 }
 
