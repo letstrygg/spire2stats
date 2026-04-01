@@ -371,7 +371,8 @@ async function buildEvents(events, runStats, sitemap) {
         const slug = slugify(event.name);
         const dir = ensureDir(path.join(root, slug));
         
-        const rawStats = runStats.eventStats[event.event_id] || { seen: 0, wins: 0, runs: [], occurrences: 0 };
+        const cleanId = (event.event_id || '').replace('EVENT.', '');
+        const rawStats = runStats.eventStats[cleanId] || { seen: 0, wins: 0, runs: [], occurrences: 0 };
         const stats = getItemStats(rawStats, runStats.globalWinRate);
         const averagesHtml = generateAveragesPanel(rawStats, rawStats.occurrences, "Averages per event visit");
         const videosHtml = averagesHtml + generateRunLinksList(rawStats.runs, `Runs featuring ${event.name}`);
@@ -593,7 +594,8 @@ async function buildEncounters(encounters, runStats, sitemap) {
         const slug = slugify(encounter.name);
         const dir = ensureDir(path.join(root, slug));
         
-        const stats = runStats.encounterStats[encounter.encounter_id] || { encountered: 0, kills: 0, lethalRuns: [] };
+        const cleanId = (encounter.encounter_id || '').replace('ENCOUNTER.', '');
+        const stats = runStats.encounterStats[cleanId] || { encountered: 0, kills: 0, lethalRuns: [], damage_taken: 0, hp_healed: 0, gold_lost: 0, gold_stolen: 0, max_hp_gained: 0, max_hp_lost: 0 };
         const lethalRunsHtml = generateRunLinksList(stats.lethalRuns, `Runs where ${encounter.name} defeated the player`);
         const averagesHtml = generateAveragesPanel(stats, stats.encountered, "Averages for this encounter");
         const subtitle = [encounter.room_type, encounter.act].filter(Boolean).join(' • ');
@@ -623,7 +625,8 @@ async function buildEncounters(encounters, runStats, sitemap) {
     sitemap.add('/encounters/');
     const encounterLinks = encounters.map(e => {
         const slug = slugify(e.name);
-        const stats = runStats.encounterStats[e.encounter_id] || { encountered: 0, kills: 0 };
+        const cleanId = (e.encounter_id || '').replace('ENCOUNTER.', '');
+        const stats = runStats.encounterStats[cleanId] || { encountered: 0, kills: 0 };
         const killDisplay = stats.kills > 0 ? `<div style="color: #ff4b4b; font-size: 1.5rem; font-weight: bold;">${stats.kills} Kills</div>` : '';
 
         return `
@@ -650,7 +653,8 @@ async function buildMonsters(monsters, runStats, sitemap) {
         const slug = slugify(monster.name);
         const dir = ensureDir(path.join(root, slug));
         
-        const stats = runStats.monsterStats[monster.monster_id] || { encountered: 0, kills: 0, lethalRuns: [] };
+        const cleanId = (monster.monster_id || '').replace('MONSTER.', '');
+        const stats = runStats.monsterStats[cleanId] || { encountered: 0, kills: 0, lethalRuns: [], damage_taken: 0, hp_healed: 0, gold_lost: 0, gold_stolen: 0, max_hp_gained: 0, max_hp_lost: 0 };
         const lethalRunsHtml = generateRunLinksList(stats.lethalRuns, `Runs where ${monster.name} killed the player`);
         const averagesHtml = generateAveragesPanel(stats, stats.encountered, "Averages for encounters with this monster");
         const subtitle = [monster.type, monster.min_hp ? `${monster.min_hp}-${monster.max_hp} HP` : null].filter(Boolean).join(' • ');
@@ -680,7 +684,8 @@ async function buildMonsters(monsters, runStats, sitemap) {
     sitemap.add('/monsters/');
     const monsterLinks = monsters.map(m => {
         const slug = slugify(m.name);
-        const stats = runStats.monsterStats[m.monster_id] || { encountered: 0, kills: 0 };
+        const cleanId = (m.monster_id || '').replace('MONSTER.', '');
+        const stats = runStats.monsterStats[cleanId] || { encountered: 0, kills: 0 };
         const killDisplay = stats.kills > 0 ? `<div style="color: #ff4b4b; font-size: 1.5rem; font-weight: bold;">${stats.kills} Kills</div>` : '';
 
         return `
