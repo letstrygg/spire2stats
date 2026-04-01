@@ -112,20 +112,22 @@ async function build() {
             });
 
             // --- USER DIRECTORY (index.html) ---
-            const runLinksHtml = userRuns.map(run => {
+            const runLinksHtml = userRuns.map((run, index) => {
                 const charName = (run.character || 'Unknown').replace('CHARACTER.', '');
                 const charClass = charName.toLowerCase();
                 const bgStyle = getCharacterBgStyle(charName);
                 const statusClass = run.win ? 'win' : 'loss';
                 const statusText = run.win ? 'Victory' : 'Defeat';
+                const statusColor = run.win ? '#00ff89' : '#ff4b4b';
+                const runNumber = userRuns.length - index;
                 
                 return `
                 <a href="/users/${user.slug}/runs/${run.id}/" class="card-item ${statusClass} ${charClass}" style="${bgStyle}">
                     <div class="card-info">
-                        <span class="card-name">Run #${run.id} - ${charName}</span>
+                        <span class="card-name">Run #${runNumber} - ${charName}</span>
                     </div>
                     <div class="card-stats">
-                        <div class="win-rate">${statusText}</div>
+                        <div class="win-rate" style="color: ${statusColor}">${statusText}</div>
                         <div class="run-count">Ascension ${run.ascension || 0}</div>
                     </div>
                 </a>`;
@@ -141,7 +143,10 @@ async function build() {
             fs.writeFileSync(path.join(userRoot, 'index.html'), indexHtml);
 
             // --- INDIVIDUAL RUN PAGES ---
-            for (const run of userRuns) {
+            for (let i = 0; i < userRuns.length; i++) {
+                const run = userRuns[i];
+                const runNumber = userRuns.length - i;
+                
                 const runDir = ensureDir(path.join(userRunsDir, String(run.id)));
                 
                 const charId = (run.character || '').replace('CHARACTER.', '').toUpperCase();
@@ -178,14 +183,14 @@ async function build() {
                 }]);
 
                 const runHtml = wrapLayout(
-                    `Run #${run.id} - ${user.display_name}`,
+                    `Run #${runNumber} - ${user.display_name}`,
                     `
                     <div class="item-box" style="${bgStyle}">
-                        <h1>Run #${run.id}</h1>
+                        <h1>Run #${runNumber}</h1>
                         <div class="subtitle">
                             <a href="/characters/${charSlug}/">${charName}</a> • 
                             <a href="/ascensions/${ascSlug}/">${ascName}</a> • 
-                            ${run.win ? 'Victory' : 'Defeat'}
+                            <span style="color: ${run.win ? '#00ff89' : '#ff4b4b'}">${run.win ? 'Victory' : 'Defeat'}</span>
                         </div>
                         
                         <div class="run-summary-container" style="margin-top: 30px; margin-bottom: 30px; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; border: 1px solid var(--border, #333);">
@@ -251,7 +256,7 @@ async function build() {
                     });
                     </script>`,
                     [{ name: user.display_name, url: `/users/${user.slug}/` }, { name: `Run #${run.id}`, url: '' }],
-                    `Detailed view of ${user.display_name}'s Slay the Spire 2 run #${run.id}.`
+                    `Detailed view of ${user.display_name}'s Slay the Spire 2 run #${runNumber}.`
                 );
                 fs.writeFileSync(path.join(runDir, 'index.html'), runHtml);
             }
