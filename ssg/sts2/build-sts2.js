@@ -564,6 +564,9 @@ async function build() {
         const events = await query("SELECT * FROM events ORDER BY name ASC");
         const ascensions = await query("SELECT * FROM ascensions ORDER BY level ASC");
         const enchantments = await query("SELECT * FROM enchantments ORDER BY name ASC");
+        const users = await query("SELECT * FROM users ORDER BY display_name ASC");
+        const userRunRows = await query("SELECT username, COUNT(*) as count FROM runs GROUP BY username");
+        const runCounts = Object.fromEntries(userRunRows.map(r => [(r.username || '').toLowerCase(), r.count]));
 
         const cardStats = await getCardStats();
         const cardsRoot = ensureDir(path.join(PATHS.WEB_ROOT, 'cards'));
@@ -672,6 +675,19 @@ async function build() {
             </a>`;
         }).join('');
 
+        const contributorLinks = users.map(user => {
+            const count = runCounts[user.slug.toLowerCase()] || 0;
+            return `
+            <a href="/${user.slug}/" class="card-item contributor-card">
+                <div class="card-info"><span class="card-name">${user.display_name}</span></div>
+                <div class="card-stats"><div class="run-count">${count} runs</div></div>
+            </a>`;
+        }).join('');
+
+        const contributorsSection = users.length > 0 ? `
+            <h2 style="margin-top: 40px; border-bottom: 1px solid #333; padding-bottom: 10px;">Contributors</h2>
+            <div class="grid">${contributorLinks}</div>` : '';
+
         const landingDesc = "Winrate Statistics for Slay the Spire 2.";
         const landingHtml = wrapLayout(
             "",
@@ -700,7 +716,8 @@ async function build() {
             </div>
         </div>
     </div>
-    <div class="grid">${landingLinks}</div>`,
+    <div class="grid">${landingLinks}</div>
+    ${contributorsSection}`,
             [],
             landingDesc,
             generateCollectionJsonLd("Slay the Spire 2 Stats Hub", landingDesc),
