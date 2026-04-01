@@ -148,7 +148,7 @@ async function build() {
                 return `
                 <a href="/users/${user.slug}/runs/${run.id}/" class="card-item ${statusClass} ${charClass}" style="border-left-width: 6px;">
                     <div class="card-info">
-                        <span class="card-name">Run ${runNumber} ${charName}</span>
+                        <span class="card-name">Run ${runNumber}<br>${charName}</span>
                     </div>
                     <div class="card-stats">
                         <div class="win-rate" style="color: ${statusColor}">${statusText}</div>
