@@ -5,7 +5,8 @@ import { PATHS, ensureDir, slugify } from './paths.js';
 import { 
     wrapLayout, 
     generateItemJsonLd,
-    getCharacterBgStyle
+    getCharacterBgStyle,
+    generateItemSummaryBox
 } from './templates/shared.js';
 
 /**
@@ -31,6 +32,14 @@ async function runCommand(sql, params = []) {
             else resolve(this);
         });
     });
+}
+
+/** Helper for win rate text color logic */
+function getWinRateColor(seen, winRateNum, globalWinRate) {
+    if (seen === 0) return '#888';
+    if (winRateNum > globalWinRate) return '#00ff89';
+    if (winRateNum < globalWinRate) return '#ff4b4b';
+    return '#888';
 }
 
 async function build() {
@@ -61,6 +70,9 @@ async function build() {
 
         const users = await query("SELECT * FROM users");
         const allRuns = await query("SELECT * FROM runs ORDER BY id DESC");
+
+        const globalTotalWins = allRuns.filter(r => r.win).length;
+        const globalWinRate = allRuns.length > 0 ? (globalTotalWins / allRuns.length) * 100 : 0;
 
         // Fetch lookup maps for names to generate accurate slugs and labels
         const cardLookup = Object.fromEntries((await query("SELECT card_id, name FROM cards")).map(c => [c.card_id, c.name]));
@@ -111,6 +123,18 @@ async function build() {
                 return runUser === user.slug.toLowerCase() || runUser === user.display_name.toLowerCase();
             });
 
+            const userWins = userRuns.filter(r => r.win).length;
+            const userTotal = userRuns.length;
+            const userWinRateNum = userTotal > 0 ? (userWins / userTotal) * 100 : 0;
+
+            const userStats = {
+                seen: userTotal,
+                wins: userWins,
+                losses: userTotal - userWins,
+                formatted: userWinRateNum.toFixed(1),
+                color: getWinRateColor(userTotal, userWinRateNum, globalWinRate)
+            };
+
             // --- USER DIRECTORY (index.html) ---
             const runLinksHtml = userRuns.map((run, index) => {
                 const charName = (run.character || 'Unknown').replace('CHARACTER.', '');
@@ -135,7 +159,8 @@ async function build() {
 
             const indexHtml = wrapLayout(
                 user.display_name,
-                `<h1>Runs by ${user.display_name}</h1>
+                `${generateItemSummaryBox(user.display_name, userStats)}
+                <h1>Runs by ${user.display_name}</h1>
                 <div class="grid">${runLinksHtml || '<p>No runs recorded yet.</p>'}</div>`,
                 [{ name: 'Users', url: '/users/' }, { name: user.display_name, url: '' }],
                 `View Slay the Spire 2 run history and statistics for ${user.display_name}.`
