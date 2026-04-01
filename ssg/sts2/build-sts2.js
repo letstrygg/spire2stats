@@ -91,6 +91,19 @@ function getCostDisplay(card) {
     return [cost, star].filter(Boolean).join(' ');
 }
 
+/** Helper to generate standardized card-item HTML for index pages */
+function generateCardItemHtml(url, name, stats, extraClass = '', bgStyle = '') {
+    return `
+    <a href="${url}" class="card-item ${extraClass}" style="${bgStyle}" aria-label="${name}: ${stats.seen} runs, ${stats.text}">
+        <div class="card-info"><span class="card-name">${name}</span></div>
+        <div class="card-stats">
+            <div class="win-rate" style="color: ${stats.color}">${stats.text}</div>
+            <div class="run-count">${stats.seen} runs</div>
+        </div>
+        <div class="win-bar" style="${stats.bar}"></div>
+    </a>`;
+}
+
 async function getCardStats() {
     const rows = await query("SELECT id, user_run_num, character, relic_list, deck_list, path_history, win, username, yt_video, ltg_url, ascension, killed_by_encounter FROM runs");
     console.log(`📡 Database returned ${rows.length} run rows.`);
@@ -301,16 +314,7 @@ async function buildRelics(relics, runStats, sitemap) {
         const stats = getItemStats(runStats.relicStats[cleanRelicId], runStats.globalWinRate);
         const poolClass = (relic.pool || 'shared').toLowerCase();
         const bgStyle = getCharacterBgStyle(relic.pool);
-
-        return `
-        <a href="/relics/${slug}/" class="card-item ${poolClass}" style="${bgStyle}" aria-label="${relic.name}: ${stats.seen} runs, ${stats.text}">
-            <div class="card-info"><span class="card-name">${relic.name}</span></div>
-            <div class="card-stats">
-                <div class="win-rate" style="color: ${stats.color}">${stats.text}</div>
-                <div class="run-count">${stats.seen} runs</div>
-            </div>
-            <div class="win-bar" style="${stats.bar}"></div>
-        </a>`;
+        return generateCardItemHtml(`/relics/${slug}/`, relic.name, stats, poolClass, bgStyle);
     }).join('');
 
     const indexDesc = `View global winrates, run statistics, and win/loss records for all Slay the Spire 2 relics.`;
@@ -352,16 +356,7 @@ async function buildEvents(events, runStats, sitemap) {
     const eventLinks = events.map(e => {
         const slug = slugify(e.name);
         const stats = getItemStats(runStats.eventStats[e.event_id], runStats.globalWinRate);
-
-        return `
-        <a href="/events/${slug}/" class="card-item" aria-label="${e.name}: ${stats.seen} runs, ${stats.text}">
-            <div class="card-info"><span class="card-name">${e.name}</span></div>
-            <div class="card-stats">
-                <div class="win-rate" style="color: ${stats.color}">${stats.text}</div>
-                <div class="run-count">${stats.seen} runs</div>
-            </div>
-            <div class="win-bar" style="${stats.bar}"></div>
-        </a>`;
+        return generateCardItemHtml(`/events/${slug}/`, e.name, stats);
     }).join('');
 
     const indexDesc = `View global winrates, run statistics, and encounter records for all Slay the Spire 2 events.`;
@@ -421,16 +416,7 @@ async function buildAscensions(ascensions, runStats, sitemap) {
         const slug = slugify(title);
         const displayName = `Asc. ${asc.level} ${asc.name || ''}`.trim();
         const stats = getItemStats(runStats.ascensionStats[String(asc.level)], runStats.globalWinRate);
-
-        return `
-        <a href="/ascensions/${slug}/" class="card-item" aria-label="${displayName}: ${stats.seen} runs, ${stats.text}">
-            <div class="card-info"><span class="card-name">${displayName}</span></div>
-            <div class="card-stats">
-                <div class="win-rate" style="color: ${stats.color}">${stats.text}</div>
-                <div class="run-count">${stats.seen} runs</div>
-            </div>
-            <div class="win-bar" style="${stats.bar}"></div>
-        </a>`;
+        return generateCardItemHtml(`/ascensions/${slug}/`, displayName, stats);
     }).join('');
 
     const indexDesc = `Global winrates and statistics per Ascension level in Slay the Spire 2.`;
@@ -485,16 +471,7 @@ async function buildEnchantments(enchantments, runStats, sitemap) {
         const slug = slugify(e.name);
         const cleanId = (e.enchantment_id || '').replace('ENCHANTMENT.', '');
         const stats = getItemStats(runStats.enchantmentStats[cleanId], runStats.globalWinRate);
-
-        return `
-        <a href="/enchantments/${slug}/" class="card-item" aria-label="${e.name}: ${stats.seen} runs, ${stats.text}">
-            <div class="card-info"><span class="card-name">${e.name}</span></div>
-            <div class="card-stats">
-                <div class="win-rate" style="color: ${stats.color}">${stats.text}</div>
-                <div class="run-count">${stats.seen} runs</div>
-            </div>
-            <div class="win-bar" style="${stats.bar}"></div>
-        </a>`;
+        return generateCardItemHtml(`/enchantments/${slug}/`, e.name, stats);
     }).join('');
 
     const indexDesc = `View global winrates and run statistics for all Slay the Spire 2 enchantments.`;
@@ -564,16 +541,7 @@ async function buildCharacters(chars, runStats, sitemap) {
                 const charKey = (c.character_id || '').replace('CHARACTER.', '').toUpperCase();
                 const stats = getItemStats(runStats.charStats[charKey], runStats.globalWinRate);
                 const bgStyle = getCharacterBgStyle(displayName);
-
-                return `
-                <a href="/characters/${slugify(displayName)}/" class="card-item ${displayName.toLowerCase()}" style="${bgStyle}" aria-label="${displayName}: ${stats.wins} wins, ${stats.losses} losses">
-                    <div class="card-info"><span class="card-name">${displayName}</span></div>
-                    <div class="card-stats">
-                        <div class="win-rate" style="color: ${stats.color}">${stats.text}</div>
-                        <div class="run-count">${stats.wins}W / ${stats.seen - stats.wins}L</div>
-                    </div>
-                    <div class="win-bar" style="${stats.bar}"></div>
-                </a>`;
+                return generateCardItemHtml(`/characters/${slugify(displayName)}/`, displayName, stats, displayName.toLowerCase(), bgStyle);
             }).join('');
 
             const indexDesc = `View global winrates, run statistics, and win/loss records for all Slay the Spire 2 characters.`;
@@ -763,16 +731,7 @@ async function build() {
             const cleanCardId = (card.card_id || '').replace('CARD.', '');
             const stats = getItemStats(cardStats.stats[cleanCardId], cardStats.globalWinRate);
             const bgStyle = getCharacterBgStyle(card.color);
-
-            return `
-            <a href="/cards/${slug}/" class="card-item ${card.color}" style="${bgStyle}" aria-label="${card.name}: ${stats.seen} runs, ${stats.text}">
-                <div class="card-info"><span class="card-name">${card.name}</span></div>
-                <div class="card-stats">
-                    <div class="win-rate" style="color: ${stats.color}">${stats.text}</div>
-                    <div class="run-count">${stats.seen} runs</div>
-                </div>
-                <div class="win-bar" style="${stats.bar}"></div>
-            </a>`;
+            return generateCardItemHtml(`/cards/${slug}/`, card.name, stats, card.color, bgStyle);
         }).join('');
 
         const indexDesc = `View global winrates, run statistics, and pick-rate records for all Slay the Spire 2 cards.`;
@@ -796,48 +755,22 @@ async function build() {
 
         const getSubText = (seen, total) => seen === total ? total : `${seen} / ${total}`;
 
-        const cardSub = getSubText(cardStats.uniqueCardsSeen, totalCards);
-        const charSub = getSubText(cardStats.uniqueCharsSeen, chars.length);
-        const relicSub = getSubText(cardStats.uniqueRelicsSeen, relics.length);
-        const eventSub = getSubText(cardStats.uniqueEventsSeen, events.length);
-        const monsterSub = getSubText(cardStats.uniqueMonstersSeen, monsters.length);
-        const encounterSub = getSubText(cardStats.uniqueEncountersSeen, encounters.length);
-        const ascSub = getSubText(cardStats.uniqueAscensionsSeen, ascensions.length);
-        const enchantmentSub = getSubText(cardStats.uniqueEnchantmentsSeen, enchantments.length);
+        const statCategoryConfig = [
+            { name: 'Cards', folder: 'cards', seen: cardStats.uniqueCardsSeen, total: totalCards },
+            { name: 'Characters', folder: 'characters', seen: cardStats.uniqueCharsSeen, total: chars.length },
+            { name: 'Relics', folder: 'relics', seen: cardStats.uniqueRelicsSeen, total: relics.length },
+            { name: 'Events', folder: 'events', seen: cardStats.uniqueEventsSeen, total: events.length },
+            { name: 'Monsters', folder: 'monsters', seen: cardStats.uniqueMonstersSeen, total: monsters.length },
+            { name: 'Encounters', folder: 'encounters', seen: cardStats.uniqueEncountersSeen, total: encounters.length },
+            { name: 'Ascensions', folder: 'ascensions', seen: cardStats.uniqueAscensionsSeen, total: ascensions.length },
+            { name: 'Enchantments', folder: 'enchantments', seen: cardStats.uniqueEnchantmentsSeen, total: enchantments.length }
+        ];
 
-        // Generate the Cards link with stats first
-        let landingLinks = `<a href="/cards/" class="card-item">
-            <div class="card-info"><span class="card-name">Cards</span></div>
-            <div class="card-stats"><div class="run-count">${cardSub}</div></div>
-        </a>`;
-        landingLinks += `<a href="/characters/" class="card-item">
-            <div class="card-info"><span class="card-name">Characters</span></div>
-            <div class="card-stats"><div class="run-count">${charSub}</div></div>
-        </a>`;
-        landingLinks += `<a href="/relics/" class="card-item">
-            <div class="card-info"><span class="card-name">Relics</span></div>
-            <div class="card-stats"><div class="run-count">${relicSub}</div></div>
-        </a>`;
-        landingLinks += `<a href="/events/" class="card-item">
-            <div class="card-info"><span class="card-name">Events</span></div>
-            <div class="card-stats"><div class="run-count">${eventSub}</div></div>
-        </a>`;
-        landingLinks += `<a href="/monsters/" class="card-item">
-            <div class="card-info"><span class="card-name">Monsters</span></div>
-            <div class="card-stats"><div class="run-count">${monsterSub}</div></div>
-        </a>`;
-        landingLinks += `<a href="/encounters/" class="card-item">
-            <div class="card-info"><span class="card-name">Encounters</span></div>
-            <div class="card-stats"><div class="run-count">${encounterSub}</div></div>
-        </a>`;
-        landingLinks += `<a href="/ascensions/" class="card-item">
-            <div class="card-info"><span class="card-name">Ascensions</span></div>
-            <div class="card-stats"><div class="run-count">${ascSub}</div></div>
-        </a>`;
-        landingLinks += `<a href="/enchantments/" class="card-item">
-            <div class="card-info"><span class="card-name">Enchantments</span></div>
-            <div class="card-stats"><div class="run-count">${enchantmentSub}</div></div>
-        </a>`;
+        let landingLinks = statCategoryConfig.map(cat => `
+        <a href="/${cat.folder}/" class="card-item">
+            <div class="card-info"><span class="card-name">${cat.name}</span></div>
+            <div class="card-stats"><div class="run-count">${getSubText(cat.seen, cat.total)}</div></div>
+        </a>`).join('');
 
         // Append the rest of the categories
         landingLinks += CATEGORIES.map(cat => {
