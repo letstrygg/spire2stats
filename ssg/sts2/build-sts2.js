@@ -626,10 +626,23 @@ async function buildEncounters(encounters, runStats, sitemap) {
 
     // Index Page
     sitemap.add('/encounters/');
+
+    let maxAvgDmg = 0;
+    encounters.forEach(e => {
+        const cleanId = (e.encounter_id || '').replace('ENCOUNTER.', '');
+        const stats = runStats.encounterStats[cleanId];
+        if (stats && stats.encountered > 0) {
+            const avg = stats.damage_taken / stats.encountered;
+            if (avg > maxAvgDmg) maxAvgDmg = avg;
+        }
+    });
+
     const encounterLinks = encounters.map(e => {
         const slug = slugify(e.name);
         const cleanId = (e.encounter_id || '').replace('ENCOUNTER.', '');
-        const stats = runStats.encounterStats[cleanId] || { encountered: 0, kills: 0 };
+        const stats = runStats.encounterStats[cleanId] || { encountered: 0, kills: 0, damage_taken: 0 };
+        const avgDmg = stats.encountered > 0 ? stats.damage_taken / stats.encountered : 0;
+        const dmgPercent = maxAvgDmg > 0 ? (avgDmg / maxAvgDmg) * 100 : 0;
         const killDisplay = stats.kills > 0 ? `<div style="color: #ff4b4b; font-size: 1.5rem; font-weight: bold;">${stats.kills} Kills</div>` : '';
 
         return `
@@ -637,10 +650,12 @@ async function buildEncounters(encounters, runStats, sitemap) {
             <div class="card-info">
                 <span class="card-name">${e.name}</span>
                 <div style="color: #888; font-size: 0.75rem;">Encountered ${stats.encountered} times</div>
+                <div style="color: #ff4b4b; font-size: 0.75rem;">Avg Dmg: ${avgDmg.toFixed(1)}</div>
             </div>
             <div class="card-stats">
                 ${killDisplay}
             </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #ff4b4b ${dmgPercent}%, transparent ${dmgPercent}%);"></div>
         </a>`;
     }).join('');
 
@@ -742,10 +757,23 @@ async function buildMonsters(monsters, runStats, sitemap) {
 
     // Index Page
     sitemap.add('/monsters/');
+
+    let maxAvgDmg = 0;
+    monsters.forEach(m => {
+        const cleanId = (m.monster_id || '').replace('MONSTER.', '');
+        const stats = runStats.monsterStats[cleanId];
+        if (stats && stats.encountered > 0) {
+            const avg = stats.damage_taken / stats.encountered;
+            if (avg > maxAvgDmg) maxAvgDmg = avg;
+        }
+    });
+
     const monsterLinks = monsters.map(m => {
         const slug = slugify(m.name);
         const cleanId = (m.monster_id || '').replace('MONSTER.', '');
-        const stats = runStats.monsterStats[cleanId] || { encountered: 0, kills: 0 };
+        const stats = runStats.monsterStats[cleanId] || { encountered: 0, kills: 0, damage_taken: 0 };
+        const avgDmg = stats.encountered > 0 ? stats.damage_taken / stats.encountered : 0;
+        const dmgPercent = maxAvgDmg > 0 ? (avgDmg / maxAvgDmg) * 100 : 0;
         const killDisplay = stats.kills > 0 ? `<div style="color: #ff4b4b; font-size: 1.5rem; font-weight: bold;">${stats.kills} Kills</div>` : '';
 
         return `
@@ -753,10 +781,12 @@ async function buildMonsters(monsters, runStats, sitemap) {
             <div class="card-info">
                 <span class="card-name">${m.name}</span>
                 <div style="color: #888; font-size: 0.75rem;">Encountered ${stats.encountered} times</div>
+                <div style="color: #ff4b4b; font-size: 0.75rem;">Avg Dmg: ${avgDmg.toFixed(1)}</div>
             </div>
             <div class="card-stats">
                 ${killDisplay}
             </div>
+            <div class="win-bar" style="background: linear-gradient(to right, #ff4b4b ${dmgPercent}%, transparent ${dmgPercent}%);"></div>
         </a>`;
     }).join('');
 
