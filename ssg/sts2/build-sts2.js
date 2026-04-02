@@ -7,6 +7,7 @@ import {
     ISO_BUILD_DATE, 
     FORMATTED_BUILD_DATE, 
     generateItemJsonLd, 
+    getWinRateColor,
     generateCollectionJsonLd, 
     generateSummaryPanel, 
     generateVideoPanel, 
@@ -16,7 +17,6 @@ import {
     generateLethalitySummaryBox,
     generateSemanticStatsParagraph, 
     getItemStats,
-    getWinRateColor,
     generateFilterControlsHtml,
     generateFilterScript,
     wrapLayout, 
@@ -75,7 +75,7 @@ function getCostDisplay(card) {
 }
 
 /** Helper to generate standardized card-item HTML for index pages */
-function generateCardItemHtml(url, name, stats, extraClass = '') {
+function generateCardItemHtml(url, name, stats, extraClass = '', levelId = '') {
     const charId = (extraClass || '').toUpperCase();
     const charColor = CHARACTER_COLORS[charId] || 'var(--gray)';
     let subtitleHtml = '';
@@ -92,10 +92,10 @@ function generateCardItemHtml(url, name, stats, extraClass = '') {
     const winBarHtml = stats.seen > 0 ? `<div class="win-bar" style="${stats.bar}"></div>` : '';
 
     return `
-    <a href="${url}" class="card-item ${extraClass ? extraClass.toLowerCase() : ''}" aria-label="${name}: ${stats.seen} runs, ${stats.text}">
+    <a href="${url}" id="asc-card-${levelId}" class="card-item ${extraClass ? extraClass.toLowerCase() : ''}" aria-label="${name}: ${stats.seen} runs, ${stats.text}">
         <div class="card-info"><span class="card-name" ${nameStyle}>${name}${subtitleHtml}</span></div>
         <div class="card-stats">
-            <div class="win-rate" style="color: ${stats.color}">${stats.text}</div>
+            <div class="win-rate" id="asc-wr-${levelId}" style="color: ${stats.color}">${stats.text}</div>
             <div class="run-count">${stats.seen} runs</div>
         </div>
         ${winBarHtml}
@@ -429,11 +429,104 @@ async function buildAscensions(ascensions, runStats, sitemap) {
         const slug = slugify(title);
         const displayName = `Asc. ${asc.level} ${asc.name || ''}`.trim();
         const stats = getItemStats(runStats.ascensionStats[String(asc.level)], runStats.globalWinRate);
-        return generateCardItemHtml(`/ascensions/${slug}/`, displayName, stats);
+        return generateCardItemHtml(`/ascensions/${slug}/`, displayName, stats, '', asc.level);
     }).join('');
 
+    const buildFilterHtml = `
+    <div style="margin-bottom: 20px; display: flex; align-items: center; gap: 15px; background: rgba(0,0,0,0.2); padding: 10px 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+        <label for="build-filter" style="font-size: 0.8rem; color: #888; text-transform: uppercase; letter-spacing: 1px;">Filter By Build:</label>
+        <select id="build-filter" style="background: #222; color: #eee; border: 1px solid #444; padding: 5px 10px; border-radius: 4px; cursor: pointer;">
+            <option value="all">All Builds</option>
+            <option value="beta">Beta (v0.100.0+)</option>
+            <option value="main">Main Branch (< v0.100.0)</option>
+        </select>
+    </div>`;
+
+    const scriptHtml = `
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        (function() {
+            const supabaseUrl = '${process.env.SUPABASE_URL}';
+            const supabaseKey = '${process.env.SUPABASE_ANON_KEY}';
+            const supabase = supabaseJs.createClient(supabaseUrl, supabaseKey);
+            
+            let runCache = null;
+            const filter = document.getElementById('build-filter');
+
+            async function updateStats() {
+                if (!runCache) {
+                    const { data, error } = await supabase.from('s2s_runs').select('win, ascension, build_id');
+                    if (error) return console.error("Error fetching live stats:", error);
+                    runCache = data;
+                }
+
+                const val = filter.value;
+                const filtered = runCache.filter(r => {
+                    if (val === 'all') return true;
+                    const b = r.build_id || 'v0.0.0';
+                    const parts = b.replace('v', '').split('.').map(Number);
+                    const isBeta = parts[0] > 0 || parts[1] >= 100;
+                    return val === 'beta' ? isBeta : !isBeta;
+                });
+
+                // Calculate Global
+                const totalRuns = filtered.length;
+                const totalWins = filtered.filter(r => r.win).length;
+                const globalWR = totalRuns > 0 ? (totalWins / totalRuns) * 100 : 0;
+
+                document.getElementById('global-total-runs').textContent = totalRuns;
+                document.getElementById('global-winrate').textContent = globalWR.toFixed(1) + '%';
+
+                // Update Ascension levels 0-10
+                for (let i = 0; i <= 10; i++) {
+                    const levelRuns = filtered.filter(r => parseInt(r.ascension) === i);
+                    const wins = levelRuns.filter(r => r.win).length;
+                    const seen = levelRuns.length;
+                    const wr = seen > 0 ? (wins / seen) * 100 : 0;
+                    
+                    const card = document.getElementById('asc-card-' + i);
+                    const label = document.getElementById('asc-wr-' + i);
+                    const countLabel = card.querySelector('.run-count');
+                    const bar = card.querySelector('.win-bar');
+
+                    if (seen === 0) {
+                        label.textContent = '';
+                        countLabel.textContent = '0 runs';
+                        if (bar) bar.style.display = 'none';
+                    } else {
+                        label.textContent = wr.toFixed(1) + '% Winrate';
+                        countLabel.textContent = seen + ' runs';
+                        
+                        // Re-run color logic
+                        let color = 'var(--gray)';
+                        if (wr > globalWR) color = 'var(--green)';
+                        else if (wr < globalWR) color = 'var(--red)';
+                        label.style.color = color;
+
+                        if (bar) {
+                            bar.style.display = 'block';
+                            bar.style.background = 'linear-gradient(to right, #00ff89 ' + wr + '%, #ff4b4b ' + wr + '%)';
+                        }
+                    }
+                }
+            }
+
+            filter.addEventListener('change', updateStats);
+        })();
+    </script>`;
+
     const indexDesc = `Global winrates and statistics per Ascension level in Slay the Spire 2.`;
-    const indexHtml = wrapLayout('Ascensions', `<h1>Slay the Spire 2 Ascensions</h1>${generateSummaryPanel(runStats, "Ascensions", totalAsc, ascSeen)}<div class="grid">${ascLinks}</div>`, [{ name: 'ascensions', url: '' }], indexDesc, generateCollectionJsonLd(`Ascensions`, indexDesc));
+    const indexHtml = wrapLayout(
+        'Ascensions', 
+        `
+        <h1>Slay the Spire 2 Ascensions</h1>
+        ${generateSummaryPanel(runStats, "Ascensions", totalAsc, ascSeen)}
+        ${buildFilterHtml}
+        <div class="grid">${ascLinks}</div>
+        ${scriptHtml}`, 
+        [{ name: 'ascensions', url: '' }], 
+        indexDesc, 
+        generateCollectionJsonLd(`Ascensions`, indexDesc));
     fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
 }
 

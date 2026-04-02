@@ -172,11 +172,11 @@ export function generateSummaryPanel(runStats, label, total, seen) {
         <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px;">
             <div class="stat-item" style="text-align: center;">
                 <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Total Runs</div>
-                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold;">${runStats.totalRuns}</div>
+                <div class="stat-value" id="global-total-runs" style="font-size: 1.2rem; font-weight: bold;">${runStats.totalRuns}</div>
             </div>
             <div class="stat-item" style="text-align: center;">
                 <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Overall Winrate</div>
-                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold; color: #00ff89">${runStats.globalWinRate.toFixed(1)}%</div>
+                <div class="stat-value" id="global-winrate" style="font-size: 1.2rem; font-weight: bold; color: #00ff89">${runStats.globalWinRate.toFixed(1)}%</div>
             </div>
             <div class="stat-item" style="text-align: center;">
                 <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">${label} Seen</div>

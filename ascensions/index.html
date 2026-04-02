@@ -20,7 +20,7 @@
   "@type": "CollectionPage",
   "name": "Ascensions - Spire 2 Stats",
   "description": "Global winrates and statistics per Ascension level in Slay the Spire 2.",
-  "dateModified": "2026-04-02T04:46:31.534Z"
+  "dateModified": "2026-04-02T04:59:36.030Z"
 }
 </script>
 </head>
@@ -29,108 +29,192 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W4TMS5FL"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-<nav class="breadcrumbs"><a href="/">spire2stats</a> / ascensions</nav><h1>Slay the Spire 2 Ascensions</h1>
+<nav class="breadcrumbs"><a href="/">spire2stats</a> / ascensions</nav>
+        <h1>Slay the Spire 2 Ascensions</h1>
+        
     <div class="averages-panel" style="margin: 20px 0; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
         <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px;">
             <div class="stat-item" style="text-align: center;">
                 <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Total Runs</div>
-                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold;">271</div>
+                <div class="stat-value" id="global-total-runs" style="font-size: 1.2rem; font-weight: bold;">271</div>
             </div>
             <div class="stat-item" style="text-align: center;">
                 <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Overall Winrate</div>
-                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold; color: #00ff89">41.3%</div>
+                <div class="stat-value" id="global-winrate" style="font-size: 1.2rem; font-weight: bold; color: #00ff89">41.3%</div>
             </div>
             <div class="stat-item" style="text-align: center;">
                 <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Ascensions Seen</div>
                 <div class="stat-value" style="font-size: 1.2rem; font-weight: bold;">11</div>
             </div>
         </div>
-    </div><div class="grid">
-    <a href="/ascensions/no-ascension/" class="card-item " aria-label="Asc. 0 No Ascension: 30 runs, 50% Winrate">
+    </div>
+        
+    <div style="margin-bottom: 20px; display: flex; align-items: center; gap: 15px; background: rgba(0,0,0,0.2); padding: 10px 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+        <label for="build-filter" style="font-size: 0.8rem; color: #888; text-transform: uppercase; letter-spacing: 1px;">Filter By Build:</label>
+        <select id="build-filter" style="background: #222; color: #eee; border: 1px solid #444; padding: 5px 10px; border-radius: 4px; cursor: pointer;">
+            <option value="all">All Builds</option>
+            <option value="beta">Beta (v0.100.0+)</option>
+            <option value="main">Main Branch (< v0.100.0)</option>
+        </select>
+    </div>
+        <div class="grid">
+    <a href="/ascensions/no-ascension/" id="asc-card-0" class="card-item " aria-label="Asc. 0 No Ascension: 30 runs, 50% Winrate">
         <div class="card-info"><span class="card-name" >Asc. 0 No Ascension</span></div>
         <div class="card-stats">
-            <div class="win-rate" style="color: var(--green)">50% Winrate</div>
+            <div class="win-rate" id="asc-wr-0" style="color: var(--green)">50% Winrate</div>
             <div class="run-count">30 runs</div>
         </div>
         <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
     </a>
-    <a href="/ascensions/swarming-elites/" class="card-item " aria-label="Asc. 1 Swarming Elites: 27 runs, 56% Winrate">
+    <a href="/ascensions/swarming-elites/" id="asc-card-1" class="card-item " aria-label="Asc. 1 Swarming Elites: 27 runs, 56% Winrate">
         <div class="card-info"><span class="card-name" >Asc. 1 Swarming Elites</span></div>
         <div class="card-stats">
-            <div class="win-rate" style="color: var(--green)">56% Winrate</div>
+            <div class="win-rate" id="asc-wr-1" style="color: var(--green)">56% Winrate</div>
             <div class="run-count">27 runs</div>
         </div>
         <div class="win-bar" style="background: linear-gradient(to right, #00ff89 55.55555555555556%, #ff4b4b 55.55555555555556%);"></div>
     </a>
-    <a href="/ascensions/weary-traveler/" class="card-item " aria-label="Asc. 2 Weary Traveler: 28 runs, 54% Winrate">
+    <a href="/ascensions/weary-traveler/" id="asc-card-2" class="card-item " aria-label="Asc. 2 Weary Traveler: 28 runs, 54% Winrate">
         <div class="card-info"><span class="card-name" >Asc. 2 Weary Traveler</span></div>
         <div class="card-stats">
-            <div class="win-rate" style="color: var(--green)">54% Winrate</div>
+            <div class="win-rate" id="asc-wr-2" style="color: var(--green)">54% Winrate</div>
             <div class="run-count">28 runs</div>
         </div>
         <div class="win-bar" style="background: linear-gradient(to right, #00ff89 53.57142857142857%, #ff4b4b 53.57142857142857%);"></div>
     </a>
-    <a href="/ascensions/poverty/" class="card-item " aria-label="Asc. 3 Poverty: 28 runs, 54% Winrate">
+    <a href="/ascensions/poverty/" id="asc-card-3" class="card-item " aria-label="Asc. 3 Poverty: 28 runs, 54% Winrate">
         <div class="card-info"><span class="card-name" >Asc. 3 Poverty</span></div>
         <div class="card-stats">
-            <div class="win-rate" style="color: var(--green)">54% Winrate</div>
+            <div class="win-rate" id="asc-wr-3" style="color: var(--green)">54% Winrate</div>
             <div class="run-count">28 runs</div>
         </div>
         <div class="win-bar" style="background: linear-gradient(to right, #00ff89 53.57142857142857%, #ff4b4b 53.57142857142857%);"></div>
     </a>
-    <a href="/ascensions/tight-belt/" class="card-item " aria-label="Asc. 4 Tight Belt: 24 runs, 58% Winrate">
+    <a href="/ascensions/tight-belt/" id="asc-card-4" class="card-item " aria-label="Asc. 4 Tight Belt: 24 runs, 58% Winrate">
         <div class="card-info"><span class="card-name" >Asc. 4 Tight Belt</span></div>
         <div class="card-stats">
-            <div class="win-rate" style="color: var(--green)">58% Winrate</div>
+            <div class="win-rate" id="asc-wr-4" style="color: var(--green)">58% Winrate</div>
             <div class="run-count">24 runs</div>
         </div>
         <div class="win-bar" style="background: linear-gradient(to right, #00ff89 58.333333333333336%, #ff4b4b 58.333333333333336%);"></div>
     </a>
-    <a href="/ascensions/ascenders-bane/" class="card-item " aria-label="Asc. 5 Ascender's Bane: 47 runs, 21% Winrate">
+    <a href="/ascensions/ascenders-bane/" id="asc-card-5" class="card-item " aria-label="Asc. 5 Ascender's Bane: 47 runs, 21% Winrate">
         <div class="card-info"><span class="card-name" >Asc. 5 Ascender's Bane</span></div>
         <div class="card-stats">
-            <div class="win-rate" style="color: var(--red)">21% Winrate</div>
+            <div class="win-rate" id="asc-wr-5" style="color: var(--red)">21% Winrate</div>
             <div class="run-count">47 runs</div>
         </div>
         <div class="win-bar" style="background: linear-gradient(to right, #00ff89 21.27659574468085%, #ff4b4b 21.27659574468085%);"></div>
     </a>
-    <a href="/ascensions/gloom/" class="card-item " aria-label="Asc. 6 Gloom: 12 runs, 67% Winrate">
+    <a href="/ascensions/gloom/" id="asc-card-6" class="card-item " aria-label="Asc. 6 Gloom: 12 runs, 67% Winrate">
         <div class="card-info"><span class="card-name" >Asc. 6 Gloom</span></div>
         <div class="card-stats">
-            <div class="win-rate" style="color: var(--green)">67% Winrate</div>
+            <div class="win-rate" id="asc-wr-6" style="color: var(--green)">67% Winrate</div>
             <div class="run-count">12 runs</div>
         </div>
         <div class="win-bar" style="background: linear-gradient(to right, #00ff89 66.66666666666666%, #ff4b4b 66.66666666666666%);"></div>
     </a>
-    <a href="/ascensions/scarcity/" class="card-item " aria-label="Asc. 7 Scarcity: 33 runs, 24% Winrate">
+    <a href="/ascensions/scarcity/" id="asc-card-7" class="card-item " aria-label="Asc. 7 Scarcity: 33 runs, 24% Winrate">
         <div class="card-info"><span class="card-name" >Asc. 7 Scarcity</span></div>
         <div class="card-stats">
-            <div class="win-rate" style="color: var(--red)">24% Winrate</div>
+            <div class="win-rate" id="asc-wr-7" style="color: var(--red)">24% Winrate</div>
             <div class="run-count">33 runs</div>
         </div>
         <div class="win-bar" style="background: linear-gradient(to right, #00ff89 24.242424242424242%, #ff4b4b 24.242424242424242%);"></div>
     </a>
-    <a href="/ascensions/tough-enemies/" class="card-item " aria-label="Asc. 8 Tough Enemies: 13 runs, 46% Winrate">
+    <a href="/ascensions/tough-enemies/" id="asc-card-8" class="card-item " aria-label="Asc. 8 Tough Enemies: 13 runs, 46% Winrate">
         <div class="card-info"><span class="card-name" >Asc. 8 Tough Enemies</span></div>
         <div class="card-stats">
-            <div class="win-rate" style="color: var(--green)">46% Winrate</div>
+            <div class="win-rate" id="asc-wr-8" style="color: var(--green)">46% Winrate</div>
             <div class="run-count">13 runs</div>
         </div>
         <div class="win-bar" style="background: linear-gradient(to right, #00ff89 46.15384615384615%, #ff4b4b 46.15384615384615%);"></div>
     </a>
-    <a href="/ascensions/deadly-enemies/" class="card-item " aria-label="Asc. 9 Deadly Enemies: 27 runs, 19% Winrate">
+    <a href="/ascensions/deadly-enemies/" id="asc-card-9" class="card-item " aria-label="Asc. 9 Deadly Enemies: 27 runs, 19% Winrate">
         <div class="card-info"><span class="card-name" >Asc. 9 Deadly Enemies</span></div>
         <div class="card-stats">
-            <div class="win-rate" style="color: var(--red)">19% Winrate</div>
+            <div class="win-rate" id="asc-wr-9" style="color: var(--red)">19% Winrate</div>
             <div class="run-count">27 runs</div>
         </div>
         <div class="win-bar" style="background: linear-gradient(to right, #00ff89 18.51851851851852%, #ff4b4b 18.51851851851852%);"></div>
     </a>
-    <a href="/ascensions/double-boss/" class="card-item " aria-label="Asc. 10 Double Boss: 2 runs, 50% Winrate">
+    <a href="/ascensions/double-boss/" id="asc-card-10" class="card-item " aria-label="Asc. 10 Double Boss: 2 runs, 50% Winrate">
         <div class="card-info"><span class="card-name" >Asc. 10 Double Boss</span></div>
         <div class="card-stats">
-            <div class="win-rate" style="color: var(--green)">50% Winrate</div>
+            <div class="win-rate" id="asc-wr-10" style="color: var(--green)">50% Winrate</div>
             <div class="run-count">2 runs</div>
         </div>
         <div class="win-bar" style="background: linear-gradient(to right, #00ff89 50%, #ff4b4b 50%);"></div>
-    </a></div></body></html>
+    </a></div>
+        
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        (function() {
+            const supabaseUrl = 'undefined';
+            const supabaseKey = 'undefined';
+            const supabase = supabaseJs.createClient(supabaseUrl, supabaseKey);
+            
+            let runCache = null;
+            const filter = document.getElementById('build-filter');
+
+            async function updateStats() {
+                if (!runCache) {
+                    const { data, error } = await supabase.from('s2s_runs').select('win, ascension, build_id');
+                    if (error) return console.error("Error fetching live stats:", error);
+                    runCache = data;
+                }
+
+                const val = filter.value;
+                const filtered = runCache.filter(r => {
+                    if (val === 'all') return true;
+                    const b = r.build_id || 'v0.0.0';
+                    const parts = b.replace('v', '').split('.').map(Number);
+                    const isBeta = parts[0] > 0 || parts[1] >= 100;
+                    return val === 'beta' ? isBeta : !isBeta;
+                });
+
+                // Calculate Global
+                const totalRuns = filtered.length;
+                const totalWins = filtered.filter(r => r.win).length;
+                const globalWR = totalRuns > 0 ? (totalWins / totalRuns) * 100 : 0;
+
+                document.getElementById('global-total-runs').textContent = totalRuns;
+                document.getElementById('global-winrate').textContent = globalWR.toFixed(1) + '%';
+
+                // Update Ascension levels 0-10
+                for (let i = 0; i <= 10; i++) {
+                    const levelRuns = filtered.filter(r => parseInt(r.ascension) === i);
+                    const wins = levelRuns.filter(r => r.win).length;
+                    const seen = levelRuns.length;
+                    const wr = seen > 0 ? (wins / seen) * 100 : 0;
+                    
+                    const card = document.getElementById('asc-card-' + i);
+                    const label = document.getElementById('asc-wr-' + i);
+                    const countLabel = card.querySelector('.run-count');
+                    const bar = card.querySelector('.win-bar');
+
+                    if (seen === 0) {
+                        label.textContent = '';
+                        countLabel.textContent = '0 runs';
+                        if (bar) bar.style.display = 'none';
+                    } else {
+                        label.textContent = wr.toFixed(1) + '% Winrate';
+                        countLabel.textContent = seen + ' runs';
+                        
+                        // Re-run color logic
+                        let color = 'var(--gray)';
+                        if (wr > globalWR) color = 'var(--green)';
+                        else if (wr < globalWR) color = 'var(--red)';
+                        label.style.color = color;
+
+                        if (bar) {
+                            bar.style.display = 'block';
+                            bar.style.background = 'linear-gradient(to right, #00ff89 ' + wr + '%, #ff4b4b ' + wr + '%)';
+                        }
+                    }
+                }
+            }
+
+            filter.addEventListener('change', updateStats);
+        })();
+    </script></body></html>
