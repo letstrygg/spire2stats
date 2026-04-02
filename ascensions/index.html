@@ -20,7 +20,7 @@
   "@type": "CollectionPage",
   "name": "Ascensions - Spire 2 Stats",
   "description": "Global winrates and statistics per Ascension level in Slay the Spire 2.",
-  "dateModified": "2026-04-02T04:59:36.030Z"
+  "dateModified": "2026-04-02T05:16:11.135Z"
 }
 </script>
 </head>
@@ -150,9 +150,9 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         (function() {
-            const supabaseUrl = 'undefined';
-            const supabaseKey = 'undefined';
-            const supabase = supabaseJs.createClient(supabaseUrl, supabaseKey);
+            const supabaseUrl = 'https://fnwmtytnltmqjaflfwyr.supabase.co';
+            const supabaseKey = 'sb_publishable_y12qZF_dSbUPmV_aieiUgA_CibDsxQV';
+            const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
             
             let runCache = null;
             const filter = document.getElementById('build-filter');
