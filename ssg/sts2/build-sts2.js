@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import sqlite3 from 'sqlite3';
 import { PATHS, ensureDir, slugify } from './paths.js';
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from '../utils/config.js';
 
 import { 
     ISO_BUILD_DATE, 
@@ -446,9 +447,9 @@ async function buildAscensions(ascensions, runStats, sitemap) {
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         (function() {
-            const supabaseUrl = '${process.env.SUPABASE_URL}';
-            const supabaseKey = '${process.env.SUPABASE_ANON_KEY}';
-            const supabase = supabaseJs.createClient(supabaseUrl, supabaseKey);
+            const supabaseUrl = '${SUPABASE_URL}';
+            const supabaseKey = '${SUPABASE_ANON_KEY}';
+            const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
             
             let runCache = null;
             const filter = document.getElementById('build-filter');
