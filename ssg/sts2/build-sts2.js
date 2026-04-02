@@ -30,6 +30,10 @@ import { cardDetailTemplate } from './templates/card.js';
 import { relicDetailTemplate } from './templates/relic.js';
 import { eventDetailTemplate } from './templates/event.js';
 import { characterDetailTemplate } from './templates/character.js';
+import { monsterDetailTemplate } from './templates/monster.js';
+import { encounterDetailTemplate } from './templates/encounter.js';
+import { ascensionDetailTemplate } from './templates/ascension.js';
+import { enchantmentDetailTemplate } from './templates/enchantment.js';
 
 /**
  * Slay the Spire 2 - Static Site Generator
@@ -85,6 +89,8 @@ function generateCardItemHtml(url, name, stats, extraClass = '') {
         }
     }
 
+    const winBarHtml = stats.seen > 0 ? `<div class="win-bar" style="${stats.bar}"></div>` : '';
+
     return `
     <a href="${url}" class="card-item ${extraClass ? extraClass.toLowerCase() : ''}" aria-label="${name}: ${stats.seen} runs, ${stats.text}">
         <div class="card-info"><span class="card-name" ${nameStyle}>${name}${subtitleHtml}</span></div>
@@ -92,7 +98,7 @@ function generateCardItemHtml(url, name, stats, extraClass = '') {
             <div class="win-rate" style="color: ${stats.color}">${stats.text}</div>
             <div class="run-count">${stats.seen} runs</div>
         </div>
-        <div class="win-bar" style="${stats.bar}"></div>
+        ${winBarHtml}
     </a>`;
 }
 
@@ -409,22 +415,7 @@ async function buildAscensions(ascensions, runStats, sitemap) {
         const stats = getItemStats(rawStats, runStats.globalWinRate);
         const videosHtml = generateRunLinksList(rawStats.runs, `Runs at Ascension ${asc.level}`);
 
-        const detailHtml = wrapLayout(
-            title, 
-            `
-            <div class="stats-summary">
-                ${generateSemanticStatsParagraph(title, stats, 'ascension')}
-            </div>
-            <div class="item-box">
-                <h1>${title}</h1>
-                <div class="subtitle">Ascension: Level ${asc.level}</div>
-                <div class="description">${formatDescription(asc.description)}</div>
-            </div>
-            ${videosHtml}`,
-            [{ name: 'ascensions', url: '/ascensions/' }, { name: title, url: '' }],
-            `${title} winrates and run statistics for Slay the Spire 2.`,
-            generateItemJsonLd(title, "Ascension", stats)
-        );
+        const detailHtml = ascensionDetailTemplate(asc, stats, videosHtml);
         fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
         sitemap.add(`/ascensions/${slug}/`);
     }
@@ -459,26 +450,8 @@ async function buildEnchantments(enchantments, runStats, sitemap) {
         const rawStats = runStats.enchantmentStats[cleanId] || { seen: 0, wins: 0, runs: [] };
         const stats = getItemStats(rawStats, runStats.globalWinRate);
         const videosHtml = generateRunLinksList(rawStats.runs, `Runs featuring ${enchantment.name}`);
-        const descriptionHtml = formatDescription(enchantment.description || "");
-        const extraText = enchantment.extra_card_text ? `<div class="extra-text">Adds: ${formatDescription(enchantment.extra_card_text)}</div>` : '';
 
-        const detailHtml = wrapLayout(
-            title, 
-            `
-            <div class="stats-summary">
-                ${generateSemanticStatsParagraph(title, stats, 'enchantment')}
-            </div>
-            <div class="item-box">
-                <h1>${title}</h1>
-                <div class="subtitle">Enchantment • ${enchantment.card_type || 'Any'}</div>
-                <div class="description">${descriptionHtml}</div>
-                ${extraText}
-            </div>
-            ${videosHtml}`,
-            [{ name: 'enchantments', url: '/enchantments/' }, { name: title, url: '' }],
-            `${title} enchantment winrates and run statistics for Slay the Spire 2.`,
-            generateItemJsonLd(title, "Enchantment", stats)
-        );
+        const detailHtml = enchantmentDetailTemplate(enchantment, stats, videosHtml);
         fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
         sitemap.add(`/enchantments/${slug}/`);
     }
@@ -536,13 +509,14 @@ async function buildCharacters(chars, runStats, sitemap) {
                 const relicItemsHtml = charRelics.map(r => {
                     const cleanRelicId = (r.relic_id || '').replace('RELIC.', '');
                     const rStats = getItemStats(runStats.relicStats[cleanRelicId], runStats.globalWinRate);
+                    const winBar = rStats.seen > 0 ? `<div class="win-bar" style="${rStats.bar}"></div>` : '';
                     return `<a href="/relics/${slugify(r.name)}/" class="card-item ${displayName.toLowerCase()}" aria-label="${r.name}: ${rStats.seen} runs, ${rStats.text}">
                         <div class="card-info"><span class="card-name">${r.name}</span></div>
                         <div class="card-stats">
                             <div class="win-rate" style="color: ${rStats.color}">${rStats.text}</div>
                             <div class="run-count">${rStats.seen} runs</div>
                         </div>
-                        <div class="win-bar" style="${rStats.bar}"></div>
+                        ${winBar}
                     </a>`;
                 }).join('');
 
@@ -588,23 +562,7 @@ async function buildEncounters(encounters, runStats, sitemap) {
         const averagesHtml = generateAveragesPanel(stats, stats.encountered, "Averages for this encounter");
         const subtitle = [encounter.room_type, encounter.act].filter(Boolean).join(' • ');
         
-        const detailHtml = wrapLayout(
-            encounter.name, 
-            `
-            ${generateLethalitySummaryBox(stats, "Encounter")}
-            ${averagesHtml}
-            <div class="item-box">
-                <h1>${encounter.name}</h1>
-                <div class="subtitle">${subtitle}</div>
-                <div class="description">
-                    <p>Encounter composition and historical statistics from tracked Slay the Spire 2 gameplay.</p>
-                </div>
-            </div>
-            ${lethalRunsHtml ? `<div style="margin-top: 40px;"><h3>Lethal Runs</h3><p class="text-muted">Runs where this encounter defeated the player:</p>${lethalRunsHtml}</div>` : ''}`,
-            [{ name: 'encounters', url: '/encounters/' }, { name: encounter.name, url: '' }],
-            `${encounter.name} encounter lethality statistics and history for Slay the Spire 2.`,
-            generateItemJsonLd(encounter.name, "Encounter", null)
-        );
+        const detailHtml = encounterDetailTemplate(encounter, stats, averagesHtml, lethalRunsHtml, subtitle);
         fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
         sitemap.add(`/encounters/${slug}/`);
     }
@@ -629,6 +587,7 @@ async function buildEncounters(encounters, runStats, sitemap) {
         const avgDmg = stats.encountered > 0 ? stats.damage_taken / stats.encountered : 0;
         const dmgPercent = maxAvgDmg > 0 ? (avgDmg / maxAvgDmg) * 100 : 0;
         const killDisplay = stats.kills > 0 ? `<div style="color: var(--red); font-size: 1.5rem; font-weight: bold;">${stats.kills} Kills</div>` : '';
+        const winBar = stats.encountered > 0 ? `<div class="win-bar" style="background: linear-gradient(to right, var(--red) ${dmgPercent}%, transparent ${dmgPercent}%);"></div>` : '';
 
         return `
         <a href="/encounters/${slug}/" class="card-item" aria-label="${e.name}: encountered ${stats.encountered} times">
@@ -640,7 +599,7 @@ async function buildEncounters(encounters, runStats, sitemap) {
             <div class="card-stats">
                 ${killDisplay}
             </div>
-            <div class="win-bar" style="background: linear-gradient(to right, var(--red) ${dmgPercent}%, transparent ${dmgPercent}%);"></div>
+            ${winBar}
         </a>`;
     }).join('');
 
@@ -719,23 +678,7 @@ async function buildMonsters(monsters, runStats, sitemap) {
         const averagesHtml = generateAveragesPanel(stats, stats.encountered, "Averages for encounters with this monster");
         const subtitle = [monster.type, monster.min_hp ? `${monster.min_hp}-${monster.max_hp} HP` : null].filter(Boolean).join(' • ');
         
-        const detailHtml = wrapLayout(
-            monster.name, 
-            `
-            ${generateLethalitySummaryBox(stats, "Monster")}
-            ${averagesHtml}
-            <div class="item-box">
-                <h1>${monster.name}</h1>
-                <div class="subtitle">${subtitle}</div>
-                <div class="description">
-                    <p>Monster behavior data and finishing blow records for Slay the Spire 2.</p>
-                </div>
-            </div>
-            ${lethalRunsHtml ? `<div style="margin-top: 40px;"><h3>Lethal Runs</h3><p class="text-muted">Runs where this monster delivered the finishing blow:</p>${lethalRunsHtml}</div>` : ''}`,
-            [{ name: 'monsters', url: '/monsters/' }, { name: monster.name, url: '' }],
-            `${monster.name} lethality statistics and kill history for Slay the Spire 2.`,
-            generateItemJsonLd(monster.name, "Monster", null)
-        );
+        const detailHtml = monsterDetailTemplate(monster, stats, averagesHtml, lethalRunsHtml, subtitle);
         fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
         sitemap.add(`/monsters/${slug}/`);
     }
@@ -760,6 +703,7 @@ async function buildMonsters(monsters, runStats, sitemap) {
         const avgDmg = stats.encountered > 0 ? stats.damage_taken / stats.encountered : 0;
         const dmgPercent = maxAvgDmg > 0 ? (avgDmg / maxAvgDmg) * 100 : 0;
         const killDisplay = stats.kills > 0 ? `<div style="color: #ff4b4b; font-size: 1.5rem; font-weight: bold;">${stats.kills} Kills</div>` : '';
+        const winBar = stats.encountered > 0 ? `<div class="win-bar" style="background: linear-gradient(to right, #ff4b4b ${dmgPercent}%, transparent ${dmgPercent}%);"></div>` : '';
 
         return `
         <a href="/monsters/${slug}/" class="card-item" aria-label="${m.name}: encountered ${stats.encountered} times">
@@ -771,7 +715,7 @@ async function buildMonsters(monsters, runStats, sitemap) {
             <div class="card-stats">
                 ${killDisplay}
             </div>
-            <div class="win-bar" style="background: linear-gradient(to right, #ff4b4b ${dmgPercent}%, transparent ${dmgPercent}%);"></div>
+            ${winBar}
         </a>`;
     }).join('');
 
