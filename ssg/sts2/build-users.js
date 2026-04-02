@@ -7,6 +7,9 @@ import {
     generateItemJsonLd,
     getCharacterBgStyle,
     generateItemSummaryBox,
+    getWinRateColor,
+    generateFilterControlsHtml,
+    generateFilterScript,
     generateRunCardHtml,
     CHARACTER_COLORS
 } from './templates/shared.js';
@@ -34,14 +37,6 @@ async function runCommand(sql, params = []) {
             else resolve(this);
         });
     });
-}
-
-/** Helper for win rate text color logic */
-function getWinRateColor(seen, winRateNum, globalWinRate) {
-    if (seen === 0) return 'var(--gray)';
-    if (winRateNum > globalWinRate) return 'var(--green)';
-    if (winRateNum < globalWinRate) return 'var(--red)';
-    return 'var(--gray)';
 }
 
 async function build() {
@@ -147,81 +142,10 @@ async function build() {
                 ${generateItemSummaryBox(user.display_name, userStats)}
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
                     <h1 style="margin: 0;">Runs by ${user.display_name}</h1>
-                    <div class="filter-controls" style="display: flex; gap: 10px;">
-                        <select id="build-filter" style="background: #222; color: #eee; border: 1px solid #444; padding: 5px 10px; border-radius: 4px; cursor: pointer;">
-                            <option value="all">All Versions</option>
-                            <option value="beta">v0.100.0+ (Beta)</option>
-                            <option value="legacy">Below v0.100.0</option>
-                        </select>
-                        <select id="ascension-filter" style="background: #222; color: #eee; border: 1px solid #444; padding: 5px 10px; border-radius: 4px; cursor: pointer;">
-                            <option value="all">All Ascensions</option>
-                            <option value="a10">Ascension 10</option>
-                            <option value="a0-9">Ascension 0-9</option>
-                        </select>
-                    </div>
+                    ${generateFilterControlsHtml()}
                 </div>
                 <div class="grid" id="runs-grid">${runLinksHtml || '<p>No runs recorded yet.</p>'}</div>
-                <script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        const buildFilter = document.getElementById('build-filter');
-                        const ascFilter = document.getElementById('ascension-filter');
-                        const runCards = document.querySelectorAll('.run-record');
-                        const globalWR = ${globalWinRate};
-
-                        function updateFilters() {
-                            const buildVal = buildFilter.value;
-                            const ascVal = ascFilter.value;
-                            
-                            let filteredTotal = 0;
-                            let filteredWins = 0;
-
-                            runCards.forEach(card => {
-                                const build = card.dataset.build;
-                                const asc = parseInt(card.dataset.ascension);
-                                const win = card.dataset.win === '1';
-
-                                // Build Filter Logic
-                                const buildParts = build.replace('v', '').split('.').map(Number);
-                                const isBeta = buildParts[0] > 0 || buildParts[1] >= 100;
-                                const buildMatch = buildVal === 'all' || 
-                                                  (buildVal === 'beta' && isBeta) || 
-                                                  (buildVal === 'legacy' && !isBeta);
-
-                                // Ascension Filter Logic
-                                const ascMatch = ascVal === 'all' || 
-                                                (ascVal === 'a10' && asc === 10) || 
-                                                (ascVal === 'a0-9' && asc < 10);
-
-                                if (buildMatch && ascMatch) {
-                                    card.style.display = 'flex';
-                                    filteredTotal++;
-                                    if (win) filteredWins++;
-                                } else {
-                                    card.style.display = 'none';
-                                }
-                            });
-
-                            // Update Summary Stats
-                            const filteredLosses = filteredTotal - filteredWins;
-                            const wrNum = filteredTotal > 0 ? (filteredWins / filteredTotal) * 100 : 0;
-                            
-                            document.getElementById('stat-total-val').textContent = filteredTotal;
-                            document.getElementById('stat-wins-val').textContent = filteredWins;
-                            document.getElementById('stat-losses-val').textContent = filteredLosses;
-                            document.getElementById('stat-wr-val').textContent = wrNum.toFixed(1) + '%';
-                            
-                            // Update Winrate Color
-                            const wrEl = document.getElementById('stat-wr-val');
-                            if (filteredTotal === 0) wrEl.style.color = 'var(--gray)';
-                            else if (wrNum > globalWR) wrEl.style.color = 'var(--green)';
-                            else if (wrNum < globalWR) wrEl.style.color = 'var(--red)';
-                            else wrEl.style.color = 'var(--gray)';
-                        }
-
-                        buildFilter.addEventListener('change', updateFilters);
-                        ascFilter.addEventListener('change', updateFilters);
-                    });
-                </script>`,
+                ${generateFilterScript(globalWinRate)}`,
                 [{ name: 'Users', url: '/users/' }, { name: user.display_name, url: '' }],
                 `View Slay the Spire 2 run history and statistics for ${user.display_name}.`
             );

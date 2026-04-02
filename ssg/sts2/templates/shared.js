@@ -12,6 +12,14 @@ export const CHARACTER_COLORS = {
     'REGENT': 'var(--color-regent)'
 };
 
+/** Helper for win rate text color logic */
+export function getWinRateColor(seen, winRateNum, globalWinRate) {
+    if (seen === 0) return 'var(--gray)';
+    if (winRateNum > globalWinRate) return 'var(--green)';
+    if (winRateNum < globalWinRate) return 'var(--red)';
+    return 'var(--gray)';
+}
+
 /** Returns an inline style for 30% opacity character background */
 export function getCharacterBgStyle(name) {
     if (!name) return '';
@@ -19,6 +27,109 @@ export function getCharacterBgStyle(name) {
     const cleanName = name.toUpperCase().replace(/ POOL$/i, '').replace(/^THE\s+/i, '').trim();
     const colorVar = CHARACTER_COLORS[cleanName];
     return colorVar ? `background-color: color-mix(in srgb, ${colorVar} 30%, transparent);` : '';
+}
+
+/** Generates dropdown filter controls */
+export function generateFilterControlsHtml() {
+    return `
+    <div class="filter-controls" style="display: flex; gap: 10px;">
+        <select id="build-filter" style="background: #222; color: #eee; border: 1px solid #444; padding: 5px 10px; border-radius: 4px; cursor: pointer;">
+            <option value="all">All Versions</option>
+            <option value="beta">v0.100.0+ (Beta)</option>
+            <option value="legacy">Below v0.100.0</option>
+        </select>
+        <select id="ascension-filter" style="background: #222; color: #eee; border: 1px solid #444; padding: 5px 10px; border-radius: 4px; cursor: pointer;">
+            <option value="all">All Ascensions</option>
+            <option value="a10">Ascension 10</option>
+            <option value="a0-9">Ascension 0-9</option>
+        </select>
+    </div>`;
+}
+
+/** Generates the JS required for client-side filtering and stat updates */
+export function generateFilterScript(globalWinRate) {
+    return `
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const buildFilter = document.getElementById('build-filter');
+            const ascFilter = document.getElementById('ascension-filter');
+            const runCards = document.querySelectorAll('.run-record');
+            const globalWR = ${globalWinRate};
+
+            function updateFilters() {
+                const buildVal = buildFilter.value;
+                const ascVal = ascFilter.value;
+                
+                let filteredTotal = 0;
+                let filteredWins = 0;
+
+                runCards.forEach(card => {
+                    const build = card.dataset.build || 'v0.0.0';
+                    const asc = parseInt(card.dataset.ascension || 0);
+                    const win = card.dataset.win === '1';
+
+                    // Build Filter Logic (Beta is v0.100+)
+                    const buildParts = build.replace('v', '').split('.').map(Number);
+                    const isBeta = buildParts[0] > 0 || buildParts[1] >= 100;
+                    const buildMatch = buildVal === 'all' || 
+                                      (buildVal === 'beta' && isBeta) || 
+                                      (buildVal === 'legacy' && !isBeta);
+
+                    // Ascension Filter Logic
+                    const ascMatch = ascVal === 'all' || 
+                                    (ascVal === 'a10' && asc === 10) || 
+                                    (ascVal === 'a0-9' && asc < 10);
+
+                    if (buildMatch && ascMatch) {
+                        card.style.display = 'flex';
+                        filteredTotal++;
+                        if (win) filteredWins++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                // Update Summary Stats via DOM IDs
+                const filteredLosses = filteredTotal - filteredWins;
+                const wrNum = filteredTotal > 0 ? (filteredWins / filteredTotal) * 100 : 0;
+                
+                const totalEl = document.getElementById('stat-total-val');
+                const winsEl = document.getElementById('stat-wins-val');
+                const lossEl = document.getElementById('stat-losses-val');
+                const wrValEl = document.getElementById('stat-wr-val');
+
+                if (totalEl) totalEl.textContent = filteredTotal;
+                if (winsEl) winsEl.textContent = filteredWins;
+                if (lossEl) lossEl.textContent = filteredLosses;
+                if (wrValEl) {
+                    wrValEl.textContent = wrNum.toFixed(1) + '%';
+                    // Update Winrate Color
+                    if (filteredTotal === 0) wrValEl.style.color = 'var(--gray)';
+                    else if (wrNum > globalWR) wrValEl.style.color = 'var(--green)';
+                    else if (wrNum < globalWR) wrValEl.style.color = 'var(--red)';
+                    else wrValEl.style.color = 'var(--gray)';
+                }
+            }
+
+            if (buildFilter) buildFilter.addEventListener('change', updateFilters);
+            if (ascFilter) ascFilter.addEventListener('change', updateFilters);
+        });
+    </script>`;
+}
+
+/** Standardizes item statistics for display */
+export function getItemStats(stats, globalWinRate) {
+    const seen = stats?.seen || 0;
+    const wins = stats?.wins || 0;
+    const num = seen > 0 ? (wins / seen) * 100 : 0;
+    const losses = seen - wins;
+    return {
+        seen, wins, losses, num,
+        formatted: num.toFixed(1),
+        color: getWinRateColor(seen, num, globalWinRate),
+        bar: `background: linear-gradient(to right, #00ff89 ${num}%, #ff4b4b ${num}%);`,
+        text: seen > 0 ? `${num.toFixed(0)}% Winrate` : ''
+    };
 }
 
 export function generateItemJsonLd(name, category, stats) {

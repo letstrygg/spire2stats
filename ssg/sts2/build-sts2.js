@@ -15,6 +15,10 @@ import {
     generateLethalityIndexSummary,
     generateLethalitySummaryBox,
     generateSemanticStatsParagraph, 
+    getItemStats,
+    getWinRateColor,
+    generateFilterControlsHtml,
+    generateFilterScript,
     wrapLayout, 
     formatDescription,
     getCharacterBgStyle,
@@ -58,35 +62,6 @@ async function query(sql, params = []) {
             else resolve(rows);
         });
     });
-}
-
-/** Helper for win bar background styles */
-function getWinBarStyle(seen, winRateNum) {
-    if (seen === 0) return 'background: #444;';
-    return `background: linear-gradient(to right, #00ff89 ${winRateNum}%, #ff4b4b ${winRateNum}%);`;
-}
-
-/** Helper for win rate text color logic */
-function getWinRateColor(seen, winRateNum, globalWinRate) {
-    if (seen === 0) return 'var(--gray)';
-    if (winRateNum > globalWinRate) return 'var(--green)';
-    if (winRateNum < globalWinRate) return 'var(--red)';
-    return 'var(--gray)';
-}
-
-/** Standardizes item statistics for display */
-function getItemStats(stats, globalWinRate) {
-    const seen = stats?.seen || 0;
-    const wins = stats?.wins || 0;
-    const num = seen > 0 ? (wins / seen) * 100 : 0;
-    const losses = seen - wins;
-    return {
-        seen, wins, losses, num,
-        formatted: num.toFixed(1),
-        color: getWinRateColor(seen, num, globalWinRate),
-        bar: getWinBarStyle(seen, num),
-        text: seen > 0 ? `${num.toFixed(0)}% Winrate` : ''
-    };
 }
 
 function getCostDisplay(card) {
