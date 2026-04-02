@@ -1,0 +1,10 @@
+{
+  "name": "spire2stats",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "sync": "node ssg/runs/sync-ltg.js",
+    "build": "node ssg/sts2/build-sts2.js",
+    "users": "node ssg/sts2/build-users.js"
+  }
+}

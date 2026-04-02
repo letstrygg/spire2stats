@@ -1,4 +1,5 @@
 import { execSync } from 'child_process';
+import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -23,6 +24,12 @@ async function runSync() {
     for (const script of SCRIPTS) {
         const scriptPath = path.join(PROJECT_ROOT, script);
         console.log(`\n🚀 Executing: ${script}`);
+
+        if (!fs.existsSync(scriptPath)) {
+            console.error(`\n❌ Error: File not found at ${scriptPath}`);
+            process.exit(1);
+        }
+
         try {
             execSync(`node "${scriptPath}"`, { stdio: 'inherit' });
         } catch (error) {
