@@ -20,7 +20,7 @@
   "@type": "ItemPage",
   "name": "Pandora's Box - Spire 2 Stats",
   "description": "Pandora's Box gameplay statistics for Slay the Spire 2. Winrate: 66.7%. Total Runs: 3.",
-  "dateModified": "2026-04-02T02:56:57.468Z",
+  "dateModified": "2026-04-02T03:21:17.597Z",
   "mainEntity": {
     "@type": "Thing",
     "name": "Pandora's Box",
@@ -41,19 +41,19 @@
         <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px;">
             <div class="stat-item" style="text-align: center;">
                 <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Winrate</div>
-                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold; color: var(--green)">66.7%</div>
+                <div class="stat-value" id="stat-wr-val" style="font-size: 1.2rem; font-weight: bold; color: var(--green)">66.7%</div>
             </div>
             <div class="stat-item" style="text-align: center;">
                 <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Total Runs</div>
-                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold;">3</div>
+                <div class="stat-value" id="stat-total-val" style="font-size: 1.2rem; font-weight: bold;">3</div>
             </div>
             <div class="stat-item" style="text-align: center;">
                 <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Wins</div>
-                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold; color: #00ff89">2</div>
+                <div class="stat-value" id="stat-wins-val" style="font-size: 1.2rem; font-weight: bold; color: #00ff89">2</div>
             </div>
             <div class="stat-item" style="text-align: center;">
                 <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Losses</div>
-                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold; color: #ff4b4b">1</div>
+                <div class="stat-value" id="stat-losses-val" style="font-size: 1.2rem; font-weight: bold; color: #ff4b4b">1</div>
             </div>
         </div>
     </div>
@@ -68,7 +68,8 @@
     <div class="recent-runs" style="margin-top: 30px;">
         <h3 style="margin-bottom: 15px;">Runs featuring Pandora's Box</h3>
         <div class="grid">
-    <div class="card-item loss defect" style="display: flex; flex-direction: column;">
+    <div class="card-item loss defect run-record" 
+         data-build="v0.98.3" data-ascension="3" data-win="0" style="display: flex; flex-direction: column;">
         <a href="/users/falterfire/runs/1773329004/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
             <div class="card-info">
                 <span class="card-name" style="line-height: 1.1;">
@@ -86,7 +87,8 @@
         
         <div class="win-bar" style="background: var(--red);"></div>
     </div>
-    <div class="card-item win regent" style="display: flex; flex-direction: column;">
+    <div class="card-item win regent run-record" 
+         data-build="v0.98.3" data-ascension="4" data-win="1" style="display: flex; flex-direction: column;">
         <a href="/users/falterfire/runs/1773500081/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
             <div class="card-info">
                 <span class="card-name" style="line-height: 1.1;">
@@ -104,7 +106,8 @@
         
         <div class="win-bar" style="background: var(--green);"></div>
     </div>
-    <div class="card-item win silent" style="display: flex; flex-direction: column;">
+    <div class="card-item win silent run-record" 
+         data-build="v0.99.1" data-ascension="5" data-win="1" style="display: flex; flex-direction: column;">
         <a href="/users/falterfire/runs/1773887074/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
             <div class="card-info">
                 <span class="card-name" style="line-height: 1.1;">

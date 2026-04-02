@@ -20,7 +20,7 @@
   "@type": "ItemPage",
   "name": "Ascender's Bane - Spire 2 Stats",
   "description": "Ascender's Bane gameplay statistics for Slay the Spire 2. Winrate: 21.3%. Total Runs: 47.",
-  "dateModified": "2026-04-02T02:56:57.468Z",
+  "dateModified": "2026-04-02T03:21:17.597Z",
   "mainEntity": {
     "@type": "Thing",
     "name": "Ascender's Bane",
@@ -41,19 +41,19 @@
         <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px;">
             <div class="stat-item" style="text-align: center;">
                 <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Winrate</div>
-                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold; color: var(--red)">21.3%</div>
+                <div class="stat-value" id="stat-wr-val" style="font-size: 1.2rem; font-weight: bold; color: var(--red)">21.3%</div>
             </div>
             <div class="stat-item" style="text-align: center;">
                 <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Total Runs</div>
-                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold;">47</div>
+                <div class="stat-value" id="stat-total-val" style="font-size: 1.2rem; font-weight: bold;">47</div>
             </div>
             <div class="stat-item" style="text-align: center;">
                 <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Wins</div>
-                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold; color: #00ff89">10</div>
+                <div class="stat-value" id="stat-wins-val" style="font-size: 1.2rem; font-weight: bold; color: #00ff89">10</div>
             </div>
             <div class="stat-item" style="text-align: center;">
                 <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Losses</div>
-                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold; color: #ff4b4b">37</div>
+                <div class="stat-value" id="stat-losses-val" style="font-size: 1.2rem; font-weight: bold; color: #ff4b4b">37</div>
             </div>
         </div>
     </div>
@@ -67,7 +67,8 @@
     <div class="recent-runs" style="margin-top: 30px;">
         <h3 style="margin-bottom: 15px;">Runs at Ascension 5</h3>
         <div class="grid">
-    <div class="card-item loss silent" style="display: flex; flex-direction: column;">
+    <div class="card-item loss silent run-record" 
+         data-build="v0.99.1" data-ascension="5" data-win="0" style="display: flex; flex-direction: column;">
         <a href="/users/letstrygg/runs/1774759505/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
             <div class="card-info">
                 <span class="card-name" style="line-height: 1.1;">
@@ -85,7 +86,8 @@
         <div class="run-video-links"><a href="https://letstrygg.com/yt/letstrygg/slay-the-spire-2/season-1/sts2-s01e28.html" class="run-vid-btn ltg" target="_blank">S01E28</a><a href="https://www.youtube.com/watch?v=H92yx1zFEkM" class="run-vid-btn yt" target="_blank"><span class="material-symbols-outlined" style="color: #ff4b4b;">smart_display</span>YouTube</a></div>
         <div class="win-bar" style="background: var(--red);"></div>
     </div>
-    <div class="card-item loss silent" style="display: flex; flex-direction: column;">
+    <div class="card-item loss silent run-record" 
+         data-build="v0.99.1" data-ascension="5" data-win="0" style="display: flex; flex-direction: column;">
         <a href="/users/letstrygg/runs/1774762220/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
             <div class="card-info">
                 <span class="card-name" style="line-height: 1.1;">
@@ -103,7 +105,8 @@
         <div class="run-video-links"><a href="https://letstrygg.com/yt/letstrygg/slay-the-spire-2/season-1/sts2-s01e28.html" class="run-vid-btn ltg" target="_blank">S01E28</a><a href="https://www.youtube.com/watch?v=H92yx1zFEkM" class="run-vid-btn yt" target="_blank"><span class="material-symbols-outlined" style="color: #ff4b4b;">smart_display</span>YouTube</a></div>
         <div class="win-bar" style="background: var(--red);"></div>
     </div>
-    <div class="card-item loss silent" style="display: flex; flex-direction: column;">
+    <div class="card-item loss silent run-record" 
+         data-build="v0.99.1" data-ascension="5" data-win="0" style="display: flex; flex-direction: column;">
         <a href="/users/letstrygg/runs/1774765124/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
             <div class="card-info">
                 <span class="card-name" style="line-height: 1.1;">
@@ -121,7 +124,8 @@
         <div class="run-video-links"><a href="https://letstrygg.com/yt/letstrygg/slay-the-spire-2/season-1/sts2-s01e28.html" class="run-vid-btn ltg" target="_blank">S01E28</a><a href="https://www.youtube.com/watch?v=H92yx1zFEkM" class="run-vid-btn yt" target="_blank"><span class="material-symbols-outlined" style="color: #ff4b4b;">smart_display</span>YouTube</a></div>
         <div class="win-bar" style="background: var(--red);"></div>
     </div>
-    <div class="card-item loss silent" style="display: flex; flex-direction: column;">
+    <div class="card-item loss silent run-record" 
+         data-build="v0.99.1" data-ascension="5" data-win="0" style="display: flex; flex-direction: column;">
         <a href="/users/letstrygg/runs/1774766451/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
             <div class="card-info">
                 <span class="card-name" style="line-height: 1.1;">
@@ -139,7 +143,8 @@
         <div class="run-video-links"><a href="https://letstrygg.com/yt/letstrygg/slay-the-spire-2/season-1/sts2-s01e28.html" class="run-vid-btn ltg" target="_blank">S01E28</a><a href="https://www.youtube.com/watch?v=H92yx1zFEkM" class="run-vid-btn yt" target="_blank"><span class="material-symbols-outlined" style="color: #ff4b4b;">smart_display</span>YouTube</a></div>
         <div class="win-bar" style="background: var(--red);"></div>
     </div>
-    <div class="card-item loss silent" style="display: flex; flex-direction: column;">
+    <div class="card-item loss silent run-record" 
+         data-build="v0.99.1" data-ascension="5" data-win="0" style="display: flex; flex-direction: column;">
         <a href="/users/letstrygg/runs/1774767435/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
             <div class="card-info">
                 <span class="card-name" style="line-height: 1.1;">
@@ -157,7 +162,8 @@
         <div class="run-video-links"><a href="https://letstrygg.com/yt/letstrygg/slay-the-spire-2/season-1/sts2-s01e28.html" class="run-vid-btn ltg" target="_blank">S01E28</a><a href="https://www.youtube.com/watch?v=H92yx1zFEkM" class="run-vid-btn yt" target="_blank"><span class="material-symbols-outlined" style="color: #ff4b4b;">smart_display</span>YouTube</a></div>
         <div class="win-bar" style="background: var(--red);"></div>
     </div>
-    <div class="card-item loss regent" style="display: flex; flex-direction: column;">
+    <div class="card-item loss regent run-record" 
+         data-build="v0.99.1" data-ascension="5" data-win="0" style="display: flex; flex-direction: column;">
         <a href="/users/letstrygg/runs/1774851945/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
             <div class="card-info">
                 <span class="card-name" style="line-height: 1.1;">
@@ -175,7 +181,8 @@
         <div class="run-video-links"><a href="https://letstrygg.com/yt/letstrygg/slay-the-spire-2/season-1/sts2-s01e29.html" class="run-vid-btn ltg" target="_blank">S01E29</a><a href="https://www.youtube.com/watch?v=GD2O5f9yx2Q" class="run-vid-btn yt" target="_blank"><span class="material-symbols-outlined" style="color: #ff4b4b;">smart_display</span>YouTube</a></div>
         <div class="win-bar" style="background: var(--red);"></div>
     </div>
-    <div class="card-item loss regent" style="display: flex; flex-direction: column;">
+    <div class="card-item loss regent run-record" 
+         data-build="v0.99.1" data-ascension="5" data-win="0" style="display: flex; flex-direction: column;">
         <a href="/users/letstrygg/runs/1774853596/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
             <div class="card-info">
                 <span class="card-name" style="line-height: 1.1;">
@@ -193,7 +200,8 @@
         <div class="run-video-links"><a href="https://letstrygg.com/yt/letstrygg/slay-the-spire-2/season-1/sts2-s01e29.html" class="run-vid-btn ltg" target="_blank">S01E29</a><a href="https://www.youtube.com/watch?v=GD2O5f9yx2Q" class="run-vid-btn yt" target="_blank"><span class="material-symbols-outlined" style="color: #ff4b4b;">smart_display</span>YouTube</a></div>
         <div class="win-bar" style="background: var(--red);"></div>
     </div>
-    <div class="card-item loss regent" style="display: flex; flex-direction: column;">
+    <div class="card-item loss regent run-record" 
+         data-build="v0.99.1" data-ascension="5" data-win="0" style="display: flex; flex-direction: column;">
         <a href="/users/letstrygg/runs/1774855674/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
             <div class="card-info">
                 <span class="card-name" style="line-height: 1.1;">
@@ -211,7 +219,8 @@
         <div class="run-video-links"><a href="https://letstrygg.com/yt/letstrygg/slay-the-spire-2/season-1/sts2-s01e29.html" class="run-vid-btn ltg" target="_blank">S01E29</a><a href="https://www.youtube.com/watch?v=GD2O5f9yx2Q" class="run-vid-btn yt" target="_blank"><span class="material-symbols-outlined" style="color: #ff4b4b;">smart_display</span>YouTube</a></div>
         <div class="win-bar" style="background: var(--red);"></div>
     </div>
-    <div class="card-item loss regent" style="display: flex; flex-direction: column;">
+    <div class="card-item loss regent run-record" 
+         data-build="v0.99.1" data-ascension="5" data-win="0" style="display: flex; flex-direction: column;">
         <a href="/users/letstrygg/runs/1774856945/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
             <div class="card-info">
                 <span class="card-name" style="line-height: 1.1;">
@@ -229,7 +238,8 @@
         <div class="run-video-links"><a href="https://letstrygg.com/yt/letstrygg/slay-the-spire-2/season-1/sts2-s01e29.html" class="run-vid-btn ltg" target="_blank">S01E29</a><a href="https://www.youtube.com/watch?v=GD2O5f9yx2Q" class="run-vid-btn yt" target="_blank"><span class="material-symbols-outlined" style="color: #ff4b4b;">smart_display</span>YouTube</a></div>
         <div class="win-bar" style="background: var(--red);"></div>
     </div>
-    <div class="card-item win regent" style="display: flex; flex-direction: column;">
+    <div class="card-item win regent run-record" 
+         data-build="v0.99.1" data-ascension="5" data-win="1" style="display: flex; flex-direction: column;">
         <a href="/users/letstrygg/runs/1774857920/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
             <div class="card-info">
                 <span class="card-name" style="line-height: 1.1;">
@@ -247,7 +257,8 @@
         <div class="run-video-links"><a href="https://letstrygg.com/yt/letstrygg/slay-the-spire-2/season-1/sts2-s01e29.html" class="run-vid-btn ltg" target="_blank">S01E29</a><a href="https://www.youtube.com/watch?v=GD2O5f9yx2Q" class="run-vid-btn yt" target="_blank"><span class="material-symbols-outlined" style="color: #ff4b4b;">smart_display</span>YouTube</a></div>
         <div class="win-bar" style="background: var(--green);"></div>
     </div>
-    <div class="card-item win ironclad" style="display: flex; flex-direction: column;">
+    <div class="card-item win ironclad run-record" 
+         data-build="v0.99.1" data-ascension="5" data-win="1" style="display: flex; flex-direction: column;">
         <a href="/users/falterfire/runs/1773801078/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
             <div class="card-info">
                 <span class="card-name" style="line-height: 1.1;">
@@ -265,7 +276,8 @@
         
         <div class="win-bar" style="background: var(--green);"></div>
     </div>
-    <div class="card-item loss silent" style="display: flex; flex-direction: column;">
+    <div class="card-item loss silent run-record" 
+         data-build="v0.99.1" data-ascension="5" data-win="0" style="display: flex; flex-direction: column;">
         <a href="/users/falterfire/runs/1773858080/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
             <div class="card-info">
                 <span class="card-name" style="line-height: 1.1;">

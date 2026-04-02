@@ -209,8 +209,13 @@ export function generateRunCardHtml(run, user) {
         videoButtons = `<div class="run-video-links">${btns}</div>`;
     }
 
+    const buildId = run.build_id || 'v0.0.0';
+    const ascension = run.ascension || 0;
+    const winVal = run.win ? 1 : 0;
+
     return `
-    <div class="card-item ${statusClass} ${charClass}" style="display: flex; flex-direction: column;">
+    <div class="card-item ${statusClass} ${charClass} run-record" 
+         data-build="${buildId}" data-ascension="${ascension}" data-win="${winVal}" style="display: flex; flex-direction: column;">
         <a href="/users/${user.slug}/runs/${run.id}/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
             <div class="card-info">
                 <span class="card-name" style="line-height: 1.1;">
@@ -239,19 +244,19 @@ export function generateItemSummaryBox(name, stats) {
         <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px;">
             <div class="stat-item" style="text-align: center;">
                 <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Winrate</div>
-                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold; color: ${stats.color}">${stats.formatted}%</div>
+                <div class="stat-value" id="stat-wr-val" style="font-size: 1.2rem; font-weight: bold; color: ${stats.color}">${stats.formatted}%</div>
             </div>
             <div class="stat-item" style="text-align: center;">
                 <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Total Runs</div>
-                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold;">${stats.seen}</div>
+                <div class="stat-value" id="stat-total-val" style="font-size: 1.2rem; font-weight: bold;">${stats.seen}</div>
             </div>
             <div class="stat-item" style="text-align: center;">
                 <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Wins</div>
-                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold; color: #00ff89">${stats.wins}</div>
+                <div class="stat-value" id="stat-wins-val" style="font-size: 1.2rem; font-weight: bold; color: #00ff89">${stats.wins}</div>
             </div>
             <div class="stat-item" style="text-align: center;">
                 <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Losses</div>
-                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold; color: #ff4b4b">${stats.losses}</div>
+                <div class="stat-value" id="stat-losses-val" style="font-size: 1.2rem; font-weight: bold; color: #ff4b4b">${stats.losses}</div>
             </div>
         </div>
     </div>`;

@@ -20,7 +20,7 @@
   "@type": "ItemPage",
   "name": "Shining Strike - Spire 2 Stats",
   "description": "Shining Strike gameplay statistics for Slay the Spire 2. Winrate: 54.5%. Total Runs: 11.",
-  "dateModified": "2026-04-02T02:56:57.468Z",
+  "dateModified": "2026-04-02T03:21:17.597Z",
   "mainEntity": {
     "@type": "Thing",
     "name": "Shining Strike",
@@ -40,19 +40,19 @@
         <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px;">
             <div class="stat-item" style="text-align: center;">
                 <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Winrate</div>
-                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold; color: var(--green)">54.5%</div>
+                <div class="stat-value" id="stat-wr-val" style="font-size: 1.2rem; font-weight: bold; color: var(--green)">54.5%</div>
             </div>
             <div class="stat-item" style="text-align: center;">
                 <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Total Runs</div>
-                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold;">11</div>
+                <div class="stat-value" id="stat-total-val" style="font-size: 1.2rem; font-weight: bold;">11</div>
             </div>
             <div class="stat-item" style="text-align: center;">
                 <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Wins</div>
-                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold; color: #00ff89">6</div>
+                <div class="stat-value" id="stat-wins-val" style="font-size: 1.2rem; font-weight: bold; color: #00ff89">6</div>
             </div>
             <div class="stat-item" style="text-align: center;">
                 <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Losses</div>
-                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold; color: #ff4b4b">5</div>
+                <div class="stat-value" id="stat-losses-val" style="font-size: 1.2rem; font-weight: bold; color: #ff4b4b">5</div>
             </div>
         </div>
     </div>
@@ -77,7 +77,8 @@
     <div class="recent-runs" style="margin-top: 30px;">
         <h3 style="margin-bottom: 15px;">Runs featuring Shining Strike</h3>
         <div class="grid">
-    <div class="card-item win regent" style="display: flex; flex-direction: column;">
+    <div class="card-item win regent run-record" 
+         data-build="v0.98.1" data-ascension="0" data-win="1" style="display: flex; flex-direction: column;">
         <a href="/users/letstrygg/runs/1772832981/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
             <div class="card-info">
                 <span class="card-name" style="line-height: 1.1;">
@@ -95,7 +96,8 @@
         <div class="run-video-links"><a href="https://letstrygg.com/yt/letstrygg/slay-the-spire-2/season-1/sts2-s01e03.html" class="run-vid-btn ltg" target="_blank">S01E03</a><a href="https://www.youtube.com/watch?v=AtaIKy3yvnk" class="run-vid-btn yt" target="_blank"><span class="material-symbols-outlined" style="color: #ff4b4b;">smart_display</span>YouTube</a></div>
         <div class="win-bar" style="background: var(--green);"></div>
     </div>
-    <div class="card-item win regent" style="display: flex; flex-direction: column;">
+    <div class="card-item win regent run-record" 
+         data-build="v0.98.3" data-ascension="1" data-win="1" style="display: flex; flex-direction: column;">
         <a href="/users/letstrygg/runs/1773512155/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
             <div class="card-info">
                 <span class="card-name" style="line-height: 1.1;">
@@ -113,7 +115,8 @@
         <div class="run-video-links"><a href="https://letstrygg.com/yt/letstrygg/slay-the-spire-2/season-1/sts2-s01e13.html" class="run-vid-btn ltg" target="_blank">S01E13</a><a href="https://www.youtube.com/watch?v=iH2Jo9JmvQA" class="run-vid-btn yt" target="_blank"><span class="material-symbols-outlined" style="color: #ff4b4b;">smart_display</span>YouTube</a></div>
         <div class="win-bar" style="background: var(--green);"></div>
     </div>
-    <div class="card-item win regent" style="display: flex; flex-direction: column;">
+    <div class="card-item win regent run-record" 
+         data-build="v0.99.1" data-ascension="5" data-win="1" style="display: flex; flex-direction: column;">
         <a href="/users/letstrygg/runs/1774857920/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
             <div class="card-info">
                 <span class="card-name" style="line-height: 1.1;">
@@ -131,7 +134,8 @@
         <div class="run-video-links"><a href="https://letstrygg.com/yt/letstrygg/slay-the-spire-2/season-1/sts2-s01e29.html" class="run-vid-btn ltg" target="_blank">S01E29</a><a href="https://www.youtube.com/watch?v=GD2O5f9yx2Q" class="run-vid-btn yt" target="_blank"><span class="material-symbols-outlined" style="color: #ff4b4b;">smart_display</span>YouTube</a></div>
         <div class="win-bar" style="background: var(--green);"></div>
     </div>
-    <div class="card-item loss regent" style="display: flex; flex-direction: column;">
+    <div class="card-item loss regent run-record" 
+         data-build="v0.99.1" data-ascension="6" data-win="0" style="display: flex; flex-direction: column;">
         <a href="/users/falterfire/runs/1774145306/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
             <div class="card-info">
                 <span class="card-name" style="line-height: 1.1;">
@@ -149,7 +153,8 @@
         
         <div class="win-bar" style="background: var(--red);"></div>
     </div>
-    <div class="card-item win regent" style="display: flex; flex-direction: column;">
+    <div class="card-item win regent run-record" 
+         data-build="v0.99.1" data-ascension="8" data-win="1" style="display: flex; flex-direction: column;">
         <a href="/users/falterfire/runs/1774491841/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
             <div class="card-info">
                 <span class="card-name" style="line-height: 1.1;">
@@ -167,7 +172,8 @@
         
         <div class="win-bar" style="background: var(--green);"></div>
     </div>
-    <div class="card-item win regent" style="display: flex; flex-direction: column;">
+    <div class="card-item win regent run-record" 
+         data-build="v0.98.1" data-ascension="0" data-win="1" style="display: flex; flex-direction: column;">
         <a href="/users/rarelyvlolent/runs/1772770414/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
             <div class="card-info">
                 <span class="card-name" style="line-height: 1.1;">
@@ -185,7 +191,8 @@
         
         <div class="win-bar" style="background: var(--green);"></div>
     </div>
-    <div class="card-item win regent" style="display: flex; flex-direction: column;">
+    <div class="card-item win regent run-record" 
+         data-build="v0.98.2" data-ascension="1" data-win="1" style="display: flex; flex-direction: column;">
         <a href="/users/rarelyvlolent/runs/1772956802/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
             <div class="card-info">
                 <span class="card-name" style="line-height: 1.1;">
@@ -203,7 +210,8 @@
         
         <div class="win-bar" style="background: var(--green);"></div>
     </div>
-    <div class="card-item loss regent" style="display: flex; flex-direction: column;">
+    <div class="card-item loss regent run-record" 
+         data-build="v0.98.3" data-ascension="5" data-win="0" style="display: flex; flex-direction: column;">
         <a href="/users/rarelyvlolent/runs/1773291994/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
             <div class="card-info">
                 <span class="card-name" style="line-height: 1.1;">
@@ -221,7 +229,8 @@
         
         <div class="win-bar" style="background: var(--red);"></div>
     </div>
-    <div class="card-item loss regent" style="display: flex; flex-direction: column;">
+    <div class="card-item loss regent run-record" 
+         data-build="v0.98.3" data-ascension="5" data-win="0" style="display: flex; flex-direction: column;">
         <a href="/users/rarelyvlolent/runs/1773573978/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
             <div class="card-info">
                 <span class="card-name" style="line-height: 1.1;">
@@ -239,7 +248,8 @@
         
         <div class="win-bar" style="background: var(--red);"></div>
     </div>
-    <div class="card-item loss regent" style="display: flex; flex-direction: column;">
+    <div class="card-item loss regent run-record" 
+         data-build="v0.99.1" data-ascension="5" data-win="0" style="display: flex; flex-direction: column;">
         <a href="/users/rarelyvlolent/runs/1773796734/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
             <div class="card-info">
                 <span class="card-name" style="line-height: 1.1;">
@@ -257,7 +267,8 @@
         
         <div class="win-bar" style="background: var(--red);"></div>
     </div>
-    <div class="card-item loss regent" style="display: flex; flex-direction: column;">
+    <div class="card-item loss regent run-record" 
+         data-build="v0.99.1" data-ascension="5" data-win="0" style="display: flex; flex-direction: column;">
         <a href="/users/rarelyvlolent/runs/1773870636/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
             <div class="card-info">
                 <span class="card-name" style="line-height: 1.1;">
