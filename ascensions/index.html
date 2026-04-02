@@ -20,7 +20,7 @@
   "@type": "CollectionPage",
   "name": "Ascensions - Spire 2 Stats",
   "description": "Global winrates and statistics per Ascension level in Slay the Spire 2.",
-  "dateModified": "2026-04-02T05:16:11.135Z"
+  "dateModified": "2026-04-02T05:40:43.231Z"
 }
 </script>
 </head>
@@ -154,59 +154,79 @@
             const supabaseKey = 'sb_publishable_y12qZF_dSbUPmV_aieiUgA_CibDsxQV';
             const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
             
-            let runCache = null;
+            const statsCache = {};
             const filter = document.getElementById('build-filter');
+            const grid = document.querySelector('.grid');
 
             async function updateStats() {
-                if (!runCache) {
-                    const { data, error } = await supabase.from('s2s_runs').select('win, ascension, build_id');
-                    if (error) return console.error("Error fetching live stats:", error);
-                    runCache = data;
+                const val = filter.value;
+                
+                // Visual Loading State
+                grid.style.opacity = '0.4';
+                grid.style.pointerEvents = 'none';
+                grid.style.transition = 'opacity 0.2s';
+
+                let results;
+                if (statsCache[val]) {
+                    results = statsCache[val];
+                } else {
+                    // Call the heavy-lifting aggregation function in Supabase
+                    const { data, error } = await supabase.rpc('get_ascension_stats', { build_filter: val });
+                    if (error) {
+                        grid.style.opacity = '1';
+                        grid.style.pointerEvents = 'auto';
+                        return console.error("Error fetching aggregated stats:", error);
+                    }
+                    results = data;
+                    statsCache[val] = data;
                 }
 
-                const val = filter.value;
-                const filtered = runCache.filter(r => {
-                    if (val === 'all') return true;
-                    const b = r.build_id || 'v0.0.0';
-                    const parts = b.replace('v', '').split('.').map(Number);
-                    const isBeta = parts[0] > 0 || parts[1] >= 100;
-                    return val === 'beta' ? isBeta : !isBeta;
-                });
+                grid.style.opacity = '1';
+                grid.style.pointerEvents = 'auto';
 
-                // Calculate Global
-                const totalRuns = filtered.length;
-                const totalWins = filtered.filter(r => r.win).length;
-                const globalWR = totalRuns > 0 ? (totalWins / totalRuns) * 100 : 0;
+                // Calculate Globals for Summary Box from aggregated results
+                const globalTotal = results.reduce((sum, r) => sum + parseInt(r.total_runs), 0);
+                const globalWins = results.reduce((sum, r) => sum + parseInt(r.wins), 0);
+                const globalWR = globalTotal > 0 ? (globalWins / globalTotal) * 100 : 0;
+                const seenCount = results.filter(r => parseInt(r.total_runs) > 0).length;
 
-                document.getElementById('global-total-runs').textContent = totalRuns;
+                document.getElementById('global-total-runs').textContent = globalTotal;
                 document.getElementById('global-winrate').textContent = globalWR.toFixed(1) + '%';
+                
+                // Update the "Ascensions Seen" stat item
+                const seenValEl = document.querySelector('.stat-item:nth-child(3) .stat-value');
+                if (seenValEl) {
+                    const totalPossible = 11;
+                    seenValEl.innerHTML = seenCount === totalPossible ? totalPossible : `${seenCount} <span style="color: #444; font-size: 0.8em;">/ ${totalPossible}</span>`;
+                }
 
-                // Update Ascension levels 0-10
+                // Update Individual Cards
                 for (let i = 0; i <= 10; i++) {
-                    const levelRuns = filtered.filter(r => parseInt(r.ascension) === i);
-                    const wins = levelRuns.filter(r => r.win).length;
-                    const seen = levelRuns.length;
-                    const wr = seen > 0 ? (wins / seen) * 100 : 0;
-                    
                     const card = document.getElementById('asc-card-' + i);
                     const label = document.getElementById('asc-wr-' + i);
+                    if (!card || !label) continue;
+
                     const countLabel = card.querySelector('.run-count');
                     const bar = card.querySelector('.win-bar');
+                    
+                    const row = results.find(r => r.level_val === i);
+                    const seen = row ? parseInt(row.total_runs) : 0;
+                    const wins = row ? parseInt(row.wins) : 0;
+                    const wr = seen > 0 ? (wins / seen) * 100 : 0;
 
                     if (seen === 0) {
                         label.textContent = '';
+                        label.style.color = 'var(--gray)';
                         countLabel.textContent = '0 runs';
                         if (bar) bar.style.display = 'none';
                     } else {
                         label.textContent = wr.toFixed(1) + '% Winrate';
                         countLabel.textContent = seen + ' runs';
                         
-                        // Re-run color logic
                         let color = 'var(--gray)';
                         if (wr > globalWR) color = 'var(--green)';
                         else if (wr < globalWR) color = 'var(--red)';
                         label.style.color = color;
-
                         if (bar) {
                             bar.style.display = 'block';
                             bar.style.background = 'linear-gradient(to right, #00ff89 ' + wr + '%, #ff4b4b ' + wr + '%)';
