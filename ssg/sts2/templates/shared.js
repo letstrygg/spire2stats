@@ -377,10 +377,12 @@ export function generateSemanticStatsParagraph(name, stats, contextLabel) {
     return generateItemSummaryBox(name, stats);
 }
 
-export function wrapLayout(title, content, breadcrumbs = [], description = "", headExtra = "") {
+export function wrapLayout(title, content, breadcrumbs = [], description = "", headExtra = "", canonicalPath = "") {
     const bcHtml = breadcrumbs.length > 0 
         ? `<nav class="breadcrumbs"><a href="/">spire2stats</a> / ${breadcrumbs.map((b, i) => i === breadcrumbs.length - 1 ? b.name.toLowerCase() : `<a href="${b.url}">${b.name.toLowerCase()}</a>`).join(' / ')}</nav>`
         : '';
+
+    const canonicalHtml = canonicalPath ? `<link rel="canonical" href="https://spire2stats.com${canonicalPath.endsWith('/') ? canonicalPath : canonicalPath + '/'}">` : '';
 
     const breadcrumbJsonLd = breadcrumbs.length > 0 ? (() => {
         const listItems = [
@@ -411,6 +413,7 @@ export function wrapLayout(title, content, breadcrumbs = [], description = "", h
     return `<!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -421,6 +424,7 @@ export function wrapLayout(title, content, breadcrumbs = [], description = "", h
     <meta charset="UTF-8">
     <title>${title ? `${title} - ` : ''}Spire 2 Stats</title>
     ${metaDesc}
+    ${canonicalHtml}
     ${breadcrumbJsonLd}
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />

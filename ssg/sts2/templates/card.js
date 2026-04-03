@@ -1,6 +1,6 @@
 import { wrapLayout, generateItemSummaryBox, generateItemJsonLd, formatDescription } from './shared.js';
 
-export function cardDetailTemplate(card, stats, videosHtml, costDisplay) {
+export function cardDetailTemplate(card, stats, videosHtml, costDisplay, canonicalPath = "") {
     const description = formatDescription(card.description);
     return wrapLayout(
         card.name, 
@@ -26,6 +26,7 @@ export function cardDetailTemplate(card, stats, videosHtml, costDisplay) {
         ${videosHtml}`,
         [{ name: 'cards', url: '/cards/' }, { name: card.name, url: '' }],
         `${card.name} card winrates and run statistics for Slay the Spire 2.`,
-        generateItemJsonLd(card.name, "Card", stats)
+        generateItemJsonLd(card.name, "Card", stats),
+        canonicalPath
     );
 }

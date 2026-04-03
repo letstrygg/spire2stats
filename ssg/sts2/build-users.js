@@ -110,7 +110,9 @@ async function build() {
             'Users',
             `<h1>Contributors</h1><div class="grid">${contributorLinks || '<p>No contributors found.</p>'}</div>`,
             [{ name: 'Users', url: '' }],
-            `View all Slay the Spire 2 contributors and their run history.`
+            `View all Slay the Spire 2 contributors and their run history.`,
+            "",
+            "/users/"
         );
         fs.writeFileSync(path.join(PATHS.WEB_ROOT, 'users', 'index.html'), usersIndexHtml);
 
@@ -150,7 +152,9 @@ async function build() {
                 <div class="grid" id="runs-grid">${runLinksHtml || '<p>No runs recorded yet.</p>'}</div>
                 ${generateFilterScript(globalWinRate)}`,
                 [{ name: 'Users', url: '/users/' }, { name: user.display_name, url: '' }],
-                `View Slay the Spire 2 run history and statistics for ${user.display_name}.`
+                `View Slay the Spire 2 run history and statistics for ${user.display_name}.`,
+                "",
+                `/users/${user.slug}/`
             );
             fs.writeFileSync(path.join(userRoot, 'index.html'), indexHtml);
 
@@ -363,7 +367,8 @@ async function build() {
                     <link rel="stylesheet" href="/css/game/sts2-style.css">`,
                     [{ name: user.display_name, url: `/users/${user.slug}/` }, { name: `Run ${run.id}`, url: '' }],
                     metaDescription,
-                    `<link rel="stylesheet" href="/css/game/sts2-style.css">`
+                    `<link rel="stylesheet" href="/css/game/sts2-style.css">`,
+                    `/users/${user.slug}/runs/${run.id}/`
                 );
                 fs.writeFileSync(path.join(runDir, 'index.html'), runHtml);
             }

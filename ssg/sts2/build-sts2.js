@@ -287,7 +287,8 @@ async function buildGeneralCategory(cat, sitemap) {
             </div>`,
             [{ name: cat.folder, url: `/${cat.folder}/` }, { name: title, url: '' }],
             `${title} ${cat.folder.slice(0, -1)} details and descriptions for Slay the Spire 2.`,
-            generateItemJsonLd(title, cat.folder.slice(0, -1), null)
+            generateItemJsonLd(title, cat.folder.slice(0, -1), null),
+            `/${cat.folder}/${slug}/`
         );
         fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
             sitemap.add(`/${cat.folder}/${slug}/`);
@@ -881,7 +882,7 @@ async function build() {
             const rawStats = cardStats.stats[cleanCardId] || { runs: [] };
             const videosHtml = generateRunLinksList(rawStats.runs, `Runs featuring ${card.name}`);
 
-            const detailHtml = cardDetailTemplate(card, stats, videosHtml, costDisplay);
+            const detailHtml = cardDetailTemplate(card, stats, videosHtml, costDisplay, `/cards/${slug}/`);
 
             fs.writeFileSync(path.join(cardDir, 'index.html'), detailHtml);
             sitemap.add(`/cards/${slug}/`);
@@ -990,8 +991,8 @@ async function build() {
     ${contributorsSection}`,
             [],
             landingDesc,
-            generateCollectionJsonLd("Slay the Spire 2 Stats Hub", landingDesc),
-            `<link rel="stylesheet" href="/css/game/sts2-style.css">`
+            generateCollectionJsonLd("Slay the Spire 2 Stats Hub", landingDesc) + `<link rel="stylesheet" href="/css/game/sts2-style.css">`,
+            "/"
         );
 
         fs.writeFileSync(path.join(PATHS.WEB_ROOT, 'index.html'), landingHtml);
