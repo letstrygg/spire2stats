@@ -23,6 +23,9 @@ if (fs.existsSync(charFilePath)) {
     });
 }
 
+// Hard-coded special cases for items that are always starters but not character-specific
+starterCards.add('ASCENDERS_BANE');
+
 const TABLES = [
     {
         name: 'cards',
