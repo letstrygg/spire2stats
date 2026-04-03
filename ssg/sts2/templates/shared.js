@@ -381,6 +381,32 @@ export function wrapLayout(title, content, breadcrumbs = [], description = "", h
     const bcHtml = breadcrumbs.length > 0 
         ? `<nav class="breadcrumbs"><a href="/">spire2stats</a> / ${breadcrumbs.map((b, i) => i === breadcrumbs.length - 1 ? b.name.toLowerCase() : `<a href="${b.url}">${b.name.toLowerCase()}</a>`).join(' / ')}</nav>`
         : '';
+
+    const breadcrumbJsonLd = breadcrumbs.length > 0 ? (() => {
+        const listItems = [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "spire2stats.com",
+                "item": "https://spire2stats.com/"
+            },
+            ...breadcrumbs.map((b, i) => {
+                const item = {
+                    "@type": "ListItem",
+                    "position": i + 2,
+                    "name": b.name
+                };
+                if (b.url) item.item = `https://spire2stats.com${b.url.startsWith('/') ? b.url : '/' + b.url}`;
+                return item;
+            })
+        ];
+        return `\n<script type="application/ld+json">\n${JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": listItems
+        }, null, 2)}\n</script>`;
+    })() : '';
+
     const metaDesc = description ? `<meta name="description" content="${description}">` : '';
     return `<!DOCTYPE html>
 <html lang="en">
@@ -395,6 +421,7 @@ export function wrapLayout(title, content, breadcrumbs = [], description = "", h
     <meta charset="UTF-8">
     <title>${title ? `${title} - ` : ''}Spire 2 Stats</title>
     ${metaDesc}
+    ${breadcrumbJsonLd}
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     ${headExtra}
