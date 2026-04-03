@@ -16,7 +16,7 @@ export function characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, 
     if (topStats.killer) highlights.push(`Deadliest foe is <strong>${topStats.killer.name}</strong> (ended ${topStats.killer.count} runs)`);
 
     const comparisonHtml = stats.seen > 0 ? 
-        `<div style="text-align: center; margin-top: 20px; font-size: 1rem; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px;">
+        `<div style="text-align: center; margin-top: 15px; font-size: 1rem;">
             <span style="color: ${charColor}">${displayName}</span> has a <span style="color: ${stats.color}">${stats.formatted}%</span> winrate across ${stats.seen} runs, 
             <span style="color: ${stats.color}">${diffAbs}% ${relationship}</span> the character average.
         </div>` : '';
@@ -32,17 +32,21 @@ export function characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, 
     return wrapLayout(
         pageTitle, 
         `
-        <h1 style="margin-bottom: 20px;">${displayName} Character Winrates & Statistics</h1>
-        <div class="stats-summary" style="margin-bottom: 40px;">
+        <h1 style="font-size: 1.6rem; margin-bottom: 10px;">${displayName} Character Winrates & Statistics</h1>
+        <div style="margin-bottom: 40px;">
             ${generateSemanticStatsParagraph(displayName, stats, 'character')}
             ${highlightsHtml}
             ${comparisonHtml}
         </div>
         ${videosHtml}
-        <h2 style="margin-top: 40px; margin-bottom: 15px;">${displayName} Specific Cards</h2>
-        <div class="grid">${cardItemsHtml}</div>
-        <h2 style="margin-top: 40px; margin-bottom: 15px;">${displayName} Specific Relics</h2>
-        <div class="grid">${relicItemsHtml}</div>`,
+        <div style="margin-top: 30px;">
+            <h3 style="margin-bottom: 15px;">${displayName} Specific Cards</h3>
+            <div class="grid">${cardItemsHtml}</div>
+        </div>
+        <div style="margin-top: 30px;">
+            <h3 style="margin-bottom: 15px;">${displayName} Specific Relics</h3>
+            <div class="grid">${relicItemsHtml}</div>
+        </div>`,
         [{ name: 'characters', url: '/characters/' }, { name: displayName, url: '' }],
         metaDesc,
         generateItemJsonLd(pageTitle, "Character", stats)
