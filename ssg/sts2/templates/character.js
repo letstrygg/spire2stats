@@ -13,7 +13,7 @@ export function characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, 
     const highlights = [];
     if (topStats.card) highlights.push(`Most popular card is <strong>${topStats.card.name}</strong> (used in ${topStats.card.count} runs)`);
     if (topStats.relic) highlights.push(`Most popular relic is <strong>${topStats.relic.name}</strong> (found in ${topStats.relic.count} runs)`);
-    if (topStats.killer) highlights.push(`Deadliest foe is <strong>${topStats.killer.name}</strong> (ended ${topStats.killer.count} runs)`);
+    if (topStats.killer) highlights.push(`Deadliest foe is <strong style="padding-left:6px;">${topStats.killer.name}</strong> (ended ${topStats.killer.count} runs)`);
 
     const comparisonHtml = stats.seen > 0 ? 
         `<div style="text-align: center; margin-top: 15px; font-size: 1rem;">
