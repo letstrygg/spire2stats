@@ -198,30 +198,44 @@ async function build() {
                         deathInfo = ` on floor ${floorNum} to ${killerName}`;
                     }
 
-                    const header = `${charName} Ascension ${run.ascension || 0} ${status}${deathInfo}, Run ${runNumber} for ${user.display_name}`;
+                    const intro = `${charName} Ascension ${run.ascension || 0} ${status}${deathInfo}`;
 
                     // Select unique details (exclude starter items)
                     const uniqueCard = deck.find(c => {
                         const cid = (c.id || '').toUpperCase();
                         return !starterCards.has(cid);
                     });
-
                     const uniqueRelic = relicIds.find(rid => !starterRelics.has(rid.toUpperCase()));
 
-                    const uniqueInteract = pathHistory.find(p => (p.event_id || p.encounter_id) && !(p.event_id || p.encounter_id).toUpperCase().includes('NEOW'));
+                    let items = [];
+                    if (uniqueCard) items.push(cardLookup[uniqueCard.id] || uniqueCard.id);
+                    if (uniqueRelic) items.push(relicLookup[uniqueRelic] || uniqueRelic);
 
-                    let featured = [];
-                    if (uniqueCard) featured.push(cardLookup[uniqueCard.id] || uniqueCard.id);
-                    if (uniqueRelic) featured.push(relicLookup[uniqueRelic] || uniqueRelic);
-                    if (uniqueInteract) {
-                        const id = uniqueInteract.event_id || uniqueInteract.encounter_id;
-                        featured.push(eventLookup[id] || encounterLookup[id] || id.split('.').pop().replace(/_/g, ' '));
+                    const itemsText = items.length > 0 
+                        ? ` using ${items.length === 1 ? items[0] : items.slice(0, -1).join(', ') + ' and ' + items.slice(-1)}` 
+                        : '';
+
+                    // Find the floor with the highest damage taken
+                    let maxDmgNode = null;
+                    if (Array.isArray(pathHistory)) {
+                        for (const node of pathHistory) {
+                            if ((node.damage_taken || 0) > 0) {
+                                if (!maxDmgNode || node.damage_taken > maxDmgNode.damage_taken) {
+                                    maxDmgNode = node;
+                                }
+                            }
+                        }
                     }
 
-                    const featuredText = featured.length > 0 
-                        ? ` using ${featured.length === 1 ? featured[0] : featured.slice(0, -1).join(', ') + ' and ' + featured.slice(-1)}.` 
-                        : '.';
-                    return (header + featuredText).substring(0, 160);
+                    let encounterInfo = '';
+                    if (maxDmgNode) {
+                        const id = maxDmgNode.encounter_id || maxDmgNode.event_id;
+                        const name = id ? (encounterLookup[id] || eventLookup[id] || id.split('.').pop().replace(/_/g, ' ')) : 'Unknown';
+                        encounterInfo = `, including a ${maxDmgNode.damage_taken} Damage ${name} Fight`;
+                    }
+
+                    const runInfo = `Run ${runNumber} for ${user.display_name}`;
+                    return `${intro}${itemsText}${encounterInfo}. ${runInfo}.`.substring(0, 160);
                 };
 
                 const metaDescription = generateRunDescription();
