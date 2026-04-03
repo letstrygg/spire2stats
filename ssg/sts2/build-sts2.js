@@ -646,7 +646,7 @@ async function buildCharacters(chars, runStats, sitemap) {
         if (rawStats.seen > 0) console.log(`   ✅ Found ${rawStats.seen} runs for ${charKey}`);
         else console.log(`   ⚠️ No runs found for ID "${charKey}"`);
 
-                const videosHtml = generateRunLinksList(rawStats.runs, `Recent Runs as ${displayName}`);
+                const videosHtml = generateRunLinksList(rawStats.runs, `${displayName} Runs`);
 
                 // Character Cards
                 const charCards = await query("SELECT * FROM cards WHERE LOWER(color) = ? ORDER BY rarity, name ASC", [displayName.toLowerCase()]);

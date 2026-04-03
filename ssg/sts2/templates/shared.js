@@ -283,10 +283,10 @@ export function generateAveragesPanel(stats, count, title = "Averages") {
 }
 
 /** Generates a grid of links to runs with embedded video buttons */
-export function generateRunLinksList(runs, title = "Recent Runs") {
+export function generateRunLinksList(runs, title = "Runs") {
     if (!runs || runs.length === 0) return '';
     
-    const links = runs.slice(0, 12).map(run => generateRunCardHtml(run, { display_name: run.username, slug: run.username?.toLowerCase() })).join('');
+    const links = runs.map(run => generateRunCardHtml(run, { display_name: run.username, slug: run.username?.toLowerCase() })).join('');
     return `
     <div class="recent-runs" style="margin-top: 30px;">
         <h3 style="margin-bottom: 15px;">${title}</h3>
