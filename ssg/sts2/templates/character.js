@@ -1,11 +1,19 @@
-import { wrapLayout, generateSemanticStatsParagraph, generateItemJsonLd, formatDescription } from './shared.js';
+import { wrapLayout, generateSemanticStatsParagraph, generateItemJsonLd, formatDescription, CHARACTER_COLORS } from './shared.js';
 
 export function characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, relicItemsHtml, displayName, globalWinRate) {
     const diff = stats.num - globalWinRate;
+    const diffAbs = Math.abs(diff).toFixed(1);
+    let relationship = 'from';
+    if (diff > 0) relationship = 'above';
+    else if (diff < 0) relationship = 'below';
+
+    const charId = (char.character_id || '').replace('CHARACTER.', '').toUpperCase();
+    const charColor = CHARACTER_COLORS[charId] || 'var(--gray)';
+
     const comparisonText = stats.seen > 0 ? 
         `<div style="text-align: center; margin-top: 15px; font-size: 0.95rem; opacity: 0.9;">
-            This character is currently <strong>${diff >= 0 ? 'above' : 'below'}</strong> the global average winrate 
-            of ${globalWinRate.toFixed(1)}% by <span style="color: ${stats.color}">${Math.abs(diff).toFixed(1)}%</span>.
+            <span style="color: ${charColor}">${displayName}</span> has a <span style="color: ${stats.color}">${stats.formatted}%</span> winrate, 
+            <span style="color: ${stats.color}">${diffAbs}% ${relationship}</span> the character average.
         </div>` : '';
 
     const pageTitle = `${displayName} Character`;
