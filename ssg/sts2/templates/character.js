@@ -12,7 +12,7 @@ export function characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, 
 
     const comparisonText = stats.seen > 0 ? 
         `<div style="text-align: center; margin-top: 15px; font-size: 0.95rem; opacity: 0.9;">
-            <span style="color: ${charColor}">${displayName}</span> has a <span style="color: ${stats.color}">${stats.formatted}%</span> winrate, 
+            <span style="color: ${charColor}">${displayName}</span> has a <span style="color: ${stats.color}">${stats.formatted}%</span> winrate across ${stats.seen} runs, 
             <span style="color: ${stats.color}">${diffAbs}% ${relationship}</span> the character average.
         </div>` : '';
 
