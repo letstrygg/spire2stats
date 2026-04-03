@@ -23,7 +23,7 @@ export function characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, 
 
     const highlightsHtml = highlights.length > 0 ? `
         <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 15px; opacity: 0.8; font-size: 0.9rem;">
-            ${highlights.map(h => `<div style="display: flex; align-items: center; gap: 8px;"><span class="material-symbols-outlined" style="font-size: 18px; color: var(--gold);">verified</span> <span>${h}</span></div>`).join('')}
+            ${highlights.map(h => `<div style="display: flex; align-items: center;">${h}</div>`).join('')}
         </div>` : '';
 
     const pageTitle = `${displayName} Character Winrates & Statistics`;
