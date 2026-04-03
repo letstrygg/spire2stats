@@ -1,6 +1,6 @@
 import { wrapLayout, generateSemanticStatsParagraph, generateItemJsonLd, formatDescription, CHARACTER_COLORS } from './shared.js';
 
-export function characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, relicItemsHtml, displayName, globalWinRate) {
+export function characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, relicItemsHtml, displayName, globalWinRate, topStats) {
     const diff = stats.num - globalWinRate;
     const diffAbs = Math.abs(diff).toFixed(1);
     let relationship = 'from';
@@ -16,6 +16,18 @@ export function characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, 
             <span style="color: ${stats.color}">${diffAbs}% ${relationship}</span> the character average.
         </div>` : '';
 
+    const highlights = [];
+    if (topStats.card) highlights.push(`Most popular card is <strong>${topStats.card.name}</strong> (used in ${topStats.card.count} runs)`);
+    if (topStats.relic) highlights.push(`Most popular relic is <strong>${topStats.relic.name}</strong> (found in ${topStats.relic.count} runs)`);
+    if (topStats.killer) highlights.push(`Deadliest foe is <strong>${topStats.killer.name}</strong> (ended ${topStats.killer.count} runs)`);
+
+    const highlightsHtml = highlights.length > 0 ? `
+        <div class="highlights-panel" style="margin: 20px 0; background: rgba(255,255,255,0.03); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); font-size: 0.95rem;">
+            <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+                ${highlights.map(h => `<div style="display: flex; align-items: center; gap: 8px;"><span class="material-symbols-outlined" style="font-size: 18px; color: var(--gold);">verified</span> <span>${h}</span></div>`).join('')}
+            </div>
+        </div>` : '';
+
     const pageTitle = `${displayName} Character`;
     const metaDesc = `${displayName} ${stats.formatted}% winrate across ${stats.seen} runs on Slay the Spire 2.`;
 
@@ -23,10 +35,11 @@ export function characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, 
         pageTitle, 
         `
         <h1>${displayName}</h1>
-        <div class="stats-summary" style="margin-bottom: 30px;">
+        <div class="stats-summary" style="margin-bottom: 10px;">
             ${generateSemanticStatsParagraph(displayName, stats, 'character')}
             ${comparisonText}
         </div>
+        ${highlightsHtml}
         <div style="background: #1a1a1a; padding: 25px; border-radius: 12px; border: 1px solid #333; line-height: 1.6; max-width: 800px;">${formatDescription(char.description)}</div>
         ${videosHtml}
         <h2 class="section-title">${displayName} Specific Cards</h2>

@@ -146,9 +146,15 @@ async function getCardStats() {
                 const video = { yt: row.yt_video, ltg: row.ltg_url };
                 const runMeta = { id: row.id, user_run_num: row.user_run_num, username: row.username, win: row.win, character: row.character, build_id: row.build_id, ascension: row.ascension };
                 const charId = (row.character || '').toUpperCase(); // Matches clean IDs like "SILENT"
+                
+                if (!charStats[charId]) {
+                    charStats[charId] = { seen: 0, wins: 0, runs: [], damage_taken: 0, hp_healed: 0, gold_lost: 0, gold_stolen: 0, max_hp_gained: 0, max_hp_lost: 0, occurrences: 0, cardFrequencies: {}, relicFrequencies: {}, killerFrequencies: {} };
+                }
                 updateStat(charStats, charId, row.win, video, runMeta);
 
                 const relics = JSON.parse(row.relic_list || '[]');
+                const uniqueRelicsInRun = new Set(relics.map(r => (r || '').toUpperCase()));
+                uniqueRelicsInRun.forEach(rid => { charStats[charId].relicFrequencies[rid] = (charStats[charId].relicFrequencies[rid] || 0) + 1; });
                 relics.forEach(relicId => updateStat(relicStats, relicId, row.win, video, runMeta));
 
                 const pathHistory = JSON.parse(row.path_history || '[]');
@@ -209,6 +215,10 @@ async function getCardStats() {
                     encounterStats[killerEncounter].kills++;
                     encounterStats[killerEncounter].lethalRuns.push(runMeta);
 
+                    // Attribute kill to character specific lethality
+                    const kid = killerEncounter.toUpperCase();
+                    charStats[charId].killerFrequencies[kid] = (charStats[charId].killerFrequencies[kid] || 0) + 1;
+
                     // Attribute kill to all constituent monsters
                     const associatedMonsters = encounterMap[killerEncounter] || [];
                     associatedMonsters.forEach(mid => {
@@ -221,6 +231,8 @@ async function getCardStats() {
 
                 const deck = JSON.parse(row.deck_list || '[]');
                 const uniqueCardsInDeck = new Set(deck.map(c => c.id || ''));
+                uniqueCardsInDeck.forEach(cid => { if (cid) charStats[charId].cardFrequencies[cid] = (charStats[charId].cardFrequencies[cid] || 0) + 1; });
+
                 uniqueCardsInDeck.forEach(cardId => updateStat(stats, cardId, row.win, video, runMeta));
 
                 const uniqueEnchantmentsInDeck = new Set();
@@ -602,9 +614,35 @@ async function buildCharacters(chars, runStats, sitemap) {
 
         console.log(`🔍 Mapping Character: "${displayName}" (ID: ${charKey})`);
 
-        const rawStats = runStats.charStats[charKey] || { seen: 0, wins: 0, runs: [] };
+        const rawStats = runStats.charStats[charKey] || { seen: 0, wins: 0, runs: [], cardFrequencies: {}, relicFrequencies: {}, killerFrequencies: {} };
         const stats = getItemStats(rawStats, runStats.globalWinRate);
                 
+                // Calculate Character Highlights (Popular cards/relics and deadliest foe)
+                const starterCards = new Set((await query("SELECT card_id FROM cards WHERE starter = 1")).map(c => c.card_id.toUpperCase()));
+                const starterRelics = new Set((await query("SELECT relic_id FROM relics WHERE starter = 1")).map(r => r.relic_id.toUpperCase()));
+                const cardNames = Object.fromEntries((await query("SELECT card_id, name FROM cards")).map(c => [c.card_id.toUpperCase(), c.name]));
+                const relicNames = Object.fromEntries((await query("SELECT relic_id, name FROM relics")).map(r => [r.relic_id.toUpperCase(), r.name]));
+                const encounterNames = Object.fromEntries((await query("SELECT encounter_id, name FROM encounters")).map(e => [e.encounter_id.toUpperCase(), e.name]));
+
+                const getTop = (freqMap, ignoreSet, nameMap) => {
+                    let bestId = null;
+                    let bestCount = 0;
+                    for (const [id, count] of Object.entries(freqMap)) {
+                        if (ignoreSet && ignoreSet.has(id.toUpperCase())) continue;
+                        if (count > bestCount) {
+                            bestCount = count;
+                            bestId = id;
+                        }
+                    }
+                    return bestId ? { name: nameMap[bestId.toUpperCase()] || bestId, count: bestCount } : null;
+                };
+
+                const topStats = {
+                    card: getTop(rawStats.cardFrequencies || {}, starterCards, cardNames),
+                    relic: getTop(rawStats.relicFrequencies || {}, starterRelics, relicNames),
+                    killer: getTop(rawStats.killerFrequencies || {}, null, encounterNames)
+                };
+
         if (rawStats.seen > 0) console.log(`   ✅ Found ${rawStats.seen} runs for ${charKey}`);
         else console.log(`   ⚠️ No runs found for ID "${charKey}"`);
 
@@ -637,7 +675,7 @@ async function buildCharacters(chars, runStats, sitemap) {
                     </a>`;
                 }).join('');
 
-                const detailHtml = characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, relicItemsHtml, displayName, runStats.globalWinRate);
+                const detailHtml = characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, relicItemsHtml, displayName, runStats.globalWinRate, topStats);
                 fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
                 sitemap.add(`/characters/${slug}/`);
     }
