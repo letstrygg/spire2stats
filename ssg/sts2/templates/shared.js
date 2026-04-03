@@ -382,7 +382,23 @@ export function wrapLayout(title, content, breadcrumbs = [], description = "", h
         ? `<nav class="breadcrumbs"><a href="/">spire2stats</a> / ${breadcrumbs.map((b, i) => i === breadcrumbs.length - 1 ? b.name.toLowerCase() : `<a href="${b.url}">${b.name.toLowerCase()}</a>`).join(' / ')}</nav>`
         : '';
 
-    const canonicalHtml = canonicalPath ? `<link rel="canonical" href="https://spire2stats.com${canonicalPath.endsWith('/') ? canonicalPath : canonicalPath + '/'}">` : '';
+    const canonicalUrl = canonicalPath ? `https://spire2stats.com${canonicalPath.endsWith('/') ? canonicalPath : canonicalPath + '/'}` : '';
+    const canonicalHtml = canonicalUrl ? `<link rel="canonical" href="${canonicalUrl}">` : '';
+
+    const displayTitle = title ? `${title} | Spire 2 Stats` : 'Spire 2 Stats';
+
+    const socialMeta = `
+    <meta property="og:site_name" content="Spire 2 Stats">
+    <meta property="og:type" content="website">
+    ${canonicalUrl ? `<meta property="og:url" content="${canonicalUrl}">` : ''}
+    <meta property="og:title" content="${displayTitle}">
+    <meta property="og:description" content="${description}">
+    <!-- <meta property="og:image" content="https://spire2stats.com/images/default-run-preview.jpg"> -->
+    <meta property="twitter:card" content="summary">
+    ${canonicalUrl ? `<meta property="twitter:url" content="${canonicalUrl}">` : ''}
+    <meta property="twitter:title" content="${displayTitle}">
+    <meta property="twitter:description" content="${description}">
+    <!-- <meta property="twitter:image" content="https://spire2stats.com/images/default-run-preview.jpg"> -->`;
 
     const breadcrumbJsonLd = breadcrumbs.length > 0 ? (() => {
         const listItems = [
@@ -423,8 +439,9 @@ export function wrapLayout(title, content, breadcrumbs = [], description = "", h
     })(window,document,'script','dataLayer','GTM-W4TMS5FL');</script>
     <!-- End Google Tag Manager -->
     <meta charset="UTF-8">
-    <title>${title ? `${title} - ` : ''}Spire 2 Stats</title>
+    <title>${displayTitle}</title>
     ${metaDesc}
+    ${socialMeta}
     ${canonicalHtml}
     ${breadcrumbJsonLd}
     <link rel="stylesheet" href="/css/main.css">
