@@ -82,6 +82,8 @@ async function build() {
             c.character_id.replace('CHARACTER.', '').toUpperCase(), 
             c.name.replace(/^The\s+/i, '')
         ]));
+        const starterCards = new Set((await query("SELECT card_id FROM cards WHERE starter = 1")).map(c => c.card_id));
+        const starterRelics = new Set((await query("SELECT relic_id FROM relics WHERE starter = 1")).map(r => r.relic_id));
         const ascLookup = Object.fromEntries((await query("SELECT level, name FROM ascensions")).map(a => [
             String(a.level), 
             a.name || `Ascension ${a.level}`
@@ -196,17 +198,15 @@ async function build() {
                         deathInfo = ` on floor ${floorNum} to ${killerName}`;
                     }
 
-                    const header = `${charName} Ascension ${run.ascension || 0} ${status}${deathInfo}, Run #${runNumber} for ${user.display_name}.`;
+                    const header = `${charName} Ascension ${run.ascension || 0} ${status}${deathInfo}, Run ${runNumber} for ${user.display_name}`;
 
-                    // Select unique details (ignore standard starting cards and relics)
-                    const ignoreCards = ['BASH', 'NEUTRALIZE', 'SURVIVOR', 'ZAP', 'DUALCAST', 'STRIKE', 'DEFEND', 'HARVEST', 'REAP', 'SWIPE'];
+                    // Select unique details (exclude starter items)
                     const uniqueCard = deck.find(c => {
                         const cid = (c.id || '').toUpperCase();
-                        return !ignoreCards.some(ignore => cid.includes(ignore));
+                        return !starterCards.has(cid);
                     });
 
-                    const ignoreRelics = ['BURNING_BLOOD', 'RING_OF_THE_SNAKE', 'CRACKED_CORE', 'WHITE_HAND', 'REGAL_ADORNMENTS'];
-                    const uniqueRelic = relicIds.find(rid => !ignoreRelics.includes(rid.toUpperCase()));
+                    const uniqueRelic = relicIds.find(rid => !starterRelics.has(rid.toUpperCase()));
 
                     const uniqueInteract = pathHistory.find(p => (p.event_id || p.encounter_id) && !(p.event_id || p.encounter_id).toUpperCase().includes('NEOW'));
 
@@ -218,7 +218,9 @@ async function build() {
                         featured.push(eventLookup[id] || encounterLookup[id] || id.split('.').pop().replace(/_/g, ' '));
                     }
 
-                    const featuredText = featured.length > 0 ? ` Featured items: ${featured.join(', ')}.` : '';
+                    const featuredText = featured.length > 0 
+                        ? ` using ${featured.length === 1 ? featured[0] : featured.slice(0, -1).join(', ') + ' and ' + featured.slice(-1)}.` 
+                        : '.';
                     return (header + featuredText).substring(0, 160);
                 };
 
