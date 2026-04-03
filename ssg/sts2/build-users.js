@@ -76,6 +76,7 @@ async function build() {
         const cardLookup = Object.fromEntries((await query("SELECT card_id, name FROM cards")).map(c => [c.card_id, c.name]));
         const relicLookup = Object.fromEntries((await query("SELECT relic_id, name FROM relics")).map(r => [r.relic_id, r.name]));
         const eventLookup = Object.fromEntries((await query("SELECT event_id, name FROM events")).map(e => [e.event_id, e.name]));
+        const encounterLookup = Object.fromEntries((await query("SELECT encounter_id, name FROM encounters")).map(e => [e.encounter_id, e.name]));
         const enchantmentLookup = Object.fromEntries((await query("SELECT enchantment_id, name FROM enchantments")).map(e => [e.enchantment_id, e.name]));
         const charLookup = Object.fromEntries((await query("SELECT character_id, name FROM characters")).map(c => [
             c.character_id.replace('CHARACTER.', '').toUpperCase(), 
@@ -182,6 +183,46 @@ async function build() {
 
                 const uniqueEventIds = [...new Set(pathHistory.filter(p => p.event_id).map(p => p.event_id))];
                 const eventsLinks = uniqueEventIds.map(id => `<a href="/events/${slugify(eventLookup[id] || id)}/" class="item-link">${eventLookup[id] || id}</a>`).join('');
+
+                // --- RICH META DESCRIPTION GENERATOR ---
+                const generateRunDescription = () => {
+                    const status = run.win ? 'Victory' : 'Defeat';
+                    let deathInfo = '';
+                    if (!run.win && pathHistory.length > 0) {
+                        const lastNode = pathHistory[pathHistory.length - 1];
+                        const floorNum = lastNode.floor ?? pathHistory.length;
+                        const killerId = run.killed_by_encounter || run.killed_by_event;
+                        const killerName = encounterLookup[killerId] || eventLookup[killerId] || (killerId ? killerId.split('.').pop().replace(/_/g, ' ') : 'Unknown');
+                        deathInfo = ` on floor ${floorNum} to ${killerName}`;
+                    }
+
+                    const header = `${charName} Ascension ${run.ascension || 0} ${status}${deathInfo}, Run #${runNumber} for ${user.display_name}.`;
+
+                    // Select unique details (ignore standard starting cards and relics)
+                    const ignoreCards = ['BASH', 'NEUTRALIZE', 'SURVIVOR', 'ZAP', 'DUALCAST', 'STRIKE', 'DEFEND', 'HARVEST', 'REAP', 'SWIPE'];
+                    const uniqueCard = deck.find(c => {
+                        const cid = (c.id || '').toUpperCase();
+                        return !ignoreCards.some(ignore => cid.includes(ignore));
+                    });
+
+                    const ignoreRelics = ['BURNING_BLOOD', 'RING_OF_THE_SNAKE', 'CRACKED_CORE', 'WHITE_HAND', 'REGAL_ADORNMENTS'];
+                    const uniqueRelic = relicIds.find(rid => !ignoreRelics.includes(rid.toUpperCase()));
+
+                    const uniqueInteract = pathHistory.find(p => (p.event_id || p.encounter_id) && !(p.event_id || p.encounter_id).toUpperCase().includes('NEOW'));
+
+                    let featured = [];
+                    if (uniqueCard) featured.push(cardLookup[uniqueCard.id] || uniqueCard.id);
+                    if (uniqueRelic) featured.push(relicLookup[uniqueRelic] || uniqueRelic);
+                    if (uniqueInteract) {
+                        const id = uniqueInteract.event_id || uniqueInteract.encounter_id;
+                        featured.push(eventLookup[id] || encounterLookup[id] || id.split('.').pop().replace(/_/g, ' '));
+                    }
+
+                    const featuredText = featured.length > 0 ? ` Featured items: ${featured.join(', ')}.` : '';
+                    return (header + featuredText).substring(0, 160);
+                };
+
+                const metaDescription = generateRunDescription();
 
                 // Chart.js Data processing - Ensure we have a valid array of floor data
                 const floorData = Array.isArray(pathHistory) 
@@ -305,7 +346,7 @@ async function build() {
                     </script>
                     <link rel="stylesheet" href="/css/game/sts2-style.css">`,
                     [{ name: user.display_name, url: `/users/${user.slug}/` }, { name: `Run ${run.id}`, url: '' }],
-                    `Detailed view of ${user.display_name}'s Slay the Spire 2 run ${runNumber}.`,
+                    metaDescription,
                     `<link rel="stylesheet" href="/css/game/sts2-style.css">`
                 );
                 fs.writeFileSync(path.join(runDir, 'index.html'), runHtml);
