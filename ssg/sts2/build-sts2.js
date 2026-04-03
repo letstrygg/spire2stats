@@ -277,8 +277,10 @@ async function buildGeneralCategory(cat, sitemap) {
         const subtitle = [item.rarity, item.type, item.act].filter(Boolean).join(' • ');
         const description = formatDescription(item.description || item.flavor || item.unlock_text || "");
 
+        const pageTitle = cat.folder === 'achievements' ? `${title} Achievement` : title;
+
         const detailHtml = wrapLayout(
-            title, 
+            pageTitle, 
             `
             <div class="item-box">
                 <h1>${title}</h1>
@@ -287,7 +289,7 @@ async function buildGeneralCategory(cat, sitemap) {
             </div>`,
             [{ name: cat.folder, url: `/${cat.folder}/` }, { name: title, url: '' }],
             `${title} ${cat.folder.slice(0, -1)} details and descriptions for Slay the Spire 2.`,
-            generateItemJsonLd(title, cat.folder.slice(0, -1), null),
+            generateItemJsonLd(pageTitle, cat.folder.slice(0, -1), null),
             `/${cat.folder}/${slug}/`
         );
         fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
@@ -635,7 +637,7 @@ async function buildCharacters(chars, runStats, sitemap) {
                     </a>`;
                 }).join('');
 
-                const detailHtml = characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, relicItemsHtml, displayName);
+                const detailHtml = characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, relicItemsHtml, displayName, runStats.globalWinRate);
                 fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
                 sitemap.add(`/characters/${slug}/`);
     }
@@ -649,7 +651,7 @@ async function buildCharacters(chars, runStats, sitemap) {
                 return generateCardItemHtml(`/characters/${slugify(displayName)}/`, displayName, stats, displayName.toLowerCase());
             }).join('');
 
-            const indexDesc = `View global winrates, run statistics, and win/loss records for all Slay the Spire 2 characters.`;
+            const indexDesc = `${runStats.globalWinRate.toFixed(1)}% winrate across ${runStats.totalRuns} runs for characters on Slay the Spire 2.`;
             const indexHtml = wrapLayout(
                 'Characters', 
                 `
@@ -899,7 +901,7 @@ async function build() {
         return generateCardItemHtml(`/cards/${slug}/`, card.name, stats, card.color);
         }).join('');
 
-        const indexDesc = `View global winrates, run statistics, and pick-rate records for all Slay the Spire 2 cards.`;
+        const indexDesc = `${cardStats.globalWinRate.toFixed(1)}% winrate across ${cardStats.totalRuns} runs for cards on Slay the Spire 2.`;
         const indexHtml = wrapLayout(
             'Cards', 
             `
@@ -963,7 +965,7 @@ async function build() {
             </h2>
             <div class="grid">${contributorLinks}</div>` : '';
 
-        const landingDesc = "Winrate Statistics for Slay the Spire 2.";
+        const landingDesc = `${cardStats.globalWinRate.toFixed(1)}% overall winrate across ${cardStats.totalRuns} runs on Slay the Spire 2.`;
         const landingHtml = wrapLayout(
             "",
             `

@@ -31,7 +31,7 @@ export function eventDetailTemplate(event, stats, averagesHtml, videosHtml) {
         ${optionsHtml}
         ${videosHtml}`,
         [{ name: 'events', url: '/events/' }, { name: event.name, url: '' }],
-        `${event.name} event winrates and run statistics for Slay the Spire 2.`,
+        `${event.name} ${stats.formatted}% winrate across ${stats.seen} runs on Slay the Spire 2.`,
         generateItemJsonLd(event.name, "Event", stats)
     );
 }

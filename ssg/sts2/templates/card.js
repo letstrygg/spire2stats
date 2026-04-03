@@ -25,7 +25,7 @@ export function cardDetailTemplate(card, stats, videosHtml, costDisplay, canonic
         </div>
         ${videosHtml}`,
         [{ name: 'cards', url: '/cards/' }, { name: card.name, url: '' }],
-        `${card.name} card winrates and run statistics for Slay the Spire 2.`,
+        `${card.name} ${stats.formatted}% winrate across ${stats.seen} runs on Slay the Spire 2.`,
         generateItemJsonLd(card.name, "Card", stats),
         canonicalPath
     );

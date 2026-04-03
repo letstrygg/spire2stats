@@ -110,7 +110,7 @@ async function build() {
             'Users',
             `<h1>Contributors</h1><div class="grid">${contributorLinks || '<p>No contributors found.</p>'}</div>`,
             [{ name: 'Users', url: '' }],
-            `View all Slay the Spire 2 contributors and their run history.`,
+            `${allRuns.length} runs contributed by the Slay the Spire 2 community.`,
             "",
             "/users/"
         );
@@ -152,7 +152,7 @@ async function build() {
                 <div class="grid" id="runs-grid">${runLinksHtml || '<p>No runs recorded yet.</p>'}</div>
                 ${generateFilterScript(globalWinRate)}`,
                 [{ name: 'Users', url: '/users/' }, { name: user.display_name, url: '' }],
-                `View Slay the Spire 2 run history and statistics for ${user.display_name}.`,
+                `${user.display_name} ${userStats.formatted}% winrate across ${userStats.seen} runs on Slay the Spire 2.`,
                 "",
                 `/users/${user.slug}/`
             );

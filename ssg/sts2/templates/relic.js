@@ -18,7 +18,7 @@ export function relicDetailTemplate(relic, stats, videosHtml) {
         </div>
         ${videosHtml}`,
         [{ name: 'relics', url: '/relics/' }, { name: relic.name.toLowerCase(), url: '' }],
-        `${relic.name} relic winrates and run statistics for Slay the Spire 2, based on tracked gameplay.`,
+        `${relic.name} ${stats.formatted}% winrate across ${stats.seen} runs on Slay the Spire 2.`,
         generateItemJsonLd(relic.name, "Relic", stats)
     );
 }
