@@ -32,31 +32,44 @@
         window.location.reload();
     };
 
-    supabase.auth.onAuthStateChange(async (event, session) => {
-        console.log("Auth: State change detected:", event);
-        const user = session?.user;
+    let isProcessing = false;
 
+    supabase.auth.onAuthStateChange(async (event, session) => {
+        console.log(`Auth: Event [${event}] detected.`);
+        if (isProcessing) {
+            console.log("Auth: Logic already running, ignoring concurrent event.");
+            return;
+        }
+        
+        const user = session?.user;
         if (!user) {
-            console.log("Auth: No session found, showing login options.");
             authBtn.textContent = 'Login';
             authMenu.innerHTML = `<button onclick="authLogin('google')">Google</button><button onclick="authLogin('twitch')">Twitch</button>`;
             return;
         }
 
         try {
+            isProcessing = true;
             console.log("Auth: Fetching profile for UUID:", user.id);
-            let { data: profile, error } = await supabase
+
+            // Use a timeout to prevent the UI from hanging if the Supabase Lock is stuck
+            const fetchPromise = supabase
                 .from('ltg_profiles')
                 .select('username')
                 .eq('user_id', user.id)
                 .maybeSingle();
 
-            console.log("Auth: Profile fetch completed. Data:", profile, "Error:", error);
+            const timeoutPromise = new Promise((_, reject) => 
+                setTimeout(() => reject(new Error("Supabase request timed out (Lock contention?)")), 10000)
+            );
+
+            const { data: profile, error } = await Promise.race([fetchPromise, timeoutPromise]);
+            console.log("Auth: Profile fetch result:", { profile, error });
 
             if (error) throw error;
 
             if (!profile) {
-                console.log("Auth: Profile missing, generating new entry...");
+                console.log("Auth: No profile found. Generating...");
                 const rawName = user.user_metadata?.display_name || ('unknown' + Math.floor(1000 + Math.random() * 9000));
                 const slug = rawName.toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-');
                 console.log(`Auth: Attempting insert with Name: ${rawName}, Slug: ${slug}`);
@@ -71,9 +84,11 @@
             authBtn.textContent = profile.username;
             authMenu.innerHTML = `<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>`;
         } catch (err) {
-            console.error("Auth Exception Details:", err);
+            console.error("Auth Critical Exception:", err);
             authBtn.textContent = 'Account';
             authMenu.innerHTML = `<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>`;
+        } finally {
+            isProcessing = false;
         }
     });
 })();
