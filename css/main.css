@@ -21,6 +21,7 @@
     --underline: #ffffff;
     --border: #26262c;
     --border-active: #3f3f3f;
+    --border-hover: #3f3f3f;
     --chat-highlight: rgba(255, 235, 59, 0.15);
 
     /* Character Semantic Colors */
