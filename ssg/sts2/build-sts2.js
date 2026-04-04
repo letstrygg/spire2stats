@@ -1031,7 +1031,7 @@ async function build() {
     ${contributorsSection}`,
             [],
             landingDesc,
-            generateCollectionJsonLd("Slay the Spire 2 Stats Hub", landingDesc) + `<link rel="stylesheet" href="/css/game/sts2-style.css">`,
+            generateCollectionJsonLd("Slay the Spire 2 Stats Hub", landingDesc) + `<link rel="stylesheet" href="/css/sts2-style.css">`,
             "/"
         );
 
