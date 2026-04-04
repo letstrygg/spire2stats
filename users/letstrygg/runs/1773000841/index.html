@@ -63,7 +63,7 @@
     <!-- End Google Tag Manager (noscript) -->
 <nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/users/letstrygg/">letstrygg</a> / run 1773000841</nav>
                     <div class="game-page-wrapper">
-                        <div class="item-box" style="background-color: color-mix(in srgb, var(--color-ironclad) 30%, transparent); max-width: 1000px; margin: 0 auto; text-align: center;">
+                        <div class="item-box" style="background-color: color-mix(in srgb, var(--color-ironclad) 30%, transparent); margin: 0 auto; text-align: center;">
                             <h1 style="font-size: 2.5rem; margin-bottom: 10px;">Run 6</h1>
                             <div class="subtitle" style="font-size: 1.2rem; margin-bottom: 30px;">
                                 <a href="/characters/ironclad/" style="color: inherit; text-decoration: underline;">Ironclad</a> • 
@@ -104,7 +104,7 @@
                     document.addEventListener("DOMContentLoaded", function() {
                         const ctx = document.getElementById('hpChart').getContext('2d');
                         if (!ctx) return;
-                        const rawRuns = [{"label":"Run 6 (Ironclad)","win":true,"floorData":[{"floor":1,"hp":80},{"floor":2,"hp":78},{"floor":3,"hp":78},{"floor":4,"hp":80},{"floor":5,"hp":78},{"floor":6,"hp":74},{"floor":7,"hp":71},{"floor":8,"hp":64},{"floor":9,"hp":64},{"floor":10,"hp":64},{"floor":11,"hp":64},{"floor":12,"hp":64},{"floor":13,"hp":48},{"floor":14,"hp":48},{"floor":15,"hp":48},{"floor":16,"hp":48},{"floor":17,"hp":36},{"floor":18,"hp":80},{"floor":19,"hp":80},{"floor":20,"hp":80},{"floor":21,"hp":80},{"floor":22,"hp":80},{"floor":23,"hp":41},{"floor":24,"hp":47},{"floor":25,"hp":47},{"floor":26,"hp":47},{"floor":27,"hp":28},{"floor":28,"hp":27},{"floor":29,"hp":51},{"floor":30,"hp":10},{"floor":31,"hp":10},{"floor":32,"hp":34},{"floor":33,"hp":24},{"floor":34,"hp":80},{"floor":35,"hp":76},{"floor":36,"hp":76},{"floor":37,"hp":78},{"floor":38,"hp":78},{"floor":39,"hp":78},{"floor":40,"hp":78},{"floor":41,"hp":78},{"floor":42,"hp":78},{"floor":43,"hp":78},{"floor":44,"hp":78},{"floor":45,"hp":75},{"floor":46,"hp":78},{"floor":47,"hp":78},{"floor":48,"hp":68}]}];
+                        const rawRuns = [{"label":"Run 6 (Ironclad)","win":true,"floorData":[{"floor":1,"hp":80,"name":"Neow","damage":0,"healed":80,"gold":0,"monsters":""},{"floor":2,"hp":78,"name":"Toadpoles","damage":8,"healed":6,"gold":18,"monsters":"TOADPOLE, TOADPOLE"},{"floor":3,"hp":78,"name":"Waterlogged Scriptorium","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":4,"hp":80,"name":"Corpse Slugs","damage":1,"healed":3,"gold":17,"monsters":"CORPSE SLUG, CORPSE SLUG"},{"floor":5,"hp":78,"name":"Sludge Spinner","damage":8,"healed":6,"gold":14,"monsters":"SLUDGE SPINNER"},{"floor":6,"hp":74,"name":"Phantasmal Gardeners","damage":10,"healed":6,"gold":38,"monsters":"PHANTASMAL GARDENER, PHANTASMAL GARDENER, PHANTASMAL GARDENER, PHANTASMAL GARDENER"},{"floor":7,"hp":71,"name":"Haunted Ship","damage":9,"healed":6,"gold":11,"monsters":"HAUNTED SHIP"},{"floor":8,"hp":64,"name":"Terror Eel","damage":13,"healed":6,"gold":42,"monsters":"TERROR EEL"},{"floor":9,"hp":64,"name":"rest site","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":10,"hp":64,"name":"treasure","damage":0,"healed":0,"gold":49,"monsters":""},{"floor":11,"hp":64,"name":"rest site","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":12,"hp":64,"name":"shop","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":13,"hp":48,"name":"Skulking Colony","damage":22,"healed":6,"gold":39,"monsters":"SKULKING COLONY"},{"floor":14,"hp":48,"name":"The Sunken Statue","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":15,"hp":48,"name":"treasure","damage":0,"healed":0,"gold":51,"monsters":""},{"floor":16,"hp":48,"name":"rest site","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":17,"hp":36,"name":"Soul Fysh","damage":18,"healed":6,"gold":100,"monsters":"SOUL FYSH"},{"floor":18,"hp":80,"name":"Pael","damage":0,"healed":44,"gold":0,"monsters":""},{"floor":19,"hp":80,"name":"Bowlbugs","damage":3,"healed":3,"gold":14,"monsters":"BOWLBUG ROCK, BOWLBUG EGG"},{"floor":20,"hp":80,"name":"Tea Master","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":21,"hp":80,"name":"Exoskeletons","damage":0,"healed":0,"gold":14,"monsters":"EXOSKELETON, EXOSKELETON, EXOSKELETON"},{"floor":22,"hp":80,"name":"Field of Man-Sized Holes","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":23,"hp":41,"name":"The Decimillipede","damage":45,"healed":6,"gold":38,"monsters":"DECIMILLIPEDE SEGMENT FRONT, DECIMILLIPEDE SEGMENT MIDDLE, DECIMILLIPEDE SEGMENT BACK"},{"floor":24,"hp":47,"name":"Louse Progenitor","damage":0,"healed":6,"gold":19,"monsters":"LOUSE PROGENITOR"},{"floor":25,"hp":47,"name":"shop","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":26,"hp":47,"name":"treasure","damage":0,"healed":0,"gold":47,"monsters":""},{"floor":27,"hp":28,"name":"Slumber Party","damage":25,"healed":6,"gold":12,"monsters":"BOWLBUG ROCK, BOWLBUG SILK, SLUMBERING BEETLE"},{"floor":28,"hp":27,"name":"Infested Prism","damage":7,"healed":6,"gold":42,"monsters":"INFESTED PRISM"},{"floor":29,"hp":51,"name":"rest site","damage":0,"healed":24,"gold":0,"monsters":""},{"floor":30,"hp":10,"name":"Entomancer","damage":47,"healed":6,"gold":44,"monsters":"ENTOMANCER"},{"floor":31,"hp":10,"name":"shop","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":32,"hp":34,"name":"rest site","damage":0,"healed":24,"gold":0,"monsters":""},{"floor":33,"hp":24,"name":"The Insatiable","damage":41,"healed":31,"gold":100,"monsters":"THE INSATIABLE"},{"floor":34,"hp":80,"name":"Nonupeipe","damage":0,"healed":56,"gold":0,"monsters":""},{"floor":35,"hp":76,"name":"Scrolls of Biting","damage":10,"healed":6,"gold":16,"monsters":"SCROLL OF BITING, SCROLL OF BITING, SCROLL OF BITING"},{"floor":36,"hp":76,"name":"shop","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":37,"hp":78,"name":"Devoted Sculptor","damage":0,"healed":2,"gold":11,"monsters":"DEVOTED SCULPTOR"},{"floor":38,"hp":78,"name":"Potion Courier","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":39,"hp":78,"name":"rest site","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":40,"hp":78,"name":"Knight Gang","damage":6,"healed":6,"gold":43,"monsters":"FLAIL KNIGHT, SPECTRAL KNIGHT, MAGI KNIGHT"},{"floor":41,"hp":78,"name":"treasure","damage":0,"healed":0,"gold":49,"monsters":""},{"floor":42,"hp":78,"name":"A Lone Globe Head","damage":0,"healed":0,"gold":20,"monsters":"GLOBE HEAD"},{"floor":43,"hp":78,"name":"Bot Buddies","damage":0,"healed":0,"gold":13,"monsters":"AXEBOT, AXEBOT"},{"floor":44,"hp":78,"name":"Mecha Knight","damage":0,"healed":0,"gold":43,"monsters":"MECHA KNIGHT"},{"floor":45,"hp":75,"name":"Slippery Bridge","damage":3,"healed":0,"gold":0,"monsters":""},{"floor":46,"hp":78,"name":"Soul Nexus","damage":0,"healed":3,"gold":41,"monsters":"SOUL NEXUS"},{"floor":47,"hp":78,"name":"rest site","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":48,"hp":68,"name":"Test Subject","damage":16,"healed":6,"gold":0,"monsters":"TEST SUBJECT"}]}];
                         console.log("📈 Chart Data received by browser:", rawRuns);
 
                         if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) {
@@ -116,9 +116,12 @@
                         const labels = Array.from({length: maxFloor}, (_, i) => i + 1);
                         const color = "#00ff89";
 
-                        const hpMap = {}; 
-                        rawRuns[0].floorData.forEach(d => { hpMap[d.floor] = d.hp; });
-                        const dataArr = labels.map(floor => hpMap[floor] !== undefined ? hpMap[floor] : null);
+                        const floorMap = {}; 
+                        rawRuns[0].floorData.forEach(d => { floorMap[d.floor] = d; });
+                        const dataArr = labels.map(floor => {
+                            const d = floorMap[floor];
+                            return d ? { x: floor, y: d.hp, ...d } : null;
+                        });
 
                         new Chart(ctx, {
                             type: 'line',
@@ -149,7 +152,24 @@
                                     } 
                                 },
                                 plugins: {
-                                    legend: { display: false }
+                                    legend: { display: false },
+                                    tooltip: {
+                                        callbacks: {
+                                            title: (items) => `Floor ${items[0].label}`,
+                                            label: (context) => {
+                                                const d = context.raw;
+                                                if (!d || typeof d === 'number') return `HP: ${d}`;
+                                                const hpStart = d.y + d.damage - d.healed;
+                                                const lines = [`Node: ${d.name}` ];
+                                                if (d.monsters) lines.push(`Monsters: ${d.monsters}`);
+                                                lines.push(`HP: ${hpStart} -> ${d.y}`);
+                                                if (d.damage > 0) lines.push(`Damage Taken: ${d.damage}`);
+                                                if (d.healed > 0) lines.push(`Healed: ${d.healed}`);
+                                                if (d.gold !== 0) lines.push(`Gold: ${d.gold > 0 ? '+' : ''}${d.gold}`);
+                                                return lines;
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         });

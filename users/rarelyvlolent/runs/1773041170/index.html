@@ -63,7 +63,7 @@
     <!-- End Google Tag Manager (noscript) -->
 <nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/users/rarelyvlolent/">rarelyvlolent</a> / run 1773041170</nav>
                     <div class="game-page-wrapper">
-                        <div class="item-box" style="background-color: color-mix(in srgb, var(--color-defect) 30%, transparent); max-width: 1000px; margin: 0 auto; text-align: center;">
+                        <div class="item-box" style="background-color: color-mix(in srgb, var(--color-defect) 30%, transparent); margin: 0 auto; text-align: center;">
                             <h1 style="font-size: 2.5rem; margin-bottom: 10px;">Run 28</h1>
                             <div class="subtitle" style="font-size: 1.2rem; margin-bottom: 30px;">
                                 <a href="/characters/defect/" style="color: inherit; text-decoration: underline;">Defect</a> • 
@@ -104,7 +104,7 @@
                     document.addEventListener("DOMContentLoaded", function() {
                         const ctx = document.getElementById('hpChart').getContext('2d');
                         if (!ctx) return;
-                        const rawRuns = [{"label":"Run 28 (Defect)","win":false,"floorData":[{"floor":1,"hp":60},{"floor":2,"hp":60},{"floor":3,"hp":60},{"floor":4,"hp":59},{"floor":5,"hp":59},{"floor":6,"hp":59},{"floor":7,"hp":30},{"floor":8,"hp":52},{"floor":9,"hp":50},{"floor":10,"hp":50},{"floor":11,"hp":36},{"floor":12,"hp":58},{"floor":13,"hp":21},{"floor":14,"hp":12},{"floor":15,"hp":12},{"floor":16,"hp":35},{"floor":17,"hp":0}]}];
+                        const rawRuns = [{"label":"Run 28 (Defect)","win":false,"floorData":[{"floor":1,"hp":60,"name":"Neow","damage":0,"healed":60,"gold":0,"monsters":""},{"floor":2,"hp":60,"name":"Fuzzy Wurm Crawler","damage":0,"healed":0,"gold":16,"monsters":"FUZZY WURM CRAWLER"},{"floor":3,"hp":60,"name":"Brain Leech","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":4,"hp":59,"name":"Group of Slimes","damage":1,"healed":0,"gold":11,"monsters":"LEAF SLIME S, TWIG SLIME M, TWIG SLIME S"},{"floor":5,"hp":59,"name":"Self-Help Book","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":6,"hp":59,"name":"shop","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":7,"hp":30,"name":"Byrdonis","damage":29,"healed":0,"gold":36,"monsters":"BYRDONIS"},{"floor":8,"hp":52,"name":"rest site","damage":0,"healed":22,"gold":0,"monsters":""},{"floor":9,"hp":50,"name":"Shrinker Beetle","damage":2,"healed":0,"gold":15,"monsters":"SHRINKER BEETLE"},{"floor":10,"hp":50,"name":"treasure","damage":0,"healed":0,"gold":52,"monsters":""},{"floor":11,"hp":36,"name":"Room Full of Cheese","damage":14,"healed":0,"gold":0,"monsters":""},{"floor":12,"hp":58,"name":"rest site","damage":0,"healed":22,"gold":0,"monsters":""},{"floor":13,"hp":21,"name":"Bygone Effigy","damage":38,"healed":1,"gold":40,"monsters":"BYGONE EFFIGY"},{"floor":14,"hp":12,"name":"Overgrowth Flora","damage":10,"healed":1,"gold":18,"monsters":"SNAPPING JAXFRUIT, FLYCONID"},{"floor":15,"hp":12,"name":"shop","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":16,"hp":35,"name":"rest site","damage":0,"healed":23,"gold":0,"monsters":""},{"floor":17,"hp":0,"name":"Vantom","damage":73,"healed":38,"gold":0,"monsters":"VANTOM"}]}];
                         console.log("📈 Chart Data received by browser:", rawRuns);
 
                         if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) {
@@ -116,9 +116,12 @@
                         const labels = Array.from({length: maxFloor}, (_, i) => i + 1);
                         const color = "#ff4b4b";
 
-                        const hpMap = {}; 
-                        rawRuns[0].floorData.forEach(d => { hpMap[d.floor] = d.hp; });
-                        const dataArr = labels.map(floor => hpMap[floor] !== undefined ? hpMap[floor] : null);
+                        const floorMap = {}; 
+                        rawRuns[0].floorData.forEach(d => { floorMap[d.floor] = d; });
+                        const dataArr = labels.map(floor => {
+                            const d = floorMap[floor];
+                            return d ? { x: floor, y: d.hp, ...d } : null;
+                        });
 
                         new Chart(ctx, {
                             type: 'line',
@@ -149,7 +152,24 @@
                                     } 
                                 },
                                 plugins: {
-                                    legend: { display: false }
+                                    legend: { display: false },
+                                    tooltip: {
+                                        callbacks: {
+                                            title: (items) => `Floor ${items[0].label}`,
+                                            label: (context) => {
+                                                const d = context.raw;
+                                                if (!d || typeof d === 'number') return `HP: ${d}`;
+                                                const hpStart = d.y + d.damage - d.healed;
+                                                const lines = [`Node: ${d.name}` ];
+                                                if (d.monsters) lines.push(`Monsters: ${d.monsters}`);
+                                                lines.push(`HP: ${hpStart} -> ${d.y}`);
+                                                if (d.damage > 0) lines.push(`Damage Taken: ${d.damage}`);
+                                                if (d.healed > 0) lines.push(`Healed: ${d.healed}`);
+                                                if (d.gold !== 0) lines.push(`Gold: ${d.gold > 0 ? '+' : ''}${d.gold}`);
+                                                return lines;
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         });

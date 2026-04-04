@@ -63,7 +63,7 @@
     <!-- End Google Tag Manager (noscript) -->
 <nav class="breadcrumbs"><a href="/">spire2stats</a> / <a href="/users/letstrygg/">letstrygg</a> / run 1773064873</nav>
                     <div class="game-page-wrapper">
-                        <div class="item-box" style="background-color: color-mix(in srgb, var(--color-regent) 30%, transparent); max-width: 1000px; margin: 0 auto; text-align: center;">
+                        <div class="item-box" style="background-color: color-mix(in srgb, var(--color-regent) 30%, transparent); margin: 0 auto; text-align: center;">
                             <h1 style="font-size: 2.5rem; margin-bottom: 10px;">Run 10</h1>
                             <div class="subtitle" style="font-size: 1.2rem; margin-bottom: 30px;">
                                 <a href="/characters/regent/" style="color: inherit; text-decoration: underline;">Regent</a> • 
@@ -104,7 +104,7 @@
                     document.addEventListener("DOMContentLoaded", function() {
                         const ctx = document.getElementById('hpChart').getContext('2d');
                         if (!ctx) return;
-                        const rawRuns = [{"label":"Run 10 (Regent)","win":false,"floorData":[{"floor":1,"hp":75},{"floor":2,"hp":75},{"floor":3,"hp":72},{"floor":4,"hp":72},{"floor":5,"hp":72},{"floor":6,"hp":72},{"floor":7,"hp":72},{"floor":8,"hp":70},{"floor":9,"hp":65},{"floor":10,"hp":65},{"floor":11,"hp":51},{"floor":12,"hp":51},{"floor":13,"hp":51},{"floor":14,"hp":51},{"floor":15,"hp":51},{"floor":16,"hp":51},{"floor":17,"hp":28},{"floor":18,"hp":75},{"floor":19,"hp":75},{"floor":20,"hp":75},{"floor":21,"hp":71},{"floor":22,"hp":71},{"floor":23,"hp":71},{"floor":24,"hp":71},{"floor":25,"hp":71},{"floor":26,"hp":71},{"floor":27,"hp":71},{"floor":28,"hp":66},{"floor":29,"hp":66},{"floor":30,"hp":66},{"floor":31,"hp":71},{"floor":32,"hp":71},{"floor":33,"hp":58},{"floor":34,"hp":80},{"floor":35,"hp":0}]}];
+                        const rawRuns = [{"label":"Run 10 (Regent)","win":false,"floorData":[{"floor":1,"hp":75,"name":"Neow","damage":0,"healed":75,"gold":0,"monsters":""},{"floor":2,"hp":75,"name":"A Lone Nibbit","damage":0,"healed":0,"gold":11,"monsters":"NIBBIT"},{"floor":3,"hp":72,"name":"Shrinker Beetle","damage":3,"healed":0,"gold":14,"monsters":"SHRINKER BEETLE"},{"floor":4,"hp":72,"name":"Brain Leech","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":5,"hp":72,"name":"Wellspring","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":6,"hp":72,"name":"Group of Slimes","damage":0,"healed":0,"gold":18,"monsters":"LEAF SLIME S, TWIG SLIME M, TWIG SLIME S"},{"floor":7,"hp":72,"name":"shop","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":8,"hp":70,"name":"Ruby Raiders","damage":2,"healed":0,"gold":18,"monsters":"TRACKER RUBY RAIDER, BRUTE RUBY RAIDER, CROSSBOW RUBY RAIDER"},{"floor":9,"hp":65,"name":"Mawler","damage":5,"healed":0,"gold":16,"monsters":"MAWLER"},{"floor":10,"hp":65,"name":"treasure","damage":0,"healed":0,"gold":47,"monsters":""},{"floor":11,"hp":51,"name":"Strangler and Friend","damage":14,"healed":0,"gold":11,"monsters":"TWIG SLIME M, SLITHERING STRANGLER"},{"floor":12,"hp":51,"name":"rest site","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":13,"hp":51,"name":"A Pair of Nibbits","damage":0,"healed":0,"gold":19,"monsters":"NIBBIT, NIBBIT"},{"floor":14,"hp":51,"name":"Swarm of Slimes","damage":0,"healed":0,"gold":20,"monsters":"TWIG SLIME M, LEAF SLIME M, TWIG SLIME S, LEAF SLIME S"},{"floor":15,"hp":51,"name":"Fogmog","damage":0,"healed":0,"gold":10,"monsters":"FOGMOG"},{"floor":16,"hp":51,"name":"rest site","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":17,"hp":28,"name":"Ceremonial Beast","damage":23,"healed":0,"gold":130,"monsters":"CEREMONIAL BEAST"},{"floor":18,"hp":75,"name":"Pael","damage":0,"healed":47,"gold":0,"monsters":""},{"floor":19,"hp":75,"name":"Bowlbugs","damage":0,"healed":0,"gold":46,"monsters":"BOWLBUG ROCK, BOWLBUG NECTAR"},{"floor":20,"hp":75,"name":"Exoskeletons","damage":0,"healed":0,"gold":47,"monsters":"EXOSKELETON, EXOSKELETON, EXOSKELETON"},{"floor":21,"hp":71,"name":"Mass of Mytes","damage":4,"healed":0,"gold":44,"monsters":"MYTE, MYTE"},{"floor":22,"hp":71,"name":"Bowlbug Swarm","damage":0,"healed":0,"gold":49,"monsters":"BOWLBUG ROCK, BOWLBUG NECTAR, BOWLBUG EGG"},{"floor":23,"hp":71,"name":"Crystal Sphere","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":24,"hp":71,"name":"Ovicopter","damage":0,"healed":0,"gold":43,"monsters":"OVICOPTER"},{"floor":25,"hp":71,"name":"rest site","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":26,"hp":71,"name":"treasure","damage":0,"healed":0,"gold":50,"monsters":""},{"floor":27,"hp":71,"name":"Slumber Party","damage":0,"healed":0,"gold":40,"monsters":"BOWLBUG ROCK, BOWLBUG SILK, SLUMBERING BEETLE"},{"floor":28,"hp":66,"name":"Louse Progenitor","damage":5,"healed":0,"gold":49,"monsters":"LOUSE PROGENITOR"},{"floor":29,"hp":66,"name":"rest site","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":30,"hp":66,"name":"shop","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":31,"hp":71,"name":"Spiny Toad","damage":0,"healed":5,"gold":42,"monsters":"SPINY TOAD"},{"floor":32,"hp":71,"name":"rest site","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":33,"hp":58,"name":"Kaiser Crab","damage":13,"healed":0,"gold":130,"monsters":"CRUSHER, ROCKET"},{"floor":34,"hp":80,"name":"Nonupeipe","damage":0,"healed":22,"gold":0,"monsters":""},{"floor":35,"hp":0,"name":"Devoted Sculptor","damage":5,"healed":0,"gold":0,"monsters":"DEVOTED SCULPTOR"}]}];
                         console.log("📈 Chart Data received by browser:", rawRuns);
 
                         if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) {
@@ -116,9 +116,12 @@
                         const labels = Array.from({length: maxFloor}, (_, i) => i + 1);
                         const color = "#ff4b4b";
 
-                        const hpMap = {}; 
-                        rawRuns[0].floorData.forEach(d => { hpMap[d.floor] = d.hp; });
-                        const dataArr = labels.map(floor => hpMap[floor] !== undefined ? hpMap[floor] : null);
+                        const floorMap = {}; 
+                        rawRuns[0].floorData.forEach(d => { floorMap[d.floor] = d; });
+                        const dataArr = labels.map(floor => {
+                            const d = floorMap[floor];
+                            return d ? { x: floor, y: d.hp, ...d } : null;
+                        });
 
                         new Chart(ctx, {
                             type: 'line',
@@ -149,7 +152,24 @@
                                     } 
                                 },
                                 plugins: {
-                                    legend: { display: false }
+                                    legend: { display: false },
+                                    tooltip: {
+                                        callbacks: {
+                                            title: (items) => `Floor ${items[0].label}`,
+                                            label: (context) => {
+                                                const d = context.raw;
+                                                if (!d || typeof d === 'number') return `HP: ${d}`;
+                                                const hpStart = d.y + d.damage - d.healed;
+                                                const lines = [`Node: ${d.name}` ];
+                                                if (d.monsters) lines.push(`Monsters: ${d.monsters}`);
+                                                lines.push(`HP: ${hpStart} -> ${d.y}`);
+                                                if (d.damage > 0) lines.push(`Damage Taken: ${d.damage}`);
+                                                if (d.healed > 0) lines.push(`Healed: ${d.healed}`);
+                                                if (d.gold !== 0) lines.push(`Gold: ${d.gold > 0 ? '+' : ''}${d.gold}`);
+                                                return lines;
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         });
