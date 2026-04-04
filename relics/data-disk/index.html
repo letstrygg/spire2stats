@@ -61,7 +61,7 @@
   "@type": "ItemPage",
   "name": "Data Disk - Spire 2 Stats",
   "description": "Data Disk gameplay statistics for Slay the Spire 2. Winrate: 57.1%. Total Runs: 7.",
-  "dateModified": "2026-04-04T19:46:22.775Z",
+  "dateModified": "2026-04-04T20:00:43.860Z",
   "mainEntity": {
     "@type": "Thing",
     "name": "Data Disk",
@@ -77,7 +77,13 @@
     <!-- End Google Tag Manager (noscript) -->
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/relics/">relics</a> / data disk</div>
-        <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-04T19:46:22.775Z">April 4, 2026</time></div>
+        <div style="display: flex; align-items: baseline; gap: 20px;">
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-04T20:00:43.860Z">April 4, 2026</time></div>
+            <div class="auth-dropdown-container">
+                <button id="auth-user-btn" class="auth-trigger">Loading...</button>
+                <div id="auth-dropdown-menu" class="auth-menu-content"></div>
+            </div>
+        </div>
     </nav>
         <div class="stats-summary">
             
@@ -244,4 +250,44 @@
         
         <div class="win-bar" style="background: var(--green);"></div>
     </div></div>
-    </div></body></html>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+    (function() {
+        const supabaseUrl = 'https://fnwmtytnltmqjaflfwyr.supabase.co';
+        const supabaseKey = 'sb_publishable_y12qZF_dSbUPmV_aieiUgA_CibDsxQV';
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        const authBtn = document.getElementById('auth-user-btn');
+        const authMenu = document.getElementById('auth-dropdown-menu');
+
+        authBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            authMenu.classList.toggle('show');
+        });
+
+        document.addEventListener('click', () => authMenu.classList.remove('show'));
+
+        window.authLogin = async (provider) => {
+            await supabase.auth.signInWithOAuth({ provider });
+        };
+
+        window.authLogout = async () => {
+            await supabase.auth.signOut();
+            window.location.reload();
+        };
+
+        supabase.auth.onAuthStateChange((event, session) => {
+            const user = session?.user;
+            if (user) {
+                const name = user.user_metadata?.full_name || user.user_metadata?.display_name || user.email.split('@')[0];
+                authBtn.textContent = name;
+                authMenu.innerHTML = `<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>`;
+            } else {
+                authBtn.textContent = 'Login';
+                authMenu.innerHTML = `<button onclick="authLogin('google')">Google</button><button onclick="authLogin('twitch')">Twitch</button>`;
+            }
+        });
+    })();
+</script>
+</body></html>

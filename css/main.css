@@ -550,3 +550,51 @@ body.sidebar-open-squish .left-sidebar { left: 0; }
 .item-link-large:hover { border-color: #4a90e2; background: #222; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
 
 .icon-energy { color: #ffd700; font-weight: bold; }
+
+/* --- Auth Dropdown --- */
+.auth-dropdown-container {
+    position: relative;
+    display: inline-block;
+}
+.auth-trigger {
+    background: none;
+    border: none;
+    color: var(--gray);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 0;
+    font-family: inherit;
+    letter-spacing: 1px;
+}
+.auth-trigger:hover { color: var(--text); }
+.auth-menu-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: var(--bg2);
+    min-width: 140px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+    z-index: 1001;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin-top: 8px;
+}
+.auth-menu-content a, .auth-menu-content button {
+    color: var(--text);
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    font-size: 0.75rem;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.auth-menu-content a:hover, .auth-menu-content button:hover { background-color: var(--bg3); }
+.auth-menu-content.show { display: block; }

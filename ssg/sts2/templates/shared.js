@@ -382,7 +382,13 @@ export function wrapLayout(title, content, breadcrumbs = [], description = "", h
         <div>${breadcrumbs.length > 0 
             ? `<a href="/">spire2stats</a> / ${breadcrumbs.map((b, i) => i === breadcrumbs.length - 1 ? b.name.toLowerCase() : `<a href="${b.url}">${b.name.toLowerCase()}</a>`).join(' / ')}`
             : 'spire2stats'}</div>
-        <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="${ISO_BUILD_DATE}">${FORMATTED_BUILD_DATE}</time></div>
+        <div style="display: flex; align-items: baseline; gap: 20px;">
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="${ISO_BUILD_DATE}">${FORMATTED_BUILD_DATE}</time></div>
+            <div class="auth-dropdown-container">
+                <button id="auth-user-btn" class="auth-trigger">Loading...</button>
+                <div id="auth-dropdown-menu" class="auth-menu-content"></div>
+            </div>
+        </div>
     </nav>`;
 
     const canonicalUrl = canonicalPath ? `https://spire2stats.com${canonicalPath.endsWith('/') ? canonicalPath : canonicalPath + '/'}` : '';
@@ -456,7 +462,47 @@ export function wrapLayout(title, content, breadcrumbs = [], description = "", h
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W4TMS5FL"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-${bcHtml}${content}</body></html>`;
+${bcHtml}${content}
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+    (function() {
+        const supabaseUrl = 'https://fnwmtytnltmqjaflfwyr.supabase.co';
+        const supabaseKey = 'sb_publishable_y12qZF_dSbUPmV_aieiUgA_CibDsxQV';
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        const authBtn = document.getElementById('auth-user-btn');
+        const authMenu = document.getElementById('auth-dropdown-menu');
+
+        authBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            authMenu.classList.toggle('show');
+        });
+
+        document.addEventListener('click', () => authMenu.classList.remove('show'));
+
+        window.authLogin = async (provider) => {
+            await supabase.auth.signInWithOAuth({ provider });
+        };
+
+        window.authLogout = async () => {
+            await supabase.auth.signOut();
+            window.location.reload();
+        };
+
+        supabase.auth.onAuthStateChange((event, session) => {
+            const user = session?.user;
+            if (user) {
+                const name = user.user_metadata?.full_name || user.user_metadata?.display_name || user.email.split('@')[0];
+                authBtn.textContent = name;
+                authMenu.innerHTML = \`<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>\`;
+            } else {
+                authBtn.textContent = 'Login';
+                authMenu.innerHTML = \`<button onclick="authLogin('google')">Google</button><button onclick="authLogin('twitch')">Twitch</button>\`;
+            }
+        });
+    })();
+</script>
+</body></html>`;
 }
 
 export function formatDescription(text) {

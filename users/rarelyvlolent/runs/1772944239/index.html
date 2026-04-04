@@ -63,7 +63,13 @@
     <!-- End Google Tag Manager (noscript) -->
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/users/rarelyvlolent/">rarelyvlolent</a> / run 1772944239</div>
-        <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-04T19:46:23.289Z">April 4, 2026</time></div>
+        <div style="display: flex; align-items: baseline; gap: 20px;">
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-04T20:00:44.363Z">April 4, 2026</time></div>
+            <div class="auth-dropdown-container">
+                <button id="auth-user-btn" class="auth-trigger">Loading...</button>
+                <div id="auth-dropdown-menu" class="auth-menu-content"></div>
+            </div>
+        </div>
     </nav>
                     <div class="game-page-wrapper">
                         <div class="item-box" style="background-color: color-mix(in srgb, var(--color-ironclad) 30%, transparent); margin: 0 auto; text-align: center;">
@@ -180,4 +186,44 @@
                         });
                     });
                     </script>
-                    <link rel="stylesheet" href="/css/sts2-style.css"></body></html>
+                    <link rel="stylesheet" href="/css/sts2-style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+    (function() {
+        const supabaseUrl = 'https://fnwmtytnltmqjaflfwyr.supabase.co';
+        const supabaseKey = 'sb_publishable_y12qZF_dSbUPmV_aieiUgA_CibDsxQV';
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        const authBtn = document.getElementById('auth-user-btn');
+        const authMenu = document.getElementById('auth-dropdown-menu');
+
+        authBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            authMenu.classList.toggle('show');
+        });
+
+        document.addEventListener('click', () => authMenu.classList.remove('show'));
+
+        window.authLogin = async (provider) => {
+            await supabase.auth.signInWithOAuth({ provider });
+        };
+
+        window.authLogout = async () => {
+            await supabase.auth.signOut();
+            window.location.reload();
+        };
+
+        supabase.auth.onAuthStateChange((event, session) => {
+            const user = session?.user;
+            if (user) {
+                const name = user.user_metadata?.full_name || user.user_metadata?.display_name || user.email.split('@')[0];
+                authBtn.textContent = name;
+                authMenu.innerHTML = `<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>`;
+            } else {
+                authBtn.textContent = 'Login';
+                authMenu.innerHTML = `<button onclick="authLogin('google')">Google</button><button onclick="authLogin('twitch')">Twitch</button>`;
+            }
+        });
+    })();
+</script>
+</body></html>
