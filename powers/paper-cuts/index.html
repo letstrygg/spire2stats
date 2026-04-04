@@ -61,7 +61,7 @@
   "@type": "ItemPage",
   "name": "Paper Cuts - Spire 2 Stats",
   "description": "Paper Cuts gameplay statistics for Slay the Spire 2. Winrate: 0.0%. Total Runs: 0.",
-  "dateModified": "2026-04-04T22:18:10.475Z",
+  "dateModified": "2026-04-04T22:25:49.214Z",
   "mainEntity": {
     "@type": "Thing",
     "name": "Paper Cuts",
@@ -78,7 +78,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/powers/">powers</a> / paper cuts</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-04T22:18:10.475Z">April 4, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-04T22:25:49.214Z">April 4, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -112,9 +112,15 @@
         
         if (user) {
             console.log("Auth: Fetching profile for UUID:", user.id);
-            const { data, error } = await supabase.from('ltg_profiles').select('username').eq('user_id', user.id).maybeSingle();
-            console.log("Auth: Query Result ->", { data, error });
-            if (data?.username) btn.textContent = data.username;
+            console.log("Auth: Query starting...");
+            const result = await supabase.from('ltg_profiles').select('username').eq('user_id', user.id).maybeSingle();
+            console.log("Auth: Query finished. Result ->", result);
+
+            if (result.error) {
+                console.log("Auth: Supabase Error Object ->", result.error);
+            }
+
+            if (result.data?.username) btn.textContent = result.data.username;
         }
     });
 })();
