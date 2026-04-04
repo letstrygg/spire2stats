@@ -1000,9 +1000,6 @@ async function build() {
         const landingHtml = wrapLayout(
             "",
             `
-    <p style="font-size: 0.8rem; color: #666; margin-top: -15px; margin-bottom: 20px; text-transform: uppercase;">
-        Data last updated: <time datetime="${ISO_BUILD_DATE}">${FORMATTED_BUILD_DATE}</time>
-    </p>
     <div class="averages-panel" style="margin: 20px 0; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
         <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
             <div class="stat-item" style="text-align: center;">

@@ -378,9 +378,12 @@ export function generateSemanticStatsParagraph(name, stats, contextLabel) {
 }
 
 export function wrapLayout(title, content, breadcrumbs = [], description = "", headExtra = "", canonicalPath = "") {
-    const bcHtml = `<nav class="breadcrumbs">${breadcrumbs.length > 0 
-        ? `<a href="/">spire2stats</a> / ${breadcrumbs.map((b, i) => i === breadcrumbs.length - 1 ? b.name.toLowerCase() : `<a href="${b.url}">${b.name.toLowerCase()}</a>`).join(' / ')}`
-        : 'spire2stats'}</nav>`;
+    const bcHtml = `<nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
+        <div>${breadcrumbs.length > 0 
+            ? `<a href="/">spire2stats</a> / ${breadcrumbs.map((b, i) => i === breadcrumbs.length - 1 ? b.name.toLowerCase() : `<a href="${b.url}">${b.name.toLowerCase()}</a>`).join(' / ')}`
+            : 'spire2stats'}</div>
+        <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="${ISO_BUILD_DATE}">${FORMATTED_BUILD_DATE}</time></div>
+    </nav>`;
 
     const canonicalUrl = canonicalPath ? `https://spire2stats.com${canonicalPath.endsWith('/') ? canonicalPath : canonicalPath + '/'}` : '';
     const canonicalHtml = canonicalUrl ? `<link rel="canonical" href="${canonicalUrl}">` : '';
