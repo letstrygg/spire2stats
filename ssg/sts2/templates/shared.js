@@ -495,12 +495,20 @@ ${bcHtml}${content}
 
         supabase.auth.onAuthStateChange(async (event, session) => {
             const user = session?.user;
-            if (user) {
-                let { data: profile } = await supabase
+            if (!user) {
+                authBtn.textContent = 'Login';
+                authMenu.innerHTML = \`<button onclick="authLogin('google')">Google</button><button onclick="authLogin('twitch')">Twitch</button>\`;
+                return;
+            }
+
+            try {
+                let { data: profile, error } = await supabase
                     .from('ltg_profiles')
                     .select('username, slug, trust')
                     .eq('user_id', user.id)
-                    .single();
+                    .maybeSingle();
+
+                if (error) throw error;
 
                 if (!profile) {
                     const rawName = user.user_metadata?.display_name || ('unknown' + Math.floor(1000 + Math.random() * 9000));
@@ -529,7 +537,7 @@ ${bcHtml}${content}
                         }
                     }
                     
-                    const { data: newProfile } = await supabase
+                    const { data: newProfile, error: insError } = await supabase
                         .from('ltg_profiles')
                         .insert([{ 
                             user_id: user.id, 
@@ -539,14 +547,16 @@ ${bcHtml}${content}
                         }])
                         .select()
                         .single();
-                    if (newProfile) profile = newProfile;
+                    if (insError) throw insError;
+                    profile = newProfile;
                 }
 
                 authBtn.textContent = profile ? profile.username : 'Account';
                 authMenu.innerHTML = \`<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>\`;
-            } else {
-                authBtn.textContent = 'Login';
-                authMenu.innerHTML = \`<button onclick="authLogin('google')">Google</button><button onclick="authLogin('twitch')">Twitch</button>\`;
+            } catch (err) {
+                console.error("Auth Profile Error:", err);
+                authBtn.textContent = 'Account';
+                authMenu.innerHTML = \`<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>\`;
             }
         });
     })();

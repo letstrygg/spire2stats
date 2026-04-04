@@ -64,7 +64,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/users/falterfire/">falterfire</a> / run 1772733956</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-04T20:47:02.931Z">April 4, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-04T21:09:10.949Z">April 4, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -219,12 +219,20 @@
 
         supabase.auth.onAuthStateChange(async (event, session) => {
             const user = session?.user;
-            if (user) {
-                let { data: profile } = await supabase
+            if (!user) {
+                authBtn.textContent = 'Login';
+                authMenu.innerHTML = `<button onclick="authLogin('google')">Google</button><button onclick="authLogin('twitch')">Twitch</button>`;
+                return;
+            }
+
+            try {
+                let { data: profile, error } = await supabase
                     .from('ltg_profiles')
                     .select('username, slug, trust')
                     .eq('user_id', user.id)
-                    .single();
+                    .maybeSingle();
+
+                if (error) throw error;
 
                 if (!profile) {
                     const rawName = user.user_metadata?.display_name || ('unknown' + Math.floor(1000 + Math.random() * 9000));
@@ -253,7 +261,7 @@
                         }
                     }
                     
-                    const { data: newProfile } = await supabase
+                    const { data: newProfile, error: insError } = await supabase
                         .from('ltg_profiles')
                         .insert([{ 
                             user_id: user.id, 
@@ -263,14 +271,16 @@
                         }])
                         .select()
                         .single();
-                    if (newProfile) profile = newProfile;
+                    if (insError) throw insError;
+                    profile = newProfile;
                 }
 
                 authBtn.textContent = profile ? profile.username : 'Account';
                 authMenu.innerHTML = `<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>`;
-            } else {
-                authBtn.textContent = 'Login';
-                authMenu.innerHTML = `<button onclick="authLogin('google')">Google</button><button onclick="authLogin('twitch')">Twitch</button>`;
+            } catch (err) {
+                console.error("Auth Profile Error:", err);
+                authBtn.textContent = 'Account';
+                authMenu.innerHTML = `<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>`;
             }
         });
     })();
