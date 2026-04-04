@@ -64,12 +64,13 @@
    2. GLOBAL RESETS & TYPOGRAPHY
    ========================================================================== */
 *, *::before, *::after { box-sizing: border-box; }
-html, body { margin: 0 !important; overflow-y:scroll;}
+html, body { margin: 0 !important; }
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: var(--bg);
     color: var(--text);
     padding: 20px;
+    overflow-y: scroll;
 }
 h1, h2, h3 { margin-top: 0; }
 a { text-decoration: none; color: inherit; }
