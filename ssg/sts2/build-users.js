@@ -246,10 +246,23 @@ async function build() {
 
                 // Chart.js Data processing - Ensure we have a valid array of floor data
                 const floorData = Array.isArray(pathHistory) 
-                    ? pathHistory.map((p, idx) => ({ 
-                        floor: p.floor ?? (idx + 1), 
-                        hp: p.current_hp 
-                    })).filter(p => p.hp !== undefined)
+                    ? pathHistory.map((p, idx) => {
+                        const id = p.encounter_id || p.event_id;
+                        const nodeName = id ? (encounterLookup[id] || eventLookup[id] || id.split('.').pop().replace(/_/g, ' ')) : (p.room_type ? p.room_type.replace(/_/g, ' ') : 'Unknown');
+                        let monsters = '';
+                        if (p.monster_ids && Array.isArray(p.monster_ids)) {
+                            monsters = p.monster_ids.map(mid => mid.split('.').pop().replace(/(_NORMAL|_BOSS|_ELITE)$/, '').replace(/_/g, ' ')).join(', ');
+                        }
+                        return { 
+                            floor: p.floor ?? (idx + 1), 
+                            hp: p.current_hp,
+                            name: nodeName,
+                            damage: p.damage_taken || 0,
+                            healed: p.hp_healed || 0,
+                            gold: (p.gold_gained || 0) - (p.gold_lost || 0) - (p.gold_stolen || 0),
+                            monsters: monsters
+                        };
+                    }).filter(p => p.hp !== undefined)
                     : [];
 
                 // Server-side debug logging for the first run of each user
@@ -272,7 +285,7 @@ async function build() {
                     `Run ${runNumber} - ${user.display_name}`,
                     `
                     <div class="game-page-wrapper">
-                        <div class="item-box" style="${bgStyle} max-width: 1000px; margin: 0 auto; text-align: center;">
+                        <div class="item-box" style="${bgStyle} margin: 0 auto; text-align: center;">
                             <h1 style="font-size: 2.5rem; margin-bottom: 10px;">Run ${runNumber}</h1>
                             <div class="subtitle" style="font-size: 1.2rem; margin-bottom: 30px;">
                                 <a href="/characters/${charSlug}/" style="color: inherit; text-decoration: underline;">${charName}</a> • 
@@ -325,9 +338,12 @@ async function build() {
                         const labels = Array.from({length: maxFloor}, (_, i) => i + 1);
                         const color = "${statusColor}";
 
-                        const hpMap = {}; 
-                        rawRuns[0].floorData.forEach(d => { hpMap[d.floor] = d.hp; });
-                        const dataArr = labels.map(floor => hpMap[floor] !== undefined ? hpMap[floor] : null);
+                        const floorMap = {}; 
+                        rawRuns[0].floorData.forEach(d => { floorMap[d.floor] = d; });
+                        const dataArr = labels.map(floor => {
+                            const d = floorMap[floor];
+                            return d ? { x: floor, y: d.hp, ...d } : null;
+                        });
 
                         new Chart(ctx, {
                             type: 'line',
@@ -358,7 +374,24 @@ async function build() {
                                     } 
                                 },
                                 plugins: {
-                                    legend: { display: false }
+                                    legend: { display: false },
+                                    tooltip: {
+                                        callbacks: {
+                                            title: (items) => \`Floor \${items[0].label}\`,
+                                            label: (context) => {
+                                                const d = context.raw;
+                                                if (!d || typeof d === 'number') return \`HP: \${d}\`;
+                                                const hpStart = d.y + d.damage - d.healed;
+                                                const lines = [\`Node: \${d.name}\` ];
+                                                if (d.monsters) lines.push(\`Monsters: \${d.monsters}\`);
+                                                lines.push(\`HP: \${hpStart} -> \${d.y}\`);
+                                                if (d.damage > 0) lines.push(\`Damage Taken: \${d.damage}\`);
+                                                if (d.healed > 0) lines.push(\`Healed: \${d.healed}\`);
+                                                if (d.gold !== 0) lines.push(\`Gold: \${d.gold > 0 ? '+' : ''}\${d.gold}\`);
+                                                return lines;
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         });
