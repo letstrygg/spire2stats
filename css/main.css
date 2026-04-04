@@ -494,7 +494,7 @@ body.sidebar-open-squish .left-sidebar { left: 0; }
     font-weight: 600; 
     display: flex; 
     flex-wrap: wrap; 
-    padding-top: 3px;
+    padding-top: 6px;
 }
 .run-vid-btn { 
     padding: 2px 8px; 
