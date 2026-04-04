@@ -509,9 +509,8 @@ body.sidebar-open-squish .left-sidebar { left: 0; }
     gap: 4px;
     transition: all 0.2s;
     background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
 }
-.run-vid-btn:hover { background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.3); }
+.run-vid-btn:hover { background: rgba(255,255,255,0.15); color: #fff;}
 .run-vid-btn .material-symbols-outlined { 
     font-size: 16px; 
     width: 16px; /* Reserves space to prevent layout jump while loading icon font */
