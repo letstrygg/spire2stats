@@ -468,7 +468,11 @@ ${bcHtml}${content}
     (function() {
         const supabaseUrl = 'https://fnwmtytnltmqjaflfwyr.supabase.co';
         const supabaseKey = 'sb_publishable_y12qZF_dSbUPmV_aieiUgA_CibDsxQV';
-        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey, {
+            auth: {
+                flowType: 'pkce'
+            }
+        });
 
         const authBtn = document.getElementById('auth-user-btn');
         const authMenu = document.getElementById('auth-dropdown-menu');
@@ -489,11 +493,56 @@ ${bcHtml}${content}
             window.location.reload();
         };
 
-        supabase.auth.onAuthStateChange((event, session) => {
+        supabase.auth.onAuthStateChange(async (event, session) => {
             const user = session?.user;
             if (user) {
-                const name = user.user_metadata?.full_name || user.user_metadata?.display_name || user.email.split('@')[0];
-                authBtn.textContent = name;
+                let { data: profile } = await supabase
+                    .from('ltg_profiles')
+                    .select('username, slug, trust')
+                    .eq('user_id', user.id)
+                    .single();
+
+                if (!profile) {
+                    const rawName = user.user_metadata?.display_name || ('unknown' + Math.floor(1000 + Math.random() * 9000));
+                    const baseSlug = rawName.toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-');
+                    
+                    let uniqueSlug = baseSlug;
+                    let isUnique = false;
+
+                    while (!isUnique) {
+                        const { data: existing } = await supabase
+                            .from('ltg_profiles')
+                            .select('slug')
+                            .eq('slug', uniqueSlug)
+                            .maybeSingle();
+
+                        if (!existing) {
+                            isUnique = true;
+                        } else {
+                            const match = uniqueSlug.match(/(\d+)$/);
+                            if (match) {
+                                const num = parseInt(match[1], 10);
+                                uniqueSlug = uniqueSlug.slice(0, -match[1].length) + (num + 1);
+                            } else {
+                                uniqueSlug = uniqueSlug + '1';
+                            }
+                        }
+                    }
+                    
+                    const { data: newProfile } = await supabase
+                        .from('ltg_profiles')
+                        .insert([{ 
+                            user_id: user.id, 
+                            username: (uniqueSlug === baseSlug && rawName.indexOf('unknown') !== 0) ? rawName : uniqueSlug, 
+                            slug: uniqueSlug,
+                            trust: 0
+                        }])
+                        .select()
+                        .single();
+                    if (newProfile) profile = newProfile;
+                }
+
+                authBtn.textContent = profile ? profile.username : 'Account';
                 authMenu.innerHTML = \`<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>\`;
             } else {
                 authBtn.textContent = 'Login';

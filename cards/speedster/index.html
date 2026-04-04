@@ -61,7 +61,7 @@
   "@type": "ItemPage",
   "name": "Speedster - Spire 2 Stats",
   "description": "Speedster gameplay statistics for Slay the Spire 2. Winrate: 50.0%. Total Runs: 8.",
-  "dateModified": "2026-04-04T20:00:43.860Z",
+  "dateModified": "2026-04-04T20:47:02.419Z",
   "mainEntity": {
     "@type": "Thing",
     "name": "Speedster",
@@ -78,7 +78,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/cards/">cards</a> / speedster</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-04T20:00:43.860Z">April 4, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-04T20:47:02.419Z">April 4, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -285,7 +285,11 @@
     (function() {
         const supabaseUrl = 'https://fnwmtytnltmqjaflfwyr.supabase.co';
         const supabaseKey = 'sb_publishable_y12qZF_dSbUPmV_aieiUgA_CibDsxQV';
-        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey, {
+            auth: {
+                flowType: 'pkce'
+            }
+        });
 
         const authBtn = document.getElementById('auth-user-btn');
         const authMenu = document.getElementById('auth-dropdown-menu');
@@ -306,11 +310,56 @@
             window.location.reload();
         };
 
-        supabase.auth.onAuthStateChange((event, session) => {
+        supabase.auth.onAuthStateChange(async (event, session) => {
             const user = session?.user;
             if (user) {
-                const name = user.user_metadata?.full_name || user.user_metadata?.display_name || user.email.split('@')[0];
-                authBtn.textContent = name;
+                let { data: profile } = await supabase
+                    .from('ltg_profiles')
+                    .select('username, slug, trust')
+                    .eq('user_id', user.id)
+                    .single();
+
+                if (!profile) {
+                    const rawName = user.user_metadata?.display_name || ('unknown' + Math.floor(1000 + Math.random() * 9000));
+                    const baseSlug = rawName.toLowerCase().replace(/s+/g, '-').replace(/[^w-]+/g, '').replace(/--+/g, '-');
+                    
+                    let uniqueSlug = baseSlug;
+                    let isUnique = false;
+
+                    while (!isUnique) {
+                        const { data: existing } = await supabase
+                            .from('ltg_profiles')
+                            .select('slug')
+                            .eq('slug', uniqueSlug)
+                            .maybeSingle();
+
+                        if (!existing) {
+                            isUnique = true;
+                        } else {
+                            const match = uniqueSlug.match(/(d+)$/);
+                            if (match) {
+                                const num = parseInt(match[1], 10);
+                                uniqueSlug = uniqueSlug.slice(0, -match[1].length) + (num + 1);
+                            } else {
+                                uniqueSlug = uniqueSlug + '1';
+                            }
+                        }
+                    }
+                    
+                    const { data: newProfile } = await supabase
+                        .from('ltg_profiles')
+                        .insert([{ 
+                            user_id: user.id, 
+                            username: (uniqueSlug === baseSlug && rawName.indexOf('unknown') !== 0) ? rawName : uniqueSlug, 
+                            slug: uniqueSlug,
+                            trust: 0
+                        }])
+                        .select()
+                        .single();
+                    if (newProfile) profile = newProfile;
+                }
+
+                authBtn.textContent = profile ? profile.username : 'Account';
                 authMenu.innerHTML = `<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>`;
             } else {
                 authBtn.textContent = 'Login';
