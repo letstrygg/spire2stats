@@ -32,7 +32,6 @@ export function characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, 
     return wrapLayout(
         pageTitle, 
         `
-        <h1 style="font-size: 1.6rem; margin-bottom: 10px;">${displayName} Character Winrates & Statistics</h1>
         <div style="margin-bottom: 40px;">
             ${generateSemanticStatsParagraph(displayName, stats, 'character')}
             ${highlightsHtml}

@@ -295,7 +295,6 @@ async function buildGeneralCategory(cat, sitemap) {
             pageTitle, 
             `
             <div class="item-box">
-                <h1>${title}</h1>
                 ${subtitle ? `<div class="subtitle">${subtitle}</div>` : ''}
                 <div class="description">${description}</div>
             </div>`,
@@ -321,7 +320,6 @@ async function buildGeneralCategory(cat, sitemap) {
     const indexHtml = wrapLayout(
         cat.folder.toUpperCase(), 
         `
-        <h1>${catName}</h1>
         <div class="grid">${itemLinks}</div>`, 
         [{ name: cat.folder, url: '' }],
         indexDesc,
@@ -366,7 +364,6 @@ async function buildRelics(relics, runStats, sitemap) {
     const indexHtml = wrapLayout(
         'Relics', 
         `
-        <h1>Slay the Spire 2 Relics</h1>
         ${generateSummaryPanel(runStats, "Relics", totalRelics, relicsSeen)}
         <div class="grid">${relicLinks}</div>`,
         [{ name: 'relics', url: '' }],
@@ -408,7 +405,6 @@ async function buildEvents(events, runStats, sitemap) {
     const indexHtml = wrapLayout(
         'Events', 
         `
-        <h1>Slay the Spire 2 Events</h1>
         ${generateSummaryPanel(runStats, "Events", totalEvents, eventsSeen)}
         <div class="grid">${eventLinks}</div>`,
         [{ name: 'events', url: '' }],
@@ -555,7 +551,6 @@ async function buildAscensions(ascensions, runStats, sitemap) {
     const indexHtml = wrapLayout(
         'Ascensions', 
         `
-        <h1>Slay the Spire 2 Ascensions</h1>
         ${generateSummaryPanel(runStats, "Ascensions", totalAsc, ascSeen)}
         ${buildFilterHtml}
         <div class="grid">${ascLinks}</div>
@@ -597,7 +592,7 @@ async function buildEnchantments(enchantments, runStats, sitemap) {
     }).join('');
 
     const indexDesc = `View global winrates and run statistics for all Slay the Spire 2 enchantments.`;
-    const indexHtml = wrapLayout('Enchantments', `<h1>Slay the Spire 2 Enchantments</h1>${generateSummaryPanel(runStats, "Enchantments", total, seen)}<div class="grid">${links}</div>`, [{ name: 'enchantments', url: '' }], indexDesc, generateCollectionJsonLd(`Enchantments`, indexDesc));
+    const indexHtml = wrapLayout('Enchantments', `${generateSummaryPanel(runStats, "Enchantments", total, seen)}<div class="grid">${links}</div>`, [{ name: 'enchantments', url: '' }], indexDesc, generateCollectionJsonLd(`Enchantments`, indexDesc));
     fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
 }
 
@@ -693,7 +688,6 @@ async function buildCharacters(chars, runStats, sitemap) {
             const indexHtml = wrapLayout(
                 'Characters', 
                 `
-                <h1>Slay the Spire 2 Characters</h1>
                 ${generateSummaryPanel(runStats, "Characters", chars.length, runStats.uniqueCharsSeen)}
                 <div class="grid">${charLinks}</div>`,
                 [{ name: 'characters', url: '' }],
@@ -943,7 +937,6 @@ async function build() {
         const indexHtml = wrapLayout(
             'Cards', 
             `
-            <h1>Slay the Spire 2 Cards</h1>
             ${generateSummaryPanel(cardStats, "Cards", totalCards, cardStats.uniqueCardsSeen)}
             <div class="grid">${cardLinks}</div>`,
             [{ name: 'cards', url: '' }],
@@ -1007,7 +1000,6 @@ async function build() {
         const landingHtml = wrapLayout(
             "",
             `
-    <h1>Slay the Spire 2 Stats</h1>
     <p style="font-size: 0.8rem; color: #666; margin-top: -15px; margin-bottom: 20px; text-transform: uppercase;">
         Data last updated: <time datetime="${ISO_BUILD_DATE}">${FORMATTED_BUILD_DATE}</time>
     </p>

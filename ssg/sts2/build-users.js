@@ -108,7 +108,7 @@ async function build() {
 
         const usersIndexHtml = wrapLayout(
             'Users',
-            `<h1>Contributors</h1><div class="grid">${contributorLinks || '<p>No contributors found.</p>'}</div>`,
+            `<div class="grid">${contributorLinks || '<p>No contributors found.</p>'}</div>`,
             [{ name: 'Users', url: '' }],
             `${allRuns.length} runs contributed by the Slay the Spire 2 community.`,
             "",
@@ -146,7 +146,6 @@ async function build() {
                 `
                 ${generateItemSummaryBox(user.display_name, userStats)}
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
-                    <h1 style="margin: 0;">Runs by ${user.display_name}</h1>
                     ${generateFilterControlsHtml()}
                 </div>
                 <div class="grid" id="runs-grid">${runLinksHtml || '<p>No runs recorded yet.</p>'}</div>
@@ -286,7 +285,6 @@ async function build() {
                     `
                     <div class="game-page-wrapper">
                         <div class="item-box" style="${bgStyle} margin: 0 auto; text-align: center;">
-                            <h1 style="font-size: 2.5rem; margin-bottom: 10px;">Run ${runNumber}</h1>
                             <div class="subtitle" style="font-size: 1.2rem; margin-bottom: 30px;">
                                 <a href="/characters/${charSlug}/" style="color: inherit; text-decoration: underline;">${charName}</a> • 
                                 <a href="/ascensions/${ascSlug}/" style="color: inherit; text-decoration: underline;">${ascName}</a> • 

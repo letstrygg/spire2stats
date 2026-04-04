@@ -24,7 +24,6 @@ export function eventDetailTemplate(event, stats, averagesHtml, videosHtml) {
         ${generateItemSummaryBox(event.name, stats)}
         ${averagesHtml}
         <div class="event-box">
-            <h1>${event.name}</h1>
             <div class="subtitle">${event.act || 'Unknown Act'} • ${event.type || 'Event'}</div>
             <div class="description">${formatDescription(event.description)}</div>
         </div>

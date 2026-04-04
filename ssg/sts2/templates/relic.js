@@ -11,7 +11,6 @@ export function relicDetailTemplate(relic, stats, videosHtml) {
             ${generateSemanticStatsParagraph(relic.name, stats, 'relic')}
         </div>
         <div class="relic-box">
-            <h1>${relic.name}</h1>
             <div class="subtitle">${subtitle}</div>
             <div class="description">${descriptionHtml}</div>
             ${relic.flavor ? `<div class="flavor">${relic.flavor}</div>` : ''}

@@ -7,7 +7,6 @@ export function monsterDetailTemplate(monster, stats, averagesHtml, lethalRunsHt
         ${generateLethalitySummaryBox(stats, "Monster")}
         ${averagesHtml}
         <div class="item-box">
-            <h1>${monster.name}</h1>
             <div class="subtitle">${subtitle}</div>
             <div class="description">
                 <p>Monster behavior data and finishing blow records for Slay the Spire 2.</p>
