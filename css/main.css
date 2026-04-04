@@ -298,6 +298,7 @@ body.sidebar-open-squish .left-sidebar { left: 0; }
 .dash-row { display: flex; flex-wrap: wrap; gap: 15px; padding: 12px 0; border-bottom: 1px dashed var(--border); align-items: center; }
 .dash-row:last-child { border-bottom: none; padding-bottom: 0; }
 
+
 /* ==========================================================================
    8. UNIVERSAL LAYOUT & FORMS
    ========================================================================== */
@@ -441,15 +442,19 @@ body.sidebar-open-squish .left-sidebar { left: 0; }
 /* ==========================================================================
    9. SPIRE 2 STATS GENERATOR SPECIFIC
    ========================================================================== */
+
+.averages-panel {margin: 20px 0; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);}
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
+.stat-item { text-align: center; }
+.stat-label { font-size: 0.7rem; color: #666; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
+.stat-value { font-size: 1.5rem; font-weight: bold; color: #fff; }
+
+
 .text-gold { color: #ffd700; }
 .text-red { color: #ff4b4b; }
 .text-green { color: #00ff89; }
 
 .stats-summary { background: #1a1a1a; border: 1px solid #333; padding: 25px; border-radius: 12px; margin-bottom: 30px; max-width: 1200px; }
-.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
-.stat-item { text-align: center; }
-.stat-label { font-size: 0.7rem; color: #888; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
-.stat-value { font-size: 1.4rem; font-weight: bold; color: #fff; }
 .stat-sub { font-size: 0.8rem; color: #666; font-weight: normal; }
 .stat-val { color: #ffd700; font-weight: bold; }
 

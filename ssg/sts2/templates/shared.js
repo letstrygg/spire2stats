@@ -168,19 +168,19 @@ export function generateCollectionJsonLd(name, description) {
 export function generateSummaryPanel(runStats, label, total, seen) {
     const completionHtml = seen === total ? total : `${seen} <span style="color: #444; font-size: 0.8em;">/ ${total}</span>`;
     return `
-    <div class="averages-panel" style="margin: 20px 0; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
-        <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px;">
-            <div class="stat-item" style="text-align: center;">
-                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Total Runs</div>
-                <div class="stat-value" id="global-total-runs" style="font-size: 1.2rem; font-weight: bold;">${runStats.totalRuns}</div>
+    <div class="averages-panel">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-label">Total Runs</div>
+                <div class="stat-value" id="global-total-runs">${runStats.totalRuns}</div>
             </div>
-            <div class="stat-item" style="text-align: center;">
-                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Overall Winrate</div>
-                <div class="stat-value" id="global-winrate" style="font-size: 1.2rem; font-weight: bold; color: #00ff89">${runStats.globalWinRate.toFixed(1)}%</div>
+            <div class="stat-item">
+                <div class="stat-label">Overall Winrate</div>
+                <div class="stat-value" id="global-winrate" style="color: #00ff89">${runStats.globalWinRate.toFixed(1)}%</div>
             </div>
-            <div class="stat-item" style="text-align: center;">
-                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">${label} Seen</div>
-                <div class="stat-value" style="font-size: 1.2rem; font-weight: bold;">${completionHtml}</div>
+            <div class="stat-item">
+                <div class="stat-label">${label} Seen</div>
+                <div class="stat-value">${completionHtml}</div>
             </div>
         </div>
     </div>`;
