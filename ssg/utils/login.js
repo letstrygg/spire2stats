@@ -51,14 +51,18 @@
                 .eq('user_id', user.id)
                 .maybeSingle();
 
+            console.log("Auth: Profile fetch completed. Data:", profile, "Error:", error);
+
             if (error) throw error;
 
             if (!profile) {
                 console.log("Auth: Profile missing, generating new entry...");
                 const rawName = user.user_metadata?.display_name || ('unknown' + Math.floor(1000 + Math.random() * 9000));
                 const slug = rawName.toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-');
-                
+                console.log(`Auth: Attempting insert with Name: ${rawName}, Slug: ${slug}`);
+
                 const { data: newProfile, error: insError } = await supabase.from('ltg_profiles').insert([{ user_id: user.id, username: rawName, slug: slug }]).select().single();
+                console.log("Auth: Insert result - Data:", newProfile, "Error:", insError);
                 if (insError) throw insError;
                 profile = newProfile;
             }
@@ -67,7 +71,7 @@
             authBtn.textContent = profile.username;
             authMenu.innerHTML = `<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>`;
         } catch (err) {
-            console.error("Auth Error:", err.message);
+            console.error("Auth Exception Details:", err);
             authBtn.textContent = 'Account';
             authMenu.innerHTML = `<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>`;
         }

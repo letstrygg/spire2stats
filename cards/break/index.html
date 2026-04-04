@@ -61,7 +61,7 @@
   "@type": "ItemPage",
   "name": "Break - Spire 2 Stats",
   "description": "Break gameplay statistics for Slay the Spire 2. Winrate: 66.7%. Total Runs: 3.",
-  "dateModified": "2026-04-04T21:23:10.377Z",
+  "dateModified": "2026-04-04T21:36:04.559Z",
   "mainEntity": {
     "@type": "Thing",
     "name": "Break",
@@ -78,7 +78,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/cards/">cards</a> / break</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-04T21:23:10.377Z">April 4, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-04T21:36:04.559Z">April 4, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -240,14 +240,18 @@
                 .eq('user_id', user.id)
                 .maybeSingle();
 
+            console.log("Auth: Profile fetch completed. Data:", profile, "Error:", error);
+
             if (error) throw error;
 
             if (!profile) {
                 console.log("Auth: Profile missing, generating new entry...");
                 const rawName = user.user_metadata?.display_name || ('unknown' + Math.floor(1000 + Math.random() * 9000));
                 const slug = rawName.toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-');
-                
+                console.log(`Auth: Attempting insert with Name: ${rawName}, Slug: ${slug}`);
+
                 const { data: newProfile, error: insError } = await supabase.from('ltg_profiles').insert([{ user_id: user.id, username: rawName, slug: slug }]).select().single();
+                console.log("Auth: Insert result - Data:", newProfile, "Error:", insError);
                 if (insError) throw insError;
                 profile = newProfile;
             }
@@ -256,7 +260,7 @@
             authBtn.textContent = profile.username;
             authMenu.innerHTML = `<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>`;
         } catch (err) {
-            console.error("Auth Error:", err.message);
+            console.error("Auth Exception Details:", err);
             authBtn.textContent = 'Account';
             authMenu.innerHTML = `<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>`;
         }
