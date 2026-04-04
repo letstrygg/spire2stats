@@ -552,7 +552,7 @@ body.sidebar-open-squish .left-sidebar { left: 0; }
 
 .section-title { border-bottom: 1px solid #333; padding-bottom: 10px; margin: 40px 0 20px 0; }
 .item-link { background: #1a1a1a; border: 1px solid #333; padding: 12px; border-radius: 8px; text-decoration: none; color: inherit; text-align: center; font-weight: bold; transition: border-color 0.2s; }
-.item-link:hover { border-color: var (--border-hover) }
+.item-link:hover { border-color: var(--border-hover) }
 .item-link-large { background: #1a1a1a; border: 1px solid #333; padding: 30px; border-radius: 8px; text-decoration: none; color: inherit; font-weight: bold; font-size: 1.3rem; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .item-link-large:hover { border-color: #4a90e2; background: #222; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
 
