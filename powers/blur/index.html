@@ -61,7 +61,7 @@
   "@type": "ItemPage",
   "name": "Blur - Spire 2 Stats",
   "description": "Blur gameplay statistics for Slay the Spire 2. Winrate: 0.0%. Total Runs: 0.",
-  "dateModified": "2026-04-04T21:45:52.013Z",
+  "dateModified": "2026-04-04T21:56:00.160Z",
   "mainEntity": {
     "@type": "Thing",
     "name": "Blur",
@@ -78,7 +78,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/powers/">powers</a> / blur</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-04T21:45:52.013Z">April 4, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-04T21:56:00.160Z">April 4, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -96,7 +96,10 @@
     const supabaseUrl = 'https://fnwmtytnltmqjaflfwyr.supabase.co';
     const supabaseKey = 'sb_publishable_y12qZF_dSbUPmV_aieiUgA_CibDsxQV';
     const supabase = window.supabase.createClient(supabaseUrl, supabaseKey, {
-        auth: { flowType: 'pkce' }
+        auth: { 
+            flowType: 'pkce',
+            lock: null // Fixes "Lock contention" by disabling Navigator Lock API
+        }
     });
 
     const authBtn = document.getElementById('auth-user-btn');
@@ -126,26 +129,24 @@
     };
 
     let isProcessing = false;
+    let lastUserId = null;
 
     supabase.auth.onAuthStateChange(async (event, session) => {
-        console.log(`Auth: Event [${event}] detected.`);
-        if (isProcessing) {
-            console.log("Auth: Logic already running, ignoring concurrent event.");
-            return;
-        }
-        
         const user = session?.user;
+        console.log(`Auth: Event [${event}]`, user ? `(User: ${user.id})` : '(No User)');
+
         if (!user) {
+            lastUserId = null;
             authBtn.textContent = 'Login';
             authMenu.innerHTML = `<button onclick="authLogin('google')">Google</button><button onclick="authLogin('twitch')">Twitch</button>`;
             return;
         }
 
+        if (isProcessing || user.id === lastUserId) return;
+
         try {
             isProcessing = true;
-            console.log("Auth: Fetching profile for UUID:", user.id);
-
-            // Use a timeout to prevent the UI from hanging if the Supabase Lock is stuck
+            
             const fetchPromise = supabase
                 .from('ltg_profiles')
                 .select('username')
@@ -153,16 +154,16 @@
                 .maybeSingle();
 
             const timeoutPromise = new Promise((_, reject) => 
-                setTimeout(() => reject(new Error("Supabase request timed out (Lock contention?)")), 10000)
+                setTimeout(() => reject(new Error("Timeout")), 4000)
             );
 
             const { data: profile, error } = await Promise.race([fetchPromise, timeoutPromise]);
-            console.log("Auth: Profile fetch result:", { profile, error });
-
             if (error) throw error;
 
+            lastUserId = user.id;
+
             if (!profile) {
-                console.log("Auth: No profile found. Generating...");
+                console.log("Auth: Creating new profile...");
                 const rawName = user.user_metadata?.display_name || ('unknown' + Math.floor(1000 + Math.random() * 9000));
                 const slug = rawName.toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-');
                 console.log(`Auth: Attempting insert with Name: ${rawName}, Slug: ${slug}`);
@@ -173,11 +174,10 @@
                 profile = newProfile;
             }
 
-            console.log("Auth: Logged in as:", profile.username);
             authBtn.textContent = profile.username;
             authMenu.innerHTML = `<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>`;
         } catch (err) {
-            console.error("Auth Critical Exception:", err);
+            console.error("Auth Exception:", err.message);
             authBtn.textContent = 'Account';
             authMenu.innerHTML = `<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>`;
         } finally {
