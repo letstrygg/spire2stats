@@ -202,15 +202,15 @@ export function generateLethalitySummaryBox(stats, label = "Monster") {
     const encounteredLabel = label === "Monster" ? "Times Encountered" : "Times Faced";
     const killsLabel = label === "Monster" ? "Total Kills" : "Player Kills";
     return `
-    <div class="averages-panel" style="margin: 20px 0; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
-        <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
-            <div class="stat-item" style="text-align: center;">
-                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">${encounteredLabel}</div>
+    <div class="averages-panel">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-label">${encounteredLabel}</div>
                 <div class="stat-value" style="font-size: 1.5rem; font-weight: bold;">${stats.encountered || 0}</div>
             </div>
-            <div class="stat-item" style="text-align: center;">
-                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">${killsLabel}</div>
-                <div class="stat-value" style="font-size: 1.5rem; font-weight: bold; color: #ff4b4b">${stats.kills || 0}</div>
+            <div class="stat-item">
+                <div class="stat-label">${killsLabel}</div>
+                <div class="stat-value" style="color: #ff4b4b">${stats.kills || 0}</div>
             </div>
         </div>
     </div>`;
@@ -229,22 +229,22 @@ export function generateLethalityIndexSummary(runStats, lethalStats, label, tota
     const completionHtml = seenCount === totalCount ? totalCount : `${seenCount} <span style="color: #444; font-size: 0.8em;">/ ${totalCount}</span>`;
 
     return `
-    <div class="averages-panel" style="margin: 20px 0; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
-        <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px;">
-            <div class="stat-item" style="text-align: center;">
-                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Total ${label} Faced</div>
+    <div class="averages-panel">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-label">Total ${label} Faced</div>
                 <div class="stat-value" style="font-size: 1.5rem; font-weight: bold;">${totalFaced}</div>
             </div>
-            <div class="stat-item" style="text-align: center;">
-                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Player Kills</div>
+            <div class="stat-item">
+                <div class="stat-label">Player Kills</div>
                 <div class="stat-value" style="font-size: 1.5rem; font-weight: bold; color: #ff4b4b">${totalKills}</div>
             </div>
-            <div class="stat-item" style="text-align: center;">
-                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Avg Lethality</div>
+            <div class="stat-item">
+                <div class="stat-label">Avg Lethality</div>
                 <div class="stat-value" style="font-size: 1.5rem; font-weight: bold; color: #ff4b4b">${lethalityRate}%</div>
             </div>
-            <div class="stat-item" style="text-align: center;">
-                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">${label} Seen</div>
+            <div class="stat-item">
+                <div class="stat-label">${label} Seen</div>
                 <div class="stat-value" style="font-size: 1.5rem; font-weight: bold;">${completionHtml}</div>
             </div>
         </div>
@@ -259,23 +259,23 @@ export function generateAveragesPanel(stats, count, title = "Averages") {
     const maxHpDelta = (stats.max_hp_gained || 0) - (stats.max_hp_lost || 0);
 
     return `
-    <div class="averages-panel" style="margin: 20px 0; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+    <div class="averages-panel">
         <h3 style="text-align: center; margin-top: 0; margin-bottom: 15px; color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">${title}</h3>
-        <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px;">
-            <div class="stat-item" style="text-align: center;">
-                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Avg Damage</div>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-label">Avg Damage</div>
                 <div class="stat-value" style="font-size: 1.2rem; font-weight: bold; color: #ff4b4b">${avg(stats.damage_taken || 0)}</div>
             </div>
-            <div class="stat-item" style="text-align: center;">
-                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Avg Healed</div>
+            <div class="stat-item">
+                <div class="stat-label">Avg Healed</div>
                 <div class="stat-value" style="font-size: 1.2rem; font-weight: bold; color: #00ff89">${avg(stats.hp_healed || 0)}</div>
             </div>
-            <div class="stat-item" style="text-align: center;">
-                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Avg Gold Loss</div>
+            <div class="stat-item">
+                <div class="stat-label">Avg Gold Loss</div>
                 <div class="stat-value" style="font-size: 1.2rem; font-weight: bold; color: #ffb84b">${avg(goldTotal)}</div>
             </div>
-            <div class="stat-item" style="text-align: center;">
-                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Max HP Change</div>
+            <div class="stat-item">
+                <div class="stat-label">Max HP Change</div>
                 <div class="stat-value" style="font-size: 1.2rem; font-weight: bold; color: ${maxHpDelta >= 0 ? '#00ff89' : '#ff4b4b'}">${maxHpDelta > 0 ? '+' : ''}${avg(maxHpDelta)}</div>
             </div>
         </div>
@@ -351,23 +351,23 @@ export function generateItemSummaryBox(name, stats) {
     if (!stats || stats.seen === 0) return `<div class="averages-panel" style="margin: 20px 0; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); text-align: center; color: #666;">No runs recorded for ${name} yet.</div>`;
     
     return `
-    <div class="averages-panel" style="margin: 20px 0; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
-        <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px;">
-            <div class="stat-item" style="text-align: center;">
-                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Winrate</div>
-                <div class="stat-value" id="stat-wr-val" style="font-size: 1.2rem; font-weight: bold; color: ${stats.color}">${stats.formatted}%</div>
+    <div class="averages-panel">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-label">Winrate</div>
+                <div class="stat-value" id="stat-wr-val" style="color: ${stats.color}">${stats.formatted}%</div>
             </div>
-            <div class="stat-item" style="text-align: center;">
-                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Total Runs</div>
-                <div class="stat-value" id="stat-total-val" style="font-size: 1.2rem; font-weight: bold;">${stats.seen}</div>
+            <div class="stat-item">
+                <div class="stat-label">Total Runs</div>
+                <div class="stat-value" id="stat-total-val">${stats.seen}</div>
             </div>
-            <div class="stat-item" style="text-align: center;">
-                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Wins</div>
-                <div class="stat-value" id="stat-wins-val" style="font-size: 1.2rem; font-weight: bold; color: #00ff89">${stats.wins}</div>
+            <div class="stat-item">
+                <div class="stat-label">Wins</div>
+                <div class="stat-value" id="stat-wins-val" style="color: #00ff89">${stats.wins}</div>
             </div>
-            <div class="stat-item" style="text-align: center;">
-                <div class="stat-label" style="font-size: 0.7rem; color: #666; text-transform: uppercase;">Losses</div>
-                <div class="stat-value" id="stat-losses-val" style="font-size: 1.2rem; font-weight: bold; color: #ff4b4b">${stats.losses}</div>
+            <div class="stat-item">
+                <div class="stat-label">Losses</div>
+                <div class="stat-value" id="stat-losses-val" style="color: #ff4b4b">${stats.losses}</div>
             </div>
         </div>
     </div>`;
