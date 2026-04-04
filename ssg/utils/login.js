@@ -30,7 +30,7 @@
             console.log("Auth: Fetching profile for UUID:", user.id);
             setTimeout(async () => {
                 console.log("Auth: Query starting...");
-                const result = await supabase.from('ltg_profiles').select('username').eq('user_id', user.id).maybeSingle();
+                const result = await supabase.from('ltg_profiles').select('username, slug, trust').eq('user_id', user.id).maybeSingle();
                 console.log("Auth: Query finished. Result ->", result);
                 if (result.data?.username) btn.textContent = result.data.username;
                 if (result.error) console.log("Auth: Error ->", result.error);
