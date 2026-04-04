@@ -471,7 +471,7 @@ body.sidebar-open-squish .left-sidebar { left: 0; }
 .yt-btn .material-symbols-outlined { color: #ff4b4b; margin-right: 6px; font-size: 1.2rem; }
 
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; }
-.card-item { position: relative; overflow: hidden; background: #1a1a1a; border: 1px solid #333; padding: 15px; text-decoration: none; color: inherit; display: flex; justify-content: space-between; border-radius: 8px; transition: border-color 0.2s; }
+.card-item { position: relative; overflow: hidden; background: #1a1a1a; border: 1px solid #333; padding: 12px; text-decoration: none; color: inherit; display: flex; justify-content: space-between; border-radius: 8px; transition: border-color 0.2s; }
 .card-item:hover { border-color: var(--border-hover) }
 .card-name { font-weight: bold; } .card-stats { text-align: right; } .win-rate { font-weight: bold; font-size: 1.1rem; } .run-count { font-size: 0.7rem; color: #666; text-transform: uppercase; } .win-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; }
 
@@ -495,9 +495,7 @@ body.sidebar-open-squish .left-sidebar { left: 0; }
     font-weight: 600; 
     display: flex; 
     flex-wrap: wrap; 
-    padding-top: 10px; 
-    margin-top: 10px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 3px;
 }
 .run-vid-btn { 
     padding: 2px 8px; 
