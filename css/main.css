@@ -64,7 +64,7 @@
    2. GLOBAL RESETS & TYPOGRAPHY
    ========================================================================== */
 *, *::before, *::after { box-sizing: border-box; }
-html, body { margin: 0 !important; }
+html, body { margin: 0 !important; overflow-y:scroll;}
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: var(--bg);
