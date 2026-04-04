@@ -9,15 +9,24 @@
     window.authLogin = (provider) => supabase.auth.signInWithOAuth({ provider });
     window.authLogout = () => supabase.auth.signOut().then(() => location.reload());
 
+    let currentUid = null;
+
     supabase.auth.onAuthStateChange(async (event, session) => {
         console.log("Auth: Event ->", event);
         const user = session?.user;
-        btn.textContent = user ? 'Account' : 'Login';
-        menu.innerHTML = user 
-            ? '<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>'
-            : '<button onclick="authLogin(\'google\')">Google</button><button onclick="authLogin(\'twitch\')">Twitch</button>';
         
-        if (user) {
+        if (!user) {
+            currentUid = null;
+            btn.textContent = 'Login';
+            menu.innerHTML = '<button onclick="authLogin(\'google\')">Google</button><button onclick="authLogin(\'twitch\')">Twitch</button>';
+            return;
+        }
+
+        if (user.id !== currentUid) {
+            currentUid = user.id;
+            btn.textContent = 'Account';
+            menu.innerHTML = '<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>';
+
             console.log("Auth: Fetching profile for UUID:", user.id);
             setTimeout(async () => {
                 console.log("Auth: Query starting...");

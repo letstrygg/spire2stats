@@ -61,7 +61,7 @@
   "@type": "ItemPage",
   "name": "Momentum - Spire 2 Stats",
   "description": "Momentum gameplay statistics for Slay the Spire 2. Winrate: 75.0%. Total Runs: 4.",
-  "dateModified": "2026-04-04T22:31:09.471Z",
+  "dateModified": "2026-04-04T22:40:17.837Z",
   "mainEntity": {
     "@type": "Thing",
     "name": "Momentum",
@@ -78,7 +78,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/enchantments/">enchantments</a> / momentum</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-04T22:31:09.471Z">April 4, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-04T22:40:17.837Z">April 4, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -208,15 +208,24 @@
     window.authLogin = (provider) => supabase.auth.signInWithOAuth({ provider });
     window.authLogout = () => supabase.auth.signOut().then(() => location.reload());
 
+    let currentUid = null;
+
     supabase.auth.onAuthStateChange(async (event, session) => {
         console.log("Auth: Event ->", event);
         const user = session?.user;
-        btn.textContent = user ? 'Account' : 'Login';
-        menu.innerHTML = user 
-            ? '<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>'
-            : '<button onclick="authLogin(\'google\')">Google</button><button onclick="authLogin(\'twitch\')">Twitch</button>';
         
-        if (user) {
+        if (!user) {
+            currentUid = null;
+            btn.textContent = 'Login';
+            menu.innerHTML = '<button onclick="authLogin(\'google\')">Google</button><button onclick="authLogin(\'twitch\')">Twitch</button>';
+            return;
+        }
+
+        if (user.id !== currentUid) {
+            currentUid = user.id;
+            btn.textContent = 'Account';
+            menu.innerHTML = '<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>';
+
             console.log("Auth: Fetching profile for UUID:", user.id);
             setTimeout(async () => {
                 console.log("Auth: Query starting...");
