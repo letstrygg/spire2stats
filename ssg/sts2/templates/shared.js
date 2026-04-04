@@ -378,9 +378,9 @@ export function generateSemanticStatsParagraph(name, stats, contextLabel) {
 }
 
 export function wrapLayout(title, content, breadcrumbs = [], description = "", headExtra = "", canonicalPath = "") {
-    const bcHtml = breadcrumbs.length > 0 
-        ? `<nav class="breadcrumbs"><a href="/">spire2stats</a> / ${breadcrumbs.map((b, i) => i === breadcrumbs.length - 1 ? b.name.toLowerCase() : `<a href="${b.url}">${b.name.toLowerCase()}</a>`).join(' / ')}</nav>`
-        : '';
+    const bcHtml = `<nav class="breadcrumbs">${breadcrumbs.length > 0 
+        ? `<a href="/">spire2stats</a> / ${breadcrumbs.map((b, i) => i === breadcrumbs.length - 1 ? b.name.toLowerCase() : `<a href="${b.url}">${b.name.toLowerCase()}</a>`).join(' / ')}`
+        : 'spire2stats'}</nav>`;
 
     const canonicalUrl = canonicalPath ? `https://spire2stats.com${canonicalPath.endsWith('/') ? canonicalPath : canonicalPath + '/'}` : '';
     const canonicalHtml = canonicalUrl ? `<link rel="canonical" href="${canonicalUrl}">` : '';
