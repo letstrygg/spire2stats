@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 // --- BUILD DATE CONSTANTS ---
 const BUILD_DATE = new Date();
 export const FORMATTED_BUILD_DATE = BUILD_DATE.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
@@ -465,101 +466,7 @@ export function wrapLayout(title, content, breadcrumbs = [], description = "", h
 ${bcHtml}${content}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-    (function() {
-        const supabaseUrl = 'https://fnwmtytnltmqjaflfwyr.supabase.co';
-        const supabaseKey = 'sb_publishable_y12qZF_dSbUPmV_aieiUgA_CibDsxQV';
-        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey, {
-            auth: {
-                flowType: 'pkce'
-            }
-        });
-
-        const authBtn = document.getElementById('auth-user-btn');
-        const authMenu = document.getElementById('auth-dropdown-menu');
-
-        authBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            authMenu.classList.toggle('show');
-        });
-
-        document.addEventListener('click', () => authMenu.classList.remove('show'));
-
-        window.authLogin = async (provider) => {
-            await supabase.auth.signInWithOAuth({ provider });
-        };
-
-        window.authLogout = async () => {
-            await supabase.auth.signOut();
-            window.location.reload();
-        };
-
-        supabase.auth.onAuthStateChange(async (event, session) => {
-            const user = session?.user;
-            if (!user) {
-                authBtn.textContent = 'Login';
-                authMenu.innerHTML = \`<button onclick="authLogin('google')">Google</button><button onclick="authLogin('twitch')">Twitch</button>\`;
-                return;
-            }
-
-            try {
-                let { data: profile, error } = await supabase
-                    .from('ltg_profiles')
-                    .select('username, slug, trust')
-                    .eq('user_id', user.id)
-                    .maybeSingle();
-
-                if (error) throw error;
-
-                if (!profile) {
-                    const rawName = user.user_metadata?.display_name || ('unknown' + Math.floor(1000 + Math.random() * 9000));
-                    const baseSlug = rawName.toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-');
-                    
-                    let uniqueSlug = baseSlug;
-                    let isUnique = false;
-
-                    while (!isUnique) {
-                        const { data: existing } = await supabase
-                            .from('ltg_profiles')
-                            .select('slug')
-                            .eq('slug', uniqueSlug)
-                            .maybeSingle();
-
-                        if (!existing) {
-                            isUnique = true;
-                        } else {
-                            const match = uniqueSlug.match(/(\d+)$/);
-                            if (match) {
-                                const num = parseInt(match[1], 10);
-                                uniqueSlug = uniqueSlug.slice(0, -match[1].length) + (num + 1);
-                            } else {
-                                uniqueSlug = uniqueSlug + '1';
-                            }
-                        }
-                    }
-                    
-                    const { data: newProfile, error: insError } = await supabase
-                        .from('ltg_profiles')
-                        .insert([{ 
-                            user_id: user.id, 
-                            username: (uniqueSlug === baseSlug && rawName.indexOf('unknown') !== 0) ? rawName : uniqueSlug, 
-                            slug: uniqueSlug,
-                            trust: 0
-                        }])
-                        .select()
-                        .single();
-                    if (insError) throw insError;
-                    profile = newProfile;
-                }
-
-                authBtn.textContent = profile ? profile.username : 'Account';
-                authMenu.innerHTML = \`<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>\`;
-            } catch (err) {
-                console.error("Auth Profile Error:", err);
-                authBtn.textContent = 'Account';
-                authMenu.innerHTML = \`<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>\`;
-            }
-        });
-    })();
+    ${fs.readFileSync(path.resolve('ssg/utils/login.js'), 'utf8')}
 </script>
 </body></html>`;
 }

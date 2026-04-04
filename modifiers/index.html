@@ -55,7 +55,7 @@
   "@type": "CollectionPage",
   "name": "Modifiers - Spire 2 Stats",
   "description": "Complete list of Slay the Spire 2 modifiers from the game database.",
-  "dateModified": "2026-04-04T21:09:10.436Z"
+  "dateModified": "2026-04-04T21:23:10.377Z"
 }
 </script>
 </head>
@@ -67,7 +67,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / modifiers</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-04T21:09:10.436Z">April 4, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-04T21:23:10.377Z">April 4, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -78,99 +78,79 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
     (function() {
-        const supabaseUrl = 'https://fnwmtytnltmqjaflfwyr.supabase.co';
-        const supabaseKey = 'sb_publishable_y12qZF_dSbUPmV_aieiUgA_CibDsxQV';
-        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey, {
-            auth: {
-                flowType: 'pkce'
+    console.log("Auth: Initializing Supabase client...");
+    const supabaseUrl = 'https://fnwmtytnltmqjaflfwyr.supabase.co';
+    const supabaseKey = 'sb_publishable_y12qZF_dSbUPmV_aieiUgA_CibDsxQV';
+    const supabase = window.supabase.createClient(supabaseUrl, supabaseKey, {
+        auth: { flowType: 'pkce' }
+    });
+
+    const authBtn = document.getElementById('auth-user-btn');
+    const authMenu = document.getElementById('auth-dropdown-menu');
+
+    if (!authBtn || !authMenu) {
+        console.error("Auth: UI elements not found (auth-user-btn or auth-dropdown-menu)");
+        return;
+    }
+
+    authBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        authMenu.classList.toggle('show');
+    });
+
+    document.addEventListener('click', () => authMenu.classList.remove('show'));
+
+    window.authLogin = async (provider) => {
+        console.log(`Auth: Redirecting to ${provider} login...`);
+        await supabase.auth.signInWithOAuth({ provider });
+    };
+
+    window.authLogout = async () => {
+        console.log("Auth: Logging out...");
+        await supabase.auth.signOut();
+        window.location.reload();
+    };
+
+    supabase.auth.onAuthStateChange(async (event, session) => {
+        console.log("Auth: State change detected:", event);
+        const user = session?.user;
+
+        if (!user) {
+            console.log("Auth: No session found, showing login options.");
+            authBtn.textContent = 'Login';
+            authMenu.innerHTML = `<button onclick="authLogin('google')">Google</button><button onclick="authLogin('twitch')">Twitch</button>`;
+            return;
+        }
+
+        try {
+            console.log("Auth: Fetching profile for UUID:", user.id);
+            let { data: profile, error } = await supabase
+                .from('ltg_profiles')
+                .select('username')
+                .eq('user_id', user.id)
+                .maybeSingle();
+
+            if (error) throw error;
+
+            if (!profile) {
+                console.log("Auth: Profile missing, generating new entry...");
+                const rawName = user.user_metadata?.display_name || ('unknown' + Math.floor(1000 + Math.random() * 9000));
+                const slug = rawName.toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-');
+                
+                const { data: newProfile, error: insError } = await supabase.from('ltg_profiles').insert([{ user_id: user.id, username: rawName, slug: slug }]).select().single();
+                if (insError) throw insError;
+                profile = newProfile;
             }
-        });
 
-        const authBtn = document.getElementById('auth-user-btn');
-        const authMenu = document.getElementById('auth-dropdown-menu');
-
-        authBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            authMenu.classList.toggle('show');
-        });
-
-        document.addEventListener('click', () => authMenu.classList.remove('show'));
-
-        window.authLogin = async (provider) => {
-            await supabase.auth.signInWithOAuth({ provider });
-        };
-
-        window.authLogout = async () => {
-            await supabase.auth.signOut();
-            window.location.reload();
-        };
-
-        supabase.auth.onAuthStateChange(async (event, session) => {
-            const user = session?.user;
-            if (!user) {
-                authBtn.textContent = 'Login';
-                authMenu.innerHTML = `<button onclick="authLogin('google')">Google</button><button onclick="authLogin('twitch')">Twitch</button>`;
-                return;
-            }
-
-            try {
-                let { data: profile, error } = await supabase
-                    .from('ltg_profiles')
-                    .select('username, slug, trust')
-                    .eq('user_id', user.id)
-                    .maybeSingle();
-
-                if (error) throw error;
-
-                if (!profile) {
-                    const rawName = user.user_metadata?.display_name || ('unknown' + Math.floor(1000 + Math.random() * 9000));
-                    const baseSlug = rawName.toLowerCase().replace(/s+/g, '-').replace(/[^w-]+/g, '').replace(/--+/g, '-');
-                    
-                    let uniqueSlug = baseSlug;
-                    let isUnique = false;
-
-                    while (!isUnique) {
-                        const { data: existing } = await supabase
-                            .from('ltg_profiles')
-                            .select('slug')
-                            .eq('slug', uniqueSlug)
-                            .maybeSingle();
-
-                        if (!existing) {
-                            isUnique = true;
-                        } else {
-                            const match = uniqueSlug.match(/(d+)$/);
-                            if (match) {
-                                const num = parseInt(match[1], 10);
-                                uniqueSlug = uniqueSlug.slice(0, -match[1].length) + (num + 1);
-                            } else {
-                                uniqueSlug = uniqueSlug + '1';
-                            }
-                        }
-                    }
-                    
-                    const { data: newProfile, error: insError } = await supabase
-                        .from('ltg_profiles')
-                        .insert([{ 
-                            user_id: user.id, 
-                            username: (uniqueSlug === baseSlug && rawName.indexOf('unknown') !== 0) ? rawName : uniqueSlug, 
-                            slug: uniqueSlug,
-                            trust: 0
-                        }])
-                        .select()
-                        .single();
-                    if (insError) throw insError;
-                    profile = newProfile;
-                }
-
-                authBtn.textContent = profile ? profile.username : 'Account';
-                authMenu.innerHTML = `<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>`;
-            } catch (err) {
-                console.error("Auth Profile Error:", err);
-                authBtn.textContent = 'Account';
-                authMenu.innerHTML = `<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>`;
-            }
-        });
-    })();
+            console.log("Auth: Logged in as:", profile.username);
+            authBtn.textContent = profile.username;
+            authMenu.innerHTML = `<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>`;
+        } catch (err) {
+            console.error("Auth Error:", err.message);
+            authBtn.textContent = 'Account';
+            authMenu.innerHTML = `<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>`;
+        }
+    });
+})();
 </script>
 </body></html>
