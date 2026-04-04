@@ -104,7 +104,7 @@
                     document.addEventListener("DOMContentLoaded", function() {
                         const ctx = document.getElementById('hpChart').getContext('2d');
                         if (!ctx) return;
-                        const rawRuns = [{"label":"Run 133 (Ironclad)","win":false,"floorData":[{"floor":1,"hp":64,"name":"Neow","damage":0,"healed":64,"gold":-99,"monsters":""},{"floor":2,"hp":60,"name":"Seapunk","damage":10,"healed":6,"gold":13,"monsters":"SEAPUNK"},{"floor":3,"hp":66,"name":"Toadpoles","damage":0,"healed":6,"gold":11,"monsters":"TOADPOLE, TOADPOLE"},{"floor":4,"hp":71,"name":"Corpse Slugs","damage":1,"healed":6,"gold":8,"monsters":"CORPSE SLUG, CORPSE SLUG"},{"floor":5,"hp":71,"name":"The Legends Were True","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":6,"hp":54,"name":"Fossil Stalker","damage":23,"healed":6,"gold":10,"monsters":"FOSSIL STALKER"},{"floor":7,"hp":54,"name":"rest site","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":8,"hp":41,"name":"Two Gremlins in a Trenchcoat","damage":19,"healed":6,"gold":13,"monsters":"GREMLIN MERC"},{"floor":9,"hp":41,"name":"rest site","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":10,"hp":41,"name":"treasure","damage":0,"healed":0,"gold":38,"monsters":""},{"floor":11,"hp":46,"name":"Haunted Ship","damage":1,"healed":6,"gold":9,"monsters":"HAUNTED SHIP"},{"floor":12,"hp":0,"name":"Skulking Colony","damage":46,"healed":0,"gold":0,"monsters":"SKULKING COLONY"}]}];
+                        const rawRuns = [{"label":"Run 133 (Ironclad)","win":false,"floorData":[{"floor":1,"hp":64,"name":"Neow","damage":0,"healed":64,"gold":-99,"monsters":[]},{"floor":2,"hp":60,"name":"Seapunk","damage":10,"healed":6,"gold":13,"monsters":["SEAPUNK"]},{"floor":3,"hp":66,"name":"Toadpoles","damage":0,"healed":6,"gold":11,"monsters":["TOADPOLE","TOADPOLE"]},{"floor":4,"hp":71,"name":"Corpse Slugs","damage":1,"healed":6,"gold":8,"monsters":["CORPSE SLUG","CORPSE SLUG"]},{"floor":5,"hp":71,"name":"The Legends Were True","damage":0,"healed":0,"gold":0,"monsters":[]},{"floor":6,"hp":54,"name":"Fossil Stalker","damage":23,"healed":6,"gold":10,"monsters":["FOSSIL STALKER"]},{"floor":7,"hp":54,"name":"rest site","damage":0,"healed":0,"gold":0,"monsters":[]},{"floor":8,"hp":41,"name":"Two Gremlins in a Trenchcoat","damage":19,"healed":6,"gold":13,"monsters":["GREMLIN MERC"]},{"floor":9,"hp":41,"name":"rest site","damage":0,"healed":0,"gold":0,"monsters":[]},{"floor":10,"hp":41,"name":"treasure","damage":0,"healed":0,"gold":38,"monsters":[]},{"floor":11,"hp":46,"name":"Haunted Ship","damage":1,"healed":6,"gold":9,"monsters":["HAUNTED SHIP"]},{"floor":12,"hp":0,"name":"Skulking Colony","damage":46,"healed":0,"gold":0,"monsters":["SKULKING COLONY"]}]}];
                         console.log("📈 Chart Data received by browser:", rawRuns);
 
                         if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) {
@@ -160,8 +160,11 @@
                                                 const d = context.raw;
                                                 if (!d || typeof d === 'number') return `HP: ${d}`;
                                                 const hpStart = d.y + d.damage - d.healed;
-                                                const lines = [`Node: ${d.name}` ];
-                                                if (d.monsters) lines.push(`Monsters: ${d.monsters}`);
+                                                const lines = [d.name];
+                                                if (Array.isArray(d.monsters) && d.monsters.length > 0) {
+                                                    lines.push('Monsters:');
+                                                    d.monsters.forEach(m => lines.push('  ' + m));
+                                                }
                                                 lines.push(`HP: ${hpStart} -> ${d.y}`);
                                                 if (d.damage > 0) lines.push(`Damage Taken: ${d.damage}`);
                                                 if (d.healed > 0) lines.push(`Healed: ${d.healed}`);

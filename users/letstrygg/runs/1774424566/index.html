@@ -104,7 +104,7 @@
                     document.addEventListener("DOMContentLoaded", function() {
                         const ctx = document.getElementById('hpChart').getContext('2d');
                         if (!ctx) return;
-                        const rawRuns = [{"label":"Run 29 (Silent)","win":false,"floorData":[{"floor":1,"hp":56,"name":"Neow","damage":0,"healed":56,"gold":0,"monsters":""},{"floor":2,"hp":53,"name":"Corpse Slugs","damage":3,"healed":0,"gold":15,"monsters":"CORPSE SLUG, CORPSE SLUG"},{"floor":3,"hp":53,"name":"Self-Help Book","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":4,"hp":53,"name":"Toadpoles","damage":0,"healed":0,"gold":12,"monsters":"TOADPOLE, TOADPOLE"},{"floor":5,"hp":53,"name":"Seapunk","damage":0,"healed":0,"gold":8,"monsters":"SEAPUNK"},{"floor":6,"hp":53,"name":"rest site","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":7,"hp":0,"name":"Evil Gas","damage":53,"healed":0,"gold":0,"monsters":"LIVING FOG"}]}];
+                        const rawRuns = [{"label":"Run 29 (Silent)","win":false,"floorData":[{"floor":1,"hp":56,"name":"Neow","damage":0,"healed":56,"gold":0,"monsters":[]},{"floor":2,"hp":53,"name":"Corpse Slugs","damage":3,"healed":0,"gold":15,"monsters":["CORPSE SLUG","CORPSE SLUG"]},{"floor":3,"hp":53,"name":"Self-Help Book","damage":0,"healed":0,"gold":0,"monsters":[]},{"floor":4,"hp":53,"name":"Toadpoles","damage":0,"healed":0,"gold":12,"monsters":["TOADPOLE","TOADPOLE"]},{"floor":5,"hp":53,"name":"Seapunk","damage":0,"healed":0,"gold":8,"monsters":["SEAPUNK"]},{"floor":6,"hp":53,"name":"rest site","damage":0,"healed":0,"gold":0,"monsters":[]},{"floor":7,"hp":0,"name":"Evil Gas","damage":53,"healed":0,"gold":0,"monsters":["LIVING FOG"]}]}];
                         console.log("📈 Chart Data received by browser:", rawRuns);
 
                         if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) {
@@ -160,8 +160,11 @@
                                                 const d = context.raw;
                                                 if (!d || typeof d === 'number') return `HP: ${d}`;
                                                 const hpStart = d.y + d.damage - d.healed;
-                                                const lines = [`Node: ${d.name}` ];
-                                                if (d.monsters) lines.push(`Monsters: ${d.monsters}`);
+                                                const lines = [d.name];
+                                                if (Array.isArray(d.monsters) && d.monsters.length > 0) {
+                                                    lines.push('Monsters:');
+                                                    d.monsters.forEach(m => lines.push('  ' + m));
+                                                }
                                                 lines.push(`HP: ${hpStart} -> ${d.y}`);
                                                 if (d.damage > 0) lines.push(`Damage Taken: ${d.damage}`);
                                                 if (d.healed > 0) lines.push(`Healed: ${d.healed}`);

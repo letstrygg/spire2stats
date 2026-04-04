@@ -249,9 +249,9 @@ async function build() {
                     ? pathHistory.map((p, idx) => {
                         const id = p.encounter_id || p.event_id;
                         const nodeName = id ? (encounterLookup[id] || eventLookup[id] || id.split('.').pop().replace(/_/g, ' ')) : (p.room_type ? p.room_type.replace(/_/g, ' ') : 'Unknown');
-                        let monsters = '';
+                        let monsters = [];
                         if (p.monster_ids && Array.isArray(p.monster_ids)) {
-                            monsters = p.monster_ids.map(mid => mid.split('.').pop().replace(/(_NORMAL|_BOSS|_ELITE)$/, '').replace(/_/g, ' ')).join(', ');
+                            monsters = p.monster_ids.map(mid => mid.split('.').pop().replace(/(_NORMAL|_BOSS|_ELITE)$/, '').replace(/_/g, ' '));
                         }
                         return { 
                             floor: p.floor ?? (idx + 1), 
@@ -382,8 +382,11 @@ async function build() {
                                                 const d = context.raw;
                                                 if (!d || typeof d === 'number') return \`HP: \${d}\`;
                                                 const hpStart = d.y + d.damage - d.healed;
-                                                const lines = [\`Node: \${d.name}\` ];
-                                                if (d.monsters) lines.push(\`Monsters: \${d.monsters}\`);
+                                                const lines = [d.name];
+                                                if (Array.isArray(d.monsters) && d.monsters.length > 0) {
+                                                    lines.push('Monsters:');
+                                                    d.monsters.forEach(m => lines.push('  ' + m));
+                                                }
                                                 lines.push(\`HP: \${hpStart} -> \${d.y}\`);
                                                 if (d.damage > 0) lines.push(\`Damage Taken: \${d.damage}\`);
                                                 if (d.healed > 0) lines.push(\`Healed: \${d.healed}\`);

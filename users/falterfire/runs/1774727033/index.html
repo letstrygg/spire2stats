@@ -104,7 +104,7 @@
                     document.addEventListener("DOMContentLoaded", function() {
                         const ctx = document.getElementById('hpChart').getContext('2d');
                         if (!ctx) return;
-                        const rawRuns = [{"label":"Run 69 (Ironclad)","win":false,"floorData":[{"floor":1,"hp":64,"name":"Neow","damage":0,"healed":64,"gold":0,"monsters":""},{"floor":2,"hp":62,"name":"Sludge Spinner","damage":8,"healed":6,"gold":12,"monsters":"SLUDGE SPINNER"},{"floor":3,"hp":59,"name":"Corpse Slugs","damage":9,"healed":6,"gold":9,"monsters":"CORPSE SLUG, CORPSE SLUG"},{"floor":4,"hp":59,"name":"treasure","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":5,"hp":53,"name":"Toadpoles","damage":12,"healed":6,"gold":10,"monsters":"TOADPOLE, TOADPOLE"},{"floor":6,"hp":10,"name":"Phantasmal Gardeners","damage":49,"healed":6,"gold":28,"monsters":"PHANTASMAL GARDENER, PHANTASMAL GARDENER, PHANTASMAL GARDENER, PHANTASMAL GARDENER"},{"floor":7,"hp":0,"name":"Two Gremlins in a Trenchcoat","damage":10,"healed":0,"gold":0,"monsters":"GREMLIN MERC"}]}];
+                        const rawRuns = [{"label":"Run 69 (Ironclad)","win":false,"floorData":[{"floor":1,"hp":64,"name":"Neow","damage":0,"healed":64,"gold":0,"monsters":[]},{"floor":2,"hp":62,"name":"Sludge Spinner","damage":8,"healed":6,"gold":12,"monsters":["SLUDGE SPINNER"]},{"floor":3,"hp":59,"name":"Corpse Slugs","damage":9,"healed":6,"gold":9,"monsters":["CORPSE SLUG","CORPSE SLUG"]},{"floor":4,"hp":59,"name":"treasure","damage":0,"healed":0,"gold":0,"monsters":[]},{"floor":5,"hp":53,"name":"Toadpoles","damage":12,"healed":6,"gold":10,"monsters":["TOADPOLE","TOADPOLE"]},{"floor":6,"hp":10,"name":"Phantasmal Gardeners","damage":49,"healed":6,"gold":28,"monsters":["PHANTASMAL GARDENER","PHANTASMAL GARDENER","PHANTASMAL GARDENER","PHANTASMAL GARDENER"]},{"floor":7,"hp":0,"name":"Two Gremlins in a Trenchcoat","damage":10,"healed":0,"gold":0,"monsters":["GREMLIN MERC"]}]}];
                         console.log("📈 Chart Data received by browser:", rawRuns);
 
                         if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) {
@@ -160,8 +160,11 @@
                                                 const d = context.raw;
                                                 if (!d || typeof d === 'number') return `HP: ${d}`;
                                                 const hpStart = d.y + d.damage - d.healed;
-                                                const lines = [`Node: ${d.name}` ];
-                                                if (d.monsters) lines.push(`Monsters: ${d.monsters}`);
+                                                const lines = [d.name];
+                                                if (Array.isArray(d.monsters) && d.monsters.length > 0) {
+                                                    lines.push('Monsters:');
+                                                    d.monsters.forEach(m => lines.push('  ' + m));
+                                                }
                                                 lines.push(`HP: ${hpStart} -> ${d.y}`);
                                                 if (d.damage > 0) lines.push(`Damage Taken: ${d.damage}`);
                                                 if (d.healed > 0) lines.push(`Healed: ${d.healed}`);

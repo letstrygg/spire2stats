@@ -104,7 +104,7 @@
                     document.addEventListener("DOMContentLoaded", function() {
                         const ctx = document.getElementById('hpChart').getContext('2d');
                         if (!ctx) return;
-                        const rawRuns = [{"label":"Run 64 (Necrobinder)","win":false,"floorData":[{"floor":1,"hp":52,"name":"Neow","damage":0,"healed":52,"gold":0,"monsters":""},{"floor":2,"hp":51,"name":"Seapunk","damage":1,"healed":0,"gold":7,"monsters":"SEAPUNK"},{"floor":3,"hp":37,"name":"Room Full of Cheese","damage":14,"healed":0,"gold":0,"monsters":""},{"floor":4,"hp":31,"name":"Corpse Slugs","damage":7,"healed":1,"gold":10,"monsters":"CORPSE SLUG, CORPSE SLUG"},{"floor":5,"hp":29,"name":"Sludge Spinner","damage":3,"healed":1,"gold":15,"monsters":"SLUDGE SPINNER"},{"floor":6,"hp":54,"name":"rest site","damage":0,"healed":25,"gold":0,"monsters":""},{"floor":7,"hp":50,"name":"Two-Tailed Rats","damage":5,"healed":1,"gold":7,"monsters":"TWO TAILED RAT, TWO TAILED RAT, TWO TAILED RAT"},{"floor":8,"hp":17,"name":"Fossil Stalker","damage":34,"healed":1,"gold":13,"monsters":"FOSSIL STALKER"},{"floor":9,"hp":0,"name":"Terror Eel","damage":32,"healed":15,"gold":0,"monsters":"TERROR EEL"}]}];
+                        const rawRuns = [{"label":"Run 64 (Necrobinder)","win":false,"floorData":[{"floor":1,"hp":52,"name":"Neow","damage":0,"healed":52,"gold":0,"monsters":[]},{"floor":2,"hp":51,"name":"Seapunk","damage":1,"healed":0,"gold":7,"monsters":["SEAPUNK"]},{"floor":3,"hp":37,"name":"Room Full of Cheese","damage":14,"healed":0,"gold":0,"monsters":[]},{"floor":4,"hp":31,"name":"Corpse Slugs","damage":7,"healed":1,"gold":10,"monsters":["CORPSE SLUG","CORPSE SLUG"]},{"floor":5,"hp":29,"name":"Sludge Spinner","damage":3,"healed":1,"gold":15,"monsters":["SLUDGE SPINNER"]},{"floor":6,"hp":54,"name":"rest site","damage":0,"healed":25,"gold":0,"monsters":[]},{"floor":7,"hp":50,"name":"Two-Tailed Rats","damage":5,"healed":1,"gold":7,"monsters":["TWO TAILED RAT","TWO TAILED RAT","TWO TAILED RAT"]},{"floor":8,"hp":17,"name":"Fossil Stalker","damage":34,"healed":1,"gold":13,"monsters":["FOSSIL STALKER"]},{"floor":9,"hp":0,"name":"Terror Eel","damage":32,"healed":15,"gold":0,"monsters":["TERROR EEL"]}]}];
                         console.log("📈 Chart Data received by browser:", rawRuns);
 
                         if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) {
@@ -160,8 +160,11 @@
                                                 const d = context.raw;
                                                 if (!d || typeof d === 'number') return `HP: ${d}`;
                                                 const hpStart = d.y + d.damage - d.healed;
-                                                const lines = [`Node: ${d.name}` ];
-                                                if (d.monsters) lines.push(`Monsters: ${d.monsters}`);
+                                                const lines = [d.name];
+                                                if (Array.isArray(d.monsters) && d.monsters.length > 0) {
+                                                    lines.push('Monsters:');
+                                                    d.monsters.forEach(m => lines.push('  ' + m));
+                                                }
                                                 lines.push(`HP: ${hpStart} -> ${d.y}`);
                                                 if (d.damage > 0) lines.push(`Damage Taken: ${d.damage}`);
                                                 if (d.healed > 0) lines.push(`Healed: ${d.healed}`);

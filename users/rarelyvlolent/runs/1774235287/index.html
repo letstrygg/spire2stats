@@ -104,7 +104,7 @@
                     document.addEventListener("DOMContentLoaded", function() {
                         const ctx = document.getElementById('hpChart').getContext('2d');
                         if (!ctx) return;
-                        const rawRuns = [{"label":"Run 120 (Regent)","win":false,"floorData":[{"floor":1,"hp":60,"name":"Neow","damage":0,"healed":60,"gold":0,"monsters":""},{"floor":2,"hp":60,"name":"Shrinker Beetle","damage":0,"healed":0,"gold":7,"monsters":"SHRINKER BEETLE"},{"floor":3,"hp":59,"name":"Fuzzy Wurm Crawler","damage":1,"healed":0,"gold":14,"monsters":"FUZZY WURM CRAWLER"},{"floor":4,"hp":59,"name":"shop","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":5,"hp":51,"name":"Dense Vegetation","damage":8,"healed":0,"gold":80,"monsters":""},{"floor":6,"hp":45,"name":"Group of Slimes","damage":6,"healed":0,"gold":10,"monsters":"TWIG SLIME S, LEAF SLIME M, LEAF SLIME S"},{"floor":7,"hp":45,"name":"rest site","damage":0,"healed":0,"gold":0,"monsters":""},{"floor":8,"hp":0,"name":"Byrdonis","damage":45,"healed":0,"gold":0,"monsters":"BYRDONIS"}]}];
+                        const rawRuns = [{"label":"Run 120 (Regent)","win":false,"floorData":[{"floor":1,"hp":60,"name":"Neow","damage":0,"healed":60,"gold":0,"monsters":[]},{"floor":2,"hp":60,"name":"Shrinker Beetle","damage":0,"healed":0,"gold":7,"monsters":["SHRINKER BEETLE"]},{"floor":3,"hp":59,"name":"Fuzzy Wurm Crawler","damage":1,"healed":0,"gold":14,"monsters":["FUZZY WURM CRAWLER"]},{"floor":4,"hp":59,"name":"shop","damage":0,"healed":0,"gold":0,"monsters":[]},{"floor":5,"hp":51,"name":"Dense Vegetation","damage":8,"healed":0,"gold":80,"monsters":[]},{"floor":6,"hp":45,"name":"Group of Slimes","damage":6,"healed":0,"gold":10,"monsters":["TWIG SLIME S","LEAF SLIME M","LEAF SLIME S"]},{"floor":7,"hp":45,"name":"rest site","damage":0,"healed":0,"gold":0,"monsters":[]},{"floor":8,"hp":0,"name":"Byrdonis","damage":45,"healed":0,"gold":0,"monsters":["BYRDONIS"]}]}];
                         console.log("📈 Chart Data received by browser:", rawRuns);
 
                         if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) {
@@ -160,8 +160,11 @@
                                                 const d = context.raw;
                                                 if (!d || typeof d === 'number') return `HP: ${d}`;
                                                 const hpStart = d.y + d.damage - d.healed;
-                                                const lines = [`Node: ${d.name}` ];
-                                                if (d.monsters) lines.push(`Monsters: ${d.monsters}`);
+                                                const lines = [d.name];
+                                                if (Array.isArray(d.monsters) && d.monsters.length > 0) {
+                                                    lines.push('Monsters:');
+                                                    d.monsters.forEach(m => lines.push('  ' + m));
+                                                }
                                                 lines.push(`HP: ${hpStart} -> ${d.y}`);
                                                 if (d.damage > 0) lines.push(`Damage Taken: ${d.damage}`);
                                                 if (d.healed > 0) lines.push(`Healed: ${d.healed}`);

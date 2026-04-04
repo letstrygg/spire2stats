@@ -104,7 +104,7 @@
                     document.addEventListener("DOMContentLoaded", function() {
                         const ctx = document.getElementById('hpChart').getContext('2d');
                         if (!ctx) return;
-                        const rawRuns = [{"label":"Run 135 (Silent)","win":false,"floorData":[{"floor":1,"hp":56,"name":"Neow","damage":0,"healed":56,"gold":0,"monsters":""},{"floor":2,"hp":53,"name":"Fuzzy Wurm Crawler","damage":3,"healed":0,"gold":15,"monsters":"FUZZY WURM CRAWLER"},{"floor":3,"hp":41,"name":"Shrinker Beetle","damage":12,"healed":0,"gold":13,"monsters":"SHRINKER BEETLE"},{"floor":4,"hp":40,"name":"A Lone Nibbit","damage":1,"healed":0,"gold":11,"monsters":"NIBBIT"},{"floor":5,"hp":25,"name":"Vine Shambler","damage":15,"healed":0,"gold":12,"monsters":"VINE SHAMBLER"},{"floor":6,"hp":13,"name":"Inklets","damage":12,"healed":0,"gold":10,"monsters":"INKLET, INKLET, INKLET"},{"floor":7,"hp":34,"name":"rest site","damage":0,"healed":21,"gold":0,"monsters":""},{"floor":8,"hp":34,"name":"treasure","damage":0,"healed":0,"gold":34,"monsters":""},{"floor":9,"hp":19,"name":"Shroom and Slime","damage":15,"healed":0,"gold":15,"monsters":"TWIG SLIME M, FLYCONID"},{"floor":10,"hp":19,"name":"treasure","damage":0,"healed":0,"gold":32,"monsters":""},{"floor":11,"hp":28,"name":"Sapphire Seed","damage":0,"healed":9,"gold":0,"monsters":""},{"floor":12,"hp":49,"name":"rest site","damage":0,"healed":21,"gold":0,"monsters":""},{"floor":13,"hp":0,"name":"Cubex Construct","damage":14,"healed":0,"gold":0,"monsters":"CUBEX CONSTRUCT"}]}];
+                        const rawRuns = [{"label":"Run 135 (Silent)","win":false,"floorData":[{"floor":1,"hp":56,"name":"Neow","damage":0,"healed":56,"gold":0,"monsters":[]},{"floor":2,"hp":53,"name":"Fuzzy Wurm Crawler","damage":3,"healed":0,"gold":15,"monsters":["FUZZY WURM CRAWLER"]},{"floor":3,"hp":41,"name":"Shrinker Beetle","damage":12,"healed":0,"gold":13,"monsters":["SHRINKER BEETLE"]},{"floor":4,"hp":40,"name":"A Lone Nibbit","damage":1,"healed":0,"gold":11,"monsters":["NIBBIT"]},{"floor":5,"hp":25,"name":"Vine Shambler","damage":15,"healed":0,"gold":12,"monsters":["VINE SHAMBLER"]},{"floor":6,"hp":13,"name":"Inklets","damage":12,"healed":0,"gold":10,"monsters":["INKLET","INKLET","INKLET"]},{"floor":7,"hp":34,"name":"rest site","damage":0,"healed":21,"gold":0,"monsters":[]},{"floor":8,"hp":34,"name":"treasure","damage":0,"healed":0,"gold":34,"monsters":[]},{"floor":9,"hp":19,"name":"Shroom and Slime","damage":15,"healed":0,"gold":15,"monsters":["TWIG SLIME M","FLYCONID"]},{"floor":10,"hp":19,"name":"treasure","damage":0,"healed":0,"gold":32,"monsters":[]},{"floor":11,"hp":28,"name":"Sapphire Seed","damage":0,"healed":9,"gold":0,"monsters":[]},{"floor":12,"hp":49,"name":"rest site","damage":0,"healed":21,"gold":0,"monsters":[]},{"floor":13,"hp":0,"name":"Cubex Construct","damage":14,"healed":0,"gold":0,"monsters":["CUBEX CONSTRUCT"]}]}];
                         console.log("📈 Chart Data received by browser:", rawRuns);
 
                         if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) {
@@ -160,8 +160,11 @@
                                                 const d = context.raw;
                                                 if (!d || typeof d === 'number') return `HP: ${d}`;
                                                 const hpStart = d.y + d.damage - d.healed;
-                                                const lines = [`Node: ${d.name}` ];
-                                                if (d.monsters) lines.push(`Monsters: ${d.monsters}`);
+                                                const lines = [d.name];
+                                                if (Array.isArray(d.monsters) && d.monsters.length > 0) {
+                                                    lines.push('Monsters:');
+                                                    d.monsters.forEach(m => lines.push('  ' + m));
+                                                }
                                                 lines.push(`HP: ${hpStart} -> ${d.y}`);
                                                 if (d.damage > 0) lines.push(`Damage Taken: ${d.damage}`);
                                                 if (d.healed > 0) lines.push(`Healed: ${d.healed}`);
