@@ -85,18 +85,9 @@ header { text-align: center; padding: 20px 0; }
 .site-container { padding: 0 120px; width: 100%; box-sizing: border-box; }
 .game-page-wrapper { width: 100%; }
 
-/* Breadcrumbs */
-.breadcrumbs { font-size: 1.05rem; }
-.breadcrumbs a {
-    color: var(--blue);
-    font-weight: 500;
-    text-decoration: underline;
-    text-decoration-color: var(--underline);
-    text-underline-offset: 3px;
-    transition: opacity 0.2s ease;
-}
-.breadcrumbs a:hover { opacity: 0.8; }
-.breadcrumb-current { color: var(--text); }
+.breadcrumbs            { font-size: 1.05rem; font-weight: 500;}
+.breadcrumbs a          { color: var(--blue); transition: opacity 0.2s ease; }
+.breadcrumbs a:hover    { color: var(--text); }
 
 @media (max-width: 768px) {
     .site-container { padding: 0 20px; }
