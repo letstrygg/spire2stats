@@ -61,7 +61,7 @@
   "@type": "ItemPage",
   "name": "Prep Time - Spire 2 Stats",
   "description": "Prep Time gameplay statistics for Slay the Spire 2. Winrate: 0.0%. Total Runs: 0.",
-  "dateModified": "2026-04-04T22:01:44.020Z",
+  "dateModified": "2026-04-04T22:18:10.475Z",
   "mainEntity": {
     "@type": "Thing",
     "name": "Prep Time",
@@ -78,7 +78,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/powers/">powers</a> / prep time</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-04T22:01:44.020Z">April 4, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-04T22:18:10.475Z">April 4, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -92,6 +92,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
     (function() {
+    console.log("Auth: Initializing...");
     const supabase = window.supabase.createClient('https://fnwmtytnltmqjaflfwyr.supabase.co', 'sb_publishable_y12qZF_dSbUPmV_aieiUgA_CibDsxQV', { auth: { lock: null } });
     const btn = document.getElementById('auth-user-btn'), menu = document.getElementById('auth-dropdown-menu');
 
@@ -101,7 +102,8 @@
     window.authLogin = (provider) => supabase.auth.signInWithOAuth({ provider });
     window.authLogout = () => supabase.auth.signOut().then(() => location.reload());
 
-    supabase.auth.onAuthStateChange(async (_, session) => {
+    supabase.auth.onAuthStateChange(async (event, session) => {
+        console.log("Auth: Event ->", event);
         const user = session?.user;
         btn.textContent = user ? 'Account' : 'Login';
         menu.innerHTML = user 
@@ -109,8 +111,10 @@
             : '<button onclick="authLogin(\'google\')">Google</button><button onclick="authLogin(\'twitch\')">Twitch</button>';
         
         if (user) {
-            const { data } = await supabase.from('ltg_profiles').select('username').eq('user_id', user.id).maybeSingle();
-            if (data) btn.textContent = data.username;
+            console.log("Auth: Fetching profile for UUID:", user.id);
+            const { data, error } = await supabase.from('ltg_profiles').select('username').eq('user_id', user.id).maybeSingle();
+            console.log("Auth: Query Result ->", { data, error });
+            if (data?.username) btn.textContent = data.username;
         }
     });
 })();
