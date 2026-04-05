@@ -2,7 +2,7 @@ import { wrapLayout } from './shared.js';
 
 export function settingsTemplate() {
     const content = `
-    <div class="item-box" style="max-width: 600px; margin: 0 auto; text-align: left;">
+    <div class="item-box" style="max-width: 900px; margin: 0 auto; text-align: left;">
         <h2 style="margin-bottom: 25px; border-bottom: 1px solid #333; padding-bottom: 10px; font-size: 1.4rem;">User Settings</h2>
         
         <div id="settings-loading" style="text-align: center; padding: 40px;">
