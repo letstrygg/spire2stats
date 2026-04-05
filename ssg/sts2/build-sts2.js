@@ -36,6 +36,7 @@ import { encounterDetailTemplate } from './templates/encounter.js';
 import { ascensionDetailTemplate } from './templates/ascension.js';
 import { enchantmentDetailTemplate } from './templates/enchantment.js';
 import { settingsTemplate } from './templates/settings.js';
+import { contributeTemplate } from './templates/contribute.js';
 
 /**
  * Slay the Spire 2 - Static Site Generator
@@ -767,56 +768,7 @@ async function buildSettingsPage(sitemap) {
 
 async function buildContributePage(sitemap) {
     console.log('📝 Generating contribute page...');
-    const content = `
-    <div class="item-box" style="max-width: 1300px; margin: 0 auto; text-align: left;">
-        <h1>How to Contribute</h1>
-        <div class="description">
-            <p>Spire 2 Stats is built on community data. By sharing your run history, you help improve winrate accuracy and monster lethality statistics for everyone!</p>
-            
-            <section style="margin-top: 30px;">
-                <h2 style="color: var(--gold, #ffd700); font-size: 1.2rem;">Step 1: Locate your Run History</h2>
-                <p>On Windows, navigate to your Steam user data folder for Slay the Spire 2. It is usually located at:</p>
-                <div class="code-block" style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; border: 1px solid #444; font-family: monospace; word-break: break-all; margin: 15px 0;">
-                    C:\\Users\\<strong style="color: #4bff87; background: rgba(75, 255, 135, 0.1); padding: 2px 4px; border-radius: 3px;">{Your_Windows_Username}</strong>\\AppData\\Roaming\\SlayTheSpire2\\steam\\<strong style="color: #4bff87; background: rgba(75, 255, 135, 0.1); padding: 2px 4px; border-radius: 3px;">{12345678901234567}</strong>\\profile1\\saves
-                </div>
-                <p class="text-muted" style="font-size: 0.85rem;">Pro tip: You can also paste <strong style="color: #4bff87;"><code>%appdata%\\SlayTheSpire2\\steam</code></strong> into your File Explorer address bar to jump there more quickly.</p>
-            </section>
-
-            <section style="margin-top: 30px;">
-                <h2 style="color: var(--gold, #ffd700); font-size: 1.2rem;">Step 2: Zip the History Folder</h2>
-                <p>Inside that folder, find the <code>history</code> directory. Right-click it and select <strong>Compress to ZIP file</strong>.</p>
-                <img src="/images/zip.png" alt="How to zip the history folder" style="display: block; max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #333; margin: 20px 0;">
-            </section>
-
-            <section style="margin-top: 30px;">
-                <h2 style="color: var(--gold, #ffd700); font-size: 1.2rem;">Step 3: Send it Over</h2>
-                <p>Once you have <code>username_history.zip</code>, share it using,</p>
-                <ul style="line-height: 1.8;">
-                    <li><strong>Discord:</strong> Join our <a href="https://discord.gg/wMEWQut72X" target="_blank" style="color: #448aff; font-weight: bold;">Discord Community</a> and upload the file.</li>
-                    <li><strong>Email:</strong> Attach it to an email and send to <a href="mailto:letstrygg@gmail.com" style="color: var(--blue, #448aff);">letstrygg@gmail.com</a>.</li>
-                </ul>
-                <p><strong>Note:</strong> Feel free to include the <strong>Display Name</strong> you would like us to use for your runs!</p>
-            </section>
-
-            <hr style="border: 0; border-top: 1px solid #333; margin: 40px 0;">
-
-            <section style="opacity: 0.8;">
-                <h2 style="font-size: 1.1rem; color: #aaa;">Future Plans</h2>
-                <ul style="font-size: 0.9rem; color: #aaa; line-height: 1.6;">
-                    <li>Google and Twitch login integration for in-site run submissions.</li>
-                    <li>User profiles with the ability to edit your display name.</li>
-                    <li>Ability to link your YouTube videos or Twitch VODs to your runs.</li>
-                </ul>
-            </section>
-        </div>
-    </div>`;
-
-    const html = wrapLayout(
-        "Contribute",
-        content,
-        [{ name: "Contribute", url: "" }],
-        "Learn how to contribute your Slay the Spire 2 run data to Spire 2 Stats."
-    );
+    const html = contributeTemplate();
 
     fs.writeFileSync(path.join(PATHS.WEB_ROOT, 'contribute.html'), html);
     sitemap.add('/contribute.html');
