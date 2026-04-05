@@ -7,7 +7,6 @@ export function encounterDetailTemplate(encounter, stats, averagesHtml, lethalRu
         ${generateLethalitySummaryBox(stats, "Encounter")}
         ${averagesHtml}
         <div class="item-box">
-            <h1>${encounter.name}</h1>
             <div class="subtitle">${subtitle}</div>
             <div class="description">
                 <p>Encounter composition and historical statistics from tracked Slay the Spire 2 gameplay.</p>
