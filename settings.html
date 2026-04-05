@@ -58,7 +58,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / settings</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-05T03:42:51.039Z">April 4, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-05T04:15:31.772Z">April 4, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -208,6 +208,7 @@
 
             uploadStatus.innerHTML = '<span style="color: var(--gray)">Reading ' + runFiles.length + ' files...</span>';
             let successCount = 0;
+            let skipCount = 0;
             let failCount = 0;
             const currentUsername = usernameInput.value.trim();
 
@@ -221,23 +222,61 @@
                     try {
                         const text = await file.text();
                         const json = JSON.parse(text);
+                        const player = json.players?.[0] || {};
                         
-                        // Map JSON fields to s2s_runs_todo schema
+                        // Map JSON fields to s2s_runs_todo schema (aligned with input-runs.js)
                         uploadData.push({
                             id: json.run_id || (Date.now() + Math.random().toString(36).substr(2, 9)),
-                            user_run_num: json.run_number,
+                            user_run_num: json.run_number || null,
                             username: currentUsername,
                             schema_version: json.schema_version,
                             build_id: json.build_id,
-                            seed: json.seed ? json.seed.toString() : null,
-                            win: json.victory ? 1 : 0,
-                            character: json.character_chosen,
-                            ascension: json.ascension_level,
-                            relic_list: json.relics,
-                            deck_list: json.cards,
-                            path_history: json.path_history,
-                            start_time: json.start_time ? new Date(json.start_time * 1000).toISOString() : null,
-                            run_time: json.playtime
+                            platform_type: json.platform_type || null,
+                            seed: json.seed ? String(json.seed) : null,
+                            start_time: json.start_time || null,
+                            run_time: json.run_time || null,
+                            ascension: json.ascension || 0,
+                            game_mode: json.game_mode || null,
+                            win: json.win ? 1 : 0,
+                            was_abandoned: json.was_abandoned ? 1 : 0,
+                            killed_by_encounter: json.killed_by_encounter?.replace('ENCOUNTER.', '') || null,
+                            killed_by_event: json.killed_by_event?.replace('EVENT.', '') || null,
+                            acts: (json.acts || []).map(a => a.replace('ACT.', '')),
+                            character: player.character?.replace('CHARACTER.', ''),
+                            relic_list: (player.relics || []).map(r => r.id?.replace('RELIC.', '')),
+                            deck_list: (player.deck || []).map(c => ({ 
+                                id: c.id?.replace('CARD.', ''), 
+                                upgrades: c.current_upgrade_level || 0, 
+                                enchantment: c.enchantment?.id || null 
+                            })),
+                            path_history: (json.map_point_history || []).flat().map((pt, idx) => {
+                                const room = pt.rooms?.[0] || {};
+                                const stats = pt.player_stats?.[0] || {};
+                                const entry = {
+                                    floor: pt.floor ?? (idx + 1),
+                                    room_type: room.room_type,
+                                    current_hp: stats.current_hp,
+                                    max_hp: stats.max_hp,
+                                    current_gold: stats.current_gold,
+                                    damage_taken: stats.damage_taken,
+                                    hp_healed: stats.hp_healed,
+                                    gold_gained: stats.gold_gained,
+                                    gold_lost: stats.gold_lost,
+                                    gold_spent: stats.gold_spent,
+                                    gold_stolen: stats.gold_stolen,
+                                    max_hp_gained: stats.max_hp_gained,
+                                    max_hp_lost: stats.max_hp_lost
+                                };
+                                if (['boss', 'monster', 'elite'].includes(room.room_type)) {
+                                    entry.encounter_id = room.model_id?.replace('ENCOUNTER.', '');
+                                    entry.monster_ids = (room.monster_ids || []).map(m => m.replace('MONSTER.', ''));
+                                } else if (room.room_type === 'event') {
+                                    entry.event_id = room.model_id?.replace('EVENT.', '');
+                                } else if (room.room_type === 'rest_site') {
+                                    entry.rest_choices = stats.rest_site_choices || [];
+                                }
+                                return entry;
+                            })
                         });
                     } catch (e) {
                         failCount++;
@@ -245,18 +284,29 @@
                 }
 
                 if (uploadData.length > 0) {
-                    const { error } = await supabase.from('s2s_runs_todo').upsert(uploadData, { onConflict: 'id' });
-                    if (error) {
-                        failCount += uploadData.length;
-                        console.error("Upload Error:", error);
-                    } else {
-                        successCount += uploadData.length;
+                    // Check if these IDs already exist in the finalized s2s_runs table
+                    const { data: existing } = await supabase.from('s2s_runs').select('id').in('id', uploadData.map(d => d.id));
+                    const existingIds = new Set(existing?.map(r => r.id) || []);
+                    
+                    const finalUpload = uploadData.filter(d => !existingIds.has(d.id));
+                    skipCount += (uploadData.length - finalUpload.length);
+
+                    if (finalUpload.length > 0) {
+                        const { error } = await supabase.from('s2s_runs_todo').upsert(finalUpload, { onConflict: 'id' });
+                        if (error) {
+                            failCount += finalUpload.length;
+                            console.error("Upload Error:", error);
+                        } else {
+                            successCount += finalUpload.length;
+                        }
                     }
                 }
-                uploadStatus.innerHTML = '<span style="color: var(--blue)">Uploading... (' + successCount + '/' + runFiles.length + ')</span>';
+                uploadStatus.innerHTML = '<span style="color: var(--blue)">Uploading... (' + (successCount + skipCount) + '/' + runFiles.length + ')</span>';
             }
 
-            uploadStatus.innerHTML = '<span style="color: var(--green)">Successfully uploaded ' + successCount + ' runs!</span>' + (failCount > 0 ? ' <span style="color: var(--red)">(' + failCount + ' failed)</span>' : '');
+            uploadStatus.innerHTML = `<span style="color: var(--green)">Uploaded ${successCount} new runs!</span> ` + 
+                (skipCount > 0 ? `<span style="color: var(--gray)">(${skipCount} already existed)</span> ` : '') + 
+                (failCount > 0 ? `<span style="color: var(--red)">(${failCount} failed)</span>` : '');
         }
 
         folderInput.onchange = (e) => processAndUploadRuns(e.target.files);
