@@ -37,7 +37,7 @@ export function settingsTemplate() {
                     <div class="code-block" style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; border: 1px solid #444; font-family: monospace; word-break: break-all; margin: 15px 0;">
                         C:\\Users\\<strong style="color: #4bff87; background: rgba(75, 255, 135, 0.1); padding: 2px 4px; border-radius: 3px;">{Your_Windows_Username}</strong>\\AppData\\Roaming\\SlayTheSpire2\\steam\\<strong style="color: #4bff87; background: rgba(75, 255, 135, 0.1); padding: 2px 4px; border-radius: 3px;">{12345678901234567}</strong>\\profile1\\saves
                     </div>
-                    <p class="text-muted" style="font-size: 0.85rem;">Pro tip: You can also paste <strong style="color: #4bff87;"><code>%appdata%\\SlayTheSpire2\\steam</code></strong> into your File Explorer address bar to jump there more quickly.</p>
+                    <p class="text-muted" style="font-size: 0.85rem;">Pro tip: You can also paste <strong style="color: #4bff87; cursor: pointer;" title="Click to copy" onclick="copyToClipboard(this, '%appdata%\\\\SlayTheSpire2\\\\steam')"><code>%appdata%\\SlayTheSpire2\\steam</code></strong> into your File Explorer address bar to jump there more quickly.</p>
                 </section>
 
 
@@ -74,6 +74,21 @@ export function settingsTemplate() {
         let originalSlug = '';
         let currentUserId = null;
         let isAvailable = true;
+
+        window.copyToClipboard = (element, textToCopy) => {
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const originalHTML = element.innerHTML;
+                const originalColor = element.style.color;
+                
+                element.innerHTML = '<code>Copied! ✓</code>';
+                element.style.color = '#ffffff'; 
+                
+                setTimeout(() => {
+                    element.innerHTML = originalHTML;
+                    element.style.color = originalColor;
+                }, 1500);
+            });
+        };
 
         const slugify = (text) => text.toString().toLowerCase().trim()
             .replace(/\\s+/g, '-')
