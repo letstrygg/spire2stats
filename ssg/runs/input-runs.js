@@ -3,6 +3,7 @@ import path from 'path';
 import sqlite3 from 'sqlite3';
 import archiver from 'archiver';
 import { PATHS, ensureDir } from '../sts2/paths.js';
+import { recalculateUserRunNumbers } from '../sts2/user-run-num.js';
 
 /**
  * Slay the Spire 2 - Run Data Importer
@@ -30,12 +31,25 @@ async function run() {
                 if (columns.length === 0) return resolve();
 
                 const hasUserRunNum = columns.some(c => c.name === 'user_run_num');
-                if (!hasUserRunNum) {
-                    console.log('➕ Adding missing column: user_run_num to existing runs table...');
-                    db.run("ALTER TABLE runs ADD COLUMN user_run_num INTEGER", (err) => {
+                const hasSupabaseId = columns.some(c => c.name === 'supabase_user_id');
+
+                function addSupabaseCol() {
+                    console.log('➕ Adding missing column: supabase_user_id to existing runs table...');
+                    db.run("ALTER TABLE runs ADD COLUMN supabase_user_id TEXT", (err) => {
                         if (err) reject(err);
                         else resolve();
                     });
+                }
+
+                if (!hasUserRunNum) {
+                    console.log('➕ Adding missing column: user_run_num to existing runs table...');
+                    db.run("ALTER TABLE runs ADD COLUMN user_run_num INTEGER", (err) => {
+                        if (err) return reject(err);
+                        if (!hasSupabaseId) addSupabaseCol();
+                        else resolve();
+                    });
+                } else if (!hasSupabaseId) {
+                    addSupabaseCol();
                 } else {
                     resolve();
                 }
@@ -72,7 +86,8 @@ async function run() {
                     deck_list TEXT,
                     path_history TEXT,
                     yt_video TEXT,
-                    ltg_url TEXT
+                    ltg_url TEXT,
+                    supabase_user_id TEXT
                 )
             `);
 
@@ -192,34 +207,6 @@ async function run() {
     } catch (error) {
         console.error('❌ Import failed:', error.message);
         process.exit(1);
-    }
-}
-
-async function recalculateUserRunNumbers(db) {
-    process.stdout.write('🔢 Recalculating user run sequence numbers... ');
-    const users = await new Promise((res, rej) => {
-        db.all("SELECT DISTINCT username FROM runs", (err, rows) => err ? rej(err) : res(rows || []));
-    });
-
-    for (const user of users) {
-        const runs = await new Promise((res, rej) => {
-            // Order by ID (timestamp) to ensure chronological order. 
-            // Using CAST(id AS INTEGER) handles potential string length sorting issues.
-            db.all("SELECT id FROM runs WHERE username = ? ORDER BY CAST(id AS INTEGER) ASC", [user.username], (err, rows) => err ? rej(err) : res(rows || []));
-        });
-
-        await new Promise((res, rej) => {
-            db.serialize(() => {
-                db.run("BEGIN TRANSACTION");
-                const updateStmt = db.prepare("UPDATE runs SET user_run_num = ? WHERE id = ?");
-                runs.forEach((run, index) => {
-                    updateStmt.run(index + 1, run.id);
-                });
-                updateStmt.finalize();
-                db.run("COMMIT", (err) => err ? rej(err) : res());
-            });
-        });
-        console.log(`\n   ✅ User: ${user.username} - Assigned numbers 1 to ${runs.length}`);
     }
 }
 
