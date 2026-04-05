@@ -64,7 +64,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/users/falterfire/">falterfire</a> / run 1773281994</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-05T00:13:46.699Z">April 4, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-05T00:37:27.317Z">April 4, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -190,42 +190,41 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
     (function() {
-    console.log("Auth: Initializing...");
-    const supabase = window.supabase.createClient('https://fnwmtytnltmqjaflfwyr.supabase.co', 'sb_publishable_y12qZF_dSbUPmV_aieiUgA_CibDsxQV', { auth: { lock: null } });
+    console.log("Auth: Initializing global client...");
+    window.supabaseClient = window.supabase.createClient('https://fnwmtytnltmqjaflfwyr.supabase.co', 'sb_publishable_y12qZF_dSbUPmV_aieiUgA_CibDsxQV', { auth: { lock: null } });
+    const supabase = window.supabaseClient;
+
     const btn = document.getElementById('auth-user-btn'), menu = document.getElementById('auth-dropdown-menu');
 
-    btn.onclick = (e) => { e.stopPropagation(); menu.classList.toggle('show'); };
+    btn.onclick = (e) => { 
+        e.stopPropagation(); 
+        menu.classList.toggle('show'); 
+    };
     document.onclick = () => menu.classList.remove('show');
 
     window.authLogin = (provider) => supabase.auth.signInWithOAuth({ provider });
     window.authLogout = () => supabase.auth.signOut().then(() => location.reload());
-
-    let currentUid = null;
 
     supabase.auth.onAuthStateChange(async (event, session) => {
         console.log("Auth: Event ->", event);
         const user = session?.user;
         
         if (!user) {
-            currentUid = null;
             btn.textContent = 'Login';
             menu.innerHTML = '<button onclick="authLogin(\'google\')">Google</button><button onclick="authLogin(\'twitch\')">Twitch</button>';
             return;
         }
 
-        if (user.id !== currentUid) {
-            currentUid = user.id;
-            btn.textContent = 'Account';
-            menu.innerHTML = '<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>';
+        console.log("Auth: Fetching profile for", user.id);
+        btn.textContent = 'Account';
+        menu.innerHTML = '<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>';
 
-            console.log("Auth: Fetching profile for UUID:", user.id);
-            setTimeout(async () => {
-                console.log("Auth: Query starting...");
-                const result = await supabase.from('ltg_profiles').select('username, slug, trust').eq('user_id', user.id).maybeSingle();
-                console.log("Auth: Query finished. Result ->", result);
-                if (result.data?.username) btn.textContent = result.data.username;
-                if (result.error) console.log("Auth: Error ->", result.error);
-            }, 500);
+        const { data } = await supabase.from('ltg_profiles').select('username').eq('user_id', user.id).maybeSingle();
+        if (data?.username) {
+            console.log("Auth: Username found ->", data.username);
+            btn.textContent = data.username;
+        } else {
+            console.log("Auth: No profile found in ltg_profiles.");
         }
     });
 })();
