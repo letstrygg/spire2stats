@@ -163,14 +163,15 @@ export function settingsTemplate() {
                         
                         // Map JSON fields to s2s_runs_todo schema (aligned with input-runs.js)
                         uploadData.push({
-                            id: json.run_id || (Date.now() + Math.random().toString(36).substr(2, 9)),
+                            id: json.start_time ? String(json.start_time) : (json.run_id || String(Date.now())),
+                            supabase_user_id: currentUserId,
                             user_run_num: json.run_number || null,
                             username: currentUsername,
                             schema_version: json.schema_version,
                             build_id: json.build_id,
                             platform_type: json.platform_type || null,
                             seed: json.seed ? String(json.seed) : null,
-                            start_time: json.start_time || null,
+                            start_time: json.start_time ? String(json.start_time) : null,
                             run_time: json.run_time || null,
                             ascension: json.ascension || 0,
                             game_mode: json.game_mode || null,
@@ -222,7 +223,11 @@ export function settingsTemplate() {
 
                 if (uploadData.length > 0) {
                     // Check if these IDs already exist in the finalized s2s_runs table
-                    const { data: existing } = await supabase.from('s2s_runs').select('id').in('id', uploadData.map(d => d.id));
+                    const { data: existing } = await supabase
+                        .from('s2s_runs')
+                        .select('id')
+                        .eq('supabase_user_id', currentUserId)
+                        .in('id', uploadData.map(d => d.id));
                     const existingIds = new Set(existing?.map(r => r.id) || []);
                     
                     const finalUpload = uploadData.filter(d => !existingIds.has(d.id));
