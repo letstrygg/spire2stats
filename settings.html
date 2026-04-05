@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#111111">
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-W4TMS5FL');</script>
+    <!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <title>Settings | Spire 2 Stats</title>
+    <meta name="description" content="Manage your Spire 2 Stats profile and display name.">
+    
+    <meta property="og:site_name" content="Spire 2 Stats">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://spire2stats.com/settings.html/">
+    <meta property="og:title" content="Settings | Spire 2 Stats">
+    <meta property="og:description" content="Manage your Spire 2 Stats profile and display name.">
+    <!-- <meta property="og:image" content="https://spire2stats.com/images/default-run-preview.jpg"> -->
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="https://spire2stats.com/settings.html/">
+    <meta property="twitter:title" content="Settings | Spire 2 Stats">
+    <meta property="twitter:description" content="Manage your Spire 2 Stats profile and display name.">
+    <!-- <meta property="twitter:image" content="https://spire2stats.com/images/default-run-preview.jpg"> -->
+    <link rel="canonical" href="https://spire2stats.com/settings.html/">
+    
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "spire2stats.com",
+      "item": "https://spire2stats.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Settings"
+    }
+  ]
+}
+</script>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W4TMS5FL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+<nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
+        <div><a href="/">spire2stats</a> / settings</div>
+        <div style="display: flex; align-items: baseline; gap: 20px;">
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-05T00:13:46.147Z">April 4, 2026</time></div>
+            <div class="auth-dropdown-container">
+                <button id="auth-user-btn" class="auth-trigger">Loading...</button>
+                <div id="auth-dropdown-menu" class="auth-menu-content"></div>
+            </div>
+        </div>
+    </nav>
+    <div class="item-box" style="max-width: 600px; margin: 0 auto; text-align: left;">
+        <h2 style="margin-bottom: 25px; border-bottom: 1px solid #333; padding-bottom: 10px; font-size: 1.4rem;">User Settings</h2>
+        
+        <div id="settings-loading" style="text-align: center; padding: 40px;">
+            <p class="text-muted">Loading your profile...</p>
+        </div>
+
+        <div id="settings-form" style="display: none;">
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; font-size: 0.75rem; color: #888; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px;">Display Name</label>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <input type="text" id="username-input" class="input" maxlength="25" placeholder="Enter new username" style="flex-grow: 1;">
+                    <div id="availability-indicator" style="font-size: 1.2rem; width: 24px; text-align: center;"></div>
+                </div>
+                <div style="margin-top: 10px; font-size: 0.85rem; color: #666; display: flex; align-items: center; gap: 6px;">
+                    <span>URL Slug:</span>
+                    <span id="slug-preview" style="color: var(--blue); font-family: monospace; font-weight: bold;"></span>
+                </div>
+            </div>
+
+            <div style="margin-top: 40px; display: flex; justify-content: flex-end; align-items: center; gap: 20px;">
+                <div id="save-status" style="font-size: 0.9rem;"></div>
+                <button id="save-settings-btn" class="btn btn-green" style="padding: 10px 25px;">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const supabaseUrl = 'https://fnwmtytnltmqjaflfwyr.supabase.co';
+        const supabaseKey = 'sb_publishable_y12qZF_dSbUPmV_aieiUgA_CibDsxQV';
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        const form = document.getElementById('settings-form');
+        const loader = document.getElementById('settings-loading');
+        const usernameInput = document.getElementById('username-input');
+        const slugPreview = document.getElementById('slug-preview');
+        const availabilityIcon = document.getElementById('availability-indicator');
+        const saveBtn = document.getElementById('save-settings-btn');
+        const saveStatus = document.getElementById('save-status');
+
+        let originalSlug = '';
+        let currentUserId = null;
+        let isAvailable = true;
+
+        const slugify = (text) => text.toString().toLowerCase().trim()
+            .replace(/\s+/g, '-')
+            .replace(/[^\w\-]+/g, '')
+            .replace(/\-\-+/g, '-');
+
+        async function checkAvailability(slug) {
+            if (!slug || slug === originalSlug) {
+                availabilityIcon.innerHTML = '';
+                isAvailable = true;
+                return;
+            }
+
+            const { data } = await supabase.from('ltg_profiles').select('slug').eq('slug', slug).maybeSingle();
+            if (!data) {
+                availabilityIcon.innerHTML = '<span style="color: var(--green)">check_circle</span>';
+                availabilityIcon.className = 'material-symbols-outlined';
+                isAvailable = true;
+            } else {
+                availabilityIcon.innerHTML = '<span style="color: var(--red)">cancel</span>';
+                availabilityIcon.className = 'material-symbols-outlined';
+                isAvailable = false;
+            }
+        }
+
+        usernameInput.addEventListener('input', (e) => {
+            const slug = slugify(e.target.value);
+            slugPreview.textContent = slug;
+            checkAvailability(slug);
+        });
+
+        supabase.auth.onAuthStateChange(async (event, session) => {
+            if (session?.user) {
+                currentUserId = session.user.id;
+                const { data: profile } = await supabase.from('ltg_profiles').select('username, slug').eq('user_id', currentUserId).maybeSingle();
+                if (profile) {
+                    usernameInput.value = profile.username;
+                    slugPreview.textContent = profile.slug;
+                    originalSlug = profile.slug;
+                    loader.style.display = 'none';
+                    form.style.display = 'block';
+                }
+            } else if (event === 'SIGNED_OUT') {
+                window.location.href = '/';
+            }
+        });
+
+        saveBtn.onclick = async () => {
+            if (!isAvailable || saveBtn.disabled) return;
+            const newName = usernameInput.value.trim();
+            const newSlug = slugify(newName);
+            if (!newName) return;
+
+            saveBtn.disabled = true;
+            saveStatus.textContent = 'Saving...';
+            saveStatus.style.color = 'var(--gray)';
+
+            const { error } = await supabase.from('ltg_profiles').update({ username: newName, slug: newSlug }).eq('user_id', currentUserId);
+
+            if (error) {
+                saveStatus.textContent = 'Error: ' + error.message;
+                saveStatus.style.color = 'var(--red)';
+                saveBtn.disabled = false;
+            } else {
+                saveStatus.textContent = 'Profile updated!';
+                saveStatus.style.color = 'var(--green)';
+                setTimeout(() => window.location.reload(), 1000);
+            }
+        };
+    });
+    </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+    (function() {
+    console.log("Auth: Initializing...");
+    const supabase = window.supabase.createClient('https://fnwmtytnltmqjaflfwyr.supabase.co', 'sb_publishable_y12qZF_dSbUPmV_aieiUgA_CibDsxQV', { auth: { lock: null } });
+    const btn = document.getElementById('auth-user-btn'), menu = document.getElementById('auth-dropdown-menu');
+
+    btn.onclick = (e) => { e.stopPropagation(); menu.classList.toggle('show'); };
+    document.onclick = () => menu.classList.remove('show');
+
+    window.authLogin = (provider) => supabase.auth.signInWithOAuth({ provider });
+    window.authLogout = () => supabase.auth.signOut().then(() => location.reload());
+
+    let currentUid = null;
+
+    supabase.auth.onAuthStateChange(async (event, session) => {
+        console.log("Auth: Event ->", event);
+        const user = session?.user;
+        
+        if (!user) {
+            currentUid = null;
+            btn.textContent = 'Login';
+            menu.innerHTML = '<button onclick="authLogin(\'google\')">Google</button><button onclick="authLogin(\'twitch\')">Twitch</button>';
+            return;
+        }
+
+        if (user.id !== currentUid) {
+            currentUid = user.id;
+            btn.textContent = 'Account';
+            menu.innerHTML = '<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>';
+
+            console.log("Auth: Fetching profile for UUID:", user.id);
+            setTimeout(async () => {
+                console.log("Auth: Query starting...");
+                const result = await supabase.from('ltg_profiles').select('username, slug, trust').eq('user_id', user.id).maybeSingle();
+                console.log("Auth: Query finished. Result ->", result);
+                if (result.data?.username) btn.textContent = result.data.username;
+                if (result.error) console.log("Auth: Error ->", result.error);
+            }, 500);
+        }
+    });
+})();
+</script>
+</body></html>
