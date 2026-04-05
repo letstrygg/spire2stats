@@ -29,6 +29,18 @@ export function settingsTemplate() {
 
             <div style="margin-top: 40px; border-top: 1px solid #333; padding-top: 30px;">
                 <h3 style="margin-bottom: 10px; font-size: 1.2rem;">Upload Run History</h3>
+
+
+                <section style="margin-top: 30px;">
+                    <h2 style="color: var(--gold, #ffd700); font-size: 1.2rem;">Step 1: Locate your Run History</h2>
+                    <p>On Windows, navigate to your Steam user data folder for Slay the Spire 2. It is usually located at:</p>
+                    <div class="code-block" style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; border: 1px solid #444; font-family: monospace; word-break: break-all; margin: 15px 0;">
+                        C:\\Users\\<strong style="color: #4bff87; background: rgba(75, 255, 135, 0.1); padding: 2px 4px; border-radius: 3px;">{Your_Windows_Username}</strong>\\AppData\\Roaming\\SlayTheSpire2\\steam\\<strong style="color: #4bff87; background: rgba(75, 255, 135, 0.1); padding: 2px 4px; border-radius: 3px;">{12345678901234567}</strong>\\profile1\\saves
+                    </div>
+                    <p class="text-muted" style="font-size: 0.85rem;">Pro tip: You can also paste <strong style="color: #4bff87;"><code>%appdata%\\SlayTheSpire2\\steam</code></strong> into your File Explorer address bar to jump there more quickly.</p>
+                </section>
+
+
                 <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 20px;">Contribute your <code>.run</code> files to the global statistics. You can select your entire <code>history</code> folder or individual files.</p>
                 
                 <div style="display: flex; gap: 10px; flex-wrap: wrap;">
