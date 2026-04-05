@@ -34,6 +34,7 @@
             setTimeout(async () => {
                 console.log("Auth: Fetching profile for", user.id);
                 const { data } = await supabase.from('ltg_profiles').select('username').eq('user_id', user.id).maybeSingle();
+                console.log("Auth: Query finished. Data:", data);
                 if (data?.username) {
                     console.log("Auth: Username found ->", data.username);
                     btn.textContent = data.username;

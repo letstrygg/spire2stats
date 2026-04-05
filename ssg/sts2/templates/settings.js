@@ -79,17 +79,21 @@ export function settingsTemplate() {
 
         supabase.auth.onAuthStateChange(async (event, session) => {
             console.log("Settings: Received Auth Event ->", event);
-            if (session?.user) {
-                currentUserId = session.user.id;
-                const { data: profile } = await supabase.from('ltg_profiles').select('username, slug').eq('user_id', currentUserId).maybeSingle();
-                console.log("Settings: Profile fetch result ->", !!profile);
-                if (profile) {
-                    usernameInput.value = profile.username;
-                    slugPreview.textContent = profile.slug;
-                    originalSlug = profile.slug;
-                    loader.style.display = 'none';
-                    form.style.display = 'block';
-                }
+            const user = session?.user;
+            if (user && user.id !== currentUserId) {
+                currentUserId = user.id;
+                setTimeout(async () => {
+                    console.log("Settings: Fetching profile for", user.id);
+                    const { data: profile } = await supabase.from('ltg_profiles').select('username, slug').eq('user_id', user.id).maybeSingle();
+                    console.log("Settings: Profile fetch result ->", !!profile);
+                    if (profile) {
+                        usernameInput.value = profile.username;
+                        slugPreview.textContent = profile.slug;
+                        originalSlug = profile.slug;
+                        loader.style.display = 'none';
+                        form.style.display = 'block';
+                    }
+                }, 500);
             } else if (event === 'SIGNED_OUT') {
                 window.location.href = '/';
             }
