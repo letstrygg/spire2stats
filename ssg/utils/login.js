@@ -12,7 +12,10 @@
     document.onclick = () => menu.classList.remove('show');
 
     window.authLogin = (provider) => supabase.auth.signInWithOAuth({ provider });
-    window.authLogout = () => supabase.auth.signOut().then(() => location.reload());
+    window.authLogout = () => {
+        localStorage.removeItem('s2s_user_cache');
+        return supabase.auth.signOut().then(() => location.reload());
+    };
 
     let currentUid = null;
     supabase.auth.onAuthStateChange(async (event, session) => {
@@ -23,12 +26,21 @@
             currentUid = null;
             btn.textContent = 'Login';
             menu.innerHTML = '<button onclick="authLogin(\'google\')">Google</button><button onclick="authLogin(\'twitch\')">Twitch</button>';
+            localStorage.removeItem('s2s_user_cache');
             return;
         }
 
         if (user.id !== currentUid) {
             currentUid = user.id;
-            btn.textContent = 'Account';
+
+            // Check cache immediately to prevent "Account" flicker
+            const cache = JSON.parse(localStorage.getItem('s2s_user_cache') || '{}');
+            if (cache.uid === user.id && cache.username) {
+                btn.textContent = cache.username;
+            } else {
+                btn.textContent = 'Account';
+            }
+
             menu.innerHTML = '<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>';
 
             setTimeout(async () => {
@@ -38,6 +50,7 @@
                 if (data?.username) {
                     console.log("Auth: Username found ->", data.username);
                     btn.textContent = data.username;
+                    localStorage.setItem('s2s_user_cache', JSON.stringify({ uid: user.id, username: data.username }));
                 }
             }, 500);
         }
