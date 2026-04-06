@@ -42,7 +42,7 @@ export function settingsTemplate() {
 
 
                 <p class="text-muted" style="font-size: 0.85rem; margin-bottom: 20px;">Contribute your <code>.run</code> files to the global statistics. You can select your entire <code>history</code> folder or individual files.</p>
-                
+                <p>New Runs get added to spire2stats Daily</p>
                 <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                     <input type="file" id="run-folder-input" webkitdirectory directory multiple style="display: none;">
                     <input type="file" id="run-files-input" accept=".run" multiple style="display: none;">
