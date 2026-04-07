@@ -1,6 +1,6 @@
 import { wrapLayout, generateItemSummaryBox, generateItemJsonLd, formatDescription } from './shared.js';
 
-export function cardDetailTemplate(card, stats, videosHtml, costDisplay, canonicalPath = "") {
+export function cardDetailTemplate(card, stats, videosHtml, costDisplay, upgCostDisplay, canonicalPath = "") {
     const description = formatDescription(card.description);
     const upgradeDescription = formatDescription(card.upgrade);
     return wrapLayout(
@@ -17,7 +17,7 @@ export function cardDetailTemplate(card, stats, videosHtml, costDisplay, canonic
             </div>
             <div class="card-arrow">→</div>
             <div class="card">
-                <div class="cost-circle">${costDisplay}</div>
+                <div class="cost-circle">${upgCostDisplay}</div>
                 <div class="card-title text-green">${card.name}+</div>
                 <div class="type-banner">${card.color || ''} ${card.type}</div>
                 <div class="description">${upgradeDescription || description}</div>

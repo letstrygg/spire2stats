@@ -71,10 +71,10 @@ async function query(sql, params = []) {
     });
 }
 
-function getCostDisplay(card) {
-    let cost = card.is_x_cost ? 'X' : (card.cost ?? '');
-    let star = card.is_x_star_cost ? 'X★' : (card.star_cost ? `${card.star_cost}★` : '');
-    return [cost, star].filter(Boolean).join(' ');
+function getCostDisplay(costVal, isX, starCostVal, isXStar) {
+    let cost = isX ? 'X' : (costVal === -1 || costVal === undefined || costVal === null ? '' : String(costVal));
+    let star = isXStar ? 'X★' : (starCostVal === undefined || starCostVal === null ? '' : `${starCostVal}★`);
+    return [cost, star].filter(s => s !== '').join(' ');
 }
 
 /** Helper to generate standardized card-item HTML for index pages */
@@ -869,7 +869,20 @@ async function build() {
             const slug = slugify(card.name);
             const cardDir = ensureDir(path.join(cardsRoot, slug));
             
-            const costDisplay = getCostDisplay(card);
+            const costDisplay = getCostDisplay(card.cost, card.is_x_cost, card.star_cost, card.is_x_star_cost);
+
+            // Calculate upgraded cost
+            let upgCost = card.cost;
+            let upgStarCost = card.star_cost;
+            if (card.upgrade) {
+                try {
+                    const upg = JSON.parse(card.upgrade);
+                    if (upg.cost !== undefined) upgCost = upg.cost;
+                    if (upg.star_cost !== undefined) upgStarCost = upg.star_cost;
+                } catch (e) {}
+            }
+            const upgCostDisplay = getCostDisplay(upgCost, card.is_x_cost, upgStarCost, card.is_x_star_cost);
+
             const description = formatDescription(card.description);
             
             const cleanCardId = (card.card_id || '').replace('CARD.', '');
@@ -877,7 +890,7 @@ async function build() {
             const rawStats = cardStats.stats[cleanCardId] || { runs: [] };
             const videosHtml = generateRunLinksList(rawStats.runs, `Runs featuring ${card.name}`);
 
-            const detailHtml = cardDetailTemplate(card, stats, videosHtml, costDisplay, `/cards/${slug}/`);
+            const detailHtml = cardDetailTemplate(card, stats, videosHtml, costDisplay, upgCostDisplay, `/cards/${slug}/`);
 
             fs.writeFileSync(path.join(cardDir, 'index.html'), detailHtml);
             sitemap.add(`/cards/${slug}/`);
