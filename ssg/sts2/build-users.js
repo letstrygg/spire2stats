@@ -178,8 +178,13 @@ async function build() {
                 const relicIds = JSON.parse(run.relic_list || '[]');
                 const pathHistory = JSON.parse(run.path_history || '[]');
 
-                const uniqueCards = [...new Set(deck.map(c => c.id))].filter(Boolean);
-                const cardsLinks = uniqueCards.map(id => `<a href="/cards/${slugify(cardLookup[id] || id)}/" class="item-link">${cardLookup[id] || id}</a>`).join('');
+                const cardsLinks = deck.map(c => {
+                    const name = cardLookup[c.id] || c.id;
+                    const upgSuffix = c.upgrades > 0 ? '+' + c.upgrades : '';
+                    const countSuffix = c.count > 1 ? ' x' + c.count : '';
+                    const displayName = name + upgSuffix + countSuffix;
+                    return `<a href="/cards/${slugify(name)}/" class="item-link">${displayName}</a>`;
+                }).join('');
 
                 const uniqueEnchs = [...new Set(deck.filter(c => c.enchantment).map(c => c.enchantment))];
                 const enchsLinks = uniqueEnchs.map(id => `<a href="/enchantments/${slugify(enchantmentLookup[id] || id)}/" class="item-link">${enchantmentLookup[id] || id}</a>`).join('');

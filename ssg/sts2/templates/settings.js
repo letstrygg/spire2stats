@@ -209,11 +209,18 @@ export function settingsTemplate() {
                             acts: (json.acts || []).map(a => a.replace('ACT.', '')),
                             character: player.character?.replace('CHARACTER.', ''),
                             relic_list: (player.relics || []).map(r => r.id?.replace('RELIC.', '')),
-                            deck_list: (player.deck || []).map(c => ({ 
-                                id: c.id?.replace('CARD.', ''), 
-                                upgrades: c.current_upgrade_level || 0, 
-                                enchantment: c.enchantment?.id || null 
-                            })),
+                            deck_list: (() => {
+                                const deckMap = {};
+                                (player.deck || []).forEach(c => {
+                                    const id = c.id?.replace('CARD.', '');
+                                    const upgrades = c.current_upgrade_level || 0;
+                                    const enchantment = c.enchantment?.id || null;
+                                    const key = \`\${id}|\${upgrades}|\${enchantment}\`;
+                                    if (deckMap[key]) deckMap[key].count = (deckMap[key].count || 1) + 1;
+                                    else deckMap[key] = { id, upgrades, enchantment };
+                                });
+                                return Object.values(deckMap);
+                            })(),
                             path_history: (json.map_point_history || []).flat().map((pt, idx) => {
                                 const room = pt.rooms?.[0] || {};
                                 const stats = pt.player_stats?.[0] || {};

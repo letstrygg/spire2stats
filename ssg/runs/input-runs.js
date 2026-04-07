@@ -125,11 +125,19 @@ async function run() {
                     const player = rawData.players?.[0] || {};
 
                     // Parse End-of-Run Deck & Relics
-                    const cleanDeck = (player.deck || []).map(c => ({
-                        id: c.id?.replace('CARD.', ''),
-                        upgrades: c.current_upgrade_level || 0,
-                        enchantment: c.enchantment?.id || null
-                    }));
+                    const deckMap = {};
+                    (player.deck || []).forEach(c => {
+                        const id = c.id?.replace('CARD.', '');
+                        const upgrades = c.current_upgrade_level || 0;
+                        const enchantment = c.enchantment?.id || null;
+                        const key = `${id}|${upgrades}|${enchantment}`;
+                        if (deckMap[key]) {
+                            deckMap[key].count = (deckMap[key].count || 1) + 1;
+                        } else {
+                            deckMap[key] = { id, upgrades, enchantment };
+                        }
+                    });
+                    const cleanDeck = Object.values(deckMap);
                     const cleanRelics = (player.relics || []).map(r => r.id?.replace('RELIC.', ''));
 
                     // Parse Encounter & Pathing History
