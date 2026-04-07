@@ -26,13 +26,74 @@ if (fs.existsSync(charFilePath)) {
 // Hard-coded special cases for items that are always starters but not character-specific
 starterCards.add('ASCENDERS_BANE');
 
+function parseCardText(raw, vars, upgrade, isUpgraded) {
+    if (!raw) return "";
+    const activeVars = {};
+    if (vars) {
+        for (const [k, v] of Object.entries(vars)) {
+            activeVars[k.toLowerCase()] = v;
+        }
+    }
+    if (isUpgraded && upgrade) {
+        for (const [k, v] of Object.entries(upgrade)) {
+            const key = k.toLowerCase();
+            const val = String(v);
+            if (val.startsWith('+')) {
+                activeVars[key] = (activeVars[key] || 0) + parseInt(val.substring(1), 10);
+            } else if (val.startsWith('-')) {
+                activeVars[key] = (activeVars[key] || 0) - parseInt(val.substring(1), 10);
+            } else if (!isNaN(v) && typeof v !== 'boolean') {
+                activeVars[key] = Number(v);
+            }
+        }
+    }
+
+    return raw.replace(/\{([A-Za-z0-9_]+)(?::([^}]+))?\}/g, (match, varName, formatter) => {
+        const key = varName.toLowerCase();
+        if (key === 'ifupgraded') {
+            const data = formatter?.startsWith('show:') ? formatter.substring(5) : formatter;
+            const parts = data ? data.split('|') : ["", ""];
+            return isUpgraded ? parts[0] : (parts[1] || "");
+        }
+        let val = activeVars[key] ?? activeVars[varName];
+        if (val === undefined && formatter?.startsWith('energyIcons')) {
+            const argMatch = formatter.match(/\((\d+)\)/);
+            val = argMatch ? argMatch[1] : 1;
+        }
+        if (val === undefined) return match;
+        if (formatter?.startsWith('plural:')) {
+            const parts = formatter.substring(7).split('|');
+            return val === 1 ? parts[0] : (parts[1] || parts[0] + 's');
+        }
+        if (formatter?.startsWith('energyIcons')) return `[energy:${val}]`;
+        return val;
+    });
+}
+
 const TABLES = [
     {
         name: 'cards',
         file: 'cards.json',
         columns: 'card_id, name, type, rarity, cost, is_x_cost, is_x_star_cost, star_cost, color, description, keywords, spawns_cards, vars, upgrade, tags, starter',
         schema: `card_id TEXT, name TEXT NOT NULL, type TEXT, rarity TEXT, cost INTEGER, is_x_cost INTEGER, is_x_star_cost INTEGER, star_cost INTEGER, color TEXT, description TEXT, keywords TEXT, spawns_cards TEXT, vars TEXT, upgrade TEXT, tags TEXT, starter INTEGER`,
-        map: (c) => [c.id, c.name, c.type, c.rarity, c.cost, c.is_x_cost ? 1 : 0, c.is_x_star_cost ? 1 : 0, c.star_cost, c.color, c.description || '', c.keywords ? JSON.stringify(c.keywords) : null, c.spawns_cards ? JSON.stringify(c.spawns_cards) : null, c.vars ? JSON.stringify(c.vars) : null, c.upgrade ? JSON.stringify(c.upgrade) : null, c.tags ? JSON.stringify(c.tags) : null, starterCards.has((c.id || '').toUpperCase()) ? 1 : 0]
+        map: (c) => [
+            c.id, 
+            c.name, 
+            c.type, 
+            c.rarity, 
+            c.cost, 
+            c.is_x_cost ? 1 : 0, 
+            c.is_x_star_cost ? 1 : 0, 
+            c.star_cost, 
+            c.color, 
+            c.description || '', 
+            c.keywords ? JSON.stringify(c.keywords) : null, 
+            c.spawns_cards ? JSON.stringify(c.spawns_cards) : null, 
+            c.vars ? JSON.stringify(c.vars) : null, 
+            c.description_raw ? parseCardText(c.description_raw, c.vars, c.upgrade, true) : null, 
+            c.tags ? JSON.stringify(c.tags) : null, 
+            starterCards.has((c.id || '').toUpperCase()) ? 1 : 0
+        ]
     },
     {
         name: 'characters',
