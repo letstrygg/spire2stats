@@ -195,7 +195,9 @@ async function build() {
                     const mp = sortedByPicked[0];
                     mpTitle = cardLookup[mp[0]] || mp[0];
                     mpSlug = slugify(mpTitle);
-                    mpHtml = `<a href="/cards/${mpSlug}/" style="color: inherit; text-decoration: underline;">${mpTitle}</a> <span style="color: #666; font-size: 0.8em;">(${mp[1].seen} runs, ${((mp[1].wins/mp[1].seen)*100).toFixed(0)}%)</span>`;
+                    const mpWR = ((mp[1].wins / mp[1].seen) * 100).toFixed(0);
+                    const mpTooltip = `${mpTitle} is ${user.display_name}'s top picked card on ${name}, used in ${mp[1].seen} runs with a ${mpWR}% winrate`;
+                    mpHtml = `<a href="/cards/${mpSlug}/" title="${mpTooltip}" style="color: inherit; text-decoration: underline;">${mpTitle}</a> <span title="${mpTooltip}" style="color: #666; font-size: 0.8em;">(${mp[1].seen} runs, ${mpWR}%)</span>`;
 
                     // Bayesian Average Score: (C * M + Wins) / (C + Runs)
                     const getScore = (s) => (C * M + s.wins) / (C + s.seen);
@@ -204,12 +206,16 @@ async function build() {
                     const hwr = sortedByScore[0];
                     hwrTitle = cardLookup[hwr[0]] || hwr[0];
                     hwrSlug = slugify(hwrTitle);
-                    hwrHtml = `<a href="/cards/${hwrSlug}/" style="color: inherit; text-decoration: underline;">${hwrTitle}</a> <span style="color: #666; font-size: 0.8em;">(${hwr[1].seen}r, ${((hwr[1].wins/hwr[1].seen)*100).toFixed(0)}%)</span>`;
+                    const hwrWR = ((hwr[1].wins / hwr[1].seen) * 100).toFixed(0);
+                    const hwrTooltip = `${hwrTitle} is ${user.display_name}'s best performing card on ${name}, with a ${hwrWR}% winrate across ${hwr[1].seen} runs`;
+                    hwrHtml = `<a href="/cards/${hwrSlug}/" title="${hwrTooltip}" style="color: inherit; text-decoration: underline;">${hwrTitle}</a> <span title="${hwrTooltip}" style="color: #666; font-size: 0.8em;">(${hwr[1].seen}r, ${hwrWR}%)</span>`;
 
                     const lwr = sortedByScore[sortedByScore.length - 1];
                     lwrTitle = cardLookup[lwr[0]] || lwr[0];
                     lwrSlug = slugify(lwrTitle);
-                    lwrHtml = `<a href="/cards/${lwrSlug}/" style="color: inherit; text-decoration: underline;">${lwrTitle}</a> <span style="color: #666; font-size: 0.8em;">(${lwr[1].seen}r, ${((lwr[1].wins/lwr[1].seen)*100).toFixed(0)}%)</span>`;
+                    const lwrWR = ((lwr[1].wins / lwr[1].seen) * 100).toFixed(0);
+                    const lwrTooltip = `${lwrTitle} is ${user.display_name}'s worst performing card on ${name}, with a ${lwrWR}% winrate across ${lwr[1].seen} runs`;
+                    lwrHtml = `<a href="/cards/${lwrSlug}/" title="${lwrTooltip}" style="color: inherit; text-decoration: underline;">${lwrTitle}</a> <span title="${lwrTooltip}" style="color: #666; font-size: 0.8em;">(${lwr[1].seen}r, ${lwrWR}%)</span>`;
                 }
 
                 const deadliestEntry = Object.entries(killers).sort((a, b) => b[1] - a[1])[0];
@@ -234,13 +240,14 @@ async function build() {
                     } else {
                         deadliestLink = deadliestTitle; // Fallback if category not determined
                     }
-                    deadliestHtml = `${deadliestLink} <span style="color: var(--red); font-size: 0.8em;">(${deadliestEntry[1]} deaths)</span>`;
+                    const deadliestTooltip = `${deadliestTitle} is ${user.display_name}'s deadliest foe on ${name} with ${deadliestEntry[1]} kills`;
+                    deadliestHtml = `<span title="${deadliestTooltip}">${deadliestLink} <span style="color: var(--red); font-size: 0.8em;">(${deadliestEntry[1]} deaths)</span></span>`;
                 }
 
                 return `
                 <div class="char-panel" style="border: 1px solid ${color}44; border-top: 3px solid ${color}; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
                     <h4 style="margin: 0; color: ${color}; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;"><a href="${charUrl}" style="color: inherit; text-decoration: underline;">${name}</a></h4>
-                    <div style="font-size: 1.4rem; font-weight: bold;">
+                    <div style="font-size: 1.4rem; font-weight: bold;" title="${user.display_name} has a ${wr}% Winrate Across ${charRuns.length} ${name} Runs">
                         ${wr}% <span style="color: ${diffColor}; font-size: 0.9rem; font-weight: normal;">(${diffSign}${diff.toFixed(1)})</span> 
                         <span style="font-size: 0.7rem; color: #666; font-weight: normal;">${charRuns.length} Runs</span>
                     </div>
