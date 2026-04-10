@@ -252,7 +252,7 @@ async function build() {
                         </div>
                     </div>
 
-                    <div style="font-size: 0.75rem; margin-top: 5px; border-top: 1px solid #333; padding-top: 8px;">
+                    <div style="margin-top: 5px; border-top: 1px solid #333; padding-top: 8px;">
                         <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Deadliest Foe</div>
                         <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;" title="${deadliestTitle}">${deadliestHtml}</div>
                     </div>
