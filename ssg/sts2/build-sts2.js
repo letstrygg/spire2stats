@@ -598,9 +598,10 @@ async function buildEnchantments(enchantments, runStats, sitemap) {
     fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
 }
 
-async function buildCharacters(chars, runStats, sitemap) {
+async function buildCharacters(chars, runStats, sitemap, users) {
     console.log(`👤 Building ${chars.length} character pages...`);
     const root = ensureDir(path.join(PATHS.WEB_ROOT, 'characters'));
+    const userLookup = Object.fromEntries(users.map(u => [u.display_name.toLowerCase(), u.slug]));
 
     for (const char of chars) {
         const displayName = char.name.replace(/^The\s+/i, '');
@@ -1003,7 +1004,7 @@ async function build() {
         fs.writeFileSync(path.join(PATHS.WEB_ROOT, 'index.html'), landingHtml);
 
         // --- CHARACTERS ---
-        await buildCharacters(chars, cardStats, sitemap);
+        await buildCharacters(chars, cardStats, sitemap, users);
 
         // --- RELICS ---
         await buildRelics(relics, cardStats, sitemap);

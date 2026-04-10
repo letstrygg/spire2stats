@@ -1,6 +1,6 @@
 import { wrapLayout, generateSemanticStatsParagraph, generateItemJsonLd, formatDescription, CHARACTER_COLORS } from './shared.js';
 
-export function characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, relicItemsHtml, displayName, globalWinRate, topStats) {
+export function characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, relicItemsHtml, displayName, globalWinRate, topStats, performancePanelsHtml) {
     const diff = stats.num - globalWinRate;
     const diffAbs = Math.abs(diff).toFixed(1);
     let relationship = 'from';
@@ -37,6 +37,7 @@ export function characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, 
             ${highlightsHtml}
             ${comparisonHtml}
         </div>
+        ${performancePanelsHtml}
         ${videosHtml}
         <div style="margin-top: 30px;">
             <h3 style="margin-bottom: 15px;">${displayName} Specific Cards</h3>
