@@ -11,13 +11,13 @@ export function characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, 
     const charColor = CHARACTER_COLORS[charId] || 'var(--gray)';
 
     const highlights = [];
-    if (topStats.card) highlights.push(`Most popular card is <strong style="padding:0px 4px;">${topStats.card.name}</strong> (used in ${topStats.card.count} runs)`);
-    if (topStats.relic) highlights.push(`Most popular relic is <strong style="padding-left:0px 4px;">${topStats.relic.name}</strong> (found in ${topStats.relic.count} runs)`);
-    if (topStats.killer) highlights.push(`Deadliest foe is <strong style="padding-left:0px 4px;">${topStats.killer.name}</strong> (ended ${topStats.killer.count} runs)`);
+    if (topStats.card) highlights.push(`Most popular card is <strong title="${topStats.card.name} was used in ${topStats.card.count} runs" style="padding:0px 4px;">${topStats.card.name}</strong> (used in ${topStats.card.count} runs)`);
+    if (topStats.relic) highlights.push(`Most popular relic is <strong title="${topStats.relic.name} was found in ${topStats.relic.count} runs" style="padding-left:0px 4px;">${topStats.relic.name}</strong> (found in ${topStats.relic.count} runs)`);
+    if (topStats.killer) highlights.push(`Deadliest foe is <strong title="${topStats.killer.name} ended ${topStats.killer.count} runs" style="padding-left:0px 4px;">${topStats.killer.name}</strong> (ended ${topStats.killer.count} runs)`);
 
     const comparisonHtml = stats.seen > 0 ? 
         `<div style="text-align: center; margin-top: 15px; font-size: 1rem;">
-            <span style="color: ${charColor}">${displayName}</span> has a <span style="color: ${stats.color}">${stats.formatted}%</span> winrate across ${stats.seen} runs, 
+            <span style="color: ${charColor}">${displayName}</span> has a <span style="color: ${stats.color}" title="${displayName} has a ${stats.formatted}% winrate across ${stats.seen} runs">${stats.formatted}%</span> winrate across <span title="${stats.seen} ${displayName} Runs">${stats.seen} runs</span>, 
             <span style="color: ${stats.color}">${diffAbs}% ${relationship}</span> the character average.
         </div>` : '';
 

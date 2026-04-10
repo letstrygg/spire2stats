@@ -681,10 +681,11 @@ async function buildCharacters(chars, runStats, sitemap, users) {
             const nonStarterEntries = Object.entries(globalCardMap).filter(([id]) => !starterCards.has(id.toUpperCase()));
             const sortedCards = [...nonStarterEntries].sort((a, b) => getScore(b[1], M) - getScore(a[1], M));
 
-            const formatCardStat = (id, s) => {
+            const formatCardStat = (id, s, tooltip = null) => {
                 const name = cardNames[id.toUpperCase()] || id;
                 const wr = s.seen > 0 ? ((s.wins / s.seen) * 100).toFixed(0) : 0;
-                return `<a href="/cards/${slugify(name)}/" style="color: inherit; text-decoration: underline;">${name}</a> <span style="color: #666; font-size: 0.85em;">(${wr}% ${s.seen} Runs)</span>`;
+                const finalTooltip = tooltip || `${name} has a ${wr}% winrate across ${s.seen} runs`;
+                return `<a href="/cards/${slugify(name)}/" title="${finalTooltip}" style="color: inherit; text-decoration: underline;">${name}</a> <span title="${finalTooltip}" style="color: #666; font-size: 0.85em;">(${wr}% ${s.seen} Runs)</span>`;
             };
 
             const top6CardsHtml = sortedCards.slice(0, 6).map(([id, s]) => `<li>${formatCardStat(id, s)}</li>`).join('');
@@ -715,15 +716,23 @@ async function buildCharacters(chars, runStats, sitemap, users) {
                 const uM = uWins / uRuns.length;
 
                 const uMostPicked = [...uNonStarters].sort((a, b) => b[1].seen - a[1].seen)[0];
+                const uMostPickedTitle = cardNames[uMostPicked[0].toUpperCase()] || uMostPicked[0];
+                const uMostPickedWR = ((uMostPicked[1].wins / uMostPicked[1].seen) * 100).toFixed(0);
+                const uMostPickedTooltip = `${uMostPickedTitle} is ${uname}'s top picked card on ${displayName}, used in ${uMostPicked[1].seen} runs with a ${uMostPickedWR}% winrate`;
+
                 const uTopCard = [...uNonStarters].sort((a, b) => getScore(b[1], uM) - getScore(a[1], uM))[0];
+                const uTopCardTitle = cardNames[uTopCard[0].toUpperCase()] || uTopCard[0];
+                const uTopCardWR = ((uTopCard[1].wins / uTopCard[1].seen) * 100).toFixed(0);
+                const uTopCardTooltip = `${uTopCardTitle} is ${uname}'s best performing card on ${displayName}, with a ${uTopCardWR}% winrate across ${uTopCard[1].seen} runs`;
+
                 const uSlug = userLookup[uname.toLowerCase()] || slugify(uname);
 
                 return `
                 <div style="margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #222;">
                     <div style="font-size: 0.85rem; margin-bottom: 4px;"><a href="/users/${uSlug}/" style="color: var(--blue); font-weight: bold;">${uname}</a></div>
                     <div style="font-size: 0.75rem; color: #888; display: flex; flex-direction: column; gap: 2px;">
-                        <div>Top Picked: ${formatCardStat(uMostPicked[0], uMostPicked[1])}</div>
-                        <div>Best Card: ${formatCardStat(uTopCard[0], uTopCard[1])}</div>
+                        <div>Top Picked: ${formatCardStat(uMostPicked[0], uMostPicked[1], uMostPickedTooltip)}</div>
+                        <div>Best Card: ${formatCardStat(uTopCard[0], uTopCard[1], uTopCardTooltip)}</div>
                     </div>
                 </div>`;
             }).join('');
