@@ -1,7 +1,7 @@
 import sqlite3 from 'sqlite3';
 import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
-import { PATHS } from '../sts2/paths.js';
+import { PATHS, slugify } from '../sts2/paths.js';
 import { recalculateUserRunNumbers } from '../sts2/user-run-num.js';
 
 /**
@@ -47,19 +47,23 @@ async function run() {
         const processedIds = [];
 
         for (const run of todoRuns) {
-            const slug = (run.username || '').toLowerCase();
+            const slug = slugify(run.username || '');
             const supabaseUserId = run.supabase_user_id;
 
             // 3. User & ID Linking Logic
-            if (slug && supabaseUserId) {
+            if (slug) {
                 const localUser = (await query("SELECT id, supabase_user_id FROM users WHERE slug = ?", [slug]))[0];
                 
-                if (localUser && !localUser.supabase_user_id) {
-                    console.log(`🔗 Linking Supabase ID for user: ${run.username}`);
+                if (!localUser) {
+                    console.log(` New user detected: ${run.username}. Registering...`);
+                    await query("INSERT INTO users (display_name, slug, supabase_user_id) VALUES (?, ?, ?)", 
+                        [run.username, slug, supabaseUserId || null]);
+                } else if (supabaseUserId && !localUser.supabase_user_id) {
+                    console.log(`🔗 Linking Supabase ID for existing user: ${run.username}`);
                     // Update users table
                     await query("UPDATE users SET supabase_user_id = ? WHERE id = ?", [supabaseUserId, localUser.id]);
                     // Update all existing runs for this username
-                    await query("UPDATE runs SET supabase_user_id = ? WHERE LOWER(username) = ?", [supabaseUserId, slug]);
+                    await query("UPDATE runs SET supabase_user_id = ? WHERE LOWER(username) = ?", [supabaseUserId, (run.username || '').toLowerCase()]);
                 }
             }
 
