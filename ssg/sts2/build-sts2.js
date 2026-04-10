@@ -857,8 +857,7 @@ async function build() {
         const ascensions = await query("SELECT * FROM ascensions ORDER BY level ASC");
         const enchantments = await query("SELECT * FROM enchantments ORDER BY name ASC");
         const users = await query("SELECT * FROM users ORDER BY display_name ASC");
-        const userRunRows = await query("SELECT username, COUNT(*) as count FROM runs GROUP BY username");
-        const runCounts = Object.fromEntries(userRunRows.map(r => [(r.username || '').toLowerCase(), r.count]));
+        const allRunUsernames = await query("SELECT username FROM runs");
 
         const cardStats = await getCardStats();
         const cardsRoot = ensureDir(path.join(PATHS.WEB_ROOT, 'cards'));
@@ -953,7 +952,10 @@ async function build() {
         }).join('');
 
         const contributorLinks = users.map(user => {
-            const count = runCounts[user.slug.toLowerCase()] || 0;
+            const count = allRunUsernames.filter(r => {
+                const runUser = (r.username || '').toLowerCase();
+                return runUser === user.slug.toLowerCase() || runUser === user.display_name.toLowerCase();
+            }).length;
             return `
             <a href="/users/${user.slug}/" class="card-item contributor-card">
                 <div class="card-info"><span class="card-name">${user.display_name}</span></div>
