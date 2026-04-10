@@ -684,7 +684,7 @@ async function buildCharacters(chars, runStats, sitemap, users) {
             const formatCardStat = (id, s) => {
                 const name = cardNames[id.toUpperCase()] || id;
                 const wr = s.seen > 0 ? ((s.wins / s.seen) * 100).toFixed(0) : 0;
-                return `<a href="/cards/${slugify(name)}/" style="color: inherit; text-decoration: underline;">${name}</a> <span style="color: #666; font-size: 0.85em;">(${s.seen}r, ${wr}%)</span>`;
+                return `<a href="/cards/${slugify(name)}/" style="color: inherit; text-decoration: underline;">${name}</a> <span style="color: #666; font-size: 0.85em;">(${wr}% ${s.seen} Runs)</span>`;
             };
 
             const top6CardsHtml = sortedCards.slice(0, 6).map(([id, s]) => `<li>${formatCardStat(id, s)}</li>`).join('');
@@ -722,8 +722,8 @@ async function buildCharacters(chars, runStats, sitemap, users) {
                 <div style="margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #222;">
                     <div style="font-size: 0.85rem; margin-bottom: 4px;"><a href="/users/${uSlug}/" style="color: var(--blue); font-weight: bold;">${uname}</a></div>
                     <div style="font-size: 0.75rem; color: #888; display: flex; flex-direction: column; gap: 2px;">
-                        <div>Picked: ${formatCardStat(uMostPicked[0], uMostPicked[1])}</div>
-                        <div>Top: ${formatCardStat(uTopCard[0], uTopCard[1])}</div>
+                        <div>Top Picked: ${formatCardStat(uMostPicked[0], uMostPicked[1])}</div>
+                        <div>Best Card: ${formatCardStat(uTopCard[0], uTopCard[1])}</div>
                     </div>
                 </div>`;
             }).join('');
