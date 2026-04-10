@@ -640,13 +640,13 @@ async function buildCharacters(chars, runStats, sitemap, users) {
                 return `<a href="/cards/${slugify(name)}/" style="color: inherit; text-decoration: underline;">${name}</a> <span style="color: #666; font-size: 0.85em;">(${wr}% ${s.seen} Runs)</span>`;
             };
 
-            const top6CardsHtml = sortedCards.slice(0, 6).map(([id, s]) => {
+            const top12CardsHtml = sortedCards.slice(0, 12).map(([id, s]) => {
                 const name = cardNames[id.toUpperCase()] || id;
                 const wr = s.seen > 0 ? ((s.wins / s.seen) * 100).toFixed(0) : 0;
                 const tooltip = `${name} has a ${wr}% winrate across ${s.seen} runs`;
                 return `<li title="${tooltip}">${formatCardStat(id, s)}</li>`;
             }).join('');
-            const bottom6CardsHtml = sortedCards.slice(-6).reverse().map(([id, s]) => {
+            const bottom12CardsHtml = sortedCards.slice(-12).reverse().map(([id, s]) => {
                 const name = cardNames[id.toUpperCase()] || id;
                 const wr = s.seen > 0 ? ((s.wins / s.seen) * 100).toFixed(0) : 0;
                 const tooltip = `${name} has a ${wr}% winrate across ${s.seen} runs`;
@@ -700,16 +700,16 @@ async function buildCharacters(chars, runStats, sitemap, users) {
                     ${recentUsersHtml || '<div class="text-muted">No user data yet.</div>'}
                 </div>
                 <div class="char-panel" style="background: rgba(0,0,0,0.2); border: 1px solid #333; padding: 20px 40px; border-radius: 8px;">
-                    <h3 style="margin: 0 0 15px 0; font-size: 0.8rem; text-transform: uppercase; color: var(--green); letter-spacing: 1px;">Top 6 Performing Cards</h3>
+                    <h3 style="margin: 0 0 15px 0; font-size: 0.8rem; text-transform: uppercase; color: var(--green); letter-spacing: 1px;">Top 12 Performing Cards</h3>
                     <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem;">
-                        ${top6CardsHtml || '<li class="text-muted">Insufficient data.</li>'}
+                        ${top12CardsHtml || '<li class="text-muted">Insufficient data.</li>'}
                     </ul>
                     <div style="margin-top: 15px; font-size: 0.7rem; color: #555; font-style: italic;">* Bayesian score weighted against character average</div>
                 </div>
                 <div class="char-panel" style="background: rgba(0,0,0,0.2); border: 1px solid #333; padding: 20px 40px; border-radius: 8px;">
-                    <h3 style="margin: 0 0 15px 0; font-size: 0.8rem; text-transform: uppercase; color: var(--red); letter-spacing: 1px;">Bottom 6 Performing Cards</h3>
+                    <h3 style="margin: 0 0 15px 0; font-size: 0.8rem; text-transform: uppercase; color: var(--red); letter-spacing: 1px;">Bottom 12 Performing Cards</h3>
                     <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem;">
-                        ${bottom6CardsHtml || '<li class="text-muted">Insufficient data.</li>'}
+                        ${bottom12CardsHtml || '<li class="text-muted">Insufficient data.</li>'}
                     </ul>
                     <div style="margin-top: 15px; font-size: 0.7rem; color: #555; font-style: italic;">* Minimum 1 run required</div>
                 </div>
