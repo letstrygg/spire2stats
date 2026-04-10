@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { slugify } from '../paths.js';
 // --- BUILD DATE CONSTANTS ---
 const BUILD_DATE = new Date();
 export const FORMATTED_BUILD_DATE = BUILD_DATE.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
@@ -287,7 +288,7 @@ export function generateAveragesPanel(stats, count, title = "Averages") {
 export function generateRunLinksList(runs, title = "Runs") {
     if (!runs || runs.length === 0) return '';
     
-    const links = runs.map(run => generateRunCardHtml(run, { display_name: run.username, slug: run.username?.toLowerCase() })).join('');
+    const links = runs.map(run => generateRunCardHtml(run, { display_name: run.username, slug: slugify(run.username || '') })).join('');
     return `
     <div class="recent-runs" style="margin-top: 30px;">
         <h3 style="margin-bottom: 15px;">${title}</h3>
