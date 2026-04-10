@@ -106,7 +106,7 @@ function generateCardItemHtml(url, name, stats, extraClass = '', levelId = '') {
 }
 
 async function getCardStats() {
-    const rows = await query("SELECT id, user_run_num, character, relic_list, deck_list, path_history, win, username, yt_video, ltg_url, ascension, build_id, killed_by_encounter FROM runs ORDER BY id DESC");
+    const rows = await query("SELECT id, user_run_num, character, relic_list, deck_list, path_history, win, username, yt_video, ltg_url, ascension, build_id, killed_by_encounter, supabase_user_id FROM runs ORDER BY id DESC");
     console.log(`📡 Database returned ${rows.length} run rows.`);
 
     const totalRuns = rows.length;
@@ -147,7 +147,7 @@ async function getCardStats() {
             rows.forEach(row => {
                 const video = { yt: row.yt_video, ltg: row.ltg_url };
                 const runMeta = { id: row.id, user_run_num: row.user_run_num, username: row.username, win: row.win, character: row.character, build_id: row.build_id, ascension: row.ascension };
-                const charId = (row.character || '').toUpperCase(); // Matches clean IDs like "SILENT"
+                const charId = (row.character || '').replace('CHARACTER.', '').toUpperCase(); // Matches clean IDs like "SILENT"
                 
                 if (!charStats[charId]) {
                     charStats[charId] = { seen: 0, wins: 0, runs: [], damage_taken: 0, hp_healed: 0, gold_lost: 0, gold_stolen: 0, max_hp_gained: 0, max_hp_lost: 0, occurrences: 0, cardFrequencies: {}, relicFrequencies: {}, killerFrequencies: {} };
@@ -603,6 +603,12 @@ async function buildCharacters(chars, runStats, sitemap, users) {
     const root = ensureDir(path.join(PATHS.WEB_ROOT, 'characters'));
     const userLookup = Object.fromEntries(users.map(u => [u.display_name.toLowerCase(), u.slug]));
 
+    const starterCards = new Set((await query("SELECT card_id FROM cards WHERE starter = 1")).map(c => c.card_id.toUpperCase()));
+    const starterRelics = new Set((await query("SELECT relic_id FROM relics WHERE starter = 1")).map(r => r.relic_id.toUpperCase()));
+    const cardNames = Object.fromEntries((await query("SELECT card_id, name FROM cards")).map(c => [c.card_id.toUpperCase(), c.name]));
+    const relicNames = Object.fromEntries((await query("SELECT relic_id, name FROM relics")).map(r => [r.relic_id.toUpperCase(), r.name]));
+    const encounterNames = Object.fromEntries((await query("SELECT encounter_id, name FROM encounters")).map(e => [e.encounter_id.toUpperCase(), e.name]));
+
     for (const char of chars) {
         const displayName = char.name.replace(/^The\s+/i, '');
         const slug = slugify(displayName);
@@ -615,13 +621,6 @@ async function buildCharacters(chars, runStats, sitemap, users) {
         const rawStats = runStats.charStats[charKey] || { seen: 0, wins: 0, runs: [], cardFrequencies: {}, relicFrequencies: {}, killerFrequencies: {} };
         const stats = getItemStats(rawStats, runStats.globalWinRate);
                 
-                // Calculate Character Highlights (Popular cards/relics and deadliest foe)
-                const starterCards = new Set((await query("SELECT card_id FROM cards WHERE starter = 1")).map(c => c.card_id.toUpperCase()));
-                const starterRelics = new Set((await query("SELECT relic_id FROM relics WHERE starter = 1")).map(r => r.relic_id.toUpperCase()));
-                const cardNames = Object.fromEntries((await query("SELECT card_id, name FROM cards")).map(c => [c.card_id.toUpperCase(), c.name]));
-                const relicNames = Object.fromEntries((await query("SELECT relic_id, name FROM relics")).map(r => [r.relic_id.toUpperCase(), r.name]));
-                const encounterNames = Object.fromEntries((await query("SELECT encounter_id, name FROM encounters")).map(e => [e.encounter_id.toUpperCase(), e.name]));
-
                 const getTop = (freqMap, ignoreSet, nameMap) => {
                     let bestId = null;
                     let bestCount = 0;
@@ -644,11 +643,14 @@ async function buildCharacters(chars, runStats, sitemap, users) {
             // --- DATA PANELS CALCULATION ---
             const charRuns = rawStats.runs; // Already sorted DESC by ID
             const globalCardMap = {}; // { id: { seen, wins } }
-            const userGroups = {}; // { username: { lastId, runs: [] } }
+            const userSummary = new Map(); // Key: supabase_user_id/username -> { lastId, username, runs: [] }
 
             charRuns.forEach(r => {
-                if (!userGroups[r.username]) userGroups[r.username] = { lastId: r.id, runs: [] };
-                userGroups[r.username].runs.push(r);
+                const userKey = r.supabase_user_id || r.username;
+                if (!userSummary.has(userKey)) {
+                    userSummary.set(userKey, { lastId: r.id, username: r.username, runs: [] });
+                }
+                userSummary.get(userKey).runs.push(r);
 
                 const deck = JSON.parse(r.deck_list || '[]');
                 const uniqueIds = new Set(deck.map(c => c.id).filter(Boolean));
@@ -674,10 +676,14 @@ async function buildCharacters(chars, runStats, sitemap, users) {
             const top6CardsHtml = sortedCards.slice(0, 6).map(([id, s]) => `<li>${formatCardStat(id, s)}</li>`).join('');
             const bottom6CardsHtml = sortedCards.slice(-6).reverse().map(([id, s]) => `<li>${formatCardStat(id, s)}</li>`).join('');
 
-            const sortedUsernames = Object.keys(userGroups).sort((a, b) => Number(userGroups[b].lastId) - Number(userGroups[a].lastId)).slice(0, 6);
+            const sortedUserKeys = [...userSummary.keys()].sort((a, b) => {
+                return Number(userSummary.get(b).lastId) - Number(userSummary.get(a).lastId);
+            }).slice(0, 6);
             
-            const recentUsersHtml = sortedUsernames.map(uname => {
-                const uRuns = userGroups[uname].runs;
+            const recentUsersHtml = sortedUserKeys.map(key => {
+                const userEntry = userSummary.get(key);
+                const uname = userEntry.username;
+                const uRuns = userEntry.runs;
                 const uCardMap = {};
                 uRuns.forEach(r => {
                     const deck = JSON.parse(r.deck_list || '[]');
