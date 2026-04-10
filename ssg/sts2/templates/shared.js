@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { slugify } from '../paths.js';
+import { calculateBayesianScore } from '../helpers.js';
 // --- BUILD DATE CONSTANTS ---
 const BUILD_DATE = new Date();
 export const FORMATTED_BUILD_DATE = BUILD_DATE.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
@@ -125,8 +126,11 @@ export function getItemStats(stats, globalWinRate) {
     const wins = stats?.wins || 0;
     const num = seen > 0 ? (wins / seen) * 100 : 0;
     const losses = seen - wins;
+    // Calculate Bayesian score using global average as the prior (M)
+    const scoreRatio = calculateBayesianScore(wins, seen, globalWinRate / 100);
+
     return {
-        seen, wins, losses, num,
+        seen, wins, losses, num, score: scoreRatio * 100,
         formatted: num.toFixed(1),
         color: getWinRateColor(seen, num, globalWinRate),
         bar: `background: linear-gradient(to right, #00ff89 ${num}%, #ff4b4b ${num}%);`,
