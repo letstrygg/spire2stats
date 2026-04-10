@@ -164,8 +164,8 @@ async function build() {
 
                 charRuns.forEach(r => {
                     const deck = JSON.parse(r.deck_list || '[]');
-                    deck.forEach(c => {
-                        const cid = c.id;
+                    const uniqueCardIds = new Set(deck.map(c => c.id).filter(Boolean));
+                    uniqueCardIds.forEach(cid => {
                         if (!cardStats[cid]) cardStats[cid] = { seen: 0, wins: 0 };
                         cardStats[cid].seen += 1;
                         if (r.win) cardStats[cid].wins += 1;
