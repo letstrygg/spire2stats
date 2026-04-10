@@ -197,7 +197,7 @@ async function build() {
                     mpSlug = slugify(mpTitle);
                     const mpWR = ((mp[1].wins / mp[1].seen) * 100).toFixed(0);
                     const mpTooltip = `${mpTitle} is ${user.display_name}'s top picked card on ${name}, used in ${mp[1].seen} runs with a ${mpWR}% winrate`;
-                    mpHtml = `<a href="/cards/${mpSlug}/" title="${mpTooltip}" style="color: inherit; text-decoration: underline;">${mpTitle}</a> <span title="${mpTooltip}" style="color: #666; font-size: 0.8em;">(${mp[1].seen} runs, ${mpWR}%)</span>`;
+                    mpHtml = `<a href="/cards/${mpSlug}/" style="color: inherit; text-decoration: underline;">${mpTitle}</a> <span style="color: #666; font-size: 0.8em;">(${mp[1].seen} runs, ${mpWR}%)</span>`;
 
                     // Bayesian Average Score: (C * M + Wins) / (C + Runs)
                     const getScore = (s) => (C * M + s.wins) / (C + s.seen);
@@ -208,14 +208,14 @@ async function build() {
                     hwrSlug = slugify(hwrTitle);
                     const hwrWR = ((hwr[1].wins / hwr[1].seen) * 100).toFixed(0);
                     const hwrTooltip = `${hwrTitle} is ${user.display_name}'s best performing card on ${name}, with a ${hwrWR}% winrate across ${hwr[1].seen} runs`;
-                    hwrHtml = `<a href="/cards/${hwrSlug}/" title="${hwrTooltip}" style="color: inherit; text-decoration: underline;">${hwrTitle}</a> <span title="${hwrTooltip}" style="color: #666; font-size: 0.8em;">(${hwr[1].seen}r, ${hwrWR}%)</span>`;
+                    hwrHtml = `<a href="/cards/${hwrSlug}/" style="color: inherit; text-decoration: underline;">${hwrTitle}</a> <span style="color: #666; font-size: 0.8em;">(${hwr[1].seen}r, ${hwrWR}%)</span>`;
 
                     const lwr = sortedByScore[sortedByScore.length - 1];
                     lwrTitle = cardLookup[lwr[0]] || lwr[0];
                     lwrSlug = slugify(lwrTitle);
                     const lwrWR = ((lwr[1].wins / lwr[1].seen) * 100).toFixed(0);
                     const lwrTooltip = `${lwrTitle} is ${user.display_name}'s worst performing card on ${name}, with a ${lwrWR}% winrate across ${lwr[1].seen} runs`;
-                    lwrHtml = `<a href="/cards/${lwrSlug}/" title="${lwrTooltip}" style="color: inherit; text-decoration: underline;">${lwrTitle}</a> <span title="${lwrTooltip}" style="color: #666; font-size: 0.8em;">(${lwr[1].seen}r, ${lwrWR}%)</span>`;
+                    lwrHtml = `<a href="/cards/${lwrSlug}/" style="color: inherit; text-decoration: underline;">${lwrTitle}</a> <span style="color: #666; font-size: 0.8em;">(${lwr[1].seen}r, ${lwrWR}%)</span>`;
                 }
 
                 const deadliestEntry = Object.entries(killers).sort((a, b) => b[1] - a[1])[0];
@@ -241,7 +241,7 @@ async function build() {
                         deadliestLink = deadliestTitle; // Fallback if category not determined
                     }
                     const deadliestTooltip = `${deadliestTitle} is ${user.display_name}'s deadliest foe on ${name} with ${deadliestEntry[1]} kills`;
-                    deadliestHtml = `<span title="${deadliestTooltip}">${deadliestLink} <span style="color: var(--red); font-size: 0.8em;">(${deadliestEntry[1]} deaths)</span></span>`;
+                    deadliestHtml = `${deadliestLink} <span style="color: var(--red); font-size: 0.8em;">(${deadliestEntry[1]} deaths)</span>`;
                 }
 
                 return `
@@ -252,25 +252,25 @@ async function build() {
                         <span style="font-size: 0.7rem; color: #666; font-weight: normal;">${charRuns.length} Runs</span>
                     </div>
                     
-                    <div>
+                    <div title="${mpTooltip}">
                         <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Most Picked</div>
-                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${mpTitle}">${mpHtml}</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${mpHtml}</div>
                     </div>
                     
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                        <div style="font-size: 0.75rem;">
+                        <div style="font-size: 0.75rem;" title="${hwrTooltip}">
                             <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Top Card</div>
-                            <div style="color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${hwrTitle}">${hwrHtml}</div>
+                            <div style="color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${hwrHtml}</div>
                         </div>
-                        <div style="font-size: 0.75rem;">
+                        <div style="font-size: 0.75rem;" title="${lwrTooltip}">
                             <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Low Card</div>
-                            <div style="color: var(--red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${lwrTitle}">${lwrHtml}</div>
+                            <div style="color: var(--red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${lwrHtml}</div>
                         </div>
                     </div>
 
-                    <div style="margin-top: 5px; border-top: 1px solid #333; padding-top: 8px;">
+                    <div style="margin-top: 5px; border-top: 1px solid #333; padding-top: 8px;" title="${deadliestTooltip}">
                         <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Deadliest Foe</div>
-                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;" title="${deadliestTitle}">${deadliestHtml}</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;">${deadliestHtml}</div>
                     </div>
                 </div>`;
             }).join('');
