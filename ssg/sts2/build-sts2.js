@@ -106,7 +106,7 @@ function generateCardItemHtml(url, name, stats, extraClass = '', levelId = '') {
 }
 
 async function getCardStats() {
-    const rows = await query("SELECT id, user_run_num, character, relic_list, deck_list, path_history, win, username, yt_video, ltg_url, ascension, build_id, killed_by_encounter FROM runs");
+    const rows = await query("SELECT id, user_run_num, character, relic_list, deck_list, path_history, win, username, yt_video, ltg_url, ascension, build_id, killed_by_encounter FROM runs ORDER BY id DESC");
     console.log(`📡 Database returned ${rows.length} run rows.`);
 
     const totalRuns = rows.length;
