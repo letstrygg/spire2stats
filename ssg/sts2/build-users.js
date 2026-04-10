@@ -144,17 +144,20 @@ async function build() {
                 const charRuns = userRuns.filter(r => (r.character || '').replace('CHARACTER.', '').toUpperCase() === charId);
                 const color = CHARACTER_COLORS[charId] || '#444';
                 const name = charLookup[charId] || charId;
+                const charUrl = `/characters/${slugify(name)}/`;
 
                 if (charRuns.length === 0) {
                     return `
                     <div class="char-panel" style="border: 1px solid #333; padding: 15px; border-radius: 8px; opacity: 0.3; background: rgba(0,0,0,0.1);">
-                        <h4 style="margin: 0 0 10px 0; color: ${color}; font-size: 0.8rem; text-transform: uppercase;">${name}</h4>
+                        <h4 style="margin: 0 0 10px 0; color: ${color}; font-size: 0.8rem; text-transform: uppercase;"><a href="${charUrl}" style="color: inherit; text-decoration: underline;">${name}</a></h4>
                         <div style="font-size: 0.75rem; color: #666;">No runs recorded</div>
                     </div>`;
                 }
 
                 const wins = charRuns.filter(r => r.win).length;
                 const wr = ((wins / charRuns.length) * 100).toFixed(1);
+                const M = wins / charRuns.length; // Character winrate prior
+                const C = 5; // Confidence factor
                 
                 const cardStats = {}; // { id: { seen, wins } }
                 const killers = {}; // { id: count }
@@ -188,13 +191,16 @@ async function build() {
                     mpSlug = slugify(mpTitle);
                     mpHtml = `<a href="/cards/${mpSlug}/" style="color: inherit; text-decoration: underline;">${mpTitle}</a> <span style="color: #666; font-size: 0.8em;">(${mp[1].seen}r, ${((mp[1].wins/mp[1].seen)*100).toFixed(0)}%)</span>`;
 
-                    const sortedByWR = [...nonStarterStats].sort((a, b) => (b[1].wins / b[1].seen) - (a[1].wins / a[1].seen));
-                    const hwr = sortedByWR[0];
+                    // Bayesian Average Score: (C * M + Wins) / (C + Runs)
+                    const getScore = (s) => (C * M + s.wins) / (C + s.seen);
+                    const sortedByScore = [...nonStarterStats].sort((a, b) => getScore(b[1]) - getScore(a[1]));
+
+                    const hwr = sortedByScore[0];
                     hwrTitle = cardLookup[hwr[0]] || hwr[0];
                     hwrSlug = slugify(hwrTitle);
                     hwrHtml = `<a href="/cards/${hwrSlug}/" style="color: inherit; text-decoration: underline;">${hwrTitle}</a> <span style="color: #666; font-size: 0.8em;">(${hwr[1].seen}r, ${((hwr[1].wins/hwr[1].seen)*100).toFixed(0)}%)</span>`;
 
-                    const lwr = sortedByWR[sortedByWR.length - 1];
+                    const lwr = sortedByScore[sortedByScore.length - 1];
                     lwrTitle = cardLookup[lwr[0]] || lwr[0];
                     lwrSlug = slugify(lwrTitle);
                     lwrHtml = `<a href="/cards/${lwrSlug}/" style="color: inherit; text-decoration: underline;">${lwrTitle}</a> <span style="color: #666; font-size: 0.8em;">(${lwr[1].seen}r, ${((lwr[1].wins/lwr[1].seen)*100).toFixed(0)}%)</span>`;
@@ -227,7 +233,7 @@ async function build() {
 
                 return `
                 <div class="char-panel" style="border: 1px solid ${color}44; border-top: 3px solid ${color}; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
-                    <h4 style="margin: 0; color: ${color}; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;">${name}</h4>
+                    <h4 style="margin: 0; color: ${color}; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;"><a href="${charUrl}" style="color: inherit; text-decoration: underline;">${name}</a></h4>
                     <div style="font-size: 1.4rem; font-weight: bold;">${wr}% <span style="font-size: 0.7rem; color: #666; font-weight: normal;">WR</span></div>
                     
                     <div style="font-size: 0.75rem;">
