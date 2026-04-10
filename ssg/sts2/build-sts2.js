@@ -146,7 +146,21 @@ async function getCardStats() {
 
             rows.forEach(row => {
                 const video = { yt: row.yt_video, ltg: row.ltg_url };
-                const runMeta = { id: row.id, user_run_num: row.user_run_num, username: row.username, win: row.win, character: row.character, build_id: row.build_id, ascension: row.ascension };
+                const runMeta = { 
+                    id: row.id, 
+                    user_run_num: row.user_run_num, 
+                    username: row.username, 
+                    win: row.win, 
+                    character: row.character, 
+                    build_id: row.build_id, 
+                    ascension: row.ascension,
+                    deck_list: row.deck_list,
+                    relic_list: row.relic_list,
+                    supabase_user_id: row.supabase_user_id,
+                    yt_video: row.yt_video,
+                    ltg_url: row.ltg_url,
+                    killed_by_encounter: row.killed_by_encounter
+                };
                 const charId = (row.character || '').replace('CHARACTER.', '').toUpperCase(); // Matches clean IDs like "SILENT"
                 
                 if (!charStats[charId]) {
