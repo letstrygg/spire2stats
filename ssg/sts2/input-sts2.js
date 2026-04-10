@@ -25,6 +25,7 @@ if (fs.existsSync(charFilePath)) {
 
 // Hard-coded special cases for items that are always starters but not character-specific
 starterCards.add('ASCENDERS_BANE');
+starterCards.add('SPOILS_MAP');
 
 function parseCardText(raw, vars, upgrade, isUpgraded) {
     if (!raw) return "";
