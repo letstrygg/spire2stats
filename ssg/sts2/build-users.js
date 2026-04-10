@@ -75,8 +75,8 @@ async function build() {
         // Fetch lookup maps for names to generate accurate slugs and labels
         const cardLookup = Object.fromEntries((await query("SELECT card_id, name FROM cards")).map(c => [c.card_id, c.name]));
         const relicLookup = Object.fromEntries((await query("SELECT relic_id, name FROM relics")).map(r => [r.relic_id, r.name]));
-        const eventLookup = Object.fromEntries((await query("SELECT event_id, name FROM events")).map(e => [e.event_id, e.name]));
-        const encounterLookup = Object.fromEntries((await query("SELECT encounter_id, name FROM encounters")).map(e => [e.encounter_id, e.name]));
+        const eventLookup = Object.fromEntries((await query("SELECT event_id, name FROM events")).map(e => [e.event_id.replace('EVENT.', ''), e.name]));
+        const encounterLookup = Object.fromEntries((await query("SELECT encounter_id, name FROM encounters")).map(e => [e.encounter_id.replace('ENCOUNTER.', ''), e.name]));
         const enchantmentLookup = Object.fromEntries((await query("SELECT enchantment_id, name FROM enchantments")).map(e => [e.enchantment_id, e.name]));
         const charLookup = Object.fromEntries((await query("SELECT character_id, name FROM characters")).map(c => [
             c.character_id.replace('CHARACTER.', '').toUpperCase(), 
@@ -189,7 +189,7 @@ async function build() {
                     const mp = sortedByPicked[0];
                     mpTitle = cardLookup[mp[0]] || mp[0];
                     mpSlug = slugify(mpTitle);
-                    mpHtml = `<a href="/cards/${mpSlug}/" style="color: inherit; text-decoration: underline;">${mpTitle}</a> <span style="color: #666; font-size: 0.8em;">(${mp[1].seen}r, ${((mp[1].wins/mp[1].seen)*100).toFixed(0)}%)</span>`;
+                    mpHtml = `<a href="/cards/${mpSlug}/" style="color: inherit; text-decoration: underline;">${mpTitle}</a> <span style="color: #666; font-size: 0.8em;">(${mp[1].seen} runs, ${((mp[1].wins/mp[1].seen)*100).toFixed(0)}%)</span>`;
 
                     // Bayesian Average Score: (C * M + Wins) / (C + Runs)
                     const getScore = (s) => (C * M + s.wins) / (C + s.seen);
@@ -217,9 +217,9 @@ async function build() {
                     const deadliestSlug = slugify(deadliestTitle);
 
                     let category = '';
-                    if (rawDeadliestId.startsWith('ENCOUNTER.')) {
+                    if (encounterLookup[rawDeadliestId]) {
                         category = 'encounters';
-                    } else if (rawDeadliestId.startsWith('EVENT.')) {
+                    } else if (eventLookup[rawDeadliestId]) {
                         category = 'events';
                     }
 
@@ -236,7 +236,7 @@ async function build() {
                     <h4 style="margin: 0; color: ${color}; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;"><a href="${charUrl}" style="color: inherit; text-decoration: underline;">${name}</a></h4>
                     <div style="font-size: 1.4rem; font-weight: bold;">${wr}% <span style="font-size: 0.7rem; color: #666; font-weight: normal;">WR</span></div>
                     
-                    <div style="font-size: 0.75rem;">
+                    <div>
                         <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Most Picked</div>
                         <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${mpTitle}">${mpHtml}</div>
                     </div>
