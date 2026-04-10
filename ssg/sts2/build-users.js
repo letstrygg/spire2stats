@@ -138,6 +138,86 @@ async function build() {
                 color: getWinRateColor(userTotal, userWinRateNum, globalWinRate)
             };
 
+            // --- CHARACTER PERFORMANCE PANELS ---
+            const charIds = ['IRONCLAD', 'SILENT', 'DEFECT', 'NECROBINDER', 'REGENT'];
+            const charPanelsHtml = charIds.map(charId => {
+                const charRuns = userRuns.filter(r => (r.character || '').replace('CHARACTER.', '').toUpperCase() === charId);
+                const color = CHARACTER_COLORS[charId] || '#444';
+                const name = charLookup[charId] || charId;
+
+                if (charRuns.length === 0) {
+                    return `
+                    <div class="char-panel" style="border: 1px solid #333; padding: 15px; border-radius: 8px; opacity: 0.3; background: rgba(0,0,0,0.1);">
+                        <h4 style="margin: 0 0 10px 0; color: ${color}; font-size: 0.8rem; text-transform: uppercase;">${name}</h4>
+                        <div style="font-size: 0.75rem; color: #666;">No runs recorded</div>
+                    </div>`;
+                }
+
+                const wins = charRuns.filter(r => r.win).length;
+                const wr = ((wins / charRuns.length) * 100).toFixed(1);
+                
+                const cardStats = {}; // { id: { seen, wins } }
+                const killers = {}; // { id: count }
+
+                charRuns.forEach(r => {
+                    const deck = JSON.parse(r.deck_list || '[]');
+                    deck.forEach(c => {
+                        const cid = c.id;
+                        if (!cardStats[cid]) cardStats[cid] = { seen: 0, wins: 0 };
+                        cardStats[cid].seen += 1;
+                        if (r.win) cardStats[cid].wins += 1;
+                    });
+
+                    if (!r.win) {
+                        const kid = r.killed_by_encounter || r.killed_by_event;
+                        if (kid) killers[kid] = (killers[kid] || 0) + 1;
+                    }
+                });
+
+                // Filter out starter cards for more interesting insights
+                const nonStarterStats = Object.entries(cardStats).filter(([id]) => !starterCards.has(id.toUpperCase()));
+                
+                let mostPicked = '—', highestWR = '—', lowestWR = '—';
+                if (nonStarterStats.length > 0) {
+                    const sortedByPicked = [...nonStarterStats].sort((a, b) => b[1].seen - a[1].seen);
+                    mostPicked = cardLookup[sortedByPicked[0][0]] || sortedByPicked[0][0];
+
+                    const sortedByWR = [...nonStarterStats].sort((a, b) => (b[1].wins / b[1].seen) - (a[1].wins / a[1].seen));
+                    highestWR = cardLookup[sortedByWR[0][0]] || sortedByWR[0][0];
+                    lowestWR = cardLookup[sortedByWR[sortedByWR.length - 1][0]] || sortedByWR[sortedByWR.length - 1][0];
+                }
+
+                const deadliestId = Object.entries(killers).sort((a, b) => b[1] - a[1])[0]?.[0];
+                const deadliestName = deadliestId ? (encounterLookup[deadliestId] || eventLookup[deadliestId] || deadliestId.split('.').pop().replace(/_/g, ' ')) : 'None';
+
+                return `
+                <div class="char-panel" style="border: 1px solid ${color}44; border-top: 3px solid ${color}; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
+                    <h4 style="margin: 0; color: ${color}; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;">${name}</h4>
+                    <div style="font-size: 1.4rem; font-weight: bold;">${wr}% <span style="font-size: 0.7rem; color: #666; font-weight: normal;">WR</span></div>
+                    
+                    <div style="font-size: 0.75rem;">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Most Picked</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${mostPicked}">${mostPicked}</div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div style="font-size: 0.75rem;">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Top Card</div>
+                            <div style="color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${highestWR}">${highestWR}</div>
+                        </div>
+                        <div style="font-size: 0.75rem;">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Low Card</div>
+                            <div style="color: var(--red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${lowestWR}">${lowestWR}</div>
+                        </div>
+                    </div>
+
+                    <div style="font-size: 0.75rem; margin-top: 5px; border-top: 1px solid #333; padding-top: 8px;">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Deadliest Foe</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;" title="${deadliestName}">${deadliestName}</div>
+                    </div>
+                </div>`;
+            }).join('');
+
             // --- USER DIRECTORY (index.html) ---
             const runLinksHtml = userRuns.map(run => generateRunCardHtml(run, user)).join('');
 
@@ -145,6 +225,9 @@ async function build() {
                 user.display_name,
                 `
                 ${generateItemSummaryBox(user.display_name, userStats)}
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 40px;">
+                    ${charPanelsHtml}
+                </div>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
                     ${generateFilterControlsHtml()}
                 </div>
