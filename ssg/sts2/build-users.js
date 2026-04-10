@@ -82,8 +82,8 @@ async function build() {
             c.character_id.replace('CHARACTER.', '').toUpperCase(), 
             c.name.replace(/^The\s+/i, '')
         ]));
-        const starterCards = new Set((await query("SELECT card_id FROM cards WHERE starter = 1")).map(c => c.card_id));
-        const starterRelics = new Set((await query("SELECT relic_id FROM relics WHERE starter = 1")).map(r => r.relic_id));
+        const starterCards = new Set((await query("SELECT card_id FROM cards WHERE starter = 1")).map(c => c.card_id.toUpperCase()));
+        const starterRelics = new Set((await query("SELECT relic_id FROM relics WHERE starter = 1")).map(r => r.relic_id.toUpperCase()));
         const ascLookup = Object.fromEntries((await query("SELECT level, name FROM ascensions")).map(a => [
             String(a.level), 
             a.name || `Ascension ${a.level}`
@@ -177,18 +177,29 @@ async function build() {
                 // Filter out starter cards for more interesting insights
                 const nonStarterStats = Object.entries(cardStats).filter(([id]) => !starterCards.has(id.toUpperCase()));
                 
-                let mostPicked = '—', highestWR = '—', lowestWR = '—';
+                let mpHtml = '—', mpTitle = '—';
+                let hwrHtml = '—', hwrTitle = '—';
+                let lwrHtml = '—', lwrTitle = '—';
+
                 if (nonStarterStats.length > 0) {
                     const sortedByPicked = [...nonStarterStats].sort((a, b) => b[1].seen - a[1].seen);
-                    mostPicked = cardLookup[sortedByPicked[0][0]] || sortedByPicked[0][0];
+                    const mp = sortedByPicked[0];
+                    mpTitle = cardLookup[mp[0]] || mp[0];
+                    mpHtml = `${mpTitle} <span style="color: #666; font-size: 0.8em;">(${mp[1].seen}r, ${((mp[1].wins/mp[1].seen)*100).toFixed(0)}%)</span>`;
 
                     const sortedByWR = [...nonStarterStats].sort((a, b) => (b[1].wins / b[1].seen) - (a[1].wins / a[1].seen));
-                    highestWR = cardLookup[sortedByWR[0][0]] || sortedByWR[0][0];
-                    lowestWR = cardLookup[sortedByWR[sortedByWR.length - 1][0]] || sortedByWR[sortedByWR.length - 1][0];
+                    const hwr = sortedByWR[0];
+                    hwrTitle = cardLookup[hwr[0]] || hwr[0];
+                    hwrHtml = `${hwrTitle} <span style="color: #666; font-size: 0.8em;">(${hwr[1].seen}r, ${((hwr[1].wins/hwr[1].seen)*100).toFixed(0)}%)</span>`;
+
+                    const lwr = sortedByWR[sortedByWR.length - 1];
+                    lwrTitle = cardLookup[lwr[0]] || lwr[0];
+                    lwrHtml = `${lwrTitle} <span style="color: #666; font-size: 0.8em;">(${lwr[1].seen}r, ${((lwr[1].wins/lwr[1].seen)*100).toFixed(0)}%)</span>`;
                 }
 
-                const deadliestId = Object.entries(killers).sort((a, b) => b[1] - a[1])[0]?.[0];
-                const deadliestName = deadliestId ? (encounterLookup[deadliestId] || eventLookup[deadliestId] || deadliestId.split('.').pop().replace(/_/g, ' ')) : 'None';
+                const deadliestEntry = Object.entries(killers).sort((a, b) => b[1] - a[1])[0];
+                const deadliestTitle = deadliestEntry ? (encounterLookup[deadliestEntry[0]] || eventLookup[deadliestEntry[0]] || deadliestEntry[0].split('.').pop().replace(/_/g, ' ')) : 'None';
+                const deadliestHtml = deadliestEntry ? `${deadliestTitle} <span style="color: var(--red); font-size: 0.8em;">(${deadliestEntry[1]} deaths)</span>` : 'None';
 
                 return `
                 <div class="char-panel" style="border: 1px solid ${color}44; border-top: 3px solid ${color}; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
@@ -197,23 +208,23 @@ async function build() {
                     
                     <div style="font-size: 0.75rem;">
                         <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Most Picked</div>
-                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${mostPicked}">${mostPicked}</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${mpTitle}">${mpHtml}</div>
                     </div>
                     
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                         <div style="font-size: 0.75rem;">
                             <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Top Card</div>
-                            <div style="color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${highestWR}">${highestWR}</div>
+                            <div style="color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${hwrTitle}">${hwrHtml}</div>
                         </div>
                         <div style="font-size: 0.75rem;">
                             <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Low Card</div>
-                            <div style="color: var(--red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${lowestWR}">${lowestWR}</div>
+                            <div style="color: var(--red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${lwrTitle}">${lwrHtml}</div>
                         </div>
                     </div>
 
                     <div style="font-size: 0.75rem; margin-top: 5px; border-top: 1px solid #333; padding-top: 8px;">
                         <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Deadliest Foe</div>
-                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;" title="${deadliestName}">${deadliestName}</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;" title="${deadliestTitle}">${deadliestHtml}</div>
                     </div>
                 </div>`;
             }).join('');
