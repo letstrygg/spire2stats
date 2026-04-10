@@ -694,19 +694,19 @@ async function buildCharacters(chars, runStats, sitemap, users) {
             }).join('');
 
             const performancePanelsHtml = `
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px; text-align: left;">
-                <div class="char-panel" style="background: rgba(0,0,0,0.2); border: 1px solid #333; padding: 20px; border-radius: 8px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px; text-align: left; justify-content: space-around;">
+                <div class="char-panel" style="background: rgba(0,0,0,0.2); border: 1px solid #333; padding: 20px 40px; border-radius: 8px;">
                     <h3 style="margin: 0 0 15px 0; font-size: 0.8rem; text-transform: uppercase; color: var(--gold); letter-spacing: 1px;">Recent Active Users</h3>
                     ${recentUsersHtml || '<div class="text-muted">No user data yet.</div>'}
                 </div>
-                <div class="char-panel" style="background: rgba(0,0,0,0.2); border: 1px solid #333; padding: 20px; border-radius: 8px;">
+                <div class="char-panel" style="background: rgba(0,0,0,0.2); border: 1px solid #333; padding: 20px 40px; border-radius: 8px;">
                     <h3 style="margin: 0 0 15px 0; font-size: 0.8rem; text-transform: uppercase; color: var(--green); letter-spacing: 1px;">Top 6 Performing Cards</h3>
                     <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem;">
                         ${top6CardsHtml || '<li class="text-muted">Insufficient data.</li>'}
                     </ul>
                     <div style="margin-top: 15px; font-size: 0.7rem; color: #555; font-style: italic;">* Bayesian score weighted against character average</div>
                 </div>
-                <div class="char-panel" style="background: rgba(0,0,0,0.2); border: 1px solid #333; padding: 20px; border-radius: 8px;">
+                <div class="char-panel" style="background: rgba(0,0,0,0.2); border: 1px solid #333; padding: 20px 40px; border-radius: 8px;">
                     <h3 style="margin: 0 0 15px 0; font-size: 0.8rem; text-transform: uppercase; color: var(--red); letter-spacing: 1px;">Bottom 6 Performing Cards</h3>
                     <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem;">
                         ${bottom6CardsHtml || '<li class="text-muted">Insufficient data.</li>'}
