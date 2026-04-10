@@ -234,7 +234,7 @@ async function build() {
                 return `
                 <div class="char-panel" style="border: 1px solid ${color}44; border-top: 3px solid ${color}; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
                     <h4 style="margin: 0; color: ${color}; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;"><a href="${charUrl}" style="color: inherit; text-decoration: underline;">${name}</a></h4>
-                    <div style="font-size: 1.4rem; font-weight: bold;">${wr}% <span style="font-size: 0.7rem; color: #666; font-weight: normal;">WR</span></div>
+                    <div style="font-size: 1.4rem; font-weight: bold;">${wr}% <span style="font-size: 0.7rem; color: #666; font-weight: normal;">WR across ${charRuns.length} Runs</span></div>
                     
                     <div>
                         <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Most Picked</div>
