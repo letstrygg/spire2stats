@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import sqlite3 from 'sqlite3';
 import { PATHS, ensureDir, slugify } from './paths.js';
+import { isRunByUser, calculateBayesianScore, normalizeId, calculateWinRate, aggregateCardStats } from './helpers.js';
 import { 
     wrapLayout, 
     generateItemJsonLd,
@@ -75,15 +76,15 @@ async function build() {
         // Fetch lookup maps for names to generate accurate slugs and labels
         const cardLookup = Object.fromEntries((await query("SELECT card_id, name FROM cards")).map(c => [c.card_id, c.name]));
         const relicLookup = Object.fromEntries((await query("SELECT relic_id, name FROM relics")).map(r => [r.relic_id, r.name]));
-        const eventLookup = Object.fromEntries((await query("SELECT event_id, name FROM events")).map(e => [e.event_id.replace('EVENT.', ''), e.name]));
-        const encounterLookup = Object.fromEntries((await query("SELECT encounter_id, name FROM encounters")).map(e => [e.encounter_id.replace('ENCOUNTER.', ''), e.name]));
+        const eventLookup = Object.fromEntries((await query("SELECT event_id, name FROM events")).map(e => [normalizeId(e.event_id), e.name]));
+        const encounterLookup = Object.fromEntries((await query("SELECT encounter_id, name FROM encounters")).map(e => [normalizeId(e.encounter_id), e.name]));
         const enchantmentLookup = Object.fromEntries((await query("SELECT enchantment_id, name FROM enchantments")).map(e => [e.enchantment_id, e.name]));
         const charLookup = Object.fromEntries((await query("SELECT character_id, name FROM characters")).map(c => [
-            c.character_id.replace('CHARACTER.', '').toUpperCase(), 
+            normalizeId(c.character_id), 
             c.name.replace(/^The\s+/i, '')
         ]));
-        const starterCards = new Set((await query("SELECT card_id FROM cards WHERE starter = 1")).map(c => c.card_id.toUpperCase()));
-        const starterRelics = new Set((await query("SELECT relic_id FROM relics WHERE starter = 1")).map(r => r.relic_id.toUpperCase()));
+        const starterCards = new Set((await query("SELECT card_id FROM cards WHERE starter = 1")).map(c => normalizeId(c.card_id)));
+        const starterRelics = new Set((await query("SELECT relic_id FROM relics WHERE starter = 1")).map(r => normalizeId(r.relic_id)));
         const ascLookup = Object.fromEntries((await query("SELECT level, name FROM ascensions")).map(a => [
             String(a.level), 
             a.name || `Ascension ${a.level}`
@@ -94,10 +95,7 @@ async function build() {
         ensureDir(path.join(PATHS.WEB_ROOT, 'users'));
 
         const contributorLinks = users.map(user => {
-            const count = allRuns.filter(r => {
-                const runUser = (r.username || '').toLowerCase();
-                return runUser === user.slug.toLowerCase() || runUser === user.display_name.toLowerCase();
-            }).length;
+            const count = allRuns.filter(r => isRunByUser(r, user)).length;
 
             return `
             <a href="/users/${user.slug}/" class="card-item contributor-card">
@@ -121,14 +119,11 @@ async function build() {
             const userRoot = ensureDir(path.join(PATHS.WEB_ROOT, 'users', user.slug));
             const userRunsDir = ensureDir(path.join(userRoot, 'runs'));
 
-            const userRuns = allRuns.filter(r => {
-                const runUser = (r.username || '').toLowerCase();
-                return runUser === user.slug.toLowerCase() || runUser === user.display_name.toLowerCase();
-            });
+            const userRuns = allRuns.filter(r => isRunByUser(r, user));
 
             const userWins = userRuns.filter(r => r.win).length;
             const userTotal = userRuns.length;
-            const userWinRateNum = userTotal > 0 ? (userWins / userTotal) * 100 : 0;
+            const userWinRateNum = calculateWinRate(userRuns);
 
             const userStats = {
                 seen: userTotal,
@@ -141,7 +136,7 @@ async function build() {
             // --- CHARACTER PERFORMANCE PANELS ---
             const charIds = ['IRONCLAD', 'SILENT', 'DEFECT', 'NECROBINDER', 'REGENT'];
             const charPanelsHtml = charIds.map(charId => {
-                const charRuns = userRuns.filter(r => (r.character || '').replace('CHARACTER.', '').toUpperCase() === charId);
+                const charRuns = userRuns.filter(r => normalizeId(r.character) === charId);
                 const color = CHARACTER_COLORS[charId] || '#444';
                 const name = charLookup[charId] || charId;
                 const charUrl = `/characters/${slugify(name)}/`;
@@ -154,8 +149,8 @@ async function build() {
                     </div>`;
                 }
 
+                const wrNum = calculateWinRate(charRuns);
                 const wins = charRuns.filter(r => r.win).length;
-                const wrNum = (wins / charRuns.length) * 100;
                 const wr = wrNum.toFixed(1);
 
                 const diff = wrNum - userWinRateNum;
@@ -165,18 +160,10 @@ async function build() {
                 const M = wins / charRuns.length; // Character winrate prior
                 const C = 5; // Confidence factor
                 
-                const cardStats = {}; // { id: { seen, wins } }
+                const cardStats = aggregateCardStats(charRuns);
                 const killers = {}; // { id: count }
 
                 charRuns.forEach(r => {
-                    const deck = JSON.parse(r.deck_list || '[]');
-                    const uniqueCardIds = new Set(deck.map(c => c.id).filter(Boolean));
-                    uniqueCardIds.forEach(cid => {
-                        if (!cardStats[cid]) cardStats[cid] = { seen: 0, wins: 0 };
-                        cardStats[cid].seen += 1;
-                        if (r.win) cardStats[cid].wins += 1;
-                    });
-
                     if (!r.win) {
                         const kid = r.killed_by_encounter || r.killed_by_event;
                         if (kid) killers[kid] = (killers[kid] || 0) + 1;
@@ -200,9 +187,10 @@ async function build() {
                     mpTooltip = `${mpTitle} is ${user.display_name}'s top picked card on ${name}, used in ${mp[1].seen} runs with a ${mpWR}% winrate`;
                     mpHtml = `<a href="/cards/${mpSlug}/" style="color: inherit; text-decoration: underline;">${mpTitle}</a> <span style="color: #666; font-size: 0.8em;">(${mp[1].seen} runs, ${mpWR}%)</span>`;
 
-                    // Bayesian Average Score: (C * M + Wins) / (C + Runs)
-                    const getScore = (s) => (C * M + s.wins) / (C + s.seen);
-                    const sortedByScore = [...nonStarterStats].sort((a, b) => getScore(b[1]) - getScore(a[1]));
+                    const sortedByScore = [...nonStarterStats].sort((a, b) => 
+                        calculateBayesianScore(b[1].wins, b[1].seen, M) - 
+                        calculateBayesianScore(a[1].wins, a[1].seen, M)
+                    );
 
                     const hwr = sortedByScore[0];
                     hwrTitle = cardLookup[hwr[0]] || hwr[0];
@@ -306,7 +294,7 @@ async function build() {
                 
                 const runDir = ensureDir(path.join(userRunsDir, String(run.id)));
                 
-                const charId = (run.character || '').replace('CHARACTER.', '').toUpperCase();
+                const charId = normalizeId(run.character);
                 const charName = charLookup[charId] || charId;
                 const charSlug = slugify(charName);
                 
