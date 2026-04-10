@@ -256,7 +256,7 @@ async function build() {
                         <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Most Picked</div>
                         <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${mpHtml}</div>
                     </div>
-                    
+
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                         <div style="font-size: 0.75rem;" title="${hwrTooltip}">
                             <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Top Card</div>

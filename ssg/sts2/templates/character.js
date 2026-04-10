@@ -16,8 +16,8 @@ export function characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, 
     if (topStats.killer) highlights.push(`Deadliest foe is <strong title="${topStats.killer.name} ended ${topStats.killer.count} runs" style="padding-left:0px 4px;">${topStats.killer.name}</strong> (ended ${topStats.killer.count} runs)`);
 
     const comparisonHtml = stats.seen > 0 ? 
-        `<div style="text-align: center; margin-top: 15px; font-size: 1rem;">
-            <span style="color: ${charColor}">${displayName}</span> has a <span style="color: ${stats.color}" title="${displayName} has a ${stats.formatted}% winrate across ${stats.seen} runs">${stats.formatted}%</span> winrate across <span title="${stats.seen} ${displayName} Runs">${stats.seen} runs</span>, 
+        `<div style="text-align: center; margin-top: 15px; font-size: 1rem;" title="${displayName} has a ${stats.formatted}% winrate across ${stats.seen} runs">
+            <span style="color: ${charColor}">${displayName}</span> has a <span style="color: ${stats.color}">${stats.formatted}%</span> winrate across <span>${stats.seen} runs</span>, 
             <span style="color: ${stats.color}">${diffAbs}% ${relationship}</span> the character average.
         </div>` : '';
 

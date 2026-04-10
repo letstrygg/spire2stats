@@ -355,21 +355,21 @@ export function generateItemSummaryBox(name, stats) {
     return `
     <div class="averages-panel">
         <div class="stats-grid">
-            <div class="stat-item">
+            <div class="stat-item" title="${name} has a ${stats.formatted}% Winrate Across ${stats.seen} Runs">
                 <div class="stat-label">Winrate</div>
-                <div class="stat-value" id="stat-wr-val" title="${name} has a ${stats.formatted}% Winrate Across ${stats.seen} Runs" style="color: ${stats.color}">${stats.formatted}%</div>
+                <div class="stat-value" id="stat-wr-val" style="color: ${stats.color}">${stats.formatted}%</div>
             </div>
-            <div class="stat-item">
+            <div class="stat-item" title="${stats.seen} ${name} Runs">
                 <div class="stat-label">Total Runs</div>
-                <div class="stat-value" id="stat-total-val" title="${stats.seen} ${name} Runs">${stats.seen}</div>
+                <div class="stat-value" id="stat-total-val">${stats.seen}</div>
             </div>
-            <div class="stat-item">
+            <div class="stat-item" title="${stats.wins} ${name} Wins">
                 <div class="stat-label">Wins</div>
-                <div class="stat-value" id="stat-wins-val" title="${stats.wins} ${name} Wins" style="color: #00ff89">${stats.wins}</div>
+                <div class="stat-value" id="stat-wins-val" style="color: #00ff89">${stats.wins}</div>
             </div>
-            <div class="stat-item">
+            <div class="stat-item" title="${stats.losses} ${name} Losses">
                 <div class="stat-label">Losses</div>
-                <div class="stat-value" id="stat-losses-val" title="${stats.losses} ${name} Losses" style="color: #ff4b4b">${stats.losses}</div>
+                <div class="stat-value" id="stat-losses-val" style="color: #ff4b4b">${stats.losses}</div>
             </div>
         </div>
     </div>`;
