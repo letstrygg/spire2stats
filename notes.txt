@@ -1,0 +1,8 @@
+cd C:\GitHub\spire2stats
+npm run build
+node ssg/runs/input-videos.js
+node ssg/runs/download-runs.js
+node db/send-db.js
+	- add option to just send s2s_runs
+node ssg/updaters/syncSts2Runs.js
+	? 
