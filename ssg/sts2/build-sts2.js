@@ -641,6 +641,95 @@ async function buildCharacters(chars, runStats, sitemap, users) {
                     killer: getTop(rawStats.killerFrequencies || {}, null, encounterNames)
                 };
 
+            // --- DATA PANELS CALCULATION ---
+            const charRuns = rawStats.runs; // Already sorted DESC by ID
+            const globalCardMap = {}; // { id: { seen, wins } }
+            const userGroups = {}; // { username: { lastId, runs: [] } }
+
+            charRuns.forEach(r => {
+                if (!userGroups[r.username]) userGroups[r.username] = { lastId: r.id, runs: [] };
+                userGroups[r.username].runs.push(r);
+
+                const deck = JSON.parse(r.deck_list || '[]');
+                const uniqueIds = new Set(deck.map(c => c.id).filter(Boolean));
+                uniqueIds.forEach(cid => {
+                    if (!globalCardMap[cid]) globalCardMap[cid] = { seen: 0, wins: 0 };
+                    globalCardMap[cid].seen++;
+                    if (r.win) globalCardMap[cid].wins++;
+                });
+            });
+
+            const M = stats.num / 100; // Global character winrate (prior)
+            const getScore = (s, priorM) => (5 * priorM + s.wins) / (5 + s.seen);
+            
+            const nonStarterEntries = Object.entries(globalCardMap).filter(([id]) => !starterCards.has(id.toUpperCase()));
+            const sortedCards = [...nonStarterEntries].sort((a, b) => getScore(b[1], M) - getScore(a[1], M));
+
+            const formatCardStat = (id, s) => {
+                const name = cardNames[id.toUpperCase()] || id;
+                const wr = s.seen > 0 ? ((s.wins / s.seen) * 100).toFixed(0) : 0;
+                return `<a href="/cards/${slugify(name)}/" style="color: inherit; text-decoration: underline;">${name}</a> <span style="color: #666; font-size: 0.85em;">(${s.seen}r, ${wr}%)</span>`;
+            };
+
+            const top6CardsHtml = sortedCards.slice(0, 6).map(([id, s]) => `<li>${formatCardStat(id, s)}</li>`).join('');
+            const bottom6CardsHtml = sortedCards.slice(-6).reverse().map(([id, s]) => `<li>${formatCardStat(id, s)}</li>`).join('');
+
+            const sortedUsernames = Object.keys(userGroups).sort((a, b) => Number(userGroups[b].lastId) - Number(userGroups[a].lastId)).slice(0, 6);
+            
+            const recentUsersHtml = sortedUsernames.map(uname => {
+                const uRuns = userGroups[uname].runs;
+                const uCardMap = {};
+                uRuns.forEach(r => {
+                    const deck = JSON.parse(r.deck_list || '[]');
+                    new Set(deck.map(c => c.id).filter(Boolean)).forEach(cid => {
+                        if (!uCardMap[cid]) uCardMap[cid] = { seen: 0, wins: 0 };
+                        uCardMap[cid].seen++;
+                        if (r.win) uCardMap[cid].wins++;
+                    });
+                });
+
+                const uNonStarters = Object.entries(uCardMap).filter(([id]) => !starterCards.has(id.toUpperCase()));
+                if (uNonStarters.length === 0) return '';
+
+                const uWins = uRuns.filter(r => r.win).length;
+                const uM = uWins / uRuns.length;
+
+                const uMostPicked = [...uNonStarters].sort((a, b) => b[1].seen - a[1].seen)[0];
+                const uTopCard = [...uNonStarters].sort((a, b) => getScore(b[1], uM) - getScore(a[1], uM))[0];
+                const uSlug = userLookup[uname.toLowerCase()] || slugify(uname);
+
+                return `
+                <div style="margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #222;">
+                    <div style="font-size: 0.85rem; margin-bottom: 4px;"><a href="/users/${uSlug}/" style="color: var(--blue); font-weight: bold;">${uname}</a></div>
+                    <div style="font-size: 0.75rem; color: #888; display: flex; flex-direction: column; gap: 2px;">
+                        <div>Picked: ${formatCardStat(uMostPicked[0], uMostPicked[1])}</div>
+                        <div>Top: ${formatCardStat(uTopCard[0], uTopCard[1])}</div>
+                    </div>
+                </div>`;
+            }).join('');
+
+            const performancePanelsHtml = `
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px; text-align: left;">
+                <div class="char-panel" style="background: rgba(0,0,0,0.2); border: 1px solid #333; padding: 20px; border-radius: 8px;">
+                    <h3 style="margin: 0 0 15px 0; font-size: 0.8rem; text-transform: uppercase; color: var(--gold); letter-spacing: 1px;">Recent Active Users</h3>
+                    ${recentUsersHtml || '<div class="text-muted">No user data yet.</div>'}
+                </div>
+                <div class="char-panel" style="background: rgba(0,0,0,0.2); border: 1px solid #333; padding: 20px; border-radius: 8px;">
+                    <h3 style="margin: 0 0 15px 0; font-size: 0.8rem; text-transform: uppercase; color: var(--green); letter-spacing: 1px;">Top 6 Performance Cards</h3>
+                    <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem;">
+                        ${top6CardsHtml || '<li class="text-muted">Insufficient data.</li>'}
+                    </ul>
+                    <div style="margin-top: 15px; font-size: 0.7rem; color: #555; font-style: italic;">* Bayesian score weighted against character average</div>
+                </div>
+                <div class="char-panel" style="background: rgba(0,0,0,0.2); border: 1px solid #333; padding: 20px; border-radius: 8px;">
+                    <h3 style="margin: 0 0 15px 0; font-size: 0.8rem; text-transform: uppercase; color: var(--red); letter-spacing: 1px;">Bottom 6 Performance Cards</h3>
+                    <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem;">
+                        ${bottom6CardsHtml || '<li class="text-muted">Insufficient data.</li>'}
+                    </ul>
+                    <div style="margin-top: 15px; font-size: 0.7rem; color: #555; font-style: italic;">* Minimum 1 run required</div>
+                </div>
+            </div>`;
+
         if (rawStats.seen > 0) console.log(`   ✅ Found ${rawStats.seen} runs for ${charKey}`);
         else console.log(`   ⚠️ No runs found for ID "${charKey}"`);
 
@@ -673,7 +762,7 @@ async function buildCharacters(chars, runStats, sitemap, users) {
                     </a>`;
                 }).join('');
 
-                const detailHtml = characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, relicItemsHtml, displayName, runStats.globalWinRate, topStats);
+                const detailHtml = characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, relicItemsHtml, displayName, runStats.globalWinRate, topStats, performancePanelsHtml);
                 fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
                 sitemap.add(`/characters/${slug}/`);
     }
