@@ -300,6 +300,34 @@ export function generateRunLinksList(runs, title = "Runs") {
     </div>`;
 }
 
+/** Helper to generate standardized card-item HTML for index pages */
+export function generateCardItemHtml(url, name, stats, extraClass = '', levelId = '') {
+    const charId = (extraClass || '').toUpperCase();
+    const charColor = CHARACTER_COLORS[charId] || 'var(--gray)';
+    let subtitleHtml = '';
+    let nameStyle = '';
+
+    if (extraClass) {
+        if (name.toLowerCase() !== extraClass.toLowerCase()) {
+            subtitleHtml = `<br><span style="color: ${charColor}; font-size: 0.8em; font-weight: normal; text-transform: capitalize;">${extraClass}</span>`;
+        } else {
+            nameStyle = `style="color: ${charColor}"`;
+        }
+    }
+
+    const winBarHtml = stats.seen > 0 ? `<div class="win-bar" style="${stats.bar}"></div>` : '';
+
+    return `
+    <a href="${url}" id="asc-card-${levelId}" class="card-item ${extraClass ? extraClass.toLowerCase() : ''}" aria-label="${name}: ${stats.seen} runs, ${stats.text}">
+        <div class="card-info"><span class="card-name" ${nameStyle}>${name}${subtitleHtml}</span></div>
+        <div class="card-stats">
+            <div class="win-rate" id="asc-wr-${levelId}" style="color: ${stats.color}">${stats.text}</div>
+            <div class="run-count">${stats.seen} runs</div>
+        </div>
+        ${winBarHtml}
+    </a>`;
+}
+
 /** Generates a standard run card HTML used across the site */
 export function generateRunCardHtml(run, user) {
     const charId = (run.character || 'Unknown').replace('CHARACTER.', '').toUpperCase();

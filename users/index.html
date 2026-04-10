@@ -58,33 +58,53 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / users</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-10T21:50:22.417Z">April 10, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-10T22:24:13.060Z">April 10, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
             </div>
         </div>
     </nav><div class="grid">
-            <a href="/users/letstrygg/" class="card-item contributor-card">
-                <div class="card-info"><span class="card-name">LetsTryGG</span></div>
-                <div class="card-stats"><div class="run-count">83 runs</div></div>
-            </a>
-            <a href="/users/falterfire/" class="card-item contributor-card">
-                <div class="card-info"><span class="card-name">Falterfire</span></div>
-                <div class="card-stats"><div class="run-count">86 runs</div></div>
-            </a>
-            <a href="/users/rarelyvlolent/" class="card-item contributor-card">
-                <div class="card-info"><span class="card-name">RarelyVlolent</span></div>
-                <div class="card-stats"><div class="run-count">144 runs</div></div>
-            </a>
-            <a href="/users/0_tripwire_-0/" class="card-item contributor-card">
-                <div class="card-info"><span class="card-name">0_tripwire_ 0</span></div>
-                <div class="card-stats"><div class="run-count">340 runs</div></div>
-            </a>
-            <a href="/users/dead3y3/" class="card-item contributor-card">
-                <div class="card-info"><span class="card-name">Dead3y3</span></div>
-                <div class="card-stats"><div class="run-count">72 runs</div></div>
-            </a></div>
+    <a href="/users/letstrygg/" id="asc-card-" class="card-item contributor-card" aria-label="LetsTryGG: 83 runs, 48% Winrate">
+        <div class="card-info"><span class="card-name" >LetsTryGG<br><span style="color: var(--gray); font-size: 0.8em; font-weight: normal; text-transform: capitalize;">contributor-card</span></span></div>
+        <div class="card-stats">
+            <div class="win-rate" id="asc-wr-" style="color: var(--green)">48% Winrate</div>
+            <div class="run-count">83 runs</div>
+        </div>
+        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 48.19277108433735%, #ff4b4b 48.19277108433735%);"></div>
+    </a>
+    <a href="/users/falterfire/" id="asc-card-" class="card-item contributor-card" aria-label="Falterfire: 86 runs, 64% Winrate">
+        <div class="card-info"><span class="card-name" >Falterfire<br><span style="color: var(--gray); font-size: 0.8em; font-weight: normal; text-transform: capitalize;">contributor-card</span></span></div>
+        <div class="card-stats">
+            <div class="win-rate" id="asc-wr-" style="color: var(--green)">64% Winrate</div>
+            <div class="run-count">86 runs</div>
+        </div>
+        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 63.95348837209303%, #ff4b4b 63.95348837209303%);"></div>
+    </a>
+    <a href="/users/rarelyvlolent/" id="asc-card-" class="card-item contributor-card" aria-label="RarelyVlolent: 144 runs, 24% Winrate">
+        <div class="card-info"><span class="card-name" >RarelyVlolent<br><span style="color: var(--gray); font-size: 0.8em; font-weight: normal; text-transform: capitalize;">contributor-card</span></span></div>
+        <div class="card-stats">
+            <div class="win-rate" id="asc-wr-" style="color: var(--red)">24% Winrate</div>
+            <div class="run-count">144 runs</div>
+        </div>
+        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 24.305555555555554%, #ff4b4b 24.305555555555554%);"></div>
+    </a>
+    <a href="/users/0_tripwire_-0/" id="asc-card-" class="card-item contributor-card" aria-label="0_tripwire_ 0: 340 runs, 33% Winrate">
+        <div class="card-info"><span class="card-name" >0_tripwire_ 0<br><span style="color: var(--gray); font-size: 0.8em; font-weight: normal; text-transform: capitalize;">contributor-card</span></span></div>
+        <div class="card-stats">
+            <div class="win-rate" id="asc-wr-" style="color: var(--red)">33% Winrate</div>
+            <div class="run-count">340 runs</div>
+        </div>
+        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 32.94117647058823%, #ff4b4b 32.94117647058823%);"></div>
+    </a>
+    <a href="/users/dead3y3/" id="asc-card-" class="card-item contributor-card" aria-label="Dead3y3: 72 runs, 29% Winrate">
+        <div class="card-info"><span class="card-name" >Dead3y3<br><span style="color: var(--gray); font-size: 0.8em; font-weight: normal; text-transform: capitalize;">contributor-card</span></span></div>
+        <div class="card-stats">
+            <div class="win-rate" id="asc-wr-" style="color: var(--red)">29% Winrate</div>
+            <div class="run-count">72 runs</div>
+        </div>
+        <div class="win-bar" style="background: linear-gradient(to right, #00ff89 29.166666666666668%, #ff4b4b 29.166666666666668%);"></div>
+    </a></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
     (function() {

@@ -2,15 +2,17 @@ import fs from 'fs';
 import path from 'path';
 import sqlite3 from 'sqlite3';
 import { PATHS, ensureDir, slugify } from './paths.js';
-import { isRunByUser, calculateBayesianScore, normalizeId, calculateWinRate, aggregateCardStats } from './helpers.js';
+import { isRunByUser, calculateBayesianScore, normalizeId, calculateWinRate, aggregateCardStats, getPerformanceStats } from './helpers.js';
 import { 
     wrapLayout, 
     generateItemJsonLd,
     getCharacterBgStyle,
     generateItemSummaryBox,
+    getItemStats,
     getWinRateColor,
     generateFilterControlsHtml,
     generateFilterScript,
+    generateCardItemHtml,
     generateRunCardHtml,
     CHARACTER_COLORS
 } from './templates/shared.js';
@@ -95,13 +97,9 @@ async function build() {
         ensureDir(path.join(PATHS.WEB_ROOT, 'users'));
 
         const contributorLinks = users.map(user => {
-            const count = allRuns.filter(r => isRunByUser(r, user)).length;
-
-            return `
-            <a href="/users/${user.slug}/" class="card-item contributor-card">
-                <div class="card-info"><span class="card-name">${user.display_name}</span></div>
-                <div class="card-stats"><div class="run-count">${count} runs</div></div>
-            </a>`;
+            const userRuns = allRuns.filter(r => isRunByUser(r, user));
+            const stats = getItemStats({ seen: userRuns.length, wins: userRuns.filter(r => r.win).length }, globalWinRate);
+            return generateCardItemHtml(`/users/${user.slug}/`, user.display_name, stats, 'contributor-card');
         }).join('');
 
         const usersIndexHtml = wrapLayout(

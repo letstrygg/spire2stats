@@ -64,6 +64,50 @@ export function calculateBayesianScore(wins, runs, priorWinRate, confidence = 5)
 }
 
 /**
+ * Extracts core metadata from a run row.
+ * @param {Object} row 
+ * @returns {Object}
+ */
+export function getRunMetadata(row) {
+    return {
+        id: row.id,
+        user_run_num: row.user_run_num,
+        username: row.username,
+        win: !!row.win,
+        character: row.character,
+        build_id: row.build_id,
+        ascension: row.ascension,
+        deck_list: row.deck_list,
+        relic_list: row.relic_list,
+        supabase_user_id: row.supabase_user_id,
+        yt_video: row.yt_video,
+        ltg_url: row.ltg_url,
+        killed_by_encounter: row.killed_by_encounter
+    };
+}
+
+/**
+ * Calculates top/low card performance for a subset of runs.
+ */
+export function getPerformanceStats(runs, priorM, starterCards) {
+    const cardStats = aggregateCardStats(runs);
+    const nonStarterEntries = Object.entries(cardStats).filter(([id]) => !starterCards.has(id.toUpperCase()));
+    
+    if (nonStarterEntries.length === 0) return null;
+
+    const sorted = [...nonStarterEntries].sort((a, b) => 
+        calculateBayesianScore(b[1].wins, b[1].seen, priorM) - 
+        calculateBayesianScore(a[1].wins, a[1].seen, priorM)
+    );
+
+    return {
+        mostPicked: [...nonStarterEntries].sort((a, b) => b[1].seen - a[1].seen)[0],
+        topCard: sorted[0],
+        lowCard: sorted[sorted.length - 1]
+    };
+}
+
+/**
  * Aggregates card statistics from an array of runs.
  * Returns a map of { cardId: { seen, wins } }
  * 

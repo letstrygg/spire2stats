@@ -3,7 +3,7 @@ import path from 'path';
 import sqlite3 from 'sqlite3';
 import { PATHS, ensureDir, slugify } from './paths.js';
 import { SUPABASE_URL, SUPABASE_ANON_KEY } from '../utils/config.js';
-import { isRunByUser, calculateBayesianScore, normalizeId, calculateWinRate, aggregateCardStats } from './helpers.js';
+import { isRunByUser, calculateBayesianScore, normalizeId, calculateWinRate, aggregateCardStats, getRunMetadata, getPerformanceStats } from './helpers.js';
 
 import { 
     ISO_BUILD_DATE, 
@@ -19,6 +19,7 @@ import {
     generateLethalitySummaryBox,
     generateSemanticStatsParagraph, 
     getItemStats,
+    generateCardItemHtml,
     generateFilterControlsHtml,
     generateFilterScript,
     wrapLayout, 
@@ -78,34 +79,6 @@ function getCostDisplay(costVal, isX, starCostVal, isXStar) {
     return [cost, star].filter(s => s !== '').join(' ');
 }
 
-/** Helper to generate standardized card-item HTML for index pages */
-function generateCardItemHtml(url, name, stats, extraClass = '', levelId = '') {
-    const charId = (extraClass || '').toUpperCase();
-    const charColor = CHARACTER_COLORS[charId] || 'var(--gray)';
-    let subtitleHtml = '';
-    let nameStyle = '';
-
-    if (extraClass) {
-        if (name.toLowerCase() !== extraClass.toLowerCase()) {
-            subtitleHtml = `<br><span style="color: ${charColor}; font-size: 0.8em; font-weight: normal; text-transform: capitalize;">${extraClass}</span>`;
-        } else {
-            nameStyle = `style="color: ${charColor}"`;
-        }
-    }
-
-    const winBarHtml = stats.seen > 0 ? `<div class="win-bar" style="${stats.bar}"></div>` : '';
-
-    return `
-    <a href="${url}" id="asc-card-${levelId}" class="card-item ${extraClass ? extraClass.toLowerCase() : ''}" aria-label="${name}: ${stats.seen} runs, ${stats.text}">
-        <div class="card-info"><span class="card-name" ${nameStyle}>${name}${subtitleHtml}</span></div>
-        <div class="card-stats">
-            <div class="win-rate" id="asc-wr-${levelId}" style="color: ${stats.color}">${stats.text}</div>
-            <div class="run-count">${stats.seen} runs</div>
-        </div>
-        ${winBarHtml}
-    </a>`;
-}
-
 async function getCardStats() {
     const rows = await query("SELECT id, user_run_num, character, relic_list, deck_list, path_history, win, username, yt_video, ltg_url, ascension, build_id, killed_by_encounter, supabase_user_id FROM runs ORDER BY id DESC");
     console.log(`📡 Database returned ${rows.length} run rows.`);
@@ -147,21 +120,7 @@ async function getCardStats() {
 
             rows.forEach(row => {
                 const video = { yt: row.yt_video, ltg: row.ltg_url };
-                const runMeta = { 
-                    id: row.id, 
-                    user_run_num: row.user_run_num, 
-                    username: row.username, 
-                    win: row.win, 
-                    character: row.character, 
-                    build_id: row.build_id, 
-                    ascension: row.ascension,
-                    deck_list: row.deck_list,
-                    relic_list: row.relic_list,
-                    supabase_user_id: row.supabase_user_id,
-                    yt_video: row.yt_video,
-                    ltg_url: row.ltg_url,
-                    killed_by_encounter: row.killed_by_encounter
-                };
+                const runMeta = getRunMetadata(row);
                 const charId = normalizeId(row.character);
                 
                 if (!charStats[charId]) {
