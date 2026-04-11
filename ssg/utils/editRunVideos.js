@@ -90,39 +90,54 @@ document.addEventListener("DOMContentLoaded", function() {
             editArea.querySelector('.btn-blue').onclick = () => {
                 const inp = inputs[1]; // The short URL input
                 const val = inp.value.trim();
+                console.log("[DEBUG] 'Add' button clicked. Raw Input:", val);
                 const shortId = extractYoutubeId(val);
-                if (!shortId) return;
+                console.log("[DEBUG] Extracted Short ID:", shortId);
+                if (!shortId) {
+                    console.warn("[DEBUG] Rejection: Input did not resolve to a valid 11-char YouTube ID.");
+                    return;
+                }
                 const arr = JSON.parse(card.dataset.shorts || '[]');
                 arr.push(shortId);
                 card.dataset.shorts = JSON.stringify(arr);
+                console.log("[DEBUG] Updated local shorts dataset:", card.dataset.shorts);
                 inp.value = '';
                 updateShortsUI();
             };
 
         } else {
             // Save and Exit
+            console.log("[DEBUG] 'Save' (Gear) clicked. Run ID target:", runId);
             const inputs = editArea.querySelectorAll('.input');
             const ytInput = inputs[0];
             const shortInput = inputs[1];
             
             const newYt = extractYoutubeId(ytInput.value.trim());
+            console.log("[DEBUG] Primary Video ID to save:", newYt);
             
             // Capture any pending text in the short input box that wasn't "Added" yet
             const pendingShort = extractYoutubeId(shortInput.value.trim());
             const finalShorts = JSON.parse(card.dataset.shorts || '[]');
             if (pendingShort && !finalShorts.includes(pendingShort)) {
+                console.log("[DEBUG] Adding pending text from input box to final list:", pendingShort);
                 finalShorts.push(pendingShort);
             }
+            console.log("[DEBUG] Final Shorts array being sent to Supabase:", finalShorts);
 
             btn.style.pointerEvents = 'none';
             btn.textContent = 'sync'; // Show loading state
 
-            const { error } = await supabase.from('s2s_runs').update({ yt_video: newYt, shorts: finalShorts }).eq('id', runId);
+            const updatePayload = { yt_video: newYt, shorts: finalShorts };
+            console.log("[DEBUG] Sending UPDATE to s2s_runs table:", updatePayload);
+
+            const { error } = await supabase.from('s2s_runs').update(updatePayload).eq('id', runId);
             if (error) {
+                console.error("[DEBUG] Supabase Update FAILED:", error);
                 alert("Update failed: " + error.message);
                 btn.textContent = 'save';
                 btn.style.pointerEvents = 'auto';
             } else {
+                console.log("[DEBUG] Supabase Update SUCCESSFUL. Reloading page...");
                 window.location.reload();
             }
         }
