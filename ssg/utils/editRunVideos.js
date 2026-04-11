@@ -101,9 +101,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
         } else {
             // Save and Exit
-            const ytInput = editArea.querySelectorAll('.input')[0];
+            const inputs = editArea.querySelectorAll('.input');
+            const ytInput = inputs[0];
+            const shortInput = inputs[1];
+            
             const newYt = extractYoutubeId(ytInput.value.trim());
+            
+            // Capture any pending text in the short input box that wasn't "Added" yet
+            const pendingShort = extractYoutubeId(shortInput.value.trim());
             const finalShorts = JSON.parse(card.dataset.shorts || '[]');
+            if (pendingShort && !finalShorts.includes(pendingShort)) {
+                finalShorts.push(pendingShort);
+            }
 
             btn.style.pointerEvents = 'none';
             btn.textContent = 'sync'; // Show loading state
