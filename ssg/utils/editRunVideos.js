@@ -48,14 +48,14 @@ document.addEventListener("DOMContentLoaded", function() {
             editArea.innerHTML = `
                 <div class="edit-box" style="background: rgba(0,0,0,0.9); border: 1px solid #444; border-radius: 8px; padding: 15px; margin-top: 10px; font-size: 0.8rem; display: flex; flex-direction: column; gap: 12px; text-align: left;">
                     <div>
-                        <label style="display: block; color: #888; margin-bottom: 4px; text-transform: uppercase; font-size: 0.65rem;">YouTube Video ID</label>
-                        <input type="text" class="yt-video-input" value="${ytVideo}" placeholder="e.g. dQw4w9WgXcQ" style="width: 100%; background: #222; border: 1px solid #444; color: #eee; padding: 6px; border-radius: 4px;">
+                        <label style="display: block; color: #888; margin-bottom: 4px; text-transform: uppercase; font-size: 0.65rem;">Add YouTube Video</label>
+                        <input type="text" class="input" value="${ytVideo}" placeholder="Paste YouTube URL..." style="width: 100%; box-sizing: border-box; background: #222; border: 1px solid #444; color: #eee; padding: 6px; border-radius: 4px;">
                     </div>
                     <div>
                         <label style="display: block; color: #888; margin-bottom: 4px; text-transform: uppercase; font-size: 0.65rem;">Add YouTube Short URL</label>
-                        <div style="display: flex; gap: 8px;">
-                            <input type="text" class="short-url-input" placeholder="Paste Short URL..." style="flex-grow: 1; background: #222; border: 1px solid #444; color: #eee; padding: 6px; border-radius: 4px;">
-                            <button class="add-short-btn" style="background: var(--blue); color: white; border: none; border-radius: 4px; padding: 6px 12px; cursor: pointer; font-size: 0.7rem;">Add</button>
+                        <div style="display: flex; gap: 8px; align-items: stretch;">
+                            <input type="text" class="input" placeholder="Paste Short URL..." style="flex: 1; min-width: 0; box-sizing: border-box; background: #222; border: 1px solid #444; color: #eee; padding: 6px; border-radius: 4px;">
+                            <button class="btn btn-blue" style="padding: 6px 12px; font-size: 0.7rem; white-space: nowrap;">Add</button>
                         </div>
                     </div>
                     <div class="edit-shorts-list" style="display: flex; gap: 10px; flex-wrap: wrap;"></div>
@@ -85,8 +85,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
             updateShortsUI();
 
-            editArea.querySelector('.add-short-btn').onclick = () => {
-                const inp = editArea.querySelector('.short-url-input');
+            // Use generic selectors since classes are now standardized
+            const inputs = editArea.querySelectorAll('.input');
+            editArea.querySelector('.btn-blue').onclick = () => {
+                const inp = inputs[1]; // The short URL input
                 const val = inp.value.trim();
                 const shortId = extractYoutubeId(val);
                 if (!shortId) return;
@@ -99,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         } else {
             // Save and Exit
-            const ytInput = editArea.querySelector('.yt-video-input');
+            const ytInput = editArea.querySelectorAll('.input')[0];
             const newYt = extractYoutubeId(ytInput.value.trim());
             const finalShorts = JSON.parse(card.dataset.shorts || '[]');
 
