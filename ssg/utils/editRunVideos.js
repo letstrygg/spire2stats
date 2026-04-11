@@ -130,17 +130,28 @@ document.addEventListener("DOMContentLoaded", function() {
             const updatePayload = { yt_video: newYt, shorts: finalShorts };
             console.log("[DEBUG] Sending UPDATE to s2s_runs table:", updatePayload);
 
-            const { error } = await supabase.from('s2s_runs').update(updatePayload).eq('id', runId);
+            const { data, error } = await supabase.from('s2s_runs').update(updatePayload).eq('id', runId).select();
             if (error) {
                 console.error("[DEBUG] Supabase Update FAILED:", error);
                 alert("Update failed: " + error.message);
                 btn.textContent = 'save';
                 btn.style.pointerEvents = 'auto';
             } else {
-                console.log("[DEBUG] Supabase Update SUCCESSFUL. (Reload bypassed to allow log inspection)");
-                btn.textContent = 'done';
-                btn.style.color = 'var(--green)';
-                // window.location.reload(); 
+                console.log("[DEBUG] Supabase Update SUCCESSFUL. Rows returned:", data);
+                if (!data || data.length === 0) {
+                    console.error("[DEBUG] CRITICAL: Update returned success but 0 rows were modified. This usually means the ID " + runId + " was not found in the 's2s_runs' table or RLS policies blocked the change.");
+                }
+
+                // Update local dataset attributes so re-opening the edit box shows the new data
+                card.dataset.ytVideo = newYt || '';
+                card.dataset.shorts = JSON.stringify(finalShorts);
+
+                // Exit Edit Mode
+                editArea.style.display = 'none';
+                btn.textContent = 'settings';
+                btn.style.color = '#ffffff';
+                btn.style.pointerEvents = 'auto';
+                console.log("[DEBUG] Edit mode exited. Local card data synchronized.");
             }
         }
     });

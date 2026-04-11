@@ -64,7 +64,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/users/letstrygg/">letstrygg</a> / run 1772747998</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-11T03:05:04.945Z">April 10, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-11T03:24:18.405Z">April 10, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -381,17 +381,28 @@
             const updatePayload = { yt_video: newYt, shorts: finalShorts };
             console.log("[DEBUG] Sending UPDATE to s2s_runs table:", updatePayload);
 
-            const { error } = await supabase.from('s2s_runs').update(updatePayload).eq('id', runId);
+            const { data, error } = await supabase.from('s2s_runs').update(updatePayload).eq('id', runId).select();
             if (error) {
                 console.error("[DEBUG] Supabase Update FAILED:", error);
                 alert("Update failed: " + error.message);
                 btn.textContent = 'save';
                 btn.style.pointerEvents = 'auto';
             } else {
-                console.log("[DEBUG] Supabase Update SUCCESSFUL. (Reload bypassed to allow log inspection)");
-                btn.textContent = 'done';
-                btn.style.color = 'var(--green)';
-                // window.location.reload(); 
+                console.log("[DEBUG] Supabase Update SUCCESSFUL. Rows returned:", data);
+                if (!data || data.length === 0) {
+                    console.error("[DEBUG] CRITICAL: Update returned success but 0 rows were modified. This usually means the ID " + runId + " was not found in the 's2s_runs' table or RLS policies blocked the change.");
+                }
+
+                // Update local dataset attributes so re-opening the edit box shows the new data
+                card.dataset.ytVideo = newYt || '';
+                card.dataset.shorts = JSON.stringify(finalShorts);
+
+                // Exit Edit Mode
+                editArea.style.display = 'none';
+                btn.textContent = 'settings';
+                btn.style.color = '#ffffff';
+                btn.style.pointerEvents = 'auto';
+                console.log("[DEBUG] Edit mode exited. Local card data synchronized.");
             }
         }
     });
