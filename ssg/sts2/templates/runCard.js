@@ -12,9 +12,10 @@ export function generateRunCardHtml(run, user) {
 
     const ytId = run.yt_video || run.video?.yt;
     const ltgUrl = run.ltg_url || run.video?.ltg;
+    const shorts = run.shorts ? (typeof run.shorts === 'string' ? JSON.parse(run.shorts) : run.shorts) : [];
 
     let videoButtons = '';
-    if (ytId || ltgUrl) {
+    if (ytId || ltgUrl || shorts.length > 0) {
         let btns = '';
         if (ltgUrl) {
             const match = ltgUrl.match(/s(\d+)e(\d+)\.html/i);
@@ -24,20 +25,15 @@ export function generateRunCardHtml(run, user) {
         if (ytId) {
             btns += `<a href="https://www.youtube.com/watch?v=${ytId}" class="run-vid-btn yt" target="_blank"><span class="material-symbols-outlined" style="color: #ff4b4b;">smart_display</span>YouTube</a>`;
         }
+        if (shorts.length > 0) {
+            btns += shorts.map(s => `<a href="https://www.youtube.com/shorts/${s}" class="run-vid-btn short" target="_blank" title="Watch Short" style="padding: 2px 8px; display: inline-flex; align-items: center;"><img src="/images/250px-Youtube_shorts_icon.svg.png" style="height: 20px; width: auto;" alt="YouTube Short"></a>`).join('');
+        }
         videoButtons = `<div class="run-video-links">${btns}</div>`;
     }
 
     const buildId = run.build_id || 'v0.0.0';
     const ascension = run.ascension || 0;
     const winVal = run.win ? 1 : 0;
-    const shorts = run.shorts ? (typeof run.shorts === 'string' ? JSON.parse(run.shorts) : run.shorts) : [];
-
-    let shortsHtml = '';
-    if (shorts.length > 0) {
-        shortsHtml = `<div class="run-shorts-display" style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
-            ${shorts.map(s => `<a href="${s}" target="_blank" title="Watch Short"><img src="/images/250px-Youtube_shorts_icon.svg.png" style="height: 24px; width: auto;" alt="YouTube Short"></a>`).join('')}
-        </div>`;
-    }
 
     return `
     <div class="card-item ${statusClass} ${charClass} run-record" 
@@ -63,7 +59,6 @@ export function generateRunCardHtml(run, user) {
             </div>
         </a>
         ${videoButtons}
-        ${shortsHtml}
         <div class="run-edit-area" style="display: none;"></div>
         <div class="win-bar" style="background: ${statusColor};"></div>
     </div>`;
