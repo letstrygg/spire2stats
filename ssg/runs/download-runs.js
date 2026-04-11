@@ -107,13 +107,15 @@ async function run() {
             if (!updates || updates.length === 0) break;
 
             for (const run of updates) {
-                const shortsJson = JSON.stringify(run.shorts || []);
+                // Ensure shorts is a valid JSON array string and not double-encoded
+                const parsedShorts = (typeof run.shorts === 'string') ? JSON.parse(run.shorts) : (run.shorts || []);
+                const shortsJson = JSON.stringify(Array.isArray(parsedShorts) ? parsedShorts : []);
+                
                 const hasShorts = run.shorts && Array.isArray(run.shorts) && run.shorts.length > 0;
                 const hasVideo = !!run.yt_video;
 
                 if (hasShorts || hasVideo) {
                     if (hasShorts) runsWithShortsCount++;
-                    console.log(`   [DEBUG] Syncing Run ${run.id}: Video=${run.yt_video || 'None'}, Shorts=${shortsJson}`);
                 }
 
                 await query("UPDATE runs SET yt_video = ?, ltg_url = ?, shorts = ? WHERE id = ?", [
@@ -202,7 +204,11 @@ async function insertRunLocally(run) {
             run.yt_video,
             run.ltg_url,
             run.supabase_user_id,
-            JSON.stringify(run.shorts || [])
+            (() => {
+                // Normalize shorts to a single-encoded JSON string
+                const s = (typeof run.shorts === 'string') ? JSON.parse(run.shorts) : (run.shorts || []);
+                return JSON.stringify(Array.isArray(s) ? s : []);
+            })()
         ];
 
         await query(stmt, params);

@@ -77,10 +77,11 @@ async function build() {
 
         // Fetch lookup maps for names to generate accurate slugs and labels
         const cardLookup = Object.fromEntries((await query("SELECT card_id, name FROM cards")).map(c => [c.card_id, c.name]));
+        const cardColorLookup = Object.fromEntries((await query("SELECT card_id, color FROM cards")).map(c => [c.card_id, c.color]));
         const relicLookup = Object.fromEntries((await query("SELECT relic_id, name FROM relics")).map(r => [r.relic_id, r.name]));
         const eventLookup = Object.fromEntries((await query("SELECT event_id, name FROM events")).map(e => [normalizeId(e.event_id), e.name]));
         const encounterLookup = Object.fromEntries((await query("SELECT encounter_id, name FROM encounters")).map(e => [normalizeId(e.encounter_id), e.name]));
-        const enchantmentLookup = Object.fromEntries((await query("SELECT enchantment_id, name FROM enchantments")).map(e => [e.enchantment_id, e.name]));
+        const enchantmentLookup = Object.fromEntries((await query("SELECT enchantment_id, name FROM enchantments")).map(e => [normalizeId(e.enchantment_id), e.name]));
         const charLookup = Object.fromEntries((await query("SELECT character_id, name FROM characters")).map(c => [
             normalizeId(c.character_id), 
             c.name.replace(/^The\s+/i, '')
@@ -308,14 +309,24 @@ async function build() {
 
                 const cardsLinks = deck.map(c => {
                     const name = cardLookup[c.id] || c.id;
+                    const charKey = normalizeId(cardColorLookup[c.id]);
+                    const charColor = CHARACTER_COLORS[charKey] || '';
+                    const cardStyle = charColor ? `style="color: ${charColor}"` : '';
+
                     const upgSuffix = c.upgrades > 0 ? '+' + c.upgrades : '';
                     const countSuffix = c.count > 1 ? ' x' + c.count : '';
-                    const displayName = name + upgSuffix + countSuffix;
-                    return `<a href="/cards/${slugify(name)}/" class="item-link">${displayName}</a>`;
+                    
+                    let html = `<div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">`;
+                    html += `<a href="/cards/${slugify(name)}/" class="item-link" ${cardStyle}>${name}${upgSuffix}${countSuffix}</a>`;
+                    
+                    if (c.enchantment) {
+                        const enchId = normalizeId(c.enchantment);
+                        const enchName = enchantmentLookup[enchId] || enchId;
+                        html += `<a href="/enchantments/${slugify(enchName)}/" class="item-link" style="color: var(--purple); opacity: 0.8; font-size: 0.9em;">${enchName}</a>`;
+                    }
+                    html += `</div>`;
+                    return html;
                 }).join('');
-
-                const uniqueEnchs = [...new Set(deck.filter(c => c.enchantment).map(c => c.enchantment))];
-                const enchsLinks = uniqueEnchs.map(id => `<a href="/enchantments/${slugify(enchantmentLookup[id] || id)}/" class="item-link">${enchantmentLookup[id] || id}</a>`).join('');
 
                 const relicsLinks = relicIds.map(id => `<a href="/relics/${slugify(relicLookup[id] || id)}/" class="item-link">${relicLookup[id] || id}</a>`).join('');
 
@@ -435,10 +446,6 @@ async function build() {
                                 <section>
                                     <h3 style="color: var(--gold, #ffd700); border-bottom: 1px solid #333; padding-bottom: 5px;">Deck</h3>
                                     <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;">${cardsLinks || '<span class="text-muted">No cards</span>'}</div>
-                                </section>
-                                <section>
-                                    <h3 style="color: var(--purple, #b388ff); border-bottom: 1px solid #333; padding-bottom: 5px;">Enchantments</h3>
-                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;">${enchsLinks || '<span class="text-muted">None</span>'}</div>
                                 </section>
                                 <section>
                                     <h3 style="color: var(--red, #ff5252); border-bottom: 1px solid #333; padding-bottom: 5px;">Relics</h3>

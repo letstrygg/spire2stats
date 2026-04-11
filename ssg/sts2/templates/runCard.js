@@ -12,7 +12,13 @@ export function generateRunCardHtml(run, user) {
 
     const ytId = run.yt_video || run.video?.yt;
     const ltgUrl = run.ltg_url || run.video?.ltg;
-    const shorts = run.shorts ? (typeof run.shorts === 'string' ? JSON.parse(run.shorts) : run.shorts) : [];
+    
+    let shorts = run.shorts ? (typeof run.shorts === 'string' ? JSON.parse(run.shorts) : run.shorts) : [];
+    // Robustness: If we got a string back (double encoded), parse it again.
+    if (typeof shorts === 'string') {
+        try { shorts = JSON.parse(shorts); } catch (e) { shorts = []; }
+    }
+    if (!Array.isArray(shorts)) shorts = [];
 
     let videoButtons = '';
     if (ytId || ltgUrl || shorts.length > 0) {

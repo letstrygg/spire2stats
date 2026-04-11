@@ -83,7 +83,14 @@ export function getRunMetadata(row) {
         yt_video: row.yt_video,
         ltg_url: row.ltg_url,
         killed_by_encounter: row.killed_by_encounter,
-        shorts: row.shorts ? (typeof row.shorts === 'string' ? JSON.parse(row.shorts) : row.shorts) : []
+        shorts: (() => {
+            let s = row.shorts ? (typeof row.shorts === 'string' ? JSON.parse(row.shorts) : row.shorts) : [];
+            // Robustness: Handle double-encoded strings from legacy syncs
+            if (typeof s === 'string') {
+                try { s = JSON.parse(s); } catch (e) { s = []; }
+            }
+            return Array.isArray(s) ? s : [];
+        })()
     };
 }
 
