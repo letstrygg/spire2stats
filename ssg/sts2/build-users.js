@@ -322,7 +322,7 @@ async function build() {
                     if (c.enchantment) {
                         const enchId = normalizeId(c.enchantment);
                         const enchName = enchantmentLookup[enchId] || enchId;
-                        html += `<a href="/enchantments/${slugify(enchName)}/" class="item-link" style="color: var(--purple); opacity: 0.8; font-size: 0.9em;">${enchName}</a>`;
+                        html += `<a href="/enchantments/${slugify(enchName)}/" class="item-link" style="color: var(--purple);">${enchName}</a>`;
                     }
                     html += `</div>`;
                     return html;
