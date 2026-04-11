@@ -137,8 +137,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 btn.textContent = 'save';
                 btn.style.pointerEvents = 'auto';
             } else {
-                console.log("[DEBUG] Supabase Update SUCCESSFUL. Reloading page...");
-                window.location.reload();
+                console.log("[DEBUG] Supabase Update SUCCESSFUL. (Reload bypassed to allow log inspection)");
+                btn.textContent = 'done';
+                btn.style.color = 'var(--green)';
+                // window.location.reload(); 
             }
         }
     });

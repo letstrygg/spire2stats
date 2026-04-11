@@ -61,7 +61,7 @@
   "@type": "ItemPage",
   "name": "Chill - Spire 2 Stats",
   "description": "Chill gameplay statistics for Slay the Spire 2. Winrate: 42.6%. Total Runs: 47.",
-  "dateModified": "2026-04-11T02:54:46.543Z",
+  "dateModified": "2026-04-11T03:05:04.137Z",
   "mainEntity": {
     "@type": "Thing",
     "name": "Chill",
@@ -78,7 +78,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/cards/">cards</a> / chill</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-11T02:54:46.543Z">April 10, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-11T03:05:04.137Z">April 10, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -1598,8 +1598,10 @@
                 btn.textContent = 'save';
                 btn.style.pointerEvents = 'auto';
             } else {
-                console.log("[DEBUG] Supabase Update SUCCESSFUL. Reloading page...");
-                window.location.reload();
+                console.log("[DEBUG] Supabase Update SUCCESSFUL. (Reload bypassed to allow log inspection)");
+                btn.textContent = 'done';
+                btn.style.color = 'var(--green)';
+                // window.location.reload(); 
             }
         }
     });
