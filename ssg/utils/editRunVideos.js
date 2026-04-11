@@ -4,6 +4,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
     let currentUserId = null;
 
+    // Helper to extract the 11-character YouTube ID from various URL formats or raw IDs
+    const extractYoutubeId = (url) => {
+        if (!url) return null;
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=|\/shorts\/)([^#&?]*).*/;
+        const match = url.match(regExp);
+        return (match && match[2].length === 11) ? match[2] : (url.length === 11 ? url : null);
+    };
+
     const authChange = (event, session) => {
         const user = session?.user;
         if (user) {
@@ -47,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         <label style="display: block; color: #888; margin-bottom: 4px; text-transform: uppercase; font-size: 0.65rem;">Add YouTube Short URL</label>
                         <div style="display: flex; gap: 8px;">
                             <input type="text" class="short-url-input" placeholder="Paste Short URL..." style="flex-grow: 1; background: #222; border: 1px solid #444; color: #eee; padding: 6px; border-radius: 4px;">
-                            <button class="add-short-btn" style="background: var(--blue); color: white; border: none; border-radius: 4px; padding: 0 12px; cursor: pointer; font-size: 0.7rem;">Add</button>
+                            <button class="add-short-btn" style="background: var(--blue); color: white; border: none; border-radius: 4px; padding: 6px 12px; cursor: pointer; font-size: 0.7rem;">Add</button>
                         </div>
                     </div>
                     <div class="edit-shorts-list" style="display: flex; gap: 10px; flex-wrap: wrap;"></div>
@@ -80,9 +88,10 @@ document.addEventListener("DOMContentLoaded", function() {
             editArea.querySelector('.add-short-btn').onclick = () => {
                 const inp = editArea.querySelector('.short-url-input');
                 const val = inp.value.trim();
-                if (!val) return;
+                const shortId = extractYoutubeId(val);
+                if (!shortId) return;
                 const arr = JSON.parse(card.dataset.shorts || '[]');
-                arr.push(val);
+                arr.push(shortId);
                 card.dataset.shorts = JSON.stringify(arr);
                 inp.value = '';
                 updateShortsUI();
@@ -91,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function() {
         } else {
             // Save and Exit
             const ytInput = editArea.querySelector('.yt-video-input');
-            const newYt = ytInput.value.trim() || null;
+            const newYt = extractYoutubeId(ytInput.value.trim());
             const finalShorts = JSON.parse(card.dataset.shorts || '[]');
 
             btn.style.pointerEvents = 'none';

@@ -84,10 +84,30 @@ async function run() {
             
             if (delError) console.error("⚠️ Failed to delete runs from remote todo list:", delError.message);
             else {
-                await recalculateUserRunNumbers(db);
-                console.log(`✅ Synchronization and sequence numbering complete.`);
+                console.log(`✅ Cleaned up ${processedIds.length} runs from remote todo list.`);
             }
         }
+
+        // 6. Sync metadata updates (YouTube links and Shorts) from the permanent s2s_runs table
+        // This ensures edits made on the website via editRunVideos.js are reflected locally
+        console.log('📡 Downloading video and shorts updates from s2s_runs...');
+        const { data: updates, error: updateError } = await supabase
+            .from('s2s_runs')
+            .select('id, yt_video, ltg_url, shorts');
+
+        if (updateError) throw updateError;
+
+        for (const run of updates) {
+            await query("UPDATE runs SET yt_video = ?, ltg_url = ?, shorts = ? WHERE id = ?", [
+                run.yt_video,
+                run.ltg_url,
+                JSON.stringify(run.shorts || []),
+                run.id
+            ]);
+        }
+
+        await recalculateUserRunNumbers(db);
+        console.log(`✅ Synchronization and metadata updates complete.`);
 
     } catch (error) {
         console.error('❌ Sync failed:', error.message);
@@ -128,6 +148,8 @@ async function insertRunLocally(run) {
                 relic_list=excluded.relic_list,
                 deck_list=excluded.deck_list,
                 path_history=excluded.path_history,
+                yt_video=excluded.yt_video,
+                ltg_url=excluded.ltg_url,
                 shorts=excluded.shorts
         `;
 
