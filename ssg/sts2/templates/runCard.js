@@ -48,7 +48,7 @@ export function generateRunCardHtml(run, user) {
          data-yt-video="${ytId || ''}" data-shorts='${JSON.stringify(shorts)}'
          style="display: flex; flex-direction: column; position: relative;">
         
-        <span class="material-symbols-outlined edit-run-videos-btn" style="position: absolute; top: 8px; right: 8px; cursor: pointer; font-size: 1.2rem; color: #ffffff; display: none; z-index: 10;" title="Edit Video Links">settings</span>
+        <span class="material-symbols-outlined edit-run-videos-btn" style="position: absolute; top: -2px; right: -2px; cursor: pointer; font-size: 1.2rem; color: #ffffff; display: none; z-index: 10;" title="Edit Video Links">settings</span>
 
         <a href="/users/${user.slug}/runs/${run.id}/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
             <div class="card-info">
