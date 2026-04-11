@@ -37,77 +37,102 @@ async function run() {
             .select('*');
 
         if (fetchError) throw fetchError;
-        if (!todoRuns || todoRuns.length === 0) {
-            console.log('✨ No new runs found in s2s_runs_todo.');
-            return;
-        }
 
-        console.log(`🚀 Found ${todoRuns.length} runs to process.`);
+        if (todoRuns && todoRuns.length > 0) {
+            console.log(`🚀 Found ${todoRuns.length} runs to process in s2s_runs_todo.`);
+            const processedIds = [];
 
-        const processedIds = [];
+            for (const run of todoRuns) {
+                const slug = slugify(run.username || '');
+                const supabaseUserId = run.supabase_user_id;
 
-        for (const run of todoRuns) {
-            const slug = slugify(run.username || '');
-            const supabaseUserId = run.supabase_user_id;
+                // 3. User & ID Linking Logic
+                if (slug) {
+                    const localUser = (await query("SELECT id, supabase_user_id FROM users WHERE slug = ?", [slug]))[0];
+                    
+                    if (!localUser) {
+                        console.log(` New user detected: ${run.username}. Registering...`);
+                        await query("INSERT INTO users (display_name, slug, supabase_user_id) VALUES (?, ?, ?)", 
+                            [run.username, slug, supabaseUserId || null]);
+                    } else if (supabaseUserId && !localUser.supabase_user_id) {
+                        console.log(`🔗 Linking Supabase ID for existing user: ${run.username}`);
+                        // Update users table
+                        await query("UPDATE users SET supabase_user_id = ? WHERE id = ?", [supabaseUserId, localUser.id]);
+                        // Update all existing runs for this username
+                        await query("UPDATE runs SET supabase_user_id = ? WHERE LOWER(username) = ?", [supabaseUserId, (run.username || '').toLowerCase()]);
+                    }
+                }
 
-            // 3. User & ID Linking Logic
-            if (slug) {
-                const localUser = (await query("SELECT id, supabase_user_id FROM users WHERE slug = ?", [slug]))[0];
-                
-                if (!localUser) {
-                    console.log(` New user detected: ${run.username}. Registering...`);
-                    await query("INSERT INTO users (display_name, slug, supabase_user_id) VALUES (?, ?, ?)", 
-                        [run.username, slug, supabaseUserId || null]);
-                } else if (supabaseUserId && !localUser.supabase_user_id) {
-                    console.log(`🔗 Linking Supabase ID for existing user: ${run.username}`);
-                    // Update users table
-                    await query("UPDATE users SET supabase_user_id = ? WHERE id = ?", [supabaseUserId, localUser.id]);
-                    // Update all existing runs for this username
-                    await query("UPDATE runs SET supabase_user_id = ? WHERE LOWER(username) = ?", [supabaseUserId, (run.username || '').toLowerCase()]);
+                // 4. Insert into local SQLite
+                const success = await insertRunLocally(run);
+                if (success) {
+                    processedIds.push(run.id);
                 }
             }
 
-            // 4. Insert into local SQLite
-            const success = await insertRunLocally(run);
-            if (success) {
-                processedIds.push(run.id);
+            // 5. Clean up remote s2s_runs_todo
+            if (processedIds.length > 0) {
+                console.log(`🗑️  Cleaning up ${processedIds.length} runs from Supabase...`);
+                const { error: delError } = await supabase
+                    .from('s2s_runs_todo')
+                    .delete()
+                    .in('id', processedIds);
+                
+                if (delError) console.error("⚠️ Failed to delete runs from remote todo list:", delError.message);
+                else {
+                    console.log(`✅ Cleaned up ${processedIds.length} runs from remote todo list.`);
+                }
             }
-        }
-
-        // 5. Clean up remote s2s_runs_todo
-        if (processedIds.length > 0) {
-            console.log(`🗑️  Cleaning up ${processedIds.length} runs from Supabase...`);
-            const { error: delError } = await supabase
-                .from('s2s_runs_todo')
-                .delete()
-                .in('id', processedIds);
-            
-            if (delError) console.error("⚠️ Failed to delete runs from remote todo list:", delError.message);
-            else {
-                console.log(`✅ Cleaned up ${processedIds.length} runs from remote todo list.`);
-            }
+        } else {
+            console.log('✨ No new runs found in s2s_runs_todo.');
         }
 
         // 6. Sync metadata updates (YouTube links and Shorts) from the permanent s2s_runs table
         // This ensures edits made on the website via editRunVideos.js are reflected locally
         console.log('📡 Downloading video and shorts updates from s2s_runs...');
-        const { data: updates, error: updateError } = await supabase
-            .from('s2s_runs')
-            .select('id, yt_video, ltg_url, shorts');
+        
+        let hasMore = true;
+        let offset = 0;
+        const limit = 1000;
+        let totalSyncedCount = 0;
+        let runsWithShortsCount = 0;
 
-        if (updateError) throw updateError;
+        while (hasMore) {
+            const { data: updates, error: updateError } = await supabase
+                .from('s2s_runs')
+                .select('id, yt_video, ltg_url, shorts')
+                .range(offset, offset + limit - 1);
 
-        for (const run of updates) {
-            await query("UPDATE runs SET yt_video = ?, ltg_url = ?, shorts = ? WHERE id = ?", [
-                run.yt_video,
-                run.ltg_url,
-                JSON.stringify(run.shorts || []),
-                run.id
-            ]);
+            if (updateError) throw updateError;
+            if (!updates || updates.length === 0) break;
+
+            for (const run of updates) {
+                const shortsJson = JSON.stringify(run.shorts || []);
+                const hasShorts = run.shorts && Array.isArray(run.shorts) && run.shorts.length > 0;
+                const hasVideo = !!run.yt_video;
+
+                if (hasShorts || hasVideo) {
+                    if (hasShorts) runsWithShortsCount++;
+                    console.log(`   [DEBUG] Syncing Run ${run.id}: Video=${run.yt_video || 'None'}, Shorts=${shortsJson}`);
+                }
+
+                await query("UPDATE runs SET yt_video = ?, ltg_url = ?, shorts = ? WHERE id = ?", [
+                    run.yt_video,
+                    run.ltg_url,
+                    shortsJson,
+                    run.id
+                ]);
+            }
+
+            totalSyncedCount += updates.length;
+            if (updates.length < limit) hasMore = false;
+            else offset += limit;
         }
 
+        console.log(`✅ Metadata sync complete. Checked ${totalSyncedCount} runs, found ${runsWithShortsCount} runs with linked shorts.`);
+
         await recalculateUserRunNumbers(db);
-        console.log(`✅ Synchronization and metadata updates complete.`);
+        console.log(`✨ All synchronization and metadata updates complete.`);
 
     } catch (error) {
         console.error('❌ Sync failed:', error.message);
