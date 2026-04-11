@@ -541,6 +541,7 @@ async function build() {
                     <link rel="stylesheet" href="/css/sts2-style.css">`,
                     [{ name: user.display_name, url: `/users/${user.slug}/` }, { name: `Run ${run.id}`, url: '' }],
                     metaDescription,
+                    "",
                     `/users/${user.slug}/runs/${run.id}/`
                 );
                 fs.writeFileSync(path.join(runDir, 'index.html'), runHtml);
