@@ -162,7 +162,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 // Exit Edit Mode
                 editArea.style.display = 'none';
                 btn.textContent = 'settings';
-                btn.style.color = '#ffffff';
+                btn.style.color = '#e3e3e3';
                 btn.style.pointerEvents = 'auto';
                 console.log("[DEBUG] Edit mode exited. Local card data synchronized.");
             }
