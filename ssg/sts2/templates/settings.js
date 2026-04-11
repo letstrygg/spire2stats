@@ -274,6 +274,12 @@ export function settingsTemplate() {
                             console.error("Upload Error:", error);
                         } else {
                             successCount += finalUpload.length;
+                            // Update global counter for local sync scripts
+                            await supabase.rpc('increment_s2s_global', { 
+                                runs_inc: finalUpload.length, 
+                                shorts_inc: 0, 
+                                yt_videos_inc: 0 
+                            });
                         }
                     }
                 }

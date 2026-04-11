@@ -142,6 +142,19 @@ document.addEventListener("DOMContentLoaded", function() {
                     console.error("[DEBUG] CRITICAL: Update returned success but 0 rows were modified. This usually means the ID " + runId + " was not found in the 's2s_runs' table or RLS policies blocked the change.");
                 }
 
+                // Increment global counters based on what changed
+                const ytChanged = newYt !== (card.dataset.ytVideo || null);
+                const oldShortsCount = JSON.parse(card.dataset.shorts || '[]').length;
+                const shortsDiff = Math.max(0, finalShorts.length - oldShortsCount);
+
+                if (ytChanged || shortsDiff > 0) {
+                    await supabase.rpc('increment_s2s_global', { 
+                        runs_inc: 0, 
+                        shorts_inc: shortsDiff, 
+                        yt_videos_inc: ytChanged ? 1 : 0 
+                    });
+                }
+
                 // Update local dataset attributes so re-opening the edit box shows the new data
                 card.dataset.ytVideo = newYt || '';
                 card.dataset.shorts = JSON.stringify(finalShorts);

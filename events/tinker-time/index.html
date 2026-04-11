@@ -61,7 +61,7 @@
   "@type": "ItemPage",
   "name": "Tinker Time - Spire 2 Stats",
   "description": "Tinker Time gameplay statistics for Slay the Spire 2. Winrate: 78.0%. Total Runs: 59.",
-  "dateModified": "2026-04-11T04:19:40.793Z",
+  "dateModified": "2026-04-11T06:11:52.271Z",
   "mainEntity": {
     "@type": "Thing",
     "name": "Tinker Time",
@@ -78,7 +78,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/events/">events</a> / tinker time</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-11T04:19:40.793Z">April 10, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-11T06:11:52.271Z">April 10, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -1887,6 +1887,19 @@
                 console.log("[DEBUG] Supabase Update SUCCESSFUL. Rows returned:", data);
                 if (!data || data.length === 0) {
                     console.error("[DEBUG] CRITICAL: Update returned success but 0 rows were modified. This usually means the ID " + runId + " was not found in the 's2s_runs' table or RLS policies blocked the change.");
+                }
+
+                // Increment global counters based on what changed
+                const ytChanged = newYt !== (card.dataset.ytVideo || null);
+                const oldShortsCount = JSON.parse(card.dataset.shorts || '[]').length;
+                const shortsDiff = Math.max(0, finalShorts.length - oldShortsCount);
+
+                if (ytChanged || shortsDiff > 0) {
+                    await supabase.rpc('increment_s2s_global', { 
+                        runs_inc: 0, 
+                        shorts_inc: shortsDiff, 
+                        yt_videos_inc: ytChanged ? 1 : 0 
+                    });
                 }
 
                 // Update local dataset attributes so re-opening the edit box shows the new data
