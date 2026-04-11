@@ -71,7 +71,8 @@ export async function setupDatabase() {
                         deck_list TEXT,
                         path_history TEXT,
                         yt_video TEXT,
-                        ltg_url TEXT
+                        ltg_url TEXT,
+                        shorts TEXT
                     )
                 `);
 

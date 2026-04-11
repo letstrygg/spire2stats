@@ -80,7 +80,7 @@ function getCostDisplay(costVal, isX, starCostVal, isXStar) {
 }
 
 async function getCardStats() {
-    const rows = await query("SELECT id, user_run_num, character, relic_list, deck_list, path_history, win, username, yt_video, ltg_url, ascension, build_id, killed_by_encounter, supabase_user_id FROM runs ORDER BY id DESC");
+    const rows = await query("SELECT id, user_run_num, character, relic_list, deck_list, path_history, win, username, yt_video, ltg_url, ascension, build_id, killed_by_encounter, supabase_user_id, shorts FROM runs ORDER BY id DESC");
     console.log(`📡 Database returned ${rows.length} run rows.`);
 
     const totalRuns = rows.length;

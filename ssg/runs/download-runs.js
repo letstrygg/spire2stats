@@ -104,6 +104,10 @@ async function ensureColumns() {
             console.log(`➕ Adding supabase_user_id to local ${table} table...`);
             await query(`ALTER TABLE ${table} ADD COLUMN supabase_user_id TEXT`);
         }
+        if (table === 'runs' && !info.some(c => c.name === 'shorts')) {
+            console.log(`➕ Adding shorts column to local runs table...`);
+            await query(`ALTER TABLE runs ADD COLUMN shorts TEXT`);
+        }
     }
 }
 
@@ -114,8 +118,8 @@ async function insertRunLocally(run) {
                 id, user_run_num, username, schema_version, build_id, platform_type, 
                 seed, start_time, run_time, ascension, game_mode, win, was_abandoned, 
                 killed_by_encounter, killed_by_event, acts, character, 
-                relic_list, deck_list, path_history, yt_video, ltg_url, supabase_user_id
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                relic_list, deck_list, path_history, yt_video, ltg_url, supabase_user_id, shorts
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ON CONFLICT(id) DO UPDATE SET
                 username=excluded.username,
                 supabase_user_id=excluded.supabase_user_id,
@@ -123,7 +127,8 @@ async function insertRunLocally(run) {
                 win=excluded.win,
                 relic_list=excluded.relic_list,
                 deck_list=excluded.deck_list,
-                path_history=excluded.path_history
+                path_history=excluded.path_history,
+                shorts=excluded.shorts
         `;
 
         const params = [
@@ -149,7 +154,8 @@ async function insertRunLocally(run) {
             JSON.stringify(run.path_history),
             run.yt_video,
             run.ltg_url,
-            run.supabase_user_id
+            run.supabase_user_id,
+            JSON.stringify(run.shorts || [])
         ];
 
         await query(stmt, params);

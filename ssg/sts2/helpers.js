@@ -82,7 +82,8 @@ export function getRunMetadata(row) {
         supabase_user_id: row.supabase_user_id,
         yt_video: row.yt_video,
         ltg_url: row.ltg_url,
-        killed_by_encounter: row.killed_by_encounter
+        killed_by_encounter: row.killed_by_encounter,
+        shorts: row.shorts ? (typeof row.shorts === 'string' ? JSON.parse(row.shorts) : row.shorts) : []
     };
 }
 

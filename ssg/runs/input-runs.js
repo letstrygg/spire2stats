@@ -32,27 +32,23 @@ async function run() {
 
                 const hasUserRunNum = columns.some(c => c.name === 'user_run_num');
                 const hasSupabaseId = columns.some(c => c.name === 'supabase_user_id');
+                const hasShorts = columns.some(c => c.name === 'shorts');
 
-                function addSupabaseCol() {
-                    console.log('➕ Adding missing column: supabase_user_id to existing runs table...');
-                    db.run("ALTER TABLE runs ADD COLUMN supabase_user_id TEXT", (err) => {
-                        if (err) reject(err);
-                        else resolve();
-                    });
-                }
-
-                if (!hasUserRunNum) {
-                    console.log('➕ Adding missing column: user_run_num to existing runs table...');
-                    db.run("ALTER TABLE runs ADD COLUMN user_run_num INTEGER", (err) => {
-                        if (err) return reject(err);
-                        if (!hasSupabaseId) addSupabaseCol();
-                        else resolve();
-                    });
-                } else if (!hasSupabaseId) {
-                    addSupabaseCol();
-                } else {
-                    resolve();
-                }
+                db.serialize(() => {
+                    if (!hasUserRunNum) {
+                        console.log('➕ Adding missing column: user_run_num to existing runs table...');
+                        db.run("ALTER TABLE runs ADD COLUMN user_run_num INTEGER");
+                    }
+                    if (!hasSupabaseId) {
+                        console.log('➕ Adding missing column: supabase_user_id to existing runs table...');
+                        db.run("ALTER TABLE runs ADD COLUMN supabase_user_id TEXT");
+                    }
+                    if (!hasShorts) {
+                        console.log('➕ Adding missing column: shorts to existing runs table...');
+                        db.run("ALTER TABLE runs ADD COLUMN shorts TEXT");
+                    }
+                    db.get("SELECT 1", (err) => err ? reject(err) : resolve());
+                });
             });
         });
 
@@ -87,7 +83,8 @@ async function run() {
                     path_history TEXT,
                     yt_video TEXT,
                     ltg_url TEXT,
-                    supabase_user_id TEXT
+                    supabase_user_id TEXT,
+                    shorts TEXT
                 )
             `);
 

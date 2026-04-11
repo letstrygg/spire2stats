@@ -30,10 +30,24 @@ export function generateRunCardHtml(run, user) {
     const buildId = run.build_id || 'v0.0.0';
     const ascension = run.ascension || 0;
     const winVal = run.win ? 1 : 0;
+    const shorts = run.shorts ? (typeof run.shorts === 'string' ? JSON.parse(run.shorts) : run.shorts) : [];
+
+    let shortsHtml = '';
+    if (shorts.length > 0) {
+        shortsHtml = `<div class="run-shorts-display" style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+            ${shorts.map(s => `<a href="${s}" target="_blank" title="Watch Short"><img src="/images/250px-Youtube_shorts_icon.svg.png" style="height: 24px; width: auto;" alt="YouTube Short"></a>`).join('')}
+        </div>`;
+    }
 
     return `
     <div class="card-item ${statusClass} ${charClass} run-record" 
-         data-build="${buildId}" data-ascension="${ascension}" data-win="${winVal}" style="display: flex; flex-direction: column;">
+         data-build="${buildId}" data-ascension="${ascension}" data-win="${winVal}" 
+         data-user-id="${run.supabase_user_id || ''}" data-run-id="${run.id}"
+         data-yt-video="${ytId || ''}" data-shorts='${JSON.stringify(shorts)}'
+         style="display: flex; flex-direction: column; position: relative;">
+        
+        <span class="material-symbols-outlined edit-run-videos-btn" style="position: absolute; top: 8px; right: 8px; cursor: pointer; font-size: 1.2rem; color: #666; display: none; z-index: 10;" title="Edit Video Links">settings</span>
+
         <a href="/users/${user.slug}/runs/${run.id}/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
             <div class="card-info">
                 <span class="card-name" style="line-height: 1.1;">
@@ -49,6 +63,8 @@ export function generateRunCardHtml(run, user) {
             </div>
         </a>
         ${videoButtons}
+        ${shortsHtml}
+        <div class="run-edit-area" style="display: none;"></div>
         <div class="win-bar" style="background: ${statusColor};"></div>
     </div>`;
 }

@@ -435,6 +435,9 @@ ${bcHtml}${content}
 <script>
     ${fs.readFileSync(path.resolve('ssg/utils/login.js'), 'utf8')}
 </script>
+<script>
+    ${fs.readFileSync(path.resolve('ssg/utils/editRunVideos.js'), 'utf8')}
+</script>
 </body></html>`;
 }
 
