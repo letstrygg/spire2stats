@@ -4,6 +4,7 @@ import sqlite3 from 'sqlite3';
 import { PATHS, ensureDir, slugify } from './paths.js';
 import { SUPABASE_URL, SUPABASE_ANON_KEY } from '../utils/config.js';
 import { isRunByUser, calculateBayesianScore, normalizeId, calculateWinRate, aggregateCardStats, getRunMetadata, getPerformanceStats } from './helpers.js';
+import { generateRunLinksList } from './templates/runCard.js';
 
 import { 
     ISO_BUILD_DATE, 
@@ -13,7 +14,6 @@ import {
     generateCollectionJsonLd, 
     generateSummaryPanel, 
     generateVideoPanel, 
-    generateRunLinksList,
     generateAveragesPanel,
     generateLethalityIndexSummary,
     generateLethalitySummaryBox,

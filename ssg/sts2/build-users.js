@@ -13,9 +13,9 @@ import {
     generateFilterControlsHtml,
     generateFilterScript,
     generateCardItemHtml,
-    generateRunCardHtml,
     CHARACTER_COLORS
 } from './templates/shared.js';
+import { generateRunCardHtml } from './templates/runCard.js';
 
 /**
  * Slay the Spire 2 - User Page Generator
