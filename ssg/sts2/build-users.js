@@ -274,20 +274,20 @@ async function build() {
             // Find cards where this user is the top specialist
             const specializedCards = Object.entries(specialistsMap)
                 .filter(([cardName, top]) => top.slug === user.slug)
-                .map(([cardName, top]) => ({ name: cardName, ...top }));
+                .map(([cardName, top]) => ({ cardName, ...top }));
 
             let specializationHtml = '';
             if (specializedCards.length > 0) {
                 const list = specializedCards.map(c => `
                     <li style="margin-bottom: 5px;">
-                        <a href="/cards/${slugify(c.name)}/" style="color: var(--gold); text-decoration: underline;">${c.name}</a> 
-                        <span style="color: #888;">(${c.winrate}% winrate over ${c.seen} runs)</span>
+                        <a href="/cards/${slugify(c.cardName)}/" style="color: var(--gold); text-decoration: underline;">${c.cardName}</a> 
+                        <span style="color: #888;">(${c.winrate}% ${c.seen} runs)</span>
                     </li>
                 `).join('');
                 specializationHtml = `
-                <div class="item-box" style="margin-bottom: 40px; border-color: var(--gold)44; border-top: 3px solid var(--gold);">
+                <div class="item-box" style="margin-bottom: 40px; border-color: var(--border)">
                     <h3 style="margin-top: 0; color: var(--gold); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Card Specializations</h3>
-                    <ul style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 5px 20px; padding: 0; list-style: disc; list-style-position: inside; margin-top: 15px; font-size: 0.85rem;">
+                    <ul style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); font-size: 0.85rem;">
                         ${list}
                     </ul>
                 </div>`;
