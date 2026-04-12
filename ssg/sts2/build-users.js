@@ -292,7 +292,7 @@ async function build() {
                 `}).join('');
                 specializationHtml = `
                 <div class="item-box" style="margin-bottom: 40px;">
-                    <h3 style="margin-top: 0; color: var(--gold); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Card Specializations</h3>
+                    <h3 style="margin-top: 0; color: var(--gold); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Top Winrate with Card</h3>
                     <ol style="display: grid; grid-template-columns: repeat(auto-fit, minmax(225px, 1fr)); font-size: 0.85rem;">
                         ${list}
                     </ol>
