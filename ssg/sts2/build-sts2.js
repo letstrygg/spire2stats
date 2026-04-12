@@ -722,12 +722,25 @@ async function buildCharacters(chars, runStats, sitemap, users) {
                 const videosHtml = generateRunLinksList(rawStats.runs, `${displayName} Runs`);
 
                 // Character Cards
-                const charCards = await query("SELECT * FROM cards WHERE LOWER(color) = ? ORDER BY rarity, name ASC", [displayName.toLowerCase()]);
+                const charCards = await query("SELECT * FROM cards WHERE LOWER(color) = ?", [displayName.toLowerCase()]);
+                
+                // Sort cards by strength (Bayesian score) relative to character winrate
+                const charWinRatePrior = stats.num / 100;
+                charCards.sort((a, b) => {
+                    const idA = (a.card_id || '').replace('CARD.', '');
+                    const idB = (b.card_id || '').replace('CARD.', '');
+                    const sA = runStats.stats[idA] || { seen: 0, wins: 0 };
+                    const sB = runStats.stats[idB] || { seen: 0, wins: 0 };
+                    return calculateBayesianScore(sB.wins, sB.seen, charWinRatePrior) - 
+                           calculateBayesianScore(sA.wins, sA.seen, charWinRatePrior);
+                });
+
                 const cardItemsHtml = charCards.map(c => {
-                    const cStats = getItemStats(runStats.stats[c.card_id], runStats.globalWinRate);
+                    const cleanId = (c.card_id || '').replace('CARD.', '');
+                    const cStats = getItemStats(runStats.stats[cleanId], stats.num);
                     return `<a href="/cards/${slugify(c.name)}/" class="card-item ${displayName.toLowerCase()}">
                         <div class="card-info"><span class="card-name">${c.name}</span></div>
-                        <div class="card-stats"><div class="win-rate">${cStats.text}</div><div class="run-count">${cStats.seen} runs</div></div>
+                        <div class="card-stats"><div class="win-rate" style="color: ${cStats.color}">${cStats.text}</div><div class="run-count">${cStats.seen} runs</div></div>
                         <div class="win-bar" style="${cStats.bar}"></div>
                     </a>`;
                 }).join('');
