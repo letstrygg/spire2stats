@@ -4,7 +4,16 @@ import sqlite3 from 'sqlite3';
 import { PATHS, ensureDir, slugify } from './paths.js';
 import { execSync } from 'child_process';
 import { SUPABASE_URL, SUPABASE_ANON_KEY } from '../utils/config.js';
-import { isRunByUser, calculateBayesianScore, normalizeId, calculateWinRate, aggregateCardStats, getRunMetadata, getPerformanceStats } from './helpers.js';
+import { 
+    isRunByUser, 
+    calculateBayesianScore, 
+    normalizeId, 
+    calculateWinRate, 
+    aggregateCardStats, 
+    getRunMetadata, 
+    getPerformanceStats,
+    parseCardText
+} from './helpers.js';
 import { generateRunLinksList } from './templates/runCard.js';
 
 import { 
@@ -1033,8 +1042,13 @@ async function build() {
             }
             const upgCostDisplay = getCostDisplay(upgCost, card.is_x_cost, upgStarCost, card.is_x_star_cost);
 
-            const description = formatDescription(card.description);
-            
+            // Resolve dynamic descriptions for base and upgraded versions
+            const vars = card.vars ? JSON.parse(card.vars) : {};
+            const upgradeData = card.upgrade ? JSON.parse(card.upgrade) : null;
+
+            card.description_base = formatDescription(parseCardText(card.description, vars, upgradeData, false));
+            card.description_upgraded = formatDescription(parseCardText(card.description, vars, upgradeData, true));
+
             const cleanCardId = (card.card_id || '').replace('CARD.', '');
             const rawStats = cardStats.stats[cleanCardId] || { runs: [], seen: 0, wins: 0 };
             const stats = getItemStats(rawStats, cardStats.globalWinRate);

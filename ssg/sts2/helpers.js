@@ -135,3 +135,51 @@ export function aggregateCardStats(runs) {
     });
     return cardMap;
 }
+
+/**
+ * Resolves card text templates using variables and upgrade data.
+ * Preserves Godot BBCode tags for downstream formatting.
+ */
+export function parseCardText(raw, vars, upgrade, isUpgraded) {
+    if (!raw) return "";
+    const activeVars = {};
+    if (vars) {
+        for (const [k, v] of Object.entries(vars)) {
+            activeVars[k.toLowerCase()] = v;
+        }
+    }
+    if (isUpgraded && upgrade) {
+        for (const [k, v] of Object.entries(upgrade)) {
+            const key = k.toLowerCase();
+            const val = String(v);
+            if (val.startsWith('+')) {
+                activeVars[key] = (activeVars[key] || 0) + parseInt(val.substring(1), 10);
+            } else if (val.startsWith('-')) {
+                activeVars[key] = (activeVars[key] || 0) - parseInt(val.substring(1), 10);
+            } else if (!isNaN(v) && typeof v !== 'boolean') {
+                activeVars[key] = Number(v);
+            }
+        }
+    }
+
+    return raw.replace(/\{([A-Za-z0-9_]+)(?::([^}]+))?\}/g, (match, varName, formatter) => {
+        const key = varName.toLowerCase();
+        if (key === 'ifupgraded') {
+            const data = formatter?.startsWith('show:') ? formatter.substring(5) : formatter;
+            const parts = data ? data.split('|') : ["", ""];
+            return isUpgraded ? parts[0] : (parts[1] || "");
+        }
+        let val = activeVars[key] ?? activeVars[varName];
+        if (val === undefined && formatter?.startsWith('energyIcons')) {
+            const argMatch = formatter.match(/\((\d+)\)/);
+            val = argMatch ? argMatch[1] : 1;
+        }
+        if (val === undefined) return match;
+        if (formatter?.startsWith('plural:')) {
+            const parts = formatter.substring(7).split('|');
+            return val === 1 ? parts[0] : (parts[1] || parts[0] + 's');
+        }
+        if (formatter?.startsWith('energyIcons')) return `[energy:${val}]`;
+        return val;
+    });
+}

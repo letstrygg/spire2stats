@@ -61,7 +61,7 @@
   "@type": "ItemPage",
   "name": "Jackpot - Spire 2 Stats",
   "description": "Jackpot gameplay statistics for Slay the Spire 2. Winrate: 55.6%. Total Runs: 9.",
-  "dateModified": "2026-04-12T22:51:02.036Z",
+  "dateModified": "2026-04-12T23:48:19.565Z",
   "mainEntity": {
     "@type": "Thing",
     "name": "Jackpot",
@@ -78,7 +78,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/cards/">cards</a> / jackpot</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-12T22:51:02.036Z">April 12, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-12T23:48:19.565Z">April 12, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -117,7 +117,7 @@
                 <div class="cost-circle">X</div>
                 <div class="card-title">Jackpot</div>
                 <div class="type-banner">colorless Attack</div>
-                <div class="description">Deal 25 damage.<br>Add 3 random 0<span class="icon-energy">[E]</span> cards into your <span class="text-gold">Hand</span>.</div>
+                <div class="description">Deal {Damage:diff()} damage.<br>Add {Cards:diff()} random{IfUpgraded:show: <span class="text-gold">Upgraded</span>} 0{energyPrefix:energyIcons(1)} {Cards:plural:card|cards} into your <span class="text-gold">Hand</span>.</div>
                 <div class="card-footer">Rare</div>
             </div>
             <div class="card-arrow">→</div>
@@ -125,7 +125,7 @@
                 <div class="cost-circle">X</div>
                 <div class="card-title text-green">Jackpot+</div>
                 <div class="type-banner">colorless Attack</div>
-                <div class="description">Deal 30 damage.<br>Add 3 random <span class="text-gold">Upgraded</span> 0<span class="icon-energy">[E]</span> cards into your <span class="text-gold">Hand</span>.</div>
+                <div class="description">{"damage":"+5"}</div>
                 <div class="card-footer">Rare</div>
             </div>
         </div>
