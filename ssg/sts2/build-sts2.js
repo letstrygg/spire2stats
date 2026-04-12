@@ -747,10 +747,21 @@ async function buildCharacters(chars, runStats, sitemap, users) {
                 }).join('');
 
                 // Character Relics
-                const charRelics = await query("SELECT * FROM relics WHERE LOWER(pool) = ? ORDER BY rarity, name ASC", [displayName.toLowerCase()]);
+                const charRelics = await query("SELECT * FROM relics WHERE LOWER(pool) = ?", [displayName.toLowerCase()]);
+                
+                // Sort relics by strength (Bayesian score) relative to character winrate
+                charRelics.sort((a, b) => {
+                    const idA = (a.relic_id || '').replace('RELIC.', '');
+                    const idB = (b.relic_id || '').replace('RELIC.', '');
+                    const sA = runStats.relicStats[idA] || { seen: 0, wins: 0 };
+                    const sB = runStats.relicStats[idB] || { seen: 0, wins: 0 };
+                    return calculateBayesianScore(sB.wins, sB.seen, charWinRatePrior) - 
+                           calculateBayesianScore(sA.wins, sA.seen, charWinRatePrior);
+                });
+
                 const relicItemsHtml = charRelics.map(r => {
                     const cleanRelicId = (r.relic_id || '').replace('RELIC.', '');
-                    const rStats = getItemStats(runStats.relicStats[cleanRelicId], runStats.globalWinRate);
+                    const rStats = getItemStats(runStats.relicStats[cleanRelicId], stats.num);
                     const winBar = rStats.seen > 0 ? `<div class="win-bar" style="${rStats.bar}"></div>` : '';
                     return `<a href="/relics/${slugify(r.name)}/" class="card-item ${displayName.toLowerCase()}" aria-label="${r.name}: ${rStats.seen} runs, ${rStats.text}">
                         <div class="card-info"><span class="card-name">${r.name}</span></div>
