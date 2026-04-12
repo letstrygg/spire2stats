@@ -1,12 +1,20 @@
 import { wrapLayout, generateItemSummaryBox, generateItemJsonLd, formatDescription } from './shared.js';
 
-export function cardDetailTemplate(card, stats, videosHtml, costDisplay, upgCostDisplay, canonicalPath = "") {
+export function cardDetailTemplate(card, stats, videosHtml, costDisplay, upgCostDisplay, canonicalPath = "", topUser = null) {
     const description = formatDescription(card.description);
     const upgradeDescription = formatDescription(card.upgrade);
+    const topUserHtml = topUser ? `
+        <div style="text-align: center; margin: 20px 0; font-size: 0.9rem; color: #888;">
+            Top <span style="color: var(--gold);">${card.name}</span> Specialist: 
+            <a href="/users/${topUser.slug}/" style="color: var(--blue); text-decoration: underline;">${topUser.name}</a> 
+            (${topUser.winrate}% winrate over ${topUser.seen} runs)
+        </div>` : '';
+
     return wrapLayout(
         card.name, 
         `
         ${generateItemSummaryBox(card.name, stats)}
+        ${topUserHtml}
         <div class="card-display">
             <div class="card">
                 <div class="cost-circle">${costDisplay}</div>

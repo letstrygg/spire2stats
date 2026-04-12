@@ -932,6 +932,7 @@ async function build() {
         const ascensions = await query("SELECT * FROM ascensions ORDER BY level ASC");
         const enchantments = await query("SELECT * FROM enchantments ORDER BY name ASC");
         const users = await query("SELECT * FROM users ORDER BY display_name ASC");
+        const userLookup = Object.fromEntries(users.map(u => [u.display_name.toLowerCase(), u.slug]));
         const allRunUsernames = await query("SELECT username, supabase_user_id FROM runs");
 
         const cardStats = await getCardStats();
@@ -960,11 +961,40 @@ async function build() {
             const description = formatDescription(card.description);
             
             const cleanCardId = (card.card_id || '').replace('CARD.', '');
-            const stats = getItemStats(cardStats.stats[cleanCardId], cardStats.globalWinRate);
-            const rawStats = cardStats.stats[cleanCardId] || { runs: [] };
-            const videosHtml = generateRunLinksList(rawStats.runs, `Runs featuring ${card.name}`);
+            const rawStats = cardStats.stats[cleanCardId] || { runs: [], seen: 0, wins: 0 };
+            const stats = getItemStats(rawStats, cardStats.globalWinRate);
 
-            const detailHtml = cardDetailTemplate(card, stats, videosHtml, costDisplay, upgCostDisplay, `/cards/${slug}/`);
+            // Calculate Top Specialist for this card based on Bayesian Score
+            let topUser = null;
+            if (rawStats.runs.length > 0) {
+                const userMap = {};
+                rawStats.runs.forEach(r => {
+                    const key = r.supabase_user_id || r.username;
+                    if (!userMap[key]) userMap[key] = { seen: 0, wins: 0, username: r.username };
+                    userMap[key].seen++;
+                    if (r.win) userMap[key].wins++;
+                });
+
+                // Use the card's average winrate as the prior for user comparison
+                const cardRatio = rawStats.seen > 0 ? (rawStats.wins / rawStats.seen) : 0;
+                const sortedSpecialists = Object.values(userMap).sort((a, b) => 
+                    calculateBayesianScore(b.wins, b.seen, cardRatio) - 
+                    calculateBayesianScore(a.wins, a.seen, cardRatio)
+                );
+
+                const top = sortedSpecialists[0];
+                if (top && top.seen > 0) {
+                    topUser = {
+                        name: top.username,
+                        slug: userLookup[top.username.toLowerCase()] || slugify(top.username),
+                        winrate: ((top.wins / top.seen) * 100).toFixed(1),
+                        seen: top.seen
+                    };
+                }
+            }
+
+            const videosHtml = generateRunLinksList(rawStats.runs, `Runs featuring ${card.name}`);
+            const detailHtml = cardDetailTemplate(card, stats, videosHtml, costDisplay, upgCostDisplay, `/cards/${slug}/`, topUser);
 
             fs.writeFileSync(path.join(cardDir, 'index.html'), detailHtml);
             sitemap.add(`/cards/${slug}/`);
