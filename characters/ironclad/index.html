@@ -61,7 +61,7 @@
   "@type": "ItemPage",
   "name": "Ironclad Character Winrates & Statistics - Spire 2 Stats",
   "description": "Ironclad Character Winrates & Statistics gameplay statistics for Slay the Spire 2. Winrate: 31.5%. Total Runs: 181.",
-  "dateModified": "2026-04-12T22:07:42.743Z",
+  "dateModified": "2026-04-12T22:17:36.137Z",
   "mainEntity": {
     "@type": "Thing",
     "name": "Ironclad Character Winrates & Statistics",
@@ -78,7 +78,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/characters/">characters</a> / ironclad</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-12T22:07:42.743Z">April 12, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-12T22:17:36.137Z">April 12, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -181,7 +181,8 @@
             </div>
         
     <div class="collapsible-wrapper is-collapsed">
-        
+        <div class="collapsible-content">
+            
     <div class="recent-runs" style="margin-top: 30px;">
         <h3 style="margin-bottom: 15px;">Ironclad Runs</h3>
         <div class="grid">
@@ -4892,7 +4893,9 @@
         <div class="win-bar" style="background: var(--red);"></div>
     </div></div>
     </div>
-        <div class="collapsible-controls" style="text-align: center; margin-top: -20px; margin-bottom: 40px; position: relative; z-index: 10;">
+            <div class="collapsible-fade"></div>
+        </div>
+        <div class="collapsible-controls" style="text-align: center; margin-top: 20px; margin-bottom: 40px; position: relative; z-index: 10;">
             <button class="collapse-toggle-btn" 
                     style="background: #222; border: 1px solid #444; color: #888; padding: 10px 24px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;"
                     onclick="
@@ -4904,13 +4907,31 @@
                         }
                     ">Expand</button>
         </div>
+        <style>
+            .collapsible-wrapper .collapsible-content {
+                max-height: none;
+                overflow: visible;
+                position: relative;
+            }
+            .collapsible-wrapper.is-collapsed .collapsible-content {
+                max-height: 1600px; /* This height covers roughly 2 rows of run cards */
+                overflow: hidden;
+            }
+            .collapsible-wrapper .collapsible-fade {
+                display: none;
+                position: absolute;
+                bottom: 0; left: 0; width: 100%; height: 80px;
+                background: linear-gradient(to top, #111, transparent);
+                pointer-events: none;
+            }
+            .collapsible-wrapper.is-collapsed .collapsible-fade {
+                display: block;
+            }
+        </style>
     </div>
-    <style>
-        .collapsible-wrapper.is-collapsed .grid > *:nth-child(n+11) { display: none !important; }
-    </style>
         <div style="margin-top: 30px;">
             <h3 style="margin-bottom: 15px;">Ironclad Specific Cards</h3>
-            <div class="grid"><div class="grid"><a href="/cards/crimson-mantle/" class="card-item ironclad">
+            <div class="grid"><a href="/cards/crimson-mantle/" class="card-item ironclad">
                         <div class="card-info"><span class="card-name">Crimson Mantle</span></div>
                         <div class="card-stats"><div class="win-rate" style="color: var(--green)">79% Winrate</div><div class="run-count">19 runs</div></div>
                         <div class="win-bar" style="background: linear-gradient(to right, #00ff89 78.94736842105263%, #ff4b4b 78.94736842105263%);"></div>
@@ -5258,11 +5279,11 @@
                         <div class="card-info"><span class="card-name">Grapple</span></div>
                         <div class="card-stats"><div class="win-rate" style="color: var(--red)">16% Winrate</div><div class="run-count">19 runs</div></div>
                         <div class="win-bar" style="background: linear-gradient(to right, #00ff89 15.789473684210526%, #ff4b4b 15.789473684210526%);"></div>
-                    </a></div></div>
+                    </a></div>
         </div>
         <div style="margin-top: 30px;">
             <h3 style="margin-bottom: 15px;">Ironclad Specific Relics</h3>
-            <div class="grid"><div class="grid"><a href="/relics/red-skull/" class="card-item ironclad" aria-label="Red Skull: 20 runs, 60% Winrate">
+            <div class="grid"><a href="/relics/red-skull/" class="card-item ironclad" aria-label="Red Skull: 20 runs, 60% Winrate">
                         <div class="card-info"><span class="card-name">Red Skull</span></div>
                         <div class="card-stats">
                             <div class="win-rate" style="color: var(--green)">60% Winrate</div>
@@ -5318,7 +5339,7 @@
                             <div class="run-count">4 runs</div>
                         </div>
                         <div class="win-bar" style="background: linear-gradient(to right, #00ff89 100%, #ff4b4b 100%);"></div>
-                    </a></div></div>
+                    </a></div>
         </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>

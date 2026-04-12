@@ -736,7 +736,7 @@ async function buildCharacters(chars, runStats, sitemap, users) {
                            calculateBayesianScore(sA.wins, sA.seen, charWinRatePrior);
                 });
 
-                const cardItemsHtml = `<div class="grid">${charCards.map(c => {
+                const cardItemsHtml = charCards.map(c => {
                     const cleanId = (c.card_id || '').replace('CARD.', '');
                     const cStats = getItemStats(runStats.stats[cleanId], stats.num);
                     return `<a href="/cards/${slugify(c.name)}/" class="card-item ${displayName.toLowerCase()}">
@@ -744,11 +744,11 @@ async function buildCharacters(chars, runStats, sitemap, users) {
                         <div class="card-stats"><div class="win-rate" style="color: ${cStats.color}">${cStats.text}</div><div class="run-count">${cStats.seen} runs</div></div>
                         <div class="win-bar" style="${cStats.bar}"></div>
                     </a>`;
-                }).join('')}</div>`;
+                }).join('');
 
                 // Character Relics
                 const charRelics = await query("SELECT * FROM relics WHERE LOWER(pool) = ? ORDER BY rarity, name ASC", [displayName.toLowerCase()]);
-                const relicItemsHtml = `<div class="grid">${charRelics.map(r => {
+                const relicItemsHtml = charRelics.map(r => {
                     const cleanRelicId = (r.relic_id || '').replace('RELIC.', '');
                     const rStats = getItemStats(runStats.relicStats[cleanRelicId], runStats.globalWinRate);
                     const winBar = rStats.seen > 0 ? `<div class="win-bar" style="${rStats.bar}"></div>` : '';
@@ -760,7 +760,7 @@ async function buildCharacters(chars, runStats, sitemap, users) {
                         </div>
                         ${winBar}
                     </a>`;
-                }).join('')}</div>`;
+                }).join('');
 
                 const detailHtml = characterDetailTemplate(char, stats, runsHtml, cardItemsHtml, relicItemsHtml, displayName, runStats.globalWinRate, topStats, performancePanelsHtml);
                 fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
@@ -820,7 +820,7 @@ function wrapInCollapsible(contentHtml, itemCount) {
                 position: relative;
             }
             .collapsible-wrapper.is-collapsed .collapsible-content {
-                max-height: 800px; /* This height covers roughly 2 rows of run cards */
+                max-height: 1600px; /* This height covers roughly 2 rows of run cards */
                 overflow: hidden;
             }
             .collapsible-wrapper .collapsible-fade {
