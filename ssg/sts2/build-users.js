@@ -293,9 +293,9 @@ async function build() {
                 specializationHtml = `
                 <div class="item-box" style="margin-bottom: 40px;">
                     <h3 style="margin-top: 0; color: var(--gold); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Card Specializations</h3>
-                    <ul style="display: grid; grid-template-columns: repeat(auto-fit, minmax(225px, 1fr)); font-size: 0.85rem;">
+                    <ol style="display: grid; grid-template-columns: repeat(auto-fit, minmax(225px, 1fr)); font-size: 0.85rem;">
                         ${list}
-                    </ul>
+                    </ol>
                 </div>`;
             }
 
