@@ -97,6 +97,10 @@ async function build() {
         console.log('📂 Building global users directory...');
         ensureDir(path.join(PATHS.WEB_ROOT, 'users'));
 
+        // Load specialists from build-sts2.js run
+        const specialistsPath = path.join(PATHS.WEB_ROOT, 'ssg/sts2/specialists.json');
+        const specialistsMap = fs.existsSync(specialistsPath) ? JSON.parse(fs.readFileSync(specialistsPath, 'utf8')) : {};
+
         const contributorLinks = users.map(user => {
             const userRuns = allRuns.filter(r => isRunByUser(r, user));
             const stats = getItemStats({ seen: userRuns.length, wins: userRuns.filter(r => r.win).length }, globalWinRate);
@@ -267,6 +271,28 @@ async function build() {
             // --- USER DIRECTORY (index.html) ---
             const runLinksHtml = userRuns.map(run => generateRunCardHtml(run, user)).join('');
 
+            // Find cards where this user is the top specialist
+            const specializedCards = Object.entries(specialistsMap)
+                .filter(([cardName, top]) => top.slug === user.slug)
+                .map(([cardName, top]) => ({ name: cardName, ...top }));
+
+            let specializationHtml = '';
+            if (specializedCards.length > 0) {
+                const list = specializedCards.map(c => `
+                    <li style="margin-bottom: 5px;">
+                        <a href="/cards/${slugify(c.name)}/" style="color: var(--gold); text-decoration: underline;">${c.name}</a> 
+                        <span style="color: #888;">(${c.winrate}% winrate over ${c.seen} runs)</span>
+                    </li>
+                `).join('');
+                specializationHtml = `
+                <div class="item-box" style="margin-bottom: 40px; border-color: var(--gold)44; border-top: 3px solid var(--gold);">
+                    <h3 style="margin-top: 0; color: var(--gold); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Card Specializations</h3>
+                    <ul style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 5px 20px; padding: 0; list-style: disc; list-style-position: inside; margin-top: 15px; font-size: 0.85rem;">
+                        ${list}
+                    </ul>
+                </div>`;
+            }
+
             const indexHtml = wrapLayout(
                 user.display_name,
                 `
@@ -274,6 +300,7 @@ async function build() {
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 40px;">
                     ${charPanelsHtml}
                 </div>
+                ${specializationHtml}
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
                     ${generateFilterControlsHtml()}
                 </div>

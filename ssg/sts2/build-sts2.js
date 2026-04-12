@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import sqlite3 from 'sqlite3';
 import { PATHS, ensureDir, slugify } from './paths.js';
+import { execSync } from 'child_process';
 import { SUPABASE_URL, SUPABASE_ANON_KEY } from '../utils/config.js';
 import { isRunByUser, calculateBayesianScore, normalizeId, calculateWinRate, aggregateCardStats, getRunMetadata, getPerformanceStats } from './helpers.js';
 import { generateRunLinksList } from './templates/runCard.js';
@@ -940,6 +941,7 @@ async function build() {
 
         console.log(`🎴 Generating ${cards.length} card pages...`);
 
+        const specialists = {};
         for (const card of cards) {
             const slug = slugify(card.name);
             const cardDir = ensureDir(path.join(cardsRoot, slug));
@@ -991,6 +993,10 @@ async function build() {
                         seen: top.seen
                     };
                 }
+            }
+
+            if (topUser) {
+                specialists[card.name] = topUser;
             }
 
             const videosHtml = generateRunLinksList(rawStats.runs, `Runs featuring ${card.name}`);
@@ -1139,8 +1145,14 @@ async function build() {
         console.log('🗺️  Saving sitemap.xml...');
         sitemap.save(path.join(PATHS.WEB_ROOT, 'sitemap.xml'));
 
+        // Save specialists for build-users.js
+        fs.writeFileSync(path.join(PATHS.WEB_ROOT, 'ssg/sts2/specialists.json'), JSON.stringify(specialists, null, 2));
+
         console.log('✨ Build complete!');
         db.close();
+
+        console.log('👥 Triggering user build...');
+        execSync('node ssg/sts2/build-users.js', { stdio: 'inherit' });
 
     } catch (error) {
         console.error('❌ Build failed:', error);
