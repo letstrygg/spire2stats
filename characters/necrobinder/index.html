@@ -61,7 +61,7 @@
   "@type": "ItemPage",
   "name": "Necrobinder Character Winrates & Statistics - Spire 2 Stats",
   "description": "Necrobinder Character Winrates & Statistics gameplay statistics for Slay the Spire 2. Winrate: 26.4%. Total Runs: 250.",
-  "dateModified": "2026-04-12T21:20:14.757Z",
+  "dateModified": "2026-04-12T21:41:12.526Z",
   "mainEntity": {
     "@type": "Thing",
     "name": "Necrobinder Character Winrates & Statistics",
@@ -78,7 +78,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/characters/">characters</a> / necrobinder</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-12T21:20:14.757Z">April 12, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-12T21:41:12.526Z">April 12, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -180,6 +180,8 @@
                 </div>
             </div>
         
+                <div id="runs-collapsible-wrapper" class="runs-is-collapsed">
+                    
     <div class="recent-runs" style="margin-top: 30px;">
         <h3 style="margin-bottom: 15px;">Necrobinder Runs</h3>
         <div class="grid">
@@ -6684,6 +6686,25 @@
         <div class="win-bar" style="background: var(--red);"></div>
     </div></div>
     </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: -20px; margin-bottom: 40px; position: relative; z-index: 10;">
+                    <button id="runs-toggle-btn" style="background: #222; border: 1px solid #444; color: #888; padding: 10px 24px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Expand</button>
+                </div>
+                <style>
+                    .runs-is-collapsed .grid > *:nth-child(n+7) { display: none; }
+                </style>
+                <script>
+                    document.getElementById('runs-toggle-btn').addEventListener('click', function() {
+                        const wrapper = document.getElementById('runs-collapsible-wrapper');
+                        const isCollapsed = wrapper.classList.toggle('runs-is-collapsed');
+                        this.textContent = isCollapsed ? 'Expand' : 'Collapse';
+                        if (isCollapsed) {
+                            wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    });
+                </script>
+                
         <div style="margin-top: 30px;">
             <h3 style="margin-bottom: 15px;">Necrobinder Specific Cards</h3>
             <div class="grid"><a href="/cards/sentry-mode/" class="card-item necrobinder">

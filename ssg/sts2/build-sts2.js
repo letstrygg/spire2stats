@@ -719,7 +719,29 @@ async function buildCharacters(chars, runStats, sitemap, users) {
         if (rawStats.seen > 0) console.log(`   ✅ Found ${rawStats.seen} runs for ${charKey}`);
         else console.log(`   ⚠️ No runs found for ID "${charKey}"`);
 
-                const videosHtml = generateRunLinksList(rawStats.runs, `${displayName} Runs`);
+                const videosHtmlRaw = generateRunLinksList(rawStats.runs, `${displayName} Runs`);
+                const videosHtml = `
+                <div id="runs-collapsible-wrapper" class="runs-is-collapsed">
+                    ${videosHtmlRaw}
+                </div>
+                ${rawStats.runs.length > 6 ? `
+                <div style="text-align: center; margin-top: -20px; margin-bottom: 40px; position: relative; z-index: 10;">
+                    <button id="runs-toggle-btn" style="background: #222; border: 1px solid #444; color: #888; padding: 10px 24px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Expand</button>
+                </div>
+                <style>
+                    .runs-is-collapsed .grid > *:nth-child(n+7) { display: none; }
+                </style>
+                <script>
+                    document.getElementById('runs-toggle-btn').addEventListener('click', function() {
+                        const wrapper = document.getElementById('runs-collapsible-wrapper');
+                        const isCollapsed = wrapper.classList.toggle('runs-is-collapsed');
+                        this.textContent = isCollapsed ? 'Expand' : 'Collapse';
+                        if (isCollapsed) {
+                            wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    });
+                </script>` : ''}
+                `;
 
                 // Character Cards
                 const charCards = await query("SELECT * FROM cards WHERE LOWER(color) = ?", [displayName.toLowerCase()]);
