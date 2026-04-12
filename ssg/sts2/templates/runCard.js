@@ -53,7 +53,7 @@ export function generateRunCardHtml(run, user) {
         <a href="/users/${user.slug}/runs/${run.id}/" style="text-decoration: none; color: inherit; display: flex; justify-content: space-between; flex-grow: 1;">
             <div class="card-info">
                 <span class="card-name" style="line-height: 1.1;">
-                    <span style="font-size: 0.7rem; color: var(--gray); text-transform: uppercase; display: block;">${user.display_name}</span>
+                    <span class="user-name">${user.display_name}</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run ${run.user_run_num}</span>
                     <span style="color: ${charColor}">${charId}</span>
                 </span>
