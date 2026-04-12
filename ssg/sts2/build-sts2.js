@@ -684,9 +684,9 @@ async function buildCharacters(chars, runStats, sitemap, users) {
                 const uSlug = userLookup[uname.toLowerCase()] || slugify(uname);
 
                 return `
-                <div style="margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #222;">
+                <div style="padding-bottom: 12px; font-size: 0.75rem;">
                     <a href="/users/${uSlug}/" class="user-name" style="margin-bottom: 4px;">${uname}</a>
-                    <div style="font-size: 0.75rem; color: #888; display: flex; flex-direction: column; gap: 2px;">
+                    <div style="color: #888; display: flex; flex-direction: column; gap: 2px;">
                         <div title="${uMostPickedTooltip}">Top Picked: ${formatCardStat(uMostPicked[0], uMostPicked[1])}</div>
                         <div title="${uTopCardTooltip}">Best Card: ${formatCardStat(uTopCard[0], uTopCard[1])}</div>
                     </div>
