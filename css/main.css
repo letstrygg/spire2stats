@@ -295,9 +295,10 @@ body.sidebar-open-squish .left-sidebar { left: 0; }
 
 .user-name {
     font-size: 0.7rem;
-    color: var(--gray);
+    color: var(--text);
     text-transform: uppercase;
     display: block;
+    font-weight: bold;
 }
 
 /* --- Specific Dashboards (The only exceptions for grid specific layouts) --- */
