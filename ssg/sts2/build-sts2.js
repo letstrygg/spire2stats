@@ -637,7 +637,7 @@ async function buildCharacters(chars, runStats, sitemap, users) {
             const formatCardStat = (id, s) => {
                 const name = cardNames[id.toUpperCase()] || id;
                 const wr = s.seen > 0 ? ((s.wins / s.seen) * 100).toFixed(0) : 0;
-                return `<a href="/cards/${slugify(name)}/" style="color: var(--text); font-size: 0.9rem; text-decoration: underline;">${name}</a> <span style="color: #666; font-size: 0.85em;">(${wr}% ${s.seen} Runs)</span>`;
+                return `<a href="/cards/${slugify(name)}/" style="color: var(--text); font-size: 0.9rem; text-decoration: underline;">${name}</a> <span style="color: #666;">(${wr}% ${s.seen} Runs)</span>`;
             };
 
             const top12CardsHtml = sortedCards.slice(0, 12).map(([id, s]) => {
