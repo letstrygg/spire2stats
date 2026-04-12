@@ -820,7 +820,7 @@ function wrapInCollapsible(contentHtml, itemCount) {
                 position: relative;
             }
             .collapsible-wrapper.is-collapsed .collapsible-content {
-                max-height: 300px; /* This height covers roughly 2 rows of run cards */
+                max-height: 350px; /* This height covers roughly 2 rows of run cards */
                 overflow: hidden;
             }
             .collapsible-wrapper .collapsible-fade {
