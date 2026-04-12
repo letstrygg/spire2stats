@@ -239,7 +239,7 @@ async function build() {
                 }
 
                 return `
-                <div class="char-panel" style="border: 1px solid ${color}44; border-top: 3px solid ${color}; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
+                <div class="char-panel" style="border: 1px solid rgba(255, 255, 255, 0.05); border-top: 3px solid ${color}; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
                     <h4 style="margin: 0; color: ${color}; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;"><a href="${charUrl}" style="color: inherit; text-decoration: underline;">${name}</a></h4>
                     <div style="font-size: 1.4rem; font-weight: bold;" title="${user.display_name} has a ${wr}% Winrate Across ${charRuns.length} ${name} Runs">
                         ${wr}% <span style="color: ${diffColor}; font-size: 0.9rem; font-weight: normal;">(${diffSign}${diff.toFixed(1)})</span> 
@@ -262,7 +262,7 @@ async function build() {
                         </div>
                     </div>
 
-                    <div style="margin-top: 5px; border-top: 1px solid #333; padding-top: 8px;" title="${deadliestTooltip}">
+                    <div style="margin-top: 5px;" title="${deadliestTooltip}">
                         <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Deadliest Foe</div>
                         <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;">${deadliestHtml}</div>
                     </div>
@@ -291,7 +291,7 @@ async function build() {
                     </li>
                 `}).join('');
                 specializationHtml = `
-                <div class="item-box" style="margin-bottom: 40px; border-color: var(--border)">
+                <div class="item-box" style="margin-bottom: 40px;">
                     <h3 style="margin-top: 0; color: var(--gold); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Card Specializations</h3>
                     <ul style="display: grid; grid-template-columns: repeat(auto-fit, minmax(225px, 1fr)); font-size: 0.85rem;">
                         ${list}
