@@ -719,29 +719,8 @@ async function buildCharacters(chars, runStats, sitemap, users) {
         if (rawStats.seen > 0) console.log(`   ✅ Found ${rawStats.seen} runs for ${charKey}`);
         else console.log(`   ⚠️ No runs found for ID "${charKey}"`);
 
-                const videosHtmlRaw = generateRunLinksList(rawStats.runs, `${displayName} Runs`);
-                const videosHtml = `
-                <div id="runs-collapsible-wrapper" class="runs-is-collapsed">
-                    ${videosHtmlRaw}
-                </div>
-                ${rawStats.runs.length > 6 ? `
-                <div style="text-align: center; margin-top: -20px; margin-bottom: 40px; position: relative; z-index: 10;">
-                    <button id="runs-toggle-btn" style="background: #222; border: 1px solid #444; color: #888; padding: 10px 24px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Expand</button>
-                </div>
-                <style>
-                    .runs-is-collapsed .grid > *:nth-child(n+7) { display: none; }
-                </style>
-                <script>
-                    document.getElementById('runs-toggle-btn').addEventListener('click', function() {
-                        const wrapper = document.getElementById('runs-collapsible-wrapper');
-                        const isCollapsed = wrapper.classList.toggle('runs-is-collapsed');
-                        this.textContent = isCollapsed ? 'Expand' : 'Collapse';
-                        if (isCollapsed) {
-                            wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }
-                    });
-                </script>` : ''}
-                `;
+                const runsHtmlRaw = generateRunLinksList(rawStats.runs, `${displayName} Runs`);
+                const runsHtml = wrapInCollapsible(runsHtmlRaw, rawStats.runs.length);
 
                 // Character Cards
                 const charCards = await query("SELECT * FROM cards WHERE LOWER(color) = ?", [displayName.toLowerCase()]);
@@ -757,7 +736,7 @@ async function buildCharacters(chars, runStats, sitemap, users) {
                            calculateBayesianScore(sA.wins, sA.seen, charWinRatePrior);
                 });
 
-                const cardItemsHtml = charCards.map(c => {
+                const cardItemsRaw = charCards.map(c => {
                     const cleanId = (c.card_id || '').replace('CARD.', '');
                     const cStats = getItemStats(runStats.stats[cleanId], stats.num);
                     return `<a href="/cards/${slugify(c.name)}/" class="card-item ${displayName.toLowerCase()}">
@@ -766,10 +745,11 @@ async function buildCharacters(chars, runStats, sitemap, users) {
                         <div class="win-bar" style="${cStats.bar}"></div>
                     </a>`;
                 }).join('');
+                const cardItemsHtml = wrapInCollapsible(`<div class="grid">${cardItemsRaw}</div>`, charCards.length);
 
                 // Character Relics
                 const charRelics = await query("SELECT * FROM relics WHERE LOWER(pool) = ? ORDER BY rarity, name ASC", [displayName.toLowerCase()]);
-                const relicItemsHtml = charRelics.map(r => {
+                const relicItemsRaw = charRelics.map(r => {
                     const cleanRelicId = (r.relic_id || '').replace('RELIC.', '');
                     const rStats = getItemStats(runStats.relicStats[cleanRelicId], runStats.globalWinRate);
                     const winBar = rStats.seen > 0 ? `<div class="win-bar" style="${rStats.bar}"></div>` : '';
@@ -782,8 +762,9 @@ async function buildCharacters(chars, runStats, sitemap, users) {
                         ${winBar}
                     </a>`;
                 }).join('');
+                const relicItemsHtml = wrapInCollapsible(`<div class="grid">${relicItemsRaw}</div>`, charRelics.length);
 
-                const detailHtml = characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, relicItemsHtml, displayName, runStats.globalWinRate, topStats, performancePanelsHtml);
+                const detailHtml = characterDetailTemplate(char, stats, runsHtml, cardItemsHtml, relicItemsHtml, displayName, runStats.globalWinRate, topStats, performancePanelsHtml);
                 fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
                 sitemap.add(`/characters/${slug}/`);
     }
@@ -808,6 +789,33 @@ async function buildCharacters(chars, runStats, sitemap, users) {
                 generateCollectionJsonLd(`Characters`, indexDesc)
             );
             fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
+}
+
+/**
+ * Wraps a content block in a generic collapsible container if it exceeds 2 rows (6 items).
+ */
+function wrapInCollapsible(contentHtml, itemCount) {
+    if (itemCount <= 6) return contentHtml;
+
+    return `
+    <div class="collapsible-wrapper is-collapsed">
+        ${contentHtml}
+        <div class="collapsible-controls" style="text-align: center; margin-top: -20px; margin-bottom: 40px; position: relative; z-index: 10;">
+            <button class="collapse-toggle-btn" 
+                    style="background: #222; border: 1px solid #444; color: #888; padding: 10px 24px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;"
+                    onclick="
+                        const wrapper = this.closest('.collapsible-wrapper');
+                        const isCollapsed = wrapper.classList.toggle('is-collapsed');
+                        this.textContent = isCollapsed ? 'Expand' : 'Collapse';
+                        if (isCollapsed) {
+                            wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    ">Expand</button>
+        </div>
+    </div>
+    <style>
+        .collapsible-wrapper.is-collapsed .grid > *:nth-child(n+7) { display: none !important; }
+    </style>`;
 }
 
 async function buildEncounters(encounters, runStats, sitemap) {

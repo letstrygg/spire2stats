@@ -61,7 +61,7 @@
   "@type": "ItemPage",
   "name": "Silent Character Winrates & Statistics - Spire 2 Stats",
   "description": "Silent Character Winrates & Statistics gameplay statistics for Slay the Spire 2. Winrate: 30.4%. Total Runs: 335.",
-  "dateModified": "2026-04-12T21:41:12.526Z",
+  "dateModified": "2026-04-12T21:55:17.198Z",
   "mainEntity": {
     "@type": "Thing",
     "name": "Silent Character Winrates & Statistics",
@@ -78,7 +78,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/characters/">characters</a> / silent</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-12T21:41:12.526Z">April 12, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-12T21:55:17.198Z">April 12, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -180,8 +180,8 @@
                 </div>
             </div>
         
-                <div id="runs-collapsible-wrapper" class="runs-is-collapsed">
-                    
+    <div class="collapsible-wrapper is-collapsed">
+        
     <div class="recent-runs" style="margin-top: 30px;">
         <h3 style="margin-bottom: 15px;">Silent Runs</h3>
         <div class="grid">
@@ -8896,28 +8896,27 @@
         <div class="win-bar" style="background: var(--red);"></div>
     </div></div>
     </div>
-                </div>
-                
-                <div style="text-align: center; margin-top: -20px; margin-bottom: 40px; position: relative; z-index: 10;">
-                    <button id="runs-toggle-btn" style="background: #222; border: 1px solid #444; color: #888; padding: 10px 24px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Expand</button>
-                </div>
-                <style>
-                    .runs-is-collapsed .grid > *:nth-child(n+7) { display: none; }
-                </style>
-                <script>
-                    document.getElementById('runs-toggle-btn').addEventListener('click', function() {
-                        const wrapper = document.getElementById('runs-collapsible-wrapper');
-                        const isCollapsed = wrapper.classList.toggle('runs-is-collapsed');
+        <div class="collapsible-controls" style="text-align: center; margin-top: -20px; margin-bottom: 40px; position: relative; z-index: 10;">
+            <button class="collapse-toggle-btn" 
+                    style="background: #222; border: 1px solid #444; color: #888; padding: 10px 24px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;"
+                    onclick="
+                        const wrapper = this.closest('.collapsible-wrapper');
+                        const isCollapsed = wrapper.classList.toggle('is-collapsed');
                         this.textContent = isCollapsed ? 'Expand' : 'Collapse';
                         if (isCollapsed) {
                             wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
                         }
-                    });
-                </script>
-                
+                    ">Expand</button>
+        </div>
+    </div>
+    <style>
+        .collapsible-wrapper.is-collapsed .grid > *:nth-child(n+7) { display: none !important; }
+    </style>
         <div style="margin-top: 30px;">
             <h3 style="margin-bottom: 15px;">Silent Specific Cards</h3>
-            <div class="grid"><a href="/cards/tools-of-the-trade/" class="card-item silent">
+            <div class="grid">
+    <div class="collapsible-wrapper is-collapsed">
+        <div class="grid"><a href="/cards/tools-of-the-trade/" class="card-item silent">
                         <div class="card-info"><span class="card-name">Tools of the Trade</span></div>
                         <div class="card-stats"><div class="win-rate" style="color: var(--green)">67% Winrate</div><div class="run-count">43 runs</div></div>
                         <div class="win-bar" style="background: linear-gradient(to right, #00ff89 67.44186046511628%, #ff4b4b 67.44186046511628%);"></div>
@@ -9270,10 +9269,28 @@
                         <div class="card-stats"><div class="win-rate" style="color: var(--red)">18% Winrate</div><div class="run-count">28 runs</div></div>
                         <div class="win-bar" style="background: linear-gradient(to right, #00ff89 17.857142857142858%, #ff4b4b 17.857142857142858%);"></div>
                     </a></div>
+        <div class="collapsible-controls" style="text-align: center; margin-top: -20px; margin-bottom: 40px; position: relative; z-index: 10;">
+            <button class="collapse-toggle-btn" 
+                    style="background: #222; border: 1px solid #444; color: #888; padding: 10px 24px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;"
+                    onclick="
+                        const wrapper = this.closest('.collapsible-wrapper');
+                        const isCollapsed = wrapper.classList.toggle('is-collapsed');
+                        this.textContent = isCollapsed ? 'Expand' : 'Collapse';
+                        if (isCollapsed) {
+                            wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    ">Expand</button>
+        </div>
+    </div>
+    <style>
+        .collapsible-wrapper.is-collapsed .grid > *:nth-child(n+7) { display: none !important; }
+    </style></div>
         </div>
         <div style="margin-top: 30px;">
             <h3 style="margin-bottom: 15px;">Silent Specific Relics</h3>
-            <div class="grid"><a href="/relics/snecko-skull/" class="card-item silent" aria-label="Snecko Skull: 23 runs, 61% Winrate">
+            <div class="grid">
+    <div class="collapsible-wrapper is-collapsed">
+        <div class="grid"><a href="/relics/snecko-skull/" class="card-item silent" aria-label="Snecko Skull: 23 runs, 61% Winrate">
                         <div class="card-info"><span class="card-name">Snecko Skull</span></div>
                         <div class="card-stats">
                             <div class="win-rate" style="color: var(--green)">61% Winrate</div>
@@ -9330,6 +9347,22 @@
                         </div>
                         <div class="win-bar" style="background: linear-gradient(to right, #00ff89 56.25%, #ff4b4b 56.25%);"></div>
                     </a></div>
+        <div class="collapsible-controls" style="text-align: center; margin-top: -20px; margin-bottom: 40px; position: relative; z-index: 10;">
+            <button class="collapse-toggle-btn" 
+                    style="background: #222; border: 1px solid #444; color: #888; padding: 10px 24px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;"
+                    onclick="
+                        const wrapper = this.closest('.collapsible-wrapper');
+                        const isCollapsed = wrapper.classList.toggle('is-collapsed');
+                        this.textContent = isCollapsed ? 'Expand' : 'Collapse';
+                        if (isCollapsed) {
+                            wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    ">Expand</button>
+        </div>
+    </div>
+    <style>
+        .collapsible-wrapper.is-collapsed .grid > *:nth-child(n+7) { display: none !important; }
+    </style></div>
         </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
