@@ -736,7 +736,7 @@ async function buildCharacters(chars, runStats, sitemap, users) {
                            calculateBayesianScore(sA.wins, sA.seen, charWinRatePrior);
                 });
 
-                const cardItemsRaw = charCards.map(c => {
+                const cardItemsHtml = `<div class="grid">${charCards.map(c => {
                     const cleanId = (c.card_id || '').replace('CARD.', '');
                     const cStats = getItemStats(runStats.stats[cleanId], stats.num);
                     return `<a href="/cards/${slugify(c.name)}/" class="card-item ${displayName.toLowerCase()}">
@@ -744,12 +744,11 @@ async function buildCharacters(chars, runStats, sitemap, users) {
                         <div class="card-stats"><div class="win-rate" style="color: ${cStats.color}">${cStats.text}</div><div class="run-count">${cStats.seen} runs</div></div>
                         <div class="win-bar" style="${cStats.bar}"></div>
                     </a>`;
-                }).join('');
-                const cardItemsHtml = wrapInCollapsible(`<div class="grid">${cardItemsRaw}</div>`, charCards.length);
+                }).join('')}</div>`;
 
                 // Character Relics
                 const charRelics = await query("SELECT * FROM relics WHERE LOWER(pool) = ? ORDER BY rarity, name ASC", [displayName.toLowerCase()]);
-                const relicItemsRaw = charRelics.map(r => {
+                const relicItemsHtml = `<div class="grid">${charRelics.map(r => {
                     const cleanRelicId = (r.relic_id || '').replace('RELIC.', '');
                     const rStats = getItemStats(runStats.relicStats[cleanRelicId], runStats.globalWinRate);
                     const winBar = rStats.seen > 0 ? `<div class="win-bar" style="${rStats.bar}"></div>` : '';
@@ -761,8 +760,7 @@ async function buildCharacters(chars, runStats, sitemap, users) {
                         </div>
                         ${winBar}
                     </a>`;
-                }).join('');
-                const relicItemsHtml = wrapInCollapsible(`<div class="grid">${relicItemsRaw}</div>`, charRelics.length);
+                }).join('')}</div>`;
 
                 const detailHtml = characterDetailTemplate(char, stats, runsHtml, cardItemsHtml, relicItemsHtml, displayName, runStats.globalWinRate, topStats, performancePanelsHtml);
                 fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
@@ -795,7 +793,7 @@ async function buildCharacters(chars, runStats, sitemap, users) {
  * Wraps a content block in a generic collapsible container if it exceeds 2 rows (6 items).
  */
 function wrapInCollapsible(contentHtml, itemCount) {
-    if (itemCount <= 6) return contentHtml;
+    if (itemCount <= 10) return contentHtml;
 
     return `
     <div class="collapsible-wrapper is-collapsed">
@@ -814,7 +812,7 @@ function wrapInCollapsible(contentHtml, itemCount) {
         </div>
     </div>
     <style>
-        .collapsible-wrapper.is-collapsed .grid > *:nth-child(n+7) { display: none !important; }
+        .collapsible-wrapper.is-collapsed .grid > *:nth-child(n+11) { display: none !important; }
     </style>`;
 }
 

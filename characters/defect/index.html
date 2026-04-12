@@ -61,7 +61,7 @@
   "@type": "ItemPage",
   "name": "Defect Character Winrates & Statistics - Spire 2 Stats",
   "description": "Defect Character Winrates & Statistics gameplay statistics for Slay the Spire 2. Winrate: 25.2%. Total Runs: 298.",
-  "dateModified": "2026-04-12T21:55:17.198Z",
+  "dateModified": "2026-04-12T22:07:42.743Z",
   "mainEntity": {
     "@type": "Thing",
     "name": "Defect Character Winrates & Statistics",
@@ -78,7 +78,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/characters/">characters</a> / defect</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-12T21:55:17.198Z">April 12, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-12T22:07:42.743Z">April 12, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -7948,13 +7948,11 @@
         </div>
     </div>
     <style>
-        .collapsible-wrapper.is-collapsed .grid > *:nth-child(n+7) { display: none !important; }
+        .collapsible-wrapper.is-collapsed .grid > *:nth-child(n+11) { display: none !important; }
     </style>
         <div style="margin-top: 30px;">
             <h3 style="margin-bottom: 15px;">Defect Specific Cards</h3>
-            <div class="grid">
-    <div class="collapsible-wrapper is-collapsed">
-        <div class="grid"><a href="/cards/buffer/" class="card-item defect">
+            <div class="grid"><div class="grid"><a href="/cards/buffer/" class="card-item defect">
                         <div class="card-info"><span class="card-name">Buffer</span></div>
                         <div class="card-stats"><div class="win-rate" style="color: var(--green)">65% Winrate</div><div class="run-count">31 runs</div></div>
                         <div class="win-bar" style="background: linear-gradient(to right, #00ff89 64.51612903225806%, #ff4b4b 64.51612903225806%);"></div>
@@ -8306,29 +8304,11 @@
                         <div class="card-info"><span class="card-name">Quadcast</span></div>
                         <div class="card-stats"><div class="win-rate" style="color: var(--red)">0% Winrate</div><div class="run-count">9 runs</div></div>
                         <div class="win-bar" style="background: linear-gradient(to right, #00ff89 0%, #ff4b4b 0%);"></div>
-                    </a></div>
-        <div class="collapsible-controls" style="text-align: center; margin-top: -20px; margin-bottom: 40px; position: relative; z-index: 10;">
-            <button class="collapse-toggle-btn" 
-                    style="background: #222; border: 1px solid #444; color: #888; padding: 10px 24px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;"
-                    onclick="
-                        const wrapper = this.closest('.collapsible-wrapper');
-                        const isCollapsed = wrapper.classList.toggle('is-collapsed');
-                        this.textContent = isCollapsed ? 'Expand' : 'Collapse';
-                        if (isCollapsed) {
-                            wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }
-                    ">Expand</button>
-        </div>
-    </div>
-    <style>
-        .collapsible-wrapper.is-collapsed .grid > *:nth-child(n+7) { display: none !important; }
-    </style></div>
+                    </a></div></div>
         </div>
         <div style="margin-top: 30px;">
             <h3 style="margin-bottom: 15px;">Defect Specific Relics</h3>
-            <div class="grid">
-    <div class="collapsible-wrapper is-collapsed">
-        <div class="grid"><a href="/relics/data-disk/" class="card-item defect" aria-label="Data Disk: 37 runs, 54% Winrate">
+            <div class="grid"><div class="grid"><a href="/relics/data-disk/" class="card-item defect" aria-label="Data Disk: 37 runs, 54% Winrate">
                         <div class="card-info"><span class="card-name">Data Disk</span></div>
                         <div class="card-stats">
                             <div class="win-rate" style="color: var(--green)">54% Winrate</div>
@@ -8384,23 +8364,7 @@
                             <div class="run-count">17 runs</div>
                         </div>
                         <div class="win-bar" style="background: linear-gradient(to right, #00ff89 52.94117647058824%, #ff4b4b 52.94117647058824%);"></div>
-                    </a></div>
-        <div class="collapsible-controls" style="text-align: center; margin-top: -20px; margin-bottom: 40px; position: relative; z-index: 10;">
-            <button class="collapse-toggle-btn" 
-                    style="background: #222; border: 1px solid #444; color: #888; padding: 10px 24px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;"
-                    onclick="
-                        const wrapper = this.closest('.collapsible-wrapper');
-                        const isCollapsed = wrapper.classList.toggle('is-collapsed');
-                        this.textContent = isCollapsed ? 'Expand' : 'Collapse';
-                        if (isCollapsed) {
-                            wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }
-                    ">Expand</button>
-        </div>
-    </div>
-    <style>
-        .collapsible-wrapper.is-collapsed .grid > *:nth-child(n+7) { display: none !important; }
-    </style></div>
+                    </a></div></div>
         </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
