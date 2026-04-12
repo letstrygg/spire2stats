@@ -76,7 +76,6 @@ h1, h2, h3 { margin-top: 0; }
 a { text-decoration: none; color: inherit; }
 b, strong { font-weight: 600; }
 ul { list-style-type: none; padding-left: 1.5em; }
-ul li { text-indent: -1.2em; }
 ul li::before { content: "•"; color: var(--green); margin-right: 0.8em; }
 
 header { text-align: center; padding: 20px 0; }
