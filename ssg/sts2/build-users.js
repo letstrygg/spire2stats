@@ -78,6 +78,7 @@ async function build() {
         // Fetch lookup maps for names to generate accurate slugs and labels
         const cardLookup = Object.fromEntries((await query("SELECT card_id, name FROM cards")).map(c => [c.card_id, c.name]));
         const cardColorLookup = Object.fromEntries((await query("SELECT card_id, color FROM cards")).map(c => [c.card_id, c.color]));
+        const cardNameToColor = Object.fromEntries((await query("SELECT name, color FROM cards")).map(c => [c.name, c.color]));
         const relicLookup = Object.fromEntries((await query("SELECT relic_id, name FROM relics")).map(r => [r.relic_id, r.name]));
         const eventLookup = Object.fromEntries((await query("SELECT event_id, name FROM events")).map(e => [normalizeId(e.event_id), e.name]));
         const encounterLookup = Object.fromEntries((await query("SELECT encounter_id, name FROM encounters")).map(e => [normalizeId(e.encounter_id), e.name]));
@@ -278,12 +279,17 @@ async function build() {
 
             let specializationHtml = '';
             if (specializedCards.length > 0) {
-                const list = specializedCards.map(c => `
-                    <li style="margin-bottom: 5px;">
-                        <a href="/cards/${slugify(c.cardName)}/" style="color: var(--gold); text-decoration: underline;">${c.cardName}</a> 
+                const list = specializedCards.map(c => {
+                    const colorName = cardNameToColor[c.cardName];
+                    const charKey = colorName ? normalizeId(colorName) : null;
+                    const charColor = CHARACTER_COLORS[charKey] || 'var(--text)';
+                    
+                    return `
+                    <li>
+                        <a href="/cards/${slugify(c.cardName)}/" style="color: ${charColor}; text-decoration: underline;">${c.cardName}</a> 
                         <span style="color: #888;">(${c.winrate}% ${c.seen} runs)</span>
                     </li>
-                `).join('');
+                `}).join('');
                 specializationHtml = `
                 <div class="item-box" style="margin-bottom: 40px; border-color: var(--border)">
                     <h3 style="margin-top: 0; color: var(--gold); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Card Specializations</h3>
