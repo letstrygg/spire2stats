@@ -160,6 +160,8 @@ async function build() {
                 const diff = wrNum - userWinRateNum;
                 const diffSign = diff > 0 ? '+' : '';
                 const diffColor = diff > 0 ? 'var(--green)' : (diff < 0 ? 'var(--red)' : '#666');
+                const diffDirection = diff >= 0 ? 'above' : 'below';
+                const diffValue = Math.abs(diff).toFixed(1);
 
                 const M = wins / charRuns.length; // Character winrate prior
                 const C = 5; // Confidence factor
@@ -241,7 +243,7 @@ async function build() {
                 return `
                 <div class="char-panel" style="border: 1px solid rgba(255, 255, 255, 0.05); border-top: 3px solid ${color}; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
                     <h4 style="margin: 0; color: ${color}; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;"><a href="${charUrl}" style="color: inherit; text-decoration: underline;">${name}</a></h4>
-                    <div style="font-size: 1.4rem; font-weight: bold;" title="${user.display_name} has a ${wr}% Winrate Across ${charRuns.length} ${name} Runs">
+                    <div style="font-size: 1.4rem; font-weight: bold;" title="${user.display_name} has a ${wr}% Winrate Across ${charRuns.length} ${name} Runs, ${diffValue}% ${diffDirection} their overall winrate.">
                         ${wr}% <span style="color: ${diffColor}; font-size: 0.9rem; font-weight: normal;">(${diffSign}${diff.toFixed(1)})</span> 
                         <span style="font-size: 0.7rem; color: #666; font-weight: normal;">${charRuns.length} Runs</span>
                     </div>
