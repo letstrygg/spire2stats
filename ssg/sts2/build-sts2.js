@@ -793,12 +793,15 @@ async function buildCharacters(chars, runStats, sitemap, users) {
  * Wraps a content block in a generic collapsible container if it exceeds 2 rows (6 items).
  */
 function wrapInCollapsible(contentHtml, itemCount) {
-    if (itemCount <= 10) return contentHtml;
+    if (itemCount <= 4) return contentHtml;
 
     return `
     <div class="collapsible-wrapper is-collapsed">
-        ${contentHtml}
-        <div class="collapsible-controls" style="text-align: center; margin-top: -20px; margin-bottom: 40px; position: relative; z-index: 10;">
+        <div class="collapsible-content">
+            ${contentHtml}
+            <div class="collapsible-fade"></div>
+        </div>
+        <div class="collapsible-controls" style="text-align: center; margin-top: 20px; margin-bottom: 40px; position: relative; z-index: 10;">
             <button class="collapse-toggle-btn" 
                     style="background: #222; border: 1px solid #444; color: #888; padding: 10px 24px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;"
                     onclick="
@@ -810,10 +813,28 @@ function wrapInCollapsible(contentHtml, itemCount) {
                         }
                     ">Expand</button>
         </div>
-    </div>
-    <style>
-        .collapsible-wrapper.is-collapsed .grid > *:nth-child(n+11) { display: none !important; }
-    </style>`;
+        <style>
+            .collapsible-wrapper .collapsible-content {
+                max-height: none;
+                overflow: visible;
+                position: relative;
+            }
+            .collapsible-wrapper.is-collapsed .collapsible-content {
+                max-height: 800px; /* This height covers roughly 2 rows of run cards */
+                overflow: hidden;
+            }
+            .collapsible-wrapper .collapsible-fade {
+                display: none;
+                position: absolute;
+                bottom: 0; left: 0; width: 100%; height: 80px;
+                background: linear-gradient(to top, #111, transparent);
+                pointer-events: none;
+            }
+            .collapsible-wrapper.is-collapsed .collapsible-fade {
+                display: block;
+            }
+        </style>
+    </div>`;
 }
 
 async function buildEncounters(encounters, runStats, sitemap) {
