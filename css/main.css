@@ -473,11 +473,12 @@ body.sidebar-open-squish .left-sidebar { left: 0; }
 .card-item { position: relative; overflow: hidden; background: #1a1a1a; border: 1px solid #333; padding: 12px; text-decoration: none; color: inherit; display: flex; justify-content: space-between; border-radius: 8px; transition: border-color 0.2s; --char-color: var(--gray); }
 .card-name { font-weight: bold; } .card-stats { text-align: right; } .win-rate { font-weight: bold; margin-top: -4px;} .run-count { font-size: 0.7rem; color: #666; text-transform: uppercase; } .win-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 2px; }
 
-.card-item.ironclad    { --char-color: var(--color-ironclad); }
-.card-item.silent      { --char-color: var(--color-silent); }
-.card-item.defect      { --char-color: var(--color-defect); }
-.card-item.necrobinder { --char-color: var(--color-necrobinder); }
-.card-item.regent      { --char-color: var(--color-regent); }
+.card-item.ironclad, .card.ironclad       { --char-color: var(--color-ironclad); }
+.card-item.silent, .card.silent           { --char-color: var(--color-silent); }
+.card-item.defect, .card.defect           { --char-color: var(--color-defect); }
+.card-item.necrobinder, .card.necrobinder { --char-color: var(--color-necrobinder); }
+.card-item.regent, .card.regent           { --char-color: var(--color-regent); }
+.card.colorless                           { --char-color: var(--gray); }
 
 .card-item:hover { border-color: var(--char-color); }
 .card-item .card-name { color: var(--char-color); }
@@ -536,7 +537,7 @@ body.sidebar-open-squish .left-sidebar { left: 0; }
 .card { position: relative; border: 2px solid #444; border-radius: 12px; padding: 25px; width: 320px; background: #1a1a1a; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
 .card .cost-circle { position: absolute; top: -20px; left: -20px; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; z-index: 5; background: none; border: none; }
 .card .cost-icon { height: 48px; width: auto; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
-.card .cost-value { position: absolute; color: #fff; font-weight: bold; font-size: 1.5rem; text-shadow: 0 0 4px #000, 0 0 2px #000; margin-top: -4px; }
+.card .cost-value { position: absolute; color: #fff; font-weight: bold; font-size: 1.5rem; -webkit-text-stroke: 3px var(--char-color, #000); paint-order: stroke fill; text-shadow: 0 0 12px #000, 0 0 8px #000; margin-top: -4px; }
 .card .card-title { font-size: 1.5rem; font-weight: bold; margin-bottom: 10px; text-align: center; }
 .card .type-banner { background: #2a2a2a; color: #888; text-transform: uppercase; font-size: 0.75rem; padding: 4px; text-align: center; margin: 10px -25px; border-top: 1px solid #333; border-bottom: 1px solid #333; }
 .card .description { line-height: 1.5; font-size: 1rem; min-height: 100px; text-align: center; }
