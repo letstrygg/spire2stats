@@ -41,6 +41,9 @@ export function generateRunCardHtml(run, user) {
     const ascension = run.ascension || 0;
     const winVal = run.win ? 1 : 0;
 
+    const gameMode = (run.game_mode || 'standard').toLowerCase();
+    const modeColor = gameMode === 'custom' ? 'var(--purple)' : (gameMode === 'daily' ? 'var(--orange)' : 'inherit');
+
     return `
     <div class="card-item ${statusClass} ${charId} run-record" 
          data-build="${buildId}" data-ascension="${ascension}" data-win="${winVal}" 
@@ -61,7 +64,7 @@ export function generateRunCardHtml(run, user) {
             <div class="card-stats">
                 <div class="win-rate" style="color: ${statusColor}">${statusText}</div>
                 <div class="run-count" style="font-size: 0.7rem; opacity: 0.6;">Build ${run.build_id || 'Unknown'}</div>
-                <div class="run-count">Ascension ${run.ascension || 0}</div>
+                <div class="run-count">Ascension ${run.ascension || 0} • <span style="color: ${modeColor}; text-transform: capitalize;">${gameMode}</span></div>
             </div>
         </a>
         ${videoButtons}
