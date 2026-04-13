@@ -1046,8 +1046,13 @@ async function build() {
             const vars = card.vars ? JSON.parse(card.vars) : {};
             const upgradeData = card.upgrade ? JSON.parse(card.upgrade) : null;
 
-            card.description_base = formatDescription(parseCardText(card.description, vars, upgradeData, false));
-            card.description_upgraded = formatDescription(parseCardText(card.description, vars, upgradeData, true));
+            // Resolve dynamic templates. We overwrite the original fields so the 
+            // detail template displays the processed text instead of raw JSON or templates.
+            const baseDesc = parseCardText(card.description, vars, upgradeData, false);
+            const upgradedDesc = parseCardText(card.description, vars, upgradeData, true);
+
+            card.description = formatDescription(baseDesc);
+            card.upgrade = formatDescription(upgradedDesc);
 
             const cleanCardId = (card.card_id || '').replace('CARD.', '');
             const rawStats = cardStats.stats[cleanCardId] || { runs: [], seen: 0, wins: 0 };
