@@ -1060,16 +1060,26 @@ async function build() {
                     if (lowUpg.ethereal === true) kSet.add("Ethereal");
                     if (lowUpg.unplayable === true) kSet.add("Unplayable");
                     if (lowUpg.sly === true) kSet.add("Sly");
+
+                    // Dynamically handle "add_keyword" flags (e.g. add_retain: true)
+                    Object.entries(lowUpg).forEach(([key, val]) => {
+                        if (val === true && key.startsWith('add_')) {
+                            const kwRaw = key.substring(4);
+                            const match = ["Unplayable", "Innate", "Sly", "Retain", "Ethereal", "Eternal", "Exhaust"]
+                                .find(k => k.toLowerCase() === kwRaw.toLowerCase());
+                            if (match) kSet.add(match);
+                        }
+                    });
                 }
 
                 const prefix = ["Unplayable", "Innate", "Sly", "Retain", "Ethereal"]
                     .filter(k => kSet.has(k))
-                    .map(k => `[gold]${k}.[/gold]`)
+                    .map(k => `[gold]<a href="/keywords/${slugify(k)}/">${k}.</a>[/gold]`)
                     .join('\n');
                 
                 const suffix = ["Eternal", "Exhaust"]
                     .filter(k => kSet.has(k))
-                    .map(k => `[gold]${k}.[/gold]`)
+                    .map(k => `[gold]<a href="/keywords/${slugify(k)}/">${k}.</a>[/gold]`)
                     .join('\n');
 
                 let res = text;
