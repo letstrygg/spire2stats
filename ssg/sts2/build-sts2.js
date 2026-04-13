@@ -113,7 +113,7 @@ async function getCardStats() {
             const encounterMap = {};
             encounterRows.forEach(enc => {
                 const monstersList = JSON.parse(enc.monsters || '[]');
-                encounterMap[enc.encounter_id] = monstersList.map(m => m.id);
+                encounterMap[normalizeId(enc.encounter_id)] = monstersList.map(m => normalizeId(m.id));
             });
 
             const updateStat = (obj, id, win, video, runMeta) => {
@@ -141,7 +141,7 @@ async function getCardStats() {
                 const relics = JSON.parse(row.relic_list || '[]');
                 const uniqueRelicsInRun = new Set(relics.map(r => normalizeId(r)));
                 uniqueRelicsInRun.forEach(rid => { if (rid) charStats[charId].relicFrequencies[rid] = (charStats[charId].relicFrequencies[rid] || 0) + 1; });
-                relics.forEach(relicId => updateStat(relicStats, relicId, row.win, video, runMeta));
+                relics.forEach(relicId => updateStat(relicStats, normalizeId(relicId), row.win, video, runMeta));
 
                 const pathHistory = JSON.parse(row.path_history || '[]');
                 const uniqueEventsInRun = new Set();
@@ -156,7 +156,7 @@ async function getCardStats() {
                     };
 
                     if (p.event_id) {
-                        const eid = p.event_id.replace('EVENT.', '');
+                        const eid = normalizeId(p.event_id);
                         uniqueEventsInRun.add(eid);
                         if (!eventStats[eid]) eventStats[eid] = { seen: 0, wins: 0, runs: [], damage_taken: 0, hp_healed: 0, gold_lost: 0, gold_stolen: 0, max_hp_gained: 0, max_hp_lost: 0, occurrences: 0 };
                         eventStats[eid].occurrences++;
@@ -168,14 +168,15 @@ async function getCardStats() {
                         eventStats[eid].max_hp_lost += floorStats.max_hp_lost;
                     }
                     if (p.encounter_id) {
-                        if (!encounterStats[p.encounter_id]) encounterStats[p.encounter_id] = { encountered: 0, kills: 0, lethalRuns: [], damage_taken: 0, hp_healed: 0, gold_lost: 0, gold_stolen: 0, max_hp_gained: 0, max_hp_lost: 0 };
-                        encounterStats[p.encounter_id].encountered++;
-                        encounterStats[p.encounter_id].damage_taken += floorStats.damage_taken;
-                        encounterStats[p.encounter_id].hp_healed += floorStats.hp_healed;
-                        encounterStats[p.encounter_id].gold_lost += floorStats.gold_lost;
-                        encounterStats[p.encounter_id].gold_stolen += floorStats.gold_stolen;
-                        encounterStats[p.encounter_id].max_hp_gained += floorStats.max_hp_gained;
-                        encounterStats[p.encounter_id].max_hp_lost += floorStats.max_hp_lost;
+                        const encId = normalizeId(p.encounter_id);
+                        if (!encounterStats[encId]) encounterStats[encId] = { encountered: 0, kills: 0, lethalRuns: [], damage_taken: 0, hp_healed: 0, gold_lost: 0, gold_stolen: 0, max_hp_gained: 0, max_hp_lost: 0 };
+                        encounterStats[encId].encountered++;
+                        encounterStats[encId].damage_taken += floorStats.damage_taken;
+                        encounterStats[encId].hp_healed += floorStats.hp_healed;
+                        encounterStats[encId].gold_lost += floorStats.gold_lost;
+                        encounterStats[encId].gold_stolen += floorStats.gold_stolen;
+                        encounterStats[encId].max_hp_gained += floorStats.max_hp_gained;
+                        encounterStats[encId].max_hp_lost += floorStats.max_hp_lost;
                     }
                     if (p.monster_ids) {
                         p.monster_ids.forEach(mid => {
@@ -194,19 +195,19 @@ async function getCardStats() {
                 uniqueEventsInRun.forEach(eventId => updateStat(eventStats, eventId, row.win, video, runMeta));
 
                 if (!row.win && row.killed_by_encounter) {
-                    const killerEncounter = row.killed_by_encounter;
+                    const killerId = normalizeId(row.killed_by_encounter);
                     
                     // Attribute kill to the encounter
-                    if (!encounterStats[killerEncounter]) encounterStats[killerEncounter] = { encountered: 0, kills: 0, lethalRuns: [], damage_taken: 0, hp_healed: 0, gold_lost: 0, gold_stolen: 0, max_hp_gained: 0, max_hp_lost: 0 };
-                    encounterStats[killerEncounter].kills++;
-                    encounterStats[killerEncounter].lethalRuns.push(runMeta);
+                    if (!encounterStats[killerId]) encounterStats[killerId] = { encountered: 0, kills: 0, lethalRuns: [], damage_taken: 0, hp_healed: 0, gold_lost: 0, gold_stolen: 0, max_hp_gained: 0, max_hp_lost: 0 };
+                    encounterStats[killerId].kills++;
+                    encounterStats[killerId].lethalRuns.push(runMeta);
 
                     // Attribute kill to character specific lethality
-                    const kid = normalizeId(killerEncounter);
+                    const kid = killerId;
                     charStats[charId].killerFrequencies[kid] = (charStats[charId].killerFrequencies[kid] || 0) + 1;
 
                     // Attribute kill to all constituent monsters
-                    const associatedMonsters = encounterMap[killerEncounter] || [];
+                    const associatedMonsters = encounterMap[killerId] || [];
                     associatedMonsters.forEach(mid => {
                         const cleanMid = mid.replace(/(_NORMAL|_BOSS|_ELITE)$/, '');
                         if (!monsterStats[cleanMid]) monsterStats[cleanMid] = { encountered: 0, kills: 0, lethalRuns: [], damage_taken: 0, hp_healed: 0, gold_lost: 0, gold_stolen: 0, max_hp_gained: 0, max_hp_lost: 0 };
@@ -322,7 +323,7 @@ async function buildRelics(relics, runStats, sitemap) {
         const slug = slugify(relic.name);
         const dir = ensureDir(path.join(root, slug));
         
-        const cleanRelicId = (relic.relic_id || '').replace('RELIC.', '');
+        const cleanRelicId = normalizeId(relic.relic_id);
         const rawStats = runStats.relicStats[cleanRelicId] || { seen: 0, wins: 0, runs: [] };
         const stats = getItemStats(rawStats, runStats.globalWinRate);
         const videosHtml = generateRunLinksList(rawStats.runs, `Runs featuring ${relic.name}`);
@@ -340,7 +341,7 @@ async function buildRelics(relics, runStats, sitemap) {
     const relicsSeen = runStats.uniqueRelicsSeen;
     const relicLinks = relics.map(relic => {
         const slug = slugify(relic.name);
-        const cleanRelicId = (relic.relic_id || '').replace('RELIC.', '');
+        const cleanRelicId = normalizeId(relic.relic_id);
         const stats = getItemStats(runStats.relicStats[cleanRelicId], runStats.globalWinRate);
         const poolClass = (relic.pool || 'shared').toLowerCase();
         return generateCardItemHtml(`/relics/${slug}/`, relic.name, stats, poolClass);
@@ -367,7 +368,7 @@ async function buildEvents(events, runStats, sitemap) {
         const slug = slugify(event.name);
         const dir = ensureDir(path.join(root, slug));
         
-        const cleanId = (event.event_id || '').replace('EVENT.', '');
+        const cleanId = normalizeId(event.event_id);
         const rawStats = runStats.eventStats[cleanId] || { seen: 0, wins: 0, runs: [], occurrences: 0 };
         const stats = getItemStats(rawStats, runStats.globalWinRate);
         const averagesHtml = generateAveragesPanel(rawStats, rawStats.occurrences, "Averages per event visit");
@@ -555,8 +556,8 @@ async function buildEnchantments(enchantments, runStats, sitemap) {
         const title = enchantment.name;
         const slug = slugify(title);
         const dir = ensureDir(path.join(root, slug));
-        
-        const cleanId = (enchantment.enchantment_id || '').replace('ENCHANTMENT.', '');
+
+        const cleanId = normalizeId(enchantment.enchantment_id);
         const rawStats = runStats.enchantmentStats[cleanId] || { seen: 0, wins: 0, runs: [] };
         const stats = getItemStats(rawStats, runStats.globalWinRate);
         const videosHtml = generateRunLinksList(rawStats.runs, `Runs featuring ${enchantment.name}`);
@@ -572,7 +573,7 @@ async function buildEnchantments(enchantments, runStats, sitemap) {
     const seen = runStats.uniqueEnchantmentsSeen;
     const links = enchantments.map(e => {
         const slug = slugify(e.name);
-        const cleanId = (e.enchantment_id || '').replace('ENCHANTMENT.', '');
+        const cleanId = normalizeId(e.enchantment_id);
         const stats = getItemStats(runStats.enchantmentStats[cleanId], runStats.globalWinRate);
         return generateCardItemHtml(`/enchantments/${slug}/`, e.name, stats);
     }).join('');
@@ -865,7 +866,7 @@ async function buildEncounters(encounters, runStats, sitemap) {
         const slug = slugify(encounter.name);
         const dir = ensureDir(path.join(root, slug));
         
-        const cleanId = (encounter.encounter_id || '').replace('ENCOUNTER.', '');
+        const cleanId = normalizeId(encounter.encounter_id);
         const stats = runStats.encounterStats[cleanId] || { encountered: 0, kills: 0, lethalRuns: [], damage_taken: 0, hp_healed: 0, gold_lost: 0, gold_stolen: 0, max_hp_gained: 0, max_hp_lost: 0 };
         const lethalRunsHtml = generateRunLinksList(stats.lethalRuns, `Runs where ${encounter.name} defeated the player`);
         const averagesHtml = generateAveragesPanel(stats, stats.encountered, "Averages for this encounter");
@@ -881,7 +882,7 @@ async function buildEncounters(encounters, runStats, sitemap) {
 
     let maxAvgDmg = 0;
     encounters.forEach(e => {
-        const cleanId = (e.encounter_id || '').replace('ENCOUNTER.', '');
+        const cleanId = normalizeId(e.encounter_id);
         const stats = runStats.encounterStats[cleanId];
         if (stats && stats.encountered > 0) {
             const avg = stats.damage_taken / stats.encountered;
@@ -891,7 +892,7 @@ async function buildEncounters(encounters, runStats, sitemap) {
 
     const encounterLinks = encounters.map(e => {
         const slug = slugify(e.name);
-        const cleanId = (e.encounter_id || '').replace('ENCOUNTER.', '');
+        const cleanId = normalizeId(e.encounter_id);
         const stats = runStats.encounterStats[cleanId] || { encountered: 0, kills: 0, damage_taken: 0 };
         const avgDmg = stats.encountered > 0 ? stats.damage_taken / stats.encountered : 0;
         const dmgPercent = maxAvgDmg > 0 ? (avgDmg / maxAvgDmg) * 100 : 0;
@@ -940,7 +941,7 @@ async function buildMonsters(monsters, runStats, sitemap) {
         const slug = slugify(monster.name);
         const dir = ensureDir(path.join(root, slug));
         
-        const cleanId = (monster.monster_id || '').replace('MONSTER.', '');
+        const cleanId = normalizeId(monster.monster_id);
         const stats = runStats.monsterStats[cleanId] || { encountered: 0, kills: 0, lethalRuns: [], damage_taken: 0, hp_healed: 0, gold_lost: 0, gold_stolen: 0, max_hp_gained: 0, max_hp_lost: 0 };
         const lethalRunsHtml = generateRunLinksList(stats.lethalRuns, `Runs where ${monster.name} killed the player`);
         const averagesHtml = generateAveragesPanel(stats, stats.encountered, "Averages for encounters with this monster");
@@ -956,7 +957,7 @@ async function buildMonsters(monsters, runStats, sitemap) {
 
     let maxAvgDmg = 0;
     monsters.forEach(m => {
-        const cleanId = (m.monster_id || '').replace('MONSTER.', '');
+        const cleanId = normalizeId(m.monster_id);
         const stats = runStats.monsterStats[cleanId];
         if (stats && stats.encountered > 0) {
             const avg = stats.damage_taken / stats.encountered;
@@ -966,7 +967,7 @@ async function buildMonsters(monsters, runStats, sitemap) {
 
     const monsterLinks = monsters.map(m => {
         const slug = slugify(m.name);
-        const cleanId = (m.monster_id || '').replace('MONSTER.', '');
+        const cleanId = normalizeId(m.monster_id);
         const stats = runStats.monsterStats[cleanId] || { encountered: 0, kills: 0, damage_taken: 0 };
         const avgDmg = stats.encountered > 0 ? stats.damage_taken / stats.encountered : 0;
         const dmgPercent = maxAvgDmg > 0 ? (avgDmg / maxAvgDmg) * 100 : 0;
@@ -1108,7 +1109,7 @@ async function build() {
             card.description = finalizeDescription(baseDescText);
             card.upgrade = finalizeDescription(upgradedDescText);
 
-            const cleanCardId = (card.card_id || '').replace('CARD.', '');
+            const cleanCardId = normalizeId(card.card_id);
             const rawStats = cardStats.stats[cleanCardId] || { runs: [], seen: 0, wins: 0 };
             const stats = getItemStats(rawStats, cardStats.globalWinRate);
 
@@ -1158,7 +1159,7 @@ async function build() {
         
         const cardLinks = cards.map(card => {
             const slug = slugify(card.name);
-            const cleanCardId = (card.card_id || '').replace('CARD.', '');
+            const cleanCardId = normalizeId(card.card_id);
             const stats = getItemStats(cardStats.stats[cleanCardId], cardStats.globalWinRate);
         return generateCardItemHtml(`/cards/${slug}/`, card.name, stats, card.color);
         }).join('');

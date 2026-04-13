@@ -76,10 +76,10 @@ async function build() {
         const globalWinRate = allRuns.length > 0 ? (globalTotalWins / allRuns.length) * 100 : 0;
 
         // Fetch lookup maps for names to generate accurate slugs and labels
-        const cardLookup = Object.fromEntries((await query("SELECT card_id, name FROM cards")).map(c => [c.card_id, c.name]));
-        const cardColorLookup = Object.fromEntries((await query("SELECT card_id, color FROM cards")).map(c => [c.card_id, c.color]));
+        const cardLookup = Object.fromEntries((await query("SELECT card_id, name FROM cards")).map(c => [normalizeId(c.card_id), c.name]));
+        const cardColorLookup = Object.fromEntries((await query("SELECT card_id, color FROM cards")).map(c => [normalizeId(c.card_id), c.color]));
         const cardNameToColor = Object.fromEntries((await query("SELECT name, color FROM cards")).map(c => [c.name, c.color]));
-        const relicLookup = Object.fromEntries((await query("SELECT relic_id, name FROM relics")).map(r => [r.relic_id, r.name]));
+        const relicLookup = Object.fromEntries((await query("SELECT relic_id, name FROM relics")).map(r => [normalizeId(r.relic_id), r.name]));
         const eventLookup = Object.fromEntries((await query("SELECT event_id, name FROM events")).map(e => [normalizeId(e.event_id), e.name]));
         const encounterLookup = Object.fromEntries((await query("SELECT encounter_id, name FROM encounters")).map(e => [normalizeId(e.encounter_id), e.name]));
         const enchantmentLookup = Object.fromEntries((await query("SELECT enchantment_id, name FROM enchantments")).map(e => [normalizeId(e.enchantment_id), e.name]));
@@ -343,8 +343,9 @@ async function build() {
                 const pathHistory = JSON.parse(run.path_history || '[]');
 
                 const cardsLinks = deck.map(c => {
-                    const name = cardLookup[c.id] || c.id;
-                    const charKey = normalizeId(cardColorLookup[c.id]);
+                    const cid = normalizeId(c.id);
+                    const name = cardLookup[cid] || c.id;
+                    const charKey = normalizeId(cardColorLookup[cid]);
                     const charColor = CHARACTER_COLORS[charKey] || '';
                     const cardStyle = charColor ? `style="color: ${charColor}"` : '';
 
@@ -363,7 +364,11 @@ async function build() {
                     return html;
                 }).join('');
 
-                const relicsLinks = relicIds.map(id => `<a href="/relics/${slugify(relicLookup[id] || id)}/" class="item-link">${relicLookup[id] || id}</a>`).join('');
+                const relicsLinks = relicIds.map(id => {
+                    const rid = normalizeId(id);
+                    const name = relicLookup[rid] || id;
+                    return `<a href="/relics/${slugify(name)}/" class="item-link">${name}</a>`;
+                }).join('');
 
                 const uniqueEventIds = [...new Set(pathHistory.filter(p => p.event_id).map(p => p.event_id))];
                 const eventsLinks = uniqueEventIds.map(id => `<a href="/events/${slugify(eventLookup[id] || id)}/" class="item-link">${eventLookup[id] || id}</a>`).join('');

@@ -1,1 +1,3224 @@
-{}
+{
+  "Alchemize": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "60.0",
+    "seen": 5
+  },
+  "Anointed": {
+    "name": "rarelyvlolent",
+    "slug": "rarelyvlolent",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Automation": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "83.3",
+    "seen": 6
+  },
+  "Beacon of Hope": {
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Beat Down": {
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Believe in You": {
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Bolas": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Calamity": {
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Catastrophe": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Coordinate": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Dark Shackles": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Discovery": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "50.0",
+    "seen": 2
+  },
+  "Dramatic Entrance": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Entropy": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Equilibrium": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "40.0",
+    "seen": 5
+  },
+  "Eternal Armor": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Fasten": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Finesse": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Fisticuffs": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Flash of Steel": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Gang Up": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Gold Axe": {
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Hand of Greed": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "0.0",
+    "seen": 1
+  },
+  "Hidden Gem": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "83.3",
+    "seen": 6
+  },
+  "Huddle Up": {
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Impatience": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Intercept": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "0.0",
+    "seen": 1
+  },
+  "Jack of All Trades": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Jackpot": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Knockdown": {
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Lift": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "50.0",
+    "seen": 2
+  },
+  "Master of Strategy": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Mayhem": {
+    "name": "rarelyvlolent",
+    "slug": "rarelyvlolent",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Mind Blast": {
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Nostalgia": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Omnislice": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "80.0",
+    "seen": 5
+  },
+  "Panache": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Panic Button": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "40.0",
+    "seen": 5
+  },
+  "Prep Time": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "66.7",
+    "seen": 3
+  },
+  "Production": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "80.0",
+    "seen": 5
+  },
+  "Prolong": {
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "9.1",
+    "seen": 11
+  },
+  "Prowess": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "63.2",
+    "seen": 19
+  },
+  "Purity": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Rally": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Restlessness": {
+    "name": "rarelyvlolent",
+    "slug": "rarelyvlolent",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Rolling Boulder": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Salvo": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Scrawl": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Secret Technique": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "50.0",
+    "seen": 2
+  },
+  "Secret Weapon": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Seeker Strike": {
+    "name": "rarelyvlolent",
+    "slug": "rarelyvlolent",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Shockwave": {
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Splash": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Stratagem": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Tag Team": {
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "The Bomb": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Thinking Ahead": {
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "50.0",
+    "seen": 6
+  },
+  "Thrumming Hatchet": {
+    "name": "rarelyvlolent",
+    "slug": "rarelyvlolent",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Ultimate Defend": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "75.0",
+    "seen": 4
+  },
+  "Ultimate Strike": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Volley": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Ascender's Bane": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "61.2",
+    "seen": 49
+  },
+  "Bad Luck": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Clumsy": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "63.6",
+    "seen": 11
+  },
+  "Curse of the Bell": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Debt": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Decay": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "66.7",
+    "seen": 3
+  },
+  "Doubt": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "83.3",
+    "seen": 6
+  },
+  "Enthralled": {
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "75.0",
+    "seen": 4
+  },
+  "Folly": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 4
+  },
+  "Greed": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Guilty": {
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "0.0",
+    "seen": 7
+  },
+  "Injury": {
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "6.7",
+    "seen": 15
+  },
+  "Normality": {
+    "name": "rarelyvlolent",
+    "slug": "rarelyvlolent",
+    "winrate": "0.0",
+    "seen": 2
+  },
+  "Regret": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Shame": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Spore Mind": {
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Adaptive Strike": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 4
+  },
+  "All for One": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "60.0",
+    "seen": 5
+  },
+  "Ball Lightning": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "58.3",
+    "seen": 12
+  },
+  "Barrage": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "42.9",
+    "seen": 21
+  },
+  "Beam Cell": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 5
+  },
+  "Biased Cognition": {
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "50.0",
+    "seen": 2
+  },
+  "Boost Away": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "72.7",
+    "seen": 11
+  },
+  "Boot Sequence": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "66.7",
+    "seen": 6
+  },
+  "Buffer": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Bulk Up": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "85.7",
+    "seen": 7
+  },
+  "Capacitor": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "75.0",
+    "seen": 4
+  },
+  "Chaos": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "50.0",
+    "seen": 2
+  },
+  "Charge Battery": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "58.3",
+    "seen": 12
+  },
+  "Chill": {
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "83.3",
+    "seen": 6
+  },
+  "Claw": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "66.7",
+    "seen": 6
+  },
+  "Cold Snap": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "62.5",
+    "seen": 8
+  },
+  "Compact": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "66.7",
+    "seen": 3
+  },
+  "Compile Driver": {
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "66.7",
+    "seen": 3
+  },
+  "Consuming Shadow": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "83.3",
+    "seen": 6
+  },
+  "Coolant": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Coolheaded": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "80.0",
+    "seen": 5
+  },
+  "Creative AI": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Darkness": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Defend": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "71.4",
+    "seen": 14
+  },
+  "Defragment": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "83.3",
+    "seen": 6
+  },
+  "Double Energy": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Dualcast": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "57.1",
+    "seen": 14
+  },
+  "Echo Form": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Energy Surge": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "100.0",
+    "seen": 6
+  },
+  "FTL": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Feral": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "71.4",
+    "seen": 7
+  },
+  "Fight Through": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Flak Cannon": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Focused Strike": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "62.5",
+    "seen": 8
+  },
+  "Fusion": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "33.3",
+    "seen": 6
+  },
+  "Genetic Algorithm": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Glacier": {
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "54.5",
+    "seen": 11
+  },
+  "Glasswork": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "50.0",
+    "seen": 6
+  },
+  "Go for the Eyes": {
+    "name": "rarelyvlolent",
+    "slug": "rarelyvlolent",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Gunk Up": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Hailstorm": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "75.0",
+    "seen": 4
+  },
+  "Helix Drill": {
+    "name": "rarelyvlolent",
+    "slug": "rarelyvlolent",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Hologram": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "60.0",
+    "seen": 5
+  },
+  "Hotfix": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Hyperbeam": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "66.7",
+    "seen": 6
+  },
+  "Ice Lance": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Ignition": {
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Iteration": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Leap": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "66.7",
+    "seen": 6
+  },
+  "Lightning Rod": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "75.0",
+    "seen": 8
+  },
+  "Loop": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "87.5",
+    "seen": 8
+  },
+  "Machine Learning": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "80.0",
+    "seen": 5
+  },
+  "Meteor Strike": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Modded": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Momentum Strike": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "50.0",
+    "seen": 4
+  },
+  "Multi-Cast": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "100.0",
+    "seen": 4
+  },
+  "Null": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 5
+  },
+  "Overclock": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "80.0",
+    "seen": 5
+  },
+  "Quadcast": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "0.0",
+    "seen": 3
+  },
+  "Rainbow": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Reboot": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Refract": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Rocket Punch": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Scavenge": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Scrape": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Shadow Shield": {
+    "name": "rarelyvlolent",
+    "slug": "rarelyvlolent",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Shatter": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Signal Boost": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Skim": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "54.5",
+    "seen": 22
+  },
+  "Smokestack": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "42.9",
+    "seen": 7
+  },
+  "Spinner": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "66.7",
+    "seen": 3
+  },
+  "Storm": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "80.0",
+    "seen": 5
+  },
+  "Strike": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "63.6",
+    "seen": 11
+  },
+  "Subroutine": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "87.5",
+    "seen": 8
+  },
+  "Sunder": {
+    "name": "rarelyvlolent",
+    "slug": "rarelyvlolent",
+    "winrate": "50.0",
+    "seen": 2
+  },
+  "Supercritical": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Sweeping Beam": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "66.7",
+    "seen": 3
+  },
+  "Synchronize": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "50.0",
+    "seen": 4
+  },
+  "Synthesis": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "75.0",
+    "seen": 4
+  },
+  "TURBO": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "54.5",
+    "seen": 11
+  },
+  "Tempest": {
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "66.7",
+    "seen": 3
+  },
+  "Tesla Coil": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "83.3",
+    "seen": 6
+  },
+  "Thunder": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "60.0",
+    "seen": 5
+  },
+  "Trash to Treasure": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Uproar": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Voltaic": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "80.0",
+    "seen": 5
+  },
+  "White Noise": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "50.0",
+    "seen": 8
+  },
+  "Zap": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "52.4",
+    "seen": 21
+  },
+  "Apotheosis": {
+    "name": "rarelyvlolent",
+    "slug": "rarelyvlolent",
+    "winrate": "83.3",
+    "seen": 6
+  },
+  "Apparition": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Brightest Flame": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Byrd Swoop": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "75.0",
+    "seen": 4
+  },
+  "Caltrops": {
+    "name": "rarelyvlolent",
+    "slug": "rarelyvlolent",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Clash": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "0.0",
+    "seen": 1
+  },
+  "Distraction": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Dual Wield": {
+    "name": "rarelyvlolent",
+    "slug": "rarelyvlolent",
+    "winrate": "33.3",
+    "seen": 3
+  },
+  "Enlightenment": {
+    "name": "rarelyvlolent",
+    "slug": "rarelyvlolent",
+    "winrate": "0.0",
+    "seen": 3
+  },
+  "Entrench": {
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "0.0",
+    "seen": 1
+  },
+  "Exterminate": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "80.0",
+    "seen": 5
+  },
+  "Feeding Frenzy": {
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Hello World": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "0.0",
+    "seen": 1
+  },
+  "Mad Science": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "92.9",
+    "seen": 14
+  },
+  "Maul": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Metamorphosis": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Neow's Fury": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Outmaneuver": {
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Peck": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Rebound": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Relax": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Rip and Tear": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Squash": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "66.7",
+    "seen": 9
+  },
+  "Stack": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "0.0",
+    "seen": 1
+  },
+  "Toric Toughness": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "71.4",
+    "seen": 7
+  },
+  "Whistle": {
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Wish": {
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Aggression": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Anger": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "54.5",
+    "seen": 11
+  },
+  "Armaments": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "75.0",
+    "seen": 4
+  },
+  "Ashen Strike": {
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Barricade": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "66.7",
+    "seen": 3
+  },
+  "Bash": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "75.0",
+    "seen": 4
+  },
+  "Battle Trance": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Blood Wall": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "80.0",
+    "seen": 5
+  },
+  "Bloodletting": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "75.0",
+    "seen": 8
+  },
+  "Bludgeon": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Body Slam": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "75.0",
+    "seen": 4
+  },
+  "Brand": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Break": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Breakthrough": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "62.5",
+    "seen": 8
+  },
+  "Bully": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Burning Pact": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Cascade": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Cinder": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Colossus": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Conflagration": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Corruption": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Crimson Mantle": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Cruelty": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "44.4",
+    "seen": 9
+  },
+  "Dark Embrace": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Demon Form": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "80.0",
+    "seen": 5
+  },
+  "Demonic Shield": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Dismantle": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "71.4",
+    "seen": 7
+  },
+  "Dominate": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "45.5",
+    "seen": 11
+  },
+  "Drum of Battle": {
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "50.0",
+    "seen": 4
+  },
+  "Evil Eye": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "75.0",
+    "seen": 4
+  },
+  "Expect a Fight": {
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "50.0",
+    "seen": 4
+  },
+  "Feed": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Feel No Pain": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "66.7",
+    "seen": 6
+  },
+  "Fiend Fire": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "66.7",
+    "seen": 6
+  },
+  "Fight Me!": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "66.7",
+    "seen": 3
+  },
+  "Flame Barrier": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "85.7",
+    "seen": 7
+  },
+  "Forgotten Ritual": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Grapple": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Havoc": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Headbutt": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Hellraiser": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Hemokinesis": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Howl from Beyond": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 5
+  },
+  "Impervious": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Infernal Blade": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 4
+  },
+  "Inferno": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "75.0",
+    "seen": 4
+  },
+  "Inflame": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Iron Wave": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "75.0",
+    "seen": 8
+  },
+  "Juggernaut": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Juggling": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Mangle": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Molten Fist": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "42.9",
+    "seen": 21
+  },
+  "Offering": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "One-Two Punch": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Pact's End": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Perfected Strike": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Pillage": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "71.4",
+    "seen": 7
+  },
+  "Pommel Strike": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "54.5",
+    "seen": 11
+  },
+  "Primal Force": {
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Pyre": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "75.0",
+    "seen": 4
+  },
+  "Rage": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "80.0",
+    "seen": 5
+  },
+  "Rampage": {
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Rupture": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "83.3",
+    "seen": 6
+  },
+  "Second Wind": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Setup Strike": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Shrug It Off": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Spite": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "80.0",
+    "seen": 5
+  },
+  "Stampede": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "83.3",
+    "seen": 6
+  },
+  "Stoke": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "66.7",
+    "seen": 3
+  },
+  "Stomp": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "60.0",
+    "seen": 5
+  },
+  "Stone Armor": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Sword Boomerang": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 4
+  },
+  "Taunt": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 4
+  },
+  "Tear Asunder": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Thrash": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Thunderclap": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "80.0",
+    "seen": 5
+  },
+  "Tremble": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "True Grit": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "76.9",
+    "seen": 13
+  },
+  "Twin Strike": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Unmovable": {
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Unrelenting": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Uppercut": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "87.5",
+    "seen": 8
+  },
+  "Vicious": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Whirlwind": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "83.3",
+    "seen": 6
+  },
+  "Afterlife": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Banshee's Cry": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 4
+  },
+  "Blight Strike": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Bodyguard": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "66.7",
+    "seen": 15
+  },
+  "Bone Shards": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Borrowed Time": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Bury": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Calcify": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Call of the Void": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "75.0",
+    "seen": 4
+  },
+  "Capture Spirit": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "75.0",
+    "seen": 4
+  },
+  "Cleanse": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Countdown": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "75.0",
+    "seen": 4
+  },
+  "Danse Macabre": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "71.4",
+    "seen": 7
+  },
+  "Death March": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Death's Door": {
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "85.7",
+    "seen": 7
+  },
+  "Deathbringer": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Debilitate": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Defile": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "75.0",
+    "seen": 4
+  },
+  "Defy": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "83.3",
+    "seen": 12
+  },
+  "Delay": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Demesne": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 6
+  },
+  "Devour Life": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "58.3",
+    "seen": 12
+  },
+  "Dirge": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Drain Power": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "60.0",
+    "seen": 5
+  },
+  "Dredge": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "60.0",
+    "seen": 5
+  },
+  "Eidolon": {
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "End of Days": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Enfeebling Touch": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "85.7",
+    "seen": 7
+  },
+  "Eradicate": {
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Fear": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Fetch": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 7
+  },
+  "Flatten": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Forbidden Grimoire": {
+    "name": "rarelyvlolent",
+    "slug": "rarelyvlolent",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Friendship": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 8
+  },
+  "Glimpse Beyond": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Grave Warden": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "81.8",
+    "seen": 11
+  },
+  "Graveblast": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "75.0",
+    "seen": 8
+  },
+  "Hang": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Haunt": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "66.7",
+    "seen": 3
+  },
+  "High Five": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Invoke": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "62.5",
+    "seen": 8
+  },
+  "Legion of Bone": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "83.3",
+    "seen": 6
+  },
+  "Lethality": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "80.0",
+    "seen": 5
+  },
+  "Melancholy": {
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Misery": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "50.0",
+    "seen": 10
+  },
+  "Necro Mastery": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Negative Pulse": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "75.0",
+    "seen": 8
+  },
+  "Neurosurge": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "80.0",
+    "seen": 5
+  },
+  "No Escape": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Oblivion": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Pagestorm": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "80.0",
+    "seen": 5
+  },
+  "Parse": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Poke": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Protector": {
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Pull Aggro": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "71.4",
+    "seen": 7
+  },
+  "Pull from Below": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "50.0",
+    "seen": 4
+  },
+  "Putrefy": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Rattle": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Reanimate": {
+    "name": "rarelyvlolent",
+    "slug": "rarelyvlolent",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Reap": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "85.7",
+    "seen": 7
+  },
+  "Reaper Form": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Reave": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "50.0",
+    "seen": 2
+  },
+  "Right Hand Hand": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Sacrifice": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Scourge": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "60.0",
+    "seen": 5
+  },
+  "Sculpting Strike": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "66.7",
+    "seen": 3
+  },
+  "Seance": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Sentry Mode": {
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Severance": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Shared Fate": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Shroud": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Sic 'Em": {
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Sleight of Flesh": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "83.3",
+    "seen": 6
+  },
+  "Snap": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Soul Storm": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "66.7",
+    "seen": 3
+  },
+  "Sow": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Spirit of Ash": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "75.0",
+    "seen": 4
+  },
+  "Spur": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Squeeze": {
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "The Scythe": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "36.4",
+    "seen": 11
+  },
+  "Time's Up": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Transfigure": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "66.7",
+    "seen": 3
+  },
+  "Undeath": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 4
+  },
+  "Unleash": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "68.8",
+    "seen": 16
+  },
+  "Veilpiercer": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Wisp": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Byrdonis Egg": {
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "0.0",
+    "seen": 4
+  },
+  "Lantern Key": {
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "0.0",
+    "seen": 4
+  },
+  "Spoils Map": {
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "0.0",
+    "seen": 20
+  },
+  "Alignment": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "70.0",
+    "seen": 10
+  },
+  "Arsenal": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Astral Pulse": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "BEGONE!": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "100.0",
+    "seen": 5
+  },
+  "Beat into Shape": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "80.0",
+    "seen": 5
+  },
+  "Big Bang": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "87.5",
+    "seen": 8
+  },
+  "Black Hole": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "66.7",
+    "seen": 12
+  },
+  "Bombardment": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 6
+  },
+  "Bulwark": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "80.0",
+    "seen": 5
+  },
+  "Bundle of Joy": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "CHARGE!!": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Celestial Might": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Child of the Stars": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "77.8",
+    "seen": 9
+  },
+  "Cloak of Stars": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "75.0",
+    "seen": 8
+  },
+  "Collision Course": {
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Comet": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "80.0",
+    "seen": 5
+  },
+  "Conqueror": {
+    "name": "rarelyvlolent",
+    "slug": "rarelyvlolent",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Convergence": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "83.3",
+    "seen": 6
+  },
+  "Cosmic Indifference": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "83.3",
+    "seen": 6
+  },
+  "Crash Landing": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Crescent Spear": {
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "28.6",
+    "seen": 7
+  },
+  "Crush Under": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "85.7",
+    "seen": 7
+  },
+  "Decisions, Decisions": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "75.0",
+    "seen": 4
+  },
+  "Devastate": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Dying Star": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "66.7",
+    "seen": 3
+  },
+  "Falling Star": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "90.0",
+    "seen": 10
+  },
+  "Foregone Conclusion": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Furnace": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "83.3",
+    "seen": 6
+  },
+  "GUARDS!!!": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Gamma Blast": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Gather Light": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "77.8",
+    "seen": 9
+  },
+  "Genesis": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 4
+  },
+  "Glimmer": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Glitterstream": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 9
+  },
+  "Glow": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "69.6",
+    "seen": 23
+  },
+  "Guiding Star": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Hammer Time": {
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Heavenly Drill": {
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Hegemony": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "75.0",
+    "seen": 8
+  },
+  "Heirloom Hammer": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Hidden Cache": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "69.2",
+    "seen": 13
+  },
+  "I Am Invincible": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Kingly Kick": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Kingly Punch": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "50.0",
+    "seen": 2
+  },
+  "Knockout Blow": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "50.0",
+    "seen": 2
+  },
+  "Know Thy Place": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "75.0",
+    "seen": 8
+  },
+  "Largesse": {
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Lunar Blast": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Make It So": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "66.7",
+    "seen": 3
+  },
+  "Manifest Authority": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "66.7",
+    "seen": 6
+  },
+  "Meteor Shower": {
+    "name": "rarelyvlolent",
+    "slug": "rarelyvlolent",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Monarch's Gaze": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Monologue": {
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Neutron Aegis": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "80.0",
+    "seen": 5
+  },
+  "Orbit": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "83.3",
+    "seen": 6
+  },
+  "Pale Blue Dot": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "80.0",
+    "seen": 5
+  },
+  "Parry": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Particle Wall": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "72.7",
+    "seen": 11
+  },
+  "Patter": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "80.0",
+    "seen": 10
+  },
+  "Photon Cut": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 6
+  },
+  "Pillar of Creation": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "66.7",
+    "seen": 3
+  },
+  "Prophesize": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "75.0",
+    "seen": 4
+  },
+  "Quasar": {
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "23.1",
+    "seen": 13
+  },
+  "Radiate": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "70.0",
+    "seen": 10
+  },
+  "Refine Blade": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "83.3",
+    "seen": 6
+  },
+  "Reflect": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "50.0",
+    "seen": 12
+  },
+  "Resonance": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "80.0",
+    "seen": 5
+  },
+  "Royal Gamble": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "50.0",
+    "seen": 4
+  },
+  "Royalties": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Seeking Edge": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 4
+  },
+  "Seven Stars": {
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "80.0",
+    "seen": 5
+  },
+  "Shining Strike": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Solar Strike": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "80.0",
+    "seen": 5
+  },
+  "Spectrum Shift": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "60.0",
+    "seen": 5
+  },
+  "Spoils of Battle": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "62.5",
+    "seen": 8
+  },
+  "Stardust": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "50.0",
+    "seen": 4
+  },
+  "Summon Forth": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 7
+  },
+  "Supermassive": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Sword Sage": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Terraforming": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "80.0",
+    "seen": 5
+  },
+  "The Sealed Throne": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "The Smith": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "100.0",
+    "seen": 5
+  },
+  "Tyranny": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Venerate": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "83.3",
+    "seen": 12
+  },
+  "Void Form": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "83.3",
+    "seen": 6
+  },
+  "Wrought in War": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "80.0",
+    "seen": 5
+  },
+  "Abrasive": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Accelerant": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Accuracy": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "58.8",
+    "seen": 17
+  },
+  "Acrobatics": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "88.9",
+    "seen": 9
+  },
+  "Adrenaline": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "80.0",
+    "seen": 10
+  },
+  "Afterimage": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 6
+  },
+  "Anticipate": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "75.0",
+    "seen": 4
+  },
+  "Assassinate": {
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "66.7",
+    "seen": 3
+  },
+  "Backflip": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "53.1",
+    "seen": 32
+  },
+  "Backstab": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Blade Dance": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "83.3",
+    "seen": 6
+  },
+  "Blade of Ink": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "50.0",
+    "seen": 2
+  },
+  "Blur": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "83.3",
+    "seen": 6
+  },
+  "Bouncing Flask": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Bubble Bubble": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Bullet Time": {
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Burst": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 4
+  },
+  "Calculated Gamble": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Cloak and Dagger": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "85.7",
+    "seen": 7
+  },
+  "Corrosive Wave": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Dagger Spray": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "64.3",
+    "seen": 14
+  },
+  "Dagger Throw": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "83.3",
+    "seen": 6
+  },
+  "Dash": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Deadly Poison": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "85.7",
+    "seen": 7
+  },
+  "Deflect": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Dodge and Roll": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Echoing Slash": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "66.7",
+    "seen": 6
+  },
+  "Envenom": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Escape Plan": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "88.9",
+    "seen": 9
+  },
+  "Expertise": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Expose": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "81.0",
+    "seen": 21
+  },
+  "Fan of Knives": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Finisher": {
+    "name": "rarelyvlolent",
+    "slug": "rarelyvlolent",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Flanking": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "50.0",
+    "seen": 8
+  },
+  "Flechettes": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "62.5",
+    "seen": 8
+  },
+  "Flick-Flack": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 5
+  },
+  "Follow Through": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Footwork": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 9
+  },
+  "Grand Finale": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Hand Trick": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "50.0",
+    "seen": 4
+  },
+  "Haze": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "88.9",
+    "seen": 9
+  },
+  "Hidden Daggers": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "58.3",
+    "seen": 12
+  },
+  "Infinite Blades": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "50.0",
+    "seen": 4
+  },
+  "Knife Trap": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "88.9",
+    "seen": 9
+  },
+  "Leading Strike": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "46.7",
+    "seen": 15
+  },
+  "Leg Sweep": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 4
+  },
+  "Malaise": {
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Master Planner": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "33.3",
+    "seen": 3
+  },
+  "Memento Mori": {
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "80.0",
+    "seen": 5
+  },
+  "Mirage": {
+    "name": "rarelyvlolent",
+    "slug": "rarelyvlolent",
+    "winrate": "100.0",
+    "seen": 4
+  },
+  "Murder": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "66.7",
+    "seen": 3
+  },
+  "Neutralize": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "71.4",
+    "seen": 14
+  },
+  "Nightmare": {
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "80.0",
+    "seen": 5
+  },
+  "Noxious Fumes": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "80.0",
+    "seen": 5
+  },
+  "Outbreak": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Phantom Blades": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "75.0",
+    "seen": 4
+  },
+  "Piercing Wail": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "87.5",
+    "seen": 8
+  },
+  "Pinpoint": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "71.4",
+    "seen": 14
+  },
+  "Poisoned Stab": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 7
+  },
+  "Pounce": {
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "75.0",
+    "seen": 4
+  },
+  "Precise Cut": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "66.7",
+    "seen": 3
+  },
+  "Predator": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Prepared": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "90.9",
+    "seen": 11
+  },
+  "Reflex": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Ricochet": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 3
+  },
+  "Serpent Form": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 6
+  },
+  "Shadow Step": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "66.7",
+    "seen": 6
+  },
+  "Shadowmeld": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Skewer": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "71.4",
+    "seen": 7
+  },
+  "Slice": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "66.7",
+    "seen": 3
+  },
+  "Snakebite": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "66.7",
+    "seen": 3
+  },
+  "Sneaky": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "66.7",
+    "seen": 3
+  },
+  "Speedster": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 2
+  },
+  "Storm of Steel": {
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "71.4",
+    "seen": 7
+  },
+  "Strangle": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "100.0",
+    "seen": 6
+  },
+  "Sucker Punch": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "69.2",
+    "seen": 13
+  },
+  "Suppress": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "62.5",
+    "seen": 8
+  },
+  "Survivor": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "73.3",
+    "seen": 15
+  },
+  "Tactician": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "83.3",
+    "seen": 6
+  },
+  "The Hunt": {
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "75.0",
+    "seen": 4
+  },
+  "Tools of the Trade": {
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 5
+  },
+  "Tracking": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "85.7",
+    "seen": 14
+  },
+  "Untouchable": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "80.0",
+    "seen": 10
+  },
+  "Up My Sleeve": {
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "61.1",
+    "seen": 18
+  },
+  "Well-Laid Plans": {
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 6
+  },
+  "Wraith Form": {
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "100.0",
+    "seen": 1
+  }
+}
