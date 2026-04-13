@@ -54,7 +54,6 @@
 	--spire-orange: #e67e22;
     --spire-upgrade: #7fff00;
     
-    font-family: 'Kreon', serif;
     font-size: 1.4rem;
     line-height: 1.6;
 }
@@ -66,7 +65,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 html, body { margin: 0 !important; }
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Kreon', serif;
     background: var(--bg);
     color: var(--text);
     padding: 20px;
