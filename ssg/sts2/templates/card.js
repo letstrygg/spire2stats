@@ -27,7 +27,7 @@ export function cardDetailTemplate(card, stats, videosHtml, costDisplay, upgCost
                 <div class="card-footer">${card.rarity}</div>
             </div>
             <div class="card-arrow">→</div>
-            <div class="card">
+            <div class="card ${charKey}">
                 <div class="cost-circle">${upgCostDisplay}</div>
                 <div class="card-title text-green">${card.name}+</div>
                 <div class="type-banner">${card.color || ''} ${card.type}</div>
