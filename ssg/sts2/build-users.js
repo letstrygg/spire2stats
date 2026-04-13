@@ -129,6 +129,23 @@ async function build() {
             const userTotal = userRuns.length;
             const userWinRateNum = calculateWinRate(userRuns);
 
+            // Calculate total completed ascensions for the summary panel
+            const charIds = ['ironclad', 'silent', 'defect', 'necrobinder', 'regent'];
+            const maxAscensionsMap = {};
+            charIds.forEach(id => maxAscensionsMap[id] = -1);
+            userRuns.filter(r => r.win).forEach(run => {
+                const cid = normalizeId(run.character);
+                if (maxAscensionsMap.hasOwnProperty(cid)) {
+                    const level = run.ascension || 0;
+                    if (level > maxAscensionsMap[cid]) {
+                        maxAscensionsMap[cid] = level;
+                    }
+                }
+            });
+            // Beating level 0 counts as 1 completion, level 10 counts as 11 completions
+            const totalCompletedAscensions = Object.values(maxAscensionsMap)
+                .reduce((sum, val) => sum + (val === -1 ? 0 : val + 1), 0);
+
             const userStats = {
                 seen: userTotal,
                 wins: userWins,
@@ -138,7 +155,6 @@ async function build() {
             };
 
             // --- CHARACTER PERFORMANCE PANELS ---
-            const charIds = ['ironclad', 'silent', 'defect', 'necrobinder', 'regent'];
             const charPanelsHtml = charIds.map(charId => {
                 const charRuns = userRuns.filter(r => normalizeId(r.character) === charId);
                 const color = CHARACTER_COLORS[charId] || '#444';
@@ -271,6 +287,23 @@ async function build() {
                 </div>`;
             }).join('');
 
+            const userHeaderStatsHtml = `
+            <div class="game-page-wrapper">
+                <div class="panel flex-row gap-md" style="align-items: center; width: fit-content; margin-bottom: 25px; padding: 12px 20px; background: rgba(0,0,0,0.2);">
+                    <img src="/images/sts2_images/ui/stats/stats_swords.png" style="height: 42px; width: auto;" alt="Stats">
+                    <div style="display: flex; flex-direction: column; gap: 2px;">
+                        <div style="font-size: 1.1rem; font-weight: bold; line-height: 1.2;">
+                            <span style="color: var(--text);">Ascensions</span>
+                            <span style="color: var(--spire-blue); margin-left: 4px;">${totalCompletedAscensions} / 50</span>
+                        </div>
+                        <div style="font-size: 0.95rem; font-weight: 600; line-height: 1.2;">
+                            <span style="color: var(--spire-upgrade);">${userWins} Wins</span>
+                            <span style="color: var(--spire-red); margin-left: 10px;">${userTotal - userWins} Losses</span>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+
             // --- USER DIRECTORY (index.html) ---
             const runLinksHtml = userRuns.map(run => generateRunCardHtml(run, user)).join('');
 
@@ -305,6 +338,7 @@ async function build() {
                 user.display_name,
                 `
                 ${generateItemSummaryBox(user.display_name, userStats)}
+                ${userHeaderStatsHtml}
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 40px;">
                     ${charPanelsHtml}
                 </div>
