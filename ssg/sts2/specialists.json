@@ -14,8 +14,8 @@
   "Automation": {
     "name": "letstrygg",
     "slug": "letstrygg",
-    "winrate": "83.3",
-    "seen": 6
+    "winrate": "85.7",
+    "seen": 7
   },
   "Beacon of Hope": {
     "name": "vetres3",
@@ -348,10 +348,10 @@
     "seen": 1
   },
   "Ultimate Defend": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "75.0",
-    "seen": 4
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Ultimate Strike": {
     "name": "Dead3y3",
@@ -2259,7 +2259,7 @@
     "name": "letstrygg",
     "slug": "letstrygg",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 2
   },
   "Child of the Stars": {
     "name": "0_tripwire_ 0",
@@ -2514,8 +2514,8 @@
     "seen": 5
   },
   "Orbit": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
+    "name": "letstrygg",
+    "slug": "letstrygg",
     "winrate": "83.3",
     "seen": 6
   },
@@ -2594,8 +2594,8 @@
   "Royal Gamble": {
     "name": "letstrygg",
     "slug": "letstrygg",
-    "winrate": "50.0",
-    "seen": 4
+    "winrate": "60.0",
+    "seen": 5
   },
   "Royalties": {
     "name": "Falterfire",
@@ -2642,8 +2642,8 @@
   "Stardust": {
     "name": "letstrygg",
     "slug": "letstrygg",
-    "winrate": "50.0",
-    "seen": 4
+    "winrate": "60.0",
+    "seen": 5
   },
   "Summon Forth": {
     "name": "Falterfire",
