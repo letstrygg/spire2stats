@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#111111">
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-W4TMS5FL');</script>
+    <!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <title>Ranking Info | Spire 2 Stats</title>
+    <meta name="description" content="Learn how Bayesian average rankings work on Spire 2 Stats.">
+    
+    <meta property="og:site_name" content="Spire 2 Stats">
+    <meta property="og:type" content="website">
+    
+    <meta property="og:title" content="Ranking Info | Spire 2 Stats">
+    <meta property="og:description" content="Learn how Bayesian average rankings work on Spire 2 Stats.">
+    <!-- <meta property="og:image" content="https://spire2stats.com/images/default-run-preview.jpg"> -->
+    <meta property="twitter:card" content="summary">
+    
+    <meta property="twitter:title" content="Ranking Info | Spire 2 Stats">
+    <meta property="twitter:description" content="Learn how Bayesian average rankings work on Spire 2 Stats.">
+    <!-- <meta property="twitter:image" content="https://spire2stats.com/images/default-run-preview.jpg"> -->
+    
+    
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "spire2stats.com",
+      "item": "https://spire2stats.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Info"
+    }
+  ]
+}
+</script>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W4TMS5FL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+<nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
+        <div><a href="/">spire2stats</a> / info</div>
+        <div style="display: flex; align-items: baseline; gap: 20px;">
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-13T06:42:39.967Z">April 12, 2026</time></div>
+            <div class="auth-dropdown-container">
+                <button id="auth-user-btn" class="auth-trigger">Loading...</button>
+                <div id="auth-dropdown-menu" class="auth-menu-content"></div>
+            </div>
+        </div>
+    </nav>
+    <div class="item-box" style="max-width: 900px; margin: 0 auto; text-align: left;">
+        <h2 style="margin-bottom: 25px; border-bottom: 1px solid #333; padding-bottom: 10px; font-size: 1.4rem;">Ranking Methodology</h2>
+        
+        <div class="description">
+            <p>Spire 2 Stats displays a simple percentage win rate and total run count on card items because they are intuitive and easy to understand at a glance. However, to ensure that card rankings are fair and meaningful, we use a <strong>Bayesian Average</strong> for sorting.</p>
+            
+            <p>This prevents "lucky" cards with only 1 run and 1 win from dominating the top of the lists, ensuring that 1-win cards aren't all at the top while letting proven cards climb as they deserve.</p>
+
+            <div style="background: rgba(0,0,0,0.2); padding: 25px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin: 30px 0;">
+                <h3 style="margin-top: 0; color: var(--gold);">Bayesian Average</h3>
+                <p>This is used by sites like IMDb for movie ratings. It pads a card's win rate with the <em>average win rate of all cards</em> until the card proves it deserves to be higher or lower.</p>
+                
+                <ul style="line-height: 1.8; list-style-type: none; padding-left: 0;">
+                    <li style="margin-bottom: 15px;">
+                        <strong>Formula:</strong> <i>Score</i> = 
+                        <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline">
+                            <mfrac>
+                                <mrow>
+                                    <mi>C</mi>
+                                    <mo>&times;</mo>
+                                    <mi>M</mi>
+                                    <mo>+</mo>
+                                    <mi>R</mi>
+                                    <mo>&times;</mo>
+                                    <mi>W</mi>
+                                </mrow>
+                                <mrow>
+                                    <mi>C</mi>
+                                    <mo>+</mo>
+                                    <mi>R</mi>
+                                </mrow>
+                            </mfrac>
+                        </math>
+                    </li>
+                    <li style="margin-bottom: 10px;">
+                        <strong>Variables:</strong>
+                        <ul style="margin-top: 5px; margin-bottom: 10px; padding-left: 20px; list-style-type: none;">
+                            <li style="margin-bottom: 5px;">• <i>C</i> is a confidence constant (e.g., <strong>5 runs</strong>). This represents how much "weight" we give the global average before trusting specific data.</li>
+                            <li style="margin-bottom: 5px;">• <i>M</i> is the global average win rate across all your cards.</li>
+                            <li style="margin-bottom: 5px;">• <i>R</i> is the runs with this specific card.</li>
+                            <li style="margin-bottom: 5px;">• <i>W</i> is the card's actual win rate.</li>
+                        </ul>
+                    </li>
+                    <li style="margin-bottom: 5px;">
+                        <strong>Pros:</strong> Highly accurate; naturally adjusts to the player's overall skill level.
+                    </li>
+                    <li>
+                        <strong>Cons:</strong> Requires calculating the global average win rate first.
+                    </li>
+                </ul>
+            </div>
+
+            <h3 style="margin-top: 40px; border-bottom: 1px solid #333; padding-bottom: 10px;">Example</h3>
+            <p>Using a <strong>Confidence Constant (<i>C</i>) of 5</strong>, and a character's <strong>Global Average Win Rate (<i>M</i>) of 20% (0.20)</strong>.</p>
+
+            <ul style="line-height: 1.6; list-style-type: none; padding-left: 0;">
+                <li style="margin-bottom: 25px;">
+                    <strong style="color: var(--subtitle);">Example 1: The "Lucky" Card (1 run, 1 win)</strong><br>
+                    Even though this card has a 100% actual win rate (<i>W</i> = 1.0) over 1 run (<i>R</i> = 1), the formula pulls it down toward the 20% average because we lack confidence in a single run.<br>
+                    <div style="font-family: monospace; background: #111; padding: 10px; border-radius: 4px; margin-top: 10px;">
+                        Score = (5 &times; 0.20 + 1 &times; 1.0) &divide; (5 + 1) = 2 &divide; 6 = <strong>33.3%</strong>
+                    </div>
+                </li>
+                
+                <li style="margin-bottom: 25px;">
+                    <strong style="color: var(--subtitle);">Example 2: The "Proven" Card (10 runs, 6 wins)</strong><br>
+                    This card has a lower actual win rate of 60% (<i>W</i> = 0.60) over 10 runs (<i>R</i> = 10). Because it has proven itself over more runs (overcoming the confidence constant), it doesn't get dragged down as much.<br>
+                    <div style="font-family: monospace; background: #111; padding: 10px; border-radius: 4px; margin-top: 10px;">
+                        Score = (5 &times; 0.20 + 10 &times; 0.60) &divide; (5 + 10) = 7 &divide; 15 = <strong>46.7%</strong>
+                    </div>
+                </li>
+            </ul>
+            
+            <p style="margin-top: 30px; padding: 15px; background: rgba(0,232,255,0.05); border-left: 4px solid var(--subtitle); font-style: italic;">
+                <strong>The Result:</strong> The proven 60% card (46.7% Bayesian Score) correctly outranks the lucky 100% card (33.3% Bayesian Score).
+            </p>
+        </div>
+    </div>
+    
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+    (function() {
+    console.log("Auth: Initializing global client...");
+    window.supabaseClient = window.supabase.createClient('https://fnwmtytnltmqjaflfwyr.supabase.co', 'sb_publishable_y12qZF_dSbUPmV_aieiUgA_CibDsxQV', { auth: { lock: null } });
+    const supabase = window.supabaseClient;
+
+    const btn = document.getElementById('auth-user-btn'), menu = document.getElementById('auth-dropdown-menu');
+
+    btn.onclick = (e) => { 
+        e.stopPropagation(); 
+        menu.classList.toggle('show'); 
+    };
+    document.onclick = () => menu.classList.remove('show');
+
+    window.authLogin = (provider) => supabase.auth.signInWithOAuth({ provider });
+    window.authLogout = () => {
+        localStorage.removeItem('s2s_user_cache');
+        return supabase.auth.signOut().then(() => location.reload());
+    };
+
+    let currentUid = null;
+    supabase.auth.onAuthStateChange(async (event, session) => {
+        console.log("Auth: Event ->", event);
+        const user = session?.user;
+        
+        if (!user) {
+            currentUid = null;
+            btn.textContent = 'Login';
+            menu.innerHTML = '<button onclick="authLogin(\'google\')">Google</button><button onclick="authLogin(\'twitch\')">Twitch</button>';
+            localStorage.removeItem('s2s_user_cache');
+            return;
+        }
+
+        if (user.id !== currentUid) {
+            currentUid = user.id;
+
+            // Check cache immediately to prevent "Account" flicker
+            const cache = JSON.parse(localStorage.getItem('s2s_user_cache') || '{}');
+            if (cache.uid === user.id && cache.username) {
+                btn.textContent = cache.username;
+            } else {
+                btn.textContent = 'Account';
+            }
+
+            menu.innerHTML = '<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>';
+
+            setTimeout(async () => {
+                console.log("Auth: Fetching profile for", user.id);
+                const { data } = await supabase.from('ltg_profiles').select('username').eq('user_id', user.id).maybeSingle();
+                console.log("Auth: Query finished. Data:", data);
+                if (data?.username) {
+                    console.log("Auth: Username found ->", data.username);
+                    btn.textContent = data.username;
+                    localStorage.setItem('s2s_user_cache', JSON.stringify({ uid: user.id, username: data.username }));
+                }
+            }, 500);
+        }
+    });
+})();
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const supabase = window.supabaseClient;
+    if (!supabase) return;
+
+    let currentUserId = null;
+
+    // Helper to extract the 11-character YouTube ID from various URL formats or raw IDs
+    const extractYoutubeId = (url) => {
+        if (!url) return null;
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=|\/shorts\/)([^#&?]*).*/;
+        const match = url.match(regExp);
+        return (match && match[2].length === 11) ? match[2] : (url.length === 11 ? url : null);
+    };
+
+    const authChange = (event, session) => {
+        const user = session?.user;
+        if (user) {
+            currentUserId = user.id;
+            document.querySelectorAll('.run-record').forEach(card => {
+                if (card.dataset.userId === currentUserId) {
+                    const btn = card.querySelector('.edit-run-videos-btn');
+                    if (btn) btn.style.display = 'block';
+                }
+            });
+        }
+    };
+
+    supabase.auth.onAuthStateChange(authChange);
+    supabase.auth.getSession().then(({data}) => authChange('INITIAL', data.session));
+
+    document.addEventListener('click', async (e) => {
+        const btn = e.target.closest('.edit-run-videos-btn');
+        if (!btn) return;
+
+        const card = btn.closest('.run-record');
+        const editArea = card.querySelector('.run-edit-area');
+        const runId = card.dataset.runId;
+
+        if (btn.textContent === 'settings') {
+            // Enter Edit Mode
+            btn.textContent = 'save';
+            btn.style.color = 'var(--green)';
+            editArea.style.display = 'block';
+            
+            const ytVideo = card.dataset.ytVideo || '';
+            const shorts = JSON.parse(card.dataset.shorts || '[]');
+
+            editArea.innerHTML = `
+                <div class="edit-box" style="background: rgba(0,0,0,0.9); border: 1px solid #444; border-radius: 8px; padding: 15px; margin-top: 10px; font-size: 0.8rem; display: flex; flex-direction: column; gap: 12px; text-align: left;">
+                    <div>
+                        <label style="display: block; color: #888; margin-bottom: 4px; text-transform: uppercase; font-size: 0.65rem;">Add YouTube Video</label>
+                        <input type="text" class="input" value="${ytVideo}" placeholder="Paste YouTube URL..." style="width: 100%; box-sizing: border-box; background: #222; border: 1px solid #444; color: #eee; padding: 6px; border-radius: 4px;">
+                    </div>
+                    <div>
+                        <label style="display: block; color: #888; margin-bottom: 4px; text-transform: uppercase; font-size: 0.65rem;">Add YouTube Short URL</label>
+                        <div style="display: flex; gap: 8px; align-items: stretch;">
+                            <input type="text" class="input" placeholder="Paste Short URL..." style="flex: 1; min-width: 0; box-sizing: border-box; background: #222; border: 1px solid #444; color: #eee; padding: 6px; border-radius: 4px;">
+                            <button class="btn btn-blue" style="padding: 6px 12px; font-size: 0.7rem; white-space: nowrap;">Add</button>
+                        </div>
+                    </div>
+                    <div class="edit-shorts-list" style="display: flex; gap: 10px; flex-wrap: wrap;"></div>
+                </div>
+            `;
+
+            const list = editArea.querySelector('.edit-shorts-list');
+            const updateShortsUI = () => {
+                const current = JSON.parse(card.dataset.shorts || '[]');
+                list.innerHTML = current.map((s, idx) => `
+                    <div style="position: relative; display: inline-block;">
+                        <img src="/images/250px-Youtube_shorts_icon.svg.png" style="height: 32px; width: auto;" alt="Short">
+                        <span class="remove-short-btn material-symbols-outlined" data-idx="${idx}" style="position: absolute; top: -8px; right: -8px; background: var(--red); color: white; border-radius: 50%; font-size: 14px; cursor: pointer; padding: 2px;">close</span>
+                    </div>
+                `).join('');
+                
+                list.querySelectorAll('.remove-short-btn').forEach(x => {
+                    x.onclick = () => {
+                        const idx = parseInt(x.dataset.idx);
+                        const arr = JSON.parse(card.dataset.shorts || '[]');
+                        arr.splice(idx, 1);
+                        card.dataset.shorts = JSON.stringify(arr);
+                        updateShortsUI();
+                    };
+                });
+            };
+
+            updateShortsUI();
+
+            // Use generic selectors since classes are now standardized
+            const inputs = editArea.querySelectorAll('.input');
+            editArea.querySelector('.btn-blue').onclick = () => {
+                const inp = inputs[1]; // The short URL input
+                const val = inp.value.trim();
+                console.log("[DEBUG] 'Add' button clicked. Raw Input:", val);
+                const shortId = extractYoutubeId(val);
+                console.log("[DEBUG] Extracted Short ID:", shortId);
+                if (!shortId) {
+                    console.warn("[DEBUG] Rejection: Input did not resolve to a valid 11-char YouTube ID.");
+                    return;
+                }
+                const arr = JSON.parse(card.dataset.shorts || '[]');
+                arr.push(shortId);
+                card.dataset.shorts = JSON.stringify(arr);
+                console.log("[DEBUG] Updated local shorts dataset:", card.dataset.shorts);
+                inp.value = '';
+                updateShortsUI();
+            };
+
+        } else {
+            // Save and Exit
+            console.log("[DEBUG] 'Save' (Gear) clicked. Run ID target:", runId);
+            const inputs = editArea.querySelectorAll('.input');
+            const ytInput = inputs[0];
+            const shortInput = inputs[1];
+            
+            const newYt = extractYoutubeId(ytInput.value.trim());
+            console.log("[DEBUG] Primary Video ID to save:", newYt);
+            
+            // Capture any pending text in the short input box that wasn't "Added" yet
+            const pendingShort = extractYoutubeId(shortInput.value.trim());
+            const finalShorts = JSON.parse(card.dataset.shorts || '[]');
+            if (pendingShort && !finalShorts.includes(pendingShort)) {
+                console.log("[DEBUG] Adding pending text from input box to final list:", pendingShort);
+                finalShorts.push(pendingShort);
+            }
+            console.log("[DEBUG] Final Shorts array being sent to Supabase:", finalShorts);
+
+            btn.style.pointerEvents = 'none';
+            btn.textContent = 'sync'; // Show loading state
+
+            const updatePayload = { yt_video: newYt, shorts: finalShorts };
+            console.log("[DEBUG] Sending UPDATE to s2s_runs table:", updatePayload);
+
+            const { data, error } = await supabase.from('s2s_runs').update(updatePayload).eq('id', runId).select();
+            if (error) {
+                console.error("[DEBUG] Supabase Update FAILED:", error);
+                alert("Update failed: " + error.message);
+                btn.textContent = 'save';
+                btn.style.pointerEvents = 'auto';
+            } else {
+                console.log("[DEBUG] Supabase Update SUCCESSFUL. Rows returned:", data);
+                if (!data || data.length === 0) {
+                    console.error("[DEBUG] CRITICAL: Update returned success but 0 rows were modified. This usually means the ID " + runId + " was not found in the 's2s_runs' table or RLS policies blocked the change.");
+                }
+
+                // Increment global counters based on what changed
+                const ytChanged = newYt !== (card.dataset.ytVideo || null);
+                const oldShortsCount = JSON.parse(card.dataset.shorts || '[]').length;
+                const shortsDiff = Math.max(0, finalShorts.length - oldShortsCount);
+
+                if (ytChanged || shortsDiff > 0) {
+                    await supabase.rpc('increment_s2s_global', { 
+                        runs_inc: 0, 
+                        shorts_inc: shortsDiff, 
+                        yt_videos_inc: ytChanged ? 1 : 0 
+                    });
+                }
+
+                // Update local dataset attributes so re-opening the edit box shows the new data
+                card.dataset.ytVideo = newYt || '';
+                card.dataset.shorts = JSON.stringify(finalShorts);
+
+                // Exit Edit Mode
+                editArea.style.display = 'none';
+                btn.textContent = 'settings';
+                btn.style.color = '#e3e3e3';
+                btn.style.pointerEvents = 'auto';
+                console.log("[DEBUG] Edit mode exited. Local card data synchronized.");
+            }
+        }
+    });
+});
+</script>
+</body></html>

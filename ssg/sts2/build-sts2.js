@@ -50,6 +50,7 @@ import { ascensionDetailTemplate } from './templates/ascension.js';
 import { enchantmentDetailTemplate } from './templates/enchantment.js';
 import { settingsTemplate } from './templates/settings.js';
 import { contributeTemplate } from './templates/contribute.js';
+import { infoTemplate } from './templates/info.js';
 
 /**
  * Slay the Spire 2 - Static Site Generator
@@ -933,6 +934,14 @@ async function buildContributePage(sitemap) {
     sitemap.add('/contribute.html');
 }
 
+async function buildInfoPage(sitemap) {
+    console.log('📝 Generating info page...');
+    const html = infoTemplate();
+
+    fs.writeFileSync(path.join(PATHS.WEB_ROOT, 'info.html'), html);
+    sitemap.add('/info.html');
+}
+
 async function buildMonsters(monsters, runStats, sitemap) {
     console.log(`👹 Building ${monsters.length} monster pages...`);
     const root = ensureDir(path.join(PATHS.WEB_ROOT, 'monsters'));
@@ -1294,6 +1303,9 @@ async function build() {
 
         // --- CONTRIBUTE PAGE ---
         await buildContributePage(sitemap);
+
+        // --- INFO PAGE ---
+        await buildInfoPage(sitemap);
 
         // --- SETTINGS PAGE ---
         await buildSettingsPage(sitemap);
