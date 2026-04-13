@@ -1028,7 +1028,15 @@ async function build() {
             const slug = slugify(card.name);
             const cardDir = ensureDir(path.join(cardsRoot, slug));
             
-            const costDisplay = getCostDisplay(card.cost, card.is_x_cost, card.star_cost, card.is_x_star_cost);
+            const energyIconUrl = `/images/sts2_images/ui/compendium/card/energy_${slugify(card.color || 'colorless')}.png`;
+            
+            const generateCostHtml = (costVal, isX, starCost, isXStar) => {
+                const text = getCostDisplay(costVal, isX, starCost, isXStar);
+                if (!text && text !== '0') return ''; // Handle cards without cost (status/curse)
+                return `<img src="${energyIconUrl}" class="cost-icon" alt="Energy"><span class="cost-value">${text}</span>`;
+            };
+
+            const costHtml = generateCostHtml(card.cost, card.is_x_cost, card.star_cost, card.is_x_star_cost);
 
             // Calculate upgraded cost
             let upgCost = card.cost;
@@ -1040,7 +1048,7 @@ async function build() {
                     if (upg.star_cost !== undefined) upgStarCost = upg.star_cost;
                 } catch (e) {}
             }
-            const upgCostDisplay = getCostDisplay(upgCost, card.is_x_cost, upgStarCost, card.is_x_star_cost);
+            const upgCostHtml = generateCostHtml(upgCost, card.is_x_cost, upgStarCost, card.is_x_star_cost);
 
             // Resolve dynamic descriptions for base and upgraded versions
             const vars = card.vars ? JSON.parse(card.vars) : {};
@@ -1092,7 +1100,7 @@ async function build() {
             const upgradedDescText = applyKeywords(parseCardText(card.description, vars, upgradeData, true), true, upgradeData);
 
             // Create the color-specific energy icon HTML
-            const energyIcon = `<img src="/images/sts2_images/ui/compendium/card/energy_${slugify(card.color || 'colorless')}.png" style="height: 1.1em; width: auto; vertical-align: middle; margin-top: -3px;" alt="Energy">`;
+            const energyIcon = `<img src="/images/sts2_images/ui/compendium/card/energy_${slugify(card.color || 'colorless')}.png" style="height: 24px; width: auto; vertical-align: middle; margin-top: -3px;" alt="Energy">`;
             
             /** Final cleanup: replace energy markers with the icon and convert remaining BBCode to HTML */
             const finalizeDescription = (txt) => formatDescription(txt.replace(/\[E\]|\[energy:\d+\]/g, energyIcon));
@@ -1138,7 +1146,7 @@ async function build() {
             }
 
             const videosHtml = generateRunLinksList(rawStats.runs, `Runs featuring ${card.name}`);
-            const detailHtml = cardDetailTemplate(card, stats, videosHtml, costDisplay, upgCostDisplay, `/cards/${slug}/`, topUser);
+            const detailHtml = cardDetailTemplate(card, stats, videosHtml, costHtml, upgCostHtml, `/cards/${slug}/`, topUser);
 
             fs.writeFileSync(path.join(cardDir, 'index.html'), detailHtml);
             sitemap.add(`/cards/${slug}/`);
