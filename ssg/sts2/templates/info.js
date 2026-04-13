@@ -3,20 +3,19 @@ import { wrapLayout } from './shared.js';
 export function infoTemplate() {
     const content = `
     <div class="item-box" style="max-width: 900px; margin: 0 auto; text-align: left;">
-        <h2 style="margin-bottom: 25px; border-bottom: 1px solid #333; padding-bottom: 10px; font-size: 1.4rem;">Ranking Methodology</h2>
         
-        <div class="description">
-            <p>Spire 2 Stats displays a simple percentage win rate and total run count on card items because they are intuitive and easy to understand at a glance. However, to ensure that card rankings are fair and meaningful, we use a <strong>Bayesian Average</strong> for sorting.</p>
+        <div>
+            <p>Spire 2 Stats displays a simple percentage win rate and total run count on card items because they are intuitive and easy to understand at a glance. However, to ensure that card rankings are more useful, we use a <strong>Bayesian Average</strong> for sorting.</p>
             
-            <p>This prevents "lucky" cards with only 1 run and 1 win from dominating the top of the lists, ensuring that 1-win cards aren't all at the top while letting proven cards climb as they deserve.</p>
+            <p>This helps prevent "lucky" cards with only 1 run and 1 win from dominating the top of the lists.</p>
 
             <div style="background: rgba(0,0,0,0.2); padding: 25px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); margin: 30px 0;">
                 <h3 style="margin-top: 0; color: var(--gold);">Bayesian Average</h3>
                 <p>This is used by sites like IMDb for movie ratings. It pads a card's win rate with the <em>average win rate of all cards</em> until the card proves it deserves to be higher or lower.</p>
                 
                 <ul style="line-height: 1.8; list-style-type: none; padding-left: 0;">
-                    <li style="margin-bottom: 15px;">
-                        <strong>Formula:</strong> <i>Score</i> = 
+                    <li>
+                        <i>Score</i> = 
                         <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline">
                             <mfrac>
                                 <mrow>
@@ -36,16 +35,15 @@ export function infoTemplate() {
                             </mfrac>
                         </math>
                     </li>
-                    <li style="margin-bottom: 10px;">
-                        <strong>Variables:</strong>
+                    <li>
                         <ul style="margin-top: 5px; margin-bottom: 10px; padding-left: 20px; list-style-type: none;">
-                            <li style="margin-bottom: 5px;">• <i>C</i> is a confidence constant (e.g., <strong>5 runs</strong>). This represents how much "weight" we give the global average before trusting specific data.</li>
-                            <li style="margin-bottom: 5px;">• <i>M</i> is the global average win rate across all your cards.</li>
-                            <li style="margin-bottom: 5px;">• <i>R</i> is the runs with this specific card.</li>
-                            <li style="margin-bottom: 5px;">• <i>W</i> is the card's actual win rate.</li>
+                            <li><i>C</i> is a confidence constant (e.g., <strong>5 runs</strong>). This represents how much "weight" we give the global average before trusting specific data.</li>
+                            <li><i>M</i> is the global average win rate across all your cards.</li>
+                            <li><i>R</i> is the runs with this specific card.</li>
+                            <li><i>W</i> is the card's actual win rate.</li>
                         </ul>
                     </li>
-                    <li style="margin-bottom: 5px;">
+                    <li>
                         <strong>Pros:</strong> Highly accurate; naturally adjusts to the player's overall skill level.
                     </li>
                     <li>
@@ -54,7 +52,7 @@ export function infoTemplate() {
                 </ul>
             </div>
 
-            <h3 style="margin-top: 40px; border-bottom: 1px solid #333; padding-bottom: 10px;">Example</h3>
+            <h3 style="margin-top: 40px; padding-bottom: 10px;">Example</h3>
             <p>Using a <strong>Confidence Constant (<i>C</i>) of 5</strong>, and a character's <strong>Global Average Win Rate (<i>M</i>) of 20% (0.20)</strong>.</p>
 
             <ul style="line-height: 1.6; list-style-type: none; padding-left: 0;">
