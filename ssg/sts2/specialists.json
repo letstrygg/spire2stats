@@ -1,9 +1,9 @@
 {
   "Alchemize": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "60.0",
-    "seen": 5
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "100.0",
+    "seen": 1
   },
   "Anointed": {
     "name": "rarelyvlolent",
@@ -102,10 +102,10 @@
     "seen": 1
   },
   "Finesse": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "Girsia",
+    "slug": "girsia",
     "winrate": "100.0",
-    "seen": 2
+    "seen": 3
   },
   "Fisticuffs": {
     "name": "Falterfire",
@@ -138,10 +138,10 @@
     "seen": 1
   },
   "Hidden Gem": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "83.3",
-    "seen": 6
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "100.0",
+    "seen": 3
   },
   "Huddle Up": {
     "name": "vetres3",
@@ -150,8 +150,8 @@
     "seen": 1
   },
   "Impatience": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
+    "name": "Girsia",
+    "slug": "girsia",
     "winrate": "100.0",
     "seen": 1
   },
@@ -396,8 +396,8 @@
     "seen": 6
   },
   "Debt": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
+    "name": "Girsia",
+    "slug": "girsia",
     "winrate": "100.0",
     "seen": 1
   },
@@ -540,10 +540,10 @@
     "seen": 5
   },
   "Charge Battery": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "58.3",
-    "seen": 12
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "66.7",
+    "seen": 9
   },
   "Chill": {
     "name": "damianjestem",
@@ -564,9 +564,9 @@
     "seen": 8
   },
   "Compact": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "66.7",
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "100.0",
     "seen": 3
   },
   "Compile Driver": {
@@ -654,10 +654,10 @@
     "seen": 7
   },
   "Fight Through": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "Girsia",
+    "slug": "girsia",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 2
   },
   "Flak Cannon": {
     "name": "Dead3y3",
@@ -720,22 +720,22 @@
     "seen": 3
   },
   "Hologram": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "60.0",
-    "seen": 5
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "62.5",
+    "seen": 8
   },
   "Hotfix": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "100.0",
-    "seen": 2
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "75.0",
+    "seen": 4
   },
   "Hyperbeam": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "66.7",
-    "seen": 6
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "100.0",
+    "seen": 1
   },
   "Ice Lance": {
     "name": "Falterfire",
@@ -750,8 +750,8 @@
     "seen": 1
   },
   "Iteration": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
+    "name": "Girsia",
+    "slug": "girsia",
     "winrate": "100.0",
     "seen": 1
   },
@@ -774,10 +774,10 @@
     "seen": 8
   },
   "Machine Learning": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "80.0",
-    "seen": 5
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "100.0",
+    "seen": 3
   },
   "Meteor Strike": {
     "name": "Falterfire",
@@ -786,10 +786,10 @@
     "seen": 1
   },
   "Modded": {
-    "name": "Laczse",
-    "slug": "laczse",
+    "name": "Girsia",
+    "slug": "girsia",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 2
   },
   "Momentum Strike": {
     "name": "Falterfire",
@@ -864,10 +864,10 @@
     "seen": 5
   },
   "Shatter": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "75.0",
+    "seen": 4
   },
   "Signal Boost": {
     "name": "letstrygg",
@@ -894,10 +894,10 @@
     "seen": 3
   },
   "Storm": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "80.0",
-    "seen": 5
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "100.0",
+    "seen": 3
   },
   "Strike": {
     "name": "Falterfire",
@@ -912,10 +912,10 @@
     "seen": 8
   },
   "Sunder": {
-    "name": "Laczse",
-    "slug": "laczse",
+    "name": "Girsia",
+    "slug": "girsia",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 2
   },
   "Supercritical": {
     "name": "Dead3y3",
@@ -930,10 +930,10 @@
     "seen": 3
   },
   "Synchronize": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
-    "winrate": "50.0",
-    "seen": 4
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "100.0",
+    "seen": 1
   },
   "Synthesis": {
     "name": "0_tripwire_ 0",
@@ -948,10 +948,10 @@
     "seen": 11
   },
   "Tempest": {
-    "name": "Laczse",
-    "slug": "laczse",
-    "winrate": "57.1",
-    "seen": 7
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "75.0",
+    "seen": 4
   },
   "Tesla Coil": {
     "name": "0_tripwire_ 0",
@@ -966,10 +966,10 @@
     "seen": 5
   },
   "Trash to Treasure": {
-    "name": "Laczse",
-    "slug": "laczse",
+    "name": "Girsia",
+    "slug": "girsia",
     "winrate": "100.0",
-    "seen": 2
+    "seen": 3
   },
   "Uproar": {
     "name": "Dead3y3",
@@ -984,10 +984,10 @@
     "seen": 5
   },
   "White Noise": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
-    "winrate": "50.0",
-    "seen": 8
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "75.0",
+    "seen": 4
   },
   "Zap": {
     "name": "Falterfire",
@@ -1068,9 +1068,9 @@
     "seen": 1
   },
   "Hello World": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "0.0",
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "100.0",
     "seen": 1
   },
   "Mad Science": {
@@ -1248,10 +1248,10 @@
     "seen": 2
   },
   "Burning Pact": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
+    "name": "Girsia",
+    "slug": "girsia",
     "winrate": "100.0",
-    "seen": 3
+    "seen": 4
   },
   "Cascade": {
     "name": "SnekNet",
@@ -1332,8 +1332,8 @@
     "seen": 4
   },
   "Evil Eye": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "Girsia",
+    "slug": "girsia",
     "winrate": "75.0",
     "seen": 4
   },
@@ -1374,10 +1374,10 @@
     "seen": 7
   },
   "Forgotten Ritual": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
+    "name": "Girsia",
+    "slug": "girsia",
     "winrate": "100.0",
-    "seen": 3
+    "seen": 4
   },
   "Grapple": {
     "name": "Falterfire",
@@ -1386,16 +1386,16 @@
     "seen": 1
   },
   "Havoc": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "Girsia",
+    "slug": "girsia",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 3
   },
   "Headbutt": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "75.0",
+    "seen": 4
   },
   "Hellraiser": {
     "name": "letstrygg",
@@ -1446,10 +1446,10 @@
     "seen": 8
   },
   "Juggernaut": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "Girsia",
+    "slug": "girsia",
     "winrate": "100.0",
-    "seen": 2
+    "seen": 3
   },
   "Juggling": {
     "name": "Dead3y3",
@@ -1482,10 +1482,10 @@
     "seen": 2
   },
   "Pact's End": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "50.0",
-    "seen": 6
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "100.0",
+    "seen": 4
   },
   "Perfected Strike": {
     "name": "SnekNet",
@@ -1494,16 +1494,16 @@
     "seen": 4
   },
   "Pillage": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
-    "winrate": "71.4",
-    "seen": 7
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "83.3",
+    "seen": 6
   },
   "Pommel Strike": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
-    "winrate": "66.7",
-    "seen": 3
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "57.1",
+    "seen": 7
   },
   "Primal Force": {
     "name": "SnekNet",
@@ -1524,10 +1524,10 @@
     "seen": 5
   },
   "Rampage": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "66.7",
-    "seen": 3
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "80.0",
+    "seen": 5
   },
   "Rupture": {
     "name": "Falterfire",
@@ -1578,10 +1578,10 @@
     "seen": 5
   },
   "Stone Armor": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
+    "name": "Girsia",
+    "slug": "girsia",
     "winrate": "100.0",
-    "seen": 2
+    "seen": 3
   },
   "Sword Boomerang": {
     "name": "Falterfire",
@@ -1644,10 +1644,10 @@
     "seen": 1
   },
   "Unrelenting": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
+    "name": "Girsia",
+    "slug": "girsia",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 4
   },
   "Uppercut": {
     "name": "Falterfire",
@@ -1668,10 +1668,10 @@
     "seen": 6
   },
   "Afterlife": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "80.0",
+    "seen": 5
   },
   "Banshee's Cry": {
     "name": "Dead3y3",
@@ -1794,16 +1794,16 @@
     "seen": 6
   },
   "Devour Life": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "58.3",
-    "seen": 12
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "80.0",
+    "seen": 5
   },
   "Dirge": {
-    "name": "SnekNet",
-    "slug": "sneknet",
-    "winrate": "100.0",
-    "seen": 3
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "87.5",
+    "seen": 8
   },
   "Drain Power": {
     "name": "Dead3y3",
@@ -1884,10 +1884,10 @@
     "seen": 11
   },
   "Graveblast": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
-    "winrate": "75.0",
-    "seen": 8
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "100.0",
+    "seen": 3
   },
   "Hang": {
     "name": "SnekNet",
@@ -1896,10 +1896,10 @@
     "seen": 2
   },
   "Haunt": {
-    "name": "SnekNet",
-    "slug": "sneknet",
+    "name": "Girsia",
+    "slug": "girsia",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 3
   },
   "High Five": {
     "name": "Dead3y3",
@@ -1926,10 +1926,10 @@
     "seen": 5
   },
   "Melancholy": {
-    "name": "SnekNet",
-    "slug": "sneknet",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "75.0",
+    "seen": 4
   },
   "Misery": {
     "name": "0_tripwire_ 0",
@@ -1992,16 +1992,16 @@
     "seen": 1
   },
   "Pull Aggro": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "71.4",
-    "seen": 7
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "75.0",
+    "seen": 8
   },
   "Pull from Below": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "50.0",
-    "seen": 4
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "66.7",
+    "seen": 3
   },
   "Putrefy": {
     "name": "Falterfire",
@@ -2028,16 +2028,16 @@
     "seen": 7
   },
   "Reaper Form": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "55.6",
+    "seen": 9
   },
   "Reave": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
-    "winrate": "50.0",
-    "seen": 2
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "31.3",
+    "seen": 16
   },
   "Right Hand Hand": {
     "name": "SnekNet",
@@ -2070,8 +2070,8 @@
     "seen": 2
   },
   "Sentry Mode": {
-    "name": "damianjestem",
-    "slug": "damianjestem",
+    "name": "Girsia",
+    "slug": "girsia",
     "winrate": "100.0",
     "seen": 3
   },
@@ -2094,10 +2094,10 @@
     "seen": 2
   },
   "Sic 'Em": {
-    "name": "SnekNet",
-    "slug": "sneknet",
-    "winrate": "100.0",
-    "seen": 2
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "83.3",
+    "seen": 6
   },
   "Sleight of Flesh": {
     "name": "Falterfire",
@@ -2112,10 +2112,10 @@
     "seen": 3
   },
   "Soul Storm": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
-    "winrate": "66.7",
-    "seen": 3
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Sow": {
     "name": "Dead3y3",
@@ -2130,10 +2130,10 @@
     "seen": 4
   },
   "Spur": {
-    "name": "SnekNet",
-    "slug": "sneknet",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "75.0",
+    "seen": 4
   },
   "Squeeze": {
     "name": "damianjestem",
@@ -2286,8 +2286,8 @@
     "seen": 8
   },
   "Collision Course": {
-    "name": "vetres3",
-    "slug": "vetres3",
+    "name": "Girsia",
+    "slug": "girsia",
     "winrate": "100.0",
     "seen": 1
   },
@@ -2322,10 +2322,10 @@
     "seen": 1
   },
   "Crescent Spear": {
-    "name": "SnekNet",
-    "slug": "sneknet",
-    "winrate": "54.5",
-    "seen": 11
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "66.7",
+    "seen": 6
   },
   "Crush Under": {
     "name": "Falterfire",
@@ -2370,10 +2370,10 @@
     "seen": 6
   },
   "GUARDS!!!": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
+    "name": "Girsia",
+    "slug": "girsia",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 2
   },
   "Gamma Blast": {
     "name": "Falterfire",
@@ -2412,10 +2412,10 @@
     "seen": 23
   },
   "Guiding Star": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "60.0",
+    "seen": 5
   },
   "Hammer Time": {
     "name": "damianjestem",
@@ -2424,8 +2424,8 @@
     "seen": 2
   },
   "Heavenly Drill": {
-    "name": "damianjestem",
-    "slug": "damianjestem",
+    "name": "Girsia",
+    "slug": "girsia",
     "winrate": "100.0",
     "seen": 2
   },
@@ -2496,10 +2496,10 @@
     "seen": 5
   },
   "Manifest Authority": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "66.7",
-    "seen": 6
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "71.4",
+    "seen": 7
   },
   "Meteor Shower": {
     "name": "rarelyvlolent",
@@ -2538,8 +2538,8 @@
     "seen": 5
   },
   "Parry": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "Girsia",
+    "slug": "girsia",
     "winrate": "100.0",
     "seen": 3
   },
@@ -2574,10 +2574,10 @@
     "seen": 4
   },
   "Quasar": {
-    "name": "SnekNet",
-    "slug": "sneknet",
-    "winrate": "50.0",
-    "seen": 2
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "66.7",
+    "seen": 6
   },
   "Radiate": {
     "name": "SnekNet",
@@ -2742,10 +2742,10 @@
     "seen": 9
   },
   "Adrenaline": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "80.0",
-    "seen": 10
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Afterimage": {
     "name": "Falterfire",
@@ -2778,8 +2778,8 @@
     "seen": 1
   },
   "Blade Dance": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "Girsia",
+    "slug": "girsia",
     "winrate": "83.3",
     "seen": 6
   },
@@ -2820,10 +2820,10 @@
     "seen": 4
   },
   "Calculated Gamble": {
-    "name": "SnekNet",
-    "slug": "sneknet",
+    "name": "Girsia",
+    "slug": "girsia",
     "winrate": "100.0",
-    "seen": 2
+    "seen": 3
   },
   "Cloak and Dagger": {
     "name": "Falterfire",
@@ -2892,10 +2892,10 @@
     "seen": 9
   },
   "Expertise": {
-    "name": "SnekNet",
-    "slug": "sneknet",
+    "name": "Girsia",
+    "slug": "girsia",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 2
   },
   "Expose": {
     "name": "0_tripwire_ 0",
@@ -2910,10 +2910,10 @@
     "seen": 3
   },
   "Finisher": {
-    "name": "SnekNet",
-    "slug": "sneknet",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "71.4",
+    "seen": 7
   },
   "Flanking": {
     "name": "0_tripwire_ 0",
@@ -2970,9 +2970,9 @@
     "seen": 12
   },
   "Infinite Blades": {
-    "name": "SnekNet",
-    "slug": "sneknet",
-    "winrate": "50.0",
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "83.3",
     "seen": 6
   },
   "Knife Trap": {
@@ -2982,10 +2982,10 @@
     "seen": 9
   },
   "Leading Strike": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "46.7",
-    "seen": 15
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "75.0",
+    "seen": 8
   },
   "Leg Sweep": {
     "name": "Falterfire",
@@ -3108,8 +3108,8 @@
     "seen": 3
   },
   "Serpent Form": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "Girsia",
+    "slug": "girsia",
     "winrate": "100.0",
     "seen": 6
   },
@@ -3132,10 +3132,10 @@
     "seen": 2
   },
   "Slice": {
-    "name": "SnekNet",
-    "slug": "sneknet",
+    "name": "Girsia",
+    "slug": "girsia",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 2
   },
   "Snakebite": {
     "name": "0_tripwire_ 0",
@@ -3174,10 +3174,10 @@
     "seen": 13
   },
   "Suppress": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "62.5",
-    "seen": 8
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Survivor": {
     "name": "Falterfire",
@@ -3216,10 +3216,10 @@
     "seen": 10
   },
   "Up My Sleeve": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "61.1",
-    "seen": 18
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "75.0",
+    "seen": 4
   },
   "Well-Laid Plans": {
     "name": "Falterfire",
