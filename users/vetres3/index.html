@@ -64,7 +64,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/users/">users</a> / vetres3</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-13T03:55:55.318Z">April 12, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-13T04:20:18.352Z">April 12, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -94,26 +94,146 @@
     </div>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 40px;">
                     
-                    <div class="char-panel" style="border: 1px solid #333; padding: 15px; border-radius: 8px; opacity: 0.3; background: rgba(0,0,0,0.1);">
-                        <h4 style="margin: 0 0 10px 0; color: #444; font-size: 0.8rem; text-transform: uppercase;"><a href="/characters/ironclad/" style="color: inherit; text-decoration: underline;">IRONCLAD</a></h4>
-                        <div style="font-size: 0.75rem; color: #666;">No runs recorded</div>
+                <div class="char-panel" style="border: 1px solid rgba(255, 255, 255, 0.05); border-top: 3px solid var(--color-ironclad); background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
+                    <h4 style="margin: 0; color: var(--color-ironclad); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;"><a href="/characters/ironclad/" style="color: inherit; text-decoration: underline;">Ironclad</a></h4>
+                    <div style="font-size: 1.4rem; font-weight: bold;" title="vetres3 has a 13.6% Winrate Across 22 Ironclad Runs, 0.4% above their overall winrate.">
+                        13.6% <span style="color: var(--green); font-size: 0.9rem; font-weight: normal;">(+0.4)</span> 
+                        <span style="font-size: 0.7rem; color: #666; font-weight: normal;">22 Runs</span>
                     </div>
-                    <div class="char-panel" style="border: 1px solid #333; padding: 15px; border-radius: 8px; opacity: 0.3; background: rgba(0,0,0,0.1);">
-                        <h4 style="margin: 0 0 10px 0; color: #444; font-size: 0.8rem; text-transform: uppercase;"><a href="/characters/silent/" style="color: inherit; text-decoration: underline;">SILENT</a></h4>
-                        <div style="font-size: 0.75rem; color: #666;">No runs recorded</div>
+                    
+                    <div title="molten_fist is vetres3's top picked card on Ironclad, used in 13 runs with a 15% winrate">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Most Picked</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/molten_fist/" style="color: inherit; text-decoration: underline;">molten_fist</a> <span style="color: #666; font-size: 0.8em;">(13 runs, 15%)</span></div>
                     </div>
-                    <div class="char-panel" style="border: 1px solid #333; padding: 15px; border-radius: 8px; opacity: 0.3; background: rgba(0,0,0,0.1);">
-                        <h4 style="margin: 0 0 10px 0; color: #444; font-size: 0.8rem; text-transform: uppercase;"><a href="/characters/defect/" style="color: inherit; text-decoration: underline;">DEFECT</a></h4>
-                        <div style="font-size: 0.75rem; color: #666;">No runs recorded</div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div style="font-size: 0.75rem;" title="evil_eye is vetres3's best performing card on Ironclad, with a 67% winrate across 3 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Top Card</div>
+                            <div style="color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/evil_eye/" style="color: inherit; text-decoration: underline;">evil_eye</a> <span style="color: #666; font-size: 0.8em;">(3r, 67%)</span></div>
+                        </div>
+                        <div style="font-size: 0.75rem;" title="armaments is vetres3's worst performing card on Ironclad, with a 0% winrate across 7 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Low Card</div>
+                            <div style="color: var(--red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/armaments/" style="color: inherit; text-decoration: underline;">armaments</a> <span style="color: #666; font-size: 0.8em;">(7r, 0%)</span></div>
+                        </div>
                     </div>
-                    <div class="char-panel" style="border: 1px solid #333; padding: 15px; border-radius: 8px; opacity: 0.3; background: rgba(0,0,0,0.1);">
-                        <h4 style="margin: 0 0 10px 0; color: #444; font-size: 0.8rem; text-transform: uppercase;"><a href="/characters/necrobinder/" style="color: inherit; text-decoration: underline;">NECROBINDER</a></h4>
-                        <div style="font-size: 0.75rem; color: #666;">No runs recorded</div>
+
+                    <div style="margin-top: 5px;" title="DECIMILLIPEDE ELITE is vetres3's deadliest foe on Ironclad with 3 kills">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Deadliest Foe</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;">DECIMILLIPEDE ELITE <span style="color: var(--red); font-size: 0.8em;">(3 deaths)</span></div>
                     </div>
-                    <div class="char-panel" style="border: 1px solid #333; padding: 15px; border-radius: 8px; opacity: 0.3; background: rgba(0,0,0,0.1);">
-                        <h4 style="margin: 0 0 10px 0; color: #444; font-size: 0.8rem; text-transform: uppercase;"><a href="/characters/regent/" style="color: inherit; text-decoration: underline;">REGENT</a></h4>
-                        <div style="font-size: 0.75rem; color: #666;">No runs recorded</div>
+                </div>
+                <div class="char-panel" style="border: 1px solid rgba(255, 255, 255, 0.05); border-top: 3px solid var(--color-silent); background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
+                    <h4 style="margin: 0; color: var(--color-silent); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;"><a href="/characters/silent/" style="color: inherit; text-decoration: underline;">Silent</a></h4>
+                    <div style="font-size: 1.4rem; font-weight: bold;" title="vetres3 has a 18.2% Winrate Across 66 Silent Runs, 4.9% above their overall winrate.">
+                        18.2% <span style="color: var(--green); font-size: 0.9rem; font-weight: normal;">(+4.9)</span> 
+                        <span style="font-size: 0.7rem; color: #666; font-weight: normal;">66 Runs</span>
                     </div>
+                    
+                    <div title="accuracy is vetres3's top picked card on Silent, used in 29 runs with a 31% winrate">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Most Picked</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/accuracy/" style="color: inherit; text-decoration: underline;">accuracy</a> <span style="color: #666; font-size: 0.8em;">(29 runs, 31%)</span></div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div style="font-size: 0.75rem;" title="storm_of_steel is vetres3's best performing card on Silent, with a 71% winrate across 7 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Top Card</div>
+                            <div style="color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/storm_of_steel/" style="color: inherit; text-decoration: underline;">storm_of_steel</a> <span style="color: #666; font-size: 0.8em;">(7r, 71%)</span></div>
+                        </div>
+                        <div style="font-size: 0.75rem;" title="serpent_form is vetres3's worst performing card on Silent, with a 0% winrate across 5 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Low Card</div>
+                            <div style="color: var(--red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/serpent_form/" style="color: inherit; text-decoration: underline;">serpent_form</a> <span style="color: #666; font-size: 0.8em;">(5r, 0%)</span></div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 5px;" title="BYGONE EFFIGY ELITE is vetres3's deadliest foe on Silent with 6 kills">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Deadliest Foe</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;">BYGONE EFFIGY ELITE <span style="color: var(--red); font-size: 0.8em;">(6 deaths)</span></div>
+                    </div>
+                </div>
+                <div class="char-panel" style="border: 1px solid rgba(255, 255, 255, 0.05); border-top: 3px solid var(--color-defect); background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
+                    <h4 style="margin: 0; color: var(--color-defect); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;"><a href="/characters/defect/" style="color: inherit; text-decoration: underline;">Defect</a></h4>
+                    <div style="font-size: 1.4rem; font-weight: bold;" title="vetres3 has a 11.5% Winrate Across 96 Defect Runs, 1.8% below their overall winrate.">
+                        11.5% <span style="color: var(--red); font-size: 0.9rem; font-weight: normal;">(-1.8)</span> 
+                        <span style="font-size: 0.7rem; color: #666; font-weight: normal;">96 Runs</span>
+                    </div>
+                    
+                    <div title="hologram is vetres3's top picked card on Defect, used in 53 runs with a 17% winrate">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Most Picked</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/hologram/" style="color: inherit; text-decoration: underline;">hologram</a> <span style="color: #666; font-size: 0.8em;">(53 runs, 17%)</span></div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div style="font-size: 0.75rem;" title="multi_cast is vetres3's best performing card on Defect, with a 75% winrate across 4 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Top Card</div>
+                            <div style="color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/multi_cast/" style="color: inherit; text-decoration: underline;">multi_cast</a> <span style="color: #666; font-size: 0.8em;">(4r, 75%)</span></div>
+                        </div>
+                        <div style="font-size: 0.75rem;" title="beam_cell is vetres3's worst performing card on Defect, with a 0% winrate across 23 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Low Card</div>
+                            <div style="color: var(--red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/beam_cell/" style="color: inherit; text-decoration: underline;">beam_cell</a> <span style="color: #666; font-size: 0.8em;">(23r, 0%)</span></div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 5px;" title="BYRDONIS ELITE is vetres3's deadliest foe on Defect with 9 kills">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Deadliest Foe</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;">BYRDONIS ELITE <span style="color: var(--red); font-size: 0.8em;">(9 deaths)</span></div>
+                    </div>
+                </div>
+                <div class="char-panel" style="border: 1px solid rgba(255, 255, 255, 0.05); border-top: 3px solid var(--color-necrobinder); background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
+                    <h4 style="margin: 0; color: var(--color-necrobinder); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;"><a href="/characters/necrobinder/" style="color: inherit; text-decoration: underline;">Necrobinder</a></h4>
+                    <div style="font-size: 1.4rem; font-weight: bold;" title="vetres3 has a 5.3% Winrate Across 19 Necrobinder Runs, 8.0% below their overall winrate.">
+                        5.3% <span style="color: var(--red); font-size: 0.9rem; font-weight: normal;">(-8.0)</span> 
+                        <span style="font-size: 0.7rem; color: #666; font-weight: normal;">19 Runs</span>
+                    </div>
+                    
+                    <div title="friendship is vetres3's top picked card on Necrobinder, used in 11 runs with a 9% winrate">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Most Picked</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/friendship/" style="color: inherit; text-decoration: underline;">friendship</a> <span style="color: #666; font-size: 0.8em;">(11 runs, 9%)</span></div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div style="font-size: 0.75rem;" title="sacrifice is vetres3's best performing card on Necrobinder, with a 100% winrate across 1 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Top Card</div>
+                            <div style="color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/sacrifice/" style="color: inherit; text-decoration: underline;">sacrifice</a> <span style="color: #666; font-size: 0.8em;">(1r, 100%)</span></div>
+                        </div>
+                        <div style="font-size: 0.75rem;" title="deaths_door is vetres3's worst performing card on Necrobinder, with a 0% winrate across 7 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Low Card</div>
+                            <div style="color: var(--red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/deaths_door/" style="color: inherit; text-decoration: underline;">deaths_door</a> <span style="color: #666; font-size: 0.8em;">(7r, 0%)</span></div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 5px;" title="TERROR EEL ELITE is vetres3's deadliest foe on Necrobinder with 2 kills">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Deadliest Foe</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;">TERROR EEL ELITE <span style="color: var(--red); font-size: 0.8em;">(2 deaths)</span></div>
+                    </div>
+                </div>
+                <div class="char-panel" style="border: 1px solid rgba(255, 255, 255, 0.05); border-top: 3px solid var(--color-regent); background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
+                    <h4 style="margin: 0; color: var(--color-regent); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;"><a href="/characters/regent/" style="color: inherit; text-decoration: underline;">Regent</a></h4>
+                    <div style="font-size: 1.4rem; font-weight: bold;" title="vetres3 has a 13.2% Winrate Across 68 Regent Runs, 0.0% below their overall winrate.">
+                        13.2% <span style="color: var(--red); font-size: 0.9rem; font-weight: normal;">(-0.0)</span> 
+                        <span style="font-size: 0.7rem; color: #666; font-weight: normal;">68 Runs</span>
+                    </div>
+                    
+                    <div title="crescent_spear is vetres3's top picked card on Regent, used in 28 runs with a 18% winrate">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Most Picked</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/crescent_spear/" style="color: inherit; text-decoration: underline;">crescent_spear</a> <span style="color: #666; font-size: 0.8em;">(28 runs, 18%)</span></div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div style="font-size: 0.75rem;" title="largesse is vetres3's best performing card on Regent, with a 100% winrate across 3 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Top Card</div>
+                            <div style="color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/largesse/" style="color: inherit; text-decoration: underline;">largesse</a> <span style="color: #666; font-size: 0.8em;">(3r, 100%)</span></div>
+                        </div>
+                        <div style="font-size: 0.75rem;" title="furnace is vetres3's worst performing card on Regent, with a 0% winrate across 7 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Low Card</div>
+                            <div style="color: var(--red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/furnace/" style="color: inherit; text-decoration: underline;">furnace</a> <span style="color: #666; font-size: 0.8em;">(7r, 0%)</span></div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 5px;" title="BYGONE EFFIGY ELITE is vetres3's deadliest foe on Regent with 7 kills">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Deadliest Foe</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;">BYGONE EFFIGY ELITE <span style="color: var(--red); font-size: 0.8em;">(7 deaths)</span></div>
+                    </div>
+                </div>
                 </div>
                 
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">

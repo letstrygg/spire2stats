@@ -1,4 +1,5 @@
 import { wrapLayout, generateSemanticStatsParagraph, generateItemJsonLd, formatDescription, CHARACTER_COLORS } from './shared.js';
+import { normalizeId } from '../helpers.js';
 
 export function characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, relicItemsHtml, displayName, globalWinRate, topStats, performancePanelsHtml) {
     const diff = stats.num - globalWinRate;
@@ -7,7 +8,7 @@ export function characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, 
     if (diff > 0) relationship = 'above';
     else if (diff < 0) relationship = 'below';
 
-    const charId = (char.character_id || '').replace('CHARACTER.', '').toUpperCase();
+    const charId = normalizeId(char.character_id);
     const charColor = CHARACTER_COLORS[charId] || 'var(--gray)';
 
     const highlights = [];
@@ -32,7 +33,7 @@ export function characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, 
     return wrapLayout(
         pageTitle, 
         `
-        <div style="margin-bottom: 40px;">
+        <div style="margin-bottom: 40px;" class="${charId}">
             ${generateSemanticStatsParagraph(displayName, stats, 'character')}
             ${highlightsHtml}
             ${comparisonHtml}

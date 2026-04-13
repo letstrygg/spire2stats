@@ -64,7 +64,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/users/">users</a> / falterfire</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-13T03:55:55.318Z">April 12, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-13T04:20:18.352Z">April 12, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -94,26 +94,146 @@
     </div>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 40px;">
                     
-                    <div class="char-panel" style="border: 1px solid #333; padding: 15px; border-radius: 8px; opacity: 0.3; background: rgba(0,0,0,0.1);">
-                        <h4 style="margin: 0 0 10px 0; color: #444; font-size: 0.8rem; text-transform: uppercase;"><a href="/characters/ironclad/" style="color: inherit; text-decoration: underline;">IRONCLAD</a></h4>
-                        <div style="font-size: 0.75rem; color: #666;">No runs recorded</div>
+                <div class="char-panel" style="border: 1px solid rgba(255, 255, 255, 0.05); border-top: 3px solid var(--color-ironclad); background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
+                    <h4 style="margin: 0; color: var(--color-ironclad); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;"><a href="/characters/ironclad/" style="color: inherit; text-decoration: underline;">Ironclad</a></h4>
+                    <div style="font-size: 1.4rem; font-weight: bold;" title="Falterfire has a 52.4% Winrate Across 21 Ironclad Runs, 11.6% below their overall winrate.">
+                        52.4% <span style="color: var(--red); font-size: 0.9rem; font-weight: normal;">(-11.6)</span> 
+                        <span style="font-size: 0.7rem; color: #666; font-weight: normal;">21 Runs</span>
                     </div>
-                    <div class="char-panel" style="border: 1px solid #333; padding: 15px; border-radius: 8px; opacity: 0.3; background: rgba(0,0,0,0.1);">
-                        <h4 style="margin: 0 0 10px 0; color: #444; font-size: 0.8rem; text-transform: uppercase;"><a href="/characters/silent/" style="color: inherit; text-decoration: underline;">SILENT</a></h4>
-                        <div style="font-size: 0.75rem; color: #666;">No runs recorded</div>
+                    
+                    <div title="shrug_it_off is Falterfire's top picked card on Ironclad, used in 15 runs with a 60% winrate">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Most Picked</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/shrug_it_off/" style="color: inherit; text-decoration: underline;">shrug_it_off</a> <span style="color: #666; font-size: 0.8em;">(15 runs, 60%)</span></div>
                     </div>
-                    <div class="char-panel" style="border: 1px solid #333; padding: 15px; border-radius: 8px; opacity: 0.3; background: rgba(0,0,0,0.1);">
-                        <h4 style="margin: 0 0 10px 0; color: #444; font-size: 0.8rem; text-transform: uppercase;"><a href="/characters/defect/" style="color: inherit; text-decoration: underline;">DEFECT</a></h4>
-                        <div style="font-size: 0.75rem; color: #666;">No runs recorded</div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div style="font-size: 0.75rem;" title="howl_from_beyond is Falterfire's best performing card on Ironclad, with a 100% winrate across 5 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Top Card</div>
+                            <div style="color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/howl_from_beyond/" style="color: inherit; text-decoration: underline;">howl_from_beyond</a> <span style="color: #666; font-size: 0.8em;">(5r, 100%)</span></div>
+                        </div>
+                        <div style="font-size: 0.75rem;" title="ashen_strike is Falterfire's worst performing card on Ironclad, with a 0% winrate across 2 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Low Card</div>
+                            <div style="color: var(--red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/ashen_strike/" style="color: inherit; text-decoration: underline;">ashen_strike</a> <span style="color: #666; font-size: 0.8em;">(2r, 0%)</span></div>
+                        </div>
                     </div>
-                    <div class="char-panel" style="border: 1px solid #333; padding: 15px; border-radius: 8px; opacity: 0.3; background: rgba(0,0,0,0.1);">
-                        <h4 style="margin: 0 0 10px 0; color: #444; font-size: 0.8rem; text-transform: uppercase;"><a href="/characters/necrobinder/" style="color: inherit; text-decoration: underline;">NECROBINDER</a></h4>
-                        <div style="font-size: 0.75rem; color: #666;">No runs recorded</div>
+
+                    <div style="margin-top: 5px;" title="DECIMILLIPEDE ELITE is Falterfire's deadliest foe on Ironclad with 2 kills">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Deadliest Foe</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;">DECIMILLIPEDE ELITE <span style="color: var(--red); font-size: 0.8em;">(2 deaths)</span></div>
                     </div>
-                    <div class="char-panel" style="border: 1px solid #333; padding: 15px; border-radius: 8px; opacity: 0.3; background: rgba(0,0,0,0.1);">
-                        <h4 style="margin: 0 0 10px 0; color: #444; font-size: 0.8rem; text-transform: uppercase;"><a href="/characters/regent/" style="color: inherit; text-decoration: underline;">REGENT</a></h4>
-                        <div style="font-size: 0.75rem; color: #666;">No runs recorded</div>
+                </div>
+                <div class="char-panel" style="border: 1px solid rgba(255, 255, 255, 0.05); border-top: 3px solid var(--color-silent); background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
+                    <h4 style="margin: 0; color: var(--color-silent); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;"><a href="/characters/silent/" style="color: inherit; text-decoration: underline;">Silent</a></h4>
+                    <div style="font-size: 1.4rem; font-weight: bold;" title="Falterfire has a 73.3% Winrate Across 15 Silent Runs, 9.4% above their overall winrate.">
+                        73.3% <span style="color: var(--green); font-size: 0.9rem; font-weight: normal;">(+9.4)</span> 
+                        <span style="font-size: 0.7rem; color: #666; font-weight: normal;">15 Runs</span>
                     </div>
+                    
+                    <div title="prepared is Falterfire's top picked card on Silent, used in 11 runs with a 91% winrate">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Most Picked</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/prepared/" style="color: inherit; text-decoration: underline;">prepared</a> <span style="color: #666; font-size: 0.8em;">(11 runs, 91%)</span></div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div style="font-size: 0.75rem;" title="footwork is Falterfire's best performing card on Silent, with a 100% winrate across 9 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Top Card</div>
+                            <div style="color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/footwork/" style="color: inherit; text-decoration: underline;">footwork</a> <span style="color: #666; font-size: 0.8em;">(9r, 100%)</span></div>
+                        </div>
+                        <div style="font-size: 0.75rem;" title="leading_strike is Falterfire's worst performing card on Silent, with a 0% winrate across 1 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Low Card</div>
+                            <div style="color: var(--red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/leading_strike/" style="color: inherit; text-decoration: underline;">leading_strike</a> <span style="color: #666; font-size: 0.8em;">(1r, 0%)</span></div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 5px;" title="PHANTASMAL GARDENERS ELITE is Falterfire's deadliest foe on Silent with 1 kills">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Deadliest Foe</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;">PHANTASMAL GARDENERS ELITE <span style="color: var(--red); font-size: 0.8em;">(1 deaths)</span></div>
+                    </div>
+                </div>
+                <div class="char-panel" style="border: 1px solid rgba(255, 255, 255, 0.05); border-top: 3px solid var(--color-defect); background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
+                    <h4 style="margin: 0; color: var(--color-defect); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;"><a href="/characters/defect/" style="color: inherit; text-decoration: underline;">Defect</a></h4>
+                    <div style="font-size: 1.4rem; font-weight: bold;" title="Falterfire has a 52.4% Winrate Across 21 Defect Runs, 11.6% below their overall winrate.">
+                        52.4% <span style="color: var(--red); font-size: 0.9rem; font-weight: normal;">(-11.6)</span> 
+                        <span style="font-size: 0.7rem; color: #666; font-weight: normal;">21 Runs</span>
+                    </div>
+                    
+                    <div title="charge_battery is Falterfire's top picked card on Defect, used in 12 runs with a 58% winrate">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Most Picked</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/charge_battery/" style="color: inherit; text-decoration: underline;">charge_battery</a> <span style="color: #666; font-size: 0.8em;">(12 runs, 58%)</span></div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div style="font-size: 0.75rem;" title="beam_cell is Falterfire's best performing card on Defect, with a 100% winrate across 5 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Top Card</div>
+                            <div style="color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/beam_cell/" style="color: inherit; text-decoration: underline;">beam_cell</a> <span style="color: #666; font-size: 0.8em;">(5r, 100%)</span></div>
+                        </div>
+                        <div style="font-size: 0.75rem;" title="uproar is Falterfire's worst performing card on Defect, with a 0% winrate across 3 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Low Card</div>
+                            <div style="color: var(--red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/uproar/" style="color: inherit; text-decoration: underline;">uproar</a> <span style="color: #666; font-size: 0.8em;">(3r, 0%)</span></div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 5px;" title="SLUMBERING BEETLE NORMAL is Falterfire's deadliest foe on Defect with 1 kills">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Deadliest Foe</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;">SLUMBERING BEETLE NORMAL <span style="color: var(--red); font-size: 0.8em;">(1 deaths)</span></div>
+                    </div>
+                </div>
+                <div class="char-panel" style="border: 1px solid rgba(255, 255, 255, 0.05); border-top: 3px solid var(--color-necrobinder); background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
+                    <h4 style="margin: 0; color: var(--color-necrobinder); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;"><a href="/characters/necrobinder/" style="color: inherit; text-decoration: underline;">Necrobinder</a></h4>
+                    <div style="font-size: 1.4rem; font-weight: bold;" title="Falterfire has a 68.8% Winrate Across 16 Necrobinder Runs, 4.8% above their overall winrate.">
+                        68.8% <span style="color: var(--green); font-size: 0.9rem; font-weight: normal;">(+4.8)</span> 
+                        <span style="font-size: 0.7rem; color: #666; font-weight: normal;">16 Runs</span>
+                    </div>
+                    
+                    <div title="defy is Falterfire's top picked card on Necrobinder, used in 12 runs with a 83% winrate">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Most Picked</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/defy/" style="color: inherit; text-decoration: underline;">defy</a> <span style="color: #666; font-size: 0.8em;">(12 runs, 83%)</span></div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div style="font-size: 0.75rem;" title="friendship is Falterfire's best performing card on Necrobinder, with a 100% winrate across 8 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Top Card</div>
+                            <div style="color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/friendship/" style="color: inherit; text-decoration: underline;">friendship</a> <span style="color: #666; font-size: 0.8em;">(8r, 100%)</span></div>
+                        </div>
+                        <div style="font-size: 0.75rem;" title="flash_of_steel is Falterfire's worst performing card on Necrobinder, with a 0% winrate across 2 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Low Card</div>
+                            <div style="color: var(--red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/flash_of_steel/" style="color: inherit; text-decoration: underline;">flash_of_steel</a> <span style="color: #666; font-size: 0.8em;">(2r, 0%)</span></div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 5px;" title="DECIMILLIPEDE ELITE is Falterfire's deadliest foe on Necrobinder with 3 kills">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Deadliest Foe</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;">DECIMILLIPEDE ELITE <span style="color: var(--red); font-size: 0.8em;">(3 deaths)</span></div>
+                    </div>
+                </div>
+                <div class="char-panel" style="border: 1px solid rgba(255, 255, 255, 0.05); border-top: 3px solid var(--color-regent); background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
+                    <h4 style="margin: 0; color: var(--color-regent); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;"><a href="/characters/regent/" style="color: inherit; text-decoration: underline;">Regent</a></h4>
+                    <div style="font-size: 1.4rem; font-weight: bold;" title="Falterfire has a 84.6% Winrate Across 13 Regent Runs, 20.7% above their overall winrate.">
+                        84.6% <span style="color: var(--green); font-size: 0.9rem; font-weight: normal;">(+20.7)</span> 
+                        <span style="font-size: 0.7rem; color: #666; font-weight: normal;">13 Runs</span>
+                    </div>
+                    
+                    <div title="glitterstream is Falterfire's top picked card on Regent, used in 9 runs with a 100% winrate">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Most Picked</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/glitterstream/" style="color: inherit; text-decoration: underline;">glitterstream</a> <span style="color: #666; font-size: 0.8em;">(9 runs, 100%)</span></div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div style="font-size: 0.75rem;" title="glitterstream is Falterfire's best performing card on Regent, with a 100% winrate across 9 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Top Card</div>
+                            <div style="color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/glitterstream/" style="color: inherit; text-decoration: underline;">glitterstream</a> <span style="color: #666; font-size: 0.8em;">(9r, 100%)</span></div>
+                        </div>
+                        <div style="font-size: 0.75rem;" title="charge is Falterfire's worst performing card on Regent, with a 50% winrate across 4 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Low Card</div>
+                            <div style="color: var(--red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/charge/" style="color: inherit; text-decoration: underline;">charge</a> <span style="color: #666; font-size: 0.8em;">(4r, 50%)</span></div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 5px;" title="QUEEN BOSS is Falterfire's deadliest foe on Regent with 1 kills">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Deadliest Foe</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;">QUEEN BOSS <span style="color: var(--red); font-size: 0.8em;">(1 deaths)</span></div>
+                    </div>
+                </div>
                 </div>
                 
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">

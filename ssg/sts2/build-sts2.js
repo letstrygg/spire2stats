@@ -609,13 +609,13 @@ async function buildCharacters(chars, runStats, sitemap, users) {
                     let bestId = null;
                     let bestCount = 0;
                     for (const [id, count] of Object.entries(freqMap)) {
-                        if (ignoreSet && ignoreSet.has(id.toUpperCase())) continue;
+                        if (ignoreSet && ignoreSet.has(normalizeId(id))) continue;
                         if (count > bestCount) {
                             bestCount = count;
                             bestId = id;
                         }
                     }
-                    return bestId ? { name: nameMap[bestId.toUpperCase()] || bestId, count: bestCount } : null;
+                    return bestId ? { name: nameMap[normalizeId(bestId)] || bestId, count: bestCount } : null;
                 };
 
                 const topStats = {
@@ -637,7 +637,7 @@ async function buildCharacters(chars, runStats, sitemap, users) {
                 userSummary.get(userKey).runs.push(r);
             });
 
-            const nonStarterEntries = Object.entries(globalCardMap).filter(([id]) => !starterCards.has(id.toUpperCase()));
+            const nonStarterEntries = Object.entries(globalCardMap).filter(([id]) => !starterCards.has(normalizeId(id)));
             // Use the character's own winrate (stats.num) as the prior for its specific cards
             const sortedCards = [...nonStarterEntries].sort((a, b) => 
                 calculateBayesianScore(b[1].wins, b[1].seen, stats.num / 100) - 
@@ -645,19 +645,19 @@ async function buildCharacters(chars, runStats, sitemap, users) {
             );
 
             const formatCardStat = (id, s) => {
-                const name = cardNames[id.toUpperCase()] || id;
+                const name = cardNames[normalizeId(id)] || id;
                 const wr = s.seen > 0 ? ((s.wins / s.seen) * 100).toFixed(0) : 0;
                 return `<a href="/cards/${slugify(name)}/" style="color: var(--text); font-size: 0.9rem; text-decoration: underline;">${name}</a> <span style="color: #666;">(${wr}% ${s.seen} Runs)</span>`;
             };
 
             const top12CardsHtml = sortedCards.slice(0, 12).map(([id, s]) => {
-                const name = cardNames[id.toUpperCase()] || id;
+                const name = cardNames[normalizeId(id)] || id;
                 const wr = s.seen > 0 ? ((s.wins / s.seen) * 100).toFixed(0) : 0;
                 const tooltip = `${name} has a ${wr}% winrate across ${s.seen} runs`;
                 return `<li title="${tooltip}">${formatCardStat(id, s)}</li>`;
             }).join('');
             const bottom12CardsHtml = sortedCards.slice(-12).reverse().map(([id, s]) => {
-                const name = cardNames[id.toUpperCase()] || id;
+                const name = cardNames[normalizeId(id)] || id;
                 const wr = s.seen > 0 ? ((s.wins / s.seen) * 100).toFixed(0) : 0;
                 const tooltip = `${name} has a ${wr}% winrate across ${s.seen} runs`;
                 return `<li title="${tooltip}">${formatCardStat(id, s)}</li>`;
@@ -673,13 +673,13 @@ async function buildCharacters(chars, runStats, sitemap, users) {
                 const uRuns = userEntry.runs;
                 const uCardMap = aggregateCardStats(uRuns);
 
-                const uNonStarters = Object.entries(uCardMap).filter(([id]) => !starterCards.has(id.toUpperCase()));
+                const uNonStarters = Object.entries(uCardMap).filter(([id]) => !starterCards.has(normalizeId(id)));
                 if (uNonStarters.length === 0) return '';
 
                 const uM = calculateWinRate(uRuns) / 100;
 
                 const uMostPicked = [...uNonStarters].sort((a, b) => b[1].seen - a[1].seen)[0];
-                const uMostPickedTitle = cardNames[uMostPicked[0].toUpperCase()] || uMostPicked[0];
+                const uMostPickedTitle = cardNames[normalizeId(uMostPicked[0])] || uMostPicked[0];
                 const uMostPickedWR = ((uMostPicked[1].wins / uMostPicked[1].seen) * 100).toFixed(0);
                 const uMostPickedTooltip = `${uMostPickedTitle} is ${uname}'s top picked card on ${displayName}, used in ${uMostPicked[1].seen} runs with a ${uMostPickedWR}% winrate`;
 
@@ -687,7 +687,7 @@ async function buildCharacters(chars, runStats, sitemap, users) {
                     calculateBayesianScore(b[1].wins, b[1].seen, uM) - 
                     calculateBayesianScore(a[1].wins, a[1].seen, uM)
                 )[0];
-                const uTopCardTitle = cardNames[uTopCard[0].toUpperCase()] || uTopCard[0];
+                const uTopCardTitle = cardNames[normalizeId(uTopCard[0])] || uTopCard[0];
                 const uTopCardWR = ((uTopCard[1].wins / uTopCard[1].seen) * 100).toFixed(0);
                 const uTopCardTooltip = `${uTopCardTitle} is ${uname}'s best performing card on ${displayName}, with a ${uTopCardWR}% winrate across ${uTopCard[1].seen} runs`;
 
@@ -737,8 +737,8 @@ async function buildCharacters(chars, runStats, sitemap, users) {
                 // Sort cards by strength (Bayesian score) relative to character winrate
                 const charWinRatePrior = stats.num / 100;
                 charCards.sort((a, b) => {
-                    const idA = (a.card_id || '').replace('CARD.', '');
-                    const idB = (b.card_id || '').replace('CARD.', '');
+                    const idA = normalizeId(a.card_id);
+                    const idB = normalizeId(b.card_id);
                     const sA = runStats.stats[idA] || { seen: 0, wins: 0 };
                     const sB = runStats.stats[idB] || { seen: 0, wins: 0 };
                     return calculateBayesianScore(sB.wins, sB.seen, charWinRatePrior) - 
@@ -746,7 +746,7 @@ async function buildCharacters(chars, runStats, sitemap, users) {
                 });
 
                 const cardItemsHtml = charCards.map(c => {
-                    const cleanId = (c.card_id || '').replace('CARD.', '');
+                    const cleanId = normalizeId(c.card_id);
                     const cStats = getItemStats(runStats.stats[cleanId], stats.num);
                     return `<a href="/cards/${slugify(c.name)}/" class="card-item ${displayName.toLowerCase()}">
                         <div class="card-info"><span class="card-name">${c.name}</span></div>
@@ -760,8 +760,8 @@ async function buildCharacters(chars, runStats, sitemap, users) {
                 
                 // Sort relics by strength (Bayesian score) relative to character winrate
                 charRelics.sort((a, b) => {
-                    const idA = (a.relic_id || '').replace('RELIC.', '');
-                    const idB = (b.relic_id || '').replace('RELIC.', '');
+                    const idA = normalizeId(a.relic_id);
+                    const idB = normalizeId(b.relic_id);
                     const sA = runStats.relicStats[idA] || { seen: 0, wins: 0 };
                     const sB = runStats.relicStats[idB] || { seen: 0, wins: 0 };
                     return calculateBayesianScore(sB.wins, sB.seen, charWinRatePrior) - 
@@ -769,7 +769,7 @@ async function buildCharacters(chars, runStats, sitemap, users) {
                 });
 
                 const relicItemsHtml = charRelics.map(r => {
-                    const cleanRelicId = (r.relic_id || '').replace('RELIC.', '');
+                    const cleanRelicId = normalizeId(r.relic_id);
                     const rStats = getItemStats(runStats.relicStats[cleanRelicId], stats.num);
                     const winBar = rStats.seen > 0 ? `<div class="win-bar" style="${rStats.bar}"></div>` : '';
                     return `<a href="/relics/${slugify(r.name)}/" class="card-item ${displayName.toLowerCase()}" aria-label="${r.name}: ${rStats.seen} runs, ${rStats.text}">
@@ -1100,7 +1100,7 @@ async function build() {
             const upgradedDescText = applyKeywords(parseCardText(card.description, vars, upgradeData, true), true, upgradeData);
 
             // Create the color-specific energy icon HTML
-            const energyIcon = `<img src="/images/sts2_images/ui/compendium/card/energy_${slugify(card.color || 'colorless')}.png" style="height: 24px; width: auto; vertical-align: middle; margin-top: -3px;" alt="Energy">`;
+            const energyIcon = `<img src="/images/sts2_images/ui/compendium/card/energy_${normalizeId(card.color || 'colorless')}.png" style="height: 24px; width: auto; vertical-align: middle; margin-top: -3px;" alt="Energy">`;
             
             /** Final cleanup: replace energy markers with the icon and convert remaining BBCode to HTML */
             const finalizeDescription = (txt) => formatDescription(txt.replace(/\[E\]|\[energy:\d+\]/g, energyIcon));

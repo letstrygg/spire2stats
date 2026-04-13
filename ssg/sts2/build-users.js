@@ -138,7 +138,7 @@ async function build() {
             };
 
             // --- CHARACTER PERFORMANCE PANELS ---
-            const charIds = ['IRONCLAD', 'SILENT', 'DEFECT', 'NECROBINDER', 'REGENT'];
+            const charIds = ['ironclad', 'silent', 'defect', 'necrobinder', 'regent'];
             const charPanelsHtml = charIds.map(charId => {
                 const charRuns = userRuns.filter(r => normalizeId(r.character) === charId);
                 const color = CHARACTER_COLORS[charId] || '#444';
@@ -177,7 +177,7 @@ async function build() {
                 });
 
                 // Filter out starter cards for more interesting insights
-                const nonStarterStats = Object.entries(cardStats).filter(([id]) => !starterCards.has(id.toUpperCase()));
+                const nonStarterStats = Object.entries(cardStats).filter(([id]) => !starterCards.has(normalizeId(id)));
                 
                 let mpHtml = '—', mpTitle = '—', mpSlug = '';
                 let hwrHtml = '—', hwrTitle = '—', hwrSlug = '';
@@ -384,10 +384,10 @@ async function build() {
 
                     // Select unique details (exclude starter items)
                     const uniqueCard = deck.find(c => {
-                        const cid = (c.id || '').toUpperCase();
+                        const cid = normalizeId(c.id);
                         return !starterCards.has(cid);
                     });
-                    const uniqueRelic = relicIds.find(rid => !starterRelics.has(rid.toUpperCase()));
+                    const uniqueRelic = relicIds.find(rid => !starterRelics.has(normalizeId(rid)));
 
                     let items = [];
                     if (uniqueCard) items.push(cardLookup[uniqueCard.id] || uniqueCard.id);

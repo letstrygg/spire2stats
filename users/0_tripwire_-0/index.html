@@ -64,7 +64,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/users/">users</a> / 0_tripwire_ 0</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-13T03:55:55.318Z">April 12, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-13T04:20:18.352Z">April 12, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -94,26 +94,146 @@
     </div>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 40px;">
                     
-                    <div class="char-panel" style="border: 1px solid #333; padding: 15px; border-radius: 8px; opacity: 0.3; background: rgba(0,0,0,0.1);">
-                        <h4 style="margin: 0 0 10px 0; color: #444; font-size: 0.8rem; text-transform: uppercase;"><a href="/characters/ironclad/" style="color: inherit; text-decoration: underline;">IRONCLAD</a></h4>
-                        <div style="font-size: 0.75rem; color: #666;">No runs recorded</div>
+                <div class="char-panel" style="border: 1px solid rgba(255, 255, 255, 0.05); border-top: 3px solid var(--color-ironclad); background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
+                    <h4 style="margin: 0; color: var(--color-ironclad); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;"><a href="/characters/ironclad/" style="color: inherit; text-decoration: underline;">Ironclad</a></h4>
+                    <div style="font-size: 1.4rem; font-weight: bold;" title="0_tripwire_ 0 has a 33.3% Winrate Across 48 Ironclad Runs, 0.4% above their overall winrate.">
+                        33.3% <span style="color: var(--green); font-size: 0.9rem; font-weight: normal;">(+0.4)</span> 
+                        <span style="font-size: 0.7rem; color: #666; font-weight: normal;">48 Runs</span>
                     </div>
-                    <div class="char-panel" style="border: 1px solid #333; padding: 15px; border-radius: 8px; opacity: 0.3; background: rgba(0,0,0,0.1);">
-                        <h4 style="margin: 0 0 10px 0; color: #444; font-size: 0.8rem; text-transform: uppercase;"><a href="/characters/silent/" style="color: inherit; text-decoration: underline;">SILENT</a></h4>
-                        <div style="font-size: 0.75rem; color: #666;">No runs recorded</div>
+                    
+                    <div title="bloodletting is 0_tripwire_ 0's top picked card on Ironclad, used in 31 runs with a 32% winrate">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Most Picked</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/bloodletting/" style="color: inherit; text-decoration: underline;">bloodletting</a> <span style="color: #666; font-size: 0.8em;">(31 runs, 32%)</span></div>
                     </div>
-                    <div class="char-panel" style="border: 1px solid #333; padding: 15px; border-radius: 8px; opacity: 0.3; background: rgba(0,0,0,0.1);">
-                        <h4 style="margin: 0 0 10px 0; color: #444; font-size: 0.8rem; text-transform: uppercase;"><a href="/characters/defect/" style="color: inherit; text-decoration: underline;">DEFECT</a></h4>
-                        <div style="font-size: 0.75rem; color: #666;">No runs recorded</div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div style="font-size: 0.75rem;" title="dismantle is 0_tripwire_ 0's best performing card on Ironclad, with a 71% winrate across 7 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Top Card</div>
+                            <div style="color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/dismantle/" style="color: inherit; text-decoration: underline;">dismantle</a> <span style="color: #666; font-size: 0.8em;">(7r, 71%)</span></div>
+                        </div>
+                        <div style="font-size: 0.75rem;" title="expect_a_fight is 0_tripwire_ 0's worst performing card on Ironclad, with a 0% winrate across 4 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Low Card</div>
+                            <div style="color: var(--red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/expect_a_fight/" style="color: inherit; text-decoration: underline;">expect_a_fight</a> <span style="color: #666; font-size: 0.8em;">(4r, 0%)</span></div>
+                        </div>
                     </div>
-                    <div class="char-panel" style="border: 1px solid #333; padding: 15px; border-radius: 8px; opacity: 0.3; background: rgba(0,0,0,0.1);">
-                        <h4 style="margin: 0 0 10px 0; color: #444; font-size: 0.8rem; text-transform: uppercase;"><a href="/characters/necrobinder/" style="color: inherit; text-decoration: underline;">NECROBINDER</a></h4>
-                        <div style="font-size: 0.75rem; color: #666;">No runs recorded</div>
+
+                    <div style="margin-top: 5px;" title="KAISER CRAB BOSS is 0_tripwire_ 0's deadliest foe on Ironclad with 4 kills">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Deadliest Foe</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;">KAISER CRAB BOSS <span style="color: var(--red); font-size: 0.8em;">(4 deaths)</span></div>
                     </div>
-                    <div class="char-panel" style="border: 1px solid #333; padding: 15px; border-radius: 8px; opacity: 0.3; background: rgba(0,0,0,0.1);">
-                        <h4 style="margin: 0 0 10px 0; color: #444; font-size: 0.8rem; text-transform: uppercase;"><a href="/characters/regent/" style="color: inherit; text-decoration: underline;">REGENT</a></h4>
-                        <div style="font-size: 0.75rem; color: #666;">No runs recorded</div>
+                </div>
+                <div class="char-panel" style="border: 1px solid rgba(255, 255, 255, 0.05); border-top: 3px solid var(--color-silent); background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
+                    <h4 style="margin: 0; color: var(--color-silent); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;"><a href="/characters/silent/" style="color: inherit; text-decoration: underline;">Silent</a></h4>
+                    <div style="font-size: 1.4rem; font-weight: bold;" title="0_tripwire_ 0 has a 50.0% Winrate Across 58 Silent Runs, 17.1% above their overall winrate.">
+                        50.0% <span style="color: var(--green); font-size: 0.9rem; font-weight: normal;">(+17.1)</span> 
+                        <span style="font-size: 0.7rem; color: #666; font-weight: normal;">58 Runs</span>
                     </div>
+                    
+                    <div title="acrobatics is 0_tripwire_ 0's top picked card on Silent, used in 44 runs with a 59% winrate">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Most Picked</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/acrobatics/" style="color: inherit; text-decoration: underline;">acrobatics</a> <span style="color: #666; font-size: 0.8em;">(44 runs, 59%)</span></div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div style="font-size: 0.75rem;" title="strangle is 0_tripwire_ 0's best performing card on Silent, with a 100% winrate across 6 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Top Card</div>
+                            <div style="color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/strangle/" style="color: inherit; text-decoration: underline;">strangle</a> <span style="color: #666; font-size: 0.8em;">(6r, 100%)</span></div>
+                        </div>
+                        <div style="font-size: 0.75rem;" title="envenom is 0_tripwire_ 0's worst performing card on Silent, with a 0% winrate across 3 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Low Card</div>
+                            <div style="color: var(--red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/envenom/" style="color: inherit; text-decoration: underline;">envenom</a> <span style="color: #666; font-size: 0.8em;">(3r, 0%)</span></div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 5px;" title="DOORMAKER BOSS is 0_tripwire_ 0's deadliest foe on Silent with 4 kills">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Deadliest Foe</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;">DOORMAKER BOSS <span style="color: var(--red); font-size: 0.8em;">(4 deaths)</span></div>
+                    </div>
+                </div>
+                <div class="char-panel" style="border: 1px solid rgba(255, 255, 255, 0.05); border-top: 3px solid var(--color-defect); background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
+                    <h4 style="margin: 0; color: var(--color-defect); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;"><a href="/characters/defect/" style="color: inherit; text-decoration: underline;">Defect</a></h4>
+                    <div style="font-size: 1.4rem; font-weight: bold;" title="0_tripwire_ 0 has a 28.7% Winrate Across 94 Defect Runs, 4.2% below their overall winrate.">
+                        28.7% <span style="color: var(--red); font-size: 0.9rem; font-weight: normal;">(-4.2)</span> 
+                        <span style="font-size: 0.7rem; color: #666; font-weight: normal;">94 Runs</span>
+                    </div>
+                    
+                    <div title="claw is 0_tripwire_ 0's top picked card on Defect, used in 62 runs with a 32% winrate">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Most Picked</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/claw/" style="color: inherit; text-decoration: underline;">claw</a> <span style="color: #666; font-size: 0.8em;">(62 runs, 32%)</span></div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div style="font-size: 0.75rem;" title="energy_surge is 0_tripwire_ 0's best performing card on Defect, with a 100% winrate across 6 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Top Card</div>
+                            <div style="color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/energy_surge/" style="color: inherit; text-decoration: underline;">energy_surge</a> <span style="color: #666; font-size: 0.8em;">(6r, 100%)</span></div>
+                        </div>
+                        <div style="font-size: 0.75rem;" title="ultimate_strike is 0_tripwire_ 0's worst performing card on Defect, with a 0% winrate across 5 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Low Card</div>
+                            <div style="color: var(--red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/ultimate_strike/" style="color: inherit; text-decoration: underline;">ultimate_strike</a> <span style="color: #666; font-size: 0.8em;">(5r, 0%)</span></div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 5px;" title="WATERFALL GIANT BOSS is 0_tripwire_ 0's deadliest foe on Defect with 6 kills">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Deadliest Foe</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;">WATERFALL GIANT BOSS <span style="color: var(--red); font-size: 0.8em;">(6 deaths)</span></div>
+                    </div>
+                </div>
+                <div class="char-panel" style="border: 1px solid rgba(255, 255, 255, 0.05); border-top: 3px solid var(--color-necrobinder); background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
+                    <h4 style="margin: 0; color: var(--color-necrobinder); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;"><a href="/characters/necrobinder/" style="color: inherit; text-decoration: underline;">Necrobinder</a></h4>
+                    <div style="font-size: 1.4rem; font-weight: bold;" title="0_tripwire_ 0 has a 21.6% Winrate Across 111 Necrobinder Runs, 11.3% below their overall winrate.">
+                        21.6% <span style="color: var(--red); font-size: 0.9rem; font-weight: normal;">(-11.3)</span> 
+                        <span style="font-size: 0.7rem; color: #666; font-weight: normal;">111 Runs</span>
+                    </div>
+                    
+                    <div title="defy is 0_tripwire_ 0's top picked card on Necrobinder, used in 65 runs with a 28% winrate">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Most Picked</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/defy/" style="color: inherit; text-decoration: underline;">defy</a> <span style="color: #666; font-size: 0.8em;">(65 runs, 28%)</span></div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div style="font-size: 0.75rem;" title="sentry_mode is 0_tripwire_ 0's best performing card on Necrobinder, with a 83% winrate across 6 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Top Card</div>
+                            <div style="color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/sentry_mode/" style="color: inherit; text-decoration: underline;">sentry_mode</a> <span style="color: #666; font-size: 0.8em;">(6r, 83%)</span></div>
+                        </div>
+                        <div style="font-size: 0.75rem;" title="greed is 0_tripwire_ 0's worst performing card on Necrobinder, with a 0% winrate across 8 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Low Card</div>
+                            <div style="color: var(--red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/greed/" style="color: inherit; text-decoration: underline;">greed</a> <span style="color: #666; font-size: 0.8em;">(8r, 0%)</span></div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 5px;" title="DOORMAKER BOSS is 0_tripwire_ 0's deadliest foe on Necrobinder with 7 kills">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Deadliest Foe</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;">DOORMAKER BOSS <span style="color: var(--red); font-size: 0.8em;">(7 deaths)</span></div>
+                    </div>
+                </div>
+                <div class="char-panel" style="border: 1px solid rgba(255, 255, 255, 0.05); border-top: 3px solid var(--color-regent); background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
+                    <h4 style="margin: 0; color: var(--color-regent); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;"><a href="/characters/regent/" style="color: inherit; text-decoration: underline;">Regent</a></h4>
+                    <div style="font-size: 1.4rem; font-weight: bold;" title="0_tripwire_ 0 has a 55.2% Winrate Across 29 Regent Runs, 22.2% above their overall winrate.">
+                        55.2% <span style="color: var(--green); font-size: 0.9rem; font-weight: normal;">(+22.2)</span> 
+                        <span style="font-size: 0.7rem; color: #666; font-weight: normal;">29 Runs</span>
+                    </div>
+                    
+                    <div title="glow is 0_tripwire_ 0's top picked card on Regent, used in 23 runs with a 70% winrate">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Most Picked</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/glow/" style="color: inherit; text-decoration: underline;">glow</a> <span style="color: #666; font-size: 0.8em;">(23 runs, 70%)</span></div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div style="font-size: 0.75rem;" title="begone is 0_tripwire_ 0's best performing card on Regent, with a 100% winrate across 5 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Top Card</div>
+                            <div style="color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/begone/" style="color: inherit; text-decoration: underline;">begone</a> <span style="color: #666; font-size: 0.8em;">(5r, 100%)</span></div>
+                        </div>
+                        <div style="font-size: 0.75rem;" title="stardust is 0_tripwire_ 0's worst performing card on Regent, with a 20% winrate across 5 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Low Card</div>
+                            <div style="color: var(--red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/stardust/" style="color: inherit; text-decoration: underline;">stardust</a> <span style="color: #666; font-size: 0.8em;">(5r, 20%)</span></div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 5px;" title="NONE is 0_tripwire_ 0's deadliest foe on Regent with 2 kills">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Deadliest Foe</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;">NONE <span style="color: var(--red); font-size: 0.8em;">(2 deaths)</span></div>
+                    </div>
+                </div>
                 </div>
                 
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">

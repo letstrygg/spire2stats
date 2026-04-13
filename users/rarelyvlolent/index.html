@@ -64,7 +64,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/users/">users</a> / rarelyvlolent</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-13T03:55:55.318Z">April 12, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-13T04:20:18.352Z">April 12, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -94,26 +94,146 @@
     </div>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 40px;">
                     
-                    <div class="char-panel" style="border: 1px solid #333; padding: 15px; border-radius: 8px; opacity: 0.3; background: rgba(0,0,0,0.1);">
-                        <h4 style="margin: 0 0 10px 0; color: #444; font-size: 0.8rem; text-transform: uppercase;"><a href="/characters/ironclad/" style="color: inherit; text-decoration: underline;">IRONCLAD</a></h4>
-                        <div style="font-size: 0.75rem; color: #666;">No runs recorded</div>
+                <div class="char-panel" style="border: 1px solid rgba(255, 255, 255, 0.05); border-top: 3px solid var(--color-ironclad); background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
+                    <h4 style="margin: 0; color: var(--color-ironclad); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;"><a href="/characters/ironclad/" style="color: inherit; text-decoration: underline;">Ironclad</a></h4>
+                    <div style="font-size: 1.4rem; font-weight: bold;" title="RarelyVlolent has a 25.0% Winrate Across 32 Ironclad Runs, 0.7% above their overall winrate.">
+                        25.0% <span style="color: var(--green); font-size: 0.9rem; font-weight: normal;">(+0.7)</span> 
+                        <span style="font-size: 0.7rem; color: #666; font-weight: normal;">32 Runs</span>
                     </div>
-                    <div class="char-panel" style="border: 1px solid #333; padding: 15px; border-radius: 8px; opacity: 0.3; background: rgba(0,0,0,0.1);">
-                        <h4 style="margin: 0 0 10px 0; color: #444; font-size: 0.8rem; text-transform: uppercase;"><a href="/characters/silent/" style="color: inherit; text-decoration: underline;">SILENT</a></h4>
-                        <div style="font-size: 0.75rem; color: #666;">No runs recorded</div>
+                    
+                    <div title="shrug_it_off is RarelyVlolent's top picked card on Ironclad, used in 23 runs with a 30% winrate">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Most Picked</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/shrug_it_off/" style="color: inherit; text-decoration: underline;">shrug_it_off</a> <span style="color: #666; font-size: 0.8em;">(23 runs, 30%)</span></div>
                     </div>
-                    <div class="char-panel" style="border: 1px solid #333; padding: 15px; border-radius: 8px; opacity: 0.3; background: rgba(0,0,0,0.1);">
-                        <h4 style="margin: 0 0 10px 0; color: #444; font-size: 0.8rem; text-transform: uppercase;"><a href="/characters/defect/" style="color: inherit; text-decoration: underline;">DEFECT</a></h4>
-                        <div style="font-size: 0.75rem; color: #666;">No runs recorded</div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div style="font-size: 0.75rem;" title="inflame is RarelyVlolent's best performing card on Ironclad, with a 60% winrate across 10 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Top Card</div>
+                            <div style="color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/inflame/" style="color: inherit; text-decoration: underline;">inflame</a> <span style="color: #666; font-size: 0.8em;">(10r, 60%)</span></div>
+                        </div>
+                        <div style="font-size: 0.75rem;" title="breakthrough is RarelyVlolent's worst performing card on Ironclad, with a 0% winrate across 7 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Low Card</div>
+                            <div style="color: var(--red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/breakthrough/" style="color: inherit; text-decoration: underline;">breakthrough</a> <span style="color: #666; font-size: 0.8em;">(7r, 0%)</span></div>
+                        </div>
                     </div>
-                    <div class="char-panel" style="border: 1px solid #333; padding: 15px; border-radius: 8px; opacity: 0.3; background: rgba(0,0,0,0.1);">
-                        <h4 style="margin: 0 0 10px 0; color: #444; font-size: 0.8rem; text-transform: uppercase;"><a href="/characters/necrobinder/" style="color: inherit; text-decoration: underline;">NECROBINDER</a></h4>
-                        <div style="font-size: 0.75rem; color: #666;">No runs recorded</div>
+
+                    <div style="margin-top: 5px;" title="QUEEN BOSS is RarelyVlolent's deadliest foe on Ironclad with 4 kills">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Deadliest Foe</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;">QUEEN BOSS <span style="color: var(--red); font-size: 0.8em;">(4 deaths)</span></div>
                     </div>
-                    <div class="char-panel" style="border: 1px solid #333; padding: 15px; border-radius: 8px; opacity: 0.3; background: rgba(0,0,0,0.1);">
-                        <h4 style="margin: 0 0 10px 0; color: #444; font-size: 0.8rem; text-transform: uppercase;"><a href="/characters/regent/" style="color: inherit; text-decoration: underline;">REGENT</a></h4>
-                        <div style="font-size: 0.75rem; color: #666;">No runs recorded</div>
+                </div>
+                <div class="char-panel" style="border: 1px solid rgba(255, 255, 255, 0.05); border-top: 3px solid var(--color-silent); background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
+                    <h4 style="margin: 0; color: var(--color-silent); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;"><a href="/characters/silent/" style="color: inherit; text-decoration: underline;">Silent</a></h4>
+                    <div style="font-size: 1.4rem; font-weight: bold;" title="RarelyVlolent has a 25.0% Winrate Across 36 Silent Runs, 0.7% above their overall winrate.">
+                        25.0% <span style="color: var(--green); font-size: 0.9rem; font-weight: normal;">(+0.7)</span> 
+                        <span style="font-size: 0.7rem; color: #666; font-weight: normal;">36 Runs</span>
                     </div>
+                    
+                    <div title="untouchable is RarelyVlolent's top picked card on Silent, used in 22 runs with a 32% winrate">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Most Picked</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/untouchable/" style="color: inherit; text-decoration: underline;">untouchable</a> <span style="color: #666; font-size: 0.8em;">(22 runs, 32%)</span></div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div style="font-size: 0.75rem;" title="mirage is RarelyVlolent's best performing card on Silent, with a 100% winrate across 4 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Top Card</div>
+                            <div style="color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/mirage/" style="color: inherit; text-decoration: underline;">mirage</a> <span style="color: #666; font-size: 0.8em;">(4r, 100%)</span></div>
+                        </div>
+                        <div style="font-size: 0.75rem;" title="expose is RarelyVlolent's worst performing card on Silent, with a 0% winrate across 5 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Low Card</div>
+                            <div style="color: var(--red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/expose/" style="color: inherit; text-decoration: underline;">expose</a> <span style="color: #666; font-size: 0.8em;">(5r, 0%)</span></div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 5px;" title="TEST SUBJECT BOSS is RarelyVlolent's deadliest foe on Silent with 2 kills">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Deadliest Foe</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;">TEST SUBJECT BOSS <span style="color: var(--red); font-size: 0.8em;">(2 deaths)</span></div>
+                    </div>
+                </div>
+                <div class="char-panel" style="border: 1px solid rgba(255, 255, 255, 0.05); border-top: 3px solid var(--color-defect); background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
+                    <h4 style="margin: 0; color: var(--color-defect); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;"><a href="/characters/defect/" style="color: inherit; text-decoration: underline;">Defect</a></h4>
+                    <div style="font-size: 1.4rem; font-weight: bold;" title="RarelyVlolent has a 26.7% Winrate Across 30 Defect Runs, 2.4% above their overall winrate.">
+                        26.7% <span style="color: var(--green); font-size: 0.9rem; font-weight: normal;">(+2.4)</span> 
+                        <span style="font-size: 0.7rem; color: #666; font-weight: normal;">30 Runs</span>
+                    </div>
+                    
+                    <div title="charge_battery is RarelyVlolent's top picked card on Defect, used in 26 runs with a 31% winrate">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Most Picked</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/charge_battery/" style="color: inherit; text-decoration: underline;">charge_battery</a> <span style="color: #666; font-size: 0.8em;">(26 runs, 31%)</span></div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div style="font-size: 0.75rem;" title="helix_drill is RarelyVlolent's best performing card on Defect, with a 100% winrate across 3 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Top Card</div>
+                            <div style="color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/helix_drill/" style="color: inherit; text-decoration: underline;">helix_drill</a> <span style="color: #666; font-size: 0.8em;">(3r, 100%)</span></div>
+                        </div>
+                        <div style="font-size: 0.75rem;" title="shatter is RarelyVlolent's worst performing card on Defect, with a 0% winrate across 5 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Low Card</div>
+                            <div style="color: var(--red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/shatter/" style="color: inherit; text-decoration: underline;">shatter</a> <span style="color: #666; font-size: 0.8em;">(5r, 0%)</span></div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 5px;" title="OWL MAGISTRATE NORMAL is RarelyVlolent's deadliest foe on Defect with 2 kills">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Deadliest Foe</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;">OWL MAGISTRATE NORMAL <span style="color: var(--red); font-size: 0.8em;">(2 deaths)</span></div>
+                    </div>
+                </div>
+                <div class="char-panel" style="border: 1px solid rgba(255, 255, 255, 0.05); border-top: 3px solid var(--color-necrobinder); background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
+                    <h4 style="margin: 0; color: var(--color-necrobinder); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;"><a href="/characters/necrobinder/" style="color: inherit; text-decoration: underline;">Necrobinder</a></h4>
+                    <div style="font-size: 1.4rem; font-weight: bold;" title="RarelyVlolent has a 35.7% Winrate Across 14 Necrobinder Runs, 11.4% above their overall winrate.">
+                        35.7% <span style="color: var(--green); font-size: 0.9rem; font-weight: normal;">(+11.4)</span> 
+                        <span style="font-size: 0.7rem; color: #666; font-weight: normal;">14 Runs</span>
+                    </div>
+                    
+                    <div title="grave_warden is RarelyVlolent's top picked card on Necrobinder, used in 12 runs with a 42% winrate">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Most Picked</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/grave_warden/" style="color: inherit; text-decoration: underline;">grave_warden</a> <span style="color: #666; font-size: 0.8em;">(12 runs, 42%)</span></div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div style="font-size: 0.75rem;" title="deathbringer is RarelyVlolent's best performing card on Necrobinder, with a 100% winrate across 2 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Top Card</div>
+                            <div style="color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/deathbringer/" style="color: inherit; text-decoration: underline;">deathbringer</a> <span style="color: #666; font-size: 0.8em;">(2r, 100%)</span></div>
+                        </div>
+                        <div style="font-size: 0.75rem;" title="fear is RarelyVlolent's worst performing card on Necrobinder, with a 0% winrate across 3 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Low Card</div>
+                            <div style="color: var(--red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/fear/" style="color: inherit; text-decoration: underline;">fear</a> <span style="color: #666; font-size: 0.8em;">(3r, 0%)</span></div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 5px;" title="QUEEN BOSS is RarelyVlolent's deadliest foe on Necrobinder with 2 kills">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Deadliest Foe</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;">QUEEN BOSS <span style="color: var(--red); font-size: 0.8em;">(2 deaths)</span></div>
+                    </div>
+                </div>
+                <div class="char-panel" style="border: 1px solid rgba(255, 255, 255, 0.05); border-top: 3px solid var(--color-regent); background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
+                    <h4 style="margin: 0; color: var(--color-regent); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;"><a href="/characters/regent/" style="color: inherit; text-decoration: underline;">Regent</a></h4>
+                    <div style="font-size: 1.4rem; font-weight: bold;" title="RarelyVlolent has a 15.6% Winrate Across 32 Regent Runs, 8.7% below their overall winrate.">
+                        15.6% <span style="color: var(--red); font-size: 0.9rem; font-weight: normal;">(-8.7)</span> 
+                        <span style="font-size: 0.7rem; color: #666; font-weight: normal;">32 Runs</span>
+                    </div>
+                    
+                    <div title="photon_cut is RarelyVlolent's top picked card on Regent, used in 19 runs with a 21% winrate">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Most Picked</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/photon_cut/" style="color: inherit; text-decoration: underline;">photon_cut</a> <span style="color: #666; font-size: 0.8em;">(19 runs, 21%)</span></div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div style="font-size: 0.75rem;" title="conqueror is RarelyVlolent's best performing card on Regent, with a 100% winrate across 3 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Top Card</div>
+                            <div style="color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/conqueror/" style="color: inherit; text-decoration: underline;">conqueror</a> <span style="color: #666; font-size: 0.8em;">(3r, 100%)</span></div>
+                        </div>
+                        <div style="font-size: 0.75rem;" title="resonance is RarelyVlolent's worst performing card on Regent, with a 0% winrate across 8 runs">
+                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Low Card</div>
+                            <div style="color: var(--red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/resonance/" style="color: inherit; text-decoration: underline;">resonance</a> <span style="color: #666; font-size: 0.8em;">(8r, 0%)</span></div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 5px;" title="SKULKING COLONY ELITE is RarelyVlolent's deadliest foe on Regent with 2 kills">
+                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Deadliest Foe</div>
+                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;">SKULKING COLONY ELITE <span style="color: var(--red); font-size: 0.8em;">(2 deaths)</span></div>
+                    </div>
+                </div>
                 </div>
                 
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">

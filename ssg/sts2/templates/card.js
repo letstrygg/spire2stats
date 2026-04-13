@@ -19,7 +19,7 @@ export function cardDetailTemplate(card, stats, videosHtml, costDisplay, upgCost
         ${generateItemSummaryBox(card.name, stats)}
         ${topUserHtml}
         <div class="card-display">
-            <div class="card">
+            <div class="card ${charKey}">
                 <div class="cost-circle">${costDisplay}</div>
                 <div class="card-title">${card.name}</div>
                 <div class="type-banner">${card.color || ''} ${card.type}</div>

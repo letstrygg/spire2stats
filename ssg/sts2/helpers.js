@@ -126,7 +126,7 @@ export function aggregateCardStats(runs) {
     const cardMap = {};
     runs.forEach(run => {
         const deck = JSON.parse(run.deck_list || '[]');
-        const uniqueIds = new Set(deck.map(c => c.id).filter(Boolean));
+        const uniqueIds = new Set(deck.map(c => normalizeId(c.id)).filter(Boolean));
         uniqueIds.forEach(cid => {
             if (!cardMap[cid]) cardMap[cid] = { seen: 0, wins: 0 };
             cardMap[cid].seen++;
