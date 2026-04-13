@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import sqlite3 from 'sqlite3';
 import { PATHS, ensureDir } from './paths.js';
-import { parseCardText } from './helpers.js';
+import { parseCardText, normalizeId } from './helpers.js';
 
 /**
  * Slay the Spire 2 - Card Data Importer
@@ -15,18 +15,17 @@ const starterRelics = new Set();
 
 if (fs.existsSync(charFilePath)) {
     const chars = JSON.parse(fs.readFileSync(charFilePath, 'utf8'));
-    const normalize = (id) => id.replace(/([a-z])([A-Z])/g, '$1_$2').toUpperCase();
     chars.forEach(c => {
         const deck = c.deck ?? c.starting_deck ?? c.StartingDeck ?? [];
         const relics = c.relics ?? c.starting_relics ?? c.StartingRelics ?? [];
-        deck.forEach(id => starterCards.add(normalize(id)));
-        relics.forEach(id => starterRelics.add(normalize(id)));
+        deck.forEach(id => starterCards.add(normalizeId(id)));
+        relics.forEach(id => starterRelics.add(normalizeId(id)));
     });
 }
 
 // Hard-coded special cases for items that are always starters but not character-specific
-starterCards.add('ASCENDERS_BANE');
-starterCards.add('SPOILS_MAP');
+starterCards.add('ascenders_bane');
+starterCards.add('spoils_map');
 
 const TABLES = [
     {
@@ -50,7 +49,7 @@ const TABLES = [
             c.vars ? JSON.stringify(c.vars) : null, 
             c.upgrade ? JSON.stringify(c.upgrade) : null, 
             c.tags ? JSON.stringify(c.tags) : null, 
-            starterCards.has((c.id || '').toUpperCase()) ? 1 : 0
+            starterCards.has(normalizeId(c.id)) ? 1 : 0
         ]
     },
     {
@@ -170,7 +169,7 @@ const TABLES = [
         file: 'relics.json',
         columns: 'relic_id, name, description, description_raw, flavor, rarity, pool, image_url, starter',
         schema: `relic_id TEXT, name TEXT NOT NULL, description TEXT, description_raw TEXT, flavor TEXT, rarity TEXT, pool TEXT, image_url TEXT, starter INTEGER`,
-        map: (r) => [r.id, r.name, r.description, r.description_raw, r.flavor, r.rarity, r.pool, r.image_url, starterRelics.has((r.id || '').toUpperCase()) ? 1 : 0]
+        map: (r) => [r.id, r.name, r.description, r.description_raw, r.flavor, r.rarity, r.pool, r.image_url, starterRelics.has(normalizeId(r.id)) ? 1 : 0]
     },
     {
         name: 'stories',

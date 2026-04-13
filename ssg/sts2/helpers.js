@@ -1,13 +1,13 @@
 import { slugify } from './paths.js';
 
 /**
- * Normalizes IDs by stripping common prefixes (CHARACTER., RELIC., CARD., etc) 
- * and converting to uppercase.
+ * Normalizes IDs by stripping common prefixes (CHARACTER., RELIC., CARD., etc)
+ * and converting to lowercase for consistent handling in CSS and JS.
  * @param {string} rawId 
  * @returns {string}
  */
 export function normalizeId(rawId) {
-    return (rawId || '').replace(/^[A-Z]+\./, '').toUpperCase();
+    return (rawId || '').replace(/^[A-Z]+\./i, '').replace(/\s*POOL$/i, '').toLowerCase().trim();
 }
 
 /**
@@ -99,7 +99,7 @@ export function getRunMetadata(row) {
  */
 export function getPerformanceStats(runs, priorM, starterCards) {
     const cardStats = aggregateCardStats(runs);
-    const nonStarterEntries = Object.entries(cardStats).filter(([id]) => !starterCards.has(id.toUpperCase()));
+    const nonStarterEntries = Object.entries(cardStats).filter(([id]) => !starterCards.has(normalizeId(id)));
     
     if (nonStarterEntries.length === 0) return null;
 

@@ -139,8 +139,8 @@ async function getCardStats() {
                 updateStat(charStats, charId, row.win, video, runMeta);
 
                 const relics = JSON.parse(row.relic_list || '[]');
-                const uniqueRelicsInRun = new Set(relics.map(r => (r || '').toUpperCase()));
-                uniqueRelicsInRun.forEach(rid => { charStats[charId].relicFrequencies[rid] = (charStats[charId].relicFrequencies[rid] || 0) + 1; });
+                const uniqueRelicsInRun = new Set(relics.map(r => normalizeId(r)));
+                uniqueRelicsInRun.forEach(rid => { if (rid) charStats[charId].relicFrequencies[rid] = (charStats[charId].relicFrequencies[rid] || 0) + 1; });
                 relics.forEach(relicId => updateStat(relicStats, relicId, row.win, video, runMeta));
 
                 const pathHistory = JSON.parse(row.path_history || '[]');
@@ -202,7 +202,7 @@ async function getCardStats() {
                     encounterStats[killerEncounter].lethalRuns.push(runMeta);
 
                     // Attribute kill to character specific lethality
-                    const kid = killerEncounter.toUpperCase();
+                    const kid = normalizeId(killerEncounter);
                     charStats[charId].killerFrequencies[kid] = (charStats[charId].killerFrequencies[kid] || 0) + 1;
 
                     // Attribute kill to all constituent monsters
@@ -216,7 +216,7 @@ async function getCardStats() {
                 }
 
                 const deck = JSON.parse(row.deck_list || '[]');
-                const uniqueCardsInDeck = new Set(deck.map(c => c.id || ''));
+                const uniqueCardsInDeck = new Set(deck.map(c => normalizeId(c.id)));
                 uniqueCardsInDeck.forEach(cid => { if (cid) charStats[charId].cardFrequencies[cid] = (charStats[charId].cardFrequencies[cid] || 0) + 1; });
 
                 uniqueCardsInDeck.forEach(cardId => updateStat(stats, cardId, row.win, video, runMeta));
@@ -791,8 +791,8 @@ async function buildCharacters(chars, runStats, sitemap, users) {
     sitemap.add('/characters/');
     const charLinks = chars.map(c => {
                 const displayName = c.name.replace(/^The\s+/i, '');
-                const charKey = (c.character_id || '').replace('CHARACTER.', '').toUpperCase();
-                const stats = getItemStats(runStats.charStats[charKey], runStats.globalWinRate);
+        const charId = normalizeId(c.character_id);
+        const stats = getItemStats(runStats.charStats[charId], runStats.globalWinRate);
                 return generateCardItemHtml(`/characters/${slugify(displayName)}/`, displayName, stats, displayName.toLowerCase());
             }).join('');
 
@@ -1028,7 +1028,7 @@ async function build() {
             const slug = slugify(card.name);
             const cardDir = ensureDir(path.join(cardsRoot, slug));
             
-            const energyIconUrl = `/images/sts2_images/ui/compendium/card/energy_${slugify(card.color || 'colorless')}.png`;
+            const energyIconUrl = `/images/sts2_images/ui/compendium/card/energy_${normalizeId(card.color || 'colorless')}.png`;
             
             const generateCostHtml = (costVal, isX, starCost, isXStar) => {
                 const text = getCostDisplay(costVal, isX, starCost, isXStar);

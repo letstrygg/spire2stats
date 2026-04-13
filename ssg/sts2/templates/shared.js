@@ -1,17 +1,17 @@
 import fs from 'fs';
 import path from 'path';
-import { calculateBayesianScore } from '../helpers.js';
+import { calculateBayesianScore, normalizeId } from '../helpers.js';
 // --- BUILD DATE CONSTANTS ---
 const BUILD_DATE = new Date();
 export const FORMATTED_BUILD_DATE = BUILD_DATE.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 export const ISO_BUILD_DATE = BUILD_DATE.toISOString();
 
 export const CHARACTER_COLORS = {
-    'IRONCLAD': 'var(--color-ironclad)',
-    'SILENT': 'var(--color-silent)',
-    'DEFECT': 'var(--color-defect)',
-    'NECROBINDER': 'var(--color-necrobinder)',
-    'REGENT': 'var(--color-regent)'
+    'ironclad': 'var(--color-ironclad)',
+    'silent': 'var(--color-silent)',
+    'defect': 'var(--color-defect)',
+    'necrobinder': 'var(--color-necrobinder)',
+    'regent': 'var(--color-regent)'
 };
 
 /** Helper for win rate text color logic */
@@ -25,9 +25,8 @@ export function getWinRateColor(seen, winRateNum, globalWinRate) {
 /** Returns an inline style for 30% opacity character background */
 export function getCharacterBgStyle(name) {
     if (!name) return '';
-    // Normalize name: "Ironclad Pool" -> "IRONCLAD", "The Silent" -> "SILENT"
-    const cleanName = name.toUpperCase().replace(/ POOL$/i, '').replace(/^THE\s+/i, '').trim();
-    const colorVar = CHARACTER_COLORS[cleanName];
+    const charId = normalizeId(name);
+    const colorVar = CHARACTER_COLORS[charId];
     return colorVar ? `background-color: color-mix(in srgb, ${colorVar} 30%, transparent);` : '';
 }
 
@@ -289,7 +288,7 @@ export function generateAveragesPanel(stats, count, title = "Averages") {
 
 /** Helper to generate standardized card-item HTML for index pages */
 export function generateCardItemHtml(url, name, stats, extraClass = '', levelId = '') {
-    const charId = (extraClass || '').toUpperCase();
+    const charId = normalizeId(extraClass);
     const charColor = CHARACTER_COLORS[charId] || 'var(--gray)';
     let subtitleHtml = '';
     let nameStyle = '';

@@ -1,10 +1,10 @@
 import { slugify } from '../paths.js';
+import { normalizeId } from '../helpers.js';
 import { CHARACTER_COLORS } from './shared.js';
 
 /** Generates a standard run card HTML used across the site */
 export function generateRunCardHtml(run, user) {
-    const charId = (run.character || 'Unknown').replace('CHARACTER.', '').toUpperCase();
-    const charClass = charId.toLowerCase();
+    const charId = normalizeId(run.character);
     const charColor = CHARACTER_COLORS[charId] || 'var(--gray)';
     const statusClass = run.win ? 'win' : 'loss';
     const statusText = run.win ? 'Victory' : 'Defeat';
@@ -42,7 +42,7 @@ export function generateRunCardHtml(run, user) {
     const winVal = run.win ? 1 : 0;
 
     return `
-    <div class="card-item ${statusClass} ${charClass} run-record" 
+    <div class="card-item ${statusClass} ${charId} run-record" 
          data-build="${buildId}" data-ascension="${ascension}" data-win="${winVal}" 
          data-user-id="${run.supabase_user_id || ''}" data-run-id="${run.id}"
          data-yt-video="${ytId || ''}" data-shorts='${JSON.stringify(shorts)}'
@@ -55,7 +55,7 @@ export function generateRunCardHtml(run, user) {
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">${user.display_name}</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run ${run.user_run_num}</span>
-                    <span style="color: ${charColor}">${charId}</span>
+                    <span style="color: ${charColor}; text-transform: capitalize;">${charId}</span>
                 </span>
             </div>
             <div class="card-stats">

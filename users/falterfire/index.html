@@ -64,7 +64,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/users/">users</a> / falterfire</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-13T02:50:26.695Z">April 12, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-13T03:55:55.318Z">April 12, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -94,1124 +94,28 @@
     </div>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 40px;">
                     
-                <div class="char-panel" style="border: 1px solid rgba(255, 255, 255, 0.05); border-top: 3px solid var(--color-ironclad); background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
-                    <h4 style="margin: 0; color: var(--color-ironclad); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;"><a href="/characters/ironclad/" style="color: inherit; text-decoration: underline;">Ironclad</a></h4>
-                    <div style="font-size: 1.4rem; font-weight: bold;" title="Falterfire has a 52.4% Winrate Across 21 Ironclad Runs, 11.6% below their overall winrate.">
-                        52.4% <span style="color: var(--red); font-size: 0.9rem; font-weight: normal;">(-11.6)</span> 
-                        <span style="font-size: 0.7rem; color: #666; font-weight: normal;">21 Runs</span>
+                    <div class="char-panel" style="border: 1px solid #333; padding: 15px; border-radius: 8px; opacity: 0.3; background: rgba(0,0,0,0.1);">
+                        <h4 style="margin: 0 0 10px 0; color: #444; font-size: 0.8rem; text-transform: uppercase;"><a href="/characters/ironclad/" style="color: inherit; text-decoration: underline;">IRONCLAD</a></h4>
+                        <div style="font-size: 0.75rem; color: #666;">No runs recorded</div>
                     </div>
-                    
-                    <div title="Shrug It Off is Falterfire's top picked card on Ironclad, used in 15 runs with a 60% winrate">
-                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Most Picked</div>
-                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/shrug-it-off/" style="color: inherit; text-decoration: underline;">Shrug It Off</a> <span style="color: #666; font-size: 0.8em;">(15 runs, 60%)</span></div>
+                    <div class="char-panel" style="border: 1px solid #333; padding: 15px; border-radius: 8px; opacity: 0.3; background: rgba(0,0,0,0.1);">
+                        <h4 style="margin: 0 0 10px 0; color: #444; font-size: 0.8rem; text-transform: uppercase;"><a href="/characters/silent/" style="color: inherit; text-decoration: underline;">SILENT</a></h4>
+                        <div style="font-size: 0.75rem; color: #666;">No runs recorded</div>
                     </div>
-
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                        <div style="font-size: 0.75rem;" title="Howl from Beyond is Falterfire's best performing card on Ironclad, with a 100% winrate across 5 runs">
-                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Top Card</div>
-                            <div style="color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/howl-from-beyond/" style="color: inherit; text-decoration: underline;">Howl from Beyond</a> <span style="color: #666; font-size: 0.8em;">(5r, 100%)</span></div>
-                        </div>
-                        <div style="font-size: 0.75rem;" title="Ashen Strike is Falterfire's worst performing card on Ironclad, with a 0% winrate across 2 runs">
-                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Low Card</div>
-                            <div style="color: var(--red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/ashen-strike/" style="color: inherit; text-decoration: underline;">Ashen Strike</a> <span style="color: #666; font-size: 0.8em;">(2r, 0%)</span></div>
-                        </div>
+                    <div class="char-panel" style="border: 1px solid #333; padding: 15px; border-radius: 8px; opacity: 0.3; background: rgba(0,0,0,0.1);">
+                        <h4 style="margin: 0 0 10px 0; color: #444; font-size: 0.8rem; text-transform: uppercase;"><a href="/characters/defect/" style="color: inherit; text-decoration: underline;">DEFECT</a></h4>
+                        <div style="font-size: 0.75rem; color: #666;">No runs recorded</div>
                     </div>
-
-                    <div style="margin-top: 5px;" title="The Decimillipede is Falterfire's deadliest foe on Ironclad with 2 kills">
-                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Deadliest Foe</div>
-                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;"><a href="/encounters/the-decimillipede/" style="color: inherit; text-decoration: underline;">The Decimillipede</a> <span style="color: var(--red); font-size: 0.8em;">(2 deaths)</span></div>
+                    <div class="char-panel" style="border: 1px solid #333; padding: 15px; border-radius: 8px; opacity: 0.3; background: rgba(0,0,0,0.1);">
+                        <h4 style="margin: 0 0 10px 0; color: #444; font-size: 0.8rem; text-transform: uppercase;"><a href="/characters/necrobinder/" style="color: inherit; text-decoration: underline;">NECROBINDER</a></h4>
+                        <div style="font-size: 0.75rem; color: #666;">No runs recorded</div>
+                    </div>
+                    <div class="char-panel" style="border: 1px solid #333; padding: 15px; border-radius: 8px; opacity: 0.3; background: rgba(0,0,0,0.1);">
+                        <h4 style="margin: 0 0 10px 0; color: #444; font-size: 0.8rem; text-transform: uppercase;"><a href="/characters/regent/" style="color: inherit; text-decoration: underline;">REGENT</a></h4>
+                        <div style="font-size: 0.75rem; color: #666;">No runs recorded</div>
                     </div>
                 </div>
-                <div class="char-panel" style="border: 1px solid rgba(255, 255, 255, 0.05); border-top: 3px solid var(--color-silent); background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
-                    <h4 style="margin: 0; color: var(--color-silent); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;"><a href="/characters/silent/" style="color: inherit; text-decoration: underline;">Silent</a></h4>
-                    <div style="font-size: 1.4rem; font-weight: bold;" title="Falterfire has a 73.3% Winrate Across 15 Silent Runs, 9.4% above their overall winrate.">
-                        73.3% <span style="color: var(--green); font-size: 0.9rem; font-weight: normal;">(+9.4)</span> 
-                        <span style="font-size: 0.7rem; color: #666; font-weight: normal;">15 Runs</span>
-                    </div>
-                    
-                    <div title="Prepared is Falterfire's top picked card on Silent, used in 11 runs with a 91% winrate">
-                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Most Picked</div>
-                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/prepared/" style="color: inherit; text-decoration: underline;">Prepared</a> <span style="color: #666; font-size: 0.8em;">(11 runs, 91%)</span></div>
-                    </div>
-
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                        <div style="font-size: 0.75rem;" title="Footwork is Falterfire's best performing card on Silent, with a 100% winrate across 9 runs">
-                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Top Card</div>
-                            <div style="color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/footwork/" style="color: inherit; text-decoration: underline;">Footwork</a> <span style="color: #666; font-size: 0.8em;">(9r, 100%)</span></div>
-                        </div>
-                        <div style="font-size: 0.75rem;" title="Leading Strike is Falterfire's worst performing card on Silent, with a 0% winrate across 1 runs">
-                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Low Card</div>
-                            <div style="color: var(--red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/leading-strike/" style="color: inherit; text-decoration: underline;">Leading Strike</a> <span style="color: #666; font-size: 0.8em;">(1r, 0%)</span></div>
-                        </div>
-                    </div>
-
-                    <div style="margin-top: 5px;" title="Phantasmal Gardeners is Falterfire's deadliest foe on Silent with 1 kills">
-                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Deadliest Foe</div>
-                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;"><a href="/encounters/phantasmal-gardeners/" style="color: inherit; text-decoration: underline;">Phantasmal Gardeners</a> <span style="color: var(--red); font-size: 0.8em;">(1 deaths)</span></div>
-                    </div>
-                </div>
-                <div class="char-panel" style="border: 1px solid rgba(255, 255, 255, 0.05); border-top: 3px solid var(--color-defect); background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
-                    <h4 style="margin: 0; color: var(--color-defect); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;"><a href="/characters/defect/" style="color: inherit; text-decoration: underline;">Defect</a></h4>
-                    <div style="font-size: 1.4rem; font-weight: bold;" title="Falterfire has a 52.4% Winrate Across 21 Defect Runs, 11.6% below their overall winrate.">
-                        52.4% <span style="color: var(--red); font-size: 0.9rem; font-weight: normal;">(-11.6)</span> 
-                        <span style="font-size: 0.7rem; color: #666; font-weight: normal;">21 Runs</span>
-                    </div>
-                    
-                    <div title="Charge Battery is Falterfire's top picked card on Defect, used in 12 runs with a 58% winrate">
-                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Most Picked</div>
-                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/charge-battery/" style="color: inherit; text-decoration: underline;">Charge Battery</a> <span style="color: #666; font-size: 0.8em;">(12 runs, 58%)</span></div>
-                    </div>
-
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                        <div style="font-size: 0.75rem;" title="Beam Cell is Falterfire's best performing card on Defect, with a 100% winrate across 5 runs">
-                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Top Card</div>
-                            <div style="color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/beam-cell/" style="color: inherit; text-decoration: underline;">Beam Cell</a> <span style="color: #666; font-size: 0.8em;">(5r, 100%)</span></div>
-                        </div>
-                        <div style="font-size: 0.75rem;" title="Uproar is Falterfire's worst performing card on Defect, with a 0% winrate across 3 runs">
-                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Low Card</div>
-                            <div style="color: var(--red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/uproar/" style="color: inherit; text-decoration: underline;">Uproar</a> <span style="color: #666; font-size: 0.8em;">(3r, 0%)</span></div>
-                        </div>
-                    </div>
-
-                    <div style="margin-top: 5px;" title="Slumber Party is Falterfire's deadliest foe on Defect with 1 kills">
-                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Deadliest Foe</div>
-                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;"><a href="/encounters/slumber-party/" style="color: inherit; text-decoration: underline;">Slumber Party</a> <span style="color: var(--red); font-size: 0.8em;">(1 deaths)</span></div>
-                    </div>
-                </div>
-                <div class="char-panel" style="border: 1px solid rgba(255, 255, 255, 0.05); border-top: 3px solid var(--color-necrobinder); background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
-                    <h4 style="margin: 0; color: var(--color-necrobinder); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;"><a href="/characters/necrobinder/" style="color: inherit; text-decoration: underline;">Necrobinder</a></h4>
-                    <div style="font-size: 1.4rem; font-weight: bold;" title="Falterfire has a 68.8% Winrate Across 16 Necrobinder Runs, 4.8% above their overall winrate.">
-                        68.8% <span style="color: var(--green); font-size: 0.9rem; font-weight: normal;">(+4.8)</span> 
-                        <span style="font-size: 0.7rem; color: #666; font-weight: normal;">16 Runs</span>
-                    </div>
-                    
-                    <div title="Defy is Falterfire's top picked card on Necrobinder, used in 12 runs with a 83% winrate">
-                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Most Picked</div>
-                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/defy/" style="color: inherit; text-decoration: underline;">Defy</a> <span style="color: #666; font-size: 0.8em;">(12 runs, 83%)</span></div>
-                    </div>
-
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                        <div style="font-size: 0.75rem;" title="Friendship is Falterfire's best performing card on Necrobinder, with a 100% winrate across 8 runs">
-                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Top Card</div>
-                            <div style="color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/friendship/" style="color: inherit; text-decoration: underline;">Friendship</a> <span style="color: #666; font-size: 0.8em;">(8r, 100%)</span></div>
-                        </div>
-                        <div style="font-size: 0.75rem;" title="Flash of Steel is Falterfire's worst performing card on Necrobinder, with a 0% winrate across 2 runs">
-                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Low Card</div>
-                            <div style="color: var(--red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/flash-of-steel/" style="color: inherit; text-decoration: underline;">Flash of Steel</a> <span style="color: #666; font-size: 0.8em;">(2r, 0%)</span></div>
-                        </div>
-                    </div>
-
-                    <div style="margin-top: 5px;" title="The Decimillipede is Falterfire's deadliest foe on Necrobinder with 3 kills">
-                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Deadliest Foe</div>
-                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;"><a href="/encounters/the-decimillipede/" style="color: inherit; text-decoration: underline;">The Decimillipede</a> <span style="color: var(--red); font-size: 0.8em;">(3 deaths)</span></div>
-                    </div>
-                </div>
-                <div class="char-panel" style="border: 1px solid rgba(255, 255, 255, 0.05); border-top: 3px solid var(--color-regent); background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px;">
-                    <h4 style="margin: 0; color: var(--color-regent); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px;"><a href="/characters/regent/" style="color: inherit; text-decoration: underline;">Regent</a></h4>
-                    <div style="font-size: 1.4rem; font-weight: bold;" title="Falterfire has a 84.6% Winrate Across 13 Regent Runs, 20.7% above their overall winrate.">
-                        84.6% <span style="color: var(--green); font-size: 0.9rem; font-weight: normal;">(+20.7)</span> 
-                        <span style="font-size: 0.7rem; color: #666; font-weight: normal;">13 Runs</span>
-                    </div>
-                    
-                    <div title="Glitterstream is Falterfire's top picked card on Regent, used in 9 runs with a 100% winrate">
-                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Most Picked</div>
-                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/glitterstream/" style="color: inherit; text-decoration: underline;">Glitterstream</a> <span style="color: #666; font-size: 0.8em;">(9 runs, 100%)</span></div>
-                    </div>
-
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                        <div style="font-size: 0.75rem;" title="Glitterstream is Falterfire's best performing card on Regent, with a 100% winrate across 9 runs">
-                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Top Card</div>
-                            <div style="color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/glitterstream/" style="color: inherit; text-decoration: underline;">Glitterstream</a> <span style="color: #666; font-size: 0.8em;">(9r, 100%)</span></div>
-                        </div>
-                        <div style="font-size: 0.75rem;" title="CHARGE!! is Falterfire's worst performing card on Regent, with a 50% winrate across 4 runs">
-                            <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Low Card</div>
-                            <div style="color: var(--red); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><a href="/cards/charge/" style="color: inherit; text-decoration: underline;">CHARGE!!</a> <span style="color: #666; font-size: 0.8em;">(4r, 50%)</span></div>
-                        </div>
-                    </div>
-
-                    <div style="margin-top: 5px;" title="Queen is Falterfire's deadliest foe on Regent with 1 kills">
-                        <div style="color: #666; text-transform: uppercase; font-size: 0.6rem; margin-bottom: 2px;">Deadliest Foe</div>
-                        <div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #eee;"><a href="/encounters/queen/" style="color: inherit; text-decoration: underline;">Queen</a> <span style="color: var(--red); font-size: 0.8em;">(1 deaths)</span></div>
-                    </div>
-                </div>
-                </div>
                 
-                <div class="item-box" style="margin-bottom: 40px;">
-                    <h3 style="margin-top: 0; color: var(--gold); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Top Winrate with Card</h3>
-                    <ol style="display: grid; grid-template-columns: repeat(auto-fit, minmax(225px, 1fr)); font-size: 0.85rem;">
-                        
-                    <li>
-                        <a href="/cards/fasten/" style="color: var(--text); text-decoration: underline;">Fasten</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/finesse/" style="color: var(--text); text-decoration: underline;">Finesse</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/fisticuffs/" style="color: var(--text); text-decoration: underline;">Fisticuffs</a> 
-                        <span style="color: #888;">(100.0% 3 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/hidden-gem/" style="color: var(--text); text-decoration: underline;">Hidden Gem</a> 
-                        <span style="color: #888;">(83.3% 6 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/jack-of-all-trades/" style="color: var(--text); text-decoration: underline;">Jack of All Trades</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/jackpot/" style="color: var(--text); text-decoration: underline;">Jackpot</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/omnislice/" style="color: var(--text); text-decoration: underline;">Omnislice</a> 
-                        <span style="color: #888;">(80.0% 5 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/rolling-boulder/" style="color: var(--text); text-decoration: underline;">Rolling Boulder</a> 
-                        <span style="color: #888;">(100.0% 3 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/splash/" style="color: var(--text); text-decoration: underline;">Splash</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/ultimate-defend/" style="color: var(--text); text-decoration: underline;">Ultimate Defend</a> 
-                        <span style="color: #888;">(75.0% 4 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/ascenders-bane/" style="color: var(--text); text-decoration: underline;">Ascender's Bane</a> 
-                        <span style="color: #888;">(61.2% 49 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/clumsy/" style="color: var(--text); text-decoration: underline;">Clumsy</a> 
-                        <span style="color: #888;">(63.6% 11 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/greed/" style="color: var(--text); text-decoration: underline;">Greed</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/adaptive-strike/" style="color: var(--color-defect); text-decoration: underline;">Adaptive Strike</a> 
-                        <span style="color: #888;">(100.0% 4 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/all-for-one/" style="color: var(--color-defect); text-decoration: underline;">All for One</a> 
-                        <span style="color: #888;">(60.0% 5 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/beam-cell/" style="color: var(--color-defect); text-decoration: underline;">Beam Cell</a> 
-                        <span style="color: #888;">(100.0% 5 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/boost-away/" style="color: var(--color-defect); text-decoration: underline;">Boost Away</a> 
-                        <span style="color: #888;">(72.7% 11 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/boot-sequence/" style="color: var(--color-defect); text-decoration: underline;">Boot Sequence</a> 
-                        <span style="color: #888;">(66.7% 6 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/buffer/" style="color: var(--color-defect); text-decoration: underline;">Buffer</a> 
-                        <span style="color: #888;">(100.0% 3 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/bulk-up/" style="color: var(--color-defect); text-decoration: underline;">Bulk Up</a> 
-                        <span style="color: #888;">(85.7% 7 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/capacitor/" style="color: var(--color-defect); text-decoration: underline;">Capacitor</a> 
-                        <span style="color: #888;">(75.0% 4 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/charge-battery/" style="color: var(--color-defect); text-decoration: underline;">Charge Battery</a> 
-                        <span style="color: #888;">(58.3% 12 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/compact/" style="color: var(--color-defect); text-decoration: underline;">Compact</a> 
-                        <span style="color: #888;">(66.7% 3 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/coolant/" style="color: var(--color-defect); text-decoration: underline;">Coolant</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/coolheaded/" style="color: var(--color-defect); text-decoration: underline;">Coolheaded</a> 
-                        <span style="color: #888;">(80.0% 5 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/darkness/" style="color: var(--color-defect); text-decoration: underline;">Darkness</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/defend/" style="color: var(--color-silent); text-decoration: underline;">Defend</a> 
-                        <span style="color: #888;">(71.4% 14 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/double-energy/" style="color: var(--color-defect); text-decoration: underline;">Double Energy</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/ftl/" style="color: var(--color-defect); text-decoration: underline;">FTL</a> 
-                        <span style="color: #888;">(100.0% 3 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/feral/" style="color: var(--color-defect); text-decoration: underline;">Feral</a> 
-                        <span style="color: #888;">(71.4% 7 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/fight-through/" style="color: var(--color-defect); text-decoration: underline;">Fight Through</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/genetic-algorithm/" style="color: var(--color-defect); text-decoration: underline;">Genetic Algorithm</a> 
-                        <span style="color: #888;">(100.0% 3 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/gunk-up/" style="color: var(--color-defect); text-decoration: underline;">Gunk Up</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/hologram/" style="color: var(--color-defect); text-decoration: underline;">Hologram</a> 
-                        <span style="color: #888;">(60.0% 5 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/hotfix/" style="color: var(--color-defect); text-decoration: underline;">Hotfix</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/ice-lance/" style="color: var(--color-defect); text-decoration: underline;">Ice Lance</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/leap/" style="color: var(--color-defect); text-decoration: underline;">Leap</a> 
-                        <span style="color: #888;">(66.7% 6 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/loop/" style="color: var(--color-defect); text-decoration: underline;">Loop</a> 
-                        <span style="color: #888;">(87.5% 8 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/machine-learning/" style="color: var(--color-defect); text-decoration: underline;">Machine Learning</a> 
-                        <span style="color: #888;">(80.0% 5 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/meteor-strike/" style="color: var(--color-defect); text-decoration: underline;">Meteor Strike</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/momentum-strike/" style="color: var(--color-defect); text-decoration: underline;">Momentum Strike</a> 
-                        <span style="color: #888;">(50.0% 4 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/null/" style="color: var(--color-defect); text-decoration: underline;">Null</a> 
-                        <span style="color: #888;">(100.0% 5 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/reboot/" style="color: var(--color-defect); text-decoration: underline;">Reboot</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/scrape/" style="color: var(--color-defect); text-decoration: underline;">Scrape</a> 
-                        <span style="color: #888;">(100.0% 3 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/shatter/" style="color: var(--color-defect); text-decoration: underline;">Shatter</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/spinner/" style="color: var(--color-defect); text-decoration: underline;">Spinner</a> 
-                        <span style="color: #888;">(66.7% 3 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/storm/" style="color: var(--color-defect); text-decoration: underline;">Storm</a> 
-                        <span style="color: #888;">(80.0% 5 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/strike/" style="color: var(--color-silent); text-decoration: underline;">Strike</a> 
-                        <span style="color: #888;">(63.6% 11 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/subroutine/" style="color: var(--color-defect); text-decoration: underline;">Subroutine</a> 
-                        <span style="color: #888;">(87.5% 8 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/sweeping-beam/" style="color: var(--color-defect); text-decoration: underline;">Sweeping Beam</a> 
-                        <span style="color: #888;">(66.7% 3 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/zap/" style="color: var(--color-defect); text-decoration: underline;">Zap</a> 
-                        <span style="color: #888;">(52.4% 21 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/distraction/" style="color: var(--text); text-decoration: underline;">Distraction</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/mad-science/" style="color: var(--text); text-decoration: underline;">Mad Science</a> 
-                        <span style="color: #888;">(92.9% 14 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/maul/" style="color: var(--text); text-decoration: underline;">Maul</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/neows-fury/" style="color: var(--text); text-decoration: underline;">Neow's Fury</a> 
-                        <span style="color: #888;">(100.0% 3 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/peck/" style="color: var(--text); text-decoration: underline;">Peck</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/relax/" style="color: var(--text); text-decoration: underline;">Relax</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/aggression/" style="color: var(--color-ironclad); text-decoration: underline;">Aggression</a> 
-                        <span style="color: #888;">(100.0% 3 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/armaments/" style="color: var(--color-ironclad); text-decoration: underline;">Armaments</a> 
-                        <span style="color: #888;">(75.0% 4 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/battle-trance/" style="color: var(--color-ironclad); text-decoration: underline;">Battle Trance</a> 
-                        <span style="color: #888;">(100.0% 3 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/bludgeon/" style="color: var(--color-ironclad); text-decoration: underline;">Bludgeon</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/brand/" style="color: var(--color-ironclad); text-decoration: underline;">Brand</a> 
-                        <span style="color: #888;">(100.0% 3 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/break/" style="color: var(--color-ironclad); text-decoration: underline;">Break</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/breakthrough/" style="color: var(--color-ironclad); text-decoration: underline;">Breakthrough</a> 
-                        <span style="color: #888;">(62.5% 8 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/bully/" style="color: var(--color-ironclad); text-decoration: underline;">Bully</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/conflagration/" style="color: var(--color-ironclad); text-decoration: underline;">Conflagration</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/crimson-mantle/" style="color: var(--color-ironclad); text-decoration: underline;">Crimson Mantle</a> 
-                        <span style="color: #888;">(100.0% 3 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/dark-embrace/" style="color: var(--color-ironclad); text-decoration: underline;">Dark Embrace</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/demon-form/" style="color: var(--color-ironclad); text-decoration: underline;">Demon Form</a> 
-                        <span style="color: #888;">(80.0% 5 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/evil-eye/" style="color: var(--color-ironclad); text-decoration: underline;">Evil Eye</a> 
-                        <span style="color: #888;">(75.0% 4 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/feed/" style="color: var(--color-ironclad); text-decoration: underline;">Feed</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/feel-no-pain/" style="color: var(--color-ironclad); text-decoration: underline;">Feel No Pain</a> 
-                        <span style="color: #888;">(66.7% 6 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/grapple/" style="color: var(--color-ironclad); text-decoration: underline;">Grapple</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/havoc/" style="color: var(--color-ironclad); text-decoration: underline;">Havoc</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/hemokinesis/" style="color: var(--color-ironclad); text-decoration: underline;">Hemokinesis</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/howl-from-beyond/" style="color: var(--color-ironclad); text-decoration: underline;">Howl from Beyond</a> 
-                        <span style="color: #888;">(100.0% 5 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/infernal-blade/" style="color: var(--color-ironclad); text-decoration: underline;">Infernal Blade</a> 
-                        <span style="color: #888;">(100.0% 4 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/iron-wave/" style="color: var(--color-ironclad); text-decoration: underline;">Iron Wave</a> 
-                        <span style="color: #888;">(75.0% 8 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/juggernaut/" style="color: var(--color-ironclad); text-decoration: underline;">Juggernaut</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/offering/" style="color: var(--color-ironclad); text-decoration: underline;">Offering</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/pacts-end/" style="color: var(--color-ironclad); text-decoration: underline;">Pact's End</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/pommel-strike/" style="color: var(--color-ironclad); text-decoration: underline;">Pommel Strike</a> 
-                        <span style="color: #888;">(54.5% 11 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/rupture/" style="color: var(--color-ironclad); text-decoration: underline;">Rupture</a> 
-                        <span style="color: #888;">(83.3% 6 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/stampede/" style="color: var(--color-ironclad); text-decoration: underline;">Stampede</a> 
-                        <span style="color: #888;">(83.3% 6 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/sword-boomerang/" style="color: var(--color-ironclad); text-decoration: underline;">Sword Boomerang</a> 
-                        <span style="color: #888;">(100.0% 4 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/taunt/" style="color: var(--color-ironclad); text-decoration: underline;">Taunt</a> 
-                        <span style="color: #888;">(100.0% 4 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/true-grit/" style="color: var(--color-ironclad); text-decoration: underline;">True Grit</a> 
-                        <span style="color: #888;">(76.9% 13 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/uppercut/" style="color: var(--color-ironclad); text-decoration: underline;">Uppercut</a> 
-                        <span style="color: #888;">(87.5% 8 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/blight-strike/" style="color: var(--color-necrobinder); text-decoration: underline;">Blight Strike</a> 
-                        <span style="color: #888;">(100.0% 3 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/bodyguard/" style="color: var(--color-necrobinder); text-decoration: underline;">Bodyguard</a> 
-                        <span style="color: #888;">(66.7% 15 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/bone-shards/" style="color: var(--color-necrobinder); text-decoration: underline;">Bone Shards</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/borrowed-time/" style="color: var(--color-necrobinder); text-decoration: underline;">Borrowed Time</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/call-of-the-void/" style="color: var(--color-necrobinder); text-decoration: underline;">Call of the Void</a> 
-                        <span style="color: #888;">(75.0% 4 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/countdown/" style="color: var(--color-necrobinder); text-decoration: underline;">Countdown</a> 
-                        <span style="color: #888;">(75.0% 4 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/debilitate/" style="color: var(--color-necrobinder); text-decoration: underline;">Debilitate</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/defile/" style="color: var(--color-necrobinder); text-decoration: underline;">Defile</a> 
-                        <span style="color: #888;">(75.0% 4 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/defy/" style="color: var(--color-necrobinder); text-decoration: underline;">Defy</a> 
-                        <span style="color: #888;">(83.3% 12 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/demesne/" style="color: var(--color-necrobinder); text-decoration: underline;">Demesne</a> 
-                        <span style="color: #888;">(100.0% 6 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/dirge/" style="color: var(--color-necrobinder); text-decoration: underline;">Dirge</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/end-of-days/" style="color: var(--color-necrobinder); text-decoration: underline;">End of Days</a> 
-                        <span style="color: #888;">(100.0% 3 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/enfeebling-touch/" style="color: var(--color-necrobinder); text-decoration: underline;">Enfeebling Touch</a> 
-                        <span style="color: #888;">(85.7% 7 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/fear/" style="color: var(--color-necrobinder); text-decoration: underline;">Fear</a> 
-                        <span style="color: #888;">(100.0% 3 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/fetch/" style="color: var(--color-necrobinder); text-decoration: underline;">Fetch</a> 
-                        <span style="color: #888;">(100.0% 7 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/flatten/" style="color: var(--color-necrobinder); text-decoration: underline;">Flatten</a> 
-                        <span style="color: #888;">(100.0% 3 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/friendship/" style="color: var(--color-necrobinder); text-decoration: underline;">Friendship</a> 
-                        <span style="color: #888;">(100.0% 8 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/grave-warden/" style="color: var(--color-necrobinder); text-decoration: underline;">Grave Warden</a> 
-                        <span style="color: #888;">(81.8% 11 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/negative-pulse/" style="color: var(--color-necrobinder); text-decoration: underline;">Negative Pulse</a> 
-                        <span style="color: #888;">(75.0% 8 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/no-escape/" style="color: var(--color-necrobinder); text-decoration: underline;">No Escape</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/pagestorm/" style="color: var(--color-necrobinder); text-decoration: underline;">Pagestorm</a> 
-                        <span style="color: #888;">(80.0% 5 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/parse/" style="color: var(--color-necrobinder); text-decoration: underline;">Parse</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/pull-aggro/" style="color: var(--color-necrobinder); text-decoration: underline;">Pull Aggro</a> 
-                        <span style="color: #888;">(71.4% 7 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/pull-from-below/" style="color: var(--color-necrobinder); text-decoration: underline;">Pull from Below</a> 
-                        <span style="color: #888;">(50.0% 4 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/putrefy/" style="color: var(--color-necrobinder); text-decoration: underline;">Putrefy</a> 
-                        <span style="color: #888;">(100.0% 3 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/reap/" style="color: var(--color-necrobinder); text-decoration: underline;">Reap</a> 
-                        <span style="color: #888;">(85.7% 7 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/right-hand-hand/" style="color: var(--color-necrobinder); text-decoration: underline;">Right Hand Hand</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/scourge/" style="color: var(--color-necrobinder); text-decoration: underline;">Scourge</a> 
-                        <span style="color: #888;">(60.0% 5 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/sculpting-strike/" style="color: var(--color-necrobinder); text-decoration: underline;">Sculpting Strike</a> 
-                        <span style="color: #888;">(66.7% 3 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/seance/" style="color: var(--color-necrobinder); text-decoration: underline;">Seance</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/shared-fate/" style="color: var(--color-necrobinder); text-decoration: underline;">Shared Fate</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/sleight-of-flesh/" style="color: var(--color-necrobinder); text-decoration: underline;">Sleight of Flesh</a> 
-                        <span style="color: #888;">(83.3% 6 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/spirit-of-ash/" style="color: var(--color-necrobinder); text-decoration: underline;">Spirit of Ash</a> 
-                        <span style="color: #888;">(75.0% 4 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/times-up/" style="color: var(--color-necrobinder); text-decoration: underline;">Time's Up</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/undeath/" style="color: var(--color-necrobinder); text-decoration: underline;">Undeath</a> 
-                        <span style="color: #888;">(100.0% 4 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/unleash/" style="color: var(--color-necrobinder); text-decoration: underline;">Unleash</a> 
-                        <span style="color: #888;">(68.8% 16 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/veilpiercer/" style="color: var(--color-necrobinder); text-decoration: underline;">Veilpiercer</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/wisp/" style="color: var(--color-necrobinder); text-decoration: underline;">Wisp</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/arsenal/" style="color: var(--color-regent); text-decoration: underline;">Arsenal</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/bombardment/" style="color: var(--color-regent); text-decoration: underline;">Bombardment</a> 
-                        <span style="color: #888;">(100.0% 6 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/bulwark/" style="color: var(--color-regent); text-decoration: underline;">Bulwark</a> 
-                        <span style="color: #888;">(80.0% 5 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/bundle-of-joy/" style="color: var(--color-regent); text-decoration: underline;">Bundle of Joy</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/cloak-of-stars/" style="color: var(--color-regent); text-decoration: underline;">Cloak of Stars</a> 
-                        <span style="color: #888;">(75.0% 8 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/comet/" style="color: var(--color-regent); text-decoration: underline;">Comet</a> 
-                        <span style="color: #888;">(80.0% 5 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/cosmic-indifference/" style="color: var(--color-regent); text-decoration: underline;">Cosmic Indifference</a> 
-                        <span style="color: #888;">(83.3% 6 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/crash-landing/" style="color: var(--color-regent); text-decoration: underline;">Crash Landing</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/crush-under/" style="color: var(--color-regent); text-decoration: underline;">Crush Under</a> 
-                        <span style="color: #888;">(85.7% 7 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/falling-star/" style="color: var(--color-regent); text-decoration: underline;">Falling Star</a> 
-                        <span style="color: #888;">(90.0% 10 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/furnace/" style="color: var(--color-regent); text-decoration: underline;">Furnace</a> 
-                        <span style="color: #888;">(83.3% 6 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/gamma-blast/" style="color: var(--color-regent); text-decoration: underline;">Gamma Blast</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/gather-light/" style="color: var(--color-regent); text-decoration: underline;">Gather Light</a> 
-                        <span style="color: #888;">(77.8% 9 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/glimmer/" style="color: var(--color-regent); text-decoration: underline;">Glimmer</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/glitterstream/" style="color: var(--color-regent); text-decoration: underline;">Glitterstream</a> 
-                        <span style="color: #888;">(100.0% 9 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/guiding-star/" style="color: var(--color-regent); text-decoration: underline;">Guiding Star</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/hegemony/" style="color: var(--color-regent); text-decoration: underline;">Hegemony</a> 
-                        <span style="color: #888;">(75.0% 8 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/kingly-kick/" style="color: var(--color-regent); text-decoration: underline;">Kingly Kick</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/know-thy-place/" style="color: var(--color-regent); text-decoration: underline;">Know Thy Place</a> 
-                        <span style="color: #888;">(75.0% 8 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/manifest-authority/" style="color: var(--color-regent); text-decoration: underline;">Manifest Authority</a> 
-                        <span style="color: #888;">(66.7% 6 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/parry/" style="color: var(--color-regent); text-decoration: underline;">Parry</a> 
-                        <span style="color: #888;">(100.0% 3 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/photon-cut/" style="color: var(--color-regent); text-decoration: underline;">Photon Cut</a> 
-                        <span style="color: #888;">(100.0% 6 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/pillar-of-creation/" style="color: var(--color-regent); text-decoration: underline;">Pillar of Creation</a> 
-                        <span style="color: #888;">(66.7% 3 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/royalties/" style="color: var(--color-regent); text-decoration: underline;">Royalties</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/seeking-edge/" style="color: var(--color-regent); text-decoration: underline;">Seeking Edge</a> 
-                        <span style="color: #888;">(100.0% 4 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/summon-forth/" style="color: var(--color-regent); text-decoration: underline;">Summon Forth</a> 
-                        <span style="color: #888;">(100.0% 7 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/sword-sage/" style="color: var(--color-regent); text-decoration: underline;">Sword Sage</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/tyranny/" style="color: var(--color-regent); text-decoration: underline;">Tyranny</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/venerate/" style="color: var(--color-regent); text-decoration: underline;">Venerate</a> 
-                        <span style="color: #888;">(83.3% 12 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/void-form/" style="color: var(--color-regent); text-decoration: underline;">Void Form</a> 
-                        <span style="color: #888;">(83.3% 6 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/abrasive/" style="color: var(--color-silent); text-decoration: underline;">Abrasive</a> 
-                        <span style="color: #888;">(100.0% 3 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/accelerant/" style="color: var(--color-silent); text-decoration: underline;">Accelerant</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/acrobatics/" style="color: var(--color-silent); text-decoration: underline;">Acrobatics</a> 
-                        <span style="color: #888;">(88.9% 9 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/afterimage/" style="color: var(--color-silent); text-decoration: underline;">Afterimage</a> 
-                        <span style="color: #888;">(100.0% 6 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/backstab/" style="color: var(--color-silent); text-decoration: underline;">Backstab</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/blade-dance/" style="color: var(--color-silent); text-decoration: underline;">Blade Dance</a> 
-                        <span style="color: #888;">(83.3% 6 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/blur/" style="color: var(--color-silent); text-decoration: underline;">Blur</a> 
-                        <span style="color: #888;">(83.3% 6 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/bouncing-flask/" style="color: var(--color-silent); text-decoration: underline;">Bouncing Flask</a> 
-                        <span style="color: #888;">(100.0% 3 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/bubble-bubble/" style="color: var(--color-silent); text-decoration: underline;">Bubble Bubble</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/burst/" style="color: var(--color-silent); text-decoration: underline;">Burst</a> 
-                        <span style="color: #888;">(100.0% 4 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/calculated-gamble/" style="color: var(--color-silent); text-decoration: underline;">Calculated Gamble</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/cloak-and-dagger/" style="color: var(--color-silent); text-decoration: underline;">Cloak and Dagger</a> 
-                        <span style="color: #888;">(85.7% 7 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/dagger-throw/" style="color: var(--color-silent); text-decoration: underline;">Dagger Throw</a> 
-                        <span style="color: #888;">(83.3% 6 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/dash/" style="color: var(--color-silent); text-decoration: underline;">Dash</a> 
-                        <span style="color: #888;">(100.0% 3 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/deadly-poison/" style="color: var(--color-silent); text-decoration: underline;">Deadly Poison</a> 
-                        <span style="color: #888;">(85.7% 7 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/deflect/" style="color: var(--color-silent); text-decoration: underline;">Deflect</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/dodge-and-roll/" style="color: var(--color-silent); text-decoration: underline;">Dodge and Roll</a> 
-                        <span style="color: #888;">(100.0% 3 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/envenom/" style="color: var(--color-silent); text-decoration: underline;">Envenom</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/expertise/" style="color: var(--color-silent); text-decoration: underline;">Expertise</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/flick-flack/" style="color: var(--color-silent); text-decoration: underline;">Flick-Flack</a> 
-                        <span style="color: #888;">(100.0% 5 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/follow-through/" style="color: var(--color-silent); text-decoration: underline;">Follow Through</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/footwork/" style="color: var(--color-silent); text-decoration: underline;">Footwork</a> 
-                        <span style="color: #888;">(100.0% 9 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/infinite-blades/" style="color: var(--color-silent); text-decoration: underline;">Infinite Blades</a> 
-                        <span style="color: #888;">(50.0% 4 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/leg-sweep/" style="color: var(--color-silent); text-decoration: underline;">Leg Sweep</a> 
-                        <span style="color: #888;">(100.0% 4 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/murder/" style="color: var(--color-silent); text-decoration: underline;">Murder</a> 
-                        <span style="color: #888;">(66.7% 3 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/neutralize/" style="color: var(--color-silent); text-decoration: underline;">Neutralize</a> 
-                        <span style="color: #888;">(71.4% 14 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/noxious-fumes/" style="color: var(--color-silent); text-decoration: underline;">Noxious Fumes</a> 
-                        <span style="color: #888;">(80.0% 5 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/outbreak/" style="color: var(--color-silent); text-decoration: underline;">Outbreak</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/piercing-wail/" style="color: var(--color-silent); text-decoration: underline;">Piercing Wail</a> 
-                        <span style="color: #888;">(87.5% 8 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/poisoned-stab/" style="color: var(--color-silent); text-decoration: underline;">Poisoned Stab</a> 
-                        <span style="color: #888;">(100.0% 7 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/prepared/" style="color: var(--color-silent); text-decoration: underline;">Prepared</a> 
-                        <span style="color: #888;">(90.9% 11 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/ricochet/" style="color: var(--color-silent); text-decoration: underline;">Ricochet</a> 
-                        <span style="color: #888;">(100.0% 3 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/serpent-form/" style="color: var(--color-silent); text-decoration: underline;">Serpent Form</a> 
-                        <span style="color: #888;">(100.0% 6 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/shadowmeld/" style="color: var(--color-silent); text-decoration: underline;">Shadowmeld</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/speedster/" style="color: var(--color-silent); text-decoration: underline;">Speedster</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/survivor/" style="color: var(--color-silent); text-decoration: underline;">Survivor</a> 
-                        <span style="color: #888;">(73.3% 15 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/untouchable/" style="color: var(--color-silent); text-decoration: underline;">Untouchable</a> 
-                        <span style="color: #888;">(80.0% 10 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/well-laid-plans/" style="color: var(--color-silent); text-decoration: underline;">Well-Laid Plans</a> 
-                        <span style="color: #888;">(100.0% 6 runs)</span>
-                    </li>
-                
-                    </ol>
-                </div>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
                     
     <div class="filter-controls" style="display: flex; gap: 10px;">
@@ -1241,7 +145,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 86</span>
-                    <span style="color: var(--color-ironclad)">IRONCLAD</span>
+                    <span style="color: var(--color-ironclad); text-transform: capitalize;">ironclad</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -1267,7 +171,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 85</span>
-                    <span style="color: var(--color-regent)">REGENT</span>
+                    <span style="color: var(--color-regent); text-transform: capitalize;">regent</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -1293,7 +197,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 84</span>
-                    <span style="color: var(--color-ironclad)">IRONCLAD</span>
+                    <span style="color: var(--color-ironclad); text-transform: capitalize;">ironclad</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -1319,7 +223,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 83</span>
-                    <span style="color: var(--color-necrobinder)">NECROBINDER</span>
+                    <span style="color: var(--color-necrobinder); text-transform: capitalize;">necrobinder</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -1345,7 +249,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 82</span>
-                    <span style="color: var(--color-necrobinder)">NECROBINDER</span>
+                    <span style="color: var(--color-necrobinder); text-transform: capitalize;">necrobinder</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -1371,7 +275,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 81</span>
-                    <span style="color: var(--color-defect)">DEFECT</span>
+                    <span style="color: var(--color-defect); text-transform: capitalize;">defect</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -1397,7 +301,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 80</span>
-                    <span style="color: var(--color-ironclad)">IRONCLAD</span>
+                    <span style="color: var(--color-ironclad); text-transform: capitalize;">ironclad</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -1423,7 +327,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 79</span>
-                    <span style="color: var(--color-silent)">SILENT</span>
+                    <span style="color: var(--color-silent); text-transform: capitalize;">silent</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -1449,7 +353,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 78</span>
-                    <span style="color: var(--color-necrobinder)">NECROBINDER</span>
+                    <span style="color: var(--color-necrobinder); text-transform: capitalize;">necrobinder</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -1475,7 +379,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 77</span>
-                    <span style="color: var(--color-defect)">DEFECT</span>
+                    <span style="color: var(--color-defect); text-transform: capitalize;">defect</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -1501,7 +405,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 76</span>
-                    <span style="color: var(--color-defect)">DEFECT</span>
+                    <span style="color: var(--color-defect); text-transform: capitalize;">defect</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -1527,7 +431,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 75</span>
-                    <span style="color: var(--color-defect)">DEFECT</span>
+                    <span style="color: var(--color-defect); text-transform: capitalize;">defect</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -1553,7 +457,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 74</span>
-                    <span style="color: var(--color-ironclad)">IRONCLAD</span>
+                    <span style="color: var(--color-ironclad); text-transform: capitalize;">ironclad</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -1579,7 +483,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 73</span>
-                    <span style="color: var(--color-defect)">DEFECT</span>
+                    <span style="color: var(--color-defect); text-transform: capitalize;">defect</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -1605,7 +509,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 72</span>
-                    <span style="color: var(--color-silent)">SILENT</span>
+                    <span style="color: var(--color-silent); text-transform: capitalize;">silent</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -1631,7 +535,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 71</span>
-                    <span style="color: var(--color-ironclad)">IRONCLAD</span>
+                    <span style="color: var(--color-ironclad); text-transform: capitalize;">ironclad</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -1657,7 +561,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 70</span>
-                    <span style="color: var(--color-necrobinder)">NECROBINDER</span>
+                    <span style="color: var(--color-necrobinder); text-transform: capitalize;">necrobinder</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -1683,7 +587,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 69</span>
-                    <span style="color: var(--color-ironclad)">IRONCLAD</span>
+                    <span style="color: var(--color-ironclad); text-transform: capitalize;">ironclad</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -1709,7 +613,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 68</span>
-                    <span style="color: var(--color-ironclad)">IRONCLAD</span>
+                    <span style="color: var(--color-ironclad); text-transform: capitalize;">ironclad</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -1735,7 +639,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 67</span>
-                    <span style="color: var(--color-ironclad)">IRONCLAD</span>
+                    <span style="color: var(--color-ironclad); text-transform: capitalize;">ironclad</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -1761,7 +665,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 66</span>
-                    <span style="color: var(--color-ironclad)">IRONCLAD</span>
+                    <span style="color: var(--color-ironclad); text-transform: capitalize;">ironclad</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -1787,7 +691,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 65</span>
-                    <span style="color: var(--color-regent)">REGENT</span>
+                    <span style="color: var(--color-regent); text-transform: capitalize;">regent</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -1813,7 +717,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 64</span>
-                    <span style="color: var(--color-necrobinder)">NECROBINDER</span>
+                    <span style="color: var(--color-necrobinder); text-transform: capitalize;">necrobinder</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -1839,7 +743,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 63</span>
-                    <span style="color: var(--color-necrobinder)">NECROBINDER</span>
+                    <span style="color: var(--color-necrobinder); text-transform: capitalize;">necrobinder</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -1865,7 +769,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 62</span>
-                    <span style="color: var(--color-silent)">SILENT</span>
+                    <span style="color: var(--color-silent); text-transform: capitalize;">silent</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -1891,7 +795,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 61</span>
-                    <span style="color: var(--color-silent)">SILENT</span>
+                    <span style="color: var(--color-silent); text-transform: capitalize;">silent</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -1917,7 +821,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 60</span>
-                    <span style="color: var(--color-silent)">SILENT</span>
+                    <span style="color: var(--color-silent); text-transform: capitalize;">silent</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -1943,7 +847,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 59</span>
-                    <span style="color: var(--color-defect)">DEFECT</span>
+                    <span style="color: var(--color-defect); text-transform: capitalize;">defect</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -1969,7 +873,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 58</span>
-                    <span style="color: var(--color-regent)">REGENT</span>
+                    <span style="color: var(--color-regent); text-transform: capitalize;">regent</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -1995,7 +899,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 57</span>
-                    <span style="color: var(--color-necrobinder)">NECROBINDER</span>
+                    <span style="color: var(--color-necrobinder); text-transform: capitalize;">necrobinder</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2021,7 +925,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 56</span>
-                    <span style="color: var(--color-ironclad)">IRONCLAD</span>
+                    <span style="color: var(--color-ironclad); text-transform: capitalize;">ironclad</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2047,7 +951,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 55</span>
-                    <span style="color: var(--color-ironclad)">IRONCLAD</span>
+                    <span style="color: var(--color-ironclad); text-transform: capitalize;">ironclad</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2073,7 +977,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 54</span>
-                    <span style="color: var(--color-regent)">REGENT</span>
+                    <span style="color: var(--color-regent); text-transform: capitalize;">regent</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2099,7 +1003,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 53</span>
-                    <span style="color: var(--color-defect)">DEFECT</span>
+                    <span style="color: var(--color-defect); text-transform: capitalize;">defect</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2125,7 +1029,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 52</span>
-                    <span style="color: var(--color-necrobinder)">NECROBINDER</span>
+                    <span style="color: var(--color-necrobinder); text-transform: capitalize;">necrobinder</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2151,7 +1055,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 51</span>
-                    <span style="color: var(--color-ironclad)">IRONCLAD</span>
+                    <span style="color: var(--color-ironclad); text-transform: capitalize;">ironclad</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2177,7 +1081,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 50</span>
-                    <span style="color: var(--color-silent)">SILENT</span>
+                    <span style="color: var(--color-silent); text-transform: capitalize;">silent</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2203,7 +1107,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 49</span>
-                    <span style="color: var(--color-regent)">REGENT</span>
+                    <span style="color: var(--color-regent); text-transform: capitalize;">regent</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2229,7 +1133,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 48</span>
-                    <span style="color: var(--color-regent)">REGENT</span>
+                    <span style="color: var(--color-regent); text-transform: capitalize;">regent</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2255,7 +1159,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 47</span>
-                    <span style="color: var(--color-necrobinder)">NECROBINDER</span>
+                    <span style="color: var(--color-necrobinder); text-transform: capitalize;">necrobinder</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2281,7 +1185,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 46</span>
-                    <span style="color: var(--color-defect)">DEFECT</span>
+                    <span style="color: var(--color-defect); text-transform: capitalize;">defect</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2307,7 +1211,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 45</span>
-                    <span style="color: var(--color-ironclad)">IRONCLAD</span>
+                    <span style="color: var(--color-ironclad); text-transform: capitalize;">ironclad</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2333,7 +1237,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 44</span>
-                    <span style="color: var(--color-silent)">SILENT</span>
+                    <span style="color: var(--color-silent); text-transform: capitalize;">silent</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2359,7 +1263,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 43</span>
-                    <span style="color: var(--color-defect)">DEFECT</span>
+                    <span style="color: var(--color-defect); text-transform: capitalize;">defect</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2385,7 +1289,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 42</span>
-                    <span style="color: var(--color-necrobinder)">NECROBINDER</span>
+                    <span style="color: var(--color-necrobinder); text-transform: capitalize;">necrobinder</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2411,7 +1315,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 41</span>
-                    <span style="color: var(--color-regent)">REGENT</span>
+                    <span style="color: var(--color-regent); text-transform: capitalize;">regent</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2437,7 +1341,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 40</span>
-                    <span style="color: var(--color-silent)">SILENT</span>
+                    <span style="color: var(--color-silent); text-transform: capitalize;">silent</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2463,7 +1367,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 39</span>
-                    <span style="color: var(--color-silent)">SILENT</span>
+                    <span style="color: var(--color-silent); text-transform: capitalize;">silent</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2489,7 +1393,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 38</span>
-                    <span style="color: var(--color-ironclad)">IRONCLAD</span>
+                    <span style="color: var(--color-ironclad); text-transform: capitalize;">ironclad</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2515,7 +1419,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 37</span>
-                    <span style="color: var(--color-defect)">DEFECT</span>
+                    <span style="color: var(--color-defect); text-transform: capitalize;">defect</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2541,7 +1445,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 36</span>
-                    <span style="color: var(--color-defect)">DEFECT</span>
+                    <span style="color: var(--color-defect); text-transform: capitalize;">defect</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2567,7 +1471,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 35</span>
-                    <span style="color: var(--color-defect)">DEFECT</span>
+                    <span style="color: var(--color-defect); text-transform: capitalize;">defect</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2593,7 +1497,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 34</span>
-                    <span style="color: var(--color-defect)">DEFECT</span>
+                    <span style="color: var(--color-defect); text-transform: capitalize;">defect</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2619,7 +1523,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 33</span>
-                    <span style="color: var(--color-regent)">REGENT</span>
+                    <span style="color: var(--color-regent); text-transform: capitalize;">regent</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2645,7 +1549,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 32</span>
-                    <span style="color: var(--color-ironclad)">IRONCLAD</span>
+                    <span style="color: var(--color-ironclad); text-transform: capitalize;">ironclad</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2671,7 +1575,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 31</span>
-                    <span style="color: var(--color-ironclad)">IRONCLAD</span>
+                    <span style="color: var(--color-ironclad); text-transform: capitalize;">ironclad</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2697,7 +1601,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 30</span>
-                    <span style="color: var(--color-necrobinder)">NECROBINDER</span>
+                    <span style="color: var(--color-necrobinder); text-transform: capitalize;">necrobinder</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2723,7 +1627,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 29</span>
-                    <span style="color: var(--color-silent)">SILENT</span>
+                    <span style="color: var(--color-silent); text-transform: capitalize;">silent</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2749,7 +1653,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 28</span>
-                    <span style="color: var(--color-necrobinder)">NECROBINDER</span>
+                    <span style="color: var(--color-necrobinder); text-transform: capitalize;">necrobinder</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2775,7 +1679,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 27</span>
-                    <span style="color: var(--color-defect)">DEFECT</span>
+                    <span style="color: var(--color-defect); text-transform: capitalize;">defect</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2801,7 +1705,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 26</span>
-                    <span style="color: var(--color-defect)">DEFECT</span>
+                    <span style="color: var(--color-defect); text-transform: capitalize;">defect</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2827,7 +1731,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 25</span>
-                    <span style="color: var(--color-defect)">DEFECT</span>
+                    <span style="color: var(--color-defect); text-transform: capitalize;">defect</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2853,7 +1757,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 24</span>
-                    <span style="color: var(--color-defect)">DEFECT</span>
+                    <span style="color: var(--color-defect); text-transform: capitalize;">defect</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2879,7 +1783,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 23</span>
-                    <span style="color: var(--color-silent)">SILENT</span>
+                    <span style="color: var(--color-silent); text-transform: capitalize;">silent</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2905,7 +1809,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 22</span>
-                    <span style="color: var(--color-ironclad)">IRONCLAD</span>
+                    <span style="color: var(--color-ironclad); text-transform: capitalize;">ironclad</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2931,7 +1835,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 21</span>
-                    <span style="color: var(--color-regent)">REGENT</span>
+                    <span style="color: var(--color-regent); text-transform: capitalize;">regent</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2957,7 +1861,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 20</span>
-                    <span style="color: var(--color-silent)">SILENT</span>
+                    <span style="color: var(--color-silent); text-transform: capitalize;">silent</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -2983,7 +1887,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 19</span>
-                    <span style="color: var(--color-ironclad)">IRONCLAD</span>
+                    <span style="color: var(--color-ironclad); text-transform: capitalize;">ironclad</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -3009,7 +1913,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 18</span>
-                    <span style="color: var(--color-regent)">REGENT</span>
+                    <span style="color: var(--color-regent); text-transform: capitalize;">regent</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -3035,7 +1939,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 17</span>
-                    <span style="color: var(--color-necrobinder)">NECROBINDER</span>
+                    <span style="color: var(--color-necrobinder); text-transform: capitalize;">necrobinder</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -3061,7 +1965,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 16</span>
-                    <span style="color: var(--color-necrobinder)">NECROBINDER</span>
+                    <span style="color: var(--color-necrobinder); text-transform: capitalize;">necrobinder</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -3087,7 +1991,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 15</span>
-                    <span style="color: var(--color-defect)">DEFECT</span>
+                    <span style="color: var(--color-defect); text-transform: capitalize;">defect</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -3113,7 +2017,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 14</span>
-                    <span style="color: var(--color-ironclad)">IRONCLAD</span>
+                    <span style="color: var(--color-ironclad); text-transform: capitalize;">ironclad</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -3139,7 +2043,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 13</span>
-                    <span style="color: var(--color-defect)">DEFECT</span>
+                    <span style="color: var(--color-defect); text-transform: capitalize;">defect</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -3165,7 +2069,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 12</span>
-                    <span style="color: var(--color-regent)">REGENT</span>
+                    <span style="color: var(--color-regent); text-transform: capitalize;">regent</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -3191,7 +2095,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 11</span>
-                    <span style="color: var(--color-regent)">REGENT</span>
+                    <span style="color: var(--color-regent); text-transform: capitalize;">regent</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -3217,7 +2121,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 10</span>
-                    <span style="color: var(--color-silent)">SILENT</span>
+                    <span style="color: var(--color-silent); text-transform: capitalize;">silent</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -3243,7 +2147,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 9</span>
-                    <span style="color: var(--color-necrobinder)">NECROBINDER</span>
+                    <span style="color: var(--color-necrobinder); text-transform: capitalize;">necrobinder</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -3269,7 +2173,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 8</span>
-                    <span style="color: var(--color-silent)">SILENT</span>
+                    <span style="color: var(--color-silent); text-transform: capitalize;">silent</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -3295,7 +2199,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 7</span>
-                    <span style="color: var(--color-defect)">DEFECT</span>
+                    <span style="color: var(--color-defect); text-transform: capitalize;">defect</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -3321,7 +2225,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 6</span>
-                    <span style="color: var(--color-defect)">DEFECT</span>
+                    <span style="color: var(--color-defect); text-transform: capitalize;">defect</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -3347,7 +2251,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 5</span>
-                    <span style="color: var(--color-necrobinder)">NECROBINDER</span>
+                    <span style="color: var(--color-necrobinder); text-transform: capitalize;">necrobinder</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -3373,7 +2277,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 4</span>
-                    <span style="color: var(--color-regent)">REGENT</span>
+                    <span style="color: var(--color-regent); text-transform: capitalize;">regent</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -3399,7 +2303,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 3</span>
-                    <span style="color: var(--color-silent)">SILENT</span>
+                    <span style="color: var(--color-silent); text-transform: capitalize;">silent</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -3425,7 +2329,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 2</span>
-                    <span style="color: var(--color-ironclad)">IRONCLAD</span>
+                    <span style="color: var(--color-ironclad); text-transform: capitalize;">ironclad</span>
                 </span>
             </div>
             <div class="card-stats">
@@ -3451,7 +2355,7 @@
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">Falterfire</span>
                     <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run 1</span>
-                    <span style="color: var(--color-ironclad)">IRONCLAD</span>
+                    <span style="color: var(--color-ironclad); text-transform: capitalize;">ironclad</span>
                 </span>
             </div>
             <div class="card-stats">
