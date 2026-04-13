@@ -1046,13 +1046,43 @@ async function build() {
             const vars = card.vars ? JSON.parse(card.vars) : {};
             const upgradeData = card.upgrade ? JSON.parse(card.upgrade) : null;
 
-            // Resolve dynamic templates. We overwrite the original fields so the 
-            // detail template displays the processed text instead of raw JSON or templates.
-            const baseDesc = parseCardText(card.description, vars, upgradeData, false);
-            const upgradedDesc = parseCardText(card.description, vars, upgradeData, true);
+            const baseKeywords = card.keywords ? JSON.parse(card.keywords) : [];
 
-            card.description = formatDescription(baseDesc);
-            card.upgrade = formatDescription(upgradedDesc);
+            /** Prepend/Append keywords to the description string based on specified order */
+            const applyKeywords = (text, isUpg, upg) => {
+                const kSet = new Set(baseKeywords);
+                if (isUpg && upg) {
+                    // Check upgrade data for keyword modifications (case-insensitive keys)
+                    const lowUpg = Object.fromEntries(Object.entries(upg).map(([k, v]) => [k.toLowerCase(), v]));
+                    if (lowUpg.remove_exhaust === true) kSet.delete("Exhaust");
+                    if (lowUpg.innate === true) kSet.add("Innate");
+                    if (lowUpg.retain === true) kSet.add("Retain");
+                    if (lowUpg.ethereal === true) kSet.add("Ethereal");
+                    if (lowUpg.unplayable === true) kSet.add("Unplayable");
+                    if (lowUpg.sly === true) kSet.add("Sly");
+                }
+
+                const prefix = ["Unplayable", "Innate", "Sly", "Retain", "Ethereal"]
+                    .filter(k => kSet.has(k))
+                    .map(k => `[gold]${k}.[/gold]`)
+                    .join('\n');
+                
+                const suffix = ["Eternal", "Exhaust"]
+                    .filter(k => kSet.has(k))
+                    .map(k => `[gold]${k}.[/gold]`)
+                    .join('\n');
+
+                let res = text;
+                if (prefix) res = prefix + '\n' + res;
+                if (suffix) res = res + '\n' + suffix;
+                return res;
+            };
+
+            const baseDescText = applyKeywords(parseCardText(card.description, vars, upgradeData, false), false, null);
+            const upgradedDescText = applyKeywords(parseCardText(card.description, vars, upgradeData, true), true, upgradeData);
+
+            card.description = formatDescription(baseDescText);
+            card.upgrade = formatDescription(upgradedDescText);
 
             const cleanCardId = (card.card_id || '').replace('CARD.', '');
             const rawStats = cardStats.stats[cleanCardId] || { runs: [], seen: 0, wins: 0 };
