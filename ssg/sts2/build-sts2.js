@@ -1091,8 +1091,14 @@ async function build() {
             const baseDescText = applyKeywords(parseCardText(card.description, vars, upgradeData, false), false, null);
             const upgradedDescText = applyKeywords(parseCardText(card.description, vars, upgradeData, true), true, upgradeData);
 
-            card.description = formatDescription(baseDescText);
-            card.upgrade = formatDescription(upgradedDescText);
+            // Create the color-specific energy icon HTML
+            const energyIcon = `<img src="/images/sts2_images/icons/${slugify(card.color || 'colorless')}_energy_icon.png" style="height: 1.1em; width: auto; vertical-align: middle; margin-top: -3px;" alt="Energy">`;
+            
+            /** Final cleanup: replace energy markers with the icon and convert remaining BBCode to HTML */
+            const finalizeDescription = (txt) => formatDescription(txt.replace(/\[E\]|\[energy:\d+\]/g, energyIcon));
+
+            card.description = finalizeDescription(baseDescText);
+            card.upgrade = finalizeDescription(upgradedDescText);
 
             const cleanCardId = (card.card_id || '').replace('CARD.', '');
             const rawStats = cardStats.stats[cleanCardId] || { runs: [], seen: 0, wins: 0 };
