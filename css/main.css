@@ -42,10 +42,7 @@
     /* Sidebar */
     --sidebar-width: 64px;
     --sidebar-mobile-height: 250px;
-}
-
-/* Slay the Spire 2 Font & Colors */
-.game-page-wrapper {
+    
     --spire-red: #ff6565;
     --spire-green: #8dff8d;
     --spire-yellow: #f6c043;
@@ -53,6 +50,10 @@
     --spire-purple: #c18cff;
 	--spire-orange: #e67e22;
     --spire-upgrade: #7fff00;
+}
+
+/* Slay the Spire 2 Font & Colors */
+.game-page-wrapper {
     
     font-size: 1.4rem;
     line-height: 1.6;
