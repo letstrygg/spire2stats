@@ -24,14 +24,14 @@
     "seen": 1
   },
   "Beat Down": {
-    "name": "damianjestem",
-    "slug": "damianjestem",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
     "seen": 1
   },
   "Believe in You": {
-    "name": "vetres3",
-    "slug": "vetres3",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
     "seen": 1
   },
@@ -66,10 +66,10 @@
     "seen": 2
   },
   "Discovery": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
-    "winrate": "50.0",
-    "seen": 2
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "66.7",
+    "seen": 3
   },
   "Dramatic Entrance": {
     "name": "Dead3y3",
@@ -132,10 +132,10 @@
     "seen": 2
   },
   "Hand of Greed": {
-    "name": "Laczse",
-    "slug": "laczse",
-    "winrate": "0.0",
-    "seen": 3
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 1
   },
   "Hidden Gem": {
     "name": "Falterfire",
@@ -192,14 +192,14 @@
     "seen": 3
   },
   "Mayhem": {
-    "name": "rarelyvlolent",
-    "slug": "rarelyvlolent",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 3
   },
   "Mind Blast": {
-    "name": "vetres3",
-    "slug": "vetres3",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
     "seen": 1
   },
@@ -240,10 +240,10 @@
     "seen": 5
   },
   "Prolong": {
-    "name": "vetres3",
-    "slug": "vetres3",
-    "winrate": "9.1",
-    "seen": 11
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 1
   },
   "Prowess": {
     "name": "0_tripwire_ 0",
@@ -262,6 +262,12 @@
     "slug": "0_tripwire_-0",
     "winrate": "100.0",
     "seen": 2
+  },
+  "Rend": {
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 1
   },
   "Restlessness": {
     "name": "rarelyvlolent",
@@ -336,10 +342,10 @@
     "seen": 1
   },
   "Thinking Ahead": {
-    "name": "vetres3",
-    "slug": "vetres3",
-    "winrate": "50.0",
-    "seen": 6
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 1
   },
   "Thrumming Hatchet": {
     "name": "rarelyvlolent",
@@ -360,8 +366,8 @@
     "seen": 3
   },
   "Volley": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
     "seen": 1
   },
@@ -378,10 +384,10 @@
     "seen": 3
   },
   "Clumsy": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "63.6",
-    "seen": 11
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "71.4",
+    "seen": 14
   },
   "Curse of the Bell": {
     "name": "damianjestem",
@@ -420,10 +426,10 @@
     "seen": 4
   },
   "Greed": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "57.1",
+    "seen": 7
   },
   "Guilty": {
     "name": "vetres3",
@@ -588,10 +594,10 @@
     "seen": 5
   },
   "Creative AI": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "58.3",
-    "seen": 12
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Darkness": {
     "name": "Falterfire",
@@ -678,16 +684,16 @@
     "seen": 3
   },
   "Glacier": {
-    "name": "damianjestem",
-    "slug": "damianjestem",
-    "winrate": "54.5",
-    "seen": 11
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "66.7",
+    "seen": 3
   },
   "Glasswork": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
-    "winrate": "50.0",
-    "seen": 6
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 1
   },
   "Go for the Eyes": {
     "name": "rarelyvlolent",
@@ -738,8 +744,8 @@
     "seen": 2
   },
   "Ignition": {
-    "name": "damianjestem",
-    "slug": "damianjestem",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
     "seen": 1
   },
@@ -810,10 +816,10 @@
     "seen": 5
   },
   "Quadcast": {
-    "name": "Laczse",
-    "slug": "laczse",
-    "winrate": "33.3",
-    "seen": 3
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "50.0",
+    "seen": 2
   },
   "Rainbow": {
     "name": "letstrygg",
@@ -870,10 +876,10 @@
     "seen": 2
   },
   "Skim": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "54.5",
-    "seen": 22
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "75.0",
+    "seen": 4
   },
   "Smokestack": {
     "name": "0_tripwire_ 0",
@@ -990,10 +996,10 @@
     "seen": 21
   },
   "Apotheosis": {
-    "name": "rarelyvlolent",
-    "slug": "rarelyvlolent",
-    "winrate": "83.3",
-    "seen": 6
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 5
   },
   "Apparition": {
     "name": "letstrygg",
@@ -1002,8 +1008,8 @@
     "seen": 3
   },
   "Brightest Flame": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
     "seen": 1
   },
@@ -1038,10 +1044,10 @@
     "seen": 3
   },
   "Enlightenment": {
-    "name": "rarelyvlolent",
-    "slug": "rarelyvlolent",
-    "winrate": "0.0",
-    "seen": 3
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "50.0",
+    "seen": 2
   },
   "Entrench": {
     "name": "damianjestem",
@@ -1050,14 +1056,14 @@
     "seen": 1
   },
   "Exterminate": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "80.0",
-    "seen": 5
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 3
   },
   "Feeding Frenzy": {
-    "name": "vetres3",
-    "slug": "vetres3",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
     "seen": 1
   },
@@ -1080,10 +1086,10 @@
     "seen": 1
   },
   "Metamorphosis": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
-    "winrate": "100.0",
-    "seen": 2
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "71.4",
+    "seen": 7
   },
   "Neow's Fury": {
     "name": "Falterfire",
@@ -1122,10 +1128,10 @@
     "seen": 1
   },
   "Squash": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
-    "winrate": "66.7",
-    "seen": 9
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 4
   },
   "Stack": {
     "name": "0_tripwire_ 0",
@@ -1134,8 +1140,8 @@
     "seen": 1
   },
   "Toric Toughness": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "71.4",
     "seen": 7
   },
@@ -1176,16 +1182,16 @@
     "seen": 1
   },
   "Barricade": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
-    "winrate": "66.7",
-    "seen": 3
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 1
   },
   "Bash": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
-    "winrate": "57.1",
-    "seen": 14
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "75.0",
+    "seen": 4
   },
   "Battle Trance": {
     "name": "Falterfire",
@@ -1248,8 +1254,8 @@
     "seen": 3
   },
   "Cascade": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
     "seen": 2
   },
@@ -1332,10 +1338,10 @@
     "seen": 4
   },
   "Expect a Fight": {
-    "name": "damianjestem",
-    "slug": "damianjestem",
-    "winrate": "50.0",
-    "seen": 4
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Feed": {
     "name": "Falterfire",
@@ -1464,8 +1470,8 @@
     "seen": 21
   },
   "Offering": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
     "seen": 2
   },
@@ -1476,16 +1482,16 @@
     "seen": 2
   },
   "Pact's End": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "50.0",
+    "seen": 6
   },
   "Perfected Strike": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 4
   },
   "Pillage": {
     "name": "letstrygg",
@@ -1494,14 +1500,14 @@
     "seen": 7
   },
   "Pommel Strike": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "54.5",
-    "seen": 11
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "66.7",
+    "seen": 3
   },
   "Primal Force": {
-    "name": "vetres3",
-    "slug": "vetres3",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
     "seen": 1
   },
@@ -1582,6 +1588,12 @@
     "slug": "falterfire",
     "winrate": "100.0",
     "seen": 4
+  },
+  "Tank": {
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "0.0",
+    "seen": 1
   },
   "Taunt": {
     "name": "Falterfire",
@@ -1704,10 +1716,10 @@
     "seen": 1
   },
   "Call of the Void": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "75.0",
-    "seen": 4
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Capture Spirit": {
     "name": "Dead3y3",
@@ -1722,10 +1734,10 @@
     "seen": 2
   },
   "Countdown": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "75.0",
-    "seen": 4
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Danse Macabre": {
     "name": "0_tripwire_ 0",
@@ -1734,8 +1746,8 @@
     "seen": 7
   },
   "Death March": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
     "seen": 2
   },
@@ -1770,8 +1782,8 @@
     "seen": 12
   },
   "Delay": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
     "seen": 1
   },
@@ -1788,10 +1800,10 @@
     "seen": 12
   },
   "Dirge": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 3
   },
   "Drain Power": {
     "name": "Dead3y3",
@@ -1800,10 +1812,10 @@
     "seen": 5
   },
   "Dredge": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
-    "winrate": "60.0",
-    "seen": 5
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 3
   },
   "Eidolon": {
     "name": "damianjestem",
@@ -1824,8 +1836,8 @@
     "seen": 7
   },
   "Eradicate": {
-    "name": "damianjestem",
-    "slug": "damianjestem",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
     "seen": 1
   },
@@ -1848,8 +1860,8 @@
     "seen": 3
   },
   "Forbidden Grimoire": {
-    "name": "rarelyvlolent",
-    "slug": "rarelyvlolent",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
     "seen": 1
   },
@@ -1860,8 +1872,8 @@
     "seen": 8
   },
   "Glimpse Beyond": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
     "seen": 1
   },
@@ -1878,16 +1890,16 @@
     "seen": 8
   },
   "Hang": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
     "seen": 2
   },
   "Haunt": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
-    "winrate": "66.7",
-    "seen": 3
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 1
   },
   "High Five": {
     "name": "Dead3y3",
@@ -1896,10 +1908,10 @@
     "seen": 2
   },
   "Invoke": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
-    "winrate": "62.5",
-    "seen": 8
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 5
   },
   "Legion of Bone": {
     "name": "0_tripwire_ 0",
@@ -1914,8 +1926,8 @@
     "seen": 5
   },
   "Melancholy": {
-    "name": "vetres3",
-    "slug": "vetres3",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
     "seen": 1
   },
@@ -1938,10 +1950,10 @@
     "seen": 8
   },
   "Neurosurge": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
-    "winrate": "80.0",
-    "seen": 5
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 3
   },
   "No Escape": {
     "name": "Falterfire",
@@ -1998,10 +2010,10 @@
     "seen": 3
   },
   "Rattle": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "83.3",
+    "seen": 6
   },
   "Reanimate": {
     "name": "damianjestem",
@@ -2028,10 +2040,10 @@
     "seen": 2
   },
   "Right Hand Hand": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
-    "seen": 2
+    "seen": 5
   },
   "Sacrifice": {
     "name": "Dead3y3",
@@ -2052,8 +2064,8 @@
     "seen": 3
   },
   "Seance": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
     "seen": 2
   },
@@ -2076,16 +2088,16 @@
     "seen": 2
   },
   "Shroud": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
     "seen": 2
   },
   "Sic 'Em": {
-    "name": "damianjestem",
-    "slug": "damianjestem",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 2
   },
   "Sleight of Flesh": {
     "name": "Falterfire",
@@ -2118,8 +2130,8 @@
     "seen": 4
   },
   "Spur": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
     "seen": 1
   },
@@ -2130,14 +2142,14 @@
     "seen": 3
   },
   "The Scythe": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "36.4",
-    "seen": 11
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 1
   },
   "Time's Up": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
     "seen": 1
   },
@@ -2166,10 +2178,10 @@
     "seen": 2
   },
   "Wisp": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "80.0",
+    "seen": 5
   },
   "Byrdonis Egg": {
     "name": "Laczse",
@@ -2184,10 +2196,10 @@
     "seen": 4
   },
   "Spoils Map": {
-    "name": "damianjestem",
-    "slug": "damianjestem",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "0.0",
-    "seen": 20
+    "seen": 5
   },
   "Alignment": {
     "name": "0_tripwire_ 0",
@@ -2238,10 +2250,10 @@
     "seen": 6
   },
   "Bulwark": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "70.0",
-    "seen": 10
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "75.0",
+    "seen": 8
   },
   "Bundle of Joy": {
     "name": "Falterfire",
@@ -2250,8 +2262,8 @@
     "seen": 1
   },
   "CHARGE!!": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
     "seen": 3
   },
@@ -2280,10 +2292,10 @@
     "seen": 1
   },
   "Comet": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "80.0",
-    "seen": 5
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 4
   },
   "Conqueror": {
     "name": "rarelyvlolent",
@@ -2292,10 +2304,10 @@
     "seen": 3
   },
   "Convergence": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "83.3",
-    "seen": 6
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "87.5",
+    "seen": 8
   },
   "Cosmic Indifference": {
     "name": "Falterfire",
@@ -2304,16 +2316,16 @@
     "seen": 6
   },
   "Crash Landing": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
     "seen": 1
   },
   "Crescent Spear": {
-    "name": "damianjestem",
-    "slug": "damianjestem",
-    "winrate": "28.6",
-    "seen": 7
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "54.5",
+    "seen": 11
   },
   "Crush Under": {
     "name": "Falterfire",
@@ -2334,8 +2346,8 @@
     "seen": 1
   },
   "Dying Star": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "66.7",
     "seen": 3
   },
@@ -2346,8 +2358,8 @@
     "seen": 10
   },
   "Foregone Conclusion": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
     "seen": 2
   },
@@ -2424,8 +2436,8 @@
     "seen": 8
   },
   "Heirloom Hammer": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
     "seen": 1
   },
@@ -2436,8 +2448,8 @@
     "seen": 13
   },
   "I Am Invincible": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
     "seen": 2
   },
@@ -2454,20 +2466,20 @@
     "seen": 2
   },
   "Knockout Blow": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "50.0",
     "seen": 2
   },
   "Know Thy Place": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "75.0",
-    "seen": 8
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 3
   },
   "Largesse": {
-    "name": "vetres3",
-    "slug": "vetres3",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
     "seen": 3
   },
@@ -2478,10 +2490,10 @@
     "seen": 2
   },
   "Make It So": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "66.7",
-    "seen": 3
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "60.0",
+    "seen": 5
   },
   "Manifest Authority": {
     "name": "Falterfire",
@@ -2550,10 +2562,10 @@
     "seen": 6
   },
   "Pillar of Creation": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "66.7",
-    "seen": 3
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "75.0",
+    "seen": 4
   },
   "Prophesize": {
     "name": "0_tripwire_ 0",
@@ -2562,16 +2574,16 @@
     "seen": 4
   },
   "Quasar": {
-    "name": "vetres3",
-    "slug": "vetres3",
-    "winrate": "23.1",
-    "seen": 13
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "50.0",
+    "seen": 2
   },
   "Radiate": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
-    "winrate": "70.0",
-    "seen": 10
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "80.0",
+    "seen": 5
   },
   "Refine Blade": {
     "name": "0_tripwire_ 0",
@@ -2580,10 +2592,10 @@
     "seen": 6
   },
   "Reflect": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
-    "winrate": "50.0",
-    "seen": 12
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "60.0",
+    "seen": 5
   },
   "Resonance": {
     "name": "0_tripwire_ 0",
@@ -2592,14 +2604,14 @@
     "seen": 5
   },
   "Royal Gamble": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
-    "winrate": "60.0",
-    "seen": 5
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "83.3",
+    "seen": 6
   },
   "Royalties": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
     "seen": 1
   },
@@ -2640,10 +2652,10 @@
     "seen": 8
   },
   "Stardust": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
-    "winrate": "60.0",
-    "seen": 5
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "71.4",
+    "seen": 7
   },
   "Summon Forth": {
     "name": "Falterfire",
@@ -2682,10 +2694,10 @@
     "seen": 5
   },
   "Tyranny": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "62.5",
+    "seen": 8
   },
   "Venerate": {
     "name": "Falterfire",
@@ -2718,10 +2730,10 @@
     "seen": 1
   },
   "Accuracy": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "58.8",
-    "seen": 17
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "80.0",
+    "seen": 5
   },
   "Acrobatics": {
     "name": "Falterfire",
@@ -2748,16 +2760,16 @@
     "seen": 4
   },
   "Assassinate": {
-    "name": "vetres3",
-    "slug": "vetres3",
-    "winrate": "66.7",
-    "seen": 3
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Backflip": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "53.1",
-    "seen": 32
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "80.0",
+    "seen": 5
   },
   "Backstab": {
     "name": "Falterfire",
@@ -2808,8 +2820,8 @@
     "seen": 4
   },
   "Calculated Gamble": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
     "seen": 2
   },
@@ -2880,8 +2892,8 @@
     "seen": 9
   },
   "Expertise": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
     "seen": 1
   },
@@ -2898,10 +2910,10 @@
     "seen": 3
   },
   "Finisher": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
-    "winrate": "60.0",
-    "seen": 5
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 1
   },
   "Flanking": {
     "name": "0_tripwire_ 0",
@@ -2940,10 +2952,10 @@
     "seen": 1
   },
   "Hand Trick": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "50.0",
-    "seen": 4
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 1
   },
   "Haze": {
     "name": "letstrygg",
@@ -2958,10 +2970,10 @@
     "seen": 12
   },
   "Infinite Blades": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
-    "winrate": "45.5",
-    "seen": 11
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "50.0",
+    "seen": 6
   },
   "Knife Trap": {
     "name": "0_tripwire_ 0",
@@ -2988,10 +3000,10 @@
     "seen": 2
   },
   "Master Planner": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "33.3",
-    "seen": 3
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "50.0",
+    "seen": 2
   },
   "Memento Mori": {
     "name": "damianjestem",
@@ -3006,10 +3018,10 @@
     "seen": 4
   },
   "Murder": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "66.7",
-    "seen": 3
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 1
   },
   "Neutralize": {
     "name": "Falterfire",
@@ -3018,10 +3030,10 @@
     "seen": 14
   },
   "Nightmare": {
-    "name": "damianjestem",
-    "slug": "damianjestem",
-    "winrate": "80.0",
-    "seen": 5
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Noxious Fumes": {
     "name": "Falterfire",
@@ -3060,16 +3072,16 @@
     "seen": 7
   },
   "Pounce": {
-    "name": "vetres3",
-    "slug": "vetres3",
-    "winrate": "75.0",
-    "seen": 4
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Precise Cut": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "66.7",
-    "seen": 3
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 1
   },
   "Predator": {
     "name": "Laczse",
@@ -3114,16 +3126,16 @@
     "seen": 1
   },
   "Skewer": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "71.4",
-    "seen": 7
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Slice": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
-    "winrate": "60.0",
-    "seen": 5
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 1
   },
   "Snakebite": {
     "name": "0_tripwire_ 0",
@@ -3144,10 +3156,10 @@
     "seen": 2
   },
   "Storm of Steel": {
-    "name": "vetres3",
-    "slug": "vetres3",
-    "winrate": "71.4",
-    "seen": 7
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Strangle": {
     "name": "0_tripwire_ 0",
@@ -3216,8 +3228,8 @@
     "seen": 6
   },
   "Wraith Form": {
-    "name": "vetres3",
-    "slug": "vetres3",
+    "name": "SnekNet",
+    "slug": "sneknet",
     "winrate": "100.0",
     "seen": 1
   }
