@@ -1092,7 +1092,7 @@ async function build() {
             const upgradedDescText = applyKeywords(parseCardText(card.description, vars, upgradeData, true), true, upgradeData);
 
             // Create the color-specific energy icon HTML
-            const energyIcon = `<img src="/images/sts2_images/ui/compendium/card/${slugify(card.color || 'colorless')}_energy_icon.png" style="height: 1.1em; width: auto; vertical-align: middle; margin-top: -3px;" alt="Energy">`;
+            const energyIcon = `<img src="/images/sts2_images/ui/compendium/card/energy_${slugify(card.color || 'colorless')}.png" style="height: 1.1em; width: auto; vertical-align: middle; margin-top: -3px;" alt="Energy">`;
             
             /** Final cleanup: replace energy markers with the icon and convert remaining BBCode to HTML */
             const finalizeDescription = (txt) => formatDescription(txt.replace(/\[E\]|\[energy:\d+\]/g, energyIcon));
