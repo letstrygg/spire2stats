@@ -41,11 +41,11 @@ export function characterDetailTemplate(char, stats, videosHtml, cardItemsHtml, 
         ${performancePanelsHtml}
         ${videosHtml}
         <div style="margin-top: 30px;">
-            <h3 style="margin-bottom: 15px;">${displayName} Specific Cards</h3>
+            <h3 style="margin-bottom: 15px;">${displayName} Specific Cards (<a href="/info.html" style="color: inherit; text-decoration: underline; font-size: 0.8rem; font-weight: normal;">Ranking Math</a>)</h3>
             <div class="grid">${cardItemsHtml}</div>
         </div>
         <div style="margin-top: 30px;">
-            <h3 style="margin-bottom: 15px;">${displayName} Specific Relics</h3>
+            <h3 style="margin-bottom: 15px;">${displayName} Specific Relics (<a href="/info.html" style="color: inherit; text-decoration: underline; font-size: 0.8rem; font-weight: normal;">Ranking Math</a>)</h3>
             <div class="grid">${relicItemsHtml}</div>
         </div>`,
         [{ name: 'characters', url: '/characters/' }, { name: displayName, url: '' }],
