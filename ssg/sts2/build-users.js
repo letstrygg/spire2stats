@@ -288,7 +288,7 @@ async function build() {
             }).join('');
 
             const userHeaderStatsHtml = `
-            <div class="panel flex-row gap-md" style="align-items: center; width: fit-content; margin-bottom: 25px; padding: 12px 20px; background: rgba(0,0,0,0.2);">
+            <div class="panel" style="display: flex; flex-direction: row; align-items: center; gap: 15px; width: fit-content; margin-bottom: 25px; padding: 12px 20px; background: rgba(0,0,0,0.2);">
                 <img src="/images/sts2_images/ui/stats/stats_swords.png" style="height: 42px; width: auto;" alt="Stats">
                 <div style="display: flex; flex-direction: column; gap: 4px;">
                     <div style="font-size: 1.1rem; font-weight: bold; line-height: 1.2;">
