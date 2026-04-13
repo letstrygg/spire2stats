@@ -1039,7 +1039,10 @@ async function build() {
             const slug = slugify(card.name);
             const cardDir = ensureDir(path.join(cardsRoot, slug));
             
-            const energyIconUrl = `/images/sts2_images/ui/compendium/card/energy_${normalizeId(card.color || 'colorless')}.png`;
+            // Use character-specific icons for the main cast, default to colorless for others (Curse, Status, etc.)
+            const mainColors = new Set(['ironclad', 'silent', 'defect', 'necrobinder', 'regent']);
+            const energyIconKey = mainColors.has(normalizeId(card.color)) ? normalizeId(card.color) : 'colorless';
+            const energyIconUrl = `/images/sts2_images/ui/compendium/card/energy_${energyIconKey}.png`;
             
             const generateCostHtml = (costVal, isX, starCost, isXStar) => {
                 const text = getCostDisplay(costVal, isX, starCost, isXStar);
@@ -1115,7 +1118,7 @@ async function build() {
             const upgradedDescText = applyKeywords(parseCardText(card.description, vars, upgradeData, true), true, upgradeData);
 
             // Create the color-specific energy icon HTML
-            const energyIcon = `<img src="/images/sts2_images/ui/compendium/card/energy_${normalizeId(card.color || 'colorless')}.png" style="height: 24px; width: auto; vertical-align: middle; margin-top: -3px;" alt="Energy">`;
+            const energyIcon = `<img src="${energyIconUrl}" style="height: 24px; width: auto; vertical-align: middle; margin-top: -3px;" alt="Energy">`;
             
             /** Final cleanup: replace energy markers with the icon and convert remaining BBCode to HTML */
             const finalizeDescription = (txt) => formatDescription(txt.replace(/\[E\]|\[energy:\d+\]/g, energyIcon));
