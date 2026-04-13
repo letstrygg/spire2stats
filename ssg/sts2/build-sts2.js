@@ -952,6 +952,8 @@ async function buildKeywords(keywords, allCards, runStats, sitemap) {
             return kSet.has(kw.name.toLowerCase());
         });
 
+        kw.cardCount = matchingCards.length;
+
         // Sort matching cards by performance
         matchingCards.sort((a, b) => {
             const sA = getItemStats(runStats.stats[normalizeId(a.card_id)], runStats.globalWinRate);
@@ -984,7 +986,10 @@ async function buildKeywords(keywords, allCards, runStats, sitemap) {
     }
 
     // Index Page
-    const indexLinks = keywords.map(kw => `<a href="/keywords/${slugify(kw.name)}/" class="item-link">${kw.name}</a>`).join('');
+    const indexLinks = keywords.map(kw => `
+        <a href="/keywords/${slugify(kw.name)}/" class="item-link">
+            ${kw.name} <span style="color: #666; font-size: 0.85em; font-weight: normal;">(${kw.cardCount || 0})</span>
+        </a>`).join('');
     const indexHtml = wrapLayout('Keywords', `<div class="grid">${indexLinks}</div>`, [{ name: 'keywords', url: '' }], "Complete list of Slay the Spire 2 keywords.");
     fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
     sitemap.add('/keywords/');
