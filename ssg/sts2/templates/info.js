@@ -3,11 +3,15 @@ import { wrapLayout } from './shared.js';
 export function infoTemplate() {
     const content = `
     <div style="max-width: 900px; margin: 0 auto; text-align: left;">
+        <br>
+        <br>
         <p>Spire 2 Stats displays a simple percentage win rate and total run count because they are easy to understand.<br>
         Card rankings use a Bayesian Average for sorting so that 1-win cards do not dominate the top of the lists.</p>
+        <br>
+        <br>
         <div style=" font-family: monospace;">
             <h3>Bayesian Average</h3>
-            
+            <ul>
                 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline">
                     <mi>Score</mi>
                     <mo>=</mo>
@@ -29,17 +33,19 @@ export function infoTemplate() {
                     </mfrac>
                 </math>
                 <br>
-            
+            <ul>
                 <br>C = confidence constant
                 <br>M = global average win rate
                 <br>R = runs with card
                 <br>W = card win rate
-            
+            </ul>
+            </ul>
             <br>
             <br>
             <strong>Example 1: The "Lucky" Card (1 run, 1 win)</strong>
             <br>
             <br>
+            <ul>
             <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline">
                     <mi>Score</mi>
                     <mo>=</mo>
@@ -67,11 +73,13 @@ export function infoTemplate() {
                     <mo>=</mo>
                     <mn>33.3%</mn>
                 </math>
+                </ul>
                 <br>
                 <br>
                 <strong>Example 2: The "Proven" Card (10 runs, 6 wins)</strong>
                 <br>
                 <br>
+                <ul>
                 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline">
                     <mi>Score</mi>
                     <mo>=</mo>
@@ -101,7 +109,7 @@ export function infoTemplate() {
                 </math>
                 <br>
                 <br>
-                
+                </ul>
             <p>Result: The proven 60% card (46.7%) outranks the lucky 100% card (33.3%).</p>
         </div>
     </div>

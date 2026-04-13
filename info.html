@@ -58,7 +58,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / info</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-13T08:03:00.430Z">April 13, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-13T08:10:45.220Z">April 13, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -66,11 +66,15 @@
         </div>
     </nav>
     <div style="max-width: 900px; margin: 0 auto; text-align: left;">
+        <br>
+        <br>
         <p>Spire 2 Stats displays a simple percentage win rate and total run count because they are easy to understand.<br>
         Card rankings use a Bayesian Average for sorting so that 1-win cards do not dominate the top of the lists.</p>
+        <br>
+        <br>
         <div style=" font-family: monospace;">
             <h3>Bayesian Average</h3>
-            
+            <ul>
                 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline">
                     <mi>Score</mi>
                     <mo>=</mo>
@@ -92,17 +96,19 @@
                     </mfrac>
                 </math>
                 <br>
-            
+            <ul>
                 <br>C = confidence constant
                 <br>M = global average win rate
                 <br>R = runs with card
                 <br>W = card win rate
-            
+            </ul>
+            </ul>
             <br>
             <br>
             <strong>Example 1: The "Lucky" Card (1 run, 1 win)</strong>
             <br>
             <br>
+            <ul>
             <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline">
                     <mi>Score</mi>
                     <mo>=</mo>
@@ -130,11 +136,13 @@
                     <mo>=</mo>
                     <mn>33.3%</mn>
                 </math>
+                </ul>
                 <br>
                 <br>
                 <strong>Example 2: The "Proven" Card (10 runs, 6 wins)</strong>
                 <br>
                 <br>
+                <ul>
                 <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline">
                     <mi>Score</mi>
                     <mo>=</mo>
@@ -164,7 +172,7 @@
                 </math>
                 <br>
                 <br>
-                
+                </ul>
             <p>Result: The proven 60% card (46.7%) outranks the lucky 100% card (33.3%).</p>
         </div>
     </div>
