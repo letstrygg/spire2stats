@@ -64,7 +64,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/users/">users</a> / damianjestem</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-13T19:27:39.386Z">April 13, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-13T19:58:44.720Z">April 13, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -270,6 +270,11 @@
                     </li>
                 
                     <li>
+                        <a href="/cards/curse-of-the-bell/" style="color: var(--text); text-decoration: underline;">Curse of the Bell</a> 
+                        <span style="color: #888;">(66.7% 6 runs)</span>
+                    </li>
+                
+                    <li>
                         <a href="/cards/enthralled/" style="color: var(--text); text-decoration: underline;">Enthralled</a> 
                         <span style="color: #888;">(75.0% 4 runs)</span>
                     </li>
@@ -300,11 +305,6 @@
                     </li>
                 
                     <li>
-                        <a href="/cards/tempest/" style="color: var(--color-defect); text-decoration: underline;">Tempest</a> 
-                        <span style="color: #888;">(66.7% 3 runs)</span>
-                    </li>
-                
-                    <li>
                         <a href="/cards/entrench/" style="color: var(--text); text-decoration: underline;">Entrench</a> 
                         <span style="color: #888;">(0.0% 1 runs)</span>
                     </li>
@@ -317,11 +317,6 @@
                     <li>
                         <a href="/cards/expect-a-fight/" style="color: var(--color-ironclad); text-decoration: underline;">Expect a Fight</a> 
                         <span style="color: #888;">(50.0% 4 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/rampage/" style="color: var(--color-ironclad); text-decoration: underline;">Rampage</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
                     </li>
                 
                     <li>
@@ -342,6 +337,11 @@
                     <li>
                         <a href="/cards/eradicate/" style="color: var(--color-necrobinder); text-decoration: underline;">Eradicate</a> 
                         <span style="color: #888;">(100.0% 1 runs)</span>
+                    </li>
+                
+                    <li>
+                        <a href="/cards/reanimate/" style="color: var(--color-necrobinder); text-decoration: underline;">Reanimate</a> 
+                        <span style="color: #888;">(71.4% 7 runs)</span>
                     </li>
                 
                     <li>
@@ -8249,7 +8249,7 @@
             const buildFilter = document.getElementById('build-filter');
             const ascFilter = document.getElementById('ascension-filter');
             const runCards = document.querySelectorAll('.run-record');
-            const globalWR = 27.756653992395435;
+            const globalWR = 26.83274021352313;
 
             function updateFilters() {
                 const buildVal = buildFilter.value;

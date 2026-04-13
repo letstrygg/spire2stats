@@ -132,10 +132,10 @@
     "seen": 2
   },
   "Hand of Greed": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
+    "name": "Laczse",
+    "slug": "laczse",
     "winrate": "0.0",
-    "seen": 1
+    "seen": 3
   },
   "Hidden Gem": {
     "name": "Falterfire",
@@ -384,10 +384,10 @@
     "seen": 11
   },
   "Curse of the Bell": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "66.7",
+    "seen": 6
   },
   "Debt": {
     "name": "letstrygg",
@@ -438,10 +438,10 @@
     "seen": 15
   },
   "Normality": {
-    "name": "rarelyvlolent",
-    "slug": "rarelyvlolent",
+    "name": "Laczse",
+    "slug": "laczse",
     "winrate": "0.0",
-    "seen": 2
+    "seen": 1
   },
   "Regret": {
     "name": "letstrygg",
@@ -528,10 +528,10 @@
     "seen": 4
   },
   "Chaos": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
-    "winrate": "50.0",
-    "seen": 2
+    "name": "Laczse",
+    "slug": "laczse",
+    "winrate": "60.0",
+    "seen": 5
   },
   "Charge Battery": {
     "name": "Falterfire",
@@ -588,10 +588,10 @@
     "seen": 5
   },
   "Creative AI": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "58.3",
+    "seen": 12
   },
   "Darkness": {
     "name": "Falterfire",
@@ -666,10 +666,10 @@
     "seen": 8
   },
   "Fusion": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "33.3",
-    "seen": 6
+    "name": "Laczse",
+    "slug": "laczse",
+    "winrate": "100.0",
+    "seen": 1
   },
   "Genetic Algorithm": {
     "name": "Falterfire",
@@ -702,10 +702,10 @@
     "seen": 2
   },
   "Hailstorm": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
-    "winrate": "75.0",
-    "seen": 4
+    "name": "Laczse",
+    "slug": "laczse",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Helix Drill": {
     "name": "rarelyvlolent",
@@ -780,8 +780,8 @@
     "seen": 1
   },
   "Modded": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
+    "name": "Laczse",
+    "slug": "laczse",
     "winrate": "100.0",
     "seen": 1
   },
@@ -810,9 +810,9 @@
     "seen": 5
   },
   "Quadcast": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "0.0",
+    "name": "Laczse",
+    "slug": "laczse",
+    "winrate": "33.3",
     "seen": 3
   },
   "Rainbow": {
@@ -852,10 +852,10 @@
     "seen": 3
   },
   "Shadow Shield": {
-    "name": "rarelyvlolent",
-    "slug": "rarelyvlolent",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "Laczse",
+    "slug": "laczse",
+    "winrate": "80.0",
+    "seen": 5
   },
   "Shatter": {
     "name": "Falterfire",
@@ -906,10 +906,10 @@
     "seen": 8
   },
   "Sunder": {
-    "name": "rarelyvlolent",
-    "slug": "rarelyvlolent",
-    "winrate": "50.0",
-    "seen": 2
+    "name": "Laczse",
+    "slug": "laczse",
+    "winrate": "100.0",
+    "seen": 1
   },
   "Supercritical": {
     "name": "Dead3y3",
@@ -942,10 +942,10 @@
     "seen": 11
   },
   "Tempest": {
-    "name": "damianjestem",
-    "slug": "damianjestem",
-    "winrate": "66.7",
-    "seen": 3
+    "name": "Laczse",
+    "slug": "laczse",
+    "winrate": "57.1",
+    "seen": 7
   },
   "Tesla Coil": {
     "name": "0_tripwire_ 0",
@@ -960,10 +960,10 @@
     "seen": 5
   },
   "Trash to Treasure": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
+    "name": "Laczse",
+    "slug": "laczse",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 2
   },
   "Uproar": {
     "name": "Dead3y3",
@@ -1182,10 +1182,10 @@
     "seen": 3
   },
   "Bash": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
-    "winrate": "75.0",
-    "seen": 4
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "57.1",
+    "seen": 14
   },
   "Battle Trance": {
     "name": "Falterfire",
@@ -1518,10 +1518,10 @@
     "seen": 5
   },
   "Rampage": {
-    "name": "damianjestem",
-    "slug": "damianjestem",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "66.7",
+    "seen": 3
   },
   "Rupture": {
     "name": "Falterfire",
@@ -1620,10 +1620,10 @@
     "seen": 13
   },
   "Twin Strike": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "55.6",
+    "seen": 9
   },
   "Unmovable": {
     "name": "damianjestem",
@@ -2004,10 +2004,10 @@
     "seen": 1
   },
   "Reanimate": {
-    "name": "rarelyvlolent",
-    "slug": "rarelyvlolent",
-    "winrate": "100.0",
-    "seen": 2
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "71.4",
+    "seen": 7
   },
   "Reap": {
     "name": "Falterfire",
@@ -2172,10 +2172,10 @@
     "seen": 1
   },
   "Byrdonis Egg": {
-    "name": "vetres3",
-    "slug": "vetres3",
+    "name": "Laczse",
+    "slug": "laczse",
     "winrate": "0.0",
-    "seen": 4
+    "seen": 1
   },
   "Lantern Key": {
     "name": "damianjestem",
@@ -2238,10 +2238,10 @@
     "seen": 6
   },
   "Bulwark": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "80.0",
-    "seen": 5
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "70.0",
+    "seen": 10
   },
   "Bundle of Joy": {
     "name": "Falterfire",
@@ -2898,10 +2898,10 @@
     "seen": 3
   },
   "Finisher": {
-    "name": "rarelyvlolent",
-    "slug": "rarelyvlolent",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "60.0",
+    "seen": 5
   },
   "Flanking": {
     "name": "0_tripwire_ 0",
@@ -2958,10 +2958,10 @@
     "seen": 12
   },
   "Infinite Blades": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "50.0",
-    "seen": 4
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "45.5",
+    "seen": 11
   },
   "Knife Trap": {
     "name": "0_tripwire_ 0",
@@ -3072,8 +3072,8 @@
     "seen": 3
   },
   "Predator": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
+    "name": "Laczse",
+    "slug": "laczse",
     "winrate": "100.0",
     "seen": 1
   },
@@ -3120,10 +3120,10 @@
     "seen": 7
   },
   "Slice": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "66.7",
-    "seen": 3
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "60.0",
+    "seen": 5
   },
   "Snakebite": {
     "name": "0_tripwire_ 0",
