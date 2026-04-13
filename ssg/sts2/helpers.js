@@ -162,24 +162,35 @@ export function parseCardText(raw, vars, upgrade, isUpgraded) {
         }
     }
 
-    return raw.replace(/\{([A-Za-z0-9_]+)(?::([^}]+))?\}/g, (match, varName, formatter) => {
-        const key = varName.toLowerCase();
-        if (key === 'ifupgraded') {
-            const data = formatter?.startsWith('show:') ? formatter.substring(5) : formatter;
-            const parts = data ? data.split('|') : ["", ""];
-            return isUpgraded ? parts[0] : (parts[1] || "");
-        }
-        let val = activeVars[key] ?? activeVars[varName];
-        if (val === undefined && formatter?.startsWith('energyIcons')) {
-            const argMatch = formatter.match(/\((\d+)\)/);
-            val = argMatch ? argMatch[1] : 1;
-        }
-        if (val === undefined) return match;
-        if (formatter?.startsWith('plural:')) {
-            const parts = formatter.substring(7).split('|');
-            return val === 1 ? parts[0] : (parts[1] || parts[0] + 's');
-        }
-        if (formatter?.startsWith('energyIcons')) return `[energy:${val}]`;
-        return val;
-    });
+    let result = raw;
+    let iterations = 0;
+    // Iteratively resolve tags from innermost to outermost to support nested templates (e.g. plurals containing stats)
+    while (iterations < 5) {
+        const nextResult = result.replace(/\{([A-Za-z0-9_]+)(?::([^{}]+))?\}/g, (match, varName, formatter) => {
+            const key = varName.toLowerCase();
+            if (key === 'ifupgraded') {
+                const data = formatter?.startsWith('show:') ? formatter.substring(5) : formatter;
+                const parts = data ? data.split('|') : ["", ""];
+                return isUpgraded ? parts[0] : (parts[1] || "");
+            }
+            let val = activeVars[key] ?? activeVars[varName];
+            if (val === undefined && (formatter?.startsWith('energyIcons') || formatter?.startsWith('starIcons'))) {
+                const argMatch = formatter.match(/\((\d+)\)/);
+                val = argMatch ? argMatch[1] : 1;
+            }
+            if (val === undefined) return match;
+            if (formatter?.startsWith('plural:')) {
+                const parts = formatter.substring(7).split('|');
+                if (val === 1) return parts[0];
+                return (parts.length > 1) ? parts[1] : (parts[0] + 's');
+            }
+            if (formatter?.startsWith('energyIcons')) return `[energy:${val}]`;
+            if (formatter?.startsWith('starIcons')) return `[star:${val}]`;
+            return String(val);
+        });
+        if (nextResult === result) break;
+        result = nextResult;
+        iterations++;
+    }
+    return result;
 }
