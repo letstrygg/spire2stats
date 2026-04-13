@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "sync": "node ssg/runs/sync-ltg.js",
+    "sync": "node db/send-db.js",
 	"videos": "node ssg/runs/input-videos.js node ssg/sts2/build-sts2.js",
 	"download": "node ssg/runs/download-runs.js node ssg/sts2/build-sts2.js",
     "build": "node ssg/sts2/build-sts2.js",
