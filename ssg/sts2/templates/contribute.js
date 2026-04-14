@@ -6,22 +6,14 @@ export function contributeTemplate() {
         <div class="description">
             <p>Spire 2 Stats is built on community data. By sharing your run history, you help improve winrate accuracy and monster lethality statistics for everyone!</p>
             
-            <section style="margin-top: 30px;">
-                <h2 style="color: var(--gold, #ffd700); font-size: 1.2rem;">Step 1: Locate your Run History</h2>
-                <p>On Windows, navigate to your Steam user data folder for Slay the Spire 2. It is usually located at:</p>
-                <div class="code-block" style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 8px; border: 1px solid #444; font-family: monospace; word-break: break-all; margin: 15px 0;">
-                    C:\\Users\\<strong style="color: #4bff87; background: rgba(75, 255, 135, 0.1); padding: 2px 4px; border-radius: 3px;">{Your_Windows_Username}</strong>\\AppData\\Roaming\\SlayTheSpire2\\steam\\<strong style="color: #4bff87; background: rgba(75, 255, 135, 0.1); padding: 2px 4px; border-radius: 3px;">{12345678901234567}</strong>\\profile1\\saves
-                </div>
-                <p class="text-muted" style="font-size: 0.85rem;">Pro tip: You can also paste <strong style="color: #4bff87;"><code>%appdata%\\SlayTheSpire2\\steam</code></strong> into your File Explorer address bar to jump there quickly.</p>
-            </section>
 
             <section style="margin-top: 30px;">
-                <h2 style="color: var(--gold, #ffd700); font-size: 1.2rem;">Step 2: Log In</h2>
+                <h2 style="color: var(--gold, #ffd700); font-size: 1.2rem;">Step 1: Log In</h2>
                 <p>Use the <strong>Login</strong> button in the top right corner of the site to sign in with your <strong>Google</strong> or <strong>Twitch</strong> account.</p>
             </section>
 
             <section style="margin-top: 30px;">
-                <h2 style="color: var(--gold, #ffd700); font-size: 1.2rem;">Step 3: Upload via Settings</h2>
+                <h2 style="color: var(--gold, #ffd700); font-size: 1.2rem;">Step 2: Upload via Settings</h2>
                 <p>Click on your <strong>Username</strong> in the top right and select <a href="/settings.html" style="color: var(--blue);">Settings</a>. From there, you can:</p>
                 <ul style="line-height: 1.6; margin-top: 10px;">
                     <li>Select your entire <code>history</code> folder to sync all runs at once.</li>
