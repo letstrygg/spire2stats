@@ -393,7 +393,7 @@
     "name": "letstrygg",
     "slug": "letstrygg",
     "winrate": "100.0",
-    "seen": 3
+    "seen": 4
   },
   "Clumsy": {
     "name": "SnekNet",
@@ -650,8 +650,8 @@
   "Dualcast": {
     "name": "letstrygg",
     "slug": "letstrygg",
-    "winrate": "57.1",
-    "seen": 14
+    "winrate": "56.3",
+    "seen": 16
   },
   "Echo Form": {
     "name": "atundelmar",
@@ -690,10 +690,10 @@
     "seen": 1
   },
   "Focused Strike": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
-    "winrate": "62.5",
-    "seen": 8
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "66.7",
+    "seen": 3
   },
   "Fusion": {
     "name": "edingerale",
@@ -788,8 +788,8 @@
   "Lightning Rod": {
     "name": "letstrygg",
     "slug": "letstrygg",
-    "winrate": "75.0",
-    "seen": 8
+    "winrate": "70.0",
+    "seen": 10
   },
   "Loop": {
     "name": "Falterfire",
@@ -836,8 +836,8 @@
   "Overclock": {
     "name": "letstrygg",
     "slug": "letstrygg",
-    "winrate": "80.0",
-    "seen": 5
+    "winrate": "83.3",
+    "seen": 6
   },
   "Quadcast": {
     "name": "unknown6455",
@@ -849,7 +849,7 @@
     "name": "letstrygg",
     "slug": "letstrygg",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 2
   },
   "Reboot": {
     "name": "Plabilitop",
@@ -968,8 +968,8 @@
   "TURBO": {
     "name": "letstrygg",
     "slug": "letstrygg",
-    "winrate": "54.5",
-    "seen": 11
+    "winrate": "58.3",
+    "seen": 12
   },
   "Tempest": {
     "name": "Girsia",
