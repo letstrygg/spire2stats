@@ -64,7 +64,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/users/">users</a> / 0_tripwire_ 0</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-14T01:53:04.819Z">April 13, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-14T06:22:34.336Z">April 13, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -285,6 +285,11 @@
                     </li>
                 
                     <li>
+                        <a href="/cards/jackpot/" style="color: var(--text); text-decoration: underline;">Jackpot</a> 
+                        <span style="color: #888;">(66.7% 6 runs)</span>
+                    </li>
+                
+                    <li>
                         <a href="/cards/lift/" style="color: var(--text); text-decoration: underline;">Lift</a> 
                         <span style="color: #888;">(50.0% 2 runs)</span>
                     </li>
@@ -395,6 +400,11 @@
                     </li>
                 
                     <li>
+                        <a href="/cards/ashen-strike/" style="color: var(--color-ironclad); text-decoration: underline;">Ashen Strike</a> 
+                        <span style="color: #888;">(66.7% 6 runs)</span>
+                    </li>
+                
+                    <li>
                         <a href="/cards/corruption/" style="color: var(--color-ironclad); text-decoration: underline;">Corruption</a> 
                         <span style="color: #888;">(100.0% 1 runs)</span>
                     </li>
@@ -500,6 +510,11 @@
                     </li>
                 
                     <li>
+                        <a href="/cards/charge/" style="color: var(--color-regent); text-decoration: underline;">CHARGE!!</a> 
+                        <span style="color: #888;">(100.0% 3 runs)</span>
+                    </li>
+                
+                    <li>
                         <a href="/cards/child-of-the-stars/" style="color: var(--color-regent); text-decoration: underline;">Child of the Stars</a> 
                         <span style="color: #888;">(77.8% 9 runs)</span>
                     </li>
@@ -565,11 +580,6 @@
                     </li>
                 
                     <li>
-                        <a href="/cards/solar-strike/" style="color: var(--color-regent); text-decoration: underline;">Solar Strike</a> 
-                        <span style="color: #888;">(80.0% 5 runs)</span>
-                    </li>
-                
-                    <li>
                         <a href="/cards/spectrum-shift/" style="color: var(--color-regent); text-decoration: underline;">Spectrum Shift</a> 
                         <span style="color: #888;">(60.0% 5 runs)</span>
                     </li>
@@ -597,6 +607,11 @@
                     <li>
                         <a href="/cards/wrought-in-war/" style="color: var(--color-regent); text-decoration: underline;">Wrought in War</a> 
                         <span style="color: #888;">(80.0% 5 runs)</span>
+                    </li>
+                
+                    <li>
+                        <a href="/cards/adrenaline/" style="color: var(--color-silent); text-decoration: underline;">Adrenaline</a> 
+                        <span style="color: #888;">(80.0% 10 runs)</span>
                     </li>
                 
                     <li>
@@ -9553,7 +9568,7 @@
             const buildFilter = document.getElementById('build-filter');
             const ascFilter = document.getElementById('ascension-filter');
             const runCards = document.querySelectorAll('.run-record');
-            const globalWR = 28.443305573350415;
+            const globalWR = 28.125;
 
             function updateFilters() {
                 const buildVal = buildFilter.value;
