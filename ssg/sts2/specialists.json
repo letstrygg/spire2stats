@@ -1,7 +1,7 @@
 {
   "Alchemize": {
-    "name": "Girsia",
-    "slug": "girsia",
+    "name": "atundelmar",
+    "slug": "atundelmar",
     "winrate": "100.0",
     "seen": 1
   },
@@ -30,10 +30,10 @@
     "seen": 1
   },
   "Believe in You": {
-    "name": "Stinkalot13",
-    "slug": "stinkalot13",
+    "name": "atundelmar",
+    "slug": "atundelmar",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 2
   },
   "Bolas": {
     "name": "letstrygg",
@@ -72,14 +72,14 @@
     "seen": 3
   },
   "Dramatic Entrance": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
-    "winrate": "100.0",
-    "seen": 2
-  },
-  "Entropy": {
     "name": "0_tripwire_ 0",
     "slug": "0_tripwire_-0",
+    "winrate": "71.4",
+    "seen": 7
+  },
+  "Entropy": {
+    "name": "guelch",
+    "slug": "guelch",
     "winrate": "100.0",
     "seen": 1
   },
@@ -96,10 +96,10 @@
     "seen": 1
   },
   "Fasten": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "atundelmar",
+    "slug": "atundelmar",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 2
   },
   "Finesse": {
     "name": "Girsia",
@@ -114,10 +114,10 @@
     "seen": 3
   },
   "Flash of Steel": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
+    "name": "Mrtoolshed",
+    "slug": "mrtoolshed",
     "winrate": "100.0",
-    "seen": 2
+    "seen": 3
   },
   "Gang Up": {
     "name": "0_tripwire_ 0",
@@ -144,10 +144,10 @@
     "seen": 3
   },
   "Huddle Up": {
-    "name": "vetres3",
-    "slug": "vetres3",
+    "name": "Mrtoolshed",
+    "slug": "mrtoolshed",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 2
   },
   "Impatience": {
     "name": "Girsia",
@@ -216,8 +216,8 @@
     "seen": 5
   },
   "Panache": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
+    "name": "guelch",
+    "slug": "guelch",
     "winrate": "100.0",
     "seen": 2
   },
@@ -306,10 +306,10 @@
     "seen": 1
   },
   "Seeker Strike": {
-    "name": "rarelyvlolent",
-    "slug": "rarelyvlolent",
+    "name": "Mrtoolshed",
+    "slug": "mrtoolshed",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 2
   },
   "Shockwave": {
     "name": "damianjestem",
@@ -342,10 +342,10 @@
     "seen": 1
   },
   "Thinking Ahead": {
-    "name": "SnekNet",
-    "slug": "sneknet",
+    "name": "Mrtoolshed",
+    "slug": "mrtoolshed",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 2
   },
   "Thrumming Hatchet": {
     "name": "rarelyvlolent",
@@ -432,10 +432,10 @@
     "seen": 7
   },
   "Guilty": {
-    "name": "vetres3",
-    "slug": "vetres3",
+    "name": "guelch",
+    "slug": "guelch",
     "winrate": "0.0",
-    "seen": 7
+    "seen": 1
   },
   "Injury": {
     "name": "vetres3",
@@ -444,8 +444,14 @@
     "seen": 15
   },
   "Normality": {
-    "name": "Laczse",
-    "slug": "laczse",
+    "name": "guelch",
+    "slug": "guelch",
+    "winrate": "100.0",
+    "seen": 1
+  },
+  "Poor Sleep": {
+    "name": "guelch",
+    "slug": "guelch",
     "winrate": "0.0",
     "seen": 1
   },
@@ -456,10 +462,10 @@
     "seen": 1
   },
   "Shame": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "75.0",
+    "seen": 4
   },
   "Spore Mind": {
     "name": "vetres3",
@@ -474,10 +480,10 @@
     "seen": 4
   },
   "All for One": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "60.0",
-    "seen": 5
+    "name": "Mrtoolshed",
+    "slug": "mrtoolshed",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Ball Lightning": {
     "name": "0_tripwire_ 0",
@@ -528,10 +534,10 @@
     "seen": 7
   },
   "Capacitor": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "75.0",
-    "seen": 4
+    "name": "atundelmar",
+    "slug": "atundelmar",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Chaos": {
     "name": "Laczse",
@@ -618,10 +624,10 @@
     "seen": 6
   },
   "Double Energy": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
-    "winrate": "60.0",
-    "seen": 5
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "53.3",
+    "seen": 15
   },
   "Dualcast": {
     "name": "letstrygg",
@@ -630,8 +636,8 @@
     "seen": 14
   },
   "Echo Form": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
+    "name": "atundelmar",
+    "slug": "atundelmar",
     "winrate": "100.0",
     "seen": 3
   },
@@ -684,14 +690,14 @@
     "seen": 3
   },
   "Glacier": {
-    "name": "damianjestem",
-    "slug": "damianjestem",
-    "winrate": "54.5",
-    "seen": 11
+    "name": "guelch",
+    "slug": "guelch",
+    "winrate": "100.0",
+    "seen": 1
   },
   "Glasswork": {
-    "name": "SnekNet",
-    "slug": "sneknet",
+    "name": "guelch",
+    "slug": "guelch",
     "winrate": "100.0",
     "seen": 1
   },
@@ -720,10 +726,10 @@
     "seen": 3
   },
   "Hologram": {
-    "name": "Girsia",
-    "slug": "girsia",
-    "winrate": "62.5",
-    "seen": 8
+    "name": "Mrtoolshed",
+    "slug": "mrtoolshed",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Hotfix": {
     "name": "Girsia",
@@ -786,16 +792,16 @@
     "seen": 1
   },
   "Modded": {
-    "name": "Girsia",
-    "slug": "girsia",
+    "name": "Mrtoolshed",
+    "slug": "mrtoolshed",
     "winrate": "100.0",
     "seen": 2
   },
   "Momentum Strike": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "50.0",
-    "seen": 4
+    "name": "Mrtoolshed",
+    "slug": "mrtoolshed",
+    "winrate": "66.7",
+    "seen": 6
   },
   "Multi-Cast": {
     "name": "0_tripwire_ 0",
@@ -828,10 +834,10 @@
     "seen": 1
   },
   "Reboot": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "54.5",
+    "seen": 11
   },
   "Refract": {
     "name": "letstrygg",
@@ -852,10 +858,10 @@
     "seen": 1
   },
   "Scrape": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "100.0",
-    "seen": 3
+    "name": "atundelmar",
+    "slug": "atundelmar",
+    "winrate": "83.3",
+    "seen": 6
   },
   "Shadow Shield": {
     "name": "Laczse",
@@ -882,10 +888,10 @@
     "seen": 4
   },
   "Smokestack": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "42.9",
-    "seen": 7
+    "name": "Mrtoolshed",
+    "slug": "mrtoolshed",
+    "winrate": "100.0",
+    "seen": 1
   },
   "Spinner": {
     "name": "Falterfire",
@@ -1026,9 +1032,9 @@
     "seen": 1
   },
   "Clash": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "0.0",
+    "name": "atundelmar",
+    "slug": "atundelmar",
+    "winrate": "100.0",
     "seen": 1
   },
   "Distraction": {
@@ -1152,10 +1158,10 @@
     "seen": 2
   },
   "Wish": {
-    "name": "damianjestem",
-    "slug": "damianjestem",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "75.0",
+    "seen": 4
   },
   "Aggression": {
     "name": "Falterfire",
@@ -1182,16 +1188,16 @@
     "seen": 6
   },
   "Barricade": {
-    "name": "SnekNet",
-    "slug": "sneknet",
+    "name": "OkieO2k",
+    "slug": "okieo2k",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 2
   },
   "Bash": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
-    "winrate": "75.0",
-    "seen": 4
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "57.1",
+    "seen": 14
   },
   "Battle Trance": {
     "name": "Falterfire",
@@ -1260,14 +1266,14 @@
     "seen": 2
   },
   "Cinder": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "66.7",
+    "seen": 3
   },
   "Colossus": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
+    "name": "guelch",
+    "slug": "guelch",
     "winrate": "100.0",
     "seen": 1
   },
@@ -1308,8 +1314,8 @@
     "seen": 5
   },
   "Demonic Shield": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
+    "name": "OkieO2k",
+    "slug": "okieo2k",
     "winrate": "100.0",
     "seen": 1
   },
@@ -1404,8 +1410,8 @@
     "seen": 2
   },
   "Hemokinesis": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "atundelmar",
+    "slug": "atundelmar",
     "winrate": "100.0",
     "seen": 1
   },
@@ -1572,10 +1578,10 @@
     "seen": 3
   },
   "Stomp": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
-    "winrate": "60.0",
-    "seen": 5
+    "name": "OkieO2k",
+    "slug": "okieo2k",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Stone Armor": {
     "name": "Girsia",
@@ -1698,8 +1704,8 @@
     "seen": 1
   },
   "Borrowed Time": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "atundelmar",
+    "slug": "atundelmar",
     "winrate": "100.0",
     "seen": 2
   },
@@ -1710,8 +1716,8 @@
     "seen": 2
   },
   "Calcify": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
+    "name": "guelch",
+    "slug": "guelch",
     "winrate": "100.0",
     "seen": 1
   },
@@ -1758,10 +1764,10 @@
     "seen": 7
   },
   "Deathbringer": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
+    "name": "atundelmar",
+    "slug": "atundelmar",
     "winrate": "100.0",
-    "seen": 2
+    "seen": 3
   },
   "Debilitate": {
     "name": "Falterfire",
@@ -1944,8 +1950,8 @@
     "seen": 2
   },
   "Negative Pulse": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "atundelmar",
+    "slug": "atundelmar",
     "winrate": "75.0",
     "seen": 8
   },
@@ -1986,10 +1992,10 @@
     "seen": 2
   },
   "Protector": {
-    "name": "vetres3",
-    "slug": "vetres3",
+    "name": "atundelmar",
+    "slug": "atundelmar",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 2
   },
   "Pull Aggro": {
     "name": "Girsia",
@@ -2016,10 +2022,10 @@
     "seen": 5
   },
   "Reanimate": {
-    "name": "damianjestem",
-    "slug": "damianjestem",
-    "winrate": "71.4",
-    "seen": 7
+    "name": "rarelyvlolent",
+    "slug": "rarelyvlolent",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Reap": {
     "name": "Falterfire",
@@ -2142,8 +2148,8 @@
     "seen": 3
   },
   "The Scythe": {
-    "name": "SnekNet",
-    "slug": "sneknet",
+    "name": "guelch",
+    "slug": "guelch",
     "winrate": "100.0",
     "seen": 1
   },
@@ -2178,10 +2184,10 @@
     "seen": 2
   },
   "Wisp": {
-    "name": "SnekNet",
-    "slug": "sneknet",
-    "winrate": "75.0",
-    "seen": 4
+    "name": "atundelmar",
+    "slug": "atundelmar",
+    "winrate": "71.4",
+    "seen": 7
   },
   "Byrdonis Egg": {
     "name": "Laczse",
@@ -2322,10 +2328,10 @@
     "seen": 1
   },
   "Crescent Spear": {
-    "name": "Stinkalot13",
-    "slug": "stinkalot13",
-    "winrate": "60.0",
-    "seen": 10
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "66.7",
+    "seen": 6
   },
   "Crush Under": {
     "name": "Falterfire",
@@ -2610,8 +2616,8 @@
     "seen": 6
   },
   "Royalties": {
-    "name": "SnekNet",
-    "slug": "sneknet",
+    "name": "guelch",
+    "slug": "guelch",
     "winrate": "100.0",
     "seen": 1
   },
@@ -2724,16 +2730,16 @@
     "seen": 3
   },
   "Accelerant": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "atundelmar",
+    "slug": "atundelmar",
+    "winrate": "75.0",
+    "seen": 4
   },
   "Accuracy": {
-    "name": "SnekNet",
-    "slug": "sneknet",
-    "winrate": "80.0",
-    "seen": 5
+    "name": "atundelmar",
+    "slug": "atundelmar",
+    "winrate": "75.0",
+    "seen": 8
   },
   "Acrobatics": {
     "name": "Falterfire",
@@ -2772,10 +2778,10 @@
     "seen": 5
   },
   "Backstab": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "guelch",
+    "slug": "guelch",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 2
   },
   "Blade Dance": {
     "name": "Girsia",
@@ -2964,14 +2970,14 @@
     "seen": 9
   },
   "Hidden Daggers": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "58.3",
-    "seen": 12
+    "name": "atundelmar",
+    "slug": "atundelmar",
+    "winrate": "100.0",
+    "seen": 4
   },
   "Infinite Blades": {
-    "name": "Girsia",
-    "slug": "girsia",
+    "name": "atundelmar",
+    "slug": "atundelmar",
     "winrate": "83.3",
     "seen": 6
   },
@@ -3078,10 +3084,10 @@
     "seen": 2
   },
   "Precise Cut": {
-    "name": "SnekNet",
-    "slug": "sneknet",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "66.7",
+    "seen": 3
   },
   "Predator": {
     "name": "Laczse",
@@ -3120,8 +3126,8 @@
     "seen": 6
   },
   "Shadowmeld": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "guelch",
+    "slug": "guelch",
     "winrate": "100.0",
     "seen": 1
   },
@@ -3138,10 +3144,10 @@
     "seen": 2
   },
   "Snakebite": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
+    "name": "atundelmar",
+    "slug": "atundelmar",
     "winrate": "66.7",
-    "seen": 3
+    "seen": 6
   },
   "Sneaky": {
     "name": "0_tripwire_ 0",
@@ -3216,10 +3222,10 @@
     "seen": 10
   },
   "Up My Sleeve": {
-    "name": "Girsia",
-    "slug": "girsia",
-    "winrate": "75.0",
-    "seen": 4
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "61.1",
+    "seen": 18
   },
   "Well-Laid Plans": {
     "name": "Falterfire",
