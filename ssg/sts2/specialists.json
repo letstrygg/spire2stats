@@ -1692,8 +1692,8 @@
     "seen": 15
   },
   "Bone Shards": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "letstrygg",
+    "slug": "letstrygg",
     "winrate": "100.0",
     "seen": 1
   },
@@ -1890,10 +1890,10 @@
     "seen": 3
   },
   "Hang": {
-    "name": "SnekNet",
-    "slug": "sneknet",
+    "name": "letstrygg",
+    "slug": "letstrygg",
     "winrate": "100.0",
-    "seen": 2
+    "seen": 3
   },
   "Haunt": {
     "name": "Girsia",
