@@ -1177,6 +1177,13 @@ async function build() {
         sitemap.add('/cards/');
         console.log('📂 Generating index page...');
         
+        cards.sort((a, b) => {
+            const sA = cardStats.stats[normalizeId(a.card_id)] || { seen: 0, wins: 0 };
+            const sB = cardStats.stats[normalizeId(b.card_id)] || { seen: 0, wins: 0 };
+            return calculateBayesianScore(sB.wins, sB.seen, cardStats.globalWinRate / 100) - 
+                   calculateBayesianScore(sA.wins, sA.seen, cardStats.globalWinRate / 100);
+        });
+
         const cardLinks = cards.map(card => {
             const slug = slugify(card.name);
             const cleanCardId = normalizeId(card.card_id);
