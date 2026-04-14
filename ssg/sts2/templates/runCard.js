@@ -57,14 +57,14 @@ export function generateRunCardHtml(run, user) {
             <div class="card-info">
                 <span class="card-name" style="line-height: 1.1;">
                     <span class="user-name">${user.display_name}</span>
-                    <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run ${run.user_run_num}</span>
+                    <span style="font-size: 0.7rem; color: var(--gray); font-weight: normal; display: block; margin-bottom: 2px;">Run #${run.user_run_num}</span>
                     <span style="color: ${charColor}; text-transform: capitalize;">${charId}</span>
                 </span>
             </div>
             <div class="card-stats">
                 <div class="win-rate" style="color: ${statusColor}">${statusText}</div>
                 <div class="run-count" style="font-size: 0.7rem; opacity: 0.6;">Build ${run.build_id || 'Unknown'}</div>
-                <div class="run-count">Ascension ${run.ascension || 0} • <span style="color: ${modeColor}; text-transform: capitalize;">${gameMode}</span></div>
+                <div class="run-count">A${run.ascension || 0} • <span style="color: ${modeColor}; text-transform: capitalize;">${gameMode}</span></div>
             </div>
         </a>
         ${videoButtons}
