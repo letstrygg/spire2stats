@@ -60,10 +60,10 @@
     "seen": 2
   },
   "Dark Shackles": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
-    "winrate": "100.0",
-    "seen": 2
+    "name": "Shane_in_the_Back",
+    "slug": "shane_in_the_back",
+    "winrate": "80.0",
+    "seen": 5
   },
   "Discovery": {
     "name": "SnekNet",
@@ -197,6 +197,12 @@
     "winrate": "100.0",
     "seen": 3
   },
+  "Mimic": {
+    "name": "Shane_in_the_Back",
+    "slug": "shane_in_the_back",
+    "winrate": "100.0",
+    "seen": 1
+  },
   "Mind Blast": {
     "name": "SnekNet",
     "slug": "sneknet",
@@ -294,8 +300,8 @@
     "seen": 1
   },
   "Secret Technique": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
+    "name": "Shane_in_the_Back",
+    "slug": "shane_in_the_back",
     "winrate": "50.0",
     "seen": 2
   },
@@ -432,10 +438,10 @@
     "seen": 7
   },
   "Guilty": {
-    "name": "guelch",
-    "slug": "guelch",
+    "name": "Shane_in_the_Back",
+    "slug": "shane_in_the_back",
     "winrate": "0.0",
-    "seen": 1
+    "seen": 3
   },
   "Injury": {
     "name": "vetres3",
@@ -690,10 +696,10 @@
     "seen": 3
   },
   "Glacier": {
-    "name": "guelch",
-    "slug": "guelch",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "54.5",
+    "seen": 11
   },
   "Glasswork": {
     "name": "guelch",
@@ -738,10 +744,10 @@
     "seen": 4
   },
   "Hyperbeam": {
-    "name": "Girsia",
-    "slug": "girsia",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "66.7",
+    "seen": 6
   },
   "Ice Lance": {
     "name": "Falterfire",
@@ -1014,10 +1020,10 @@
     "seen": 3
   },
   "Brightest Flame": {
-    "name": "SnekNet",
-    "slug": "sneknet",
+    "name": "Shane_in_the_Back",
+    "slug": "shane_in_the_back",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 4
   },
   "Byrd Swoop": {
     "name": "Dead3y3",
@@ -1242,10 +1248,10 @@
     "seen": 1
   },
   "Breakthrough": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "62.5",
-    "seen": 8
+    "name": "Shane_in_the_Back",
+    "slug": "shane_in_the_back",
+    "winrate": "66.7",
+    "seen": 6
   },
   "Bully": {
     "name": "Falterfire",
@@ -1596,9 +1602,9 @@
     "seen": 4
   },
   "Tank": {
-    "name": "SnekNet",
-    "slug": "sneknet",
-    "winrate": "0.0",
+    "name": "Shane_in_the_Back",
+    "slug": "shane_in_the_back",
+    "winrate": "100.0",
     "seen": 1
   },
   "Taunt": {
@@ -1620,10 +1626,10 @@
     "seen": 3
   },
   "Thunderclap": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
-    "winrate": "80.0",
-    "seen": 5
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "66.7",
+    "seen": 12
   },
   "Tremble": {
     "name": "Dead3y3",
@@ -1704,8 +1710,8 @@
     "seen": 1
   },
   "Borrowed Time": {
-    "name": "atundelmar",
-    "slug": "atundelmar",
+    "name": "Shane_in_the_Back",
+    "slug": "shane_in_the_back",
     "winrate": "100.0",
     "seen": 2
   },
@@ -1722,10 +1728,10 @@
     "seen": 1
   },
   "Call of the Void": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "75.0",
-    "seen": 4
+    "name": "Shane_in_the_Back",
+    "slug": "shane_in_the_back",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Capture Spirit": {
     "name": "Dead3y3",
@@ -1842,10 +1848,10 @@
     "seen": 7
   },
   "Eradicate": {
-    "name": "Stinkalot13",
-    "slug": "stinkalot13",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "Shane_in_the_Back",
+    "slug": "shane_in_the_back",
+    "winrate": "66.7",
+    "seen": 3
   },
   "Fear": {
     "name": "Falterfire",
@@ -1980,10 +1986,10 @@
     "seen": 5
   },
   "Parse": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "100.0",
-    "seen": 2
+    "name": "Shane_in_the_Back",
+    "slug": "shane_in_the_back",
+    "winrate": "83.3",
+    "seen": 6
   },
   "Poke": {
     "name": "Dead3y3",
@@ -2124,10 +2130,10 @@
     "seen": 2
   },
   "Sow": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "44.4",
+    "seen": 9
   },
   "Spirit of Ash": {
     "name": "Falterfire",
@@ -2196,16 +2202,16 @@
     "seen": 1
   },
   "Lantern Key": {
-    "name": "damianjestem",
-    "slug": "damianjestem",
+    "name": "Shane_in_the_Back",
+    "slug": "shane_in_the_back",
     "winrate": "0.0",
-    "seen": 4
+    "seen": 3
   },
   "Spoils Map": {
-    "name": "SnekNet",
-    "slug": "sneknet",
+    "name": "Shane_in_the_Back",
+    "slug": "shane_in_the_back",
     "winrate": "0.0",
-    "seen": 5
+    "seen": 9
   },
   "Alignment": {
     "name": "0_tripwire_ 0",
@@ -2724,10 +2730,10 @@
     "seen": 5
   },
   "Abrasive": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "Shane_in_the_Back",
+    "slug": "shane_in_the_back",
     "winrate": "100.0",
-    "seen": 3
+    "seen": 4
   },
   "Accelerant": {
     "name": "atundelmar",
@@ -2790,10 +2796,10 @@
     "seen": 6
   },
   "Blade of Ink": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
-    "winrate": "50.0",
-    "seen": 2
+    "name": "damianjestem",
+    "slug": "damianjestem",
+    "winrate": "40.0",
+    "seen": 5
   },
   "Blur": {
     "name": "Falterfire",
@@ -2874,8 +2880,8 @@
     "seen": 2
   },
   "Dodge and Roll": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "Shane_in_the_Back",
+    "slug": "shane_in_the_back",
     "winrate": "100.0",
     "seen": 3
   },
@@ -2916,16 +2922,16 @@
     "seen": 3
   },
   "Finisher": {
-    "name": "Girsia",
-    "slug": "girsia",
-    "winrate": "71.4",
-    "seen": 7
+    "name": "Shane_in_the_Back",
+    "slug": "shane_in_the_back",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Flanking": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "50.0",
-    "seen": 8
+    "name": "Shane_in_the_Back",
+    "slug": "shane_in_the_back",
+    "winrate": "100.0",
+    "seen": 4
   },
   "Flechettes": {
     "name": "0_tripwire_ 0",
@@ -2940,8 +2946,8 @@
     "seen": 5
   },
   "Follow Through": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "Shane_in_the_Back",
+    "slug": "shane_in_the_back",
     "winrate": "100.0",
     "seen": 2
   },
@@ -3006,10 +3012,10 @@
     "seen": 2
   },
   "Master Planner": {
-    "name": "SnekNet",
-    "slug": "sneknet",
-    "winrate": "50.0",
-    "seen": 2
+    "name": "Shane_in_the_Back",
+    "slug": "shane_in_the_back",
+    "winrate": "100.0",
+    "seen": 1
   },
   "Memento Mori": {
     "name": "damianjestem",
@@ -3036,20 +3042,20 @@
     "seen": 14
   },
   "Nightmare": {
-    "name": "SnekNet",
-    "slug": "sneknet",
+    "name": "Shane_in_the_Back",
+    "slug": "shane_in_the_back",
     "winrate": "100.0",
-    "seen": 2
+    "seen": 3
   },
   "Noxious Fumes": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "80.0",
-    "seen": 5
+    "name": "Shane_in_the_Back",
+    "slug": "shane_in_the_back",
+    "winrate": "83.3",
+    "seen": 6
   },
   "Outbreak": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "Shane_in_the_Back",
+    "slug": "shane_in_the_back",
     "winrate": "100.0",
     "seen": 2
   },
@@ -3060,10 +3066,10 @@
     "seen": 4
   },
   "Piercing Wail": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "87.5",
-    "seen": 8
+    "name": "Shane_in_the_Back",
+    "slug": "shane_in_the_back",
+    "winrate": "100.0",
+    "seen": 5
   },
   "Pinpoint": {
     "name": "0_tripwire_ 0",
@@ -3084,10 +3090,10 @@
     "seen": 2
   },
   "Precise Cut": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "66.7",
-    "seen": 3
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "100.0",
+    "seen": 1
   },
   "Predator": {
     "name": "Laczse",
@@ -3120,10 +3126,10 @@
     "seen": 6
   },
   "Shadow Step": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "66.7",
-    "seen": 6
+    "name": "Shane_in_the_Back",
+    "slug": "shane_in_the_back",
+    "winrate": "80.0",
+    "seen": 5
   },
   "Shadowmeld": {
     "name": "guelch",
@@ -3144,16 +3150,16 @@
     "seen": 2
   },
   "Snakebite": {
-    "name": "atundelmar",
-    "slug": "atundelmar",
-    "winrate": "66.7",
-    "seen": 6
+    "name": "Shane_in_the_Back",
+    "slug": "shane_in_the_back",
+    "winrate": "75.0",
+    "seen": 4
   },
   "Sneaky": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "66.7",
-    "seen": 3
+    "name": "Shane_in_the_Back",
+    "slug": "shane_in_the_back",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Speedster": {
     "name": "Falterfire",
@@ -3222,10 +3228,10 @@
     "seen": 10
   },
   "Up My Sleeve": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "61.1",
-    "seen": 18
+    "name": "Shane_in_the_Back",
+    "slug": "shane_in_the_back",
+    "winrate": "80.0",
+    "seen": 5
   },
   "Well-Laid Plans": {
     "name": "Falterfire",
