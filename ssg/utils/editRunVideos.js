@@ -59,6 +59,9 @@ document.addEventListener("DOMContentLoaded", function() {
                         </div>
                     </div>
                     <div class="edit-shorts-list" style="display: flex; gap: 10px; flex-wrap: wrap;"></div>
+                    <div style="display: flex; justify-content: flex-end; margin-top: 4px;">
+                        <button class="btn btn-green save-run-changes-btn" style="padding: 6px 12px; font-size: 0.7rem; white-space: nowrap;">Save Changes</button>
+                    </div>
                 </div>
             `;
 
@@ -104,6 +107,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 inp.value = '';
                 updateShortsUI();
             };
+
+            editArea.querySelector('.save-run-changes-btn').onclick = () => btn.click();
 
         } else {
             // Save and Exit
