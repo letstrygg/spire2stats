@@ -70,17 +70,28 @@ async function run() {
                 }
             }
 
-            // 5. Clean up remote s2s_runs_todo
+            // 5. Move to permanent s2s_runs and clean up remote s2s_runs_todo
             if (processedIds.length > 0) {
-                console.log(`🗑️  Cleaning up ${processedIds.length} runs from Supabase...`);
-                const { error: delError } = await supabase
-                    .from('s2s_runs_todo')
-                    .delete()
-                    .in('id', processedIds);
+                const runsToPermanent = todoRuns.filter(r => processedIds.includes(r.id));
                 
-                if (delError) console.error("⚠️ Failed to delete runs from remote todo list:", delError.message);
-                else {
-                    console.log(`✅ Cleaned up ${processedIds.length} runs from remote todo list.`);
+                console.log(`📤 Moving ${runsToPermanent.length} runs to permanent s2s_runs table...`);
+                const { error: moveError } = await supabase
+                    .from('s2s_runs')
+                    .upsert(runsToPermanent, { onConflict: 'id' });
+
+                if (moveError) {
+                    console.error("❌ Failed to move runs to permanent storage:", moveError.message);
+                } else {
+                    console.log(`🗑️  Cleaning up ${processedIds.length} runs from Supabase todo list...`);
+                    const { error: delError } = await supabase
+                        .from('s2s_runs_todo')
+                        .delete()
+                        .in('id', processedIds);
+                    
+                    if (delError) console.error("⚠️ Failed to delete runs from remote todo list:", delError.message);
+                    else {
+                        console.log(`✅ Cleaned up ${processedIds.length} runs from remote todo list.`);
+                    }
                 }
             }
         } else {
