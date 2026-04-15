@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import sqlite3 from 'sqlite3';
+import { execSync } from 'child_process';
 import { PATHS, ensureDir, slugify } from './paths.js';
 import { isRunByUser, calculateBayesianScore, normalizeId, calculateWinRate, aggregateCardStats, getPerformanceStats } from './helpers.js';
 import { 
@@ -349,7 +350,8 @@ async function build() {
                 [{ name: 'Users', url: '/users/' }, { name: user.display_name, url: '' }],
                 `${user.display_name} ${userStats.formatted}% winrate across ${userStats.seen} runs on Slay the Spire 2.`,
                 "",
-                `/users/${user.slug}/`
+                `/users/${user.slug}/`,
+                `/users/${user.slug}/summary.png`
             );
             fs.writeFileSync(path.join(userRoot, 'index.html'), indexHtml);
 
@@ -622,6 +624,9 @@ async function build() {
 
         console.log('✨ User build complete!');
         db.close();
+
+        console.log('🖼️  Triggering PNG summary generation...');
+        execSync('node ssg/utils/build-png.js', { stdio: 'inherit' });
 
     } catch (error) {
         console.error('❌ User build failed:', error);

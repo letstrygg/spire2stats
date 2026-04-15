@@ -344,7 +344,7 @@ export function generateSemanticStatsParagraph(name, stats, contextLabel) {
     return generateItemSummaryBox(name, stats);
 }
 
-export function wrapLayout(title, content, breadcrumbs = [], description = "", headExtra = "", canonicalPath = "") {
+export function wrapLayout(title, content, breadcrumbs = [], description = "", headExtra = "", canonicalPath = "", ogImage = "") {
     const bcHtml = `<nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div>${breadcrumbs.length > 0 
             ? `<a href="/">spire2stats</a> / ${breadcrumbs.map((b, i) => i === breadcrumbs.length - 1 ? b.name.toLowerCase() : `<a href="${b.url}">${b.name.toLowerCase()}</a>`).join(' / ')}`
@@ -369,12 +369,12 @@ export function wrapLayout(title, content, breadcrumbs = [], description = "", h
     ${canonicalUrl ? `<meta property="og:url" content="${canonicalUrl}">` : ''}
     <meta property="og:title" content="${displayTitle}">
     <meta property="og:description" content="${description}">
-    <!-- <meta property="og:image" content="https://spire2stats.com/images/default-run-preview.jpg"> -->
-    <meta property="twitter:card" content="summary">
+    ${ogImage ? `<meta property="og:image" content="https://spire2stats.com${ogImage}">` : ''}
+    <meta property="twitter:card" content="${ogImage ? 'summary_large_image' : 'summary'}">
     ${canonicalUrl ? `<meta property="twitter:url" content="${canonicalUrl}">` : ''}
     <meta property="twitter:title" content="${displayTitle}">
     <meta property="twitter:description" content="${description}">
-    <!-- <meta property="twitter:image" content="https://spire2stats.com/images/default-run-preview.jpg"> -->`;
+    ${ogImage ? `<meta property="twitter:image" content="https://spire2stats.com${ogImage}">` : ''}`;
 
     const breadcrumbJsonLd = breadcrumbs.length > 0 ? (() => {
         const listItems = [
