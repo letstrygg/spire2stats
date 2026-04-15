@@ -452,8 +452,8 @@
   "Injury": {
     "name": "vetres3",
     "slug": "vetres3",
-    "winrate": "6.7",
-    "seen": 15
+    "winrate": "12.5",
+    "seen": 16
   },
   "Normality": {
     "name": "guelch",
@@ -1701,7 +1701,7 @@
     "name": "Dead3y3",
     "slug": "dead3y3",
     "winrate": "100.0",
-    "seen": 4
+    "seen": 5
   },
   "Blight Strike": {
     "name": "Falterfire",
@@ -1946,8 +1946,8 @@
   "Lethality": {
     "name": "Dead3y3",
     "slug": "dead3y3",
-    "winrate": "80.0",
-    "seen": 5
+    "winrate": "71.4",
+    "seen": 7
   },
   "Melancholy": {
     "name": "Girsia",
@@ -2115,7 +2115,7 @@
     "name": "Dead3y3",
     "slug": "dead3y3",
     "winrate": "100.0",
-    "seen": 2
+    "seen": 3
   },
   "Sic 'Em": {
     "name": "Girsia",
