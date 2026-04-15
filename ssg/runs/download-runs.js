@@ -106,27 +106,47 @@ async function run() {
         let offset = 0;
         const limit = 1000;
         let totalSyncedCount = 0;
+        let runsWithVideosCount = 0;
         let runsWithShortsCount = 0;
+        let changedMetadataCount = 0;
 
         while (hasMore) {
             const { data: updates, error: updateError } = await supabase
                 .from('s2s_runs')
-                .select('id, yt_video, ltg_url, shorts')
+                .select('id, username, yt_video, ltg_url, shorts')
                 .range(offset, offset + limit - 1);
 
             if (updateError) throw updateError;
             if (!updates || updates.length === 0) break;
 
             for (const run of updates) {
+                // Fetch existing local state for comparison
+                const localRun = (await query("SELECT yt_video, shorts FROM runs WHERE id = ?", [run.id]))[0];
+
                 // Ensure shorts is a valid JSON array string and not double-encoded
                 const parsedShorts = (typeof run.shorts === 'string') ? JSON.parse(run.shorts) : (run.shorts || []);
                 const shortsJson = JSON.stringify(Array.isArray(parsedShorts) ? parsedShorts : []);
                 
-                const hasShorts = run.shorts && Array.isArray(run.shorts) && run.shorts.length > 0;
+                const hasShorts = parsedShorts.length > 0;
                 const hasVideo = !!run.yt_video;
 
-                if (hasShorts || hasVideo) {
-                    if (hasShorts) runsWithShortsCount++;
+                if (hasVideo) runsWithVideosCount++;
+                if (hasShorts) runsWithShortsCount++;
+
+                // Check if metadata actually changed
+                const ytChanged = run.yt_video !== (localRun?.yt_video || null);
+                const shortsChanged = shortsJson !== (localRun?.shorts || '[]');
+
+                if (ytChanged || shortsChanged) {
+                    changedMetadataCount++;
+                    console.log(`  🔄 Change detected in Run ID: ${run.id} (${run.username || 'Unknown User'})`);
+                    
+                    if (ytChanged) {
+                        console.log(`     - YT Video: ${localRun?.yt_video || 'None'} -> ${run.yt_video || 'None'}`);
+                    }
+                    if (shortsChanged) {
+                        console.log(`     - Shorts: ${localRun?.shorts || '[]'} -> ${shortsJson}`);
+                    }
                 }
 
                 await query("UPDATE runs SET yt_video = ?, ltg_url = ?, shorts = ? WHERE id = ?", [
@@ -142,7 +162,10 @@ async function run() {
             else offset += limit;
         }
 
-        console.log(`✅ Metadata sync complete. Checked ${totalSyncedCount} runs, found ${runsWithShortsCount} runs with linked shorts.`);
+        console.log(`✅ Metadata sync complete. Checked ${totalSyncedCount} runs.`);
+        console.log(`   - Runs with Videos: ${runsWithVideosCount}`);
+        console.log(`   - Runs with Shorts: ${runsWithShortsCount}`);
+        console.log(`   - Metadata updates applied: ${changedMetadataCount}`);
 
         await recalculateUserRunNumbers(db);
         console.log(`✨ All synchronization and metadata updates complete.`);
