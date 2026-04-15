@@ -64,7 +64,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/users/">users</a> / falterfire</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-15T21:19:59.833Z">April 15, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-15T21:48:36.358Z">April 15, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -447,6 +447,11 @@
                     <li>
                         <a href="/cards/rupture/" style="color: var(--color-ironclad); text-decoration: underline;">Rupture</a> 
                         <span style="color: #888;">(83.3% 6 runs)</span>
+                    </li>
+                
+                    <li>
+                        <a href="/cards/spite/" style="color: var(--color-ironclad); text-decoration: underline;">Spite</a> 
+                        <span style="color: #888;">(80.0% 5 runs)</span>
                     </li>
                 
                     <li>
@@ -3029,7 +3034,7 @@
             const buildFilter = document.getElementById('build-filter');
             const ascFilter = document.getElementById('ascension-filter');
             const runCards = document.querySelectorAll('.run-record');
-            const globalWR = 25.587248322147648;
+            const globalWR = 25.600894354387925;
 
             function updateFilters() {
                 const buildVal = buildFilter.value;

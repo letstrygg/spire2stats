@@ -1026,10 +1026,10 @@
     "seen": 4
   },
   "Apparition": {
-    "name": "Phoenixabe",
-    "slug": "phoenixabe",
+    "name": "letstrygg",
+    "slug": "letstrygg",
     "winrate": "100.0",
-    "seen": 3
+    "seen": 4
   },
   "Brightest Flame": {
     "name": "Shane_in_the_Back",
@@ -1200,10 +1200,10 @@
     "seen": 4
   },
   "Ashen Strike": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "66.7",
-    "seen": 6
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "75.0",
+    "seen": 4
   },
   "Barricade": {
     "name": "OkieO2k",
@@ -1214,8 +1214,8 @@
   "Bash": {
     "name": "letstrygg",
     "slug": "letstrygg",
-    "winrate": "57.1",
-    "seen": 14
+    "winrate": "56.3",
+    "seen": 16
   },
   "Battle Trance": {
     "name": "unknown7832",
@@ -1226,8 +1226,8 @@
   "Blood Wall": {
     "name": "letstrygg",
     "slug": "letstrygg",
-    "winrate": "80.0",
-    "seen": 5
+    "winrate": "66.7",
+    "seen": 6
   },
   "Bloodletting": {
     "name": "unknown7832",
@@ -1392,10 +1392,10 @@
     "seen": 4
   },
   "Flame Barrier": {
-    "name": "Ethan4D",
-    "slug": "ethan4d",
-    "winrate": "100.0",
-    "seen": 4
+    "name": "letstrygg",
+    "slug": "letstrygg",
+    "winrate": "87.5",
+    "seen": 8
   },
   "Forgotten Ritual": {
     "name": "Girsia",
@@ -1578,8 +1578,8 @@
     "seen": 11
   },
   "Spite": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
+    "name": "Falterfire",
+    "slug": "falterfire",
     "winrate": "80.0",
     "seen": 5
   },
@@ -1688,8 +1688,8 @@
   "Whirlwind": {
     "name": "letstrygg",
     "slug": "letstrygg",
-    "winrate": "83.3",
-    "seen": 6
+    "winrate": "71.4",
+    "seen": 7
   },
   "Afterlife": {
     "name": "Girsia",
