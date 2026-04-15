@@ -42,10 +42,10 @@
     "seen": 2
   },
   "Calamity": {
-    "name": "vetres3",
-    "slug": "vetres3",
+    "name": "Falterfire",
+    "slug": "falterfire",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 2
   },
   "Catastrophe": {
     "name": "Dead3y3",
@@ -66,10 +66,10 @@
     "seen": 3
   },
   "Discovery": {
-    "name": "SnekNet",
-    "slug": "sneknet",
-    "winrate": "66.7",
-    "seen": 3
+    "name": "Phoenixabe",
+    "slug": "phoenixabe",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Dramatic Entrance": {
     "name": "unknown7832",
@@ -210,10 +210,10 @@
     "seen": 4
   },
   "Nostalgia": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "75.0",
+    "seen": 4
   },
   "Omnislice": {
     "name": "Falterfire",
@@ -294,10 +294,10 @@
     "seen": 1
   },
   "Scrawl": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
+    "name": "Phoenixabe",
+    "slug": "phoenixabe",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 2
   },
   "Secret Technique": {
     "name": "Plabilitop",
@@ -444,16 +444,16 @@
     "seen": 7
   },
   "Guilty": {
-    "name": "Shane_in_the_Back",
-    "slug": "shane_in_the_back",
+    "name": "unknown8139",
+    "slug": "unknown8139",
     "winrate": "0.0",
-    "seen": 3
+    "seen": 15
   },
   "Injury": {
-    "name": "vetres3",
-    "slug": "vetres3",
-    "winrate": "12.5",
-    "seen": 16
+    "name": "Phoenixabe",
+    "slug": "phoenixabe",
+    "winrate": "50.0",
+    "seen": 2
   },
   "Normality": {
     "name": "guelch",
@@ -468,10 +468,10 @@
     "seen": 2
   },
   "Regret": {
-    "name": "vetres3",
-    "slug": "vetres3",
-    "winrate": "75.0",
-    "seen": 4
+    "name": "1nfern0",
+    "slug": "1nfern0",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Shame": {
     "name": "0_tripwire_ 0",
@@ -708,10 +708,10 @@
     "seen": 3
   },
   "Glacier": {
-    "name": "damianjestem",
-    "slug": "damianjestem",
-    "winrate": "54.5",
-    "seen": 11
+    "name": "Phoenixabe",
+    "slug": "phoenixabe",
+    "winrate": "62.5",
+    "seen": 8
   },
   "Glasswork": {
     "name": "guelch",
@@ -750,10 +750,10 @@
     "seen": 3
   },
   "Hotfix": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "100.0",
-    "seen": 2
+    "name": "unknown7832",
+    "slug": "unknown7832",
+    "winrate": "75.0",
+    "seen": 4
   },
   "Hyperbeam": {
     "name": "0_tripwire_ 0",
@@ -774,10 +774,10 @@
     "seen": 1
   },
   "Iteration": {
-    "name": "unknown6455",
-    "slug": "unknown6455",
-    "winrate": "60.0",
-    "seen": 5
+    "name": "unknown8139",
+    "slug": "unknown8139",
+    "winrate": "75.0",
+    "seen": 4
   },
   "Leap": {
     "name": "unknown7832",
@@ -804,10 +804,10 @@
     "seen": 3
   },
   "Meteor Strike": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "unknown8139",
+    "slug": "unknown8139",
+    "winrate": "50.0",
+    "seen": 6
   },
   "Modded": {
     "name": "unknown7832",
@@ -1026,8 +1026,8 @@
     "seen": 4
   },
   "Apparition": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
+    "name": "Phoenixabe",
+    "slug": "phoenixabe",
     "winrate": "100.0",
     "seen": 3
   },
@@ -1068,15 +1068,15 @@
     "seen": 3
   },
   "Enlightenment": {
-    "name": "unknown7832",
-    "slug": "unknown7832",
+    "name": "Phoenixabe",
+    "slug": "phoenixabe",
     "winrate": "100.0",
     "seen": 1
   },
   "Entrench": {
-    "name": "damianjestem",
-    "slug": "damianjestem",
-    "winrate": "0.0",
+    "name": "Phoenixabe",
+    "slug": "phoenixabe",
+    "winrate": "100.0",
     "seen": 1
   },
   "Exterminate": {
@@ -1140,10 +1140,10 @@
     "seen": 1
   },
   "Relax": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "1nfern0",
+    "slug": "1nfern0",
     "winrate": "100.0",
-    "seen": 2
+    "seen": 3
   },
   "Rip and Tear": {
     "name": "0_tripwire_ 0",
@@ -1170,16 +1170,16 @@
     "seen": 7
   },
   "Whistle": {
-    "name": "Plabilitop",
-    "slug": "plabilitop",
+    "name": "Phoenixabe",
+    "slug": "phoenixabe",
     "winrate": "100.0",
-    "seen": 2
+    "seen": 4
   },
   "Wish": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "75.0",
-    "seen": 4
+    "name": "unknown8139",
+    "slug": "unknown8139",
+    "winrate": "100.0",
+    "seen": 3
   },
   "Aggression": {
     "name": "Falterfire",
@@ -1290,38 +1290,38 @@
     "seen": 3
   },
   "Colossus": {
-    "name": "Log",
-    "slug": "log",
-    "winrate": "100.0",
-    "seen": 2
+    "name": "unknown8139",
+    "slug": "unknown8139",
+    "winrate": "83.3",
+    "seen": 6
   },
   "Conflagration": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "unknown8139",
+    "slug": "unknown8139",
     "winrate": "100.0",
     "seen": 2
   },
   "Corruption": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
+    "name": "unknown8139",
+    "slug": "unknown8139",
     "winrate": "100.0",
     "seen": 1
   },
   "Crimson Mantle": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "unknown8139",
+    "slug": "unknown8139",
     "winrate": "100.0",
-    "seen": 3
+    "seen": 5
   },
   "Cruelty": {
-    "name": "unknown7832",
-    "slug": "unknown7832",
-    "winrate": "66.7",
-    "seen": 3
+    "name": "Phoenixabe",
+    "slug": "phoenixabe",
+    "winrate": "62.5",
+    "seen": 8
   },
   "Dark Embrace": {
-    "name": "unknown7832",
-    "slug": "unknown7832",
+    "name": "unknown8139",
+    "slug": "unknown8139",
     "winrate": "100.0",
     "seen": 2
   },
@@ -1350,22 +1350,22 @@
     "seen": 3
   },
   "Drum of Battle": {
-    "name": "vetres3",
-    "slug": "vetres3",
-    "winrate": "50.0",
-    "seen": 4
+    "name": "unknown8139",
+    "slug": "unknown8139",
+    "winrate": "100.0",
+    "seen": 3
   },
   "Evil Eye": {
-    "name": "unknown7832",
-    "slug": "unknown7832",
-    "winrate": "100.0",
-    "seen": 2
+    "name": "unknown8139",
+    "slug": "unknown8139",
+    "winrate": "80.0",
+    "seen": 5
   },
   "Expect a Fight": {
-    "name": "SnekNet",
-    "slug": "sneknet",
-    "winrate": "100.0",
-    "seen": 2
+    "name": "unknown8139",
+    "slug": "unknown8139",
+    "winrate": "80.0",
+    "seen": 5
   },
   "Feed": {
     "name": "Stinkalot13",
@@ -1380,16 +1380,16 @@
     "seen": 2
   },
   "Fiend Fire": {
-    "name": "unknown7832",
-    "slug": "unknown7832",
+    "name": "unknown8139",
+    "slug": "unknown8139",
     "winrate": "100.0",
     "seen": 2
   },
   "Fight Me!": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "66.7",
-    "seen": 3
+    "name": "unknown8139",
+    "slug": "unknown8139",
+    "winrate": "75.0",
+    "seen": 4
   },
   "Flame Barrier": {
     "name": "Ethan4D",
@@ -1428,10 +1428,10 @@
     "seen": 2
   },
   "Hemokinesis": {
-    "name": "atundelmar",
-    "slug": "atundelmar",
+    "name": "unknown8139",
+    "slug": "unknown8139",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 2
   },
   "Howl from Beyond": {
     "name": "Falterfire",
@@ -1452,10 +1452,10 @@
     "seen": 4
   },
   "Inferno": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
-    "winrate": "75.0",
-    "seen": 4
+    "name": "unknown8139",
+    "slug": "unknown8139",
+    "winrate": "100.0",
+    "seen": 3
   },
   "Inflame": {
     "name": "letstrygg",
@@ -1482,10 +1482,10 @@
     "seen": 3
   },
   "Mangle": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
+    "name": "unknown8139",
+    "slug": "unknown8139",
     "winrate": "100.0",
-    "seen": 2
+    "seen": 4
   },
   "Molten Fist": {
     "name": "unknown7832",
@@ -1494,14 +1494,14 @@
     "seen": 10
   },
   "Offering": {
-    "name": "SnekNet",
-    "slug": "sneknet",
+    "name": "Phoenixabe",
+    "slug": "phoenixabe",
     "winrate": "100.0",
-    "seen": 2
+    "seen": 5
   },
   "One-Two Punch": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
+    "name": "Phoenixabe",
+    "slug": "phoenixabe",
     "winrate": "100.0",
     "seen": 2
   },
@@ -1536,10 +1536,10 @@
     "seen": 2
   },
   "Pyre": {
-    "name": "unknown7832",
-    "slug": "unknown7832",
-    "winrate": "85.7",
-    "seen": 7
+    "name": "unknown8139",
+    "slug": "unknown8139",
+    "winrate": "100.0",
+    "seen": 4
   },
   "Rage": {
     "name": "letstrygg",
@@ -1572,10 +1572,10 @@
     "seen": 2
   },
   "Shrug It Off": {
-    "name": "SnekNet",
-    "slug": "sneknet",
-    "winrate": "100.0",
-    "seen": 3
+    "name": "unknown8139",
+    "slug": "unknown8139",
+    "winrate": "81.8",
+    "seen": 11
   },
   "Spite": {
     "name": "letstrygg",
@@ -1614,22 +1614,22 @@
     "seen": 4
   },
   "Tank": {
-    "name": "Shane_in_the_Back",
-    "slug": "shane_in_the_back",
+    "name": "unknown8139",
+    "slug": "unknown8139",
     "winrate": "100.0",
     "seen": 1
   },
   "Taunt": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "unknown8139",
+    "slug": "unknown8139",
     "winrate": "100.0",
-    "seen": 4
+    "seen": 5
   },
   "Tear Asunder": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
+    "name": "unknown8139",
+    "slug": "unknown8139",
     "winrate": "100.0",
-    "seen": 2
+    "seen": 3
   },
   "Thrash": {
     "name": "Dead3y3",
@@ -1644,10 +1644,10 @@
     "seen": 12
   },
   "Tremble": {
-    "name": "unknown7832",
-    "slug": "unknown7832",
-    "winrate": "100.0",
-    "seen": 2
+    "name": "unknown8139",
+    "slug": "unknown8139",
+    "winrate": "83.3",
+    "seen": 6
   },
   "True Grit": {
     "name": "Falterfire",
@@ -1656,10 +1656,10 @@
     "seen": 13
   },
   "Twin Strike": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "55.6",
-    "seen": 9
+    "name": "unknown8139",
+    "slug": "unknown8139",
+    "winrate": "58.3",
+    "seen": 12
   },
   "Unmovable": {
     "name": "unknown7832",
@@ -1716,10 +1716,10 @@
     "seen": 15
   },
   "Bone Shards": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "unknown6455",
+    "slug": "unknown6455",
+    "winrate": "50.0",
+    "seen": 10
   },
   "Borrowed Time": {
     "name": "Shane_in_the_Back",
@@ -1806,10 +1806,10 @@
     "seen": 12
   },
   "Delay": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
+    "name": "Phoenixabe",
+    "slug": "phoenixabe",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 2
   },
   "Demesne": {
     "name": "unknown7832",
@@ -1818,10 +1818,10 @@
     "seen": 6
   },
   "Devour Life": {
-    "name": "Girsia",
-    "slug": "girsia",
-    "winrate": "80.0",
-    "seen": 5
+    "name": "1nfern0",
+    "slug": "1nfern0",
+    "winrate": "100.0",
+    "seen": 3
   },
   "Dirge": {
     "name": "Girsia",
@@ -1974,10 +1974,10 @@
     "seen": 8
   },
   "Neurosurge": {
-    "name": "SnekNet",
-    "slug": "sneknet",
+    "name": "1nfern0",
+    "slug": "1nfern0",
     "winrate": "100.0",
-    "seen": 3
+    "seen": 4
   },
   "No Escape": {
     "name": "unknown7832",
@@ -2004,10 +2004,10 @@
     "seen": 6
   },
   "Poke": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
-    "winrate": "100.0",
-    "seen": 2
+    "name": "unknown6455",
+    "slug": "unknown6455",
+    "winrate": "61.5",
+    "seen": 13
   },
   "Protector": {
     "name": "atundelmar",
@@ -2040,10 +2040,10 @@
     "seen": 5
   },
   "Reanimate": {
-    "name": "damianjestem",
-    "slug": "damianjestem",
-    "winrate": "71.4",
-    "seen": 7
+    "name": "unknown8139",
+    "slug": "unknown8139",
+    "winrate": "100.0",
+    "seen": 4
   },
   "Reap": {
     "name": "Falterfire",
@@ -2052,16 +2052,16 @@
     "seen": 7
   },
   "Reaper Form": {
-    "name": "Plabilitop",
-    "slug": "plabilitop",
-    "winrate": "66.7",
-    "seen": 6
+    "name": "Phoenixabe",
+    "slug": "phoenixabe",
+    "winrate": "75.0",
+    "seen": 4
   },
   "Reave": {
-    "name": "unknown6455",
-    "slug": "unknown6455",
-    "winrate": "60.0",
-    "seen": 5
+    "name": "Phoenixabe",
+    "slug": "phoenixabe",
+    "winrate": "57.1",
+    "seen": 7
   },
   "Right Hand Hand": {
     "name": "SnekNet",
@@ -2082,10 +2082,10 @@
     "seen": 8
   },
   "Sculpting Strike": {
-    "name": "unknown6455",
-    "slug": "unknown6455",
-    "winrate": "66.7",
-    "seen": 3
+    "name": "unknown8139",
+    "slug": "unknown8139",
+    "winrate": "75.0",
+    "seen": 4
   },
   "Seance": {
     "name": "SnekNet",
@@ -2094,10 +2094,10 @@
     "seen": 2
   },
   "Sentry Mode": {
-    "name": "Girsia",
-    "slug": "girsia",
-    "winrate": "100.0",
-    "seen": 3
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "83.3",
+    "seen": 6
   },
   "Severance": {
     "name": "Dead3y3",
@@ -2136,10 +2136,10 @@
     "seen": 3
   },
   "Soul Storm": {
-    "name": "edingerale",
-    "slug": "edingerale",
+    "name": "Phoenixabe",
+    "slug": "phoenixabe",
     "winrate": "100.0",
-    "seen": 2
+    "seen": 4
   },
   "Sow": {
     "name": "unknown7832",
@@ -2346,10 +2346,10 @@
     "seen": 4
   },
   "Crescent Spear": {
-    "name": "Girsia",
-    "slug": "girsia",
-    "winrate": "66.7",
-    "seen": 6
+    "name": "Stinkalot13",
+    "slug": "stinkalot13",
+    "winrate": "60.0",
+    "seen": 10
   },
   "Crush Under": {
     "name": "Falterfire",
@@ -2484,10 +2484,10 @@
     "seen": 2
   },
   "Kingly Punch": {
-    "name": "Ethan4D",
-    "slug": "ethan4d",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "1nfern0",
+    "slug": "1nfern0",
+    "winrate": "50.0",
+    "seen": 6
   },
   "Knockout Blow": {
     "name": "Plabilitop",
@@ -2496,10 +2496,10 @@
     "seen": 2
   },
   "Know Thy Place": {
-    "name": "Stinkalot13",
-    "slug": "stinkalot13",
-    "winrate": "100.0",
-    "seen": 3
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "75.0",
+    "seen": 8
   },
   "Largesse": {
     "name": "Stinkalot13",
@@ -2676,10 +2676,10 @@
     "seen": 8
   },
   "Stardust": {
-    "name": "Log",
-    "slug": "log",
-    "winrate": "100.0",
-    "seen": 2
+    "name": "SnekNet",
+    "slug": "sneknet",
+    "winrate": "66.7",
+    "seen": 6
   },
   "Summon Forth": {
     "name": "Falterfire",
@@ -2766,10 +2766,10 @@
     "seen": 9
   },
   "Adrenaline": {
-    "name": "Log",
-    "slug": "log",
+    "name": "unknown8139",
+    "slug": "unknown8139",
     "winrate": "100.0",
-    "seen": 3
+    "seen": 5
   },
   "Afterimage": {
     "name": "Falterfire",
@@ -2790,16 +2790,16 @@
     "seen": 4
   },
   "Backflip": {
-    "name": "Ethan4D",
-    "slug": "ethan4d",
-    "winrate": "83.3",
+    "name": "1nfern0",
+    "slug": "1nfern0",
+    "winrate": "100.0",
     "seen": 6
   },
   "Backstab": {
-    "name": "guelch",
-    "slug": "guelch",
+    "name": "1nfern0",
+    "slug": "1nfern0",
     "winrate": "100.0",
-    "seen": 2
+    "seen": 4
   },
   "Blade Dance": {
     "name": "Girsia",
@@ -2904,10 +2904,10 @@
     "seen": 2
   },
   "Envenom": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "1nfern0",
+    "slug": "1nfern0",
     "winrate": "100.0",
-    "seen": 2
+    "seen": 3
   },
   "Escape Plan": {
     "name": "0_tripwire_ 0",
@@ -2934,10 +2934,10 @@
     "seen": 3
   },
   "Finisher": {
-    "name": "Shane_in_the_Back",
-    "slug": "shane_in_the_back",
-    "winrate": "100.0",
-    "seen": 2
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "71.4",
+    "seen": 7
   },
   "Flanking": {
     "name": "Shane_in_the_Back",
@@ -2970,15 +2970,15 @@
     "seen": 9
   },
   "Grand Finale": {
-    "name": "Ethan4D",
-    "slug": "ethan4d",
+    "name": "1nfern0",
+    "slug": "1nfern0",
     "winrate": "100.0",
     "seen": 1
   },
   "Hand Trick": {
-    "name": "Ethan4D",
-    "slug": "ethan4d",
-    "winrate": "66.7",
+    "name": "1nfern0",
+    "slug": "1nfern0",
+    "winrate": "100.0",
     "seen": 3
   },
   "Haze": {
@@ -2994,16 +2994,16 @@
     "seen": 4
   },
   "Infinite Blades": {
-    "name": "atundelmar",
-    "slug": "atundelmar",
-    "winrate": "83.3",
-    "seen": 6
+    "name": "1nfern0",
+    "slug": "1nfern0",
+    "winrate": "85.7",
+    "seen": 7
   },
   "Knife Trap": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "88.9",
-    "seen": 9
+    "name": "1nfern0",
+    "slug": "1nfern0",
+    "winrate": "100.0",
+    "seen": 6
   },
   "Leading Strike": {
     "name": "Girsia",
@@ -3084,10 +3084,10 @@
     "seen": 5
   },
   "Pinpoint": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "71.4",
-    "seen": 14
+    "name": "Phoenixabe",
+    "slug": "phoenixabe",
+    "winrate": "100.0",
+    "seen": 3
   },
   "Poisoned Stab": {
     "name": "Falterfire",
@@ -3126,10 +3126,10 @@
     "seen": 3
   },
   "Ricochet": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "100.0",
-    "seen": 3
+    "name": "1nfern0",
+    "slug": "1nfern0",
+    "winrate": "85.7",
+    "seen": 7
   },
   "Serpent Form": {
     "name": "Girsia",
@@ -3180,10 +3180,10 @@
     "seen": 4
   },
   "Storm of Steel": {
-    "name": "SnekNet",
-    "slug": "sneknet",
+    "name": "1nfern0",
+    "slug": "1nfern0",
     "winrate": "100.0",
-    "seen": 2
+    "seen": 3
   },
   "Strangle": {
     "name": "0_tripwire_ 0",
@@ -3198,8 +3198,8 @@
     "seen": 3
   },
   "Suppress": {
-    "name": "Girsia",
-    "slug": "girsia",
+    "name": "Phoenixabe",
+    "slug": "phoenixabe",
     "winrate": "100.0",
     "seen": 2
   },

@@ -64,7 +64,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/users/">users</a> / 0_tripwire_ 0</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-15T01:10:07.793Z">April 14, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-15T17:31:56.828Z">April 15, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -270,11 +270,6 @@
                     </li>
                 
                     <li>
-                        <a href="/cards/nostalgia/" style="color: var(--text); text-decoration: underline;">Nostalgia</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
                         <a href="/cards/prowess/" style="color: var(--text); text-decoration: underline;">Prowess</a> 
                         <span style="color: #888;">(63.2% 19 runs)</span>
                     </li>
@@ -340,33 +335,13 @@
                     </li>
                 
                     <li>
-                        <a href="/cards/wish/" style="color: var(--text); text-decoration: underline;">Wish</a> 
-                        <span style="color: #888;">(75.0% 4 runs)</span>
-                    </li>
-                
-                    <li>
                         <a href="/cards/ashen-strike/" style="color: var(--color-ironclad); text-decoration: underline;">Ashen Strike</a> 
                         <span style="color: #888;">(66.7% 6 runs)</span>
                     </li>
                 
                     <li>
-                        <a href="/cards/corruption/" style="color: var(--color-ironclad); text-decoration: underline;">Corruption</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
                         <a href="/cards/dismantle/" style="color: var(--color-ironclad); text-decoration: underline;">Dismantle</a> 
                         <span style="color: #888;">(71.4% 7 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/fight-me/" style="color: var(--color-ironclad); text-decoration: underline;">Fight Me!</a> 
-                        <span style="color: #888;">(66.7% 3 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/twin-strike/" style="color: var(--color-ironclad); text-decoration: underline;">Twin Strike</a> 
-                        <span style="color: #888;">(55.6% 9 runs)</span>
                     </li>
                 
                     <li>
@@ -376,6 +351,11 @@
                 
                     <li>
                         <a href="/cards/legion-of-bone/" style="color: var(--color-necrobinder); text-decoration: underline;">Legion of Bone</a> 
+                        <span style="color: #888;">(83.3% 6 runs)</span>
+                    </li>
+                
+                    <li>
+                        <a href="/cards/sentry-mode/" style="color: var(--color-necrobinder); text-decoration: underline;">Sentry Mode</a> 
                         <span style="color: #888;">(83.3% 6 runs)</span>
                     </li>
                 
@@ -492,16 +472,6 @@
                     <li>
                         <a href="/cards/expose/" style="color: var(--color-silent); text-decoration: underline;">Expose</a> 
                         <span style="color: #888;">(81.0% 21 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/knife-trap/" style="color: var(--color-silent); text-decoration: underline;">Knife Trap</a> 
-                        <span style="color: #888;">(88.9% 9 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/pinpoint/" style="color: var(--color-silent); text-decoration: underline;">Pinpoint</a> 
-                        <span style="color: #888;">(71.4% 14 runs)</span>
                     </li>
                 
                     <li>
@@ -9378,7 +9348,7 @@
             const buildFilter = document.getElementById('build-filter');
             const ascFilter = document.getElementById('ascension-filter');
             const runCards = document.querySelectorAll('.run-record');
-            const globalWR = 27.57544224765869;
+            const globalWR = 25.587248322147648;
 
             function updateFilters() {
                 const buildVal = buildFilter.value;
