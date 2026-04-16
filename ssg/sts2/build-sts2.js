@@ -1247,11 +1247,9 @@ async function build() {
         }).join('');
 
         const contributorsSection = users.length > 0 ? `
-            <h2 style="margin-top: 40px; border-bottom: 1px solid #333; padding-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+            <h2 style="margin-top: 40px; border-bottom: 1px solid #333; padding-bottom: 10px; display: flex; align-items: baseline; gap: 10px;">
                 Contributors
-                <a href="/contribute.html" title="How to Contribute" aria-label="How to Contribute" style="color: #666; text-decoration: none; display: flex; align-items: center;">
-                    <span class="material-symbols-outlined" style="font-size: 20px;">info</span>
-                </a>
+                <a href="https://spire2stats.com/contribute.html" style="color: #666; text-decoration: underline; font-size: 0.85rem; font-weight: normal;">(How to Contribute)</a>
             </h2>
             <div class="grid">${contributorLinks}</div>` : '';
 
