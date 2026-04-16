@@ -64,7 +64,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/users/">users</a> / falterfire</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-16T03:16:53.345Z">April 15, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-16T18:14:42.686Z">April 16, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -290,11 +290,6 @@
                     </li>
                 
                     <li>
-                        <a href="/cards/boot-sequence/" style="color: var(--color-defect); text-decoration: underline;">Boot Sequence</a> 
-                        <span style="color: #888;">(66.7% 6 runs)</span>
-                    </li>
-                
-                    <li>
                         <a href="/cards/buffer/" style="color: var(--color-defect); text-decoration: underline;">Buffer</a> 
                         <span style="color: #888;">(100.0% 3 runs)</span>
                     </li>
@@ -335,17 +330,17 @@
                     </li>
                 
                     <li>
-                        <a href="/cards/focused-strike/" style="color: var(--color-defect); text-decoration: underline;">Focused Strike</a> 
-                        <span style="color: #888;">(66.7% 3 runs)</span>
-                    </li>
-                
-                    <li>
                         <a href="/cards/genetic-algorithm/" style="color: var(--color-defect); text-decoration: underline;">Genetic Algorithm</a> 
                         <span style="color: #888;">(100.0% 3 runs)</span>
                     </li>
                 
                     <li>
                         <a href="/cards/gunk-up/" style="color: var(--color-defect); text-decoration: underline;">Gunk Up</a> 
+                        <span style="color: #888;">(100.0% 2 runs)</span>
+                    </li>
+                
+                    <li>
+                        <a href="/cards/hotfix/" style="color: var(--color-defect); text-decoration: underline;">Hotfix</a> 
                         <span style="color: #888;">(100.0% 2 runs)</span>
                     </li>
                 
@@ -422,11 +417,6 @@
                     <li>
                         <a href="/cards/bully/" style="color: var(--color-ironclad); text-decoration: underline;">Bully</a> 
                         <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/grapple/" style="color: var(--color-ironclad); text-decoration: underline;">Grapple</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
                     </li>
                 
                     <li>
@@ -625,16 +615,6 @@
                     </li>
                 
                     <li>
-                        <a href="/cards/gather-light/" style="color: var(--color-regent); text-decoration: underline;">Gather Light</a> 
-                        <span style="color: #888;">(77.8% 9 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/glimmer/" style="color: var(--color-regent); text-decoration: underline;">Glimmer</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
                         <a href="/cards/glitterstream/" style="color: var(--color-regent); text-decoration: underline;">Glitterstream</a> 
                         <span style="color: #888;">(100.0% 9 runs)</span>
                     </li>
@@ -670,11 +650,6 @@
                     </li>
                 
                     <li>
-                        <a href="/cards/sword-sage/" style="color: var(--color-regent); text-decoration: underline;">Sword Sage</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
                         <a href="/cards/venerate/" style="color: var(--color-regent); text-decoration: underline;">Venerate</a> 
                         <span style="color: #888;">(83.3% 12 runs)</span>
                     </li>
@@ -702,11 +677,6 @@
                     <li>
                         <a href="/cards/bouncing-flask/" style="color: var(--color-silent); text-decoration: underline;">Bouncing Flask</a> 
                         <span style="color: #888;">(100.0% 3 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/burst/" style="color: var(--color-silent); text-decoration: underline;">Burst</a> 
-                        <span style="color: #888;">(100.0% 4 runs)</span>
                     </li>
                 
                     <li>
@@ -3034,7 +3004,7 @@
             const buildFilter = document.getElementById('build-filter');
             const ascFilter = document.getElementById('ascension-filter');
             const runCards = document.querySelectorAll('.run-record');
-            const globalWR = 25.600894354387925;
+            const globalWR = 26.30010834236186;
 
             function updateFilters() {
                 const buildVal = buildFilter.value;
