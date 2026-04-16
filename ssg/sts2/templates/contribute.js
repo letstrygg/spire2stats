@@ -31,6 +31,7 @@ export function contributeTemplate() {
                 <ul style="font-size: 0.9rem; color: #888; line-height: 1.6; margin-top: 10px;">
                     <li><strong>Discord:</strong> Join our <a href="https://discord.gg/wMEWQut72X" target="_blank" style="color: #448aff;">Discord Community</a>.</li>
                     <li><strong>Email:</strong> Contact me at <a href="mailto:letstrygg@gmail.com" style="color: #448aff;">letstrygg@gmail.com</a>.</li>
+                    <li><strong>Reddit:</strong> reddit.com/r/<a href="https://www.reddit.com/r/sts2/" style="color: #448aff;">sts2</a>.</li>
                 </ul>
             </section>
         </div>
