@@ -370,11 +370,11 @@ export function wrapLayout(title, content, breadcrumbs = [], description = "", h
     <meta property="og:title" content="${displayTitle}">
     <meta property="og:description" content="${description}">
     ${ogImage ? `<meta property="og:image" content="https://spire2stats.com${ogImage}">` : ''}
-    <meta property="twitter:card" content="${ogImage ? 'summary_large_image' : 'summary'}">
-    ${canonicalUrl ? `<meta property="twitter:url" content="${canonicalUrl}">` : ''}
-    <meta property="twitter:title" content="${displayTitle}">
-    <meta property="twitter:description" content="${description}">
-    ${ogImage ? `<meta property="twitter:image" content="https://spire2stats.com${ogImage}">` : ''}`;
+    <meta name="twitter:card" content="${ogImage ? 'summary_large_image' : 'summary'}">
+    ${canonicalUrl ? `<meta name="twitter:url" content="${canonicalUrl}">` : ''}
+    <meta name="twitter:title" content="${displayTitle}">
+    <meta name="twitter:description" content="${description}">
+    ${ogImage ? `<meta name="twitter:image" content="https://spire2stats.com${ogImage}">` : ''}`;
 
     const breadcrumbJsonLd = breadcrumbs.length > 0 ? (() => {
         const listItems = [
