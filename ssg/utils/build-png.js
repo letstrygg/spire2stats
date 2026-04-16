@@ -6,6 +6,7 @@ import { Resvg } from '@resvg/resvg-js';
 import { PATHS } from '../sts2/paths.js';
 import { isRunByUser, normalizeId } from '../sts2/helpers.js';
 import { getUserSummaryTemplate } from './templates/build-png/user-png.js';
+import { getUserThumbnailTemplate } from './templates/build-png/user-thumbnail.js';
 
 /**
  * Slay the Spire 2 - PNG Image Generator
@@ -38,16 +39,16 @@ function getBase64Image(localPath) {
 /**
  * Shared rendering logic
  */
-async function renderPng(template, outputPath, fonts) {
+async function renderPng(template, outputPath, fonts, width = 1200, height = 630) {
     const svg = await satori(template, {
-        width: 1200,
-        height: 630,
+        width: width,
+        height: height,
         fonts: fonts
     });
 
     const resvg = new Resvg(svg, {
         background: '#111',
-        fitTo: { mode: 'width', value: 1200 }
+        fitTo: { mode: 'width', value: width }
     });
     const pngData = resvg.render();
     const pngBuffer = pngData.asPng();
@@ -85,12 +86,19 @@ async function buildPngs() {
             const userRuns = allRuns.filter(r => isRunByUser(r, user));
             if (userRuns.length === 0) continue;
 
-            console.log(`📸 Generating summary for: ${user.display_name}...`);
-            const template = getUserSummaryTemplate(user, userRuns, charLookup, swordIcon);
-            const outputPath = path.join(PATHS.WEB_ROOT, 'users', user.slug, 'summary.png');
+            console.log(`📸 Generating summary images for: ${user.display_name}...`);
             
-            await renderPng(template, outputPath, fonts);
-            console.log(`✅ Saved: ${outputPath}`);
+            // 1. Standard OG Summary (1200x630)
+            const summaryTemplate = getUserSummaryTemplate(user, userRuns, charLookup, swordIcon);
+            const summaryPath = path.join(PATHS.WEB_ROOT, 'users', user.slug, 'summary.png');
+            await renderPng(summaryTemplate, summaryPath, fonts, 1200, 630);
+
+            // 2. Google Thumbnail (1000x1000)
+            const thumbTemplate = getUserThumbnailTemplate(user, userRuns, swordIcon);
+            const thumbPath = path.join(PATHS.WEB_ROOT, 'users', user.slug, 'thumbnail.png');
+            await renderPng(thumbTemplate, thumbPath, fonts, 1000, 1000);
+            
+            console.log(`✅ Saved: ${user.slug} image set`);
         }
 
         console.log('✨ PNG build complete!');

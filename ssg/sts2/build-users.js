@@ -333,6 +333,19 @@ async function build() {
                 </div>`;
             }
 
+            const userJsonLd = JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Person",
+                "name": user.display_name,
+                "url": `https://spire2stats.com/users/${user.slug}/`,
+                "image": [
+                    `https://spire2stats.com/users/${user.slug}/thumbnail.png`,
+                    `https://spire2stats.com/users/${user.slug}/summary.png`
+                ]
+            });
+
+            const headExtras = `<meta name="robots" content="max-image-preview:large"><script type="application/ld+json">${userJsonLd}</script>`;
+
             const indexHtml = wrapLayout(
                 user.display_name,
                 `
@@ -349,7 +362,7 @@ async function build() {
                 ${generateFilterScript(globalWinRate)}`,
                 [{ name: 'Users', url: '/users/' }, { name: user.display_name, url: '' }],
                 `${user.display_name} ${userStats.formatted}% winrate across ${userStats.seen} runs on Slay the Spire 2.`,
-                "",
+                headExtras,
                 `/users/${user.slug}/`,
                 `/users/${user.slug}/summary.png`
             );
