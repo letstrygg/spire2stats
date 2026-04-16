@@ -64,7 +64,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/users/">users</a> / sneknet</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-16T18:14:42.686Z">April 16, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-16T21:31:06.256Z">April 16, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -255,11 +255,6 @@
                     <ul style="display: grid; grid-template-columns: repeat(auto-fit, minmax(225px, 1fr)); font-size: 0.85rem;">
                         
                     <li>
-                        <a href="/cards/beat-down/" style="color: var(--text); text-decoration: underline;">Beat Down</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
                         <a href="/cards/mayhem/" style="color: var(--text); text-decoration: underline;">Mayhem</a> 
                         <span style="color: #888;">(100.0% 3 runs)</span>
                     </li>
@@ -341,16 +336,6 @@
                 
                     <li>
                         <a href="/cards/foregone-conclusion/" style="color: var(--color-regent); text-decoration: underline;">Foregone Conclusion</a> 
-                        <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/heirloom-hammer/" style="color: var(--color-regent); text-decoration: underline;">Heirloom Hammer</a> 
-                        <span style="color: #888;">(100.0% 1 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/pillar-of-creation/" style="color: var(--color-regent); text-decoration: underline;">Pillar of Creation</a> 
                         <span style="color: #888;">(100.0% 2 runs)</span>
                     </li>
                 
@@ -1922,7 +1907,7 @@
             const buildFilter = document.getElementById('build-filter');
             const ascFilter = document.getElementById('ascension-filter');
             const runCards = document.querySelectorAll('.run-record');
-            const globalWR = 26.30010834236186;
+            const globalWR = 26.335403726708073;
 
             function updateFilters() {
                 const buildVal = buildFilter.value;
