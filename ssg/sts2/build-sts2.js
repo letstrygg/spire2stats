@@ -385,7 +385,8 @@ async function buildEvents(events, runStats, sitemap) {
     const eventsSeen = runStats.uniqueEventsSeen;
     const eventLinks = events.map(e => {
         const slug = slugify(e.name);
-        const stats = getItemStats(runStats.eventStats[e.event_id], runStats.globalWinRate);
+        const cleanId = normalizeId(e.event_id);
+        const stats = getItemStats(runStats.eventStats[cleanId], runStats.globalWinRate);
         return generateCardItemHtml(`/events/${slug}/`, e.name, stats);
     }).join('');
 
