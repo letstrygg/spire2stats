@@ -13,7 +13,7 @@ dotenv.config({ path: 'C:\\GitHub\\.env' });
 
 const supabase = createClient(
     process.env.SUPABASE_URL,
-    process.env.SUPABASE_ANON_KEY
+    process.env.SUPABASE_SERVICE_KEY
 );
 
 const db = new sqlite3.Database(PATHS.DATABASE);
@@ -62,6 +62,25 @@ async function run() {
         }
 
         console.log(`🔍 Found ${remoteRuns.length} video/URL links in Supabase. Syncing...`);
+
+        // 2.5 Update Supabase s2s_runs table with these video links
+        console.log(`📤 Propagating video links to s2s_runs table...`);
+        const s2sPayload = remoteRuns.map(run => ({
+            id: run.id,
+            yt_video: run.video_id,
+            ltg_url: run.ltg_videos?.url || null
+        }));
+
+        const batchSize = 100;
+        for (let i = 0; i < s2sPayload.length; i += batchSize) {
+            const batch = s2sPayload.slice(i, i + batchSize);
+            const { error: upsertError } = await supabase
+                .from('s2s_runs')
+                .upsert(batch, { onConflict: 'id' });
+            
+            if (upsertError) console.error(`⚠️ Failed to sync batch to s2s_runs:`, upsertError.message);
+        }
+        console.log(`✅ Community database (s2s_runs) updated.`);
 
         // 3. Update local database
         db.serialize(() => {
