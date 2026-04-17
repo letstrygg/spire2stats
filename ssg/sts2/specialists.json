@@ -1,9 +1,9 @@
 {
   "Alchemize": {
-    "name": "BuffFinkaPLZ",
-    "slug": "bufffinkaplz",
-    "winrate": "70.0",
-    "seen": 10
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Anointed": {
     "name": "unknown7832",
@@ -90,10 +90,10 @@
     "seen": 3
   },
   "Eternal Armor": {
-    "name": "Ethan4D",
-    "slug": "ethan4d",
-    "winrate": "75.0",
-    "seen": 4
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Fasten": {
     "name": "unknown7832",
@@ -120,8 +120,8 @@
     "seen": 3
   },
   "Gang Up": {
-    "name": "Log",
-    "slug": "log",
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
     "winrate": "100.0",
     "seen": 2
   },
@@ -276,8 +276,8 @@
     "seen": 1
   },
   "Restlessness": {
-    "name": "rarelyvlolent",
-    "slug": "rarelyvlolent",
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
     "winrate": "100.0",
     "seen": 3
   },
@@ -300,10 +300,10 @@
     "seen": 2
   },
   "Secret Technique": {
-    "name": "Ethan4D",
-    "slug": "ethan4d",
-    "winrate": "60.0",
-    "seen": 5
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
+    "winrate": "100.0",
+    "seen": 1
   },
   "Secret Weapon": {
     "name": "0_tripwire_ 0",
@@ -348,10 +348,10 @@
     "seen": 3
   },
   "The Gambit": {
-    "name": "Ethan4D",
-    "slug": "ethan4d",
-    "winrate": "50.0",
-    "seen": 2
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
+    "winrate": "100.0",
+    "seen": 1
   },
   "Thinking Ahead": {
     "name": "Mrtoolshed",
@@ -414,10 +414,10 @@
     "seen": 1
   },
   "Decay": {
-    "name": "Plabilitop",
-    "slug": "plabilitop",
-    "winrate": "83.3",
-    "seen": 6
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
+    "winrate": "100.0",
+    "seen": 3
   },
   "Doubt": {
     "name": "0_tripwire_ 0",
@@ -468,16 +468,16 @@
     "seen": 2
   },
   "Regret": {
-    "name": "1nfern0",
-    "slug": "1nfern0",
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
     "winrate": "100.0",
     "seen": 2
   },
   "Shame": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "0_tripwire_ 0",
+    "slug": "0_tripwire_-0",
+    "winrate": "75.0",
+    "seen": 4
   },
   "Spore Mind": {
     "name": "unknown7832",
@@ -522,8 +522,8 @@
     "seen": 5
   },
   "Biased Cognition": {
-    "name": "unknown6455",
-    "slug": "unknown6455",
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
     "winrate": "100.0",
     "seen": 1
   },
@@ -552,22 +552,22 @@
     "seen": 7
   },
   "Capacitor": {
-    "name": "atundelmar",
-    "slug": "atundelmar",
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
+    "winrate": "85.7",
+    "seen": 7
+  },
+  "Chaos": {
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
     "winrate": "100.0",
     "seen": 2
   },
-  "Chaos": {
-    "name": "unknown7832",
-    "slug": "unknown7832",
-    "winrate": "60.0",
-    "seen": 5
-  },
   "Charge Battery": {
-    "name": "Girsia",
-    "slug": "girsia",
-    "winrate": "66.7",
-    "seen": 9
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
+    "winrate": "85.7",
+    "seen": 7
   },
   "Chill": {
     "name": "damianjestem",
@@ -576,16 +576,16 @@
     "seen": 6
   },
   "Claw": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
-    "winrate": "66.7",
-    "seen": 6
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
+    "winrate": "100.0",
+    "seen": 3
   },
   "Cold Snap": {
-    "name": "BuffFinkaPLZ",
-    "slug": "bufffinkaplz",
-    "winrate": "70.0",
-    "seen": 10
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
+    "winrate": "100.0",
+    "seen": 5
   },
   "Compact": {
     "name": "Girsia",
@@ -594,10 +594,10 @@
     "seen": 3
   },
   "Compile Driver": {
-    "name": "damianjestem",
-    "slug": "damianjestem",
-    "winrate": "66.7",
-    "seen": 3
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Consuming Shadow": {
     "name": "0_tripwire_ 0",
@@ -612,20 +612,20 @@
     "seen": 2
   },
   "Coolheaded": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
     "winrate": "80.0",
     "seen": 5
   },
   "Creative AI": {
-    "name": "shutupper",
-    "slug": "shutupper",
-    "winrate": "80.0",
-    "seen": 5
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
+    "winrate": "100.0",
+    "seen": 3
   },
   "Darkness": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
     "winrate": "100.0",
     "seen": 2
   },
@@ -642,16 +642,16 @@
     "seen": 6
   },
   "Double Energy": {
-    "name": "shutupper",
-    "slug": "shutupper",
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
     "winrate": "100.0",
-    "seen": 3
+    "seen": 4
   },
   "Dualcast": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
-    "winrate": "56.3",
-    "seen": 16
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
+    "winrate": "75.0",
+    "seen": 8
   },
   "Echo Form": {
     "name": "atundelmar",
@@ -690,16 +690,16 @@
     "seen": 2
   },
   "Focused Strike": {
-    "name": "shutupper",
-    "slug": "shutupper",
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
     "winrate": "100.0",
-    "seen": 2
+    "seen": 3
   },
   "Fusion": {
-    "name": "edingerale",
-    "slug": "edingerale",
-    "winrate": "66.7",
-    "seen": 3
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
+    "winrate": "80.0",
+    "seen": 5
   },
   "Genetic Algorithm": {
     "name": "Falterfire",
@@ -714,16 +714,16 @@
     "seen": 8
   },
   "Glasswork": {
-    "name": "BuffFinkaPLZ",
-    "slug": "bufffinkaplz",
-    "winrate": "60.0",
-    "seen": 5
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
+    "winrate": "100.0",
+    "seen": 4
   },
   "Go for the Eyes": {
-    "name": "rarelyvlolent",
-    "slug": "rarelyvlolent",
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
     "winrate": "100.0",
-    "seen": 3
+    "seen": 5
   },
   "Gunk Up": {
     "name": "Falterfire",
@@ -750,8 +750,8 @@
     "seen": 3
   },
   "Hotfix": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
     "winrate": "100.0",
     "seen": 2
   },
@@ -762,10 +762,10 @@
     "seen": 6
   },
   "Ice Lance": {
-    "name": "unknown6455",
-    "slug": "unknown6455",
-    "winrate": "80.0",
-    "seen": 5
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
+    "winrate": "100.0",
+    "seen": 3
   },
   "Ignition": {
     "name": "Stinkalot13",
@@ -774,22 +774,22 @@
     "seen": 1
   },
   "Iteration": {
-    "name": "shutupper",
-    "slug": "shutupper",
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
     "winrate": "75.0",
     "seen": 4
   },
   "Leap": {
-    "name": "unknown7832",
-    "slug": "unknown7832",
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
     "winrate": "100.0",
     "seen": 2
   },
   "Lightning Rod": {
-    "name": "letstrygg",
-    "slug": "letstrygg",
-    "winrate": "70.0",
-    "seen": 10
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
+    "winrate": "100.0",
+    "seen": 3
   },
   "Loop": {
     "name": "Falterfire",
@@ -798,20 +798,20 @@
     "seen": 8
   },
   "Machine Learning": {
-    "name": "Girsia",
-    "slug": "girsia",
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
     "winrate": "100.0",
-    "seen": 3
+    "seen": 4
   },
   "Meteor Strike": {
-    "name": "unknown8139",
-    "slug": "unknown8139",
-    "winrate": "50.0",
-    "seen": 6
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "100.0",
+    "seen": 1
   },
   "Modded": {
-    "name": "unknown7832",
-    "slug": "unknown7832",
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
     "winrate": "100.0",
     "seen": 2
   },
@@ -840,10 +840,10 @@
     "seen": 6
   },
   "Quadcast": {
-    "name": "BuffFinkaPLZ",
-    "slug": "bufffinkaplz",
-    "winrate": "50.0",
-    "seen": 4
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
+    "winrate": "100.0",
+    "seen": 1
   },
   "Rainbow": {
     "name": "letstrygg",
@@ -936,28 +936,28 @@
     "seen": 8
   },
   "Sunder": {
-    "name": "Girsia",
-    "slug": "girsia",
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
     "winrate": "100.0",
     "seen": 2
   },
   "Supercritical": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
     "winrate": "100.0",
     "seen": 2
   },
   "Sweeping Beam": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "66.7",
-    "seen": 3
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
+    "winrate": "100.0",
+    "seen": 6
   },
   "Synchronize": {
-    "name": "unknown6455",
-    "slug": "unknown6455",
-    "winrate": "62.5",
-    "seen": 8
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Synthesis": {
     "name": "unknown6455",
@@ -1008,16 +1008,16 @@
     "seen": 5
   },
   "White Noise": {
-    "name": "Girsia",
-    "slug": "girsia",
-    "winrate": "75.0",
-    "seen": 4
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
+    "winrate": "100.0",
+    "seen": 5
   },
   "Zap": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "52.4",
-    "seen": 21
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
+    "winrate": "75.0",
+    "seen": 8
   },
   "Apotheosis": {
     "name": "SnekNet",
@@ -1068,8 +1068,8 @@
     "seen": 3
   },
   "Enlightenment": {
-    "name": "Phoenixabe",
-    "slug": "phoenixabe",
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
     "winrate": "100.0",
     "seen": 1
   },
@@ -1080,10 +1080,10 @@
     "seen": 1
   },
   "Exterminate": {
-    "name": "SnekNet",
-    "slug": "sneknet",
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
     "winrate": "100.0",
-    "seen": 3
+    "seen": 4
   },
   "Feeding Frenzy": {
     "name": "SnekNet",
@@ -1110,10 +1110,10 @@
     "seen": 2
   },
   "Metamorphosis": {
-    "name": "unknown7832",
-    "slug": "unknown7832",
-    "winrate": "70.0",
-    "seen": 10
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
+    "winrate": "100.0",
+    "seen": 4
   },
   "Neow's Fury": {
     "name": "Falterfire",
@@ -1662,8 +1662,8 @@
     "seen": 12
   },
   "Unmovable": {
-    "name": "unknown7832",
-    "slug": "unknown7832",
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
     "winrate": "100.0",
     "seen": 4
   },
@@ -1884,8 +1884,8 @@
     "seen": 3
   },
   "Forbidden Grimoire": {
-    "name": "SnekNet",
-    "slug": "sneknet",
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
     "winrate": "100.0",
     "seen": 1
   },
@@ -2370,10 +2370,10 @@
     "seen": 5
   },
   "Dying Star": {
-    "name": "edingerale",
-    "slug": "edingerale",
-    "winrate": "80.0",
-    "seen": 5
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
+    "winrate": "100.0",
+    "seen": 3
   },
   "Falling Star": {
     "name": "Falterfire",
@@ -2484,10 +2484,10 @@
     "seen": 2
   },
   "Kingly Punch": {
-    "name": "1nfern0",
-    "slug": "1nfern0",
-    "winrate": "50.0",
-    "seen": 6
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Knockout Blow": {
     "name": "Plabilitop",
@@ -2520,10 +2520,10 @@
     "seen": 4
   },
   "Manifest Authority": {
-    "name": "Girsia",
-    "slug": "girsia",
-    "winrate": "71.4",
-    "seen": 7
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
+    "winrate": "100.0",
+    "seen": 4
   },
   "Meteor Shower": {
     "name": "rarelyvlolent",
@@ -2754,10 +2754,10 @@
     "seen": 4
   },
   "Accuracy": {
-    "name": "atundelmar",
-    "slug": "atundelmar",
-    "winrate": "75.0",
-    "seen": 8
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
+    "winrate": "100.0",
+    "seen": 3
   },
   "Acrobatics": {
     "name": "Falterfire",
@@ -2868,8 +2868,8 @@
     "seen": 14
   },
   "Dagger Throw": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
     "winrate": "83.3",
     "seen": 6
   },
@@ -2934,10 +2934,10 @@
     "seen": 3
   },
   "Finisher": {
-    "name": "Girsia",
-    "slug": "girsia",
-    "winrate": "71.4",
-    "seen": 7
+    "name": "Shane_in_the_Back",
+    "slug": "shane_in_the_back",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Flanking": {
     "name": "Shane_in_the_Back",
@@ -2970,8 +2970,8 @@
     "seen": 9
   },
   "Grand Finale": {
-    "name": "1nfern0",
-    "slug": "1nfern0",
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
     "winrate": "100.0",
     "seen": 1
   },
@@ -3024,10 +3024,10 @@
     "seen": 2
   },
   "Master Planner": {
-    "name": "unknown6455",
-    "slug": "unknown6455",
-    "winrate": "71.4",
-    "seen": 7
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Memento Mori": {
     "name": "damianjestem",
@@ -3144,10 +3144,10 @@
     "seen": 4
   },
   "Shadowmeld": {
-    "name": "Ethan4D",
-    "slug": "ethan4d",
-    "winrate": "100.0",
-    "seen": 2
+    "name": "shutupper",
+    "slug": "shutupper",
+    "winrate": "80.0",
+    "seen": 5
   },
   "Skewer": {
     "name": "SnekNet",
