@@ -644,15 +644,28 @@ async function buildVersions(runStats, sitemap) {
 
     // Index Page
     sitemap.add('/versions/');
-    const versionLinks = allVersionKeys.map(v => {
+
+    const majorKeys = allVersionKeys.filter(v => v.split('.').length === 2);
+    const minorKeys = allVersionKeys.filter(v => v.split('.').length === 3);
+
+    const majorLinks = majorKeys.map(v => {
         const slug = slugify(v);
-        const stats = getItemStats(runStats.versionStats[v] || runStats.majorVersionStats[v], runStats.globalWinRate);
-        const isMajor = v.split('.').length === 2;
-        return generateCardItemHtml(`/versions/${slug}/`, v, stats, isMajor ? 'major-version' : '');
+        const stats = getItemStats(runStats.majorVersionStats[v], runStats.globalWinRate);
+        return generateCardItemHtml(`/versions/${slug}/`, v, stats, 'major-version');
+    }).join('');
+
+    const minorLinks = minorKeys.map(v => {
+        const slug = slugify(v);
+        const stats = getItemStats(runStats.versionStats[v], runStats.globalWinRate);
+        return generateCardItemHtml(`/versions/${slug}/`, v, stats);
     }).join('');
 
     const indexDesc = `Performance statistics and run history for Slay the Spire 2 build versions.`;
-    const indexHtml = wrapLayout('Versions', `${generateSummaryPanel(runStats, "Versions", allVersionKeys.length, allVersionKeys.length)}<div class="grid">${versionLinks}</div>`, [{ name: 'versions', url: '' }], indexDesc, generateCollectionJsonLd(`Versions`, indexDesc));
+    const indexHtml = wrapLayout('Versions', `
+        ${generateSummaryPanel(runStats, "Versions", majorKeys.length, majorKeys.length)}
+        <div class="grid">${majorLinks}</div>
+        <h3 style="margin-top: 40px; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px;">Specific Build Versions</h3>
+        <div class="grid">${minorLinks}</div>`, [{ name: 'versions', url: '' }], indexDesc, generateCollectionJsonLd(`Versions`, indexDesc));
     fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
 }
 
