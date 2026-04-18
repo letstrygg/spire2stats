@@ -153,10 +153,15 @@ export function settingsTemplate() {
             saveStatus.textContent = 'Saving...';
             saveStatus.style.color = 'var(--gray)';
 
-            const { error } = await supabase.from('ltg_profiles').update({ username: newName, slug: newSlug }).eq('user_id', currentUserId);
+            // Update profile tables and historical runs in Supabase
+            const { error: error1 } = await supabase.from('ltg_profiles').update({ username: newName, slug: newSlug }).eq('user_id', currentUserId);
+            const { error: error2 } = await supabase.from('s2s_users').update({ display_name: newName, slug: newSlug }).eq('supabase_user_id', currentUserId);
+            const { error: error3 } = await supabase.from('s2s_runs').update({ username: newName }).eq('supabase_user_id', currentUserId);
 
-            if (error) {
-                saveStatus.textContent = 'Error: ' + error.message;
+            const anyError = error1 || error2 || error3;
+
+            if (anyError) {
+                saveStatus.textContent = 'Error: ' + anyError.message;
                 saveStatus.style.color = 'var(--red)';
                 saveBtn.disabled = false;
             } else {

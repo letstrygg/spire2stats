@@ -31,6 +31,66 @@ async function run() {
         // 1. Ensure local schema has supabase_user_id columns
         await ensureColumns();
 
+        // 1.5 Sync User Metadata (Display Name & Slugs) from Supabase source of truth
+        console.log('📡 Syncing user metadata from Supabase ltg_profiles...');
+        const { data: remoteUsers, error: userSyncError } = await supabase
+            .from('ltg_profiles')
+            .select('user_id, username, slug');
+        
+        if (userSyncError) {
+            console.warn('⚠️ User metadata sync failed:', userSyncError.message);
+        } else if (remoteUsers) {
+            for (const u of remoteUsers) {
+                try {
+                    // 1. Clean up duplicate local records for this Supabase ID
+                    // If multiple rows share this UUID, keep only the one with the highest internal ID
+                    const localRecords = await query("SELECT id, display_name, slug FROM users WHERE supabase_user_id = ? ORDER BY id DESC", [u.user_id]);
+                    
+                    if (localRecords.length > 1) {
+                        const idsToDelete = localRecords.slice(1).map(r => r.id);
+                        console.log(`  🗑️ Removing ${idsToDelete.length} duplicate local user records for ${u.username} (${u.user_id})`);
+                        await query(`DELETE FROM users WHERE id IN (${idsToDelete.join(',')})`);
+                    }
+
+                    // 2. Check for "Stale" blockers (rows with the target slug but no UUID or a different one)
+                    const blocker = (await query("SELECT id, supabase_user_id FROM users WHERE slug = ?", [u.slug]))[0];
+                    if (blocker && blocker.supabase_user_id !== u.user_id) {
+                        if (!blocker.supabase_user_id) {
+                            console.log(`  🗑️ Removing stale legacy record (ID: ${blocker.id}) using slug "${u.slug}"`);
+                            await query("DELETE FROM users WHERE id = ?", [blocker.id]);
+                        } else {
+                            console.warn(`  ⚠️ Slug collision: "${u.slug}" is claimed by Supabase ID ${u.user_id} but used locally by ${blocker.supabase_user_id}. Skipping sync for this user.`);
+                            continue;
+                        }
+                    }
+
+                    // Find current local state for this Supabase ID
+                    const localUser = localRecords[0];
+                    
+                    if (localUser) {
+                        // Only log and update if there's an actual change
+                        if (localUser.display_name !== u.username || localUser.slug !== u.slug) {
+                            console.log(`  👤 Updating user [${u.user_id}]: "${localUser.display_name}" (${localUser.slug}) -> "${u.username}" (${u.slug})`);
+                            await query("UPDATE users SET display_name = ?, slug = ? WHERE supabase_user_id = ?", 
+                                [u.username, u.slug, u.user_id]);
+                        }
+                        
+                        // Always sync username in the runs table to catch any stragglers
+                        await query("UPDATE runs SET username = ? WHERE supabase_user_id = ?", [u.username, u.user_id]);
+                    }
+                } catch (err) {
+                    if (err.message.includes('UNIQUE constraint failed: users.slug')) {
+                        const blocker = (await query("SELECT display_name, supabase_user_id FROM users WHERE slug = ?", [u.slug]))[0];
+                        console.error(`❌ Conflict: Cannot update "${u.username}" to slug "${u.slug}" because that slug is already taken by local user "${blocker?.display_name || 'unknown'}" (ID: ${blocker?.supabase_user_id || 'null'}).`);
+                    } else {
+                        console.error(`❌ Error syncing metadata for user ${u.username} (${u.user_id}):`, err.message);
+                    }
+                    throw err; // Stop execution so the problem can be addressed
+                }
+            }
+            console.log(`✅ Synced ${remoteUsers.length} user profiles and associated run usernames locally.`);
+        }
+
         // 2. Fetch runs from s2s_runs_todo
         const { data: todoRuns, error: fetchError } = await supabase
             .from('s2s_runs_todo')
