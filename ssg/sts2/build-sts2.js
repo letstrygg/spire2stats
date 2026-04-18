@@ -888,7 +888,7 @@ async function buildEncounters(encounters, runStats, sitemap) {
         const stats = runStats.encounterStats[cleanId] || { encountered: 0, kills: 0, damage_taken: 0 };
         const avgDmg = stats.encountered > 0 ? stats.damage_taken / stats.encountered : 0;
         const dmgPercent = maxAvgDmg > 0 ? (avgDmg / maxAvgDmg) * 100 : 0;
-        const killDisplay = stats.kills > 0 ? `<div style="color: var(--red); font-size: 1.5rem; font-weight: bold;">${stats.kills} Kills</div>` : '';
+        const killDisplay = stats.kills > 0 ? `<div style="color: var(--red); font-size: 1.5rem; font-weight: bold; white-space: nowrap;">${stats.kills} Kills</div>` : '';
         const winBar = stats.encountered > 0 ? `<div class="win-bar" style="background: linear-gradient(to right, var(--red) ${dmgPercent}%, transparent ${dmgPercent}%);"></div>` : '';
 
         return `
@@ -898,7 +898,7 @@ async function buildEncounters(encounters, runStats, sitemap) {
                 <div style="color: #888; font-size: 0.75rem;">Encounters ${stats.encountered}</div>
                 <div style="color: var(--red); font-size: 0.75rem;">Avg Dmg: ${avgDmg.toFixed(1)}</div>
             </div>
-            <div class="card-stats">
+            <div class="card-stats" style="flex-shrink: 0;">
                 ${killDisplay}
             </div>
             ${winBar}
@@ -999,7 +999,7 @@ async function buildMonsters(monsters, runStats, sitemap) {
             <div class="card-info">
                 <span class="card-name">${m.name}</span>
                 <div style="color: ${typeColor}; font-size: 0.65rem; text-transform: uppercase; font-weight: bold; margin-bottom: 2px;">${m.type || 'Monster'}</div>
-                <div style="color: #888; font-size: 0.75rem;">Encounters ${stats.encountered}</div>
+                <div style="color: #888; font-size: 0.75rem;">Encountered ${stats.encountered} times</div>
                 <div style="color: #ff4b4b; font-size: 0.75rem;">Avg Dmg: ${avgDmg.toFixed(1)}</div>
             </div>
             <div class="card-stats" style="display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; flex-shrink: 0;">
