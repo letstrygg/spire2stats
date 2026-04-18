@@ -20,9 +20,9 @@ export function getVersionSummaryTemplate(versions, icon) {
         <div style="display: flex; flex-direction: column; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-top: 4px solid #00e8ff; padding: 20px; border-radius: 12px; width: 340px; margin-bottom: 20px;">
             <div style="color: #00e8ff; font-size: 32px; margin-bottom: 8px; font-weight: bold; letter-spacing: 1px;">${v.id}</div>
             <div style="display: flex; justify-content: space-between; align-items: flex-end;">
-                <div style="display: flex; align-items: flex-start; font-size: 38px; font-weight: bold; color: #fff; line-height: 1;">
-                    <span style="align-self: flex-end;">${winrate}%</span>
-                    <span style="font-size: 22px; color: ${diffColor}; margin-left: 6px; font-weight: normal; transform: translateY(-6px);">(${diffSign}${diff.toFixed(1)})</span>
+                <div style="display: flex; align-items: flex-start; font-size: 38px; font-weight: bold; line-height: 1;">
+                    <span style="align-self: flex-end; color: ${diffColor};">${winrate}%</span>
+                    <span style="font-size: 22px; color: #fff; margin-left: 6px; font-weight: normal; transform: translateY(-6px);">(<span style="color: ${diffColor};">${diffSign}${diff.toFixed(1)}</span>)</span>
                 </div>
                 <div style="display: flex; flex-direction: column; align-items: flex-end;">
                     <div style="font-size: 16px; color: #00ff89; font-weight: bold;">Wins ${v.wins}</div>
