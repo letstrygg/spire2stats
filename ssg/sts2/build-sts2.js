@@ -34,13 +34,14 @@ import {
     generateFilterControlsHtml,
     generateFilterScript,
     wrapLayout, 
+    wrapInCollapsible,
     formatDescription,
     getCharacterBgStyle,
     CHARACTER_COLORS,
     Sitemap
 } from './templates/shared.js';
 
-import { cardDetailTemplate } from './templates/card.js';
+import { cardDetailTemplate, generateCostHtml } from './templates/card.js';
 import { relicDetailTemplate } from './templates/relic.js';
 import { eventDetailTemplate } from './templates/event.js';
 import { characterDetailTemplate } from './templates/character.js';
@@ -83,12 +84,6 @@ async function query(sql, params = []) {
             else resolve(rows);
         });
     });
-}
-
-function getCostDisplay(costVal, isX, starCostVal, isXStar) {
-    let cost = isX ? 'X' : (costVal === -1 || costVal === undefined || costVal === null ? '' : String(costVal));
-    let star = isXStar ? 'X★' : (starCostVal === undefined || starCostVal === null ? '' : `${starCostVal}★`);
-    return [cost, star].filter(s => s !== '').join(' ');
 }
 
 async function getCardStats() {
@@ -855,54 +850,6 @@ async function buildCharacters(chars, runStats, sitemap, users) {
             fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
 }
 
-/**
- * Wraps a content block in a generic collapsible container if it exceeds 2 rows (6 items).
- */
-function wrapInCollapsible(contentHtml, itemCount) {
-    if (itemCount <= 4) return contentHtml;
-
-    return `
-    <div class="collapsible-wrapper is-collapsed">
-        <div class="collapsible-content">
-            ${contentHtml}
-            <div class="collapsible-fade"></div>
-        </div>
-        <div class="collapsible-controls" style="text-align: center; margin-top: 20px; margin-bottom: 40px; position: relative; z-index: 10;">
-            <button class="collapse-toggle-btn" 
-                    style="background: #222; border: 1px solid #444; color: #888; padding: 10px 24px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;"
-                    onclick="
-                        const wrapper = this.closest('.collapsible-wrapper');
-                        const isCollapsed = wrapper.classList.toggle('is-collapsed');
-                        this.textContent = isCollapsed ? 'Expand' : 'Collapse';
-                        if (isCollapsed) {
-                            wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }
-                    ">Expand</button>
-        </div>
-        <style>
-            .collapsible-wrapper .collapsible-content {
-                max-height: none;
-                overflow: visible;
-                position: relative;
-            }
-            .collapsible-wrapper.is-collapsed .collapsible-content {
-                max-height: 350px; /* This height covers roughly 2 rows of run cards */
-                overflow: hidden;
-            }
-            .collapsible-wrapper .collapsible-fade {
-                display: none;
-                position: absolute;
-                bottom: 0; left: 0; width: 100%; height: 80px;
-                background: linear-gradient(to top, #111, transparent);
-                pointer-events: none;
-            }
-            .collapsible-wrapper.is-collapsed .collapsible-fade {
-                display: block;
-            }
-        </style>
-    </div>`;
-}
-
 async function buildEncounters(encounters, runStats, sitemap) {
     console.log(`⚔️ Building ${encounters.length} encounter pages...`);
     const root = ensureDir(path.join(PATHS.WEB_ROOT, 'encounters'));
@@ -1085,16 +1032,9 @@ async function build() {
             
             // Use character-specific icons for the main cast, default to colorless for others (Curse, Status, etc.)
             const mainColors = new Set(['ironclad', 'silent', 'defect', 'necrobinder', 'regent']);
-            const energyIconKey = mainColors.has(normalizeId(card.color)) ? normalizeId(card.color) : 'colorless';
-            const energyIconUrl = `/images/sts2_images/ui/compendium/card/energy_${energyIconKey}.png`;
-            
-            const generateCostHtml = (costVal, isX, starCost, isXStar) => {
-                const text = getCostDisplay(costVal, isX, starCost, isXStar);
-                if (!text && text !== '0') return ''; // Handle cards without cost (status/curse)
-                return `<img src="${energyIconUrl}" class="cost-icon" alt="Energy"><span class="cost-value">${text}</span>`;
-            };
+            const energyIconUrl = `/images/sts2_images/ui/compendium/card/energy_${mainColors.has(normalizeId(card.color)) ? normalizeId(card.color) : 'colorless'}.png`;
 
-            const costHtml = generateCostHtml(card.cost, card.is_x_cost, card.star_cost, card.is_x_star_cost);
+            const costHtml = generateCostHtml(card);
 
             // Calculate upgraded cost
             let upgCost = card.cost;
@@ -1106,7 +1046,7 @@ async function build() {
                     if (upg.star_cost !== undefined) upgStarCost = upg.star_cost;
                 } catch (e) {}
             }
-            const upgCostHtml = generateCostHtml(upgCost, card.is_x_cost, upgStarCost, card.is_x_star_cost);
+            const upgCostHtml = generateCostHtml(card, upgCost, upgStarCost);
 
             // Resolve dynamic descriptions for base and upgraded versions
             const vars = card.vars ? JSON.parse(card.vars) : {};
@@ -1162,13 +1102,10 @@ async function build() {
             const upgradedDescText = applyKeywords(parseCardText(card.description, vars, upgradeData, true), true, upgradeData);
 
             // Create the color-specific energy icon HTML
-            const energyIcon = `<img src="${energyIconUrl}" style="height: 24px; width: auto; vertical-align: middle; margin-top: -3px;" alt="Energy">`;
-            
-            /** Final cleanup: replace energy markers with the icon and convert remaining BBCode to HTML */
-            const finalizeDescription = (txt) => formatDescription(txt.replace(/\[E\]|\[energy:\d+\]/g, energyIcon));
+            const energyIconHtml = `<img src="${energyIconUrl}" style="height: 24px; width: auto; vertical-align: middle; margin-top: -3px;" alt="Energy">`;
 
-            card.description = finalizeDescription(baseDescText);
-            card.upgrade = finalizeDescription(upgradedDescText);
+            card.description = baseDescText;
+            card.upgrade = upgradedDescText;
 
             const cleanCardId = normalizeId(card.card_id);
             const rawStats = cardStats.stats[cleanCardId] || { runs: [], seen: 0, wins: 0 };
@@ -1208,7 +1145,7 @@ async function build() {
             }
 
             const videosHtml = generateRunLinksList(rawStats.runs, `Runs featuring ${card.name}`);
-            const detailHtml = cardDetailTemplate(card, stats, videosHtml, costHtml, upgCostHtml, `/cards/${slug}/`, topUser);
+            const detailHtml = cardDetailTemplate(card, stats, videosHtml, costHtml, upgCostHtml, `/cards/${slug}/`, topUser, energyIconHtml);
 
             fs.writeFileSync(path.join(cardDir, 'index.html'), detailHtml);
             sitemap.add(`/cards/${slug}/`);

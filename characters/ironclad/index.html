@@ -20040,25 +20040,10 @@
                     ">Expand</button>
         </div>
         <style>
-            .collapsible-wrapper .collapsible-content {
-                max-height: none;
-                overflow: visible;
-                position: relative;
-            }
-            .collapsible-wrapper.is-collapsed .collapsible-content {
-                max-height: 350px; /* This height covers roughly 2 rows of run cards */
-                overflow: hidden;
-            }
-            .collapsible-wrapper .collapsible-fade {
-                display: none;
-                position: absolute;
-                bottom: 0; left: 0; width: 100%; height: 80px;
-                background: linear-gradient(to top, #111, transparent);
-                pointer-events: none;
-            }
-            .collapsible-wrapper.is-collapsed .collapsible-fade {
-                display: block;
-            }
+            .collapsible-wrapper .collapsible-content { max-height: none; overflow: visible; position: relative; }
+            .collapsible-wrapper.is-collapsed .collapsible-content { max-height: 350px; overflow: hidden; }
+            .collapsible-wrapper .collapsible-fade { display: none; position: absolute; bottom: 0; left: 0; width: 100%; height: 80px; background: linear-gradient(to top, #111, transparent); pointer-events: none; }
+            .collapsible-wrapper.is-collapsed .collapsible-fade { display: block; }
         </style>
     </div>
         <div style="margin-top: 30px;">

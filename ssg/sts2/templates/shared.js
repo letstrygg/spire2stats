@@ -441,7 +441,45 @@ ${bcHtml}${content}
 </body></html>`;
 }
 
-export function formatDescription(text) {
+/**
+ * Wraps a content block in a generic collapsible container if it exceeds a threshold.
+ */
+export function wrapInCollapsible(contentHtml, itemCount) {
+    if (itemCount <= 4) return contentHtml;
+
+    return `
+    <div class="collapsible-wrapper is-collapsed">
+        <div class="collapsible-content">
+            ${contentHtml}
+            <div class="collapsible-fade"></div>
+        </div>
+        <div class="collapsible-controls" style="text-align: center; margin-top: 20px; margin-bottom: 40px; position: relative; z-index: 10;">
+            <button class="collapse-toggle-btn" 
+                    style="background: #222; border: 1px solid #444; color: #888; padding: 10px 24px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;"
+                    onclick="
+                        const wrapper = this.closest('.collapsible-wrapper');
+                        const isCollapsed = wrapper.classList.toggle('is-collapsed');
+                        this.textContent = isCollapsed ? 'Expand' : 'Collapse';
+                        if (isCollapsed) {
+                            wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    ">Expand</button>
+        </div>
+        <style>
+            .collapsible-wrapper .collapsible-content { max-height: none; overflow: visible; position: relative; }
+            .collapsible-wrapper.is-collapsed .collapsible-content { max-height: 350px; overflow: hidden; }
+            .collapsible-wrapper .collapsible-fade { display: none; position: absolute; bottom: 0; left: 0; width: 100%; height: 80px; background: linear-gradient(to top, #111, transparent); pointer-events: none; }
+            .collapsible-wrapper.is-collapsed .collapsible-fade { display: block; }
+        </style>
+    </div>`;
+}
+
+/**
+ * Formats Slay the Spire 2 specific BBCode tags into HTML.
+ * @param {string} text - The raw description string.
+ * @param {string} energyIconHtml - Optional HTML for the energy icon.
+ */
+export function formatDescription(text, energyIconHtml = '<span class="icon-energy">[E]</span>') {
     if (!text) return "";
     return text
         .replace(/\[gold\](.*?)\[\/gold\]/g, '<span class="text-gold">$1</span>')
@@ -452,7 +490,7 @@ export function formatDescription(text) {
         .replace(/\[pink\](.*?)\[\/pink\]/g, '<span class="text-purple">$1</span>')
         .replace(/\[sine\](.*?)\[\/sine\]/g, '<em>$1</em>')
         .replace(/\[jitter\](.*?)\[\/jitter\]/g, '<strong>$1</strong>')
-        .replace(/\[energy:(\d+)\]/ig, '<span class="icon-energy">[E]</span>')
+        .replace(/\[E\]|\[energy:\d+\]/ig, energyIconHtml)
         .replace(/\n/g, '<br>');
 }
 
