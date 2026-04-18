@@ -994,7 +994,7 @@ async function buildMonsters(monsters, runStats, sitemap) {
         const typeIcon = m.type === 'Boss' ? '/images/map_boss.png' : (m.type === 'Elite' ? '/images/sts2_images/ui/map_nodes/map_elite.png' : '/images/sts2_images/ui/map_nodes/map_monster.png');
 
         return `
-        <a href="/monsters/${slug}/" class="card-item" aria-label="${m.name}: encountered ${stats.encountered} times">
+        <a href="/monsters/${slug}/" class="card-item" aria-label="${m.name}: encounters ${stats.encountered}">
             <div class="card-info">
                 <span class="card-name">${m.name}</span>
                 <div style="color: ${typeColor}; font-size: 0.65rem; text-transform: uppercase; font-weight: bold; margin-bottom: 2px;">${m.type || 'Monster'}</div>
