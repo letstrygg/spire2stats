@@ -66,7 +66,7 @@ export function versionDetailTemplate(version, stats, videosHtml) {
             <h1>${title}</h1>
             <div class="subtitle">Game Version</div>
             <div class="description">
-                <p>Run statistics, winrates, and performance history for Slay the Spire 2 build version <strong>${version}</strong>.</p>
+                <p>Winrates run statistics for Slay the Spire 2 build version <strong>${version}</strong>.</p>
             </div>
         </div>
         ${videosHtml}`,
