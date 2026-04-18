@@ -7,7 +7,10 @@ export function monsterDetailTemplate(monster, stats, averagesHtml, lethalRunsHt
         ${generateLethalitySummaryBox(stats, "Monster")}
         ${averagesHtml}
         <div class="item-box ${monster.type ? monster.type.toLowerCase() : ''}">
-            <div class="subtitle" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+            <div class="subtitle" style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                ${monster.type ? `
+                    <img src="${monster.type === 'Boss' ? '/images/map_boss.png' : (monster.type === 'Elite' ? '/images/sts2_images/ui/map_nodes/map_elite.png' : '/images/sts2_images/ui/map_nodes/map_monster.png')}" alt="${monster.type}" style="height: 32px; width: auto;">
+                ` : ''}
                 ${monster.type ? `
                     <span style="color: ${monster.type === 'Boss' ? 'var(--gold)' : (monster.type === 'Elite' ? 'var(--red)' : '#888')}; font-weight: bold; text-transform: uppercase; font-size: 0.75rem; border: 1px solid currentColor; padding: 2px 8px; border-radius: 4px; letter-spacing: 1px;">${monster.type}</span>
                 ` : ''}

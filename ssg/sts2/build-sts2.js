@@ -991,12 +991,16 @@ async function buildMonsters(monsters, runStats, sitemap) {
         const winBar = stats.encountered > 0 ? `<div class="win-bar" style="background: linear-gradient(to right, #ff4b4b ${dmgPercent}%, transparent ${dmgPercent}%);"></div>` : '';
         
         const typeColor = m.type === 'Boss' ? 'var(--gold)' : (m.type === 'Elite' ? 'var(--red)' : '#888');
+        const typeIcon = m.type === 'Boss' ? '/images/map_boss.png' : (m.type === 'Elite' ? '/images/sts2_images/ui/map_nodes/map_elite.png' : '/images/sts2_images/ui/map_nodes/map_monster.png');
 
         return `
         <a href="/monsters/${slug}/" class="card-item" aria-label="${m.name}: encountered ${stats.encountered} times">
             <div class="card-info">
                 <span class="card-name">${m.name}</span>
-                <div style="color: ${typeColor}; font-size: 0.65rem; text-transform: uppercase; font-weight: bold; margin-bottom: 2px;">${m.type || 'Monster'}</div>
+                <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px;">
+                    <img src="${typeIcon}" alt="${m.type}" style="height: 18px; width: auto; opacity: 0.8;">
+                    <div style="color: ${typeColor}; font-size: 0.65rem; text-transform: uppercase; font-weight: bold;">${m.type || 'Monster'}</div>
+                </div>
                 <div style="color: #888; font-size: 0.75rem;">Encountered ${stats.encountered} times</div>
                 <div style="color: #ff4b4b; font-size: 0.75rem;">Avg Dmg: ${avgDmg.toFixed(1)}</div>
             </div>
