@@ -1002,7 +1002,7 @@ async function buildMonsters(monsters, runStats, sitemap) {
                 <div style="color: #888; font-size: 0.75rem;">Encounteres ${stats.encountered}</div>
                 <div style="color: #ff4b4b; font-size: 0.75rem;">Avg Dmg: ${avgDmg.toFixed(1)}</div>
             </div>
-            <div class="card-stats" style="display: flex; flex-direction: column; align-items: flex-end; justify-content: flex-end; gap: 4px;">
+            <div class="card-stats" style="display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between;">
                 ${killDisplay}
                 <img src="${typeIcon}" alt="${m.type}" style="height: ${iconHeight}; width: auto; display: block;">
             </div>
