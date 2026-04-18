@@ -6,8 +6,13 @@ export function monsterDetailTemplate(monster, stats, averagesHtml, lethalRunsHt
         `
         ${generateLethalitySummaryBox(stats, "Monster")}
         ${averagesHtml}
-        <div class="item-box">
-            <div class="subtitle">${subtitle}</div>
+        <div class="item-box ${monster.type ? monster.type.toLowerCase() : ''}">
+            <div class="subtitle" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                ${monster.type ? `
+                    <span style="color: ${monster.type === 'Boss' ? 'var(--gold)' : (monster.type === 'Elite' ? 'var(--red)' : '#888')}; font-weight: bold; text-transform: uppercase; font-size: 0.75rem; border: 1px solid currentColor; padding: 2px 8px; border-radius: 4px; letter-spacing: 1px;">${monster.type}</span>
+                ` : ''}
+                ${monster.min_hp ? `<span style="color: #888;">${monster.min_hp}-${monster.max_hp} HP</span>` : ''}
+            </div>
             <div class="description">
                 <p>Monster behavior data and finishing blow records for Slay the Spire 2.</p>
             </div>

@@ -179,7 +179,7 @@ async function getCardStats() {
                     }
                     if (p.monster_ids) {
                         p.monster_ids.forEach(mid => {
-                            const cleanMid = mid.replace(/(_NORMAL|_BOSS|_ELITE)$/, '');
+                            const cleanMid = normalizeId(mid.replace(/(_NORMAL|_BOSS|_ELITE)$/i, ''));
                             if (!monsterStats[cleanMid]) monsterStats[cleanMid] = { encountered: 0, kills: 0, lethalRuns: [], damage_taken: 0, hp_healed: 0, gold_lost: 0, gold_stolen: 0, max_hp_gained: 0, max_hp_lost: 0 };
                             monsterStats[cleanMid].encountered++;
                             monsterStats[cleanMid].damage_taken += floorStats.damage_taken;
@@ -208,7 +208,7 @@ async function getCardStats() {
                     // Attribute kill to all constituent monsters
                     const associatedMonsters = encounterMap[killerId] || [];
                     associatedMonsters.forEach(mid => {
-                        const cleanMid = mid.replace(/(_NORMAL|_BOSS|_ELITE)$/, '');
+                        const cleanMid = normalizeId(mid.replace(/(_NORMAL|_BOSS|_ELITE)$/i, ''));
                         if (!monsterStats[cleanMid]) monsterStats[cleanMid] = { encountered: 0, kills: 0, lethalRuns: [], damage_taken: 0, hp_healed: 0, gold_lost: 0, gold_stolen: 0, max_hp_gained: 0, max_hp_lost: 0 };
                         monsterStats[cleanMid].kills++;
                         monsterStats[cleanMid].lethalRuns.push(runMeta);
@@ -989,11 +989,14 @@ async function buildMonsters(monsters, runStats, sitemap) {
         const dmgPercent = maxAvgDmg > 0 ? (avgDmg / maxAvgDmg) * 100 : 0;
         const killDisplay = stats.kills > 0 ? `<div style="color: #ff4b4b; font-size: 1.5rem; font-weight: bold;">${stats.kills} Kills</div>` : '';
         const winBar = stats.encountered > 0 ? `<div class="win-bar" style="background: linear-gradient(to right, #ff4b4b ${dmgPercent}%, transparent ${dmgPercent}%);"></div>` : '';
+        
+        const typeColor = m.type === 'Boss' ? 'var(--gold)' : (m.type === 'Elite' ? 'var(--red)' : '#888');
 
         return `
         <a href="/monsters/${slug}/" class="card-item" aria-label="${m.name}: encountered ${stats.encountered} times">
             <div class="card-info">
                 <span class="card-name">${m.name}</span>
+                <div style="color: ${typeColor}; font-size: 0.65rem; text-transform: uppercase; font-weight: bold; margin-bottom: 2px;">${m.type || 'Monster'}</div>
                 <div style="color: #888; font-size: 0.75rem;">Encountered ${stats.encountered} times</div>
                 <div style="color: #ff4b4b; font-size: 0.75rem;">Avg Dmg: ${avgDmg.toFixed(1)}</div>
             </div>
