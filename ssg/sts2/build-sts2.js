@@ -47,7 +47,7 @@ import { characterDetailTemplate } from './templates/character.js';
 import { monsterDetailTemplate } from './templates/monster.js';
 import { encounterDetailTemplate } from './templates/encounter.js';
 import { ascensionDetailTemplate } from './templates/ascension.js';
-import { versionDetailTemplate } from './templates/version.js';
+import { versionDetailTemplate, versionIndexTemplate, sortVersions } from './templates/version.js';
 import { enchantmentDetailTemplate } from './templates/enchantment.js';
 import { settingsTemplate } from './templates/settings.js';
 import { contributeTemplate } from './templates/contribute.js';
@@ -604,27 +604,7 @@ async function buildVersions(runStats, sitemap) {
     const minorVersions = Object.keys(runStats.versionStats);
     const majorVersions = Object.keys(runStats.majorVersionStats);
     
-    // Sort logic: Major versions descending, children ascending within groups.
-    const allVersionKeys = [...new Set([...minorVersions, ...majorVersions])].sort((a, b) => {
-        const getMajor = (v) => v.split('.').slice(0, 2).join('.');
-        const majorA = getMajor(a);
-        const majorB = getMajor(b);
-
-        if (majorA !== majorB) {
-            return majorB.localeCompare(majorA, undefined, { numeric: true });
-        }
-
-        const partsA = a.split('.');
-        const partsB = b.split('.');
-
-        // Major version (fewer parts) comes first in its group
-        if (partsA.length !== partsB.length) {
-            return partsA.length - partsB.length;
-        }
-
-        // Same length (e.g. two minor versions), sort ascending
-        return a.localeCompare(b, undefined, { numeric: true });
-    });
+    const allVersionKeys = sortVersions(minorVersions, majorVersions);
     
     console.log(`🏷️  Building ${allVersionKeys.length} version pages...`);
     const root = ensureDir(path.join(PATHS.WEB_ROOT, 'versions'));
@@ -644,28 +624,7 @@ async function buildVersions(runStats, sitemap) {
 
     // Index Page
     sitemap.add('/versions/');
-
-    const majorKeys = allVersionKeys.filter(v => v.split('.').length === 2);
-    const minorKeys = allVersionKeys.filter(v => v.split('.').length === 3);
-
-    const majorLinks = majorKeys.map(v => {
-        const slug = slugify(v);
-        const stats = getItemStats(runStats.majorVersionStats[v], runStats.globalWinRate);
-        return generateCardItemHtml(`/versions/${slug}/`, v, stats, 'major-version');
-    }).join('');
-
-    const minorLinks = minorKeys.map(v => {
-        const slug = slugify(v);
-        const stats = getItemStats(runStats.versionStats[v], runStats.globalWinRate);
-        return generateCardItemHtml(`/versions/${slug}/`, v, stats);
-    }).join('');
-
-    const indexDesc = `Performance statistics and run history for Slay the Spire 2 build versions.`;
-    const indexHtml = wrapLayout('Versions', `
-        ${generateSummaryPanel(runStats, "Versions", majorKeys.length, runStats.uniqueVersionsSeen)}
-        <div class="grid">${majorLinks}</div>
-        <h3 style="margin-top: 40px; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px;">Specific Build Versions</h3>
-        <div class="grid">${minorLinks}</div>`, [{ name: 'versions', url: '' }], indexDesc, generateCollectionJsonLd(`Versions`, indexDesc));
+    const indexHtml = versionIndexTemplate(runStats, allVersionKeys);
     fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
 }
 
