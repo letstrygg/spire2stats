@@ -892,10 +892,10 @@ async function buildEncounters(encounters, runStats, sitemap) {
         const winBar = stats.encountered > 0 ? `<div class="win-bar" style="background: linear-gradient(to right, var(--red) ${dmgPercent}%, transparent ${dmgPercent}%);"></div>` : '';
 
         return `
-        <a href="/encounters/${slug}/" class="card-item" aria-label="${e.name}: encountered ${stats.encountered} times">
+        <a href="/encounters/${slug}/" class="card-item" aria-label="${e.name}: encounters ${stats.encountered}">
             <div class="card-info">
                 <span class="card-name">${e.name}</span>
-                <div style="color: #888; font-size: 0.75rem;">Encountered ${stats.encountered} times</div>
+                <div style="color: #888; font-size: 0.75rem;">Encounters ${stats.encountered}</div>
                 <div style="color: var(--red); font-size: 0.75rem;">Avg Dmg: ${avgDmg.toFixed(1)}</div>
             </div>
             <div class="card-stats">
