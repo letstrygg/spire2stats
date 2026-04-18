@@ -225,7 +225,7 @@ async function getCardStats() {
 
                 const uniqueEnchantmentsInDeck = new Set();
                 deck.forEach(c => {
-                    if (c.enchantment) uniqueEnchantmentsInDeck.add(c.enchantment.replace('ENCHANTMENT.', ''));
+                    if (c.enchantment) uniqueEnchantmentsInDeck.add(normalizeId(c.enchantment));
                 });
                 uniqueEnchantmentsInDeck.forEach(eId => updateStat(enchantmentStats, eId, row.win, video, runMeta));
 
