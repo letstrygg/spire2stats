@@ -96,7 +96,7 @@ async function getCardStats() {
     console.log(`📡 Database returned ${rows.length} run rows.`);
 
     const totalRuns = rows.length;
-    if (totalRuns === 0) return { stats: {}, charStats: {}, relicStats: {}, eventStats: {}, ascensionStats: {}, enchantmentStats: {}, monsterStats: {}, encounterStats: {}, versionStats: {}, globalWinRate: 0, totalRuns: 0, totalWins: 0, totalLosses: 0, uniqueUsers: 0, uniqueCardsSeen: 0, uniqueRelicsSeen: 0, uniqueEventsSeen: 0, uniqueCharsSeen: 0, uniqueAscensionsSeen: 0, uniqueEnchantmentsSeen: 0, uniqueMonstersSeen: 0, uniqueEncountersSeen: 0, uniqueVersionsSeen: 0 };
+    if (totalRuns === 0) return { stats: {}, charStats: {}, relicStats: {}, eventStats: {}, ascensionStats: {}, enchantmentStats: {}, monsterStats: {}, encounterStats: {}, versionStats: {}, majorVersionStats: {}, globalWinRate: 0, totalRuns: 0, totalWins: 0, totalLosses: 0, uniqueUsers: 0, uniqueCardsSeen: 0, uniqueRelicsSeen: 0, uniqueEventsSeen: 0, uniqueCharsSeen: 0, uniqueAscensionsSeen: 0, uniqueEnchantmentsSeen: 0, uniqueMonstersSeen: 0, uniqueEncountersSeen: 0, uniqueVersionsSeen: 0 };
 
             const totalWins = rows.filter(r => r.win).length;
             const globalWinRate = totalRuns > 0 ? (totalWins / totalRuns) * 100 : 0;
@@ -111,6 +111,7 @@ async function getCardStats() {
             const monsterStats = {}; // Monster stats
             const encounterStats = {}; // Encounter stats
             const versionStats = {}; // Version stats
+            const majorVersionStats = {}; // Major version groupings
 
             const encounterRows = await query("SELECT encounter_id, monsters FROM encounters");
             const encounterMap = {};
@@ -236,6 +237,12 @@ async function getCardStats() {
 
                 const buildId = row.build_id || 'Unknown';
                 updateStat(versionStats, buildId, row.win, video, runMeta);
+
+                const buildParts = buildId.split('.');
+                if (buildParts.length >= 2) {
+                    const majorId = buildParts.slice(0, 2).join('.');
+                    updateStat(majorVersionStats, majorId, row.win, video, runMeta);
+                }
             });
             
             const uniqueCardsSeen = Object.keys(stats).length;
@@ -253,6 +260,7 @@ async function getCardStats() {
                 monsterStats,
                 encounterStats,
                 versionStats,
+                majorVersionStats,
                 globalWinRate, 
                 totalRuns, 
                 totalWins, 
@@ -593,20 +601,41 @@ async function buildEnchantments(enchantments, runStats, sitemap) {
 }
 
 async function buildVersions(runStats, sitemap) {
-    const versions = Object.keys(runStats.versionStats).sort((a, b) => {
-        return b.localeCompare(a, undefined, { numeric: true, sensitivity: 'base' });
+    const minorVersions = Object.keys(runStats.versionStats);
+    const majorVersions = Object.keys(runStats.majorVersionStats);
+    
+    // Sort logic: Major versions descending, children ascending within groups.
+    const allVersionKeys = [...new Set([...minorVersions, ...majorVersions])].sort((a, b) => {
+        const getMajor = (v) => v.split('.').slice(0, 2).join('.');
+        const majorA = getMajor(a);
+        const majorB = getMajor(b);
+
+        if (majorA !== majorB) {
+            return majorB.localeCompare(majorA, undefined, { numeric: true });
+        }
+
+        const partsA = a.split('.');
+        const partsB = b.split('.');
+
+        // Major version (fewer parts) comes first in its group
+        if (partsA.length !== partsB.length) {
+            return partsA.length - partsB.length;
+        }
+
+        // Same length (e.g. two minor versions), sort ascending
+        return a.localeCompare(b, undefined, { numeric: true });
     });
     
-    console.log(`🏷️  Building ${versions.length} version pages...`);
+    console.log(`🏷️  Building ${allVersionKeys.length} version pages...`);
     const root = ensureDir(path.join(PATHS.WEB_ROOT, 'versions'));
 
-    for (const v of versions) {
+    for (const v of allVersionKeys) {
         const slug = slugify(v);
         const dir = ensureDir(path.join(root, slug));
         
-        const rawStats = runStats.versionStats[v];
+        const rawStats = runStats.versionStats[v] || runStats.majorVersionStats[v];
         const stats = getItemStats(rawStats, runStats.globalWinRate);
-        const videosHtml = generateRunLinksList(rawStats.runs, `Runs on Build ${v}`);
+        const videosHtml = generateRunLinksList(rawStats.runs, `Runs on Version ${v}`);
 
         const detailHtml = versionDetailTemplate(v, stats, videosHtml);
         fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
@@ -615,14 +644,15 @@ async function buildVersions(runStats, sitemap) {
 
     // Index Page
     sitemap.add('/versions/');
-    const versionLinks = versions.map(v => {
+    const versionLinks = allVersionKeys.map(v => {
         const slug = slugify(v);
-        const stats = getItemStats(runStats.versionStats[v], runStats.globalWinRate);
-        return generateCardItemHtml(`/versions/${slug}/`, v, stats);
+        const stats = getItemStats(runStats.versionStats[v] || runStats.majorVersionStats[v], runStats.globalWinRate);
+        const isMajor = v.split('.').length === 2;
+        return generateCardItemHtml(`/versions/${slug}/`, v, stats, isMajor ? 'major-version' : '');
     }).join('');
 
     const indexDesc = `Performance statistics and run history for Slay the Spire 2 build versions.`;
-    const indexHtml = wrapLayout('Versions', `${generateSummaryPanel(runStats, "Versions", versions.length, versions.length)}<div class="grid">${versionLinks}</div>`, [{ name: 'versions', url: '' }], indexDesc, generateCollectionJsonLd(`Versions`, indexDesc));
+    const indexHtml = wrapLayout('Versions', `${generateSummaryPanel(runStats, "Versions", allVersionKeys.length, allVersionKeys.length)}<div class="grid">${versionLinks}</div>`, [{ name: 'versions', url: '' }], indexDesc, generateCollectionJsonLd(`Versions`, indexDesc));
     fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
 }
 
@@ -1261,7 +1291,7 @@ async function build() {
             { name: 'Monsters', folder: 'monsters', seen: cardStats.uniqueMonstersSeen, total: monsters.length },
             { name: 'Encounters', folder: 'encounters', seen: cardStats.uniqueEncountersSeen, total: encounters.length },
             { name: 'Ascensions', folder: 'ascensions', seen: cardStats.uniqueAscensionsSeen, total: ascensions.length },
-            { name: 'Versions', folder: 'versions', seen: cardStats.uniqueVersionsSeen, total: cardStats.uniqueVersionsSeen },
+            { name: 'Versions', folder: 'versions', seen: cardStats.uniqueVersionsSeen, total: Object.keys(cardStats.majorVersionStats).length },
             { name: 'Enchantments', folder: 'enchantments', seen: cardStats.uniqueEnchantmentsSeen, total: enchantments.length },
             { name: 'Keywords', folder: 'keywords', seen: keywordStats.seen, total: keywordStats.total }
         ];

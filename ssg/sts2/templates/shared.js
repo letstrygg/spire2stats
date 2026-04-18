@@ -2,7 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import { calculateBayesianScore, normalizeId } from '../helpers.js';
 // --- BUILD DATE CONSTANTS ---
-const BUILD_DATE = new Date();
+const EIGHT_HOURS_MS = 8 * 60 * 60 * 1000;
+const BUILD_DATE = new Date(Math.floor(Date.now() / EIGHT_HOURS_MS) * EIGHT_HOURS_MS);
 export const FORMATTED_BUILD_DATE = BUILD_DATE.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 export const ISO_BUILD_DATE = BUILD_DATE.toISOString();
 
