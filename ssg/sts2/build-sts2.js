@@ -996,11 +996,9 @@ async function buildMonsters(monsters, runStats, sitemap) {
         return `
         <a href="/monsters/${slug}/" class="card-item" aria-label="${m.name}: encountered ${stats.encountered} times">
             <div class="card-info">
+                <img src="${typeIcon}" alt="${m.type}" style="height: 50px; width: auto; margin-bottom: 10px; display: block;">
                 <span class="card-name">${m.name}</span>
-                <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px;">
-                    <img src="${typeIcon}" alt="${m.type}" style="height: 18px; width: auto; opacity: 0.8;">
-                    <div style="color: ${typeColor}; font-size: 0.65rem; text-transform: uppercase; font-weight: bold;">${m.type || 'Monster'}</div>
-                </div>
+                <div style="color: ${typeColor}; font-size: 0.65rem; text-transform: uppercase; font-weight: bold; margin-bottom: 2px;">${m.type || 'Monster'}</div>
                 <div style="color: #888; font-size: 0.75rem;">Encountered ${stats.encountered} times</div>
                 <div style="color: #ff4b4b; font-size: 0.75rem;">Avg Dmg: ${avgDmg.toFixed(1)}</div>
             </div>
