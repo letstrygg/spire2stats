@@ -662,7 +662,7 @@ async function buildVersions(runStats, sitemap) {
 
     const indexDesc = `Performance statistics and run history for Slay the Spire 2 build versions.`;
     const indexHtml = wrapLayout('Versions', `
-        ${generateSummaryPanel(runStats, "Versions", majorKeys.length, majorKeys.length)}
+        ${generateSummaryPanel(runStats, "Versions", majorKeys.length, runStats.uniqueVersionsSeen)}
         <div class="grid">${majorLinks}</div>
         <h3 style="margin-top: 40px; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px;">Specific Build Versions</h3>
         <div class="grid">${minorLinks}</div>`, [{ name: 'versions', url: '' }], indexDesc, generateCollectionJsonLd(`Versions`, indexDesc));
