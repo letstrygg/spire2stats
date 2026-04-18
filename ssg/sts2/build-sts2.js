@@ -992,6 +992,7 @@ async function buildMonsters(monsters, runStats, sitemap) {
         
         const typeColor = m.type === 'Boss' ? 'var(--gold)' : (m.type === 'Elite' ? 'var(--red)' : '#888');
         const typeIcon = m.type === 'Boss' ? '/images/map_boss.png' : (m.type === 'Elite' ? '/images/sts2_images/ui/map_nodes/map_elite.png' : '/images/sts2_images/ui/map_nodes/map_monster.png');
+        const iconHeight = m.type === 'Boss' ? '50px' : (m.type === 'Elite' ? '40px' : '36px');
 
         return `
         <a href="/monsters/${slug}/" class="card-item" aria-label="${m.name}: encounters ${stats.encountered}">
@@ -1003,7 +1004,7 @@ async function buildMonsters(monsters, runStats, sitemap) {
             </div>
             <div class="card-stats" style="display: flex; flex-direction: column; align-items: flex-end; justify-content: flex-end; gap: 4px;">
                 ${killDisplay}
-                <img src="${typeIcon}" alt="${m.type}" style="height: 50px; width: auto; display: block;">
+                <img src="${typeIcon}" alt="${m.type}" style="height: ${iconHeight}; width: auto; display: block;">
             </div>
             ${winBar}
         </a>`;
