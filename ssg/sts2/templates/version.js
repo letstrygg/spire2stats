@@ -1,11 +1,10 @@
 import { 
     wrapLayout, 
-    generateItemJsonLd, 
     generateSemanticStatsParagraph,
     generateSummaryPanel,
-    generateCollectionJsonLd,
     generateCardItemHtml,
-    getItemStats
+    getItemStats,
+    ISO_BUILD_DATE
 } from './shared.js';
 import { slugify } from '../paths.js';
 
@@ -35,6 +34,27 @@ export function sortVersions(minorKeys, majorKeys) {
 
 export function versionDetailTemplate(version, stats, videosHtml) {
     const title = `Build ${version}`;
+    const desc = `${title} winrates and run statistics for Slay the Spire 2.`;
+    const slug = slugify(version);
+
+    const jsonLd = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ItemPage",
+        "name": `${title} - Spire 2 Stats`,
+        "description": desc,
+        "dateModified": ISO_BUILD_DATE,
+        "url": `https://spire2stats.com/versions/${slug}/`,
+        "image": [
+            "https://spire2stats.com/versions/thumbnail.png",
+            "https://spire2stats.com/versions/summary.png"
+        ],
+        "mainEntity": {
+            "@type": "Thing",
+            "name": title,
+            "alternateName": "Slay the Spire 2 Version"
+        }
+    });
+    const headExtras = `<meta name="robots" content="max-image-preview:large"><script type="application/ld+json">${jsonLd}</script>`;
     
     return wrapLayout(
         title, 
@@ -51,9 +71,10 @@ export function versionDetailTemplate(version, stats, videosHtml) {
         </div>
         ${videosHtml}`,
         [{ name: 'versions', url: '/versions/' }, { name: version, url: '' }],
-        `${title} winrates and run statistics for Slay the Spire 2.`,
-        generateItemJsonLd(title, "Version", stats),
-        `/versions/${slugify(version)}/`
+        desc,
+        headExtras,
+        `/versions/${slug}/`,
+        `/versions/summary.png`
     );
 }
 
@@ -74,9 +95,30 @@ export function versionIndexTemplate(runStats, allVersionKeys) {
     }).join('');
 
     const indexDesc = `Performance statistics and run history for Slay the Spire 2 build versions.`;
+
+    const jsonLd = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Versions - Spire 2 Stats",
+        "description": indexDesc,
+        "url": "https://spire2stats.com/versions/",
+        "image": [
+            "https://spire2stats.com/versions/thumbnail.png",
+            "https://spire2stats.com/versions/summary.png"
+        ],
+        "dateModified": ISO_BUILD_DATE
+    });
+    const headExtras = `<meta name="robots" content="max-image-preview:large"><script type="application/ld+json">${jsonLd}</script>`;
+
     return wrapLayout('Versions', `
-        ${generateSummaryPanel(runStats, "Versions", majorKeys.length, runStats.uniqueVersionsSeen)}
+        ${generateSummaryPanel(runStats, "Versions", runStats.uniqueVersionsSeen, runStats.uniqueVersionsSeen)}
         <div class="grid">${majorLinks}</div>
         <h3 style="margin-top: 40px; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px;">Specific Build Versions</h3>
-        <div class="grid">${minorLinks}</div>`, [{ name: 'versions', url: '' }], indexDesc, generateCollectionJsonLd(`Versions`, indexDesc));
+        <div class="grid">${minorLinks}</div>`, 
+        [{ name: 'versions', url: '' }], 
+        indexDesc, 
+        headExtras, 
+        `/versions/`, 
+        `/versions/summary.png`
+    );
 }

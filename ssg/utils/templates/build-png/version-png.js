@@ -39,7 +39,7 @@ export function getVersionSummaryTemplate(versions, icon) {
         <!-- Header -->
         <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px;">
             <div style="display: flex; flex-direction: column;">
-                <div style="font-size: 24px; color: #00e8ff; font-style: italic; margin-bottom: 5px;">Slay the Spire 2 Stats</div>
+                <div style="font-size: 24px; color: #ffd700; font-style: italic; margin-bottom: 5px;">Slay the Spire 2 Stats</div>
                 <div style="font-size: 72px; font-weight: bold; color: #fff; line-height: 1;">Versions</div>
             </div>
             <div style="display: flex; align-items: center; background: rgba(0,0,0,0.4); padding: 20px 30px; border-radius: 12px; border: 1px solid #333;">

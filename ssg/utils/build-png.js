@@ -8,6 +8,7 @@ import { isRunByUser, normalizeId } from '../sts2/helpers.js';
 import { getUserSummaryTemplate } from './templates/build-png/user-png.js';
 import { getUserThumbnailTemplate } from './templates/build-png/user-thumbnail.js';
 import { getVersionSummaryTemplate } from './templates/build-png/version-png.js';
+import { getVersionThumbnailTemplate } from './templates/build-png/version-thumbnail.js';
 
 /**
  * Slay the Spire 2 - PNG Image Generator
@@ -106,14 +107,21 @@ async function buildPngs() {
         // 3. Global Version Summary (6 most recent major versions)
         console.log('📸 Generating global version summary image...');
         const versionMap = {};
+        const minorVersionSets = {}; // Track unique build_ids per major track
+
         allRuns.forEach(run => {
             const buildId = run.build_id || 'Unknown';
             const parts = buildId.split('.');
             if (parts.length >= 2) {
                 const majorId = parts.slice(0, 2).join('.');
-                if (!versionMap[majorId]) versionMap[majorId] = { id: majorId, wins: 0, total: 0 };
+                if (!versionMap[majorId]) {
+                    versionMap[majorId] = { id: majorId, wins: 0, total: 0 };
+                    minorVersionSets[majorId] = new Set();
+                }
                 versionMap[majorId].total++;
                 if (run.win) versionMap[majorId].wins++;
+
+                if (parts.length === 3) minorVersionSets[majorId].add(buildId);
             }
         });
 
@@ -125,6 +133,13 @@ async function buildPngs() {
             const versionTemplate = getVersionSummaryTemplate(latestMajorVersions, newStatsIcon);
             const versionPath = path.join(PATHS.WEB_ROOT, 'versions', 'summary.png');
             await renderPng(versionTemplate, versionPath, fonts, 1200, 630);
+
+            // 4. Global Version Thumbnail (Latest major track)
+            const latest = latestMajorVersions[0];
+            const mCount = minorVersionSets[latest.id]?.size || 0;
+            const thumbTemplate = getVersionThumbnailTemplate(latest, mCount, newStatsIcon);
+            const thumbPath = path.join(PATHS.WEB_ROOT, 'versions', 'thumbnail.png');
+            await renderPng(thumbTemplate, thumbPath, fonts, 1000, 1000);
         }
 
         console.log('✨ PNG build complete!');

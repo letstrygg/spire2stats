@@ -1200,7 +1200,7 @@ async function build() {
             { name: 'Monsters', folder: 'monsters', seen: cardStats.uniqueMonstersSeen, total: monsters.length },
             { name: 'Encounters', folder: 'encounters', seen: cardStats.uniqueEncountersSeen, total: encounters.length },
             { name: 'Ascensions', folder: 'ascensions', seen: cardStats.uniqueAscensionsSeen, total: ascensions.length },
-            { name: 'Versions', folder: 'versions', seen: cardStats.uniqueVersionsSeen, total: Object.keys(cardStats.majorVersionStats).length },
+            { name: 'Versions', folder: 'versions', seen: cardStats.uniqueVersionsSeen, total: cardStats.uniqueVersionsSeen },
             { name: 'Enchantments', folder: 'enchantments', seen: cardStats.uniqueEnchantmentsSeen, total: enchantments.length },
             { name: 'Keywords', folder: 'keywords', seen: keywordStats.seen, total: keywordStats.total }
         ];
