@@ -905,7 +905,23 @@ async function buildEncounters(encounters, runStats, sitemap) {
         </a>`;
     }).join('');
 
-    const indexHtml = wrapLayout('Encounters', `${generateLethalityIndexSummary(runStats, runStats.encounterStats, "Encounters", encounters.length, runStats.uniqueEncountersSeen)}<div class="grid">${encounterLinks}</div>`, [{ name: 'encounters', url: '' }], "View Slay the Spire 2 encounter lethality and encounter rates.");
+    // Calculate summary stats for SEO title and description
+    let totalFaced = 0;
+    let totalKills = 0;
+    Object.values(runStats.encounterStats).forEach(s => {
+        totalFaced += (s.encountered || 0);
+        totalKills += (s.kills || 0);
+    });
+    const lethalityRate = totalFaced > 0 ? ((totalKills / totalFaced) * 100).toFixed(1) : "0.0";
+
+    const indexTitle = `${totalFaced} Encounters ${lethalityRate}% Lethal ${totalKills} Kills`;
+    const indexDesc = `Player kills and average damage stats for ${encounters.length} encounters across ${runStats.totalRuns} runs on Slay the Spire 2.`;
+
+    const indexHtml = wrapLayout(indexTitle, 
+        `${generateLethalityIndexSummary(runStats, runStats.encounterStats, "Encounters", encounters.length, runStats.uniqueEncountersSeen)}<div class="grid">${encounterLinks}</div>`, 
+        [{ name: 'encounters', url: '' }], 
+        indexDesc,
+        generateCollectionJsonLd("Encounters", indexDesc));
     fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
 }
 
@@ -988,7 +1004,23 @@ async function buildMonsters(monsters, runStats, sitemap) {
         </a>`;
     }).join('');
 
-    const indexHtml = wrapLayout('Monsters', `${generateLethalityIndexSummary(runStats, runStats.monsterStats, "Monsters", monsters.length, runStats.uniqueMonstersSeen)}<div class="grid">${monsterLinks}</div>`, [{ name: 'monsters', url: '' }], "View Slay the Spire 2 monster lethality and encounter rates.");
+    // Calculate summary stats for SEO title and description
+    let totalFaced = 0;
+    let totalKills = 0;
+    Object.values(runStats.monsterStats).forEach(s => {
+        totalFaced += (s.encountered || 0);
+        totalKills += (s.kills || 0);
+    });
+    const lethalityRate = totalFaced > 0 ? ((totalKills / totalFaced) * 100).toFixed(1) : "0.0";
+
+    const indexTitle = `${totalFaced} Monsters ${lethalityRate}% Lethal ${totalKills} Kills`;
+    const indexDesc = `Player kills and average damage stats for ${monsters.length} monsters across ${runStats.totalRuns} runs on Slay the Spire 2.`;
+
+    const indexHtml = wrapLayout(indexTitle, 
+        `${generateLethalityIndexSummary(runStats, runStats.monsterStats, "Monsters", monsters.length, runStats.uniqueMonstersSeen)}<div class="grid">${monsterLinks}</div>`, 
+        [{ name: 'monsters', url: '' }], 
+        indexDesc,
+        generateCollectionJsonLd("Monsters", indexDesc));
     fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
 }
 
