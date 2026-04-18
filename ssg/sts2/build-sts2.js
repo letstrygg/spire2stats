@@ -999,7 +999,7 @@ async function buildMonsters(monsters, runStats, sitemap) {
             <div class="card-info">
                 <span class="card-name">${m.name}</span>
                 <div style="color: ${typeColor}; font-size: 0.65rem; text-transform: uppercase; font-weight: bold; margin-bottom: 2px;">${m.type || 'Monster'}</div>
-                <div style="color: #888; font-size: 0.75rem;">Encountered ${stats.encountered} times</div>
+                <div style="color: #888; font-size: 0.75rem;">Encounteres ${stats.encountered}</div>
                 <div style="color: #ff4b4b; font-size: 0.75rem;">Avg Dmg: ${avgDmg.toFixed(1)}</div>
             </div>
             <div class="card-stats" style="display: flex; flex-direction: column; align-items: flex-end; justify-content: flex-end; gap: 4px;">
