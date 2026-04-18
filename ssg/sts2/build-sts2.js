@@ -47,6 +47,7 @@ import { characterDetailTemplate } from './templates/character.js';
 import { monsterDetailTemplate } from './templates/monster.js';
 import { encounterDetailTemplate } from './templates/encounter.js';
 import { ascensionDetailTemplate } from './templates/ascension.js';
+import { versionDetailTemplate } from './templates/version.js';
 import { enchantmentDetailTemplate } from './templates/enchantment.js';
 import { settingsTemplate } from './templates/settings.js';
 import { contributeTemplate } from './templates/contribute.js';
@@ -95,7 +96,7 @@ async function getCardStats() {
     console.log(`📡 Database returned ${rows.length} run rows.`);
 
     const totalRuns = rows.length;
-    if (totalRuns === 0) return { stats: {}, charStats: {}, relicStats: {}, eventStats: {}, ascensionStats: {}, enchantmentStats: {}, monsterStats: {}, encounterStats: {}, globalWinRate: 0, totalRuns: 0, totalWins: 0, totalLosses: 0, uniqueUsers: 0, uniqueCardsSeen: 0, uniqueRelicsSeen: 0, uniqueEventsSeen: 0, uniqueCharsSeen: 0, uniqueAscensionsSeen: 0, uniqueEnchantmentsSeen: 0, uniqueMonstersSeen: 0, uniqueEncountersSeen: 0 };
+    if (totalRuns === 0) return { stats: {}, charStats: {}, relicStats: {}, eventStats: {}, ascensionStats: {}, enchantmentStats: {}, monsterStats: {}, encounterStats: {}, versionStats: {}, globalWinRate: 0, totalRuns: 0, totalWins: 0, totalLosses: 0, uniqueUsers: 0, uniqueCardsSeen: 0, uniqueRelicsSeen: 0, uniqueEventsSeen: 0, uniqueCharsSeen: 0, uniqueAscensionsSeen: 0, uniqueEnchantmentsSeen: 0, uniqueMonstersSeen: 0, uniqueEncountersSeen: 0, uniqueVersionsSeen: 0 };
 
             const totalWins = rows.filter(r => r.win).length;
             const globalWinRate = totalRuns > 0 ? (totalWins / totalRuns) * 100 : 0;
@@ -109,6 +110,7 @@ async function getCardStats() {
             const enchantmentStats = {}; // Enchantment stats
             const monsterStats = {}; // Monster stats
             const encounterStats = {}; // Encounter stats
+            const versionStats = {}; // Version stats
 
             const encounterRows = await query("SELECT encounter_id, monsters FROM encounters");
             const encounterMap = {};
@@ -231,6 +233,9 @@ async function getCardStats() {
 
                 const ascLevel = String(row.ascension || 0);
                 updateStat(ascensionStats, ascLevel, row.win, video, runMeta);
+
+                const buildId = row.build_id || 'Unknown';
+                updateStat(versionStats, buildId, row.win, video, runMeta);
             });
             
             const uniqueCardsSeen = Object.keys(stats).length;
@@ -247,6 +252,7 @@ async function getCardStats() {
                 enchantmentStats,
                 monsterStats,
                 encounterStats,
+                versionStats,
                 globalWinRate, 
                 totalRuns, 
                 totalWins, 
@@ -259,7 +265,8 @@ async function getCardStats() {
                 uniqueAscensionsSeen: Object.keys(ascensionStats).length,
                 uniqueEnchantmentsSeen: Object.keys(enchantmentStats).length,
                 uniqueMonstersSeen: Object.keys(monsterStats).length,
-                uniqueEncountersSeen: Object.keys(encounterStats).length
+                uniqueEncountersSeen: Object.keys(encounterStats).length,
+                uniqueVersionsSeen: Object.keys(versionStats).length
             };
 }
 
@@ -582,6 +589,40 @@ async function buildEnchantments(enchantments, runStats, sitemap) {
 
     const indexDesc = `View global winrates and run statistics for all Slay the Spire 2 enchantments.`;
     const indexHtml = wrapLayout('Enchantments', `${generateSummaryPanel(runStats, "Enchantments", total, seen)}<div class="grid">${links}</div>`, [{ name: 'enchantments', url: '' }], indexDesc, generateCollectionJsonLd(`Enchantments`, indexDesc));
+    fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
+}
+
+async function buildVersions(runStats, sitemap) {
+    const versions = Object.keys(runStats.versionStats).sort((a, b) => {
+        return b.localeCompare(a, undefined, { numeric: true, sensitivity: 'base' });
+    });
+    
+    console.log(`🏷️  Building ${versions.length} version pages...`);
+    const root = ensureDir(path.join(PATHS.WEB_ROOT, 'versions'));
+
+    for (const v of versions) {
+        const slug = slugify(v);
+        const dir = ensureDir(path.join(root, slug));
+        
+        const rawStats = runStats.versionStats[v];
+        const stats = getItemStats(rawStats, runStats.globalWinRate);
+        const videosHtml = generateRunLinksList(rawStats.runs, `Runs on Build ${v}`);
+
+        const detailHtml = versionDetailTemplate(v, stats, videosHtml);
+        fs.writeFileSync(path.join(dir, 'index.html'), detailHtml);
+        sitemap.add(`/versions/${slug}/`);
+    }
+
+    // Index Page
+    sitemap.add('/versions/');
+    const versionLinks = versions.map(v => {
+        const slug = slugify(v);
+        const stats = getItemStats(runStats.versionStats[v], runStats.globalWinRate);
+        return generateCardItemHtml(`/versions/${slug}/`, v, stats);
+    }).join('');
+
+    const indexDesc = `Performance statistics and run history for Slay the Spire 2 build versions.`;
+    const indexHtml = wrapLayout('Versions', `${generateSummaryPanel(runStats, "Versions", versions.length, versions.length)}<div class="grid">${versionLinks}</div>`, [{ name: 'versions', url: '' }], indexDesc, generateCollectionJsonLd(`Versions`, indexDesc));
     fs.writeFileSync(path.join(root, 'index.html'), indexHtml);
 }
 
@@ -1220,6 +1261,7 @@ async function build() {
             { name: 'Monsters', folder: 'monsters', seen: cardStats.uniqueMonstersSeen, total: monsters.length },
             { name: 'Encounters', folder: 'encounters', seen: cardStats.uniqueEncountersSeen, total: encounters.length },
             { name: 'Ascensions', folder: 'ascensions', seen: cardStats.uniqueAscensionsSeen, total: ascensions.length },
+            { name: 'Versions', folder: 'versions', seen: cardStats.uniqueVersionsSeen, total: cardStats.uniqueVersionsSeen },
             { name: 'Enchantments', folder: 'enchantments', seen: cardStats.uniqueEnchantmentsSeen, total: enchantments.length },
             { name: 'Keywords', folder: 'keywords', seen: keywordStats.seen, total: keywordStats.total }
         ];
@@ -1301,6 +1343,9 @@ async function build() {
 
         // --- ASCENSIONS ---
         await buildAscensions(ascensions, cardStats, sitemap);
+
+        // --- VERSIONS ---
+        await buildVersions(cardStats, sitemap);
 
         // --- ENCHANTMENTS ---
         await buildEnchantments(enchantments, cardStats, sitemap);
