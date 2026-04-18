@@ -14,9 +14,9 @@ const PNG_COLORS = {
  * @param {object} user - User record from DB.
  * @param {Array} userRuns - Filtered list of runs for this user.
  * @param {object} charLookup - Mapping of character IDs to display names.
- * @param {string} swordIcon - Base64 string of the stats_swords icon.
+ * @param {string} icon - Base64 string of the primary branding icon.
  */
-export function getUserSummaryTemplate(user, userRuns, charLookup, swordIcon) {
+export function getUserSummaryTemplate(user, userRuns, charLookup, icon) {
     const userWins = userRuns.filter(r => r.win).length;
     const userTotal = userRuns.length;
     const userWinRate = calculateWinRate(userRuns).toFixed(1);
@@ -51,7 +51,7 @@ export function getUserSummaryTemplate(user, userRuns, charLookup, swordIcon) {
     }).join('');
 
     return html(`
-    <div style="display: flex; flex-direction: column; width: 1200px; height: 630px; background-color: #111; color: #e3e3e3; font-family: 'Kreon'; padding: 50px; position: relative;">
+    <div style="display: flex; flex-direction: column; width: 1200px; height: 630px; background-color: #111; color: #e3e3e3; font-family: 'Kreon'; padding: 50px 60px; position: relative;">
         
         <!-- Header -->
         <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px;">
@@ -60,7 +60,7 @@ export function getUserSummaryTemplate(user, userRuns, charLookup, swordIcon) {
                 <div style="font-size: 72px; font-weight: bold; color: #fff; line-height: 1;">${user.display_name}</div>
             </div>
             <div style="display: flex; align-items: center; background: rgba(0,0,0,0.4); padding: 20px 30px; border-radius: 12px; border: 1px solid #333;">
-                <img src="${swordIcon}" style="width: 60px; height: 60px; margin-right: 20px;" />
+                <img src="${icon}" style="width: 60px; height: 60px; margin-right: 20px;" />
                 <div style="display: flex; flex-direction: column;">
                             <div style="display: flex; font-size: 32px; font-weight: bold;">
                         <span style="color: #fff;">Ascensions</span>
@@ -93,7 +93,7 @@ export function getUserSummaryTemplate(user, userRuns, charLookup, swordIcon) {
         </div>
 
         <!-- Branding Footer -->
-        <div style="position: absolute; bottom: 40px; left: 50px; font-size: 20px; color: #444;">
+        <div style="position: absolute; bottom: 40px; left: 60px; font-size: 20px; color: #444;">
             Generated on spire2stats.com
         </div>
     </div>
