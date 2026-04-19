@@ -638,8 +638,8 @@
   "Defragment": {
     "name": "LetsTryGG",
     "slug": "letstrygg",
-    "winrate": "83.3",
-    "seen": 6
+    "winrate": "85.7",
+    "seen": 7
   },
   "Double Energy": {
     "name": "SunShadoowRay",
@@ -786,10 +786,10 @@
     "seen": 2
   },
   "Lightning Rod": {
-    "name": "SunShadoowRay",
-    "slug": "sunshadoowray",
-    "winrate": "100.0",
-    "seen": 3
+    "name": "LetsTryGG",
+    "slug": "letstrygg",
+    "winrate": "72.7",
+    "seen": 11
   },
   "Loop": {
     "name": "Falterfire",
@@ -968,8 +968,8 @@
   "TURBO": {
     "name": "LetsTryGG",
     "slug": "letstrygg",
-    "winrate": "58.3",
-    "seen": 12
+    "winrate": "61.5",
+    "seen": 13
   },
   "Tempest": {
     "name": "Girsia",
