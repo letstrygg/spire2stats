@@ -11,24 +11,8 @@ import { slugify } from '../paths.js';
 /** Sort logic: Major versions descending, children ascending within groups. */
 export function sortVersions(minorKeys, majorKeys) {
     return [...new Set([...minorKeys, ...majorKeys])].sort((a, b) => {
-        const getMajor = (v) => v.split('.').slice(0, 2).join('.');
-        const majorA = getMajor(a);
-        const majorB = getMajor(b);
-
-        if (majorA !== majorB) {
-            return majorB.localeCompare(majorA, undefined, { numeric: true });
-        }
-
-        const partsA = a.split('.');
-        const partsB = b.split('.');
-
-        // Major version (fewer parts) comes first in its group
-        if (partsA.length !== partsB.length) {
-            return partsA.length - partsB.length;
-        }
-
-        // Same length (e.g. two minor versions), sort ascending
-        return a.localeCompare(b, undefined, { numeric: true });
+        // Sort all versions in a simple descending numerical order
+        return b.localeCompare(a, undefined, { numeric: true });
     });
 }
 
