@@ -408,10 +408,10 @@
     "seen": 2
   },
   "Debt": {
-    "name": "Girsia",
-    "slug": "girsia",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "BuffFinkaPLZ",
+    "slug": "bufffinkaplz",
+    "winrate": "61.5",
+    "seen": 13
   },
   "Decay": {
     "name": "SunShadoowRay",
@@ -1752,10 +1752,10 @@
     "seen": 4
   },
   "Cleanse": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
-    "winrate": "100.0",
-    "seen": 2
+    "name": "Shane_in_the_Back",
+    "slug": "shane_in_the_back",
+    "winrate": "66.7",
+    "seen": 3
   },
   "Countdown": {
     "name": "Falterfire",
@@ -2102,8 +2102,8 @@
   "Severance": {
     "name": "Dead3y3",
     "slug": "dead3y3",
-    "winrate": "100.0",
-    "seen": 3
+    "winrate": "75.0",
+    "seen": 4
   },
   "Shared Fate": {
     "name": "Falterfire",
@@ -2132,8 +2132,8 @@
   "Snap": {
     "name": "Dead3y3",
     "slug": "dead3y3",
-    "winrate": "100.0",
-    "seen": 3
+    "winrate": "75.0",
+    "seen": 4
   },
   "Soul Storm": {
     "name": "Phoenixabe",
