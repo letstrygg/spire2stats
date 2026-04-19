@@ -26,7 +26,7 @@ export function ensureDir(dirPath) {
 
 export function slugify(text) {
     return text.toString().toLowerCase().trim()
-        .replace(/[.\s]+/g, '-')
+        .replace(/[._\s]+/g, '-')
         .replace(/[^\w\-]+/g, '')
         .replace(/\-\-+/g, '-');
 }

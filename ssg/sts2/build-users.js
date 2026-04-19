@@ -418,7 +418,11 @@ async function build() {
                 }).join('');
 
                 const uniqueEventIds = [...new Set(pathHistory.filter(p => p.event_id).map(p => p.event_id))];
-                const eventsLinks = uniqueEventIds.map(id => `<a href="/events/${slugify(eventLookup[id] || id)}/" class="item-link">${eventLookup[id] || id}</a>`).join('');
+                const eventsLinks = uniqueEventIds.map(id => {
+                    const cleanId = normalizeId(id);
+                    const name = eventLookup[cleanId] || (id ? id.split('.').pop().replace(/_/g, ' ') : id);
+                    return `<a href="/events/${slugify(name)}/" class="item-link">${name}</a>`;
+                }).join('');
 
                 // --- RICH META DESCRIPTION GENERATOR ---
                 const generateRunDescription = () => {
@@ -428,7 +432,8 @@ async function build() {
                         const lastNode = pathHistory[pathHistory.length - 1];
                         const floorNum = lastNode.floor ?? pathHistory.length;
                         const killerId = run.killed_by_encounter || run.killed_by_event;
-                        const killerName = encounterLookup[killerId] || eventLookup[killerId] || (killerId ? killerId.split('.').pop().replace(/_/g, ' ') : 'Unknown');
+                        const cleanKillerId = normalizeId(killerId);
+                        const killerName = encounterLookup[cleanKillerId] || eventLookup[cleanKillerId] || (killerId ? killerId.split('.').pop().replace(/_/g, ' ') : 'Unknown');
                         deathInfo = ` on floor ${floorNum} to ${killerName}`;
                     }
 
@@ -478,7 +483,8 @@ async function build() {
                 const floorData = Array.isArray(pathHistory) 
                     ? pathHistory.map((p, idx) => {
                         const id = p.encounter_id || p.event_id;
-                        const nodeName = id ? (encounterLookup[id] || eventLookup[id] || id.split('.').pop().replace(/_/g, ' ')) : (p.room_type ? p.room_type.replace(/_/g, ' ') : 'Unknown');
+                        const cleanId = normalizeId(id);
+                        const nodeName = id ? (encounterLookup[cleanId] || eventLookup[cleanId] || id.split('.').pop().replace(/_/g, ' ')) : (p.room_type ? p.room_type.replace(/_/g, ' ') : 'Unknown');
                         let monsters = [];
                         if (p.monster_ids && Array.isArray(p.monster_ids)) {
                             monsters = p.monster_ids.map(mid => mid.split('.').pop().replace(/(_NORMAL|_BOSS|_ELITE)$/, '').replace(/_/g, ' '));
