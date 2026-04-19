@@ -64,7 +64,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/users/letstrygg/">letstrygg</a> / run 1776019686</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-19T08:00:00.000Z">April 19, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-19T16:00:00.000Z">April 19, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -97,7 +97,7 @@
                                 </section>
                                 <section>
                                     <h3 style="color: var(--blue, #448aff); border-bottom: 1px solid #333; padding-bottom: 5px;">Events</h3>
-                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;"><a href="/events/neow/" class="item-link">NEOW</a><a href="/events/the_legends_were_true/" class="item-link">THE_LEGENDS_WERE_TRUE</a><a href="/events/punch_off/" class="item-link">PUNCH_OFF</a></div>
+                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;"><a href="/events/neow/" class="item-link">Neow</a><a href="/events/the-legends-were-true/" class="item-link">The Legends Were True</a><a href="/events/punch-off/" class="item-link">Punch Off</a></div>
                                 </section>
                             </div>
                         </div>
@@ -108,7 +108,7 @@
                     document.addEventListener("DOMContentLoaded", function() {
                         const ctx = document.getElementById('hpChart').getContext('2d');
                         if (!ctx) return;
-                        const rawRuns = [{"label":"Run 95 (Silent)","win":false,"floorData":[{"floor":1,"hp":43,"name":"NEOW","damage":13,"healed":56,"gold":0,"monsters":[]},{"floor":2,"hp":43,"name":"SEAPUNK WEAK","damage":0,"healed":0,"gold":9,"monsters":["SEAPUNK"]},{"floor":3,"hp":42,"name":"SLUDGE SPINNER WEAK","damage":1,"healed":0,"gold":14,"monsters":["SLUDGE SPINNER"]},{"floor":4,"hp":42,"name":"TOADPOLES WEAK","damage":0,"healed":0,"gold":7,"monsters":["TOADPOLE","TOADPOLE"]},{"floor":5,"hp":40,"name":"LIVING FOG NORMAL","damage":2,"healed":0,"gold":7,"monsters":["LIVING FOG"]},{"floor":6,"hp":32,"name":"THE LEGENDS WERE TRUE","damage":8,"healed":0,"gold":0,"monsters":[]},{"floor":7,"hp":32,"name":"CULTISTS NORMAL","damage":0,"healed":0,"gold":9,"monsters":["CALCIFIED CULTIST","DAMP CULTIST"]},{"floor":8,"hp":0,"name":"PUNCH OFF","damage":32,"healed":0,"gold":0,"monsters":[]}]}];
+                        const rawRuns = [{"label":"Run 95 (Silent)","win":false,"floorData":[{"floor":1,"hp":43,"name":"Neow","damage":13,"healed":56,"gold":0,"monsters":[]},{"floor":2,"hp":43,"name":"Seapunk","damage":0,"healed":0,"gold":9,"monsters":["SEAPUNK"]},{"floor":3,"hp":42,"name":"Sludge Spinner","damage":1,"healed":0,"gold":14,"monsters":["SLUDGE SPINNER"]},{"floor":4,"hp":42,"name":"Toadpoles","damage":0,"healed":0,"gold":7,"monsters":["TOADPOLE","TOADPOLE"]},{"floor":5,"hp":40,"name":"Evil Gas","damage":2,"healed":0,"gold":7,"monsters":["LIVING FOG"]},{"floor":6,"hp":32,"name":"The Legends Were True","damage":8,"healed":0,"gold":0,"monsters":[]},{"floor":7,"hp":32,"name":"Cultists","damage":0,"healed":0,"gold":9,"monsters":["CALCIFIED CULTIST","DAMP CULTIST"]},{"floor":8,"hp":0,"name":"Punch Off","damage":32,"healed":0,"gold":0,"monsters":[]}]}];
                         console.log("📈 Chart Data received by browser:", rawRuns);
 
                         if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) {

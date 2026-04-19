@@ -64,7 +64,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/users/1nfern0/">1nfern0</a> / run 1772934463</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-19T08:00:00.000Z">April 19, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-19T16:00:00.000Z">April 19, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -97,7 +97,7 @@
                                 </section>
                                 <section>
                                     <h3 style="color: var(--blue, #448aff); border-bottom: 1px solid #333; padding-bottom: 5px;">Events</h3>
-                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;"><a href="/events/neow/" class="item-link">NEOW</a></div>
+                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;"><a href="/events/neow/" class="item-link">Neow</a></div>
                                 </section>
                             </div>
                         </div>
@@ -108,7 +108,7 @@
                     document.addEventListener("DOMContentLoaded", function() {
                         const ctx = document.getElementById('hpChart').getContext('2d');
                         if (!ctx) return;
-                        const rawRuns = [{"label":"Run 18 (Necrobinder)","win":false,"floorData":[{"floor":1,"hp":52,"name":"NEOW","damage":0,"healed":52,"gold":0,"monsters":[]},{"floor":2,"hp":52,"name":"TOADPOLES WEAK","damage":0,"healed":0,"gold":15,"monsters":["TOADPOLE","TOADPOLE"]},{"floor":3,"hp":45,"name":"SLUDGE SPINNER WEAK","damage":7,"healed":0,"gold":7,"monsters":["SLUDGE SPINNER"]},{"floor":4,"hp":43,"name":"CORPSE SLUGS WEAK","damage":2,"healed":0,"gold":14,"monsters":["CORPSE SLUG","CORPSE SLUG"]},{"floor":5,"hp":43,"name":"shop","damage":0,"healed":0,"gold":0,"monsters":[]},{"floor":6,"hp":6,"name":"SKULKING COLONY ELITE","damage":37,"healed":0,"gold":31,"monsters":["SKULKING COLONY"]},{"floor":7,"hp":22,"name":"rest site","damage":0,"healed":16,"gold":0,"monsters":[]}]}];
+                        const rawRuns = [{"label":"Run 18 (Necrobinder)","win":false,"floorData":[{"floor":1,"hp":52,"name":"Neow","damage":0,"healed":52,"gold":0,"monsters":[]},{"floor":2,"hp":52,"name":"Toadpoles","damage":0,"healed":0,"gold":15,"monsters":["TOADPOLE","TOADPOLE"]},{"floor":3,"hp":45,"name":"Sludge Spinner","damage":7,"healed":0,"gold":7,"monsters":["SLUDGE SPINNER"]},{"floor":4,"hp":43,"name":"Corpse Slugs","damage":2,"healed":0,"gold":14,"monsters":["CORPSE SLUG","CORPSE SLUG"]},{"floor":5,"hp":43,"name":"shop","damage":0,"healed":0,"gold":0,"monsters":[]},{"floor":6,"hp":6,"name":"Skulking Colony","damage":37,"healed":0,"gold":31,"monsters":["SKULKING COLONY"]},{"floor":7,"hp":22,"name":"rest site","damage":0,"healed":16,"gold":0,"monsters":[]}]}];
                         console.log("📈 Chart Data received by browser:", rawRuns);
 
                         if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) {

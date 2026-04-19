@@ -64,7 +64,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/users/dawu/">dawu</a> / run 1774085418</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-19T08:00:00.000Z">April 19, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-19T16:00:00.000Z">April 19, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -97,7 +97,7 @@
                                 </section>
                                 <section>
                                     <h3 style="color: var(--blue, #448aff); border-bottom: 1px solid #333; padding-bottom: 5px;">Events</h3>
-                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;"><a href="/events/neow/" class="item-link">NEOW</a></div>
+                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;"><a href="/events/neow/" class="item-link">Neow</a></div>
                                 </section>
                             </div>
                         </div>
@@ -108,7 +108,7 @@
                     document.addEventListener("DOMContentLoaded", function() {
                         const ctx = document.getElementById('hpChart').getContext('2d');
                         if (!ctx) return;
-                        const rawRuns = [{"label":"Run 47 (Silent)","win":false,"floorData":[{"floor":1,"hp":0,"name":"NEOW","damage":0,"healed":56,"gold":0,"monsters":[]}]}];
+                        const rawRuns = [{"label":"Run 47 (Silent)","win":false,"floorData":[{"floor":1,"hp":0,"name":"Neow","damage":0,"healed":56,"gold":0,"monsters":[]}]}];
                         console.log("📈 Chart Data received by browser:", rawRuns);
 
                         if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) {
