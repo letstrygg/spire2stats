@@ -96,10 +96,10 @@
     "seen": 2
   },
   "Fasten": {
-    "name": "RiffinesElike",
-    "slug": "riffineselike",
-    "winrate": "100.0",
-    "seen": 2
+    "name": "shutupper",
+    "slug": "shutupper",
+    "winrate": "83.3",
+    "seen": 6
   },
   "Finesse": {
     "name": "Ethan4D",
@@ -114,10 +114,10 @@
     "seen": 4
   },
   "Flash of Steel": {
-    "name": "Mrtoolshed",
-    "slug": "mrtoolshed",
+    "name": "shutupper",
+    "slug": "shutupper",
     "winrate": "100.0",
-    "seen": 3
+    "seen": 4
   },
   "Gang Up": {
     "name": "SunShadoowRay",
@@ -138,10 +138,10 @@
     "seen": 3
   },
   "Hidden Gem": {
-    "name": "shutupper",
-    "slug": "shutupper",
+    "name": "Girsia",
+    "slug": "girsia",
     "winrate": "100.0",
-    "seen": 4
+    "seen": 3
   },
   "Huddle Up": {
     "name": "RiffinesElike",
@@ -312,10 +312,10 @@
     "seen": 1
   },
   "Seeker Strike": {
-    "name": "Mrtoolshed",
-    "slug": "mrtoolshed",
-    "winrate": "100.0",
-    "seen": 2
+    "name": "shutupper",
+    "slug": "shutupper",
+    "winrate": "80.0",
+    "seen": 5
   },
   "Shockwave": {
     "name": "Plabilitop",
@@ -330,10 +330,10 @@
     "seen": 2
   },
   "Stratagem": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
+    "name": "shutupper",
+    "slug": "shutupper",
     "winrate": "100.0",
-    "seen": 3
+    "seen": 4
   },
   "Tag Team": {
     "name": "Log",
@@ -408,10 +408,10 @@
     "seen": 2
   },
   "Debt": {
-    "name": "Girsia",
-    "slug": "girsia",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "BuffFinkaPLZ",
+    "slug": "bufffinkaplz",
+    "winrate": "61.5",
+    "seen": 13
   },
   "Decay": {
     "name": "Nexhawk1441",
@@ -426,8 +426,8 @@
     "seen": 6
   },
   "Enthralled": {
-    "name": "Nexhawk1441",
-    "slug": "nexhawk1441",
+    "name": "shutupper",
+    "slug": "shutupper",
     "winrate": "100.0",
     "seen": 3
   },
@@ -468,8 +468,8 @@
     "seen": 2
   },
   "Regret": {
-    "name": "SunShadoowRay",
-    "slug": "sunshadoowray",
+    "name": "shutupper",
+    "slug": "shutupper",
     "winrate": "100.0",
     "seen": 2
   },
@@ -618,10 +618,10 @@
     "seen": 5
   },
   "Creative AI": {
-    "name": "SunShadoowRay",
-    "slug": "sunshadoowray",
-    "winrate": "100.0",
-    "seen": 3
+    "name": "shutupper",
+    "slug": "shutupper",
+    "winrate": "83.3",
+    "seen": 6
   },
   "Darkness": {
     "name": "SunShadoowRay",
@@ -1098,10 +1098,10 @@
     "seen": 1
   },
   "Mad Science": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "92.9",
-    "seen": 14
+    "name": "shutupper",
+    "slug": "shutupper",
+    "winrate": "93.3",
+    "seen": 15
   },
   "Maul": {
     "name": "Nexhawk1441",
@@ -1166,8 +1166,8 @@
   "Toric Toughness": {
     "name": "shutupper",
     "slug": "shutupper",
-    "winrate": "80.0",
-    "seen": 5
+    "winrate": "83.3",
+    "seen": 6
   },
   "Whistle": {
     "name": "Phoenixabe",
@@ -1314,10 +1314,10 @@
     "seen": 5
   },
   "Cruelty": {
-    "name": "shutupper",
-    "slug": "shutupper",
-    "winrate": "66.7",
-    "seen": 6
+    "name": "Phoenixabe",
+    "slug": "phoenixabe",
+    "winrate": "62.5",
+    "seen": 8
   },
   "Dark Embrace": {
     "name": "Nexhawk1441",
@@ -1494,8 +1494,8 @@
     "seen": 10
   },
   "Offering": {
-    "name": "shutupper",
-    "slug": "shutupper",
+    "name": "Phoenixabe",
+    "slug": "phoenixabe",
     "winrate": "100.0",
     "seen": 5
   },
@@ -1718,8 +1718,8 @@
   "Bone Shards": {
     "name": "shutupper",
     "slug": "shutupper",
-    "winrate": "80.0",
-    "seen": 5
+    "winrate": "83.3",
+    "seen": 6
   },
   "Borrowed Time": {
     "name": "Shane_in_the_Back",
@@ -1821,7 +1821,7 @@
     "name": "shutupper",
     "slug": "shutupper",
     "winrate": "100.0",
-    "seen": 3
+    "seen": 5
   },
   "Dirge": {
     "name": "Girsia",
@@ -1836,10 +1836,10 @@
     "seen": 5
   },
   "Dredge": {
-    "name": "SnekNet",
-    "slug": "sneknet",
-    "winrate": "100.0",
-    "seen": 2
+    "name": "shutupper",
+    "slug": "shutupper",
+    "winrate": "80.0",
+    "seen": 5
   },
   "Eidolon": {
     "name": "Ethan4D",
@@ -1884,10 +1884,10 @@
     "seen": 3
   },
   "Forbidden Grimoire": {
-    "name": "SunShadoowRay",
-    "slug": "sunshadoowray",
+    "name": "shutupper",
+    "slug": "shutupper",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 2
   },
   "Friendship": {
     "name": "Falterfire",
@@ -1926,10 +1926,10 @@
     "seen": 3
   },
   "High Five": {
-    "name": "shutupper",
-    "slug": "shutupper",
+    "name": "Dead3y3",
+    "slug": "dead3y3",
     "winrate": "100.0",
-    "seen": 3
+    "seen": 2
   },
   "Invoke": {
     "name": "SnekNet",
@@ -1946,8 +1946,8 @@
   "Lethality": {
     "name": "shutupper",
     "slug": "shutupper",
-    "winrate": "75.0",
-    "seen": 8
+    "winrate": "72.7",
+    "seen": 11
   },
   "Melancholy": {
     "name": "Girsia",
@@ -1998,16 +1998,16 @@
     "seen": 5
   },
   "Parse": {
-    "name": "Shane_in_the_Back",
-    "slug": "shane_in_the_back",
+    "name": "shutupper",
+    "slug": "shutupper",
     "winrate": "83.3",
     "seen": 6
   },
   "Poke": {
-    "name": "shutupper",
-    "slug": "shutupper",
-    "winrate": "80.0",
-    "seen": 5
+    "name": "akoreanninja",
+    "slug": "akoreanninja",
+    "winrate": "66.7",
+    "seen": 12
   },
   "Protector": {
     "name": "Nexhawk1441",
@@ -2028,8 +2028,8 @@
     "seen": 2
   },
   "Putrefy": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "shutupper",
+    "slug": "shutupper",
     "winrate": "100.0",
     "seen": 3
   },
@@ -2166,10 +2166,10 @@
     "seen": 3
   },
   "The Scythe": {
-    "name": "Plabilitop",
-    "slug": "plabilitop",
-    "winrate": "60.0",
-    "seen": 5
+    "name": "shutupper",
+    "slug": "shutupper",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Time's Up": {
     "name": "akoreanninja",
@@ -2180,8 +2180,8 @@
   "Transfigure": {
     "name": "shutupper",
     "slug": "shutupper",
-    "winrate": "80.0",
-    "seen": 5
+    "winrate": "71.4",
+    "seen": 7
   },
   "Undeath": {
     "name": "Falterfire",
@@ -2204,8 +2204,8 @@
   "Wisp": {
     "name": "shutupper",
     "slug": "shutupper",
-    "winrate": "85.7",
-    "seen": 7
+    "winrate": "81.8",
+    "seen": 11
   },
   "Byrdonis Egg": {
     "name": "Laczse",
@@ -2397,7 +2397,7 @@
     "name": "shutupper",
     "slug": "shutupper",
     "winrate": "100.0",
-    "seen": 5
+    "seen": 6
   },
   "Gamma Blast": {
     "name": "0_tripwire_ 0",
@@ -2408,8 +2408,8 @@
   "Gather Light": {
     "name": "shutupper",
     "slug": "shutupper",
-    "winrate": "77.8",
-    "seen": 9
+    "winrate": "80.0",
+    "seen": 10
   },
   "Genesis": {
     "name": "atundelmar",
@@ -2421,7 +2421,7 @@
     "name": "shutupper",
     "slug": "shutupper",
     "winrate": "100.0",
-    "seen": 4
+    "seen": 6
   },
   "Glitterstream": {
     "name": "Falterfire",
@@ -2556,10 +2556,10 @@
     "seen": 5
   },
   "Pale Blue Dot": {
-    "name": "Plabilitop",
-    "slug": "plabilitop",
+    "name": "shutupper",
+    "slug": "shutupper",
     "winrate": "100.0",
-    "seen": 3
+    "seen": 4
   },
   "Parry": {
     "name": "Girsia",
@@ -2568,10 +2568,10 @@
     "seen": 3
   },
   "Particle Wall": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "80.0",
-    "seen": 10
+    "name": "shutupper",
+    "slug": "shutupper",
+    "winrate": "100.0",
+    "seen": 5
   },
   "Patter": {
     "name": "shutupper",
@@ -2592,8 +2592,8 @@
     "seen": 12
   },
   "Prophesize": {
-    "name": "RiffinesElike",
-    "slug": "riffineselike",
+    "name": "shutupper",
+    "slug": "shutupper",
     "winrate": "100.0",
     "seen": 2
   },
@@ -2607,7 +2607,7 @@
     "name": "shutupper",
     "slug": "shutupper",
     "winrate": "100.0",
-    "seen": 5
+    "seen": 6
   },
   "Refine Blade": {
     "name": "akoreanninja",
@@ -2616,8 +2616,8 @@
     "seen": 4
   },
   "Reflect": {
-    "name": "Stinkalot13",
-    "slug": "stinkalot13",
+    "name": "shutupper",
+    "slug": "shutupper",
     "winrate": "80.0",
     "seen": 5
   },
@@ -2634,10 +2634,10 @@
     "seen": 6
   },
   "Royalties": {
-    "name": "guelch",
-    "slug": "guelch",
+    "name": "shutupper",
+    "slug": "shutupper",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 3
   },
   "Seeking Edge": {
     "name": "Falterfire",
@@ -2646,8 +2646,8 @@
     "seen": 4
   },
   "Seven Stars": {
-    "name": "damianjestem",
-    "slug": "damianjestem",
+    "name": "shutupper",
+    "slug": "shutupper",
     "winrate": "80.0",
     "seen": 5
   },
@@ -2697,7 +2697,7 @@
     "name": "shutupper",
     "slug": "shutupper",
     "winrate": "100.0",
-    "seen": 3
+    "seen": 4
   },
   "Terraforming": {
     "name": "Ethan4D",
@@ -2828,8 +2828,8 @@
   "Bubble Bubble": {
     "name": "shutupper",
     "slug": "shutupper",
-    "winrate": "85.7",
-    "seen": 7
+    "winrate": "75.0",
+    "seen": 8
   },
   "Bullet Time": {
     "name": "vetres3",
@@ -2838,10 +2838,10 @@
     "seen": 2
   },
   "Burst": {
-    "name": "shutupper",
-    "slug": "shutupper",
+    "name": "Falterfire",
+    "slug": "falterfire",
     "winrate": "100.0",
-    "seen": 6
+    "seen": 4
   },
   "Calculated Gamble": {
     "name": "akoreanninja",
@@ -2889,7 +2889,7 @@
     "name": "shutupper",
     "slug": "shutupper",
     "winrate": "100.0",
-    "seen": 5
+    "seen": 8
   },
   "Dodge and Roll": {
     "name": "Shane_in_the_Back",
@@ -2916,8 +2916,8 @@
     "seen": 9
   },
   "Expertise": {
-    "name": "akoreanninja",
-    "slug": "akoreanninja",
+    "name": "shutupper",
+    "slug": "shutupper",
     "winrate": "100.0",
     "seen": 3
   },
@@ -2928,10 +2928,10 @@
     "seen": 21
   },
   "Fan of Knives": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
-    "winrate": "100.0",
-    "seen": 3
+    "name": "shutupper",
+    "slug": "shutupper",
+    "winrate": "85.7",
+    "seen": 7
   },
   "Finisher": {
     "name": "Girsia",
@@ -2946,10 +2946,10 @@
     "seen": 4
   },
   "Flechettes": {
-    "name": "Ethan4D",
-    "slug": "ethan4d",
-    "winrate": "80.0",
-    "seen": 5
+    "name": "shutupper",
+    "slug": "shutupper",
+    "winrate": "100.0",
+    "seen": 3
   },
   "Flick-Flack": {
     "name": "Falterfire",
@@ -2970,10 +2970,10 @@
     "seen": 9
   },
   "Grand Finale": {
-    "name": "SunShadoowRay",
-    "slug": "sunshadoowray",
+    "name": "shutupper",
+    "slug": "shutupper",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 2
   },
   "Hand Trick": {
     "name": "1nfern0",
@@ -3060,22 +3060,22 @@
     "seen": 3
   },
   "Noxious Fumes": {
-    "name": "shutupper",
-    "slug": "shutupper",
-    "winrate": "85.7",
-    "seen": 7
-  },
-  "Outbreak": {
-    "name": "shutupper",
-    "slug": "shutupper",
+    "name": "Shane_in_the_Back",
+    "slug": "shane_in_the_back",
     "winrate": "83.3",
     "seen": 6
+  },
+  "Outbreak": {
+    "name": "Ethan4D",
+    "slug": "ethan4d",
+    "winrate": "100.0",
+    "seen": 3
   },
   "Phantom Blades": {
     "name": "shutupper",
     "slug": "shutupper",
-    "winrate": "100.0",
-    "seen": 3
+    "winrate": "80.0",
+    "seen": 5
   },
   "Piercing Wail": {
     "name": "Shane_in_the_Back",
@@ -3084,10 +3084,10 @@
     "seen": 5
   },
   "Pinpoint": {
-    "name": "Phoenixabe",
-    "slug": "phoenixabe",
-    "winrate": "100.0",
-    "seen": 3
+    "name": "shutupper",
+    "slug": "shutupper",
+    "winrate": "85.7",
+    "seen": 7
   },
   "Poisoned Stab": {
     "name": "Falterfire",
@@ -3120,10 +3120,10 @@
     "seen": 11
   },
   "Reflex": {
-    "name": "shutupper",
-    "slug": "shutupper",
+    "name": "LetsTryGG",
+    "slug": "letstrygg",
     "winrate": "100.0",
-    "seen": 5
+    "seen": 3
   },
   "Ricochet": {
     "name": "1nfern0",
@@ -3146,8 +3146,8 @@
   "Shadowmeld": {
     "name": "shutupper",
     "slug": "shutupper",
-    "winrate": "80.0",
-    "seen": 5
+    "winrate": "83.3",
+    "seen": 6
   },
   "Skewer": {
     "name": "SnekNet",
@@ -3156,8 +3156,8 @@
     "seen": 2
   },
   "Slice": {
-    "name": "Girsia",
-    "slug": "girsia",
+    "name": "shutupper",
+    "slug": "shutupper",
     "winrate": "100.0",
     "seen": 2
   },
@@ -3176,8 +3176,8 @@
   "Speedster": {
     "name": "shutupper",
     "slug": "shutupper",
-    "winrate": "87.5",
-    "seen": 8
+    "winrate": "90.0",
+    "seen": 10
   },
   "Storm of Steel": {
     "name": "Nexhawk1441",
