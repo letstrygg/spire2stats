@@ -101,6 +101,13 @@
                         C:\Users\<strong style="color: #4bff87; background: rgba(75, 255, 135, 0.1); padding: 2px 4px; border-radius: 3px;">{Your_Windows_Username}</strong>\AppData\Roaming\SlayTheSpire2\steam\<strong style="color: #4bff87; background: rgba(75, 255, 135, 0.1); padding: 2px 4px; border-radius: 3px;">{12345678901234567}</strong>\profile1\saves
                     </div>
                     <p class="text-muted" style="font-size: 0.85rem;">Pro tip: You can also paste <strong style="color: #4bff87; cursor: pointer;" title="Click to copy" onclick="copyToClipboard(this, '%appdata%\\SlayTheSpire2\\steam')"><code>%appdata%\SlayTheSpire2\steam</code></strong> into your File Explorer address bar to jump there more quickly.</p>
+                    <div style="margin-top: 15px;">
+                        <p class="text-muted" style="font-size: 0.85rem;">Supa-Pro tip: Paste your directory below to get there quicker in the future.</p>
+                        <div style="display: flex; gap: 8px; margin-top: 8px;">
+                            <input type="text" id="save-dir-input" class="input" placeholder="Paste Your Directory Here" style="flex-grow: 1; font-family: monospace; font-size: 0.8rem; background: rgba(0,0,0,0.3);">
+                            <button class="btn btn-blue" style="padding: 6px 12px; font-size: 0.75rem;" onclick="copyToClipboard(this, document.getElementById('save-dir-input').value)">Copy</button>
+                        </div>
+                    </div>
                 </section>
 
 
@@ -129,6 +136,7 @@
         const availabilityIcon = document.getElementById('availability-indicator');
         const saveBtn = document.getElementById('save-settings-btn');
         const saveStatus = document.getElementById('save-status');
+        const saveDirInput = document.getElementById('save-dir-input');
         
         const folderInput = document.getElementById('run-folder-input');
         const filesInput = document.getElementById('run-files-input');
@@ -192,11 +200,13 @@
                 setTimeout(async () => {
                     console.log("Settings: Fetching profile for", user.id);
                     const { data: profile } = await supabase.from('ltg_profiles').select('username, slug').eq('user_id', user.id).maybeSingle();
+                    const { data: s2sUser } = await supabase.from('s2s_users').select('save_dir').eq('supabase_user_id', user.id).maybeSingle();
                     console.log("Settings: Profile fetch result ->", !!profile);
                     if (profile) {
                         usernameInput.value = profile.username;
                         slugPreview.textContent = profile.slug;
                         originalSlug = profile.slug;
+                        if (s2sUser?.save_dir) saveDirInput.value = s2sUser.save_dir;
                         loader.style.display = 'none';
                         form.style.display = 'block';
                     }
@@ -210,6 +220,7 @@
             if (!isAvailable || saveBtn.disabled) return;
             const newName = usernameInput.value.trim();
             const newSlug = slugify(newName);
+            const newSaveDir = saveDirInput.value.trim();
             if (!newName) return;
 
             saveBtn.disabled = true;
@@ -218,7 +229,7 @@
 
             // Update profile tables and historical runs in Supabase
             const { error: error1 } = await supabase.from('ltg_profiles').update({ username: newName, slug: newSlug }).eq('user_id', currentUserId);
-            const { error: error2 } = await supabase.from('s2s_users').update({ display_name: newName, slug: newSlug }).eq('supabase_user_id', currentUserId);
+            const { error: error2 } = await supabase.from('s2s_users').update({ display_name: newName, slug: newSlug, save_dir: newSaveDir }).eq('supabase_user_id', currentUserId);
             const { error: error3 } = await supabase.from('s2s_runs').update({ username: newName }).eq('supabase_user_id', currentUserId);
 
             const anyError = error1 || error2 || error3;
