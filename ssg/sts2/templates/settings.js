@@ -43,6 +43,7 @@ export function settingsTemplate() {
                         <div style="display: flex; gap: 8px; margin-top: 8px;">
                             <input type="text" id="save-dir-input" class="input" placeholder="Paste Your Directory Here" style="flex-grow: 1; font-family: monospace; font-size: 0.8rem; background: rgba(0,0,0,0.3);">
                             <button class="btn btn-blue" style="padding: 6px 12px; font-size: 0.75rem;" onclick="copyToClipboard(this, document.getElementById('save-dir-input').value)">Copy</button>
+                            <button id="save-dir-btn" class="btn btn-green" style="padding: 6px 12px; font-size: 0.75rem;">Save</button>
                         </div>
                     </div>
                 </section>
@@ -74,6 +75,7 @@ export function settingsTemplate() {
         const saveBtn = document.getElementById('save-settings-btn');
         const saveStatus = document.getElementById('save-status');
         const saveDirInput = document.getElementById('save-dir-input');
+        const saveDirBtn = document.getElementById('save-dir-btn');
         
         const folderInput = document.getElementById('run-folder-input');
         const filesInput = document.getElementById('run-files-input');
@@ -180,6 +182,25 @@ export function settingsTemplate() {
                 saveStatus.style.color = 'var(--green)';
                 setTimeout(() => window.location.reload(), 1000);
             }
+        };
+
+        saveDirBtn.onclick = async () => {
+            if (!currentUserId || saveDirBtn.disabled) return;
+            const dir = saveDirInput.value.trim();
+            saveDirBtn.disabled = true;
+            const originalText = saveDirBtn.textContent;
+            saveDirBtn.textContent = 'Saving...';
+
+            const { error } = await supabase.from('s2s_users').update({ save_dir: dir }).eq('supabase_user_id', currentUserId);
+
+            if (error) {
+                alert('Error: ' + error.message);
+                saveDirBtn.textContent = originalText;
+            } else {
+                saveDirBtn.textContent = 'Saved! ✓';
+                setTimeout(() => { saveDirBtn.textContent = originalText; }, 2000);
+            }
+            saveDirBtn.disabled = false;
         };
 
         async function processAndUploadRuns(files) {
