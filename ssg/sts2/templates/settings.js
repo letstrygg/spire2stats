@@ -168,7 +168,12 @@ export function settingsTemplate() {
 
             // Update profile tables and historical runs in Supabase
             const { error: error1 } = await supabase.from('ltg_profiles').update({ username: newName, slug: newSlug }).eq('user_id', currentUserId);
-            const { error: error2 } = await supabase.from('s2s_users').update({ display_name: newName, slug: newSlug, save_dir: newSaveDir }).eq('supabase_user_id', currentUserId);
+            const { error: error2 } = await supabase.from('s2s_users').upsert({ 
+                supabase_user_id: currentUserId, 
+                display_name: newName, 
+                slug: newSlug, 
+                save_dir: newSaveDir 
+            }, { onConflict: 'supabase_user_id' });
             const { error: error3 } = await supabase.from('s2s_runs').update({ username: newName }).eq('supabase_user_id', currentUserId);
 
             const anyError = error1 || error2 || error3;
@@ -191,7 +196,10 @@ export function settingsTemplate() {
             const originalText = saveDirBtn.textContent;
             saveDirBtn.textContent = 'Saving...';
 
-            const { error } = await supabase.from('s2s_users').update({ save_dir: dir }).eq('supabase_user_id', currentUserId);
+            const { error } = await supabase.from('s2s_users').upsert({ 
+                supabase_user_id: currentUserId, 
+                save_dir: dir 
+            }, { onConflict: 'supabase_user_id' });
 
             if (error) {
                 alert('Error: ' + error.message);
