@@ -192,12 +192,17 @@ export function settingsTemplate() {
         saveDirBtn.onclick = async () => {
             if (!currentUserId || saveDirBtn.disabled) return;
             const dir = saveDirInput.value.trim();
+            const name = usernameInput.value.trim();
+            const slug = slugify(name);
+
             saveDirBtn.disabled = true;
             const originalText = saveDirBtn.textContent;
             saveDirBtn.textContent = 'Saving...';
 
             const { error } = await supabase.from('s2s_users').upsert({ 
                 supabase_user_id: currentUserId, 
+                display_name: name,
+                slug: slug,
                 save_dir: dir 
             }, { onConflict: 'supabase_user_id' });
 
