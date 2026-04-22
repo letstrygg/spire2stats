@@ -228,8 +228,8 @@
     "seen": 2
   },
   "Panic Button": {
-    "name": "BuffFinkaPLZ",
-    "slug": "bufffinkaplz",
+    "name": "vetres3",
+    "slug": "vetres3",
     "winrate": "100.0",
     "seen": 1
   },
@@ -408,10 +408,10 @@
     "seen": 2
   },
   "Debt": {
-    "name": "BuffFinkaPLZ",
-    "slug": "bufffinkaplz",
-    "winrate": "61.5",
-    "seen": 13
+    "name": "Girsia",
+    "slug": "girsia",
+    "winrate": "100.0",
+    "seen": 1
   },
   "Decay": {
     "name": "Nexhawk1441",
@@ -444,10 +444,10 @@
     "seen": 4
   },
   "Guilty": {
-    "name": "unknown8139",
-    "slug": "unknown8139",
+    "name": "vetres3",
+    "slug": "vetres3",
     "winrate": "0.0",
-    "seen": 15
+    "seen": 10
   },
   "Injury": {
     "name": "Phoenixabe",
@@ -1062,10 +1062,10 @@
     "seen": 2
   },
   "Dual Wield": {
-    "name": "BuffFinkaPLZ",
-    "slug": "bufffinkaplz",
-    "winrate": "33.3",
-    "seen": 3
+    "name": "vetres3",
+    "slug": "vetres3",
+    "winrate": "50.0",
+    "seen": 2
   },
   "Enlightenment": {
     "name": "Nexhawk1441",
@@ -1386,10 +1386,10 @@
     "seen": 2
   },
   "Fight Me!": {
-    "name": "shutupper",
-    "slug": "shutupper",
-    "winrate": "100.0",
-    "seen": 2
+    "name": "unknown8139",
+    "slug": "unknown8139",
+    "winrate": "75.0",
+    "seen": 4
   },
   "Flame Barrier": {
     "name": "LetsTryGG",
