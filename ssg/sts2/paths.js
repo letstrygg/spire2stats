@@ -10,7 +10,7 @@ const PROJECT_ROOT = path.resolve(__dirname, '../../');
 
 export const PATHS = {
     // Look for the sts2 folder as a sibling to the spire2stats folder
-    CODEX_DATA: path.resolve(PROJECT_ROOT, '../sts2/spire-codex-main/data'), 
+    CODEX_DATA: path.resolve(PROJECT_ROOT, '../sts2/spire-codex-main/data-beta/v0.103.2/eng'), 
     DATABASE: path.resolve(PROJECT_ROOT, '../sts2/spire2.db'),
     
     WEB_ROOT: PROJECT_ROOT,

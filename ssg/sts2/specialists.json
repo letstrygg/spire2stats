@@ -1403,12 +1403,6 @@
     "winrate": "100.0",
     "seen": 4
   },
-  "Grapple": {
-    "name": "Nexhawk1441",
-    "slug": "nexhawk1441",
-    "winrate": "75.0",
-    "seen": 4
-  },
   "Havoc": {
     "name": "Girsia",
     "slug": "girsia",
@@ -1492,6 +1486,12 @@
     "slug": "riffineselike",
     "winrate": "70.0",
     "seen": 10
+  },
+  "Not Yet": {
+    "name": "unknown8139",
+    "slug": "unknown8139",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Offering": {
     "name": "Phoenixabe",
