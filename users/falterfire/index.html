@@ -64,7 +64,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/users/">users</a> / falterfire</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-23T16:00:00.000Z">April 23, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-25T16:00:00.000Z">April 25, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -315,6 +315,11 @@
                     </li>
                 
                     <li>
+                        <a href="/cards/meteor-strike/" style="color: var(--color-defect); text-decoration: underline;">Meteor Strike</a> 
+                        <span style="color: #888;">(100.0% 1 runs)</span>
+                    </li>
+                
+                    <li>
                         <a href="/cards/null/" style="color: var(--color-defect); text-decoration: underline;">Null</a> 
                         <span style="color: #888;">(100.0% 5 runs)</span>
                     </li>
@@ -332,11 +337,6 @@
                     <li>
                         <a href="/cards/distraction/" style="color: var(--text); text-decoration: underline;">Distraction</a> 
                         <span style="color: #888;">(100.0% 2 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/neows-fury/" style="color: var(--text); text-decoration: underline;">Neow's Fury</a> 
-                        <span style="color: #888;">(100.0% 3 runs)</span>
                     </li>
                 
                     <li>
@@ -400,11 +400,6 @@
                     </li>
                 
                     <li>
-                        <a href="/cards/thunderclap/" style="color: var(--color-ironclad); text-decoration: underline;">Thunderclap</a> 
-                        <span style="color: #888;">(66.7% 12 runs)</span>
-                    </li>
-                
-                    <li>
                         <a href="/cards/true-grit/" style="color: var(--color-ironclad); text-decoration: underline;">True Grit</a> 
                         <span style="color: #888;">(76.9% 13 runs)</span>
                     </li>
@@ -422,11 +417,6 @@
                     <li>
                         <a href="/cards/bodyguard/" style="color: var(--color-necrobinder); text-decoration: underline;">Bodyguard</a> 
                         <span style="color: #888;">(66.7% 15 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/countdown/" style="color: var(--color-necrobinder); text-decoration: underline;">Countdown</a> 
-                        <span style="color: #888;">(75.0% 4 runs)</span>
                     </li>
                 
                     <li>
@@ -455,11 +445,6 @@
                     </li>
                 
                     <li>
-                        <a href="/cards/fear/" style="color: var(--color-necrobinder); text-decoration: underline;">Fear</a> 
-                        <span style="color: #888;">(100.0% 3 runs)</span>
-                    </li>
-                
-                    <li>
                         <a href="/cards/fetch/" style="color: var(--color-necrobinder); text-decoration: underline;">Fetch</a> 
                         <span style="color: #888;">(100.0% 7 runs)</span>
                     </li>
@@ -475,16 +460,6 @@
                     </li>
                 
                     <li>
-                        <a href="/cards/grave-warden/" style="color: var(--color-necrobinder); text-decoration: underline;">Grave Warden</a> 
-                        <span style="color: #888;">(81.8% 11 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/pagestorm/" style="color: var(--color-necrobinder); text-decoration: underline;">Pagestorm</a> 
-                        <span style="color: #888;">(80.0% 5 runs)</span>
-                    </li>
-                
-                    <li>
                         <a href="/cards/reap/" style="color: var(--color-necrobinder); text-decoration: underline;">Reap</a> 
                         <span style="color: #888;">(85.7% 7 runs)</span>
                     </li>
@@ -497,11 +472,6 @@
                     <li>
                         <a href="/cards/undeath/" style="color: var(--color-necrobinder); text-decoration: underline;">Undeath</a> 
                         <span style="color: #888;">(100.0% 4 runs)</span>
-                    </li>
-                
-                    <li>
-                        <a href="/cards/unleash/" style="color: var(--color-necrobinder); text-decoration: underline;">Unleash</a> 
-                        <span style="color: #888;">(68.8% 16 runs)</span>
                     </li>
                 
                     <li>
@@ -2919,7 +2889,7 @@
             const buildFilter = document.getElementById('build-filter');
             const ascFilter = document.getElementById('ascension-filter');
             const runCards = document.querySelectorAll('.run-record');
-            const globalWR = 25.348305260969017;
+            const globalWR = 25.68486096807415;
 
             function updateFilters() {
                 const buildVal = buildFilter.value;
