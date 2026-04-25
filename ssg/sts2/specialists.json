@@ -14,8 +14,8 @@
   "Automation": {
     "name": "LetsTryGG",
     "slug": "letstrygg",
-    "winrate": "87.5",
-    "seen": 8
+    "winrate": "88.9",
+    "seen": 9
   },
   "Beacon of Hope": {
     "name": "shutupper",
@@ -390,10 +390,10 @@
     "seen": 49
   },
   "Bad Luck": {
-    "name": "LetsTryGG",
-    "slug": "letstrygg",
+    "name": "shutupper",
+    "slug": "shutupper",
     "winrate": "100.0",
-    "seen": 4
+    "seen": 3
   },
   "Clumsy": {
     "name": "SnekNet",
@@ -408,10 +408,10 @@
     "seen": 2
   },
   "Debt": {
-    "name": "Girsia",
-    "slug": "girsia",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "BuffFinkaPLZ",
+    "slug": "bufffinkaplz",
+    "winrate": "61.5",
+    "seen": 13
   },
   "Decay": {
     "name": "Nexhawk1441",
@@ -444,10 +444,10 @@
     "seen": 4
   },
   "Guilty": {
-    "name": "vetres3",
-    "slug": "vetres3",
+    "name": "LetsTryGG",
+    "slug": "letstrygg",
     "winrate": "0.0",
-    "seen": 10
+    "seen": 1
   },
   "Injury": {
     "name": "Phoenixabe",
@@ -966,10 +966,10 @@
     "seen": 6
   },
   "TURBO": {
-    "name": "LetsTryGG",
-    "slug": "letstrygg",
-    "winrate": "61.5",
-    "seen": 13
+    "name": "Nexhawk1441",
+    "slug": "nexhawk1441",
+    "winrate": "60.0",
+    "seen": 10
   },
   "Tempest": {
     "name": "Nexhawk1441",
@@ -2028,8 +2028,8 @@
     "seen": 2
   },
   "Putrefy": {
-    "name": "LetsTryGG",
-    "slug": "letstrygg",
+    "name": "shutupper",
+    "slug": "shutupper",
     "winrate": "100.0",
     "seen": 3
   },
@@ -2748,10 +2748,10 @@
     "seen": 4
   },
   "Accelerant": {
-    "name": "atundelmar",
-    "slug": "atundelmar",
-    "winrate": "75.0",
-    "seen": 4
+    "name": "LetsTryGG",
+    "slug": "letstrygg",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Accuracy": {
     "name": "SunShadoowRay",
@@ -3123,7 +3123,7 @@
     "name": "LetsTryGG",
     "slug": "letstrygg",
     "winrate": "100.0",
-    "seen": 3
+    "seen": 4
   },
   "Ricochet": {
     "name": "1nfern0",
