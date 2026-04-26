@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#111111">
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-W4TMS5FL');</script>
+    <!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <title>Run 61 - NicoTheThird | Spire 2 Stats</title>
+    <meta name="description" content="Necrobinder Ascension 2 Defeat on floor 48 to Queen using DEFEND_NECROBINDER and BOUND_PHYLACTERY, including a 67 Damage QUEEN BOSS Fight. Run 61 for NicoTheThi">
+    
+    <meta property="og:site_name" content="Spire 2 Stats">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://spire2stats.com/users/nicothethird/runs/1773017068/">
+    <meta property="og:title" content="Run 61 - NicoTheThird | Spire 2 Stats">
+    <meta property="og:description" content="Necrobinder Ascension 2 Defeat on floor 48 to Queen using DEFEND_NECROBINDER and BOUND_PHYLACTERY, including a 67 Damage QUEEN BOSS Fight. Run 61 for NicoTheThi">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://spire2stats.com/users/nicothethird/runs/1773017068/">
+    <meta name="twitter:title" content="Run 61 - NicoTheThird | Spire 2 Stats">
+    <meta name="twitter:description" content="Necrobinder Ascension 2 Defeat on floor 48 to Queen using DEFEND_NECROBINDER and BOUND_PHYLACTERY, including a 67 Damage QUEEN BOSS Fight. Run 61 for NicoTheThi">
+    
+    <link rel="canonical" href="https://spire2stats.com/users/nicothethird/runs/1773017068/">
+    
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "spire2stats.com",
+      "item": "https://spire2stats.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "NicoTheThird",
+      "item": "https://spire2stats.com/users/nicothethird/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Run 1773017068"
+    }
+  ]
+}
+</script>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W4TMS5FL"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+<nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
+        <div><a href="/">spire2stats</a> / <a href="/users/nicothethird/">nicothethird</a> / run 1773017068</div>
+        <div style="display: flex; align-items: baseline; gap: 20px;">
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-04-26T00:00:00.000Z">April 25, 2026</time></div>
+            <div class="auth-dropdown-container">
+                <button id="auth-user-btn" class="auth-trigger">Loading...</button>
+                <div id="auth-dropdown-menu" class="auth-menu-content"></div>
+            </div>
+        </div>
+    </nav>
+                    <div class="game-page-wrapper">
+                        <div class="item-box" style="background-color: color-mix(in srgb, var(--color-necrobinder) 30%, transparent); margin: 0 auto; text-align: center;">
+                            <div class="subtitle" style="font-size: 1.2rem; margin-bottom: 30px;">
+                                <a href="/characters/necrobinder/" style="color: inherit; text-decoration: underline;">Necrobinder</a> • 
+                                <a href="/ascensions/weary-traveler/" style="color: inherit; text-decoration: underline;">Weary Traveler</a> • 
+                                <strong style="color: #ff4b4b">Defeat</strong>
+                            </div>
+                            
+                            <div class="run-summary-container" style="background: rgba(0,0,0,0.4); padding: 25px; border-radius: 12px; border: 1px solid #444; margin-bottom: 40px;">
+                                <h3 style="margin-top: 0; color: #ccc; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px;">Health Progression</h3>
+                                <div style="height: 350px; width: 100%;">
+                                    <canvas id="hpChart"></canvas>
+                                </div>
+                            </div>
+
+                            <div class="run-details-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; text-align: left;">
+                                <section>
+                                    <h3 style="color: var(--gold, #ffd700); border-bottom: 1px solid #333; padding-bottom: 5px;">Deck</h3>
+                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;"><div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;"><a href="/cards/defend/" class="item-link" style="color: var(--color-necrobinder)">Defend x3</a></div><div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;"><a href="/cards/bodyguard/" class="item-link" style="color: var(--color-necrobinder)">Bodyguard+1</a></div><div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;"><a href="/cards/unleash/" class="item-link" style="color: var(--color-necrobinder)">Unleash</a></div><div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;"><a href="/cards/blight-strike/" class="item-link" style="color: var(--color-necrobinder)">Blight Strike</a></div><div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;"><a href="/cards/grave-warden/" class="item-link" style="color: var(--color-necrobinder)">Grave Warden</a></div><div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;"><a href="/cards/wisp/" class="item-link" style="color: var(--color-necrobinder)">Wisp</a></div><div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;"><a href="/cards/invoke/" class="item-link" style="color: var(--color-necrobinder)">Invoke+1 x3</a></div><div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;"><a href="/cards/sow/" class="item-link" style="color: var(--color-necrobinder)">Sow</a></div><div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;"><a href="/cards/afterlife/" class="item-link" style="color: var(--color-necrobinder)">Afterlife x3</a></div><div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;"><a href="/cards/veilpiercer/" class="item-link" style="color: var(--color-necrobinder)">Veilpiercer</a></div><div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;"><a href="/cards/deathbringer/" class="item-link" style="color: var(--color-necrobinder)">Deathbringer x2</a></div><div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;"><a href="/cards/fetch/" class="item-link" style="color: var(--color-necrobinder)">Fetch</a></div><div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;"><a href="/cards/pull-aggro/" class="item-link" style="color: var(--color-necrobinder)">Pull Aggro</a></div><div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;"><a href="/cards/necro-mastery/" class="item-link" style="color: var(--color-necrobinder)">Necro Mastery</a></div><div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;"><a href="/cards/no-escape/" class="item-link" style="color: var(--color-necrobinder)">No Escape+1</a></div><div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;"><a href="/cards/bone-shards/" class="item-link" style="color: var(--color-necrobinder)">Bone Shards x2</a></div><div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;"><a href="/cards/afterlife/" class="item-link" style="color: var(--color-necrobinder)">Afterlife+1 x2</a></div><div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;"><a href="/cards/friendship/" class="item-link" style="color: var(--color-necrobinder)">Friendship+1</a></div><div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;"><a href="/cards/reanimate/" class="item-link" style="color: var(--color-necrobinder)">Reanimate</a></div><div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;"><a href="/cards/undeath/" class="item-link" style="color: var(--color-necrobinder)">Undeath+1</a></div><div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;"><a href="/cards/scourge/" class="item-link" style="color: var(--color-necrobinder)">Scourge+1</a></div><div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;"><a href="/cards/severance/" class="item-link" style="color: var(--color-necrobinder)">Severance+1</a></div><div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;"><a href="/cards/soul-storm/" class="item-link" style="color: var(--color-necrobinder)">Soul Storm</a></div><div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;"><a href="/cards/fetch/" class="item-link" style="color: var(--color-necrobinder)">Fetch+1</a></div><div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;"><a href="/cards/graveblast/" class="item-link" style="color: var(--color-necrobinder)">Graveblast</a></div><div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;"><a href="/cards/haunt/" class="item-link" style="color: var(--color-necrobinder)">Haunt+1</a></div></div>
+                                </section>
+                                <section>
+                                    <h3 style="color: var(--red, #ff5252); border-bottom: 1px solid #333; padding-bottom: 5px;">Relics</h3>
+                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;"><a href="/relics/bound-phylactery/" class="item-link">Bound Phylactery</a><a href="/relics/golden-pearl/" class="item-link">Golden Pearl</a><a href="/relics/ghost-seed/" class="item-link">Ghost Seed</a><a href="/relics/oddly-smooth-stone/" class="item-link">Oddly Smooth Stone</a><a href="/relics/tiny-mailbox/" class="item-link">Tiny Mailbox</a><a href="/relics/red-mask/" class="item-link">Red Mask</a><a href="/relics/ripple-basin/" class="item-link">Ripple Basin</a><a href="/relics/paels-flesh/" class="item-link">Pael's Flesh</a><a href="/relics/venerable-tea-set/" class="item-link">Venerable Tea Set???</a><a href="/relics/mango/" class="item-link">Mango???</a><a href="/relics/blood-vial/" class="item-link">Blood Vial</a><a href="/relics/juzu-bracelet/" class="item-link">Juzu Bracelet</a><a href="/relics/bag-of-preparation/" class="item-link">Bag of Preparation</a><a href="/relics/gorget/" class="item-link">Gorget</a><a href="/relics/throwing-axe/" class="item-link">Throwing Axe</a><a href="/relics/book-of-five-rings/" class="item-link">Book of Five Rings</a><a href="/relics/parrying-shield/" class="item-link">Parrying Shield</a><a href="/relics/pantograph/" class="item-link">Pantograph</a><a href="/relics/bone-flute/" class="item-link">Bone Flute</a></div>
+                                </section>
+                                <section>
+                                    <h3 style="color: var(--blue, #448aff); border-bottom: 1px solid #333; padding-bottom: 5px;">Events</h3>
+                                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;"><a href="/events/neow/" class="item-link">Neow</a><a href="/events/pael/" class="item-link">Pael</a><a href="/events/symbiote/" class="item-link">Symbiote</a><a href="/events/the-merchant/" class="item-link">The Merchant???</a><a href="/events/tanx/" class="item-link">Tanx</a><a href="/events/this-or-that/" class="item-link">This or That?</a><a href="/events/the-trial/" class="item-link">The Trial</a></div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                    <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const ctx = document.getElementById('hpChart').getContext('2d');
+                        if (!ctx) return;
+                        const rawRuns = [{"label":"Run 61 (Necrobinder)","win":false,"floorData":[{"floor":1,"hp":52,"name":"Neow","damage":0,"healed":52,"gold":150,"monsters":[]},{"floor":2,"hp":47,"name":"Toadpoles","damage":5,"healed":0,"gold":13,"monsters":["TOADPOLE","TOADPOLE"]},{"floor":3,"hp":45,"name":"Seapunk","damage":2,"healed":0,"gold":17,"monsters":["SEAPUNK"]},{"floor":4,"hp":45,"name":"shop","damage":0,"healed":0,"gold":0,"monsters":[]},{"floor":5,"hp":45,"name":"Corpse Slugs","damage":0,"healed":0,"gold":17,"monsters":["CORPSE SLUG","CORPSE SLUG"]},{"floor":6,"hp":45,"name":"rest site","damage":0,"healed":0,"gold":0,"monsters":[]},{"floor":7,"hp":36,"name":"Cultists","damage":9,"healed":0,"gold":13,"monsters":["CALCIFIED CULTIST","DAMP CULTIST"]},{"floor":8,"hp":36,"name":"rest site","damage":0,"healed":0,"gold":0,"monsters":[]},{"floor":9,"hp":36,"name":"Phantasmal Gardeners","damage":0,"healed":0,"gold":40,"monsters":["PHANTASMAL GARDENER","PHANTASMAL GARDENER","PHANTASMAL GARDENER","PHANTASMAL GARDENER"]},{"floor":10,"hp":36,"name":"treasure","damage":0,"healed":0,"gold":51,"monsters":[]},{"floor":11,"hp":55,"name":"rest site","damage":0,"healed":19,"gold":0,"monsters":[]},{"floor":12,"hp":40,"name":"Skulking Colony","damage":15,"healed":0,"gold":43,"monsters":["SKULKING COLONY"]},{"floor":13,"hp":40,"name":"Punch Construct","damage":0,"healed":0,"gold":11,"monsters":["PUNCH CONSTRUCT"]},{"floor":14,"hp":35,"name":"Terror Eel","damage":5,"healed":0,"gold":35,"monsters":["TERROR EEL"]},{"floor":15,"hp":35,"name":"shop","damage":0,"healed":0,"gold":0,"monsters":[]},{"floor":16,"hp":54,"name":"rest site","damage":0,"healed":19,"gold":0,"monsters":[]},{"floor":17,"hp":54,"name":"Lagavulin Matriarch","damage":0,"healed":0,"gold":100,"monsters":["LAGAVULIN MATRIARCH"]},{"floor":18,"hp":63,"name":"Pael","damage":0,"healed":9,"gold":0,"monsters":[]},{"floor":19,"hp":58,"name":"Exoskeletons","damage":5,"healed":0,"gold":19,"monsters":["EXOSKELETON","EXOSKELETON","EXOSKELETON"]},{"floor":20,"hp":46,"name":"Bowlbugs","damage":12,"healed":0,"gold":10,"monsters":["BOWLBUG ROCK","BOWLBUG NECTAR"]},{"floor":21,"hp":46,"name":"Symbiote","damage":0,"healed":0,"gold":0,"monsters":[]},{"floor":22,"hp":46,"name":"The Obscura","damage":0,"healed":0,"gold":14,"monsters":["THE OBSCURA"]},{"floor":23,"hp":49,"name":"The Merchant???","damage":0,"healed":3,"gold":0,"monsters":[]},{"floor":24,"hp":42,"name":"Spiny Toad","damage":7,"healed":0,"gold":10,"monsters":["SPINY TOAD"]},{"floor":25,"hp":42,"name":"rest site","damage":0,"healed":0,"gold":0,"monsters":[]},{"floor":26,"hp":42,"name":"treasure","damage":0,"healed":0,"gold":47,"monsters":[]},{"floor":27,"hp":24,"name":"The Decimillipede","damage":20,"healed":2,"gold":44,"monsters":["DECIMILLIPEDE SEGMENT FRONT","DECIMILLIPEDE SEGMENT MIDDLE","DECIMILLIPEDE SEGMENT BACK"]},{"floor":28,"hp":24,"name":"shop","damage":0,"healed":0,"gold":0,"monsters":[]},{"floor":29,"hp":44,"name":"rest site","damage":0,"healed":20,"gold":0,"monsters":[]},{"floor":30,"hp":46,"name":"An Automaton Pair","damage":0,"healed":2,"gold":15,"monsters":["CHOMPER","CHOMPER"]},{"floor":31,"hp":48,"name":"Entomancer","damage":0,"healed":2,"gold":36,"monsters":["ENTOMANCER"]},{"floor":32,"hp":48,"name":"rest site","damage":0,"healed":0,"gold":0,"monsters":[]},{"floor":33,"hp":42,"name":"The Insatiable","damage":8,"healed":2,"gold":100,"monsters":["THE INSATIABLE"]},{"floor":34,"hp":63,"name":"Tanx","damage":0,"healed":21,"gold":0,"monsters":[]},{"floor":35,"hp":60,"name":"Scrolls of Biting","damage":5,"healed":2,"gold":15,"monsters":["SCROLL OF BITING","SCROLL OF BITING","SCROLL OF BITING"]},{"floor":36,"hp":62,"name":"Devoted Sculptor","damage":0,"healed":2,"gold":20,"monsters":["DEVOTED SCULPTOR"]},{"floor":37,"hp":62,"name":"shop","damage":0,"healed":0,"gold":0,"monsters":[]},{"floor":38,"hp":56,"name":"This or That?","damage":6,"healed":0,"gold":62,"monsters":[]},{"floor":39,"hp":58,"name":"Knight Gang","damage":0,"healed":2,"gold":44,"monsters":["FLAIL KNIGHT","SPECTRAL KNIGHT","MAGI KNIGHT"]},{"floor":40,"hp":67,"name":"rest site","damage":0,"healed":9,"gold":0,"monsters":[]},{"floor":41,"hp":67,"name":"treasure","damage":0,"healed":0,"gold":51,"monsters":[]},{"floor":42,"hp":63,"name":"Mecha Knight","damage":4,"healed":0,"gold":41,"monsters":["MECHA KNIGHT"]},{"floor":43,"hp":65,"name":"Lost and Forgotten","damage":0,"healed":2,"gold":14,"monsters":["THE LOST","THE FORGOTTEN"]},{"floor":44,"hp":67,"name":"The Trial","damage":0,"healed":2,"gold":0,"monsters":[]},{"floor":45,"hp":67,"name":"shop","damage":0,"healed":0,"gold":0,"monsters":[]},{"floor":46,"hp":55,"name":"Soul Nexus","damage":12,"healed":0,"gold":39,"monsters":["SOUL NEXUS"]},{"floor":47,"hp":55,"name":"rest site","damage":0,"healed":0,"gold":0,"monsters":[]},{"floor":48,"hp":0,"name":"Queen","damage":67,"healed":12,"gold":0,"monsters":["TORCH HEAD AMALGAM","QUEEN"]}]}];
+                        console.log("📈 Chart Data received by browser:", rawRuns);
+
+                        if (rawRuns.length === 0 || rawRuns[0].floorData.length === 0) {
+                            console.warn("⚠️ No floor data available for HP graph.");
+                            return;
+                        }
+
+                        const maxFloor = Math.max(...rawRuns[0].floorData.map(d => d.floor), 1);
+                        const labels = Array.from({length: maxFloor}, (_, i) => i + 1);
+                        const color = "#ff4b4b";
+
+                        const floorMap = {}; 
+                        rawRuns[0].floorData.forEach(d => { floorMap[d.floor] = d; });
+                        const dataArr = labels.map(floor => {
+                            const d = floorMap[floor];
+                            return d ? { x: floor, y: d.hp, ...d } : null;
+                        });
+
+                        new Chart(ctx, {
+                            type: 'line',
+                            data: { labels: labels, datasets: [{
+                                label: rawRuns[0].label,
+                                data: dataArr,
+                                borderColor: color,
+                                backgroundColor: color + '15',
+                                borderWidth: 2,
+                                fill: true,
+                                tension: 0.3,
+                                spanGaps: true
+                            }]},
+                            options: {
+                                responsive: true, maintainAspectRatio: false,
+                                interaction: { mode: 'index', intersect: false },
+                                scales: { 
+                                    y: { 
+                                        beginAtZero: true, 
+                                        grid: { color: 'rgba(255,255,255,0.05)' },
+                                        ticks: { color: '#888' },
+                                        title: { display: true, text: 'Hit Points', color: '#666' }
+                                    }, 
+                                    x: { 
+                                        grid: { color: 'rgba(255,255,255,0.05)' },
+                                        ticks: { color: '#888' },
+                                        title: { display: true, text: 'Floor', color: '#666' }
+                                    } 
+                                },
+                                plugins: {
+                                    legend: { display: false },
+                                    tooltip: {
+                                        callbacks: {
+                                            title: (items) => `Floor ${items[0].label}`,
+                                            label: (context) => {
+                                                const d = context.raw;
+                                                if (!d || typeof d === 'number') return `HP: ${d}`;
+                                                const hpStart = d.y + d.damage - d.healed;
+                                                const lines = [d.name];
+                                                if (Array.isArray(d.monsters) && d.monsters.length > 0) {
+                                                    lines.push('Monsters:');
+                                                    d.monsters.forEach(m => lines.push('  ' + m));
+                                                }
+                                                lines.push(`HP: ${hpStart} -> ${d.y}`);
+                                                if (d.damage > 0) lines.push(`Damage Taken: ${d.damage}`);
+                                                if (d.healed > 0) lines.push(`Healed: ${d.healed}`);
+                                                if (d.gold !== 0) lines.push(`Gold: ${d.gold > 0 ? '+' : ''}${d.gold}`);
+                                                return lines;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    });
+                    </script>
+                    <link rel="stylesheet" href="/css/sts2-style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+    (function() {
+    console.log("Auth: Initializing global client...");
+    window.supabaseClient = window.supabase.createClient('https://fnwmtytnltmqjaflfwyr.supabase.co', 'sb_publishable_y12qZF_dSbUPmV_aieiUgA_CibDsxQV', { auth: { lock: null } });
+    const supabase = window.supabaseClient;
+
+    const btn = document.getElementById('auth-user-btn'), menu = document.getElementById('auth-dropdown-menu');
+
+    btn.onclick = (e) => { 
+        e.stopPropagation(); 
+        menu.classList.toggle('show'); 
+    };
+    document.onclick = () => menu.classList.remove('show');
+
+    window.authLogin = (provider) => supabase.auth.signInWithOAuth({ provider });
+    window.authLogout = () => {
+        localStorage.removeItem('s2s_user_cache');
+        return supabase.auth.signOut().then(() => location.reload());
+    };
+
+    let currentUid = null;
+    supabase.auth.onAuthStateChange(async (event, session) => {
+        console.log("Auth: Event ->", event);
+        const user = session?.user;
+        
+        if (!user) {
+            currentUid = null;
+            btn.textContent = 'Login';
+            menu.innerHTML = '<button onclick="authLogin(\'google\')">Google</button><button onclick="authLogin(\'twitch\')">Twitch</button>';
+            localStorage.removeItem('s2s_user_cache');
+            return;
+        }
+
+        if (user.id !== currentUid) {
+            currentUid = user.id;
+
+            // Check cache immediately to prevent "Account" flicker
+            const cache = JSON.parse(localStorage.getItem('s2s_user_cache') || '{}');
+            if (cache.uid === user.id && cache.username) {
+                btn.textContent = cache.username;
+            } else {
+                btn.textContent = 'Account';
+            }
+
+            menu.innerHTML = '<a href="/settings.html">Settings</a><button onclick="authLogout()">Logout</button>';
+
+            setTimeout(async () => {
+                console.log("Auth: Fetching profile for", user.id);
+                const { data } = await supabase.from('ltg_profiles').select('username').eq('user_id', user.id).maybeSingle();
+                console.log("Auth: Query finished. Data:", data);
+                if (data?.username) {
+                    console.log("Auth: Username found ->", data.username);
+                    btn.textContent = data.username;
+                    localStorage.setItem('s2s_user_cache', JSON.stringify({ uid: user.id, username: data.username }));
+                }
+            }, 500);
+        }
+    });
+})();
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const supabase = window.supabaseClient;
+    if (!supabase) return;
+
+    let currentUserId = null;
+
+    // Helper to extract the 11-character YouTube ID from various URL formats or raw IDs
+    const extractYoutubeId = (url) => {
+        if (!url) return null;
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=|\/shorts\/)([^#&?]*).*/;
+        const match = url.match(regExp);
+        return (match && match[2].length === 11) ? match[2] : (url.length === 11 ? url : null);
+    };
+
+    const authChange = (event, session) => {
+        const user = session?.user;
+        if (user) {
+            currentUserId = user.id;
+            document.querySelectorAll('.run-record').forEach(card => {
+                if (card.dataset.userId === currentUserId) {
+                    const btn = card.querySelector('.edit-run-videos-btn');
+                    if (btn) btn.style.display = 'block';
+                }
+            });
+        }
+    };
+
+    supabase.auth.onAuthStateChange(authChange);
+    supabase.auth.getSession().then(({data}) => authChange('INITIAL', data.session));
+
+    document.addEventListener('click', async (e) => {
+        const btn = e.target.closest('.edit-run-videos-btn');
+        if (!btn) return;
+
+        const card = btn.closest('.run-record');
+        const editArea = card.querySelector('.run-edit-area');
+        const runId = card.dataset.runId;
+
+        if (btn.textContent === 'settings') {
+            // Enter Edit Mode
+            btn.textContent = 'save';
+            btn.style.color = 'var(--green)';
+            editArea.style.display = 'block';
+            
+            const ytVideo = card.dataset.ytVideo || '';
+            const shorts = JSON.parse(card.dataset.shorts || '[]');
+
+            editArea.innerHTML = `
+                <div class="edit-box" style="background: rgba(0,0,0,0.9); border: 1px solid #444; border-radius: 8px; padding: 15px; margin-top: 10px; font-size: 0.8rem; display: flex; flex-direction: column; gap: 12px; text-align: left;">
+                    <div>
+                        <label style="display: block; color: #888; margin-bottom: 4px; text-transform: uppercase; font-size: 0.65rem;">Add YouTube Video</label>
+                        <input type="text" class="input" value="${ytVideo}" placeholder="Paste YouTube URL..." style="width: 100%; box-sizing: border-box; background: #222; border: 1px solid #444; color: #eee; padding: 6px; border-radius: 4px;">
+                    </div>
+                    <div>
+                        <label style="display: block; color: #888; margin-bottom: 4px; text-transform: uppercase; font-size: 0.65rem;">Add YouTube Short URL</label>
+                        <div style="display: flex; gap: 8px; align-items: stretch;">
+                            <input type="text" class="input" placeholder="Paste Short URL..." style="flex: 1; min-width: 0; box-sizing: border-box; background: #222; border: 1px solid #444; color: #eee; padding: 6px; border-radius: 4px;">
+                            <button class="btn btn-blue" style="padding: 6px 12px; font-size: 0.7rem; white-space: nowrap;">Add</button>
+                        </div>
+                    </div>
+                    <div class="edit-shorts-list" style="display: flex; gap: 10px; flex-wrap: wrap;"></div>
+                    <div style="display: flex; justify-content: flex-end; margin-top: 4px;">
+                        <button class="btn btn-green save-run-changes-btn" style="padding: 6px 12px; font-size: 0.7rem; white-space: nowrap;">Save Changes</button>
+                    </div>
+                </div>
+            `;
+
+            const list = editArea.querySelector('.edit-shorts-list');
+            const updateShortsUI = () => {
+                const current = JSON.parse(card.dataset.shorts || '[]');
+                list.innerHTML = current.map((s, idx) => `
+                    <div style="position: relative; display: inline-block;">
+                        <img src="/images/250px-Youtube_shorts_icon.svg.png" style="height: 32px; width: auto;" alt="Short">
+                        <span class="remove-short-btn material-symbols-outlined" data-idx="${idx}" style="position: absolute; top: -8px; right: -8px; background: var(--red); color: white; border-radius: 50%; font-size: 14px; cursor: pointer; padding: 2px;">close</span>
+                    </div>
+                `).join('');
+                
+                list.querySelectorAll('.remove-short-btn').forEach(x => {
+                    x.onclick = () => {
+                        const idx = parseInt(x.dataset.idx);
+                        const arr = JSON.parse(card.dataset.shorts || '[]');
+                        arr.splice(idx, 1);
+                        card.dataset.shorts = JSON.stringify(arr);
+                        updateShortsUI();
+                    };
+                });
+            };
+
+            updateShortsUI();
+
+            // Use generic selectors since classes are now standardized
+            const inputs = editArea.querySelectorAll('.input');
+            editArea.querySelector('.btn-blue').onclick = () => {
+                const inp = inputs[1]; // The short URL input
+                const val = inp.value.trim();
+                console.log("[DEBUG] 'Add' button clicked. Raw Input:", val);
+                const shortId = extractYoutubeId(val);
+                console.log("[DEBUG] Extracted Short ID:", shortId);
+                if (!shortId) {
+                    console.warn("[DEBUG] Rejection: Input did not resolve to a valid 11-char YouTube ID.");
+                    return;
+                }
+                const arr = JSON.parse(card.dataset.shorts || '[]');
+                arr.push(shortId);
+                card.dataset.shorts = JSON.stringify(arr);
+                console.log("[DEBUG] Updated local shorts dataset:", card.dataset.shorts);
+                inp.value = '';
+                updateShortsUI();
+            };
+
+            editArea.querySelector('.save-run-changes-btn').onclick = () => btn.click();
+
+        } else {
+            // Save and Exit
+            console.log("[DEBUG] 'Save' (Gear) clicked. Run ID target:", runId);
+            const inputs = editArea.querySelectorAll('.input');
+            const ytInput = inputs[0];
+            const shortInput = inputs[1];
+            
+            const newYt = extractYoutubeId(ytInput.value.trim());
+            console.log("[DEBUG] Primary Video ID to save:", newYt);
+            
+            // Capture any pending text in the short input box that wasn't "Added" yet
+            const pendingShort = extractYoutubeId(shortInput.value.trim());
+            const finalShorts = JSON.parse(card.dataset.shorts || '[]');
+            if (pendingShort && !finalShorts.includes(pendingShort)) {
+                console.log("[DEBUG] Adding pending text from input box to final list:", pendingShort);
+                finalShorts.push(pendingShort);
+            }
+            console.log("[DEBUG] Final Shorts array being sent to Supabase:", finalShorts);
+
+            btn.style.pointerEvents = 'none';
+            btn.textContent = 'sync'; // Show loading state
+
+            const updatePayload = { yt_video: newYt, shorts: finalShorts };
+            console.log("[DEBUG] Sending UPDATE to s2s_runs table:", updatePayload);
+
+            const { data, error } = await supabase.from('s2s_runs').update(updatePayload).eq('id', runId).select();
+            if (error) {
+                console.error("[DEBUG] Supabase Update FAILED:", error);
+                alert("Update failed: " + error.message);
+                btn.textContent = 'save';
+                btn.style.pointerEvents = 'auto';
+            } else {
+                console.log("[DEBUG] Supabase Update SUCCESSFUL. Rows returned:", data);
+                if (!data || data.length === 0) {
+                    console.error("[DEBUG] CRITICAL: Update returned success but 0 rows were modified. This usually means the ID " + runId + " was not found in the 's2s_runs' table or RLS policies blocked the change.");
+                }
+
+                // Increment global counters based on what changed
+                const ytChanged = newYt !== (card.dataset.ytVideo || null);
+                const oldShortsCount = JSON.parse(card.dataset.shorts || '[]').length;
+                const shortsDiff = Math.max(0, finalShorts.length - oldShortsCount);
+
+                if (ytChanged || shortsDiff > 0) {
+                    await supabase.rpc('increment_s2s_global', { 
+                        runs_inc: 0, 
+                        shorts_inc: shortsDiff, 
+                        yt_videos_inc: ytChanged ? 1 : 0 
+                    });
+                }
+
+                // Update local dataset attributes so re-opening the edit box shows the new data
+                card.dataset.ytVideo = newYt || '';
+                card.dataset.shorts = JSON.stringify(finalShorts);
+
+                // Exit Edit Mode
+                editArea.style.display = 'none';
+                btn.textContent = 'settings';
+                btn.style.color = '#e3e3e3';
+                btn.style.pointerEvents = 'auto';
+                console.log("[DEBUG] Edit mode exited. Local card data synchronized.");
+            }
+        }
+    });
+});
+</script>
+</body></html>
