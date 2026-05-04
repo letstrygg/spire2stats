@@ -156,9 +156,9 @@
     "seen": 2
   },
   "Intercept": {
-    "name": "unknown9815",
-    "slug": "unknown9815",
-    "winrate": "0.0",
+    "name": "unknown7769",
+    "slug": "unknown7769",
+    "winrate": "100.0",
     "seen": 1
   },
   "Jack of All Trades": {
@@ -240,10 +240,10 @@
     "seen": 3
   },
   "Production": {
-    "name": "RiffinesElike",
-    "slug": "riffineselike",
+    "name": "unknown7769",
+    "slug": "unknown7769",
     "winrate": "100.0",
-    "seen": 3
+    "seen": 5
   },
   "Prolong": {
     "name": "akoreanninja",
@@ -408,10 +408,10 @@
     "seen": 2
   },
   "Debt": {
-    "name": "BuffFinkaPLZ",
-    "slug": "bufffinkaplz",
-    "winrate": "61.5",
-    "seen": 13
+    "name": "unknown7769",
+    "slug": "unknown7769",
+    "winrate": "100.0",
+    "seen": 3
   },
   "Decay": {
     "name": "Nexhawk1441",
@@ -444,8 +444,8 @@
     "seen": 4
   },
   "Guilty": {
-    "name": "NicoTheThird",
-    "slug": "nicothethird",
+    "name": "unknown7769",
+    "slug": "unknown7769",
     "winrate": "0.0",
     "seen": 2
   },
@@ -456,10 +456,10 @@
     "seen": 2
   },
   "Normality": {
-    "name": "guelch",
-    "slug": "guelch",
+    "name": "unknown7769",
+    "slug": "unknown7769",
     "winrate": "100.0",
-    "seen": 1
+    "seen": 2
   },
   "Poor Sleep": {
     "name": "Ethan4D",
@@ -486,10 +486,10 @@
     "seen": 1
   },
   "Writhe": {
-    "name": "OkieO2k",
-    "slug": "okieo2k",
+    "name": "unknown7769",
+    "slug": "unknown7769",
     "winrate": "0.0",
-    "seen": 1
+    "seen": 2
   },
   "Adaptive Strike": {
     "name": "Falterfire",
@@ -510,8 +510,8 @@
     "seen": 5
   },
   "Barrage": {
-    "name": "Nexhawk1441",
-    "slug": "nexhawk1441",
+    "name": "unknown7769",
+    "slug": "unknown7769",
     "winrate": "100.0",
     "seen": 3
   },
@@ -612,10 +612,10 @@
     "seen": 2
   },
   "Coolheaded": {
-    "name": "Nexhawk1441",
-    "slug": "nexhawk1441",
-    "winrate": "63.2",
-    "seen": 19
+    "name": "SunShadoowRay",
+    "slug": "sunshadoowray",
+    "winrate": "80.0",
+    "seen": 5
   },
   "Creative AI": {
     "name": "shutupper",
@@ -666,10 +666,10 @@
     "seen": 6
   },
   "FTL": {
-    "name": "Nexhawk1441",
-    "slug": "nexhawk1441",
-    "winrate": "72.7",
-    "seen": 11
+    "name": "unknown5714",
+    "slug": "unknown5714",
+    "winrate": "100.0",
+    "seen": 3
   },
   "Feral": {
     "name": "unknown5714",
@@ -996,10 +996,10 @@
     "seen": 3
   },
   "Uproar": {
-    "name": "akoreanninja",
-    "slug": "akoreanninja",
-    "winrate": "80.0",
-    "seen": 5
+    "name": "unknown7769",
+    "slug": "unknown7769",
+    "winrate": "100.0",
+    "seen": 3
   },
   "Voltaic": {
     "name": "LetsTryGG",
@@ -1038,10 +1038,10 @@
     "seen": 4
   },
   "Byrd Swoop": {
-    "name": "unknown9332",
-    "slug": "unknown9332",
-    "winrate": "100.0",
-    "seen": 2
+    "name": "Dead3y3",
+    "slug": "dead3y3",
+    "winrate": "75.0",
+    "seen": 4
   },
   "Caltrops": {
     "name": "rarelyvlolent",
@@ -1788,16 +1788,16 @@
     "seen": 3
   },
   "Debilitate": {
-    "name": "unknown5714",
-    "slug": "unknown5714",
-    "winrate": "80.0",
-    "seen": 5
+    "name": "unknown7769",
+    "slug": "unknown7769",
+    "winrate": "77.8",
+    "seen": 9
   },
   "Defile": {
-    "name": "N9UY3N",
-    "slug": "n9uy3n",
-    "winrate": "100.0",
-    "seen": 2
+    "name": "unknown7769",
+    "slug": "unknown7769",
+    "winrate": "80.0",
+    "seen": 5
   },
   "Defy": {
     "name": "Falterfire",
@@ -1806,10 +1806,10 @@
     "seen": 12
   },
   "Delay": {
-    "name": "Phoenixabe",
-    "slug": "phoenixabe",
-    "winrate": "100.0",
-    "seen": 2
+    "name": "unknown7769",
+    "slug": "unknown7769",
+    "winrate": "71.4",
+    "seen": 7
   },
   "Demesne": {
     "name": "RiffinesElike",
@@ -1854,10 +1854,10 @@
     "seen": 3
   },
   "Enfeebling Touch": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "85.7",
-    "seen": 7
+    "name": "unknown7769",
+    "slug": "unknown7769",
+    "winrate": "100.0",
+    "seen": 5
   },
   "Eradicate": {
     "name": "N9UY3N",
@@ -1938,9 +1938,9 @@
     "seen": 4
   },
   "Legion of Bone": {
-    "name": "0_tripwire_ 0",
-    "slug": "0_tripwire_-0",
-    "winrate": "83.3",
+    "name": "unknown7769",
+    "slug": "unknown7769",
+    "winrate": "100.0",
     "seen": 6
   },
   "Lethality": {
@@ -1950,10 +1950,10 @@
     "seen": 11
   },
   "Melancholy": {
-    "name": "N9UY3N",
-    "slug": "n9uy3n",
-    "winrate": "100.0",
-    "seen": 2
+    "name": "unknown7769",
+    "slug": "unknown7769",
+    "winrate": "80.0",
+    "seen": 5
   },
   "Misery": {
     "name": "Nexhawk1441",
@@ -1992,10 +1992,10 @@
     "seen": 6
   },
   "Pagestorm": {
-    "name": "unknown9332",
-    "slug": "unknown9332",
+    "name": "unknown7769",
+    "slug": "unknown7769",
     "winrate": "100.0",
-    "seen": 5
+    "seen": 6
   },
   "Parse": {
     "name": "shutupper",
@@ -2100,10 +2100,10 @@
     "seen": 6
   },
   "Severance": {
-    "name": "abcd",
-    "slug": "abcd",
+    "name": "unknown7769",
+    "slug": "unknown7769",
     "winrate": "100.0",
-    "seen": 2
+    "seen": 3
   },
   "Shared Fate": {
     "name": "Falterfire",
@@ -2148,10 +2148,10 @@
     "seen": 4
   },
   "Spirit of Ash": {
-    "name": "unknown9332",
-    "slug": "unknown9332",
+    "name": "unknown7769",
+    "slug": "unknown7769",
     "winrate": "100.0",
-    "seen": 2
+    "seen": 5
   },
   "Spur": {
     "name": "unknown5714",
@@ -2172,10 +2172,10 @@
     "seen": 2
   },
   "Time's Up": {
-    "name": "akoreanninja",
-    "slug": "akoreanninja",
-    "winrate": "66.7",
-    "seen": 3
+    "name": "unknown7769",
+    "slug": "unknown7769",
+    "winrate": "80.0",
+    "seen": 5
   },
   "Transfigure": {
     "name": "shutupper",
@@ -2208,8 +2208,8 @@
     "seen": 11
   },
   "Byrdonis Egg": {
-    "name": "Laczse",
-    "slug": "laczse",
+    "name": "unknown7769",
+    "slug": "unknown7769",
     "winrate": "0.0",
     "seen": 1
   },
@@ -2292,10 +2292,10 @@
     "seen": 3
   },
   "Celestial Might": {
-    "name": "LetsTryGG",
-    "slug": "letstrygg",
-    "winrate": "75.0",
-    "seen": 4
+    "name": "unknown9815",
+    "slug": "unknown9815",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Child of the Stars": {
     "name": "0_tripwire_ 0",
@@ -2832,10 +2832,10 @@
     "seen": 8
   },
   "Bullet Time": {
-    "name": "N9UY3N",
-    "slug": "n9uy3n",
-    "winrate": "100.0",
-    "seen": 2
+    "name": "BuffFinkaPLZ",
+    "slug": "bufffinkaplz",
+    "winrate": "71.4",
+    "seen": 7
   },
   "Burst": {
     "name": "shutupper",
