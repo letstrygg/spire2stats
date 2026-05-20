@@ -444,10 +444,10 @@
     "seen": 4
   },
   "Guilty": {
-    "name": "unknown7769",
-    "slug": "unknown7769",
+    "name": "vetres3",
+    "slug": "vetres3",
     "winrate": "0.0",
-    "seen": 2
+    "seen": 14
   },
   "Injury": {
     "name": "malchickles",
@@ -486,8 +486,8 @@
     "seen": 1
   },
   "Writhe": {
-    "name": "unknown7769",
-    "slug": "unknown7769",
+    "name": "vetres3",
+    "slug": "vetres3",
     "winrate": "0.0",
     "seen": 2
   },
@@ -2082,10 +2082,10 @@
     "seen": 8
   },
   "Sculpting Strike": {
-    "name": "unknown9332",
-    "slug": "unknown9332",
-    "winrate": "100.0",
-    "seen": 2
+    "name": "unknown8139",
+    "slug": "unknown8139",
+    "winrate": "75.0",
+    "seen": 4
   },
   "Seance": {
     "name": "unknown9332",
@@ -2832,10 +2832,10 @@
     "seen": 8
   },
   "Bullet Time": {
-    "name": "N9UY3N",
-    "slug": "n9uy3n",
+    "name": "vetres3",
+    "slug": "vetres3",
     "winrate": "100.0",
-    "seen": 2
+    "seen": 3
   },
   "Burst": {
     "name": "shutupper",
