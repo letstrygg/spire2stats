@@ -64,7 +64,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/users/">users</a> / shutupper</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-05-20T00:00:00.000Z">May 19, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-05-21T00:00:00.000Z">May 20, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -280,11 +280,6 @@
                     </li>
                 
                     <li>
-                        <a href="/cards/stratagem/" style="color: var(--text); text-decoration: underline;">Stratagem</a> 
-                        <span style="color: #888;">(100.0% 4 runs)</span>
-                    </li>
-                
-                    <li>
                         <a href="/cards/bad-luck/" style="color: var(--text); text-decoration: underline;">Bad Luck</a> 
                         <span style="color: #888;">(100.0% 3 runs)</span>
                     </li>
@@ -362,6 +357,11 @@
                     <li>
                         <a href="/cards/alignment/" style="color: var(--color-regent); text-decoration: underline;">Alignment</a> 
                         <span style="color: #888;">(100.0% 4 runs)</span>
+                    </li>
+                
+                    <li>
+                        <a href="/cards/cosmic-indifference/" style="color: var(--color-regent); text-decoration: underline;">Cosmic Indifference</a> 
+                        <span style="color: #888;">(68.8% 16 runs)</span>
                     </li>
                 
                     <li>
@@ -4314,7 +4314,7 @@
             const buildFilter = document.getElementById('build-filter');
             const ascFilter = document.getElementById('ascension-filter');
             const runCards = document.querySelectorAll('.run-record');
-            const globalWR = 24.852785746640496;
+            const globalWR = 24.79559982161439;
 
             function updateFilters() {
                 const buildVal = buildFilter.value;

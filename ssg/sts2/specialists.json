@@ -300,10 +300,10 @@
     "seen": 2
   },
   "Secret Technique": {
-    "name": "SunShadoowRay",
-    "slug": "sunshadoowray",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "Ethan4D",
+    "slug": "ethan4d",
+    "winrate": "60.0",
+    "seen": 5
   },
   "Secret Weapon": {
     "name": "Nexhawk1441",
@@ -330,8 +330,8 @@
     "seen": 2
   },
   "Stratagem": {
-    "name": "shutupper",
-    "slug": "shutupper",
+    "name": "LordTsoran",
+    "slug": "lordtsoran",
     "winrate": "100.0",
     "seen": 4
   },
@@ -1206,10 +1206,10 @@
     "seen": 5
   },
   "Barricade": {
-    "name": "unknown9815",
-    "slug": "unknown9815",
-    "winrate": "75.0",
-    "seen": 4
+    "name": "LordTsoran",
+    "slug": "lordtsoran",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Bash": {
     "name": "unknown9332",
@@ -1356,8 +1356,8 @@
     "seen": 3
   },
   "Evil Eye": {
-    "name": "unknown8139",
-    "slug": "unknown8139",
+    "name": "LordTsoran",
+    "slug": "lordtsoran",
     "winrate": "80.0",
     "seen": 5
   },
@@ -1368,8 +1368,8 @@
     "seen": 5
   },
   "Feed": {
-    "name": "Stinkalot13",
-    "slug": "stinkalot13",
+    "name": "LordTsoran",
+    "slug": "lordtsoran",
     "winrate": "100.0",
     "seen": 2
   },
@@ -1386,8 +1386,8 @@
     "seen": 2
   },
   "Fight Me!": {
-    "name": "unknown8139",
-    "slug": "unknown8139",
+    "name": "LordTsoran",
+    "slug": "lordtsoran",
     "winrate": "75.0",
     "seen": 4
   },
@@ -2334,10 +2334,10 @@
     "seen": 5
   },
   "Cosmic Indifference": {
-    "name": "Falterfire",
-    "slug": "falterfire",
-    "winrate": "83.3",
-    "seen": 6
+    "name": "shutupper",
+    "slug": "shutupper",
+    "winrate": "68.8",
+    "seen": 16
   },
   "Crash Landing": {
     "name": "Ethan4D",
