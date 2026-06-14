@@ -64,7 +64,7 @@
 <nav class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;">
         <div><a href="/">spire2stats</a> / <a href="/users/">users</a> / lyrichain361</div>
         <div style="display: flex; align-items: baseline; gap: 20px;">
-            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-06-10T00:00:00.000Z">June 9, 2026</time></div>
+            <div style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Updated: <time datetime="2026-06-14T00:00:00.000Z">June 13, 2026</time></div>
             <div class="auth-dropdown-container">
                 <button id="auth-user-btn" class="auth-trigger">Loading...</button>
                 <div id="auth-dropdown-menu" class="auth-menu-content"></div>
@@ -260,6 +260,11 @@
                     </li>
                 
                     <li>
+                        <a href="/cards/finesse/" style="color: var(--text); text-decoration: underline;">Finesse</a> 
+                        <span style="color: #888;">(80.0% 10 runs)</span>
+                    </li>
+                
+                    <li>
                         <a href="/cards/jackpot/" style="color: var(--text); text-decoration: underline;">Jackpot</a> 
                         <span style="color: #888;">(100.0% 3 runs)</span>
                     </li>
@@ -287,6 +292,16 @@
                     <li>
                         <a href="/cards/thrumming-hatchet/" style="color: var(--text); text-decoration: underline;">Thrumming Hatchet</a> 
                         <span style="color: #888;">(100.0% 5 runs)</span>
+                    </li>
+                
+                    <li>
+                        <a href="/cards/greed/" style="color: var(--text); text-decoration: underline;">Greed</a> 
+                        <span style="color: #888;">(50.0% 22 runs)</span>
+                    </li>
+                
+                    <li>
+                        <a href="/cards/regret/" style="color: var(--text); text-decoration: underline;">Regret</a> 
+                        <span style="color: #888;">(77.8% 9 runs)</span>
                     </li>
                 
                     <li>
@@ -8944,7 +8959,7 @@
             const buildFilter = document.getElementById('build-filter');
             const ascFilter = document.getElementById('ascension-filter');
             const runCards = document.querySelectorAll('.run-record');
-            const globalWR = 24.81712993749169;
+            const globalWR = 23.8143978164449;
 
             function updateFilters() {
                 const buildVal = buildFilter.value;
