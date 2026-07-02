@@ -1,5 +1,8 @@
 cd C:\GitHub\spire2stats
+npm run download
 npm run build
+
+
 node ssg/runs/input-videos.js
 node ssg/runs/download-runs.js
 node db/send-db.js
