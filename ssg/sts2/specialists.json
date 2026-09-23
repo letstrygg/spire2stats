@@ -6,10 +6,10 @@
     "seen": 2
   },
   "Anointed": {
-    "name": "RiffinesElike",
-    "slug": "riffineselike",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "TripleM",
+    "slug": "triplem",
+    "winrate": "75.0",
+    "seen": 4
   },
   "Automation": {
     "name": "LetsTryGG",
@@ -36,14 +36,14 @@
     "seen": 8
   },
   "Bolas": {
-    "name": "Plabilitop",
-    "slug": "plabilitop",
+    "name": "TripleM",
+    "slug": "triplem",
     "winrate": "100.0",
-    "seen": 2
+    "seen": 3
   },
   "Calamity": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "TripleM",
+    "slug": "triplem",
     "winrate": "100.0",
     "seen": 2
   },
@@ -66,8 +66,8 @@
     "seen": 3
   },
   "Discovery": {
-    "name": "Phoenixabe",
-    "slug": "phoenixabe",
+    "name": "TripleM",
+    "slug": "triplem",
     "winrate": "100.0",
     "seen": 2
   },
@@ -120,8 +120,8 @@
     "seen": 4
   },
   "Gang Up": {
-    "name": "SunShadoowRay",
-    "slug": "sunshadoowray",
+    "name": "TripleM",
+    "slug": "triplem",
     "winrate": "100.0",
     "seen": 2
   },
@@ -138,10 +138,10 @@
     "seen": 3
   },
   "Hidden Gem": {
-    "name": "Girsia",
-    "slug": "girsia",
-    "winrate": "100.0",
-    "seen": 3
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "83.3",
+    "seen": 6
   },
   "Huddle Up": {
     "name": "RiffinesElike",
@@ -150,14 +150,14 @@
     "seen": 3
   },
   "Impatience": {
-    "name": "Plabilitop",
-    "slug": "plabilitop",
+    "name": "unknown1528",
+    "slug": "unknown1528",
     "winrate": "100.0",
     "seen": 2
   },
   "Intercept": {
-    "name": "unknown7769",
-    "slug": "unknown7769",
+    "name": "unknown1528",
+    "slug": "unknown1528",
     "winrate": "100.0",
     "seen": 1
   },
@@ -180,8 +180,8 @@
     "seen": 5
   },
   "Lift": {
-    "name": "Plabilitop",
-    "slug": "plabilitop",
+    "name": "unknown1528",
+    "slug": "unknown1528",
     "winrate": "100.0",
     "seen": 1
   },
@@ -204,16 +204,16 @@
     "seen": 1
   },
   "Mind Blast": {
-    "name": "lyrichain361",
-    "slug": "lyrichain361",
+    "name": "TripleM",
+    "slug": "triplem",
     "winrate": "100.0",
-    "seen": 2
+    "seen": 4
   },
   "Nostalgia": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
-    "winrate": "75.0",
-    "seen": 4
+    "name": "TripleM",
+    "slug": "triplem",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Omnislice": {
     "name": "Falterfire",
@@ -234,10 +234,10 @@
     "seen": 2
   },
   "Prep Time": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
-    "winrate": "66.7",
-    "seen": 3
+    "name": "TripleM",
+    "slug": "triplem",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Production": {
     "name": "unknown7769",
@@ -288,26 +288,26 @@
     "seen": 3
   },
   "Salvo": {
-    "name": "akoreanninja",
-    "slug": "akoreanninja",
+    "name": "unknown1528",
+    "slug": "unknown1528",
     "winrate": "100.0",
     "seen": 1
   },
   "Scrawl": {
-    "name": "Phoenixabe",
-    "slug": "phoenixabe",
+    "name": "pipi123",
+    "slug": "pipi123",
     "winrate": "100.0",
     "seen": 2
   },
   "Secret Technique": {
-    "name": "Ethan4D",
-    "slug": "ethan4d",
-    "winrate": "60.0",
-    "seen": 5
+    "name": "TripleM",
+    "slug": "triplem",
+    "winrate": "100.0",
+    "seen": 4
   },
   "Secret Weapon": {
-    "name": "Nexhawk1441",
-    "slug": "nexhawk1441",
+    "name": "unknown1528",
+    "slug": "unknown1528",
     "winrate": "100.0",
     "seen": 1
   },
@@ -348,14 +348,14 @@
     "seen": 3
   },
   "The Gambit": {
-    "name": "SunShadoowRay",
-    "slug": "sunshadoowray",
+    "name": "pipi123",
+    "slug": "pipi123",
     "winrate": "100.0",
     "seen": 1
   },
   "Thinking Ahead": {
-    "name": "Mrtoolshed",
-    "slug": "mrtoolshed",
+    "name": "TripleM",
+    "slug": "triplem",
     "winrate": "100.0",
     "seen": 2
   },
@@ -378,10 +378,10 @@
     "seen": 4
   },
   "Volley": {
-    "name": "malchickles",
-    "slug": "malchickles",
-    "winrate": "100.0",
-    "seen": 1
+    "name": "TripleM",
+    "slug": "triplem",
+    "winrate": "75.0",
+    "seen": 4
   },
   "Ascender's Bane": {
     "name": "Falterfire",
@@ -444,10 +444,10 @@
     "seen": 22
   },
   "Guilty": {
-    "name": "unknown8848",
-    "slug": "unknown8848",
+    "name": "unknown1528",
+    "slug": "unknown1528",
     "winrate": "0.0",
-    "seen": 3
+    "seen": 8
   },
   "Injury": {
     "name": "unknown8848",
@@ -486,10 +486,10 @@
     "seen": 1
   },
   "Writhe": {
-    "name": "unknown8848",
-    "slug": "unknown8848",
-    "winrate": "0.0",
-    "seen": 1
+    "name": "unknown1528",
+    "slug": "unknown1528",
+    "winrate": "33.3",
+    "seen": 3
   },
   "Adaptive Strike": {
     "name": "Falterfire",
@@ -522,8 +522,8 @@
     "seen": 5
   },
   "Biased Cognition": {
-    "name": "shutupper",
-    "slug": "shutupper",
+    "name": "pipi123",
+    "slug": "pipi123",
     "winrate": "100.0",
     "seen": 1
   },
@@ -654,10 +654,10 @@
     "seen": 24
   },
   "Echo Form": {
-    "name": "cooeoeooc",
-    "slug": "cooeoeooc",
-    "winrate": "100.0",
-    "seen": 3
+    "name": "akoreanninja",
+    "slug": "akoreanninja",
+    "winrate": "83.3",
+    "seen": 6
   },
   "Energy Surge": {
     "name": "0_tripwire_ 0",
@@ -684,10 +684,10 @@
     "seen": 2
   },
   "Flak Cannon": {
-    "name": "N9UY3N",
-    "slug": "n9uy3n",
-    "winrate": "100.0",
-    "seen": 2
+    "name": "Nexhawk1441",
+    "slug": "nexhawk1441",
+    "winrate": "75.0",
+    "seen": 4
   },
   "Focused Strike": {
     "name": "SunShadoowRay",
@@ -780,10 +780,10 @@
     "seen": 7
   },
   "Leap": {
-    "name": "SunShadoowRay",
-    "slug": "sunshadoowray",
-    "winrate": "100.0",
-    "seen": 2
+    "name": "Falterfire",
+    "slug": "falterfire",
+    "winrate": "66.7",
+    "seen": 6
   },
   "Lightning Rod": {
     "name": "malchickles",
@@ -840,10 +840,10 @@
     "seen": 7
   },
   "Quadcast": {
-    "name": "unknown9757",
-    "slug": "unknown9757",
-    "winrate": "66.7",
-    "seen": 3
+    "name": "pipi123",
+    "slug": "pipi123",
+    "winrate": "60.0",
+    "seen": 5
   },
   "Rainbow": {
     "name": "malchickles",
@@ -966,10 +966,10 @@
     "seen": 6
   },
   "TURBO": {
-    "name": "Nexhawk1441",
-    "slug": "nexhawk1441",
-    "winrate": "60.0",
-    "seen": 10
+    "name": "LetsTryGG",
+    "slug": "letstrygg",
+    "winrate": "57.1",
+    "seen": 14
   },
   "Tempest": {
     "name": "Nexhawk1441",
@@ -1074,10 +1074,10 @@
     "seen": 13
   },
   "Entrench": {
-    "name": "BuffFinkaPLZ",
-    "slug": "bufffinkaplz",
-    "winrate": "66.7",
-    "seen": 3
+    "name": "TripleM",
+    "slug": "triplem",
+    "winrate": "100.0",
+    "seen": 1
   },
   "Exterminate": {
     "name": "malchickles",
@@ -1284,10 +1284,10 @@
     "seen": 5
   },
   "Cinder": {
-    "name": "damianjestem",
-    "slug": "damianjestem",
+    "name": "pipi123",
+    "slug": "pipi123",
     "winrate": "66.7",
-    "seen": 3
+    "seen": 6
   },
   "Colossus": {
     "name": "unknown8139",
@@ -1422,10 +1422,10 @@
     "seen": 10
   },
   "Hemokinesis": {
-    "name": "unknown8139",
-    "slug": "unknown8139",
-    "winrate": "100.0",
-    "seen": 2
+    "name": "BuffFinkaPLZ",
+    "slug": "bufffinkaplz",
+    "winrate": "75.0",
+    "seen": 4
   },
   "Howl from Beyond": {
     "name": "Falterfire",
@@ -1470,8 +1470,8 @@
     "seen": 3
   },
   "Juggling": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
+    "name": "TripleM",
+    "slug": "triplem",
     "winrate": "100.0",
     "seen": 3
   },
@@ -1488,8 +1488,8 @@
     "seen": 10
   },
   "Not Yet": {
-    "name": "unknown8139",
-    "slug": "unknown8139",
+    "name": "TripleM",
+    "slug": "triplem",
     "winrate": "100.0",
     "seen": 2
   },
@@ -1548,10 +1548,10 @@
     "seen": 5
   },
   "Rampage": {
-    "name": "Girsia",
-    "slug": "girsia",
-    "winrate": "80.0",
-    "seen": 5
+    "name": "TripleM",
+    "slug": "triplem",
+    "winrate": "100.0",
+    "seen": 3
   },
   "Rupture": {
     "name": "Falterfire",
@@ -1578,8 +1578,8 @@
     "seen": 11
   },
   "Spite": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "TripleM",
+    "slug": "triplem",
     "winrate": "80.0",
     "seen": 5
   },
@@ -1632,8 +1632,8 @@
     "seen": 3
   },
   "Thrash": {
-    "name": "Dead3y3",
-    "slug": "dead3y3",
+    "name": "TripleM",
+    "slug": "triplem",
     "winrate": "100.0",
     "seen": 3
   },
@@ -1752,10 +1752,10 @@
     "seen": 4
   },
   "Cleanse": {
-    "name": "Shane_in_the_Back",
-    "slug": "shane_in_the_back",
-    "winrate": "66.7",
-    "seen": 3
+    "name": "TripleM",
+    "slug": "triplem",
+    "winrate": "100.0",
+    "seen": 2
   },
   "Countdown": {
     "name": "lyrichain361",
@@ -1794,10 +1794,10 @@
     "seen": 9
   },
   "Defile": {
-    "name": "unknown7769",
-    "slug": "unknown7769",
-    "winrate": "80.0",
-    "seen": 5
+    "name": "TripleM",
+    "slug": "triplem",
+    "winrate": "70.0",
+    "seen": 10
   },
   "Defy": {
     "name": "Falterfire",
@@ -1842,16 +1842,16 @@
     "seen": 4
   },
   "Eidolon": {
-    "name": "lyrichain361",
-    "slug": "lyrichain361",
-    "winrate": "100.0",
-    "seen": 2
-  },
-  "End of Days": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "TripleM",
+    "slug": "triplem",
     "winrate": "100.0",
     "seen": 3
+  },
+  "End of Days": {
+    "name": "TripleM",
+    "slug": "triplem",
+    "winrate": "100.0",
+    "seen": 4
   },
   "Enfeebling Touch": {
     "name": "unknown7769",
@@ -1860,10 +1860,10 @@
     "seen": 5
   },
   "Eradicate": {
-    "name": "N9UY3N",
-    "slug": "n9uy3n",
-    "winrate": "80.0",
-    "seen": 5
+    "name": "TripleM",
+    "slug": "triplem",
+    "winrate": "100.0",
+    "seen": 3
   },
   "Fear": {
     "name": "unknown9332",
@@ -1956,10 +1956,10 @@
     "seen": 5
   },
   "Misery": {
-    "name": "Nexhawk1441",
-    "slug": "nexhawk1441",
-    "winrate": "100.0",
-    "seen": 4
+    "name": "TripleM",
+    "slug": "triplem",
+    "winrate": "87.5",
+    "seen": 8
   },
   "Necro Mastery": {
     "name": "Plabilitop",
@@ -1974,8 +1974,8 @@
     "seen": 8
   },
   "Neurosurge": {
-    "name": "1nfern0",
-    "slug": "1nfern0",
+    "name": "Cartaphilus23",
+    "slug": "cartaphilus23",
     "winrate": "100.0",
     "seen": 4
   },
@@ -1986,10 +1986,10 @@
     "seen": 9
   },
   "Oblivion": {
-    "name": "unknown5714",
-    "slug": "unknown5714",
-    "winrate": "83.3",
-    "seen": 6
+    "name": "TripleM",
+    "slug": "triplem",
+    "winrate": "100.0",
+    "seen": 4
   },
   "Pagestorm": {
     "name": "unknown7769",
@@ -2034,10 +2034,10 @@
     "seen": 8
   },
   "Rattle": {
-    "name": "shutupper",
-    "slug": "shutupper",
+    "name": "TripleM",
+    "slug": "triplem",
     "winrate": "100.0",
-    "seen": 3
+    "seen": 4
   },
   "Reanimate": {
     "name": "unknown8139",
@@ -2082,10 +2082,10 @@
     "seen": 8
   },
   "Sculpting Strike": {
-    "name": "unknown8139",
-    "slug": "unknown8139",
-    "winrate": "75.0",
-    "seen": 4
+    "name": "TripleM",
+    "slug": "triplem",
+    "winrate": "100.0",
+    "seen": 5
   },
   "Seance": {
     "name": "unknown9332",
@@ -2106,8 +2106,8 @@
     "seen": 3
   },
   "Shared Fate": {
-    "name": "Falterfire",
-    "slug": "falterfire",
+    "name": "TripleM",
+    "slug": "triplem",
     "winrate": "100.0",
     "seen": 2
   },
@@ -2130,10 +2130,10 @@
     "seen": 4
   },
   "Snap": {
-    "name": "lyrichain361",
-    "slug": "lyrichain361",
-    "winrate": "61.5",
-    "seen": 13
+    "name": "TripleM",
+    "slug": "triplem",
+    "winrate": "83.3",
+    "seen": 6
   },
   "Soul Storm": {
     "name": "Phoenixabe",
@@ -2166,8 +2166,8 @@
     "seen": 7
   },
   "The Scythe": {
-    "name": "shutupper",
-    "slug": "shutupper",
+    "name": "TripleM",
+    "slug": "triplem",
     "winrate": "100.0",
     "seen": 2
   },
@@ -2178,10 +2178,10 @@
     "seen": 3
   },
   "Transfigure": {
-    "name": "unknown9332",
-    "slug": "unknown9332",
+    "name": "TripleM",
+    "slug": "triplem",
     "winrate": "100.0",
-    "seen": 2
+    "seen": 4
   },
   "Undeath": {
     "name": "Falterfire",
@@ -2208,8 +2208,8 @@
     "seen": 3
   },
   "Byrdonis Egg": {
-    "name": "unknown7769",
-    "slug": "unknown7769",
+    "name": "pipi123",
+    "slug": "pipi123",
     "winrate": "0.0",
     "seen": 1
   },
@@ -2436,8 +2436,8 @@
     "seen": 5
   },
   "Guiding Star": {
-    "name": "JJKetchum15",
-    "slug": "jjketchum15",
+    "name": "Cartaphilus23",
+    "slug": "cartaphilus23",
     "winrate": "100.0",
     "seen": 2
   },
@@ -2490,10 +2490,10 @@
     "seen": 2
   },
   "Knockout Blow": {
-    "name": "Plabilitop",
-    "slug": "plabilitop",
-    "winrate": "100.0",
-    "seen": 2
+    "name": "NicoTheThird",
+    "slug": "nicothethird",
+    "winrate": "60.0",
+    "seen": 10
   },
   "Know Thy Place": {
     "name": "Falterfire",
@@ -2742,10 +2742,10 @@
     "seen": 3
   },
   "Abrasive": {
-    "name": "Shane_in_the_Back",
-    "slug": "shane_in_the_back",
-    "winrate": "100.0",
-    "seen": 4
+    "name": "lyrichain361",
+    "slug": "lyrichain361",
+    "winrate": "80.0",
+    "seen": 15
   },
   "Accelerant": {
     "name": "N9UY3N",
@@ -3066,10 +3066,10 @@
     "seen": 9
   },
   "Outbreak": {
-    "name": "Ethan4D",
-    "slug": "ethan4d",
+    "name": "TripleM",
+    "slug": "triplem",
     "winrate": "100.0",
-    "seen": 3
+    "seen": 4
   },
   "Phantom Blades": {
     "name": "shutupper",
